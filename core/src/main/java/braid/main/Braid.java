@@ -97,8 +97,9 @@ public class Braid extends ApplicationAdapter {
 
         if (isJumping) {
             löweSprite.translateY(VelocityY);
-             VelocityY -= gravity;
+            VelocityY -= gravity; // Behalte diese Zeile nur einmal
         }
+
     }
 
     private void logic() {
