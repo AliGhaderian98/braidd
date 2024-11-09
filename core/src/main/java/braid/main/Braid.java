@@ -4,12 +4,17 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.math.Vector2;
@@ -44,6 +49,8 @@ public class Braid extends ApplicationAdapter {
     private Rewind rewindLöwe;
     private Rewind rewindBöserLöwe;
 
+    private Array<Rewind> rewindObjects;
+
     @Override
     public void create() {
         worldWidth = Gdx.graphics.getWidth();
@@ -52,6 +59,7 @@ public class Braid extends ApplicationAdapter {
         batch = new SpriteBatch();
         image = new Texture("libgdx.png");
         löwe = new Texture("löwe.png");
+
 
         löweSprite = new Sprite(löwe);
         löweSprite.setSize(löweSprite.getWidth() * 0.1f, löweSprite.getHeight() * 0.1f);
@@ -63,6 +71,10 @@ public class Braid extends ApplicationAdapter {
 
         rewindLöwe = new Rewind(new RewindableSprite(löweSprite));
         rewindBöserLöwe = new Rewind(new RewindableSprite(böserLöweSprite)); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen können)
+
+        rewindObjects = new Array<Rewind>();
+        rewindObjects.add(rewindLöwe);
+        rewindObjects.add(rewindBöserLöwe);
     }
 
     @Override
@@ -104,11 +116,27 @@ public class Braid extends ApplicationAdapter {
 
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(SHIFT)) {
-            rewindLöwe.startRewinding();
-            rewindBöserLöwe.startRewinding();
+            for (Rewind r : rewindObjects) {
+                r.startRewinding();
+            }
+
+            // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
+            if (rewindLöwe.hasRewindStorage()) {
+                löweSprite.setColor(Color.BLUE);
+            } else {
+                löweSprite.setColor(Color.WHITE);
+            }
+            if (rewindLöwe.hasRewindStorage()) {
+                böserLöweSprite.setColor(Color.BLUE);
+            } else {
+                böserLöweSprite.setColor(Color.WHITE);
+            }
         } else {
-            rewindLöwe.stopRewinding();
-            rewindBöserLöwe.stopRewinding();
+            for (Rewind r : rewindObjects) {
+                r.stopRewinding();
+            }
+            löweSprite.setColor(Color.WHITE);
+            böserLöweSprite.setColor(Color.WHITE);
         }
 
         rewindLöwe.update(); // Updates für Rewind-Mechanik in jedem Frame

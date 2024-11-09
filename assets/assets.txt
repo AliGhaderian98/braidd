@@ -1,2 +1,4 @@
 libgdx.png
 löwe.png
+packedimages/lion-idle.atlas
+packedimages/lion-idle.png
