@@ -1,5 +1,5 @@
 package braid.main;
-
+//Steuerung und Logik vom Char und erste Logik für Gegner (Invoker?)
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.math.Vector2;
 
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class Braid extends ApplicationAdapter {
@@ -33,16 +34,15 @@ public class Braid extends ApplicationAdapter {
     static final int enemySpeed = 3;
     static boolean isJumping = false;
     static final int jumpVelocity = 20;
-    static int VelocityY;
+    static int velocityY;
     static final int gravity = 1;
 
     private Texture löwe;
     private Sprite löweSprite;
-
     private Sprite böserLöweSprite;
 
-
-
+    private Rewind rewindLöwe;
+    private Rewind rewindBöserLöwe;
 
     @Override
     public void create() {
@@ -55,11 +55,14 @@ public class Braid extends ApplicationAdapter {
 
         löweSprite = new Sprite(löwe);
         löweSprite.setSize(löweSprite.getWidth() * 0.1f, löweSprite.getHeight() * 0.1f);
+        löweSprite.setPosition(0,0);
 
         böserLöweSprite = new Sprite(löwe);
         böserLöweSprite.setSize(böserLöweSprite.getWidth() * 0.1f, böserLöweSprite.getHeight() * 0.1f);
-        böserLöweSprite.setX(worldWidth - böserLöweSprite.getWidth());
+        böserLöweSprite.setPosition(worldWidth - böserLöweSprite.getWidth(), 0);
 
+        rewindLöwe = new Rewind(new RewindableSprite(löweSprite));
+        rewindBöserLöwe = new Rewind(new RewindableSprite(böserLöweSprite)); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen können)
     }
 
     @Override
@@ -69,13 +72,13 @@ public class Braid extends ApplicationAdapter {
         draw();
     }
 
-
-
     @Override
     public void dispose() {
         batch.dispose();
         image.dispose();
+        löwe.dispose();
     }
+
     private void input() {
         if (Gdx.input.isKeyPressed(RIGHT_KEY)) {
             löweSprite.translateX(playerSpeed);
@@ -85,7 +88,7 @@ public class Braid extends ApplicationAdapter {
         }
         if (Gdx.input.isKeyJustPressed(SPACEBAR) && !isJumping) {
             isJumping = true;
-            VelocityY = jumpVelocity;
+            velocityY = jumpVelocity;
         }
 
         if (böserLöweSprite.getX() < löweSprite.getX()) {
@@ -94,17 +97,29 @@ public class Braid extends ApplicationAdapter {
             böserLöweSprite.translateX(-enemySpeed);
         }
 
-
         if (isJumping) {
-            löweSprite.translateY(VelocityY);
-             VelocityY -= gravity;
+            löweSprite.translateY(velocityY);
+            velocityY -= gravity;
         }
+
+        // Zeitmechanik für Rewind-Funktion
+        if (Gdx.input.isKeyPressed(SHIFT)) {
+            rewindLöwe.startRewinding();
+            rewindBöserLöwe.startRewinding();
+        } else {
+            rewindLöwe.stopRewinding();
+            rewindBöserLöwe.stopRewinding();
+        }
+
+        rewindLöwe.update(); // Updates für Rewind-Mechanik in jedem Frame
+        rewindBöserLöwe.update();
     }
 
     private void logic() {
         if (löweSprite.getY() <= 0) {
             isJumping = false;
-            VelocityY = 0;
+            velocityY = 0;
+            löweSprite.setY(0);
         }
         if (löweSprite.getX() <= 0) {
             löweSprite.setX(0);
