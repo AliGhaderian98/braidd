@@ -135,6 +135,8 @@ public class Braid extends ApplicationAdapter {
             for (Rewind r : rewindObjects) {
                 r.stopRewinding();
             }
+            löweSprite.setColor(Color.WHITE);
+            böserLöweSprite.setColor(Color.WHITE);
         }
 
         rewindLöwe.update(); // Updates für Rewind-Mechanik in jedem Frame
