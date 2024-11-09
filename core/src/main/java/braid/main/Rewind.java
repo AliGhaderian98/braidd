@@ -67,6 +67,11 @@ public class Rewind{
         }
     }
 
+    // folgende Funktion ist nur dafür da, um für den Vorzeigeprototypen eine simple visuelle Änderung zeigen zu können
+    public boolean hasRewindStorage() {
+        return !states.isEmpty();
+    }
+
     //Vorher, nun das meiste vorher/in anderen Klassen zu finden (siehe Rewindable): public void setDatas(){
     //    obj.setData1(obj.data1, obj.data2); //Positionen von den gespeicherten Objekten, unser Char, Gegner usw
     //}
