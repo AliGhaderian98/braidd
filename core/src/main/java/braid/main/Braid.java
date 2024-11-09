@@ -97,21 +97,21 @@ public class Braid extends ApplicationAdapter {
             böserLöweSprite.translateX(-enemySpeed);
         }
 
-
         if (isJumping) {
             löweSprite.translateY(velocityY);
             velocityY -= gravity;
         }
 
-        if(Gdx.input.isKeyPressed(SHIFT)){ //Testen ob das hier drin besser ist als in Rewind-Klasse
+        // Zeitmechanik für Rewind-Funktion
+        if (Gdx.input.isKeyPressed(SHIFT)) {
             rewindLöwe.startRewinding();
             rewindBöserLöwe.startRewinding();
-        } else { //Redundant?
+        } else {
             rewindLöwe.stopRewinding();
             rewindBöserLöwe.stopRewinding();
         }
 
-        rewindLöwe.update(); //Stand jetzt updatet der das jedes Frame, müssen schauen ob das Perfomance wise gut ist
+        rewindLöwe.update(); // Updates für Rewind-Mechanik in jedem Frame
         rewindBöserLöwe.update();
     }
 
