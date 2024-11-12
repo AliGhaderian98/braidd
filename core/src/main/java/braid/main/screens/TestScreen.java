@@ -67,7 +67,7 @@ public class TestScreen implements Screen {
 
         boeserLoeweSprite = new Sprite(loewe);
         boeserLoeweSprite.setSize(boeserLoeweSprite.getWidth() * 0.1f, boeserLoeweSprite.getHeight() * 0.1f);
-        boeserLoeweSprite.setPosition(worldWidth - boeserLoeweSprite.getWidth(), 0);
+        boeserLoeweSprite.setPosition(worldWidth - 5*boeserLoeweSprite.getWidth(), 0);
 
         rewindLoewe = new Rewind(new RewindableSprite(loeweSprite));
         rewindBoeserLoewe = new Rewind(new RewindableSprite(boeserLoeweSprite)); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
