@@ -3,6 +3,7 @@ package braid.main.screens;
 import braid.main.Braid;
 import braid.main.Rewind;
 import braid.main.RewindableSprite;
+import braid.main.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -32,22 +33,7 @@ public class TestScreen implements Screen {
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
 
-    // Player variables
-    static final int playerSpeed = 5;
-    static final int enemySpeed = 3;
-    static boolean isJumping = false;
-    static final int jumpVelocity = 20;
-    static int velocityY;
-    static final int gravity = 1;
-
-    private Texture loewe;
-    private Sprite loeweSprite;
-    private Sprite boeserLoeweSprite;
-
-    private Rewind rewindLoewe;
-    private Rewind rewindBoeserLoewe;
-
-    private Array<Rewind> rewindObjects;
+    Player player = new Player();
 
     public TestScreen(Braid game) {
         this.game = game;
@@ -59,22 +45,22 @@ public class TestScreen implements Screen {
         gamePort = new FitViewport(worldWidth / Braid.PPM , worldHeight / Braid.PPM,gamecam);
 
         image = new Texture("libgdx.png");
-        loewe = new Texture("löwe.png");
+        player.setLoewe(new Texture("löwe.png"));
 
-        loeweSprite = new Sprite(loewe);
-        loeweSprite.setSize(loeweSprite.getWidth() * 0.1f, loeweSprite.getHeight() * 0.1f);
-        loeweSprite.setPosition(0,0);
+        player.setLoeweSprite(new Sprite(player.getLoewe()));
+        player.getLoeweSprite().setSize(player.getLoeweSprite().getWidth() * 0.1f, player.getLoeweSprite().getHeight() * 0.1f);
+        player.getLoeweSprite().setPosition(0,0);
 
-        boeserLoeweSprite = new Sprite(loewe);
-        boeserLoeweSprite.setSize(boeserLoeweSprite.getWidth() * 0.1f, boeserLoeweSprite.getHeight() * 0.1f);
-        boeserLoeweSprite.setPosition(worldWidth - 5*boeserLoeweSprite.getWidth(), 0);
+        player.setBoeserLoeweSprite(new Sprite(player.getLoewe()));
+        player.getBoeserLoeweSprite().setSize(player.getBoeserLoeweSprite().getWidth() * 0.1f, player.getBoeserLoeweSprite().getHeight() * 0.1f);
+        player.getBoeserLoeweSprite().setPosition(worldWidth - 5*player.getBoeserLoeweSprite().getWidth(), 0);
 
-        rewindLoewe = new Rewind(new RewindableSprite(loeweSprite));
-        rewindBoeserLoewe = new Rewind(new RewindableSprite(boeserLoeweSprite)); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
+        player.setRewindLoewe(new Rewind(new RewindableSprite(player.getLoeweSprite())));
+        player.setRewindBoeserLoewe(new Rewind(new RewindableSprite(player.getBoeserLoeweSprite()))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
 
-        rewindObjects = new Array<Rewind>();
-        rewindObjects.add(rewindLoewe);
-        rewindObjects.add(rewindBoeserLoewe);
+        player.setRewindObjects(new Array<Rewind>());
+        player.getRewindObjects().add(player.getRewindLoewe());
+        player.getRewindObjects().add(player.getRewindBoeserLoewe());
     }
 
 
@@ -93,67 +79,69 @@ public class TestScreen implements Screen {
 
     private void input() {
         if (Gdx.input.isKeyPressed(RIGHT_KEY)) {
-            loeweSprite.translateX(playerSpeed);
+            player.getLoeweSprite().translateX(player.getPlayerSpeed());
         }
         if (Gdx.input.isKeyPressed(LEFT_KEY)) {
-            loeweSprite.translateX(-playerSpeed);
+            player.getLoeweSprite().translateX(-player.getPlayerSpeed());
         }
-        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !isJumping) {
-            isJumping = true;
-            velocityY = jumpVelocity;
-        }
-
-        if (boeserLoeweSprite.getX() < loeweSprite.getX()) {
-            boeserLoeweSprite.translateX(enemySpeed);
-        } else if (boeserLoeweSprite.getX() > loeweSprite.getX()) {
-            boeserLoeweSprite.translateX(-enemySpeed);
+        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isIsJumping()) {
+            player.setIsJumping(true);
+            player.setVelocityY(player.getJumpVelocity());
         }
 
-        if (isJumping) {
-            loeweSprite.translateY(velocityY);
-            velocityY -= gravity;
+        if (player.getBoeserLoeweSprite().getX() < player.getLoeweSprite().getX()) {
+            player.getBoeserLoeweSprite().translateX(player.getEnemySpeed());
+        } else if (player.getBoeserLoeweSprite().getX() > player.getLoeweSprite().getX()) {
+            player.getBoeserLoeweSprite().translateX(-player.getEnemySpeed());
+        }
+
+
+        if (player.isIsJumping()) {
+            int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
+            player.getLoeweSprite().translateY(player.getVelocityY());
+            player.setVelocityY(currentVelocityY - player.getGravity());
         }
 
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(SHIFT)) {
-            for (Rewind r : rewindObjects) {
+            for (Rewind r : player.getRewindObjects()) {
                 r.startRewinding();
             }
 
             // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
-            if (rewindLoewe.hasRewindStorage()) {
-                loeweSprite.setColor(Color.BLUE);
+            if (player.getRewindLoewe().hasRewindStorage()) {
+                player.getLoeweSprite().setColor(Color.BLUE);
             } else {
-                loeweSprite.setColor(Color.WHITE);
+                player.getLoeweSprite().setColor(Color.WHITE);
             }
-            if (rewindLoewe.hasRewindStorage()) {
-                boeserLoeweSprite.setColor(Color.BLUE);
+            if (player.getRewindLoewe().hasRewindStorage()) {
+                player.getBoeserLoeweSprite().setColor(Color.BLUE);
             } else {
-                boeserLoeweSprite.setColor(Color.WHITE);
+                player.getBoeserLoeweSprite().setColor(Color.WHITE);
             }
         } else {
-            for (Rewind r : rewindObjects) {
+            for (Rewind r : player.getRewindObjects()) {
                 r.stopRewinding();
             }
-            loeweSprite.setColor(Color.WHITE);
-            boeserLoeweSprite.setColor(Color.WHITE);
+            player.getLoeweSprite().setColor(Color.WHITE);
+            player.getBoeserLoeweSprite().setColor(Color.WHITE);
         }
 
-        rewindLoewe.update(); // Updates für Rewind-Mechanik in jedem Frame
-        rewindBoeserLoewe.update();
+        player.getRewindLoewe().update(); // Updates für Rewind-Mechanik in jedem Frame
+        player.getRewindBoeserLoewe().update();
     }
 
     private void logic() {
-        if (loeweSprite.getY() <= 0) {
-            isJumping = false;
-            velocityY = 0;
-            loeweSprite.setY(0);
+        if (player.getLoeweSprite().getY() <= 0) {
+            player.setIsJumping(false);
+            player.setVelocityY(0);
+            player.getLoeweSprite().setY(0);
         }
-        if (loeweSprite.getX() <= 0) {
-            loeweSprite.setX(0);
+        if (player.getLoeweSprite().getX() <= 0) {
+            player.getLoeweSprite().setX(0);
         }
-        if (loeweSprite.getX() + loeweSprite.getWidth() >= worldWidth) {
-            loeweSprite.setX(worldWidth - loeweSprite.getWidth());
+        if (player.getLoeweSprite().getX() + player.getLoeweSprite().getWidth() >= worldWidth) {
+            player.getLoeweSprite().setX(worldWidth - player.getLoeweSprite().getWidth());
         }
 
     }
@@ -162,8 +150,8 @@ public class TestScreen implements Screen {
 
         game.batch.begin();
         game.batch.draw(image, 140, 210);
-        loeweSprite.draw(game.batch);
-        boeserLoeweSprite.draw(game.batch);
+        player.getLoeweSprite().draw(game.batch);
+        player.getBoeserLoeweSprite().draw(game.batch);
         game.batch.end();
     }
 
@@ -190,6 +178,6 @@ public class TestScreen implements Screen {
     @Override
     public void dispose() {
         image.dispose();
-        loewe.dispose();
+        player.getLoewe().dispose();
     }
 }
