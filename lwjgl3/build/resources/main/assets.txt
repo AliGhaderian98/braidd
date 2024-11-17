@@ -1,4 +1,9 @@
 libgdx.png
 löwe.png
-packedimages/lion-idle.atlas
-packedimages/lion-idle.png
+maps/schwebebahn_1.tsx
+maps/sheet.tsx
+maps/testmap.tmx
+maps/tilesets/schwebebahn_1.png
+maps/tilesets/sheet.png
+packedimages/lion.atlas
+packedimages/lion.png
