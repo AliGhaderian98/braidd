@@ -67,7 +67,7 @@ public class TestScreen implements Screen {
 
         loader = new TmxMapLoader();
         map = loader.load("maps/testmap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 3);
+        renderer = new OrthogonalTiledMapRenderer(map, 3); // 3 als scaling factor, weil es irgendwie passt?
         gameCamera.setMap(map);
 
         // Setup Player
