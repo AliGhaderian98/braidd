@@ -1,5 +1,6 @@
-package braid.main;
+package braid.main.objects;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 // Enemy-Klasse, die von GameObject erbt und gegner-spezifische Funktionen enthält
@@ -7,7 +8,12 @@ public class Enemy extends GameObject {
 
     // Konstruktor für die Initialisierung des Gegners
     public Enemy() {
-        // Initialisierungscode für den Gegner, z.B. Festlegen von Geschwindigkeit oder anderen Eigenschaften
+        speed = 3;
+    }
+
+    public Enemy(Texture texture) {
+        super(texture);
+        speed = 3;
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
