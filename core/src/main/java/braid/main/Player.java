@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 
-public class Player {
+public class Player extends GameObject {
     // Player variables
     static final int playerSpeed = 5;
     static final int enemySpeed = 3;
