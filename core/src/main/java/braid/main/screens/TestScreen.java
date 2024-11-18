@@ -1,17 +1,23 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.GameCamera;
 import braid.main.Rewind;
 import braid.main.RewindableSprite;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -20,16 +26,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class TestScreen implements Screen {
     // World Variables
     private final Braid game;
-    private Texture image;
-    final int gravity;
+    private static final int GRAVITY = 1;
 
     // Screen
     int worldWidth;
     int worldHeight;
 
     // Camera
-    private OrthographicCamera gamecam;
+
+    private final GameCamera gameCamera;
     private Viewport gamePort;
+
+    // Map
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
+    TmxMapLoader loader;
+
 
     // Rewind Control
     private Array<Rewind> rewindObjects;
@@ -41,21 +53,22 @@ public class TestScreen implements Screen {
     static int SPACEBAR = Input.Keys.SPACE;
 
     // GameObject Variables
-    Player player;
-    Enemy enemy;
+    private Player player;
+    private Enemy enemy;
 
     public TestScreen(Braid game) {
         // Setup basic world variables
         this.game = game;
         worldWidth = Braid.V_WIDTH;
         worldHeight = Braid.V_HEIGHT;
-        gravity = 1;
 
         // Setup Game Camera
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(worldWidth / Braid.PPM , worldHeight / Braid.PPM,gamecam);
+        gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT);
 
-        image = new Texture("libgdx.png");
+        loader = new TmxMapLoader();
+        map = loader.load("maps/testmap.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map, 1/32f);
+        gameCamera.setMap(map);
 
         // Setup Player
         Texture testTexture = new Texture("löwe.png");
@@ -84,11 +97,33 @@ public class TestScreen implements Screen {
 
     @Override
     public void render(float v) {
+        clearScreen();
+        updateCamera();
+        renderWorld();
         input();
         logic();
-        draw();
     }
 
+
+    private void clearScreen() {
+        ScreenUtils.clear(0,0,0,1);
+    }
+
+    private void updateCamera() {
+        gameCamera.followTarget(player.getSprite().getX());
+    }
+
+    private void renderWorld() {
+        renderer.setView(gameCamera.getCamera());
+        renderer.render();
+
+        game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
+
+        game.batch.begin();
+        player.getSprite().draw(game.batch);
+        enemy.getSprite().draw(game.batch);
+        game.batch.end();
+    }
     private void input() {
         if (Gdx.input.isKeyPressed(RIGHT_KEY)) {
             player.getSprite().translateX(player.getSpeed());
@@ -110,7 +145,7 @@ public class TestScreen implements Screen {
         if (player.isJumping()) {
             int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
             player.getSprite().translateY(player.getVelocityY());
-            player.setVelocityY(currentVelocityY - gravity);
+            player.setVelocityY(currentVelocityY - GRAVITY);
         }
 
         // Zeitmechanik für Rewind-Funktion
@@ -160,19 +195,11 @@ public class TestScreen implements Screen {
         }
 
     }
-    private void draw() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 
-        game.batch.begin();
-        game.batch.draw(image, 140, 210);
-        player.getSprite().draw(game.batch);
-        enemy.getSprite().draw(game.batch);
-        game.batch.end();
-    }
 
     @Override
-    public void resize(int i, int i1) {
-
+    public void resize(int height, int width) {
+        gameCamera.resize(width,height);
     }
 
     @Override
@@ -187,12 +214,15 @@ public class TestScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
     public void dispose() {
-        image.dispose();
+        map.dispose();
+        renderer.dispose();
+
+
         player.getTexture().dispose();
     }
 }
