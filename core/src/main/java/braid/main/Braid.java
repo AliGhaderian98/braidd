@@ -21,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Braid extends Game {
     public static final int V_WIDTH = 800;
     public static final int V_HEIGHT = 600;
-    public static final float PPM = 100;
+    public static final float PPM = 1;
 
     public SpriteBatch batch;
 

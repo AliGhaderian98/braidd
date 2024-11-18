@@ -5,10 +5,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+
+// Die GameCamera ist dafür da, um die Spielwelt und die Position des Spielers automatisch der Kamera anzupassen
 public class GameCamera {
     private final OrthographicCamera camera;
     private final Viewport viewport;
-
     private final float worldWidth;
     private final float worldHeight;
     private float mapWidth;
