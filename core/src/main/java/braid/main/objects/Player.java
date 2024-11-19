@@ -7,21 +7,25 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
-enum State {
-    GROUNDED,
-    JUMPING
-}
+/***********
+ Diese Klasse implementiert den Spieler und soll sich  um alle Variablen und interaktiven
+ Elemente davon kümmern.
+ ***********/
 
 public class Player extends GameObject {
-    // Player variables
+    // Enumeration für die verschiedenen Zustände, in der sich ein Spieler befinden kann.
+    public enum State {
+        GROUNDED,
+        JUMPING
+    }
+
+    // Player specific variables
     int velocityY;
 
-    //boolean isJumping = false;
     State currentState = State.GROUNDED;
-    int jumpVelocity = 20;
+    float jumpVelocity = 20f;
 
     private TextureRegion stand;
 
@@ -30,10 +34,12 @@ public class Player extends GameObject {
     public Player(World world, TestScreen screen) {
         super(world);
 
-        speed = 5;
+        speed = 5f;
+
+        defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-        stand = new TextureRegion(sprite.getTexture(), 0, 0, 24, 24);
+        stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
     }
@@ -44,9 +50,30 @@ public class Player extends GameObject {
     }
 
     // Methods
+    @Override
+    public void defineBody() {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(32 / Braid.PPM, 32 / Braid.PPM);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
+
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(11/ Braid.PPM);
+
+        fdef.shape = shape;
+        b2body.createFixture(fdef);
+    }
+
+    public void update(float dt) {
+        currentState = getCurrentState();
+        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+    }
+
+
     public void jump() {
         currentState = State.JUMPING;
-        velocityY = jumpVelocity;
+        //velocityY = jumpVelocity;
     }
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
@@ -54,12 +81,19 @@ public class Player extends GameObject {
         currentState = State.GROUNDED;
     }
 
+    public State getCurrentState() {
+        if(b2body.getLinearVelocity().y != 0)
+            return State.JUMPING;
+        else
+            return State.GROUNDED;
+    }
+
     //Getter und Setter
     public boolean isJumping() {
         return currentState == State.JUMPING;
     }
 
-    public final int getJumpVelocity () {
+    public final float getJumpVelocity () {
         return jumpVelocity;
     }
 

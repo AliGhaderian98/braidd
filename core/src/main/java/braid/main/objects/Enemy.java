@@ -5,9 +5,17 @@ import braid.main.screens.TestScreen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-// Enemy-Klasse, die von GameObject erbt und gegner-spezifische Funktionen enthält
+/***********
+ Diese Klasse soll einen ersten spezifischen Entwurf für einen Gegner darstellen
+ und später generalisert werden, sodass aus ihr verschiedene Arten an Gegnern
+ erstellt werden können.
+ ***********/
+
 public class Enemy extends GameObject {
 
     private TextureRegion stand;
@@ -17,6 +25,8 @@ public class Enemy extends GameObject {
         super(world);
 
         speed = 5;
+
+        defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
         stand = new TextureRegion(sprite.getTexture(), 0, 0, 24, 24);
@@ -36,5 +46,23 @@ public class Enemy extends GameObject {
     public void act(float delta) {
         super.act(delta); // Aufruf der GameObject-Logik
         // Gegner-spezifische Logik, z.B. Bewegungsmuster oder Interaktion mit dem Spieler
+    }
+
+    public void defineBody() {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set((Braid.V_WIDTH-32) / Braid.PPM, 32 / Braid.PPM);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
+
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(11/ Braid.PPM);
+
+        fdef.shape = shape;
+        b2body.createFixture(fdef);
+    }
+
+    public void update(float dt) {
+        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
     }
 }

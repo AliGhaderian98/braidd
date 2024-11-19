@@ -17,6 +17,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.math.Vector2;
 
+/***********
+ Hauptklasse des Spiels, die zum Management aller anderen Teile dient.
+ ***********/
+
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class Braid extends Game {
     public static final int V_WIDTH = 240;

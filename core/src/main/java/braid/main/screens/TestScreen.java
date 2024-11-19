@@ -25,6 +25,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/***********
+  Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
+  Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
+ ***********/
+
 public class TestScreen implements Screen {
     // World Variables
     private final Braid game;
@@ -36,9 +41,7 @@ public class TestScreen implements Screen {
     private final int worldHeight = Braid.V_HEIGHT;
 
     // Camera
-    //private GameCamera gameCamera;
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
+    private GameCamera gameCamera;
 
     // Map
     private TmxMapLoader mapLoader;
@@ -63,21 +66,18 @@ public class TestScreen implements Screen {
     private Player player;
     private Enemy enemy;
 
+
     public TestScreen(Braid game) {
         // Setup basic world variables
         atlas = new TextureAtlas("packedimages/lion.atlas");
         this.game = game;
 
         // Setup Game Camera
-        //gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT);
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(worldWidth/Braid.PPM, worldHeight/Braid.PPM, gamecam);
+        gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("maps/testmap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1/Braid.PPM); // 3 als scaling factor, weil es irgendwie passt?
-        //gameCamera.setMap(map);
-        gamecam.position.set((float) gamePort.getWorldWidth()/2, (float) gamePort.getWorldHeight()/2, 0);
+        renderer = new OrthogonalTiledMapRenderer(map, 1/Braid.PPM);
 
         // setup Box2D world
         world = new World(new Vector2(0,-10), true);
@@ -85,17 +85,14 @@ public class TestScreen implements Screen {
         new B2WorldCreator(world, map);
 
         // Setup Player
-        Texture testTexture = new Texture("löwe.png");
-        //player = new Player(testTexture);
         player = new Player(world, this);
-        player.setPosition(0,0);
+        //player.setPosition(0,0);
         player.setRewindController(new Rewind(new RewindableSprite(player.getSprite())));
 
 
         // Setup Enemy
-        //enemy = new Enemy(testTexture);
         enemy = new Enemy(world, this);
-        enemy.setPosition(worldWidth - 5 * enemy.getSprite().getWidth(), 0);
+        //enemy.setPosition(worldWidth - 5 * enemy.getSprite().getWidth(), 0);
         enemy.setRewindController(new Rewind(new RewindableSprite(enemy.getSprite()))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
 
         // Add all rewindable objects to Watcher
@@ -124,7 +121,14 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
+        // Update world physics
         world.step(1/60f, 6, 2);
+
+        // Update Player and Enemies
+        player.update(dt);
+        enemy.update(dt);
+
+        // Update Camera
         updateCamera();
     }
 
@@ -133,20 +137,16 @@ public class TestScreen implements Screen {
     }
 
     private void updateCamera() {
-        // gameCamera.followTarget(player.getSprite().getX());
-        gamecam.position.x = player.getSprite().getX();
-        gamecam.update();
-        renderer.setView(gamecam);
+        gameCamera.followTarget(player.getSprite().getX());
     }
 
     private void renderWorld() {
-        //renderer.setView(gameCamera.getCamera());
+        renderer.setView(gameCamera.getCamera());
 
         renderer.render();
-        b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gameCamera.getCamera().combined);
 
-        //game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
-        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
@@ -154,28 +154,33 @@ public class TestScreen implements Screen {
         game.batch.end();
     }
     private void input() {
-        if (Gdx.input.isKeyPressed(RIGHT_KEY)) {
-            player.getSprite().translateX(player.getSpeed());
+        if (Gdx.input.isKeyPressed(RIGHT_KEY) && player.b2body.getLinearVelocity().x <= player.getSpeed()) {
+            // player.getSprite().translateX(player.getSpeed());
+            player.b2body.applyLinearImpulse(new Vector2(player.getSpeed(), 0), player.b2body.getWorldCenter(), true);
         }
-        if (Gdx.input.isKeyPressed(LEFT_KEY)) {
-            player.getSprite().translateX(-player.getSpeed());
+        if (Gdx.input.isKeyPressed(LEFT_KEY) && player.b2body.getLinearVelocity().x <= player.getSpeed()) {
+            //player.getSprite().translateX(-player.getSpeed());
+            player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed(), 0), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
             player.jump();
+            player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpVelocity()), player.b2body.getWorldCenter(), true);
         }
 
         if (enemy.getSprite().getX() < player.getSprite().getX()) {
-            enemy.getSprite().translateX(enemy.getSpeed());
+            // enemy.getSprite().translateX(enemy.getSpeed());
+            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed(), 0), enemy.b2body.getWorldCenter(), true);
         } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-            enemy.getSprite().translateX(-enemy.getSpeed());
+            //enemy.getSprite().translateX(-enemy.getSpeed());
+            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed(), 0), enemy.b2body.getWorldCenter(), true);
         }
 
 
-        if (player.isJumping()) {
-            int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
-            player.getSprite().translateY(player.getVelocityY());
-            player.setVelocityY(currentVelocityY - GRAVITY);
-        }
+        //if (player.isJumping()) {
+        //    int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
+        //    player.getSprite().translateY(player.getVelocityY());
+        //    player.setVelocityY(currentVelocityY - GRAVITY);
+        //}
 
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(SHIFT)) {
@@ -203,11 +208,10 @@ public class TestScreen implements Screen {
             enemy.setColor(Color.WHITE);
         }
 
+        // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
         for (Rewind r : rewindObjects) {
             r.update();
         }
-        //player.getRewindController().update(); // Updates für Rewind-Mechanik in jedem Frame
-        //enemy.getRewindController().update();
     }
 
     private void logic() {
@@ -228,8 +232,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //gameCamera.resize(width,height);
-        gamePort.update(width, height);
+        gameCamera.resize(width,height);
     }
 
     @Override

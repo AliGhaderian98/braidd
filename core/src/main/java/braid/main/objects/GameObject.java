@@ -8,7 +8,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-// Abstrakte Basisklasse für alle Spielobjekte, die von Actor erben
+/***********
+ Abstrakte Basisklasse für alle Spielobjekte, die von Actor erben. Darunter fallen u.a.
+ Spieler und Gegner, aber auch Schlüssel u.ä.
+ ***********/
+
 public abstract class GameObject extends Actor {
     // Gemeinsame Eigenschaft für Geschwindigkeit, die von Spieler und Gegner verwendet werden kann
     protected float speed;
@@ -53,6 +57,7 @@ public abstract class GameObject extends Actor {
         sprite.setColor(color);
     }
 
+    public void defineBody() {}
 
 
 
