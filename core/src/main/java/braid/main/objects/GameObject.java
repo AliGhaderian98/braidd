@@ -4,15 +4,24 @@ import braid.main.Rewind;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-// Abstrakte Basisklasse für alle Spielobjekte, die von Actor erben
+/***********
+ Abstrakte Basisklasse für alle Spielobjekte, die von Actor erben. Darunter fallen u.a.
+ Spieler und Gegner, aber auch Schlüssel u.ä.
+ ***********/
+
 public abstract class GameObject extends Actor {
     // Gemeinsame Eigenschaft für Geschwindigkeit, die von Spieler und Gegner verwendet werden kann
     protected float speed;
     protected Texture texture;
     protected Sprite sprite;
     private Rewind rewindController;
+
+    public World world;
+    public Body b2body;
 
     public GameObject() {}
 
@@ -21,6 +30,10 @@ public abstract class GameObject extends Actor {
         this.texture = texture;
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
+    }
+
+    public GameObject(World world) {
+        this.world = world;
     }
 
 
@@ -44,6 +57,7 @@ public abstract class GameObject extends Actor {
         sprite.setColor(color);
     }
 
+    public void defineBody() {}
 
 
 

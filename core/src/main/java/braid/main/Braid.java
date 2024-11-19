@@ -17,10 +17,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.math.Vector2;
 
+/***********
+ Hauptklasse des Spiels, die zum Management aller anderen Teile dient.
+ ***********/
+
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class Braid extends Game {
-    public static final int V_WIDTH = 800;
-    public static final int V_HEIGHT = 600;
+    public static final int V_WIDTH = 240; // alt: 240
+    public static final int V_HEIGHT = 160; // alt: 160
     public static final float PPM = 100;
 
     public SpriteBatch batch;
@@ -28,6 +32,7 @@ public class Braid extends Game {
 
     @Override
     public void create() {
+        Gdx.graphics.setWindowedMode(800, 600);
         batch = new SpriteBatch();
         setScreen(new TestScreen(this));
     }
