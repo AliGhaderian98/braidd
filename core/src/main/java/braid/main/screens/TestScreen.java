@@ -11,8 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -22,8 +20,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 /***********
   Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
@@ -75,6 +71,7 @@ public class TestScreen implements Screen {
         // Setup Game Camera
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT);
 
+        // Setup Level Map
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("maps/testmap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/Braid.PPM);
@@ -86,13 +83,11 @@ public class TestScreen implements Screen {
 
         // Setup Player
         player = new Player(world, this);
-        //player.setPosition(0,0);
         player.setRewindController(new Rewind(new RewindableSprite(player.getSprite())));
 
 
         // Setup Enemy
         enemy = new Enemy(world, this);
-        //enemy.setPosition(worldWidth - 5 * enemy.getSprite().getWidth(), 0);
         enemy.setRewindController(new Rewind(new RewindableSprite(enemy.getSprite()))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
 
         // Add all rewindable objects to Watcher
@@ -111,6 +106,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
 
         clearScreen();
@@ -122,7 +118,7 @@ public class TestScreen implements Screen {
 
     public void update(float dt) {
         // Update world physics
-        world.step(1/60f, 6, 2);
+        world.step(dt, 6, 2);
 
         // Update Player and Enemies
         player.update(dt);
@@ -153,26 +149,31 @@ public class TestScreen implements Screen {
         enemy.getSprite().draw(game.batch);
         game.batch.end();
     }
+
     private void input() {
-        if (Gdx.input.isKeyPressed(RIGHT_KEY) && player.b2body.getLinearVelocity().x <= player.getSpeed()) {
-            // player.getSprite().translateX(player.getSpeed());
-            player.b2body.applyLinearImpulse(new Vector2(player.getSpeed(), 0), player.b2body.getWorldCenter(), true);
+        // handle input for the player
+        if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
+            if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                player.b2body.applyLinearImpulse(new Vector2(player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
+            }
         }
-        if (Gdx.input.isKeyPressed(LEFT_KEY) && player.b2body.getLinearVelocity().x <= player.getSpeed()) {
-            //player.getSprite().translateX(-player.getSpeed());
-            player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed(), 0), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
-            player.jump();
-            player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpVelocity()), player.b2body.getWorldCenter(), true);
+        else {
+            player.b2body.setLinearVelocity(0,player.b2body.getLinearVelocity().y);
         }
 
+        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
+            player.jump();
+            player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
+        }
+
+        // move enemy based on the position of the player
         if (enemy.getSprite().getX() < player.getSprite().getX()) {
-            // enemy.getSprite().translateX(enemy.getSpeed());
-            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed(), 0), enemy.b2body.getWorldCenter(), true);
+            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed()*.5f, 0), enemy.b2body.getWorldCenter(), true);
         } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-            //enemy.getSprite().translateX(-enemy.getSpeed());
-            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed(), 0), enemy.b2body.getWorldCenter(), true);
+            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed()*.5f, 0), enemy.b2body.getWorldCenter(), true);
         }
 
 

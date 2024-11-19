@@ -1,16 +1,15 @@
 package braid.main.objects;
 
 import braid.main.Braid;
-import braid.main.Rewind;
 import braid.main.screens.TestScreen;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 /***********
- Diese Klasse implementiert den Spieler und soll sich  um alle Variablen und interaktiven
+ Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
  ***********/
 
@@ -25,7 +24,7 @@ public class Player extends GameObject {
     int velocityY;
 
     State currentState = State.GROUNDED;
-    float jumpVelocity = 20f;
+    float jumpSpeed = 3.5f;
 
     private TextureRegion stand;
 
@@ -34,7 +33,7 @@ public class Player extends GameObject {
     public Player(World world, TestScreen screen) {
         super(world);
 
-        speed = 5f;
+        speed = 1f;
 
         defineBody();
 
@@ -42,11 +41,6 @@ public class Player extends GameObject {
         stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
-    }
-
-    public Player(Texture texture) {
-        super(texture);
-        speed = 5;
     }
 
     // Methods
@@ -57,12 +51,20 @@ public class Player extends GameObject {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef bodyFdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(11/ Braid.PPM);
+        shape.setRadius(9/ Braid.PPM);
 
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
+        bodyFdef.shape = shape;
+        bodyFdef.friction = 0f;
+        b2body.createFixture(bodyFdef);
+
+        FixtureDef footFdef = new FixtureDef();
+        PolygonShape feet = new PolygonShape();
+        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0,-8 / Braid.PPM), 0);
+        footFdef.shape = feet;
+        footFdef.friction = 1f;
+        b2body.createFixture(footFdef);
     }
 
     public void update(float dt) {
@@ -93,8 +95,8 @@ public class Player extends GameObject {
         return currentState == State.JUMPING;
     }
 
-    public final float getJumpVelocity () {
-        return jumpVelocity;
+    public final float getJumpSpeed() {
+        return jumpSpeed;
     }
 
     public int getVelocityY() {
@@ -103,4 +105,5 @@ public class Player extends GameObject {
     public void setVelocityY(int value) {
         velocityY = value;
     }
+
 }

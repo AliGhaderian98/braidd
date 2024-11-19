@@ -23,15 +23,16 @@ import com.badlogic.gdx.math.Vector2;
 
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class Braid extends Game {
-    public static final int V_WIDTH = 240;
-    public static final int V_HEIGHT = 160;
-    public static final float PPM = 1;
+    public static final int V_WIDTH = 240; // alt: 240
+    public static final int V_HEIGHT = 160; // alt: 160
+    public static final float PPM = 100;
 
     public SpriteBatch batch;
 
 
     @Override
     public void create() {
+        Gdx.graphics.setWindowedMode(800, 600);
         batch = new SpriteBatch();
         setScreen(new TestScreen(this));
     }

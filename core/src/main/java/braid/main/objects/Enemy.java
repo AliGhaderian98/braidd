@@ -24,7 +24,7 @@ public class Enemy extends GameObject {
     public Enemy(World world, TestScreen screen) {
         super(world);
 
-        speed = 5;
+        speed = .1f;
 
         defineBody();
 
@@ -33,13 +33,6 @@ public class Enemy extends GameObject {
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
     }
-
-    public Enemy(Texture texture) {
-        super(texture);
-        speed = 3;
-    }
-
-
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
     @Override
@@ -59,6 +52,7 @@ public class Enemy extends GameObject {
         shape.setRadius(11/ Braid.PPM);
 
         fdef.shape = shape;
+        fdef.friction = 1f;
         b2body.createFixture(fdef);
     }
 
