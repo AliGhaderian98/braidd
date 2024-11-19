@@ -1,5 +1,6 @@
-package braid.main;
+package braid.main.tools;
 
+import braid.main.Braid;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,7 +24,7 @@ public class GameCamera {
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(worldWidth / Braid.PPM , worldHeight / Braid.PPM, camera);
-        camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+        camera.position.set((float) viewport.getWorldWidth() / 2, (float) viewport.getWorldHeight() / 2, 0);
     }
 
     public void setMap(TiledMap map) {

@@ -4,6 +4,8 @@ import braid.main.Rewind;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 // Abstrakte Basisklasse für alle Spielobjekte, die von Actor erben
@@ -14,6 +16,9 @@ public abstract class GameObject extends Actor {
     protected Sprite sprite;
     private Rewind rewindController;
 
+    public World world;
+    public Body b2body;
+
     public GameObject() {}
 
     // Konstruktoren
@@ -21,6 +26,10 @@ public abstract class GameObject extends Actor {
         this.texture = texture;
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
+    }
+
+    public GameObject(World world) {
+        this.world = world;
     }
 
 

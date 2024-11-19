@@ -19,8 +19,8 @@ import com.badlogic.gdx.math.Vector2;
 
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class Braid extends Game {
-    public static final int V_WIDTH = 800;
-    public static final int V_HEIGHT = 600;
+    public static final int V_WIDTH = 240;
+    public static final int V_HEIGHT = 160;
     public static final float PPM = 1;
 
     public SpriteBatch batch;
