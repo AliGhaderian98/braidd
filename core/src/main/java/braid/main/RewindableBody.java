@@ -1,5 +1,8 @@
 package braid.main;
-//Schnittstelle zwischen RewindController und GameObjects
+/*******
+ * Schnittstelle zwischen RewindController und GameObjects
+ *******/
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 

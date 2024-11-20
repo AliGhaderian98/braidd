@@ -1,5 +1,7 @@
 package braid.main;
-//Getter/Setter-Klasse zum Sprites Rewinden (Schnittstelle fÃ¼r Sprite und Rewindable (Receiver1?))
+/*******
+ * Schnittstelle zwischen RewindController und Sprites
+ *******/
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;

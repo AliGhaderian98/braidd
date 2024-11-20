@@ -5,10 +5,14 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 // import com.badlogic.gdx.Input; siehe Braid.java Controls
 
+/***********
+ Hauptlogik für die Rewindmech, wir speichern alle States (Pos und Velos) und ersetzen diese beim Rewinden
+ ***********/
+
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int maxRewindLength = 600; //Anzahl der Frames/Minuten die wir saven wollen todo: immer noch schauen wie man 10 min genau misst (oder ob wir das mit Frames machen wollen)
+    private int maxRewindLength = 600; //Anzahl der Frames/Minuten die wir saven wollen
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){

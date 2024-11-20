@@ -19,10 +19,10 @@ public abstract class GameObject extends Actor{
     protected float speed;
     protected Texture texture;
     protected Sprite sprite;
-    //protected RewindController rewindController;
+    //protected RewindController rewindController; //Copy-Paste für Rewind
 
     public World world;
-    public Body b2body;
+    public Body b2body;//Copy-Paste für Rewind
 
     public GameObject() {}
 
@@ -32,12 +32,12 @@ public abstract class GameObject extends Actor{
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
 
-        //this.rewindController = new RewindController(this); //Noch useless
+        //this.rewindController = new RewindController(new RewindableBody(b2body)); //Copy-Paste für Rewind
     }
 
     public GameObject(World world) {
         this.world = world;
-        //this.rewindController = new RewindController(this); //Noch useless
+        //this.rewindController = new RewindController(new RewindableBody(b2body)); ////Copy-Paste für Rewind
     }
 
 
@@ -84,7 +84,7 @@ public abstract class GameObject extends Actor{
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-/* noch useless
+/* //Copy-Paste für Rewind
     public RewindController getRewindController() {
         return rewindController;
     }

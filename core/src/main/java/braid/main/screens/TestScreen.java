@@ -90,6 +90,9 @@ public class TestScreen implements Screen {
         enemy = new Enemy(world, this);
         enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body)));
 
+        //Copy-Paste für Rewind:
+        //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
+
         // Add all rewindable objects to Watcher
         rewindObjects = new Array<RewindController>();
         rewindObjects.add(player.getRewindController());
@@ -162,7 +165,7 @@ public class TestScreen implements Screen {
         // handle input for the player
 
         //if(player.getRewindController().isRewinding()){return;}, ich lass das nochmal hier für bugfixes
-
+        //todo: links und rechts gedrückt halten behaviour
         if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
             if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.b2body.applyLinearImpulse(new Vector2(player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
