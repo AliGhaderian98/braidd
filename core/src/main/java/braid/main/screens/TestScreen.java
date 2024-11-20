@@ -1,10 +1,8 @@
 package braid.main.screens;
 
-import braid.main.Braid;
+import braid.main.*;
 import braid.main.tools.B2WorldCreator;
 import braid.main.tools.GameCamera;
-import braid.main.Rewind;
-import braid.main.RewindableSprite;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import com.badlogic.gdx.Gdx;
@@ -32,6 +30,7 @@ public class TestScreen implements Screen {
     private static final int GRAVITY = 1;
     private TextureAtlas atlas;
 
+    private RewindController rewindController;
     // Screen
     private final int worldWidth = Braid.V_WIDTH;
     private final int worldHeight = Braid.V_HEIGHT;
@@ -50,7 +49,7 @@ public class TestScreen implements Screen {
 
 
     // Rewind Control
-    private Array<Rewind> rewindObjects;
+    private Array<RewindController> rewindObjects;
 
     // Keys
     static int RIGHT_KEY = Input.Keys.D;
@@ -83,15 +82,15 @@ public class TestScreen implements Screen {
 
         // Setup Player
         player = new Player(world, this);
-        player.setRewindController(new Rewind(new RewindableSprite(player.getSprite())));
+        player.setRewindController(new RewindController(new RewindableBody(player.b2body)));
 
 
         // Setup Enemy
         enemy = new Enemy(world, this);
-        enemy.setRewindController(new Rewind(new RewindableSprite(enemy.getSprite()))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
 
         // Add all rewindable objects to Watcher
-        rewindObjects = new Array<Rewind>();
+        rewindObjects = new Array<RewindController>();
         rewindObjects.add(player.getRewindController());
         rewindObjects.add(enemy.getRewindController());
     }
@@ -118,7 +117,9 @@ public class TestScreen implements Screen {
 
     public void update(float dt) {
         // Update world physics
-        world.step(dt, 6, 2);
+        if(!player.getRewindController().isRewinding()) {
+            world.step(dt, 6, 2);
+        }
 
         // Update Player and Enemies
         player.update(dt);
@@ -126,6 +127,10 @@ public class TestScreen implements Screen {
 
         // Update Camera
         updateCamera();
+
+        for (RewindController r : rewindObjects) {
+            r.update();
+        }
     }
 
     private void clearScreen() {
@@ -152,6 +157,8 @@ public class TestScreen implements Screen {
 
     private void input() {
         // handle input for the player
+        if(player.getRewindController().isRewinding()){return;}
+
         if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
             if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.b2body.applyLinearImpulse(new Vector2(player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
@@ -185,7 +192,7 @@ public class TestScreen implements Screen {
 
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(SHIFT)) {
-            for (Rewind r : rewindObjects) {
+            for (RewindController r : rewindObjects) {
                 r.startRewinding();
             }
 
@@ -202,17 +209,13 @@ public class TestScreen implements Screen {
                 enemy.setColor(Color.WHITE);
             }
         } else {
-            for (Rewind r : rewindObjects) {
+            for (RewindController r : rewindObjects) {
                 r.stopRewinding();
             }
             player.setColor(Color.WHITE);
             enemy.setColor(Color.WHITE);
         }
-
         // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
-        for (Rewind r : rewindObjects) {
-            r.update();
-        }
     }
 
     private void logic() {

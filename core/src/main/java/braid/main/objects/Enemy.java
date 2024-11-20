@@ -1,14 +1,13 @@
 package braid.main.objects;
 
-import braid.main.Braid;
+
 import braid.main.screens.TestScreen;
+import braid.main.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 
 /***********
  Diese Klasse soll einen ersten spezifischen Entwurf für einen Gegner darstellen
@@ -16,9 +15,10 @@ import com.badlogic.gdx.physics.box2d.World;
  erstellt werden können.
  ***********/
 
-public class Enemy extends GameObject {
+public class Enemy extends GameObject{
 
     private TextureRegion stand;
+    private RewindController rewindController;
 
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, TestScreen screen) {
@@ -32,6 +32,8 @@ public class Enemy extends GameObject {
         stand = new TextureRegion(sprite.getTexture(), 0, 0, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
+
+        rewindController = new RewindController(new RewindableBody(b2body)); //
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -58,5 +60,15 @@ public class Enemy extends GameObject {
 
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+
+        rewindController.update();
     }
+    public RewindController getRewindController() {
+        return rewindController;
+    }
+    public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
+
+
+
+
 }

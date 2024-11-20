@@ -5,14 +5,14 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 // import com.badlogic.gdx.Input; siehe Braid.java Controls
 
-public class Rewind{
+public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int buffer = 600; //Anzahl der Frames/Minuten die wir saven wollen todo: immer noch schauen wie man 10 min genau misst (oder ob wir das mit Frames machen wollen)
-    private Rewindable rewindObject;
+    private int maxRewindLength = 600; //Anzahl der Frames/Minuten die wir saven wollen todo: immer noch schauen wie man 10 min genau misst (oder ob wir das mit Frames machen wollen)
+    private Rewindable rewindable;
 
-    public Rewind(Rewindable rewindObject){
-        this.rewindObject = rewindObject;
+    public RewindController(Rewindable rewindable){
+        this.rewindable = rewindable;
     }
 
     public void update(){
@@ -23,22 +23,33 @@ public class Rewind{
         }
     }
 
-    public void startRewinding(){ isRewinding = true; }
+    public void startRewinding(){
+        isRewinding = true;
+        //rewindable.setVelocity(new Vector2(0,0));
+    }
 
-    public void stopRewinding(){ isRewinding = false; }
+    public void stopRewinding(){
+        isRewinding = false;
+        //Bugfix Versuch
+        //rewindable.setVelocity(new Vector2(0, 0));
+    }
+
+    public boolean isRewinding() {
+        return isRewinding;
+    }
 
     public void recordState(){
-        if (states.size() >= buffer){
+        if (states.size() >= maxRewindLength){
             states.remove(0);
         }
-        states.add(new State(rewindObject.getPosition(), rewindObject.getVelocity())); //füge in jedem Frame den State in die Liste hinzu
+        states.add(new State(rewindable.getPosition(), rewindable.getVelocity())); //füge in jedem Frame den State in die Liste hinzu
     }
 
     public void applyRewind(){
         if(!states.isEmpty()){//solange man nicht am Start ist bzw. nichts gespeichert hat
             State rewindState = states.remove(states.size() - 1);//Logik: Wir setzen die States vom vorherigen Frame hin
-            rewindObject.setPosition(rewindState.getPosition()); //Einmal die Position
-            rewindObject.setVelocity(rewindState.getVelocity()); //Einmal die Velocity
+            rewindable.setPosition(rewindState.getPosition()); //Einmal die Position
+            rewindable.setVelocity(rewindState.getVelocity()); //Einmal die Velocity
         } else{
             stopRewinding();
         }
