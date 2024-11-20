@@ -2,11 +2,14 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
@@ -14,20 +17,11 @@ import com.badlogic.gdx.physics.box2d.*;
  ***********/
 
 public class Player extends GameObject {
-    // Enumeration für die verschiedenen Zustände, in der sich ein Spieler befinden kann.
-    public enum State {
-        GROUNDED,
-        JUMPING
-    }
-
     // Player specific variables
     int velocityY;
-
     State currentState = State.GROUNDED;
     float jumpSpeed = 3.5f;
-
-    private TextureRegion stand;
-
+    private final TextureRegion stand;
 
     // Constructors
     public Player(World world, TestScreen screen) {
@@ -39,7 +33,7 @@ public class Player extends GameObject {
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
         stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
+        sprite.setBounds(0, 0, 24 / Braid.PPM, 24 / Braid.PPM);
         sprite.setRegion(stand);
     }
 
@@ -53,7 +47,7 @@ public class Player extends GameObject {
 
         FixtureDef bodyFdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(9/ Braid.PPM);
+        shape.setRadius(9 / Braid.PPM);
 
         bodyFdef.shape = shape;
         bodyFdef.friction = 0f;
@@ -61,7 +55,7 @@ public class Player extends GameObject {
 
         FixtureDef footFdef = new FixtureDef();
         PolygonShape feet = new PolygonShape();
-        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0,-8 / Braid.PPM), 0);
+        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -8 / Braid.PPM), 0);
         footFdef.shape = feet;
         footFdef.friction = 1f;
         b2body.createFixture(footFdef);
@@ -69,9 +63,8 @@ public class Player extends GameObject {
 
     public void update(float dt) {
         currentState = getCurrentState();
-        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y - sprite.getHeight() / 2);
     }
-
 
     public void jump() {
         currentState = State.JUMPING;
@@ -84,7 +77,7 @@ public class Player extends GameObject {
     }
 
     public State getCurrentState() {
-        if(b2body.getLinearVelocity().y != 0)
+        if (b2body.getLinearVelocity().y != 0)
             return State.JUMPING;
         else
             return State.GROUNDED;
@@ -102,8 +95,15 @@ public class Player extends GameObject {
     public int getVelocityY() {
         return velocityY;
     }
+
     public void setVelocityY(int value) {
         velocityY = value;
+    }
+
+    // Enumeration für die verschiedenen Zustände, in der sich ein Spieler befinden kann.
+    public enum State {
+        GROUNDED,
+        JUMPING
     }
 
 }

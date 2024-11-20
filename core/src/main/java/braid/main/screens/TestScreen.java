@@ -1,12 +1,12 @@
 package braid.main.screens;
 
 import braid.main.Braid;
-import braid.main.tools.B2WorldCreator;
-import braid.main.tools.GameCamera;
 import braid.main.Rewind;
 import braid.main.RewindableSprite;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import braid.main.tools.B2WorldCreator;
+import braid.main.tools.GameCamera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -22,45 +22,37 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /***********
-  Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
-  Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
+ Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
+ Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
  ***********/
 
 public class TestScreen implements Screen {
-    // World Variables
-    private final Braid game;
     private static final int GRAVITY = 1;
-    private TextureAtlas atlas;
-
-    // Screen
-    private final int worldWidth = Braid.V_WIDTH;
-    private final int worldHeight = Braid.V_HEIGHT;
-
-    // Camera
-    private GameCamera gameCamera;
-
-    // Map
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
-
-    // Box2D variables
-    private World world;
-    private Box2DDebugRenderer b2dr;
-
-
-    // Rewind Control
-    private Array<Rewind> rewindObjects;
-
     // Keys
     static int RIGHT_KEY = Input.Keys.D;
     static int LEFT_KEY = Input.Keys.A;
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
-
+    // World Variables
+    private final Braid game;
+    // Screen
+    private final int worldWidth = Braid.V_WIDTH;
+    private final int worldHeight = Braid.V_HEIGHT;
+    private final TextureAtlas atlas;
+    // Camera
+    private final GameCamera gameCamera;
+    // Map
+    private final TmxMapLoader mapLoader;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer renderer;
+    // Box2D variables
+    private final World world;
+    private final Box2DDebugRenderer b2dr;
+    // Rewind Control
+    private final Array<Rewind> rewindObjects;
     // GameObject Variables
-    private Player player;
-    private Enemy enemy;
+    private final Player player;
+    private final Enemy enemy;
 
 
     public TestScreen(Braid game) {
@@ -74,10 +66,10 @@ public class TestScreen implements Screen {
         // Setup Level Map
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("maps/testmap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1/Braid.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         // setup Box2D world
-        world = new World(new Vector2(0,-10), true);
+        world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(world, map);
 
@@ -95,7 +87,6 @@ public class TestScreen implements Screen {
         rewindObjects.add(player.getRewindController());
         rewindObjects.add(enemy.getRewindController());
     }
-
 
 
     @Override
@@ -129,7 +120,7 @@ public class TestScreen implements Screen {
     }
 
     private void clearScreen() {
-        ScreenUtils.clear(0,0,0,1);
+        ScreenUtils.clear(0, 0, 0, 1);
     }
 
     private void updateCamera() {
@@ -154,14 +145,13 @@ public class TestScreen implements Screen {
         // handle input for the player
         if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
             if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                player.b2body.applyLinearImpulse(new Vector2(player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
             }
             if (Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed()*.5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
             }
-        }
-        else {
-            player.b2body.setLinearVelocity(0,player.b2body.getLinearVelocity().y);
+        } else {
+            player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
         }
 
         if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
@@ -171,9 +161,9 @@ public class TestScreen implements Screen {
 
         // move enemy based on the position of the player
         if (enemy.getSprite().getX() < player.getSprite().getX()) {
-            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed()*.5f, 0), enemy.b2body.getWorldCenter(), true);
+            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
         } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed()*.5f, 0), enemy.b2body.getWorldCenter(), true);
+            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
         }
 
 
@@ -233,7 +223,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gameCamera.resize(width,height);
+        gameCamera.resize(width, height);
     }
 
     @Override
@@ -246,7 +236,9 @@ public class TestScreen implements Screen {
 
     }
 
-    public TextureAtlas getAtlas() { return atlas; }
+    public TextureAtlas getAtlas() {
+        return atlas;
+    }
 
     @Override
     public void hide() {

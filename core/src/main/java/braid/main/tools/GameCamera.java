@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 /***********
  Die GameCamera ist dafür da, um die Spielwelt und die Position des Spielers
-   automatisch der Kamera anzupassen
+ automatisch der Kamera anzupassen
  ***********/
 
 public class GameCamera {
@@ -20,14 +20,13 @@ public class GameCamera {
     private float mapHeight;
 
 
-
     public GameCamera(float worldWidth, float worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(worldWidth / Braid.PPM , worldHeight / Braid.PPM, camera);
-        camera.position.set((float) viewport.getWorldWidth() / 2, (float) viewport.getWorldHeight() / 2, 0);
+        viewport = new FitViewport(worldWidth / Braid.PPM, worldHeight / Braid.PPM, camera);
+        camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }
 
     public void setMap(TiledMap map) {
@@ -51,7 +50,7 @@ public class GameCamera {
     }
 
     public void resize(int width, int height) {
-        viewport.update(width,height);
+        viewport.update(width, height);
     }
 
     public OrthographicCamera getCamera() {

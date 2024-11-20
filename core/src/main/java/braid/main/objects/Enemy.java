@@ -2,7 +2,6 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -18,7 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Enemy extends GameObject {
 
-    private TextureRegion stand;
+    private final TextureRegion stand;
 
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, TestScreen screen) {
@@ -30,7 +29,7 @@ public class Enemy extends GameObject {
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
         stand = new TextureRegion(sprite.getTexture(), 0, 0, 24, 24);
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
+        sprite.setBounds(0, 0, 24 / Braid.PPM, 24 / Braid.PPM);
         sprite.setRegion(stand);
     }
 
@@ -43,13 +42,13 @@ public class Enemy extends GameObject {
 
     public void defineBody() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set((Braid.V_WIDTH-32) / Braid.PPM, 32 / Braid.PPM);
+        bdef.position.set((Braid.V_WIDTH - 32) / Braid.PPM, 32 / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(11/ Braid.PPM);
+        shape.setRadius(11 / Braid.PPM);
 
         fdef.shape = shape;
         fdef.friction = 1f;
@@ -57,6 +56,6 @@ public class Enemy extends GameObject {
     }
 
     public void update(float dt) {
-        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y - sprite.getHeight() / 2);
     }
 }

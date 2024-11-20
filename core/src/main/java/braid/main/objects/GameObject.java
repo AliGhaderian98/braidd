@@ -14,16 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  ***********/
 
 public abstract class GameObject extends Actor {
+    public World world;
+    public Body b2body;
     // Gemeinsame Eigenschaft für Geschwindigkeit, die von Spieler und Gegner verwendet werden kann
     protected float speed;
     protected Texture texture;
     protected Sprite sprite;
     private Rewind rewindController;
 
-    public World world;
-    public Body b2body;
-
-    public GameObject() {}
+    public GameObject() {
+    }
 
     // Konstruktoren
     public GameObject(Texture texture) {
@@ -37,7 +37,6 @@ public abstract class GameObject extends Actor {
     }
 
 
-
     // Methoden
 
     // Überschreiben der `act()`-Methode, um die Logik jedes Frames zu aktualisieren
@@ -49,7 +48,7 @@ public abstract class GameObject extends Actor {
 
     @Override
     public void setPosition(float x, float y) {
-        sprite.setPosition(x,y);
+        sprite.setPosition(x, y);
     }
 
     @Override
@@ -57,8 +56,8 @@ public abstract class GameObject extends Actor {
         sprite.setColor(color);
     }
 
-    public void defineBody() {}
-
+    public void defineBody() {
+    }
 
 
     // Getter und Setter
@@ -69,6 +68,7 @@ public abstract class GameObject extends Actor {
     public Texture getTexture() {
         return texture;
     }
+
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
@@ -76,6 +76,7 @@ public abstract class GameObject extends Actor {
     public Sprite getSprite() {
         return sprite;
     }
+
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
@@ -83,6 +84,7 @@ public abstract class GameObject extends Actor {
     public Rewind getRewindController() {
         return rewindController;
     }
+
     public void setRewindController(Rewind rewindController) {
         this.rewindController = rewindController;
     }
