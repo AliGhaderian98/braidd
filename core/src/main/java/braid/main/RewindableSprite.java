@@ -7,13 +7,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class RewindableSprite implements Rewindable{
     private final Sprite sprite;
     private Vector2 velocity = new Vector2(0, 0);
-    private Body linkedBody;
     public RewindableSprite(Sprite sprite){
         this.sprite = sprite;
-        this.linkedBody = getLinkedBody();
     }
 
-    public Body getLinkedBody(){ return linkedBody; }
     @Override
     public Vector2 getPosition(){ return new Vector2(sprite.getX(), sprite.getY()); }
 

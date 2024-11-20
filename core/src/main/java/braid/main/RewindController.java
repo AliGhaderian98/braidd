@@ -12,7 +12,9 @@ public class RewindController {
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){
-        this.rewindable = rewindable;
+        if(rewindable != null) {
+            this.rewindable = rewindable;
+        }
     }
 
     public void update(){
@@ -42,14 +44,25 @@ public class RewindController {
         if (states.size() >= maxRewindLength){
             states.remove(0);
         }
-        states.add(new State(rewindable.getPosition(), rewindable.getVelocity())); //füge in jedem Frame den State in die Liste hinzu
+        if(rewindable != null) {
+            states.add(new State(rewindable.getPosition(), rewindable.getVelocity()));
+        }//füge in jedem Frame den State in die Liste hinzu
     }
 
     public void applyRewind(){
-        if(!states.isEmpty()){//solange man nicht am Start ist bzw. nichts gespeichert hat
-            State rewindState = states.remove(states.size() - 1);//Logik: Wir setzen die States vom vorherigen Frame hin
-            rewindable.setPosition(rewindState.getPosition()); //Einmal die Position
-            rewindable.setVelocity(rewindState.getVelocity()); //Einmal die Velocity
+        int maxRemoveFrames = 2; //RewindSpeed
+
+        if(!states.isEmpty()) {// NullPointer = fun
+            for(int i = 0; i < maxRemoveFrames && !states.isEmpty(); i++) {
+                states.remove(states.size() - 1);
+            }
+            if(!states.isEmpty()) {
+                State rewindState = states.remove(states.size() - 1);
+
+                rewindable.setPosition(rewindState.getPosition()); //Einmal die Position
+                rewindable.setVelocity(rewindState.getVelocity());
+            }
+            //Einmal die Velocity
         } else{
             stopRewinding();
         }

@@ -27,10 +27,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class TestScreen implements Screen {
     // World Variables
     private final Braid game;
-    private static final int GRAVITY = 1;
+    private static final int GRAVITY = -10;
     private TextureAtlas atlas;
 
-    private RewindController rewindController;
+
     // Screen
     private final int worldWidth = Braid.V_WIDTH;
     private final int worldHeight = Braid.V_HEIGHT;
@@ -50,6 +50,7 @@ public class TestScreen implements Screen {
 
     // Rewind Control
     private Array<RewindController> rewindObjects;
+    private RewindController rewindController;
 
     // Keys
     static int RIGHT_KEY = Input.Keys.D;
@@ -87,7 +88,7 @@ public class TestScreen implements Screen {
 
         // Setup Enemy
         enemy = new Enemy(world, this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body))); //Später: testen was passiert wenn wir das bei einem weglassen (damit wir später non-rewind Objekte testen koennen)
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body)));
 
         // Add all rewindable objects to Watcher
         rewindObjects = new Array<RewindController>();
@@ -105,6 +106,8 @@ public class TestScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if(player == null || enemy == null){ return;}
+
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
 
@@ -157,7 +160,8 @@ public class TestScreen implements Screen {
 
     private void input() {
         // handle input for the player
-        if(player.getRewindController().isRewinding()){return;}
+
+        //if(player.getRewindController().isRewinding()){return;}, ich lass das nochmal hier für bugfixes
 
         if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
             if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {

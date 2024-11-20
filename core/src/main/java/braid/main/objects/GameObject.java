@@ -31,12 +31,13 @@ public abstract class GameObject extends Actor{
         this.texture = texture;
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
-        //this.rewindController = new RewindController(this);
+
+        //this.rewindController = new RewindController(this); //Noch useless
     }
 
     public GameObject(World world) {
         this.world = world;
-        //this.rewindController = new RewindController(this);
+        //this.rewindController = new RewindController(this); //Noch useless
     }
 
 
@@ -49,7 +50,6 @@ public abstract class GameObject extends Actor{
         super.act(delta); // Aufruf der übergeordneten Methode, um die grundlegende Actor-Logik auszuführen
         // Zusätzliche Logik zur Aktualisierung der Position oder anderer Eigenschaften kann hier hinzugefügt werden
 
-        //rewindController.update();
     }
 
     @Override
@@ -84,7 +84,7 @@ public abstract class GameObject extends Actor{
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-/*
+/* noch useless
     public RewindController getRewindController() {
         return rewindController;
     }
