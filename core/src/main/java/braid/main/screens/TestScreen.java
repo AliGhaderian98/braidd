@@ -73,7 +73,8 @@ public class TestScreen implements Screen {
 
         // Setup Level Map
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("maps/testmap.tmx");
+        map = mapLoader.load("maps/testmap2.tmx");
+        gameCamera.setMap(map);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         // setup Box2D world
@@ -143,7 +144,7 @@ public class TestScreen implements Screen {
     }
 
     private void updateCamera() {
-        gameCamera.followTarget(player.getSprite().getX());
+        gameCamera.followTarget(player.b2body.getPosition().x * Braid.PPM);
     }
 
     private void renderWorld() {

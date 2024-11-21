@@ -43,8 +43,8 @@ public class GameCamera {
         float minX = viewport.getWorldWidth() / 2;
         float maxX = mapWidth - viewport.getWorldWidth() / 2;
 
-        float newX = camera.position.x + (targetX - camera.position.x);
-        camera.position.x = Math.max(minX, Math.min(newX, maxX));
+
+        camera.position.x = Math.max(minX,Math.min(targetX,maxX));
 
         camera.update();
     }
