@@ -1,6 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
+import braid.main.*;
 import braid.main.screens.TestScreen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -35,6 +36,8 @@ public class Player extends GameObject {
     float jumpSpeed = 3.5f;
     State currentState;
     State previousState;
+    private RewindController rewindController;
+
 
     private TextureRegion stand;
 
@@ -61,7 +64,7 @@ public class Player extends GameObject {
         LionIdle = new Animation<TextureRegion>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
         LionRunning = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
         LionJumping = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
-
+        rewindController = new RewindController(new RewindableBody(b2body));
     }
 
     // Methods
@@ -74,7 +77,7 @@ public class Player extends GameObject {
 
         FixtureDef bodyFdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(9/ Braid.PPM);
+        shape.setRadius(9 / Braid.PPM);
 
         bodyFdef.shape = shape;
         bodyFdef.friction = 0f;
@@ -82,7 +85,7 @@ public class Player extends GameObject {
 
         FixtureDef footFdef = new FixtureDef();
         PolygonShape feet = new PolygonShape();
-        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0,-8 / Braid.PPM), 0);
+        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -8 / Braid.PPM), 0);
         footFdef.shape = feet;
         footFdef.friction = 1f;
         b2body.createFixture(footFdef);
@@ -92,6 +95,7 @@ public class Player extends GameObject {
         currentState = getCurrentState();
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
         sprite.setRegion(getFrame(dt));
+        rewindController.update();
     }
 
     public TextureRegion getFrame(float dt){
@@ -157,8 +161,16 @@ public class Player extends GameObject {
     public int getVelocityY() {
         return velocityY;
     }
+
     public void setVelocityY(int value) {
         velocityY = value;
     }
 
+    public void setRewindController(RewindController rewindController) {
+        this.rewindController = rewindController;
+    }
+
+    public RewindController getRewindController() {
+        return rewindController;
+    }
 }

@@ -1,9 +1,10 @@
 package braid.main.objects;
 
-import braid.main.Rewind;
+import braid.main.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,26 +15,29 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  ***********/
 
 public abstract class GameObject extends Actor {
-    public World world;
-    public Body b2body;
     // Gemeinsame Eigenschaft für Geschwindigkeit, die von Spieler und Gegner verwendet werden kann
     protected float speed;
     protected Texture texture;
     protected Sprite sprite;
-    private Rewind rewindController;
+    //protected RewindController rewindController; //Copy-Paste für Rewind
 
-    public GameObject() {
-    }
+    public World world;
+    public Body b2body;//Copy-Paste für Rewind
+
+    public GameObject() {}
 
     // Konstruktoren
     public GameObject(Texture texture) {
         this.texture = texture;
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
+
+        //this.rewindController = new RewindController(new RewindableBody(b2body)); //Copy-Paste für Rewind
     }
 
     public GameObject(World world) {
         this.world = world;
+        //this.rewindController = new RewindController(new RewindableBody(b2body)); ////Copy-Paste für Rewind
     }
 
 
@@ -44,6 +48,7 @@ public abstract class GameObject extends Actor {
     public void act(float delta) {
         super.act(delta); // Aufruf der übergeordneten Methode, um die grundlegende Actor-Logik auszuführen
         // Zusätzliche Logik zur Aktualisierung der Position oder anderer Eigenschaften kann hier hinzugefügt werden
+
     }
 
     @Override
@@ -80,14 +85,15 @@ public abstract class GameObject extends Actor {
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-
-    public Rewind getRewindController() {
+/* //Copy-Paste für Rewind
+    public RewindController getRewindController() {
         return rewindController;
     }
-
-    public void setRewindController(Rewind rewindController) {
+    public void setRewindController(RewindController rewindController) {
         this.rewindController = rewindController;
     }
+
+ */
 }
 
 
