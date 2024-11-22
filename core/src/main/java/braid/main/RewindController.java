@@ -54,7 +54,7 @@ public class RewindController {
     }
 
     public void applyRewind(){
-        int maxRemoveFrames = 2; //RewindSpeed
+        int maxRemoveFrames = 1; //RewindSpeed
 
         if(!states.isEmpty()) {// NullPointer = fun
             for(int i = 0; i < maxRemoveFrames && !states.isEmpty(); i++) {

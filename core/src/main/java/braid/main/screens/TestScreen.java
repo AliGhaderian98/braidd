@@ -78,7 +78,7 @@ public class TestScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         // setup Box2D world
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(world, map);
 
@@ -165,12 +165,11 @@ public class TestScreen implements Screen {
         // handle input for the player
 
         //if(player.getRewindController().isRewinding()){return;}, ich lass das nochmal hier für bugfixes
-        //todo: links und rechts gedrückt halten behaviour
         if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
-            if (Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+            if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
             }
-            if (Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+            if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
             }
         } else {
