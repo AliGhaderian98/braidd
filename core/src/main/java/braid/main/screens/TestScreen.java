@@ -5,6 +5,7 @@ import braid.main.tools.B2WorldCreator;
 import braid.main.tools.GameCamera;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import braid.main.tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -98,6 +99,8 @@ public class TestScreen implements Screen {
         rewindObjects = new Array<RewindController>();
         rewindObjects.add(player.getRewindController());
         rewindObjects.add(enemy.getRewindController());
+
+        world.setContactListener(new WorldContactListener());
     }
 
 
