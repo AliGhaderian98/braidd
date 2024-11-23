@@ -3,13 +3,11 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.*;
 import braid.main.screens.TestScreen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
@@ -21,7 +19,8 @@ public class Player extends GameObject {
     public enum State {
         IDLE,
         JUMPING,
-        RUNNING
+        RUNNING,
+        CLIMBING
     }
 
     // Animation variables
@@ -34,9 +33,11 @@ public class Player extends GameObject {
     // Player specific variables
     int velocityY;
     float jumpSpeed = 3.5f;
+    final float climbingSpeed = 0.5f;
     State currentState;
     State previousState;
     private RewindController rewindController;
+    private boolean isAtLadder;
 
 
     private TextureRegion stand;
@@ -130,6 +131,10 @@ public class Player extends GameObject {
         return region;
     }
 
+    public void climb() {
+        currentState = State.CLIMBING;
+    }
+
     public void jump() {
         currentState = State.JUMPING;
         //velocityY = jumpVelocity;
@@ -158,6 +163,10 @@ public class Player extends GameObject {
         return jumpSpeed;
     }
 
+    public boolean isClimbing() {return currentState == State.CLIMBING;}
+
+    public final float getClimbingSpeed() {return climbingSpeed;}
+
     public int getVelocityY() {
         return velocityY;
     }
@@ -173,4 +182,7 @@ public class Player extends GameObject {
     public RewindController getRewindController() {
         return rewindController;
     }
+
+    public void atLadder(boolean atLadder) {isAtLadder = atLadder;}
+    public boolean isAtLadder() {return isAtLadder;}
 }

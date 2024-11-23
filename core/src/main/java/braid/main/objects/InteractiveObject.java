@@ -4,8 +4,7 @@ import braid.main.Braid;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.bullet.softbody.btSoftBody;
-import org.w3c.dom.css.Rect;
+
 
 public class InteractiveObject {
 

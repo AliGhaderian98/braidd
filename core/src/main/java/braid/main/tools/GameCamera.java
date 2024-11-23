@@ -1,6 +1,7 @@
 package braid.main.tools;
 
 import braid.main.Braid;
+import braid.main.objects.Player;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -18,11 +19,13 @@ public class GameCamera {
     private final float worldHeight;
     private float mapWidth;
     private float mapHeight;
+    private Player player;
 
 
-    public GameCamera(float worldWidth, float worldHeight) {
+    public GameCamera(float worldWidth, float worldHeight, Player player) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
+        this.player = player;
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(worldWidth / Braid.PPM, worldHeight / Braid.PPM, camera);
@@ -37,8 +40,8 @@ public class GameCamera {
         mapHeight = (mapTileHeigth * tileSize) / Braid.PPM;
     }
 
-    public void followTarget(float targetX) {
-        targetX /= Braid.PPM;
+    public void followTarget() {
+        float targetX = player.b2body.getPosition().x;
 
         float minX = viewport.getWorldWidth() / 2;
         float maxX = mapWidth - viewport.getWorldWidth() / 2;

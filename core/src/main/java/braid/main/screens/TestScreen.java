@@ -56,6 +56,8 @@ public class TestScreen implements Screen {
     // Keys
     static int RIGHT_KEY = Input.Keys.D;
     static int LEFT_KEY = Input.Keys.A;
+    static int UP_KEY = Input.Keys.W;
+    static int DOWN_KEY = Input.Keys.S;
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
 
@@ -69,13 +71,9 @@ public class TestScreen implements Screen {
         atlas = new TextureAtlas("packedimages/lion.atlas");
         this.game = game;
 
-        // Setup Game Camera
-        gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT);
-
         // Setup Level Map
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("maps/testmap2.tmx");
-        gameCamera.setMap(map);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         // setup Box2D world
@@ -87,6 +85,9 @@ public class TestScreen implements Screen {
         player = new Player(world, this);
         player.setRewindController(new RewindController(new RewindableBody(player.b2body)));
 
+        // Setup Game Camera
+        gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
+        gameCamera.setMap(map);
 
         // Setup Enemy
         enemy = new Enemy(world, this);
@@ -100,7 +101,7 @@ public class TestScreen implements Screen {
         rewindObjects.add(player.getRewindController());
         rewindObjects.add(enemy.getRewindController());
 
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(player));
     }
 
 
@@ -147,7 +148,7 @@ public class TestScreen implements Screen {
     }
 
     private void updateCamera() {
-        gameCamera.followTarget(player.b2body.getPosition().x * Braid.PPM);
+        gameCamera.followTarget();
     }
 
     private void renderWorld() {
@@ -182,6 +183,11 @@ public class TestScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
             player.jump();
             player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
+        }
+
+        if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
+            player.b2body.applyLinearImpulse(new Vector2(0, player.getClimbingSpeed()), player.b2body.getWorldCenter(), true);
+
         }
 
         // move enemy based on the position of the player

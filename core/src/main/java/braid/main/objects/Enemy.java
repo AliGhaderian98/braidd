@@ -3,15 +3,13 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
 import braid.main.*;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+
 
 /***********
  Diese Klasse soll einen ersten spezifischen Entwurf für einen Gegner darstellen
