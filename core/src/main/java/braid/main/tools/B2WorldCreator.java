@@ -3,6 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.objects.Ladder;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -17,15 +18,17 @@ import com.badlogic.gdx.utils.Array;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
-
     public B2WorldCreator(World world, TiledMap map) {
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
 
+
         // create ground bodies and fixtures
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+        MapLayer groundLayer = map.getLayers().get("Ground");
+        for (MapObject object : groundLayer.getObjects()) {
+
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -38,26 +41,13 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
-        // Create ladders
         ladders = new Array<>();
-        int tileWidth = map.getProperties().get("tilewidth", Integer.class);
-        int tileHeight = map.getProperties().get("tileheight", Integer.class);
+        MapLayer ladderLayer =  map.getLayers().get("Ladder");
+        for (MapObject object : ladderLayer.getObjects()) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-        for (MapLayer layer : map.getLayers()) {
-            if ("Leiter".equals(layer.getName()) && layer instanceof TiledMapTileLayer) {
-                TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
-
-                for (int x = 0; x < tileLayer.getWidth(); x++) {
-                    for (int y = 0; y < tileLayer.getHeight(); y++) {
-                        TiledMapTileLayer.Cell cell = tileLayer.getCell(x,y);
-                        if (cell == null || cell.getTile() == null) {
-                            continue;
-                        }
-                        Rectangle rect = new Rectangle(x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-                        ladders.add(new Ladder(world,map,rect));
-                    }
-                }
-            }
+            Ladder ladder = new Ladder(world,map,rect);
+            ladders.add(ladder);
         }
     }
 }

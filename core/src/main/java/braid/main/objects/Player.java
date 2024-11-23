@@ -33,7 +33,7 @@ public class Player extends GameObject {
     // Player specific variables
     int velocityY;
     float jumpSpeed = 3.5f;
-    final float climbingSpeed = 0.5f;
+    final float climbingSpeed = 1f;
     State currentState;
     State previousState;
     private RewindController rewindController;
@@ -145,6 +145,7 @@ public class Player extends GameObject {
         currentState = State.IDLE;
     }
 
+    //todo: State.CLIMBING integrieren
     public State getCurrentState() {
         if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;

@@ -186,8 +186,11 @@ public class TestScreen implements Screen {
         }
 
         if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
-            player.b2body.applyLinearImpulse(new Vector2(0, player.getClimbingSpeed()), player.b2body.getWorldCenter(), true);
-
+            // Climbing up the ladder
+            player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
+        } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
+            // Climbing down the ladder
+            player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
         }
 
         // move enemy based on the position of the player
@@ -195,43 +198,46 @@ public class TestScreen implements Screen {
             enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
         } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
             enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-        }
-
-
-        //if (player.isJumping()) {
-        //    int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
-        //    player.getSprite().translateY(player.getVelocityY());
-        //    player.setVelocityY(currentVelocityY - GRAVITY);
-        //}
-
-        // Zeitmechanik für Rewind-Funktion
-        if (Gdx.input.isKeyPressed(SHIFT)) {
-            for (RewindController r : rewindObjects) {
-                r.startRewinding();
+        } else {
+            if (player.isClimbing()) {
+                world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
             }
 
-            // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
-            if (player.getRewindController().hasRewindStorage()) {
-                player.setColor(Color.BLUE);
+
+            //if (player.isJumping()) {
+            //    int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
+            //    player.getSprite().translateY(player.getVelocityY());
+            //    player.setVelocityY(currentVelocityY );
+            //}
+
+            // Zeitmechanik für Rewind-Funktion
+            if (Gdx.input.isKeyPressed(SHIFT)) {
+                for (RewindController r : rewindObjects) {
+                    r.startRewinding();
+                }
+
+                // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
+                if (player.getRewindController().hasRewindStorage()) {
+                    player.setColor(Color.BLUE);
+                } else {
+                    player.setColor(Color.WHITE);
+                }
+                if (enemy.getRewindController().hasRewindStorage()) {
+                    enemy.setColor(Color.BLUE);
+                } else {
+                    //enemy.getSprite().setColor(Color.WHITE);
+                    enemy.setColor(Color.WHITE);
+                }
             } else {
+                for (RewindController r : rewindObjects) {
+                    r.stopRewinding();
+                }
                 player.setColor(Color.WHITE);
-            }
-            if (enemy.getRewindController().hasRewindStorage()) {
-                enemy.setColor(Color.BLUE);
-            } else {
-                //enemy.getSprite().setColor(Color.WHITE);
                 enemy.setColor(Color.WHITE);
             }
-        } else {
-            for (RewindController r : rewindObjects) {
-                r.stopRewinding();
-            }
-            player.setColor(Color.WHITE);
-            enemy.setColor(Color.WHITE);
+            // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
         }
-        // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
     }
-
     private void logic() {
         if (player.getSprite().getY() <= 0) {
             player.land();
@@ -244,9 +250,7 @@ public class TestScreen implements Screen {
         if (player.getSprite().getX() + player.getSprite().getWidth() >= worldWidth) {
             player.getSprite().setX(worldWidth - player.getSprite().getWidth());
         }
-
     }
-
 
     @Override
     public void resize(int width, int height) {
