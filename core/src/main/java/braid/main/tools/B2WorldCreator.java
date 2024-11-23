@@ -24,7 +24,6 @@ public class B2WorldCreator {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
-
         // create ground bodies and fixtures
         MapLayer groundLayer = map.getLayers().get("Ground");
         for (MapObject object : groundLayer.getObjects()) {
@@ -41,6 +40,7 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
+        // Create Ladder Objects
         ladders = new Array<>();
         MapLayer ladderLayer =  map.getLayers().get("Ladder");
         for (MapObject object : ladderLayer.getObjects()) {

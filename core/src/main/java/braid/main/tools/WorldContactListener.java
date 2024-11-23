@@ -17,7 +17,6 @@ public class WorldContactListener implements ContactListener {
 
         if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
             player.atLadder(true);
-
         }
     }
 
