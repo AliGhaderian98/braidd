@@ -202,7 +202,7 @@ public class TestScreen implements Screen {
             if (player.isClimbing()) {
                 world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
             }
-
+        }
 
             //if (player.isJumping()) {
             //    int currentVelocityY = player.getVelocityY(); //temporäre Lösung -> geht wahrscheinlich einfacher
@@ -234,7 +234,7 @@ public class TestScreen implements Screen {
                 }
                 player.setColor(Color.WHITE);
                 enemy.setColor(Color.WHITE);
-            }
+
             // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
         }
     }
