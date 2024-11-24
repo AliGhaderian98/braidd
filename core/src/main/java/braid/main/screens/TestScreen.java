@@ -30,6 +30,7 @@ public class TestScreen implements Screen {
     private final Braid game;
     private static final int GRAVITY = -10;
     private TextureAtlas atlas;
+    private boolean gameIsPaused;
 
 
     // Screen
@@ -60,6 +61,9 @@ public class TestScreen implements Screen {
     static int DOWN_KEY = Input.Keys.S;
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
+    static int ESC = Input.Keys.ESCAPE;
+    static int ENTER = Input.Keys.ENTER;
+
 
     // GameObject Variables
     private final Player player;
@@ -126,20 +130,23 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
-        // Update world physics
-        if(!player.getRewindController().isRewinding()) {
-            world.step(dt, 6, 2);
-        }
+        //stop rendering if game is Paused
+        if(!gameIsPaused) {
+            // Update world physics
+            if (!player.getRewindController().isRewinding()) {
+                world.step(dt, 6, 2);
+            }
 
-        // Update Player and Enemies
-        player.update(dt);
-        enemy.update(dt);
+            // Update Player and Enemies
+            player.update(dt);
+            enemy.update(dt);
 
-        // Update Camera
-        updateCamera();
+            // Update Camera
+            updateCamera();
 
-        for (RewindController r : rewindObjects) {
-            r.update();
+            for (RewindController r : rewindObjects) {
+                r.update();
+            }
         }
     }
 
@@ -163,6 +170,7 @@ public class TestScreen implements Screen {
         player.getSprite().draw(game.batch);
         enemy.getSprite().draw(game.batch);
         game.batch.end();
+
     }
 
     private void input() {
@@ -202,6 +210,13 @@ public class TestScreen implements Screen {
             if (player.isClimbing()) {
                 world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
             }
+        }
+
+        // pause and resume Game
+        if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused){
+            pause();
+        } else if(Gdx.input.isKeyPressed(ENTER) && gameIsPaused){
+            resume();
         }
 
             //if (player.isJumping()) {
@@ -259,12 +274,13 @@ public class TestScreen implements Screen {
 
     @Override
     public void pause() {
-
+        gameIsPaused = true;
+        //game.setScreen(new PauseScreen(game));
     }
 
     @Override
     public void resume() {
-
+        gameIsPaused = false;
     }
 
     public TextureAtlas getAtlas() {
@@ -285,5 +301,6 @@ public class TestScreen implements Screen {
         b2dr.dispose();
 
         player.getTexture().dispose();
+
     }
 }

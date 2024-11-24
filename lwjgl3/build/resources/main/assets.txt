@@ -1,8 +1,17 @@
 libgdx.png
 löwe.png
+maps/1_Industrial_Tileset_1.tsx
+maps/1_Industrial_Tileset_1B.tsx
+maps/3_Far_Background_Tile.tsx
+maps/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/schwebebahn_1.tsx
 maps/sheet.tsx
 maps/testmap.tmx
+maps/testmap2.tmx
+maps/tilesets/1_Industrial_Tileset_1.png
+maps/tilesets/1_Industrial_Tileset_1B.png
+maps/tilesets/3_Far_Background_Tile.png
+maps/tilesets/Anim_Robot_Jump1_v1.png
 maps/tilesets/schwebebahn_1.png
 maps/tilesets/sheet.png
 packedimages/lion.atlas
