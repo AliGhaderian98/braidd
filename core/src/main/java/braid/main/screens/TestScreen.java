@@ -168,7 +168,9 @@ public class TestScreen implements Screen {
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
-        enemy.getSprite().draw(game.batch);
+        if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
+            enemy.getSprite().draw(game.batch);
+        }
         game.batch.end();
 
     }

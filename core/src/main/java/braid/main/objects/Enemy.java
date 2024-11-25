@@ -3,6 +3,9 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
 import braid.main.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -21,6 +24,7 @@ public class Enemy extends GameObject{
 
     private TextureRegion stand;
     private RewindController rewindController;
+    private boolean dead = false;
 
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, TestScreen screen) {
@@ -64,13 +68,18 @@ public class Enemy extends GameObject{
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         rewindController.update();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) { //Setzt Enenmy auf Dead -> im if Statement mit Hitbox lösen
+            dead = true;
+            world.destroyBody(b2body);
+        }
     }
+
     public RewindController getRewindController() {
         return rewindController;
     }
     public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
 
-
-
-
+    //Getter
+    public boolean isDead() {return dead;}
 }
