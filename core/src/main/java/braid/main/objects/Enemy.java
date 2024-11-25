@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-
+//nicht mehr kompatibel mit Rewind?, muss man testen
 
 /***********
  Diese Klasse soll einen ersten spezifischen Entwurf für einen Gegner darstellen
@@ -35,7 +35,7 @@ public class Enemy extends GameObject{
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
 
-        rewindController = new RewindController(new RewindableBody(b2body)); //
+        //rewindController = new RewindController(new RewindableBody(b2body)); //
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -63,7 +63,7 @@ public class Enemy extends GameObject{
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
-        rewindController.update();
+//        rewindController.update();
     }
     public RewindController getRewindController() {
         return rewindController;

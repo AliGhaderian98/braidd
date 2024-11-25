@@ -3,6 +3,7 @@ package braid.main;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.math.Vector2;
+import braid.main.objects.Player.*;
 // import com.badlogic.gdx.Input; siehe Braid.java Controls
 
 /***********
@@ -12,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int maxRewindLength = 600; //Anzahl der Frames/Minuten die wir saven wollen
+    private int maxRewindLength = 6000; //Anzahl der Frames/Minuten die wir saven wollen
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){
@@ -31,13 +32,10 @@ public class RewindController {
 
     public void startRewinding(){
         isRewinding = true;
-        //rewindable.setVelocity(new Vector2(0,0));
     }
 
     public void stopRewinding(){
         isRewinding = false;
-        //Bugfix Versuch
-        //rewindable.setVelocity(new Vector2(0, 0));
     }
 
     public boolean isRewinding() {
@@ -48,28 +46,32 @@ public class RewindController {
         if (states.size() >= maxRewindLength){
             states.remove(0);
         }
-        if(rewindable != null) {
-            states.add(new State(rewindable.getPosition(), rewindable.getVelocity()));
-        }//füge in jedem Frame den State in die Liste hinzu
+
+            states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));
+        //System.out.println("Recording State - Timer: " + rewindable.getStateTimer());
     }
 
     public void applyRewind(){
-        int maxRemoveFrames = 1; //RewindSpeed
+        int RewindSpeed = 0; //RewindSpeed
 
-        if(!states.isEmpty()) {// NullPointer = fun
-            for(int i = 0; i < maxRemoveFrames && !states.isEmpty(); i++) {
+        if(!states.isEmpty() && rewindable != null) {// NullPointer
+            for(int i = 0; i < RewindSpeed && !states.isEmpty(); i++) {
                 states.remove(states.size() - 1);
             }
-            if(!states.isEmpty()) {
+            if(!states.isEmpty() && rewindable != null) {
                 State rewindState = states.remove(states.size() - 1);
 
-                rewindable.setPosition(rewindState.getPosition()); //Einmal die Position
-                rewindable.setVelocity(rewindState.getVelocity());
+                rewindable.setPosition(rewindState.position()); //Einmal die Position
+                rewindable.setVelocity(rewindState.velocity());
+                rewindable.setStateTimer(rewindState.stateTimer());
+                rewindable.setCurrentState(rewindState.animationState());
+                //System.out.println("Rewinding - Restoring Timer: " + rewindState.getStateTimer()); //Ruhig ergänzen falls Nullpointer auftauchen
             }
             //Einmal die Velocity
         } else{
             stopRewinding();
         }
+
     }
 
     // folgende Funktion ist nur dafür da, um für den Vorzeigeprototypen eine simple visuelle Änderung zeigen zu können
@@ -77,19 +79,7 @@ public class RewindController {
         return !states.isEmpty();
     }
 
-    //Neu: Klasse für die States
-    private static class State{
-        private final Vector2 position;
-        private final Vector2 velocity;
-
-        public State(Vector2 position, Vector2 velocity){
-            this.position = position;
-            this.velocity = velocity;
-        }
-
-        public Vector2 getPosition(){ return position; }
-
-        public Vector2 getVelocity(){ return velocity; }
-    }
+    //Klasse für die States (anscheinend ne Record Klasse, glaube funktioniert auch ganz gut, bis auf method namen)
+        private record State(Vector2 position, Vector2 velocity, float stateTimer, AnimationState animationState) {}
 }
 

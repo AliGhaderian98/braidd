@@ -117,7 +117,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(player == null || enemy == null){ return;}
+        //if(player == null || enemy == null){ return;}
 
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
@@ -133,9 +133,9 @@ public class TestScreen implements Screen {
         //stop rendering if game is Paused
         if(!gameIsPaused) {
             // Update world physics
-            if (!player.getRewindController().isRewinding()) {
+            //if (!player.getRewindController().isRewinding()) {
                 world.step(dt, 6, 2);
-            }
+            //}
 
             // Update Player and Enemies
             player.update(dt);
@@ -176,47 +176,48 @@ public class TestScreen implements Screen {
     private void input() {
         // handle input for the player
 
-        //if(player.getRewindController().isRewinding()){return;}, ich lass das nochmal hier für bugfixes
-        if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
-            if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
+        if(!player.getRewindController().isRewinding()) { //Input-Block während Rewind
+            if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
+                if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                    player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
+                }
+                if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                    player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
+                }
+            } else {
+                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
             }
-            if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
+
+            if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
+                player.jump();
+                player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
             }
-        } else {
-            player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
-        }
 
-        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
-            player.jump();
-            player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
-        }
-
-        if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
-            // Climbing up the ladder
-            player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
-        } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
-            // Climbing down the ladder
-            player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
-        }
-
-        // move enemy based on the position of the player
-        if (enemy.getSprite().getX() < player.getSprite().getX()) {
-            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-        } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-        } else {
-            if (player.isClimbing()) {
-                world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
+            if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
+                // Climbing up the ladder
+                player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
+            } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
+                // Climbing down the ladder
+                player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
             }
-        }
 
-        // pause and resume Game
-        if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused){
-            pause();
-        } else if(Gdx.input.isKeyPressed(ENTER) && gameIsPaused){
-            resume();
+            // move enemy based on the position of the player
+            if (enemy.getSprite().getX() < player.getSprite().getX()) {
+                enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
+            } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
+                enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
+            } else {
+                if (player.isClimbing()) {
+                    world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
+                }
+            }
+
+            // pause and resume Game
+            if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused) {
+                pause();
+            } else if (Gdx.input.isKeyPressed(ENTER) && gameIsPaused) {
+                resume();
+            }
         }
 
             //if (player.isJumping()) {

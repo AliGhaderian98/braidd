@@ -8,35 +8,39 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-
+//todo: Spring Animation fixen, stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
  ***********/
 
 public class Player extends GameObject {
-    // Enumeration für die verschiedenen Zustände, in der sich ein Spieler befinden kann.
-    public enum State {
+    // Enumeration für die verschiedenen Animations-Zustände, in der sich ein Spieler befinden kann.
+    public enum AnimationState {
         IDLE,
         JUMPING,
         RUNNING,
         CLIMBING
     }
 
-    // Animation variables
-    public Animation LionIdle;
-    public Animation LionRunning;
-    public Animation LionJumping;
+    // Animation variables, Ab sofort von Typ RewindableAnimation
+    private final RewindableAnimation LionIdle;
+    private final RewindableAnimation LionRunning;
+    private final RewindableAnimation LionJumping;
     private boolean running_right;
-    private float stateTimer;
+    public float stateTimer;
+
+
+    private RewindableBody rewindableBody;
+    private RewindController rewindController;
 
     // Player specific variables
     int velocityY;
     float jumpSpeed = 3.5f;
     final float climbingSpeed = 1f;
-    State currentState;
-    State previousState;
-    private RewindController rewindController;
+    AnimationState currentState;
+    AnimationState previousState;
+
     private boolean isAtLadder;
 
 
@@ -47,10 +51,10 @@ public class Player extends GameObject {
     public Player(World world, TestScreen screen) {
         super(world);
 
-        speed = 1f;
+        speed = .5f; //Langsamer gemacht, um Animationen zu sehen, vorher 1f
         stateTimer = 0;
-        currentState = State.IDLE;
-        previousState = State.IDLE;
+        currentState = AnimationState.IDLE;
+        previousState = AnimationState.IDLE;
         running_right = true;
 
         defineBody();
@@ -62,10 +66,12 @@ public class Player extends GameObject {
 
 
         // Animation loops
-        LionIdle = new Animation<TextureRegion>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
-        LionRunning = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
-        LionJumping = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
-        rewindController = new RewindController(new RewindableBody(b2body));
+        LionIdle = new RewindableAnimation(new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG));
+        LionRunning = new RewindableAnimation(new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP));
+        LionJumping = new RewindableAnimation(new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL));
+        //Neu: Zugriff auf rewindableBody
+        rewindableBody = new RewindableBody(b2body);
+        rewindController = new RewindController(rewindableBody);
     }
 
     // Methods
@@ -93,27 +99,34 @@ public class Player extends GameObject {
     }
 
     public void update(float dt) {
-        currentState = getCurrentState();
-        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
-        sprite.setRegion(getFrame(dt));
+        currentState = getCurrentState(); //mit rewindableBody synchronisieren
+        rewindableBody.setCurrentState(currentState);
+        stateTimer = rewindableBody.getStateTimer();
+        rewindableBody.setStateTimer(stateTimer = rewindController.isRewinding() ? Math.abs(stateTimer - dt) : stateTimer + dt); //todo: sehr wichtig, Max.abs umändern zu nem Modulo-Ding oder so
+
         rewindController.update();
+        sprite.setRegion(getFrame(dt));
+
+        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
     }
 
     public TextureRegion getFrame(float dt){
-        currentState = getCurrentState();
 
+        currentState = rewindableBody.getCurrentState(); //!= null ? rewindableBody.getCurrentState() : AnimationState.IDLE; //Null pointer fix falls die wieder auftauchen
+        stateTimer = rewindableBody.getStateTimer(); // >= 0 ? rewindableBody.getStateTimer() : 0;
         // regions for the different States
         TextureRegion region;
+
         switch (currentState){
             case RUNNING:
-                region = (TextureRegion) LionRunning.getKeyFrame(stateTimer,true);
+                region = LionRunning.getKeyFrame(stateTimer, rewindController.isRewinding());
                 break;
             case JUMPING:
-                region = (TextureRegion) LionJumping.getKeyFrame(stateTimer);
+                region = LionJumping.getKeyFrame(stateTimer, rewindController.isRewinding());
                 break;
             case IDLE:
             default:
-                region = (TextureRegion) LionIdle.getKeyFrame(stateTimer,true);
+                region = LionIdle.getKeyFrame(stateTimer, rewindController.isRewinding());
                 break;
         }
 
@@ -126,45 +139,58 @@ public class Player extends GameObject {
             running_right = true;
 
         }
-        stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        //todo: testen ob wir das hier brauchen, soweit ich getestet habe braucht man das eig nicht
+        if(rewindController.isRewinding() && this.rewindableBody != null){
+            stateTimer = rewindableBody.getStateTimer();
+            currentState = rewindableBody.getCurrentState();
+        } else{
+            stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        }
+
+        //Ich checke nicht warum die StateTimer sich nicht updaten, ruhig ausschalten als Comment
+        System.out.println("currentState:" + currentState + " previousState: " + previousState + " RunningStateTimer: " + LionRunning.getStateTimer() + "JumpingStateTimer: " + LionJumping.getStateTimer());
         previousState = currentState;
+
+
         return region;
     }
 
     public void climb() {
-        currentState = State.CLIMBING;
+        currentState = AnimationState.CLIMBING;
     }
 
     public void jump() {
-        currentState = State.JUMPING;
+        //if(currentState != AnimationState.JUMPING) {
+        currentState = AnimationState.JUMPING;
+        //}
         //velocityY = jumpVelocity;
     }
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
-        currentState = State.IDLE;
+        currentState = AnimationState.IDLE;
     }
 
     //todo: State.CLIMBING integrieren
-    public State getCurrentState() {
+    public AnimationState getCurrentState() {
         if(b2body.getLinearVelocity().y > 0)
-            return State.JUMPING;
-        else if (b2body.getLinearVelocity().x != 0)
-            return State.RUNNING;
+            return AnimationState.JUMPING;
+        else if (b2body.getLinearVelocity().x != 0 && currentState != AnimationState.JUMPING) //eig offensichtlich, kann man safe iwann weglassen aber ohne war weird
+            return AnimationState.RUNNING;
         else
-            return State.IDLE;
+            return AnimationState.IDLE;
     }
 
     //Getter und Setter
     public boolean isJumping() {
-        return currentState == State.JUMPING;
+        return currentState == AnimationState.JUMPING;
     }
 
     public final float getJumpSpeed() {
         return jumpSpeed;
     }
 
-    public boolean isClimbing() {return currentState == State.CLIMBING;}
+    public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
 
     public final float getClimbingSpeed() {return climbingSpeed;}
 

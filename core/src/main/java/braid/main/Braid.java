@@ -1,7 +1,7 @@
 package braid.main;
 //Steuerung und Logik vom Char und erste Logik für Gegner (Invoker?)
 
-import braid.main.screens.PauseScreen;
+//import braid.main.screens.PauseScreen;
 import braid.main.screens.TestScreen;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
