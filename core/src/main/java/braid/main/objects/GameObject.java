@@ -20,7 +20,7 @@ public abstract class GameObject extends Actor {
     //protected RewindController rewindController; //Copy-Paste für Rewind
 
     public World world;
-    public Body b2body;//Copy-Paste für Rewind
+    public static Body b2body;//Copy-Paste für Rewind
 
     public GameObject() {}
 

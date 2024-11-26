@@ -24,14 +24,12 @@ public class Player extends GameObject {
     }
 
     // Animation variables, Ab sofort von Typ RewindableAnimation
-    private final RewindableAnimation LionIdle;
-    private final RewindableAnimation LionRunning;
-    private final RewindableAnimation LionJumping;
+    private final Animation LionIdle;
+    private final Animation LionRunning;
+    private final Animation LionJumping;
     private boolean running_right;
     public float stateTimer;
 
-
-    private RewindableBody rewindableBody;
     private RewindController rewindController;
 
     // Player specific variables
@@ -51,8 +49,8 @@ public class Player extends GameObject {
     public Player(World world, TestScreen screen) {
         super(world);
 
-        speed = .5f; //Langsamer gemacht, um Animationen zu sehen, vorher 1f
-        stateTimer = 0;
+        int velocityY = 0;
+        speed = 0.5f;
         currentState = AnimationState.IDLE;
         previousState = AnimationState.IDLE;
         running_right = true;
@@ -66,11 +64,11 @@ public class Player extends GameObject {
 
 
         // Animation loops
-        LionIdle = new RewindableAnimation(new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG));
-        LionRunning = new RewindableAnimation(new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP));
-        LionJumping = new RewindableAnimation(new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL));
+        LionIdle = new Animation<TextureRegion>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
+        LionRunning = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
+        LionJumping = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
         //Neu: Zugriff auf rewindableBody
-        rewindableBody = new RewindableBody(b2body);
+        RewindableBody rewindableBody = new RewindableBody(b2body, this);//, stateTimer, currentState);
         rewindController = new RewindController(rewindableBody);
     }
 
@@ -99,36 +97,19 @@ public class Player extends GameObject {
     }
 
     public void update(float dt) {
-        currentState = getCurrentState(); //mit rewindableBody synchronisieren
-        rewindableBody.setCurrentState(currentState);
-        stateTimer = rewindableBody.getStateTimer();
-        rewindableBody.setStateTimer(stateTimer = rewindController.isRewinding() ? Math.abs(stateTimer - dt) : stateTimer + dt); //todo: sehr wichtig, Max.abs umändern zu nem Modulo-Ding oder so
 
-        rewindController.update();
         sprite.setRegion(getFrame(dt));
-
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        rewindController.update();
     }
 
     public TextureRegion getFrame(float dt){
-
-        currentState = rewindableBody.getCurrentState(); //!= null ? rewindableBody.getCurrentState() : AnimationState.IDLE; //Null pointer fix falls die wieder auftauchen
-        stateTimer = rewindableBody.getStateTimer(); // >= 0 ? rewindableBody.getStateTimer() : 0;
         // regions for the different States
-        TextureRegion region;
-
-        switch (currentState){
-            case RUNNING:
-                region = LionRunning.getKeyFrame(stateTimer, rewindController.isRewinding());
-                break;
-            case JUMPING:
-                region = LionJumping.getKeyFrame(stateTimer, rewindController.isRewinding());
-                break;
-            case IDLE:
-            default:
-                region = LionIdle.getKeyFrame(stateTimer, rewindController.isRewinding());
-                break;
-        }
+        TextureRegion region = switch (currentState) {
+            case RUNNING -> (TextureRegion) LionRunning.getKeyFrame(stateTimer, true);
+            case JUMPING -> (TextureRegion) LionJumping.getKeyFrame(stateTimer, false);
+            default -> (TextureRegion) LionIdle.getKeyFrame(stateTimer, true);
+        };
 
         //checking if the model has to be flipped
         if((b2body.getLinearVelocity().x < 0 || !running_right) && !region.isFlipX()){
@@ -139,18 +120,9 @@ public class Player extends GameObject {
             running_right = true;
 
         }
-        //todo: testen ob wir das hier brauchen, soweit ich getestet habe braucht man das eig nicht
-        if(rewindController.isRewinding() && this.rewindableBody != null){
-            stateTimer = rewindableBody.getStateTimer();
-            currentState = rewindableBody.getCurrentState();
-        } else{
-            stateTimer = currentState == previousState ? stateTimer + dt : 0;
-        }
 
-        //Ich checke nicht warum die StateTimer sich nicht updaten, ruhig ausschalten als Comment
-        System.out.println("currentState:" + currentState + " previousState: " + previousState + " RunningStateTimer: " + LionRunning.getStateTimer() + "JumpingStateTimer: " + LionJumping.getStateTimer());
+        stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
-
 
         return region;
     }
@@ -173,9 +145,9 @@ public class Player extends GameObject {
 
     //todo: State.CLIMBING integrieren
     public AnimationState getCurrentState() {
-        if(b2body.getLinearVelocity().y > 0)
+        if(b2body.getLinearVelocity().y != 0)
             return AnimationState.JUMPING;
-        else if (b2body.getLinearVelocity().x != 0 && currentState != AnimationState.JUMPING) //eig offensichtlich, kann man safe iwann weglassen aber ohne war weird
+        else if (b2body.getLinearVelocity().x != 0)//&& currentState != AnimationState.JUMPING) //eig offensichtlich, kann man safe iwann weglassen aber ohne war weird
             return AnimationState.RUNNING;
         else
             return AnimationState.IDLE;
@@ -212,4 +184,17 @@ public class Player extends GameObject {
 
     public void atLadder(boolean atLadder) {isAtLadder = atLadder;}
     public boolean isAtLadder() {return isAtLadder;}
+
+    public float getStateTimer() {
+        return stateTimer;
+    }
+    public void setStateTimer(float stateTimer){
+        this.stateTimer = stateTimer;
+    }
+
+    public void setCurrentState(AnimationState currentState){
+        this.currentState = currentState;
+    }
+
+
 }

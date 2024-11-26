@@ -48,7 +48,7 @@ public class RewindController {
         }
 
             states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));
-        //System.out.println("Recording State - Timer: " + rewindable.getStateTimer());
+        System.out.println("Recording State - Timer: " + rewindable.getStateTimer() + "Save Animation: " + rewindable.getCurrentState());
     }
 
     public void applyRewind(){
@@ -65,7 +65,7 @@ public class RewindController {
                 rewindable.setVelocity(rewindState.velocity());
                 rewindable.setStateTimer(rewindState.stateTimer());
                 rewindable.setCurrentState(rewindState.animationState());
-                //System.out.println("Rewinding - Restoring Timer: " + rewindState.getStateTimer()); //Ruhig ergänzen falls Nullpointer auftauchen
+                System.out.println("Rewinding - Restoring Timer: " + rewindState.stateTimer() + "Restore Animation: " + rewindState.animationState()); //Ruhig ergänzen falls Nullpointer auftauchen
             }
             //Einmal die Velocity
         } else{
