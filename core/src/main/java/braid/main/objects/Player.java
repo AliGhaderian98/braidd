@@ -101,10 +101,13 @@ public class Player extends GameObject {
 
     public TextureRegion getFrame(float dt){
         // regions for the different States
+        currentState = getCurrentState();
+        stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        previousState = currentState;
         TextureRegion region = switch (currentState) {
-            case RUNNING -> (TextureRegion) LionRunning.getKeyFrame(stateTimer, true);
-            case JUMPING -> (TextureRegion) LionJumping.getKeyFrame(stateTimer, false);
-            default -> (TextureRegion) LionIdle.getKeyFrame(stateTimer, true);
+            case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
+            case JUMPING -> LionJumping.getKeyFrame(stateTimer, true);
+            default -> LionIdle.getKeyFrame(stateTimer, true);
         };
 
         //checking if the model has to be flipped
@@ -116,9 +119,6 @@ public class Player extends GameObject {
             running_right = true;
 
         }
-
-        stateTimer = currentState == previousState ? stateTimer + dt : 0;
-        previousState = currentState;
 
         return region;
     }

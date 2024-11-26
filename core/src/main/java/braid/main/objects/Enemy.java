@@ -26,7 +26,7 @@ public class Enemy extends GameObject{
     public Enemy(World world, TestScreen screen) {
         super(world);
 
-        speed = .1f;
+        speed = .5f;
 
         defineBody();
 
