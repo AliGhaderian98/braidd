@@ -70,8 +70,7 @@ public class Enemy extends GameObject{
         rewindController.update();
 
         if (Gdx.input.isKeyPressed(Input.Keys.M)) { //Setzt Enenmy auf Dead -> im if Statement mit Hitbox lösen
-            dead = true;
-            world.destroyBody(b2body);
+            die();
         }
     }
 
@@ -79,6 +78,11 @@ public class Enemy extends GameObject{
         return rewindController;
     }
     public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
+
+    public void die () {
+        dead = true;
+        world.destroyBody(b2body);
+    }
 
     //Getter
     public boolean isDead() {return dead;}
