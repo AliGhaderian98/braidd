@@ -4,19 +4,17 @@ package braid.main;
  *******/
 
 import braid.main.objects.GameObject;
-import braid.main.objects.Player;
-import braid.main.objects.Player.AnimationState;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+//import braid.main.objects.GameObject.AnimationState;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class RewindableBody implements Rewindable{
     private final Body b2body;
-    private final Player player;
+    private final GameObject gameObject;
 
-    public RewindableBody(Body b2body, Player player){
+    public RewindableBody(Body b2body, GameObject gameObject){
         this.b2body = b2body;
-        this.player = player;
+        this.gameObject = gameObject;
     }
 
     @Override
@@ -26,10 +24,10 @@ public class RewindableBody implements Rewindable{
     public Vector2 getVelocity(){ return b2body.getLinearVelocity().cpy(); }
 
     @Override
-    public float getStateTimer() { return player.getStateTimer(); }
+    public float getStateTimer() { return gameObject.getStateTimer(); }
 
     @Override
-    public AnimationState getCurrentState() { return player.getCurrentState(); }
+    public Object getCurrentState() { return gameObject.getCurrentState(); }
 
     @Override
     public void setPosition(Vector2 position){ b2body.setTransform(position, b2body.getAngle()); }
@@ -38,8 +36,8 @@ public class RewindableBody implements Rewindable{
     public void setVelocity(Vector2 velocity){ b2body.setLinearVelocity(velocity); }
 
     @Override
-    public void setStateTimer(float stateTimer) { player.setStateTimer(stateTimer); }
+    public void setStateTimer(float stateTimer) { gameObject.setStateTimer(stateTimer); }
 
     @Override
-    public void setCurrentState(AnimationState animationState) { player.setCurrentState(animationState); }
+    public void setCurrentState(Object animationState) { gameObject.setCurrentState(animationState); }
 }

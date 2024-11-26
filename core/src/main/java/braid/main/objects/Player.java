@@ -24,13 +24,12 @@ public class Player extends GameObject {
     }
 
     // Animation variables, Ab sofort von Typ RewindableAnimation
-    private final Animation LionIdle;
-    private final Animation LionRunning;
-    private final Animation LionJumping;
+    private final Animation<TextureRegion> LionIdle;
+    private final Animation<TextureRegion> LionRunning;
+    private final Animation<TextureRegion> LionJumping;
     private boolean running_right;
     public float stateTimer;
 
-    private RewindController rewindController;
 
     // Player specific variables
     int velocityY;
@@ -49,7 +48,7 @@ public class Player extends GameObject {
     public Player(World world, TestScreen screen) {
         super(world);
 
-        int velocityY = 0;
+
         speed = 0.5f;
         currentState = AnimationState.IDLE;
         previousState = AnimationState.IDLE;
@@ -64,12 +63,11 @@ public class Player extends GameObject {
 
 
         // Animation loops
-        LionIdle = new Animation<TextureRegion>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
-        LionRunning = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
-        LionJumping = new Animation<TextureRegion>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
+        LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
+        LionRunning = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
+        LionJumping = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
         //Neu: Zugriff auf rewindableBody
-        RewindableBody rewindableBody = new RewindableBody(b2body, this);//, stateTimer, currentState);
-        rewindController = new RewindController(rewindableBody);
+        setRewindController(new RewindController(new RewindableBody(b2body, this)));
     }
 
     // Methods
@@ -97,10 +95,8 @@ public class Player extends GameObject {
     }
 
     public void update(float dt) {
-
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
-        rewindController.update();
     }
 
     public TextureRegion getFrame(float dt){
@@ -132,9 +128,7 @@ public class Player extends GameObject {
     }
 
     public void jump() {
-        //if(currentState != AnimationState.JUMPING) {
         currentState = AnimationState.JUMPING;
-        //}
         //velocityY = jumpVelocity;
     }
 
@@ -144,6 +138,7 @@ public class Player extends GameObject {
     }
 
     //todo: State.CLIMBING integrieren
+    @Override
     public AnimationState getCurrentState() {
         if(b2body.getLinearVelocity().y != 0)
             return AnimationState.JUMPING;
@@ -166,35 +161,24 @@ public class Player extends GameObject {
 
     public final float getClimbingSpeed() {return climbingSpeed;}
 
-    public int getVelocityY() {
-        return velocityY;
-    }
+    public int getVelocityY() {return velocityY;}
 
-    public void setVelocityY(int value) {
-        velocityY = value;
+    public void setVelocityY(int value) {velocityY = value;
     }
-
-    public void setRewindController(RewindController rewindController) {
-        this.rewindController = rewindController;
-    }
-
-    public RewindController getRewindController() {
-        return rewindController;
-    }
-
     public void atLadder(boolean atLadder) {isAtLadder = atLadder;}
+
     public boolean isAtLadder() {return isAtLadder;}
 
-    public float getStateTimer() {
-        return stateTimer;
-    }
-    public void setStateTimer(float stateTimer){
-        this.stateTimer = stateTimer;
-    }
+    @Override
+    public float getStateTimer() {return stateTimer;}
 
-    public void setCurrentState(AnimationState currentState){
-        this.currentState = currentState;
+    @Override
+    public void setStateTimer(float stateTimer){this.stateTimer = stateTimer;}
+
+    @Override
+    public void setCurrentState(Object animationStates){
+        if(animationStates instanceof AnimationState){
+            this.currentState =(AnimationState) animationStates;
+        }
     }
-
-
 }

@@ -1,5 +1,6 @@
 package braid.main.objects;
 
+import braid.main.RewindController;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,10 +18,11 @@ public abstract class GameObject extends Actor {
     protected float speed;
     protected Texture texture;
     protected Sprite sprite;
-    //protected RewindController rewindController; //Copy-Paste für Rewind
 
-    public World world;
-    public static Body b2body;//Copy-Paste für Rewind
+    private RewindController rewindController; //Copy-Paste für Rewind
+
+    protected World world;
+    public Body b2body;//Copy-Paste für Rewind
 
     public GameObject() {}
 
@@ -29,13 +31,10 @@ public abstract class GameObject extends Actor {
         this.texture = texture;
         sprite = new Sprite(texture);
         sprite.setSize(sprite.getWidth() * 0.1f, sprite.getHeight() * 0.1f);
-
-        //this.rewindController = new RewindController(new RewindableBody(b2body)); //Copy-Paste für Rewind
     }
 
     public GameObject(World world) {
         this.world = world;
-        //this.rewindController = new RewindController(new RewindableBody(b2body)); ////Copy-Paste für Rewind
     }
 
 
@@ -46,7 +45,7 @@ public abstract class GameObject extends Actor {
     public void act(float delta) {
         super.act(delta); // Aufruf der übergeordneten Methode, um die grundlegende Actor-Logik auszuführen
         // Zusätzliche Logik zur Aktualisierung der Position oder anderer Eigenschaften kann hier hinzugefügt werden
-
+        rewindController.update();
     }
 
     @Override
@@ -59,9 +58,7 @@ public abstract class GameObject extends Actor {
         sprite.setColor(color);
     }
 
-    public void defineBody() {
-    }
-
+    public abstract void defineBody();
 
     // Getter und Setter
     public float getSpeed() {
@@ -83,15 +80,18 @@ public abstract class GameObject extends Actor {
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-/* //Copy-Paste für Rewind
-    public RewindController getRewindController() {
-        return rewindController;
-    }
-    public void setRewindController(RewindController rewindController) {
-        this.rewindController = rewindController;
-    }
 
- */
+    public RewindController getRewindController() { return rewindController; }
+
+    public void setRewindController(RewindController rewindController) { this.rewindController = rewindController; }
+
+    public abstract float getStateTimer();
+
+    public abstract void setStateTimer(float stateTimer);
+
+    public abstract Object getCurrentState();
+
+    public abstract void setCurrentState(Object currentState);
 }
 
 

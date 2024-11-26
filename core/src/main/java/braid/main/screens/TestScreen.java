@@ -3,7 +3,7 @@ package braid.main.screens;
 import braid.main.*;
 import braid.main.tools.B2WorldCreator;
 import braid.main.tools.GameCamera;
-//import braid.main.objects.Enemy;
+import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
@@ -67,7 +67,7 @@ public class TestScreen implements Screen {
 
     // GameObject Variables
     private final Player player;
-    //private final Enemy enemy;
+    private final Enemy enemy;
 
 
     public TestScreen(Braid game) {
@@ -94,8 +94,8 @@ public class TestScreen implements Screen {
         gameCamera.setMap(map);
 
         // Setup Enemy
-        //enemy = new Enemy(world, this);
-        //enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body)));
+        enemy = new Enemy(world, this);
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
 
         //Copy-Paste für Rewind:
         //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
@@ -103,7 +103,7 @@ public class TestScreen implements Screen {
         // Add all rewindable objects to Watcher
         rewindObjects = new Array<RewindController>();
         rewindObjects.add(player.getRewindController());
-        //rewindObjects.add(enemy.getRewindController());
+        rewindObjects.add(enemy.getRewindController());
 
         world.setContactListener(new WorldContactListener(player));
     }
@@ -139,7 +139,7 @@ public class TestScreen implements Screen {
 
             // Update Player and Enemies
             player.update(dt);
-            //enemy.update(dt);
+            enemy.update(dt);
 
             // Update Camera
             updateCamera();
@@ -168,7 +168,7 @@ public class TestScreen implements Screen {
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
-        //enemy.getSprite().draw(game.batch);
+        enemy.getSprite().draw(game.batch);
         game.batch.end();
 
     }
@@ -201,7 +201,7 @@ public class TestScreen implements Screen {
                 player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
             }
 
-            /* move enemy based on the position of the player
+            // move enemy based on the position of the player
             if (enemy.getSprite().getX() < player.getSprite().getX()) {
                 enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
             } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
@@ -211,7 +211,7 @@ public class TestScreen implements Screen {
                     world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
                 }
             }
-            */
+
             // pause and resume Game
             if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused) {
                 pause();
@@ -238,20 +238,20 @@ public class TestScreen implements Screen {
                 } else {
                     player.setColor(Color.WHITE);
                 }
-                /*if (enemy.getRewindController().hasRewindStorage()) {
+                if (enemy.getRewindController().hasRewindStorage()) {
                     enemy.setColor(Color.BLUE);
                 } else {
-                    //enemy.getSprite().setColor(Color.WHITE);
+                    enemy.getSprite().setColor(Color.WHITE);
                     enemy.setColor(Color.WHITE);
 
-                 */
-               // }
+
+                }
             } else {
                 for (RewindController r : rewindObjects) {
                     r.stopRewinding();
                 }
                 player.setColor(Color.WHITE);
-                //enemy.setColor(Color.WHITE);
+                enemy.setColor(Color.WHITE);
 
             // Update Informationen aus diesem Frame für alle gespeicherten Rewind Objekte
         }

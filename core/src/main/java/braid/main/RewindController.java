@@ -80,6 +80,6 @@ public class RewindController {
     }
 
     //Klasse für die States (anscheinend ne Record Klasse, glaube funktioniert auch ganz gut, bis auf method namen)
-        private record State(Vector2 position, Vector2 velocity, float stateTimer, AnimationState animationState) {}
+        private record State(Vector2 position, Vector2 velocity, float stateTimer, Object animationState) {}
 }
 
