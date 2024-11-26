@@ -1,6 +1,9 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.Items.CollectableItem;
+import braid.main.Items.Item;
+import braid.main.Items.ItemDef;
 import braid.main.Rewind;
 import braid.main.RewindableSprite;
 import braid.main.objects.Enemy;
@@ -21,12 +24,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.PriorityQueue;
+
 /***********
  Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
  Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
  ***********/
 
-public class TestScreen implements Screen {
+public class  TestScreen implements Screen {
     private static final int GRAVITY = 1;
     // Keys
     static int RIGHT_KEY = Input.Keys.D;
@@ -53,6 +58,8 @@ public class TestScreen implements Screen {
     // GameObject Variables
     private final Player player;
     private final Enemy enemy;
+    private Array <Item> items;
+    private PriorityQueue <ItemDef> itemsToSpawn;
 
 
     public TestScreen(Braid game) {
@@ -76,6 +83,10 @@ public class TestScreen implements Screen {
         // Setup Player
         player = new Player(world, this);
         player.setRewindController(new Rewind(new RewindableSprite(player.getSprite())));
+        //
+        items =new  Array <Item>();
+        itemsToSpawn = new PriorityQueue<ItemDef>();
+
 
 
         // Setup Enemy
@@ -86,6 +97,18 @@ public class TestScreen implements Screen {
         rewindObjects = new Array<Rewind>();
         rewindObjects.add(player.getRewindController());
         rewindObjects.add(enemy.getRewindController());
+
+    }
+    public void spwanItem (ItemDef idef){
+        itemsToSpawn.add(idef);
+    }
+    public void handleSpwaningItems(){
+        if(!itemsToSpawn.isEmpty()){
+            ItemDef idef = itemsToSpawn.poll();
+            if(idef.type == CollectableItem.class){
+                items.add(new CollectableItem(this, idef.position.x,idef.position.y));
+            }
+        }
     }
 
 
@@ -108,6 +131,7 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
+        handleSpwaningItems();
         // Update world physics
         world.step(dt, 6, 2);
 
@@ -117,6 +141,8 @@ public class TestScreen implements Screen {
 
         // Update Camera
         updateCamera();
+        for(Item item : items)
+            item.update(dt);
     }
 
     private void clearScreen() {
@@ -139,6 +165,8 @@ public class TestScreen implements Screen {
         player.getSprite().draw(game.batch);
         enemy.getSprite().draw(game.batch);
         game.batch.end();
+        for(Item item :items)
+            item.draw(game.batch);
     }
 
     private void input() {
@@ -235,6 +263,7 @@ public class TestScreen implements Screen {
     public void resume() {
 
     }
+
 
     public TextureAtlas getAtlas() {
         return atlas;
