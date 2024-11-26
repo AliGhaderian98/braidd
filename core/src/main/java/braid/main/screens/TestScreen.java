@@ -30,7 +30,8 @@ public class TestScreen implements Screen {
     private final Braid game;
     private static final int GRAVITY = -10;
     private TextureAtlas atlas;
-    private boolean gameIsPaused;
+    public static boolean gameIsPaused;
+    public static boolean resetgame;
 
 
     // Screen
@@ -62,7 +63,6 @@ public class TestScreen implements Screen {
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
     static int ESC = Input.Keys.ESCAPE;
-    static int ENTER = Input.Keys.ENTER;
 
 
     // GameObject Variables
@@ -132,6 +132,7 @@ public class TestScreen implements Screen {
     public void update(float dt) {
         //stop rendering if game is Paused
         if(!gameIsPaused) {
+
             // Update world physics
             if (!player.getRewindController().isRewinding()) {
                 world.step(dt, 6, 2);
@@ -147,6 +148,8 @@ public class TestScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
+            // Reset Game if Player wants to retry (PauseScreen)
+            ResetIfNecessary();
         }
     }
 
@@ -212,11 +215,9 @@ public class TestScreen implements Screen {
             }
         }
 
-        // pause and resume Game
+        // pause Game (game will be resumed in the PauseScreen)
         if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused){
             pause();
-        } else if(Gdx.input.isKeyPressed(ENTER) && gameIsPaused){
-            resume();
         }
 
             //if (player.isJumping()) {
@@ -274,8 +275,11 @@ public class TestScreen implements Screen {
 
     @Override
     public void pause() {
+        // pause Game
         gameIsPaused = true;
-        //game.setScreen(new PauseScreen(game));
+
+        // jumps to PauseScreen and saves Game state
+        game.setScreen(new PauseScreen(game,this));
     }
 
     @Override
@@ -289,18 +293,28 @@ public class TestScreen implements Screen {
 
     @Override
     public void hide() {
-        dispose();
+    }
+
+    public void ResetIfNecessary(){
+        if (!resetgame) {
+            return;
+        }
+        resetgame = false;
+        // reset Screen
+        game.setScreen(new TestScreen((Braid) game));
     }
 
     @Override
     public void dispose() {
-        map.dispose();
-        renderer.dispose();
+        if(player.getTexture() != null){
+            map.dispose();
+            renderer.dispose();
 
-        world.dispose();
-        b2dr.dispose();
+            world.dispose();
+            b2dr.dispose();
 
-        player.getTexture().dispose();
+            player.getTexture().dispose();
+        }
 
     }
 }
