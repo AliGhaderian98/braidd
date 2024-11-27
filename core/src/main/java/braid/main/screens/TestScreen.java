@@ -284,4 +284,8 @@ public class  TestScreen implements Screen {
 
         player.getTexture().dispose();
     }
+
+    public World getWorld() {
+        return world;
+    }
 }
