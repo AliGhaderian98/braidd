@@ -3,15 +3,9 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
 import braid.main.*;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 
 /***********
@@ -30,12 +24,12 @@ public class Enemy extends GameObject{
     public Enemy(World world, TestScreen screen) {
         super(world);
 
-        speed = .1f;
+        speed = 0.15f;
 
         defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-        stand = new TextureRegion(sprite.getTexture(), 0, 0, 24, 24);
+        stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
 
@@ -56,11 +50,12 @@ public class Enemy extends GameObject{
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(11 / Braid.PPM);
+        shape.setRadius(9 / Braid.PPM);
 
         fdef.shape = shape;
         fdef.friction = 1f;
-        b2body.createFixture(fdef);
+        Fixture bodyFixture = b2body.createFixture(fdef);
+        bodyFixture.setUserData(this);
     }
 
     public void update(float dt) {
@@ -68,15 +63,15 @@ public class Enemy extends GameObject{
 
         rewindController.update();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.M)) { //Setzt Enenmy auf Dead -> im if Statement mit Hitbox lösen
-            die();
+        if (dead) {
+            b2body.setActive(false);
         }
     }
 
     public RewindController getRewindController() {
         return rewindController;
     }
-    public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
+    public void setRewindController(RewindController rewindController) { this.rewindController = rewindController; }
 
     @Override
     public float getStateTimer() {
@@ -100,9 +95,8 @@ public class Enemy extends GameObject{
 
     public void die () {
         dead = true;
-        world.destroyBody(b2body);
     }
 
     //Getter
-    public boolean isDead() {return dead;}
+    public boolean isDead() { return dead; }
 }

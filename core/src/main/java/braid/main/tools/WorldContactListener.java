@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
 import com.badlogic.gdx.physics.box2d.*;
@@ -15,8 +16,23 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
-            player.atLadder(true);
+        if ("PlayerBody".equals(fixA.getUserData()) || "PlayerBody".equals(fixB.getUserData())) {
+            if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
+                player.atLadder(true);
+            }
+            if(fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+                player.die();
+            }
+        }
+        if ("PlayerFeet".equals(fixA.getUserData()) || "PlayerFeet".equals(fixB.getUserData())) {
+            if(fixA.getUserData() instanceof Enemy) {
+                Enemy enemy = (Enemy) fixA.getUserData();
+                enemy.die();
+            }
+            if(fixB.getUserData() instanceof Enemy) {
+                Enemy enemy = (Enemy) fixB.getUserData();
+                enemy.die();
+            }
         }
     }
 
@@ -25,8 +41,9 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        if ((fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) && !player.isClimbing()) {
+        if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
             player.atLadder(false);
+            player.stopClimbing();
         }
     }
 

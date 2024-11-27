@@ -128,6 +128,8 @@ public class TestScreen implements Screen {
             // Update world physics
             world.step(dt, 6, 2);
 
+
+
             // Update Player and Enemies
             player.update(dt);
             enemy.update(dt);
@@ -140,6 +142,11 @@ public class TestScreen implements Screen {
             }
             // Reset Game if Player wants to retry (PauseScreen)
             ResetIfNecessary();
+        }
+        else {
+            if(Gdx.input.isKeyPressed(SHIFT)) {
+                gameIsPaused = false;
+            }
         }
     }
 
@@ -188,12 +195,15 @@ public class TestScreen implements Screen {
                 player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
             }
 
-            if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
+            if (Gdx.input.isKeyPressed(UP_KEY) && (player.isAtLadder() || player.isClimbing())) {
                 // Climbing up the ladder
-                player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
-            } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
+                player.b2body.setLinearVelocity(0, player.getClimbingSpeed());// Only apply climbing speed
+                player.climb();
+            } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isClimbing()) {
                 // Climbing down the ladder
                 player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
+            } else if (player.isClimbing()) {
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x,0);
             }
 
             // move enemy based on the position of the player

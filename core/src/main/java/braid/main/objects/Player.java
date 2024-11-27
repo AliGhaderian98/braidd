@@ -3,6 +3,7 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.*;
 import braid.main.screens.TestScreen;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,6 +28,7 @@ public class Player extends GameObject {
     private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping;
     private boolean running_right;
     public float stateTimer;
+    private TestScreen screen;
 
     // Player specific variables
     int velocityY;
@@ -44,7 +46,7 @@ public class Player extends GameObject {
     // Constructors
     public Player(World world, TestScreen screen) {
         super(world);
-
+        this.screen = screen;
 
         speed = 1f;
         currentState = AnimationState.IDLE;
@@ -76,14 +78,17 @@ public class Player extends GameObject {
 
         bodyFdef.shape = shape;
         bodyFdef.friction = 0f;
-        b2body.createFixture(bodyFdef);
+        Fixture bodyFixture = b2body.createFixture(bodyFdef);
+        bodyFixture.setUserData("PlayerBody");
 
         FixtureDef footFdef = new FixtureDef();
         PolygonShape feet = new PolygonShape();
         feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -8 / Braid.PPM), 0);
         footFdef.shape = feet;
         footFdef.friction = 1f;
-        b2body.createFixture(footFdef);
+        Fixture feetFixture = b2body.createFixture(footFdef);
+        feetFixture.setUserData("PlayerFeet");
+
     }
 
     public void update(float dt) {
@@ -117,6 +122,7 @@ public class Player extends GameObject {
 
     public void climb() {
         currentState = AnimationState.CLIMBING;
+        b2body.setGravityScale(0);
     }
 
     public void jump() {
@@ -132,9 +138,11 @@ public class Player extends GameObject {
     //todo: State.CLIMBING integrieren
     @Override
     public AnimationState getCurrentState() {
-        if(b2body.getLinearVelocity().y != 0)
+        if (currentState == AnimationState.CLIMBING)
+            return AnimationState.CLIMBING;
+        else if (b2body.getLinearVelocity().y != 0)
             return AnimationState.JUMPING;
-        else if (b2body.getLinearVelocity().x != 0)//&& currentState != AnimationState.JUMPING) //eig offensichtlich, kann man safe iwann weglassen aber ohne war weird
+        else if (b2body.getLinearVelocity().x != 0)
             return AnimationState.RUNNING;
         else
             return AnimationState.IDLE;
@@ -152,6 +160,10 @@ public class Player extends GameObject {
     public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
 
     public final float getClimbingSpeed() { return climbingSpeed; }
+    public void stopClimbing() {
+        currentState = AnimationState.IDLE;
+        b2body.setGravityScale(1);
+    }
 
     public int getVelocityY() { return velocityY;}
 
@@ -171,5 +183,8 @@ public class Player extends GameObject {
         if (animationStates instanceof AnimationState) {
             this.currentState = (AnimationState) animationStates;
         }
+    }
+    public void die() {
+        screen.gameIsPaused = true;
     }
 }
