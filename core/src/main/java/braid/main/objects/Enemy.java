@@ -39,7 +39,6 @@ public class Enemy extends GameObject{
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
 
-        rewindController = new RewindController(new RewindableBody(b2body)); //
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -78,6 +77,26 @@ public class Enemy extends GameObject{
         return rewindController;
     }
     public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
+
+    @Override
+    public float getStateTimer() {
+        return 0;
+    }
+
+    @Override
+    public void setStateTimer(float stateTimer) {
+
+    }
+
+    @Override
+    public Object getCurrentState() {
+        return null;
+    }
+
+    @Override
+    public void setCurrentState(Object currentState) {
+
+    }
 
     public void die () {
         dead = true;

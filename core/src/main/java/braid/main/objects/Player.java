@@ -24,12 +24,9 @@ public class Player extends GameObject {
     }
 
     // Animation variables, Ab sofort von Typ RewindableAnimation
-    private final Animation<TextureRegion> LionIdle;
-    private final Animation<TextureRegion> LionRunning;
-    private final Animation<TextureRegion> LionJumping;
+    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping;
     private boolean running_right;
     public float stateTimer;
-
 
     // Player specific variables
     int velocityY;
@@ -49,7 +46,7 @@ public class Player extends GameObject {
         super(world);
 
 
-        speed = 0.5f;
+        speed = 1f;
         currentState = AnimationState.IDLE;
         previousState = AnimationState.IDLE;
         running_right = true;
@@ -57,17 +54,12 @@ public class Player extends GameObject {
         defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-        //stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        //sprite.setRegion(stand);
-
 
         // Animation loops
-        LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP_PINGPONG);
+        LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
         LionRunning = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
         LionJumping = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
-        //Neu: Zugriff auf rewindableBody
-        setRewindController(new RewindController(new RewindableBody(b2body, this)));
     }
 
     // Methods
@@ -159,26 +151,25 @@ public class Player extends GameObject {
 
     public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
 
-    public final float getClimbingSpeed() {return climbingSpeed;}
+    public final float getClimbingSpeed() { return climbingSpeed; }
 
-    public int getVelocityY() {return velocityY;}
+    public int getVelocityY() { return velocityY;}
 
-    public void setVelocityY(int value) {velocityY = value;
-    }
-    public void atLadder(boolean atLadder) {isAtLadder = atLadder;}
+    public void setVelocityY(int value) { velocityY = value; }
+    public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
 
-    public boolean isAtLadder() {return isAtLadder;}
-
-    @Override
-    public float getStateTimer() {return stateTimer;}
+    public boolean isAtLadder() { return isAtLadder; }
 
     @Override
-    public void setStateTimer(float stateTimer){this.stateTimer = stateTimer;}
+    public float getStateTimer() { return stateTimer; }
 
     @Override
-    public void setCurrentState(Object animationStates){
-        if(animationStates instanceof AnimationState){
-            this.currentState =(AnimationState) animationStates;
+    public void setStateTimer(float stateTimer) { this.stateTimer = stateTimer; }
+
+    @Override
+    public void setCurrentState(Object animationStates) {
+        if (animationStates instanceof AnimationState) {
+            this.currentState = (AnimationState) animationStates;
         }
     }
 }

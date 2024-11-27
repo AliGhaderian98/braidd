@@ -19,10 +19,10 @@ public abstract class GameObject extends Actor {
     protected Texture texture;
     protected Sprite sprite;
 
-    private RewindController rewindController; //Copy-Paste für Rewind
+    private RewindController rewindController;
 
     protected World world;
-    public Body b2body;//Copy-Paste für Rewind
+    public Body b2body;
 
     public GameObject() {}
 
@@ -36,7 +36,6 @@ public abstract class GameObject extends Actor {
     public GameObject(World world) {
         this.world = world;
     }
-
 
     // Methoden
 
