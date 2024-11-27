@@ -3,13 +3,16 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
 import braid.main.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-//nicht mehr kompatibel mit Rewind?, muss man testen
+
 
 /***********
  Diese Klasse soll einen ersten spezifischen Entwurf für einen Gegner darstellen
@@ -21,12 +24,13 @@ public class Enemy extends GameObject{
 
     private TextureRegion stand;
     private RewindController rewindController;
+    private boolean dead = false;
 
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, TestScreen screen) {
         super(world);
 
-        speed = .5f;
+        speed = .1f;
 
         defineBody();
 
@@ -35,7 +39,7 @@ public class Enemy extends GameObject{
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
 
-        setRewindController(new RewindController(new RewindableBody(b2body,this)));
+        rewindController = new RewindController(new RewindableBody(b2body)); //
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -64,31 +68,22 @@ public class Enemy extends GameObject{
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         rewindController.update();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) { //Setzt Enenmy auf Dead -> im if Statement mit Hitbox lösen
+            die();
+        }
     }
+
     public RewindController getRewindController() {
         return rewindController;
     }
     public void setRewindController(RewindController rewindController){ this.rewindController = rewindController; }
 
-    @Override
-    public float getStateTimer() {
-        return 0;
+    public void die () {
+        dead = true;
+        world.destroyBody(b2body);
     }
 
-    @Override
-    public void setStateTimer(float stateTimer) {
-
-    }
-
-    @Override
-    public Object getCurrentState() {
-        return null;
-    }
-
-    @Override
-    public void setCurrentState(Object state) {
-
-    }
-
-
+    //Getter
+    public boolean isDead() {return dead;}
 }

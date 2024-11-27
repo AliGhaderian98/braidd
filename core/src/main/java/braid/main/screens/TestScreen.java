@@ -30,7 +30,8 @@ public class TestScreen implements Screen {
     private final Braid game;
     private static final int GRAVITY = -10;
     private TextureAtlas atlas;
-    private boolean gameIsPaused;
+    public static boolean gameIsPaused;
+    public static boolean resetgame;
 
 
     // Screen
@@ -62,7 +63,6 @@ public class TestScreen implements Screen {
     static int SHIFT = Input.Keys.SHIFT_LEFT;
     static int SPACEBAR = Input.Keys.SPACE;
     static int ESC = Input.Keys.ESCAPE;
-    static int ENTER = Input.Keys.ENTER;
 
 
     // GameObject Variables
@@ -87,7 +87,7 @@ public class TestScreen implements Screen {
 
         // Setup Player
         player = new Player(world, this);
-        player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));//, player.getStateTimer(), player.getCurrentState())));
+        player.setRewindController(new RewindController(new RewindableBody(player.b2body)));
 
         // Setup Game Camera
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
@@ -95,7 +95,7 @@ public class TestScreen implements Screen {
 
         // Setup Enemy
         enemy = new Enemy(world, this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body)));
 
         //Copy-Paste für Rewind:
         //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
@@ -117,7 +117,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        //if(player == null || enemy == null){ return;}
+        if(player == null || enemy == null){ return;}
 
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
@@ -132,10 +132,11 @@ public class TestScreen implements Screen {
     public void update(float dt) {
         //stop rendering if game is Paused
         if(!gameIsPaused) {
+
             // Update world physics
-            //if (!player.getRewindController().isRewinding()) {
+            if (!player.getRewindController().isRewinding()) {
                 world.step(dt, 6, 2);
-            //}
+            }
 
             // Update Player and Enemies
             player.update(dt);
@@ -147,6 +148,8 @@ public class TestScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
+            // Reset Game if Player wants to retry (PauseScreen)
+            ResetIfNecessary();
         }
     }
 
@@ -168,7 +171,9 @@ public class TestScreen implements Screen {
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
-        enemy.getSprite().draw(game.batch);
+        if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
+            enemy.getSprite().draw(game.batch);
+        }
         game.batch.end();
 
     }
@@ -176,48 +181,45 @@ public class TestScreen implements Screen {
     private void input() {
         // handle input for the player
 
-        if(!player.getRewindController().isRewinding()) { //Input-Block während Rewind
-            if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
-                if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                    player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
-                }
-                if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                    player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
-                }
-            } else {
-                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+        //if(player.getRewindController().isRewinding()){return;}, ich lass das nochmal hier für bugfixes
+        if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
+            if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
             }
+            if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
+            }
+        } else {
+            player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+        }
 
-            if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
-                player.jump();
-                player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
-            }
+        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
+            player.jump();
+            player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
+        }
 
-            if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
-                // Climbing up the ladder
-                player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
-            } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
-                // Climbing down the ladder
-                player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
-            }
+        if (Gdx.input.isKeyPressed(UP_KEY) && player.isAtLadder()) {
+            // Climbing up the ladder
+            player.b2body.setLinearVelocity(0, player.getClimbingSpeed()); // Only apply climbing speed
+        } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isAtLadder()) {
+            // Climbing down the ladder
+            player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
+        }
 
-            // move enemy based on the position of the player
-            if (enemy.getSprite().getX() < player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {
-                if (player.isClimbing()) {
-                    world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
-                }
+        // move enemy based on the position of the player
+        if (enemy.getSprite().getX() < player.getSprite().getX()) {
+            enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
+        } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
+            enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
+        } else {
+            if (player.isClimbing()) {
+                world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
             }
+        }
 
-            // pause and resume Game
-            if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused) {
-                pause();
-            } else if (Gdx.input.isKeyPressed(ENTER) && gameIsPaused) {
-                resume();
-            }
+        // pause Game (game will be resumed in the PauseScreen)
+        if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused){
+            pause();
         }
 
             //if (player.isJumping()) {
@@ -241,10 +243,8 @@ public class TestScreen implements Screen {
                 if (enemy.getRewindController().hasRewindStorage()) {
                     enemy.setColor(Color.BLUE);
                 } else {
-                    enemy.getSprite().setColor(Color.WHITE);
+                    //enemy.getSprite().setColor(Color.WHITE);
                     enemy.setColor(Color.WHITE);
-
-
                 }
             } else {
                 for (RewindController r : rewindObjects) {
@@ -277,8 +277,11 @@ public class TestScreen implements Screen {
 
     @Override
     public void pause() {
+        // pause Game
         gameIsPaused = true;
-        //game.setScreen(new PauseScreen(game));
+
+        // jumps to PauseScreen and saves Game state
+        game.setScreen(new PauseScreen(game,this));
     }
 
     @Override
@@ -292,18 +295,28 @@ public class TestScreen implements Screen {
 
     @Override
     public void hide() {
-        dispose();
+    }
+
+    public void ResetIfNecessary(){
+        if (!resetgame) {
+            return;
+        }
+        resetgame = false;
+        // reset Screen
+        game.setScreen(new TestScreen((Braid) game));
     }
 
     @Override
     public void dispose() {
-        map.dispose();
-        renderer.dispose();
+        if(player.getTexture() != null){
+            map.dispose();
+            renderer.dispose();
 
-        world.dispose();
-        b2dr.dispose();
+            world.dispose();
+            b2dr.dispose();
 
-        player.getTexture().dispose();
+            player.getTexture().dispose();
+        }
 
     }
 }
