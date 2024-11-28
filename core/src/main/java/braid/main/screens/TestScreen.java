@@ -20,6 +20,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.PriorityQueue;
+
 /***********
   Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
   Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
@@ -65,6 +67,9 @@ public class TestScreen implements Screen {
     // GameObject Variables
     private final Player player;
     private final Enemy enemy;
+    private Array <Item> items;
+    private PriorityQueue <ItemDef> itemsToSpawn;
+
 
     public TestScreen(Braid game) {
         // Setup basic world variables
@@ -85,6 +90,11 @@ public class TestScreen implements Screen {
         player = new Player(world, this);
         player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
 
+        //
+        items =new  Array <Item>();
+        itemsToSpawn = new PriorityQueue<ItemDef>();
+
+
         // Setup Game Camera
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
         gameCamera.setMap(map);
@@ -102,6 +112,18 @@ public class TestScreen implements Screen {
         rewindObjects.add(enemy.getRewindController());
 
         world.setContactListener(new WorldContactListener(player));
+
+    }
+    public void spwanItem (ItemDef idef){
+        itemsToSpawn.add(idef);
+    }
+    public void handleSpwaningItems(){
+        if(!itemsToSpawn.isEmpty()){
+            ItemDef idef = itemsToSpawn.poll();
+            if(idef.type == CollectableItem.class){
+                items.add(new CollectableItem(this, idef.position.x,idef.position.y));
+            }
+        }
     }
 
 
@@ -123,6 +145,9 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
+        handleSpwaningItems();
+        // Update world physics
+        world.step(dt, 6, 2);
         //stop rendering if game is Paused
         if(!gameIsPaused) {
             // Update world physics
@@ -133,6 +158,9 @@ public class TestScreen implements Screen {
             // Update Player and Enemies
             player.update(dt);
             enemy.update(dt);
+
+            for(Item item : items)
+                item.update(dt);
 
             // Update Camera
             updateCamera();
@@ -173,6 +201,8 @@ public class TestScreen implements Screen {
         }
         game.batch.end();
 
+        for(Item item :items)
+            item.draw(game.batch);
     }
 
     private void input() {
@@ -268,6 +298,7 @@ public class TestScreen implements Screen {
         gameIsPaused = false;
     }
 
+
     public TextureAtlas getAtlas() {
         return atlas;
     }
@@ -297,5 +328,9 @@ public class TestScreen implements Screen {
             player.getTexture().dispose();
         }
 
+    }
+
+    public World getWorld() {
+        return world;
     }
 }
