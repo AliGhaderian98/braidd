@@ -1,6 +1,9 @@
 package braid.main.screens;
 
 import braid.main.*;
+import braid.main.Items.CollectableItem;
+import braid.main.Items.Item;
+import braid.main.Items.ItemDef;
 import braid.main.tools.B2WorldCreator;
 import braid.main.tools.GameCamera;
 import braid.main.objects.Enemy;
@@ -114,10 +117,10 @@ public class TestScreen implements Screen {
         world.setContactListener(new WorldContactListener(player));
 
     }
-    public void spwanItem (ItemDef idef){
+    public void spawnItem(ItemDef idef){
         itemsToSpawn.add(idef);
     }
-    public void handleSpwaningItems(){
+    public void handleSpawningItems(){
         if(!itemsToSpawn.isEmpty()){
             ItemDef idef = itemsToSpawn.poll();
             if(idef.type == CollectableItem.class){
@@ -145,17 +148,15 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
-        handleSpwaningItems();
-        // Update world physics
-        world.step(dt, 6, 2);
         //stop rendering if game is Paused
         if(!gameIsPaused) {
+            handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);
 
 
 
-            // Update Player and Enemies
+            // Update Entities
             player.update(dt);
             enemy.update(dt);
 
@@ -253,29 +254,28 @@ public class TestScreen implements Screen {
         }
 
             // Zeitmechanik für Rewind-Funktion
-            if (Gdx.input.isKeyPressed(SHIFT)) {
-                for (RewindController r : rewindObjects) {
-                    r.startRewinding();
-                }
-
-                // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
-                if (player.getRewindController().hasRewindStorage()) {
-                    player.setColor(Color.BLUE);
-                } else {
-                    player.setColor(Color.WHITE);
-                }
-                if (enemy.getRewindController().hasRewindStorage()) {
-                    enemy.setColor(Color.BLUE);
-                } else {
-                    //enemy.getSprite().setColor(Color.WHITE);
-                    enemy.setColor(Color.WHITE);
-                }
+        if (Gdx.input.isKeyPressed(SHIFT)) {
+            for (RewindController r : rewindObjects) {
+                r.startRewinding();
+            }
+            // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
+            if (player.getRewindController().hasRewindStorage()) {
+                player.setColor(Color.BLUE);
             } else {
-                for (RewindController r : rewindObjects) {
-                    r.stopRewinding();
-                }
                 player.setColor(Color.WHITE);
+            }
+            if (enemy.getRewindController().hasRewindStorage()) {
+                enemy.setColor(Color.BLUE);
+            } else {
+                //enemy.getSprite().setColor(Color.WHITE);
                 enemy.setColor(Color.WHITE);
+            }
+        } else {
+            for (RewindController r : rewindObjects) {
+                r.stopRewinding();
+            }
+            player.setColor(Color.WHITE);
+            enemy.setColor(Color.WHITE);
         }
     }
 

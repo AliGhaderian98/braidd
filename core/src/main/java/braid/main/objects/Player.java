@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.*;
  ***********/
 
 public class Player extends GameObject {
-    // Enumeration für die verschiedenen Animations-Zustände, in der sich ein Spieler befinden kann.
+    // Enumeration to represent the possible animation states a player can be in
     public enum AnimationState {
         IDLE,
         JUMPING,
@@ -24,23 +24,19 @@ public class Player extends GameObject {
         CLIMBING
     }
 
-    // Animation variables, Ab sofort von Typ RewindableAnimation
+    // Animation variables
     private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping;
     private boolean running_right;
     public float stateTimer;
     private TestScreen screen;
 
     // Player specific variables
-    int velocityY;
     float jumpSpeed = 3.5f;
     final float climbingSpeed = 1f;
     AnimationState currentState;
     AnimationState previousState;
 
     private boolean isAtLadder;
-
-
-    private TextureRegion stand;
 
 
     // Constructors
@@ -53,8 +49,10 @@ public class Player extends GameObject {
         previousState = AnimationState.IDLE;
         running_right = true;
 
+        // Setup box2d body
         defineBody();
 
+        // Setup sprite
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
 
@@ -103,7 +101,7 @@ public class Player extends GameObject {
         previousState = currentState;
         TextureRegion region = switch (currentState) {
             case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
-            case JUMPING -> LionJumping.getKeyFrame(stateTimer, true);
+            case JUMPING -> LionJumping.getKeyFrame(0, false);
             default -> LionIdle.getKeyFrame(stateTimer, true);
         };
 
@@ -165,9 +163,7 @@ public class Player extends GameObject {
         b2body.setGravityScale(1);
     }
 
-    public int getVelocityY() { return velocityY;}
 
-    public void setVelocityY(int value) { velocityY = value; }
     public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
 
     public boolean isAtLadder() { return isAtLadder; }
