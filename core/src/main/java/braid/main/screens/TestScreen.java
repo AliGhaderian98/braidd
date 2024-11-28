@@ -76,7 +76,7 @@ public class TestScreen implements Screen {
 
     public TestScreen(Braid game) {
         // Setup basic world variables
-        atlas = new TextureAtlas("packedimages/lion.atlas");
+        atlas = new TextureAtlas("packedimages/sprites.atlas");
         this.game = game;
 
         // Setup Level Map
@@ -253,7 +253,7 @@ public class TestScreen implements Screen {
             pause();
         }
 
-            // Zeitmechanik für Rewind-Funktion
+        // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(SHIFT)) {
             for (RewindController r : rewindObjects) {
                 r.startRewinding();

@@ -1,9 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
-import braid.main.*;
 import braid.main.screens.TestScreen;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -25,8 +23,9 @@ public class Player extends GameObject {
     }
 
     // Animation variables
-    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping;
-    private boolean running_right;
+    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing;
+    private boolean runningRight;
+    private boolean animationPaused;
     public float stateTimer;
     private TestScreen screen;
 
@@ -47,7 +46,7 @@ public class Player extends GameObject {
         speed = 1f;
         currentState = AnimationState.IDLE;
         previousState = AnimationState.IDLE;
-        running_right = true;
+        runningRight = true;
 
         // Setup box2d body
         defineBody();
@@ -60,6 +59,7 @@ public class Player extends GameObject {
         LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
         LionRunning = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
         LionJumping = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
+        LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
     }
 
     // Methods
@@ -97,25 +97,39 @@ public class Player extends GameObject {
     public TextureRegion getFrame(float dt){
         // regions for the different States
         currentState = getCurrentState();
-        stateTimer = currentState == previousState ? stateTimer + dt : 0;
+
+        testAnimationPause();
+
+        if (!animationPaused) {
+            stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        }
+
         previousState = currentState;
         TextureRegion region = switch (currentState) {
             case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
             case JUMPING -> LionJumping.getKeyFrame(0, false);
+            case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
             default -> LionIdle.getKeyFrame(stateTimer, true);
         };
 
         //checking if the model has to be flipped
-        if((b2body.getLinearVelocity().x < 0 || !running_right) && !region.isFlipX()){
+        if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
             region.flip(true,false);
-            running_right = false;
-        } else if ((b2body.getLinearVelocity().x > 0 || running_right) && region.isFlipX()) {
+            runningRight = false;
+        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true,false);
-            running_right = true;
+            runningRight = true;
 
         }
 
         return region;
+    }
+
+    private void testAnimationPause() {
+        if (isClimbing() && b2body.getLinearVelocity().y == 0)
+            animationPaused = true;
+        else
+            animationPaused = false;
     }
 
     public void climb() {
@@ -125,7 +139,6 @@ public class Player extends GameObject {
 
     public void jump() {
         currentState = AnimationState.JUMPING;
-        //velocityY = jumpVelocity;
     }
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen

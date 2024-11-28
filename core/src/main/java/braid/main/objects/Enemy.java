@@ -20,6 +20,7 @@ public class Enemy extends GameObject{
     private RewindController rewindController;
     private boolean dead = false;
 
+
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, TestScreen screen) {
         super(world);
@@ -29,7 +30,8 @@ public class Enemy extends GameObject{
         defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-        stand = new TextureRegion(sprite.getTexture(), 2, 2, 24, 24);
+        // Hier wird die Region vom ersten idle frame hardgecodet, später Rausnehmen wenn der gegner auch animiert ist
+        stand = new TextureRegion(sprite.getTexture(), 28, 2, 24, 24);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setRegion(stand);
 
