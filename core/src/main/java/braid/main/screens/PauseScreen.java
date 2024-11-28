@@ -105,6 +105,11 @@ public class PauseScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             executeSelectedAction();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            TestScreen.gameIsPaused = false;
+            game.setScreen(previousScreen);
+            dispose();
+        }
     }
 
     private void updateLabelSelection() {

@@ -27,14 +27,14 @@ public class Player extends GameObject {
     private boolean runningRight;
     private boolean animationPaused;
     public float stateTimer;
-    private TestScreen screen;
+    private final TestScreen screen;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
     final float climbingSpeed = 1f;
     AnimationState currentState;
     AnimationState previousState;
-
+    private boolean isAlive;
     private boolean isAtLadder;
 
 
@@ -47,6 +47,7 @@ public class Player extends GameObject {
         currentState = AnimationState.IDLE;
         previousState = AnimationState.IDLE;
         runningRight = true;
+        isAlive = true;
 
         // Setup box2d body
         defineBody();
@@ -132,21 +133,13 @@ public class Player extends GameObject {
             animationPaused = false;
     }
 
-    public void climb() {
-        currentState = AnimationState.CLIMBING;
-        b2body.setGravityScale(0);
-    }
 
-    public void jump() {
-        currentState = AnimationState.JUMPING;
-    }
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
         currentState = AnimationState.IDLE;
     }
 
-    //todo: State.CLIMBING integrieren
     @Override
     public AnimationState getCurrentState() {
         if (currentState == AnimationState.CLIMBING)
@@ -177,6 +170,7 @@ public class Player extends GameObject {
     }
 
 
+
     public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
 
     public boolean isAtLadder() { return isAtLadder; }
@@ -193,7 +187,43 @@ public class Player extends GameObject {
             this.currentState = (AnimationState) animationStates;
         }
     }
+
+    public boolean isAlive() { return isAlive; }
+    public void setAlive(boolean alive) { isAlive = alive;}
+
     public void die() {
-        screen.gameIsPaused = true;
+        TestScreen.gameIsPaused = true;
+        isAlive = false;
     }
+
+    // Inputs
+
+    public void moveRight() {
+        if (b2body.getLinearVelocity().x < speed) {
+            b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
+        }
+    }
+    public void moveLeft() {
+        if (b2body.getLinearVelocity().x > -speed) {
+            b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
+        }
+    }
+    public void stopMovement() {
+        b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y), b2body.getWorldCenter(), true);
+    }
+    public void climbUp() {
+        currentState = AnimationState.CLIMBING;
+        b2body.setGravityScale(0);
+        b2body.setLinearVelocity(0, getClimbingSpeed());
+    }
+
+    public void climbDown() {
+        b2body.setLinearVelocity(0, -getClimbingSpeed());
+    }
+
+    public void jump() {
+        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
+        currentState = AnimationState.JUMPING;
+    }
+
 }

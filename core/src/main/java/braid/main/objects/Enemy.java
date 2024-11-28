@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class Enemy extends GameObject{
 
-    private TextureRegion stand;
+    private final TextureRegion stand;
     private RewindController rewindController;
     private boolean dead = false;
 

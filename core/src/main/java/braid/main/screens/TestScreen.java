@@ -8,11 +8,11 @@ import braid.main.tools.B2WorldCreator;
 import braid.main.tools.GameCamera;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import braid.main.tools.PlayerInputHandler;
 import braid.main.tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -38,6 +38,8 @@ public class TestScreen implements Screen {
     public static boolean gameIsPaused;
     public static boolean resetgame;
 
+    // Tools
+    private final PlayerInputHandler inputHandler;
 
     // Screen
     private final int worldWidth = Braid.V_WIDTH;
@@ -59,13 +61,8 @@ public class TestScreen implements Screen {
     private final Array<RewindController> rewindObjects;
 
     // Keys
-    static int RIGHT_KEY = Input.Keys.D;
-    static int LEFT_KEY = Input.Keys.A;
-    static int UP_KEY = Input.Keys.W;
-    static int DOWN_KEY = Input.Keys.S;
     static int SHIFT = Input.Keys.SHIFT_LEFT;
-    static int SPACEBAR = Input.Keys.SPACE;
-    static int ESC = Input.Keys.ESCAPE;
+
 
     // GameObject Variables
     private final Player player;
@@ -116,25 +113,27 @@ public class TestScreen implements Screen {
 
         world.setContactListener(new WorldContactListener(player));
 
+        // Initialisiere den InputHandler
+        inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
     }
-    public void spawnItem(ItemDef idef){
+
+    public void spawnItem(ItemDef idef) {
         itemsToSpawn.add(idef);
     }
-    public void handleSpawningItems(){
-        if(!itemsToSpawn.isEmpty()){
+
+    public void handleSpawningItems() {
+        if (!itemsToSpawn.isEmpty()) {
             ItemDef idef = itemsToSpawn.poll();
-            if(idef.type == CollectableItem.class){
+            if (idef.type == CollectableItem.class) {
                 items.add(new CollectableItem(this, idef.position.x,idef.position.y));
             }
         }
     }
 
-
     @Override
     public void show() {
 
     }
-
 
     @Override
     public void render(float delta) {
@@ -144,7 +143,7 @@ public class TestScreen implements Screen {
         clearScreen();
         renderWorld();
 
-        input();
+        inputHandler.handleInput();
     }
 
     public void update(float dt) {
@@ -153,8 +152,6 @@ public class TestScreen implements Screen {
             handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);
-
-
 
             // Update Entities
             player.update(dt);
@@ -204,79 +201,6 @@ public class TestScreen implements Screen {
 
         for(Item item :items)
             item.draw(game.batch);
-    }
-
-    private void input() {
-        // handle input for the player
-
-        if(!player.getRewindController().isRewinding()) {
-            if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
-                if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                    player.b2body.applyLinearImpulse(new Vector2(player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
-                }
-                if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
-                    player.b2body.applyLinearImpulse(new Vector2(-player.getSpeed() * .5f, 0), player.b2body.getWorldCenter(), true);
-                }
-            } else {
-                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
-            }
-
-            if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
-                player.jump();
-                player.b2body.applyLinearImpulse(new Vector2(0, player.getJumpSpeed()), player.b2body.getWorldCenter(), true);
-            }
-
-            if (Gdx.input.isKeyPressed(UP_KEY) && (player.isAtLadder() || player.isClimbing())) {
-                // Climbing up the ladder
-                player.b2body.setLinearVelocity(0, player.getClimbingSpeed());// Only apply climbing speed
-                player.climb();
-            } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isClimbing()) {
-                // Climbing down the ladder
-                player.b2body.setLinearVelocity(0, -player.getClimbingSpeed()); // Only apply climbing speed in the down direction
-            } else if (player.isClimbing()) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x,0);
-            }
-
-            // move enemy based on the position of the player
-            if (enemy.getSprite().getX() < player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {
-                if (player.isClimbing()) {
-                    world.setGravity(new Vector2(0, 0)); // Funktioniert noch nicht, da player.getCurrentState nicht nach State.CLIMBING checkt
-                }
-            }
-        }
-        // pause Game (game will be resumed in the PauseScreen)
-        if (Gdx.input.isKeyPressed(ESC) && !gameIsPaused){
-            pause();
-        }
-
-        // Zeitmechanik für Rewind-Funktion
-        if (Gdx.input.isKeyPressed(SHIFT)) {
-            for (RewindController r : rewindObjects) {
-                r.startRewinding();
-            }
-            // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
-            if (player.getRewindController().hasRewindStorage()) {
-                player.setColor(Color.BLUE);
-            } else {
-                player.setColor(Color.WHITE);
-            }
-            if (enemy.getRewindController().hasRewindStorage()) {
-                enemy.setColor(Color.BLUE);
-            } else {
-                //enemy.getSprite().setColor(Color.WHITE);
-                enemy.setColor(Color.WHITE);
-            }
-        } else {
-            for (RewindController r : rewindObjects) {
-                r.stopRewinding();
-            }
-            player.setColor(Color.WHITE);
-            enemy.setColor(Color.WHITE);
-        }
     }
 
     @Override
