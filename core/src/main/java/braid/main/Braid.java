@@ -1,6 +1,6 @@
 package braid.main;
 //Steuerung und Logik vom Char und erste Logik für Gegner (Invoker?)
-
+import braid.main.screens.StartMenu;
 //import braid.main.screens.PauseScreen;    Auskommentiert, da die KLasse noch nicht existiert bei mir (Mike)
 import braid.main.screens.TestScreen;
 import com.badlogic.gdx.ApplicationListener;
@@ -29,6 +29,7 @@ public class Braid extends Game {
     Gdx.graphics.setWindowedMode(800, 600);
     batch = new SpriteBatch();
     setScreen(new TestScreen(this));
+    setScreen(new StartMenu(this));
   }
 
   @Override
