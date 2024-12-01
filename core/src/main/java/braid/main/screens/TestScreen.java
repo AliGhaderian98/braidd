@@ -4,12 +4,9 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
-import braid.main.tools.B2WorldCreator;
-import braid.main.tools.GameCamera;
+import braid.main.tools.*;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
-import braid.main.tools.PlayerInputHandler;
-import braid.main.tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -75,6 +72,9 @@ public class TestScreen implements Screen {
         // Setup basic world variables
         atlas = new TextureAtlas("packedimages/sprites.atlas");
         this.game = game;
+
+        KeyBindings.standardKeybindings();
+        KeyBindings.loadKeyBindings();
 
         // Setup Level Map
         mapLoader = new TmxMapLoader();

@@ -1,3 +1,6 @@
+Slider/skin.atlas
+Slider/slider_background.png
+Slider/slider_knob.png
 libgdx.png
 löwe.png
 maps/1_Industrial_Tileset_1.tsx

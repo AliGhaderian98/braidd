@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
+import java.security.Key;
+
 public class PlayerInputHandler {
     private final Player player;
     private final Enemy enemy;
@@ -18,13 +20,7 @@ public class PlayerInputHandler {
     private final Game game;
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
-
-    static final int RIGHT_KEY = Input.Keys.D;
-    static final int LEFT_KEY = Input.Keys.A;
-    static final int UP_KEY = Input.Keys.W;
-    static final int DOWN_KEY = Input.Keys.S;
-    static final int SHIFT = Input.Keys.SHIFT_LEFT;
-    static final int SPACEBAR = Input.Keys.SPACE;
+    
     static final int ESC = Input.Keys.ESCAPE;
 
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
@@ -70,10 +66,10 @@ public class PlayerInputHandler {
     }
 
     private void handleClimbing() {
-        if (Gdx.input.isKeyPressed(UP_KEY) && (player.isAtLadder() || player.isClimbing())) {
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("UP_KEY")) && (player.isAtLadder() || player.isClimbing())) {
             // Climbing up the ladder
             player.climbUp();
-        } else if (Gdx.input.isKeyPressed(DOWN_KEY) && player.isClimbing()) {
+        } else if (Gdx.input.isKeyPressed(KeyBindings.getKey("DOWN_KEY")) && player.isClimbing()) {
             // Climbing down the ladder
             player.climbDown();
         } else if (player.isClimbing()) {
@@ -82,14 +78,14 @@ public class PlayerInputHandler {
     }
 
     private void handleJumping() {
-        if (Gdx.input.isKeyJustPressed(SPACEBAR) && !player.isJumping()) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()) {
             player.jump();
         }
     }
 
     private void handleRewind() {
         // Zeitmechanik für Rewind-Funktion
-        if (Gdx.input.isKeyPressed(SHIFT)) {
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
             for (RewindController r : rewindObjects) {
                 r.startRewinding();
             }
@@ -115,11 +111,11 @@ public class PlayerInputHandler {
     }
 
     private void handleMovement() {
-        if (Gdx.input.isKeyPressed(RIGHT_KEY) || Gdx.input.isKeyPressed(LEFT_KEY)) {
-            if (Gdx.input.isKeyPressed(RIGHT_KEY) && !Gdx.input.isKeyPressed(LEFT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) || Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY"))) {
+            if (Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) && !Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY")) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.moveRight();
             }
-            if (Gdx.input.isKeyPressed(LEFT_KEY) && !Gdx.input.isKeyPressed(RIGHT_KEY) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+            if (Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY")) && !Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.moveLeft();
             }
         } else {

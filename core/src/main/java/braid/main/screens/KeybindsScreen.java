@@ -1,6 +1,7 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,65 +17,64 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class PauseScreen implements Screen {
+public class KeybindsScreen implements Screen {
 
+    private final Screen previusScreen;
     private final Stage stage;
     private final Game game;
-    private final Screen previousScreen;
-
-    private final Label Resume,mainMenu, Retry, Option, SaveAndExit;
+    private final Label RunLeft, RunRight, Jump, Rewind, INTERACT;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
 
-
-    public PauseScreen(Game game, Screen previusScreen){
-        // Setup Screen and save World for resume
+    public KeybindsScreen(Game game, Screen previusScreen) {
+        // Setup Screen
         this.game = game;
-        this.previousScreen = previusScreen;
-        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
+        this.previusScreen = previusScreen;
+        Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
 
-        // different Fonts for different Lines on the Screen
-        Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
 
-        // Set up the whole space to write on.
+        //  Create Table
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
-        // create new Labels to display
-        Label PauseLabel = new Label("Game Paused", TitelFont);
-        PauseLabel.setFontScale(2);
-        Resume = new Label("Resume", SelectionFont);
-        mainMenu = new Label("main menu", SelectionFont);
-        Retry = new Label("Retry", SelectionFont);
-        Option = new Label("Option", SelectionFont);
-        SaveAndExit = new Label("Save and Exit", SelectionFont);
+        // Setup Label styles for Title and Options
+        Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
 
-        // fill Array with Labels to target a label
+        // Setup Title and Options
+        Label Keybindings = new Label("Keybindings", TitelFont);
+        Keybindings.setFontScale(2);
+        RunLeft = new Label("Move Left: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")), SelectionFont);
+        RunRight = new Label("Move Right: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")), SelectionFont);
+        Jump = new Label("Jump: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")), SelectionFont);
+        Rewind = new Label("Rewind: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")), SelectionFont);
+        INTERACT = new Label("INTERACT: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")), SelectionFont);
+
+
+
+        // fill Array with Labels to target a Label
         menuLabels = new Array<>();
-        menuLabels.add(Resume, mainMenu, Retry, Option);
-        menuLabels.add(SaveAndExit);
+        menuLabels.add(RunLeft, RunRight, Jump, Rewind);
+        menuLabels.add(INTERACT);
 
-        // set up table
-        table.add(PauseLabel).expandX();
-        table.row();
-        table.add(Resume).expandX().padTop(10f);
-        table.row();
-        table.add(mainMenu).expandX();
-        table.row();
-        table.add(Retry).expandX();
-        table.row();
-        table.add(Option).expandX();
-        table.row();
-        table.add(SaveAndExit).expandX();
 
-        // set up Stage
+        // Setup Table
+        table.add(Keybindings).expandX();
+        table.row();
+        table.add(RunLeft).padTop(10f);
+        table.row();
+        table.add(RunRight);
+        table.row();
+        table.add(Jump);
+        table.row();
+        table.add(Rewind);
+        table.row();
+        table.add(INTERACT);
+
         stage.addActor(table);
 
-        // mark an option
-        updateLabelSelection();
     }
 
     @Override
@@ -83,14 +83,12 @@ public class PauseScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float v) {
         // show table
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
         stage.draw();
-
-
     }
     private void handleInput() {
         // navigation with Keys
@@ -106,8 +104,7 @@ public class PauseScreen implements Screen {
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            TestScreen.gameIsPaused = false;
-            game.setScreen(previousScreen);
+            game.setScreen(new PauseScreen(game,previusScreen));
             dispose();
         }
     }
@@ -127,29 +124,25 @@ public class PauseScreen implements Screen {
     private void executeSelectedAction() {
         // execute yellow targeted Option
         Label selectedLabel = menuLabels.get(selectedIndex);
+        // TODO im KeybindsScreen anzeigen lassen
+        System.out.println("inside execute");
+        if (selectedLabel == RunLeft) {
+            KeyBindings.changeKeyBinding("RunLeft");
 
-        if (selectedLabel == Resume) {
-            TestScreen.gameIsPaused = false;
-            game.setScreen(previousScreen);
-            dispose();
-
-        } else if (selectedLabel == mainMenu) {
+        } else if (selectedLabel == RunRight) {
             // switch to Main Menu
 
-        } else if (selectedLabel == Retry) {
-            TestScreen.gameIsPaused = false;
-            game.setScreen(previousScreen);
-            TestScreen.resetgame = true;
-            dispose();
+        } else if (selectedLabel == Jump) {
 
-        } else if (selectedLabel == Option) {
-            game.setScreen(new OptionMenu(game,previousScreen));
 
-        } else if (selectedLabel == SaveAndExit) {
-            // save is missing
-            Gdx.app.exit();
+        } else if (selectedLabel == Rewind) {
+
+        } else if (selectedLabel == INTERACT) {
+
         }
+
     }
+
     @Override
     public void resize(int i, int i1) {
 
@@ -174,5 +167,4 @@ public class PauseScreen implements Screen {
     public void dispose() {
         stage.dispose();
     }
-
 }
