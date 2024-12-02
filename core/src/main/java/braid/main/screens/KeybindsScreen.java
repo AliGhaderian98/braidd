@@ -104,7 +104,7 @@ public class KeybindsScreen implements Screen {
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            game.setScreen(new PauseScreen(game,previusScreen));
+            game.setScreen(new OptionMenu(game,previusScreen));
             dispose();
         }
     }

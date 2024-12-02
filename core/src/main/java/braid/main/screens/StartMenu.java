@@ -2,6 +2,7 @@ package braid.main.screens;
 
 
 import braid.main.Braid;
+import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.awt.*;
+
 
 public class StartMenu extends ScreenAdapter {
     private  Stage stage;
@@ -29,6 +32,8 @@ public class StartMenu extends ScreenAdapter {
 
     @Override
     public void show() {
+
+
         Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         Gdx.input.setInputProcessor(stage);

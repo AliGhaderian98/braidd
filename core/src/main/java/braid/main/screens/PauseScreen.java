@@ -1,6 +1,7 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -33,6 +34,8 @@ public class PauseScreen implements Screen {
         this.previousScreen = previusScreen;
         Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+
+        KeyBindings.loadKeyBindings();
 
         // different Fonts for different Lines on the Screen
         Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);

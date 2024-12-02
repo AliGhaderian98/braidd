@@ -1,4 +1,4 @@
-slider_background
+slider_background.png
   rotate: false
   xy: 0, 0
   size: 200, 10
@@ -6,7 +6,7 @@ slider_background
   offset: 0, 0
   index: -1
 
-slider_knob
+slider_knob.png
   rotate: false
   xy: 0, 20
   size: 20, 20

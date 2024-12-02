@@ -1,6 +1,7 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,9 +9,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,11 +23,14 @@ public class OptionMenu implements Screen {
 
     private final Screen previusScreen;
     private final Stage stage;
-    private Skin skin;
     private final Game game;
     private final Label Resolution, Fullscreen, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
+    private  Label  currentLabel;
+
+    Slider musicSlider;
+    Slider soundeffectSlider;
 
     public OptionMenu(Game game, Screen previusScreen) {
         // Setup Screen
@@ -32,23 +39,24 @@ public class OptionMenu implements Screen {
         Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
 
-        /* // TODO Grafiken für Slider richig einbinden
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("Slider/skin.atlas"));
-        Texture backgroundTexture = new Texture(Gdx.files.internal("Slider/slider_background.png"));
+        KeyBindings.loadKeyBindings();
+
+        // Set up Slider to control music and soundeffekt volume
         Texture knobTexture = new Texture(Gdx.files.internal("Slider/slider_knob.png"));
+        Texture backgroundTexture = new Texture(Gdx.files.internal("Slider/slider_background.png"));
 
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
-
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(knobTexture));
 
-        Slider slider = new Slider(0, 100, 1, false, sliderStyle);
+        sliderStyle.background.setMinHeight(3);
+        sliderStyle.knob.setMinHeight(3);
+        sliderStyle.knob.setMinWidth(3);
 
-        Slider musicSlider = new Slider(0,100,1,false,skin);
-        Slider SoundeffectSlider = new Slider(0,100,1,false,skin);
-        Container<Slider> container = new Container<Slider>(musicSlider);
-        container.setTransform(true);
-        */
+        musicSlider = new Slider(0, 100, 1, false, sliderStyle);
+        soundeffectSlider = new Slider(0, 100, 1, false, sliderStyle);
+        musicSlider.setValue(50);
+        soundeffectSlider.setValue(50);
 
         //  Create Table
         Table table = new Table();
@@ -89,10 +97,11 @@ public class OptionMenu implements Screen {
         table.row();
         table.add(Music);
         table.row();
-        // TODO add Slider for Music and Soundeffekt
-        //table.add(slider);
+        table.add(musicSlider);
         table.row();
         table.add(Soundeffekt);
+        table.row();
+        table.add(soundeffectSlider);
         table.row();
         table.add(Keybindings);
 
@@ -124,13 +133,18 @@ public class OptionMenu implements Screen {
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            moveSlider(-1);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            moveSlider(1);
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             TestScreen.gameIsPaused = false;
             game.setScreen(new PauseScreen(game,previusScreen));
-
             dispose();
         }
     }
@@ -141,6 +155,7 @@ public class OptionMenu implements Screen {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
                 label.setColor(Color.YELLOW); // selected
+                currentLabel = label;
             } else {
                 label.setColor(Color.WHITE); // not selected
             }
@@ -166,6 +181,15 @@ public class OptionMenu implements Screen {
         } else if (selectedLabel == Keybindings) {
             game.setScreen(new KeybindsScreen(game,previusScreen));
             dispose();
+        }
+    }
+
+    private void moveSlider(float move){
+        if(currentLabel == Music){
+            musicSlider.setValue(musicSlider.getValue() + move);
+        }
+        if(currentLabel == Soundeffekt){
+            soundeffectSlider.setValue(soundeffectSlider.getValue() + move);
         }
     }
 

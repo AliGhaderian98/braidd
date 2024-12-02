@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-import java.security.Key;
 
 public class PlayerInputHandler {
     private final Player player;
@@ -20,7 +19,7 @@ public class PlayerInputHandler {
     private final Game game;
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
-    
+
     static final int ESC = Input.Keys.ESCAPE;
 
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
@@ -33,6 +32,8 @@ public class PlayerInputHandler {
     }
 
     public void handleInput() {
+        KeyBindings.loadKeyBindings();
+
         if(!player.getRewindController().isRewinding()) {
             handleMovement();
             handleJumping();
