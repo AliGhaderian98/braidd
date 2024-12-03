@@ -7,6 +7,57 @@ maps/1_Industrial_Tileset_1.tsx
 maps/1_Industrial_Tileset_1B.tsx
 maps/3_Far_Background_Tile.tsx
 maps/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/AnimeBackground.tsx
+maps/backgrounds/AnimatedBackground (1).png
+maps/backgrounds/AnimatedBackground (10).png
+maps/backgrounds/AnimatedBackground (11).png
+maps/backgrounds/AnimatedBackground (12).png
+maps/backgrounds/AnimatedBackground (13).png
+maps/backgrounds/AnimatedBackground (14).png
+maps/backgrounds/AnimatedBackground (15).png
+maps/backgrounds/AnimatedBackground (16).png
+maps/backgrounds/AnimatedBackground (17).png
+maps/backgrounds/AnimatedBackground (18).png
+maps/backgrounds/AnimatedBackground (19).png
+maps/backgrounds/AnimatedBackground (2).png
+maps/backgrounds/AnimatedBackground (20).png
+maps/backgrounds/AnimatedBackground (21).png
+maps/backgrounds/AnimatedBackground (22).png
+maps/backgrounds/AnimatedBackground (23).png
+maps/backgrounds/AnimatedBackground (24).png
+maps/backgrounds/AnimatedBackground (25).png
+maps/backgrounds/AnimatedBackground (26).png
+maps/backgrounds/AnimatedBackground (27).png
+maps/backgrounds/AnimatedBackground (28).png
+maps/backgrounds/AnimatedBackground (29).png
+maps/backgrounds/AnimatedBackground (3).png
+maps/backgrounds/AnimatedBackground (30).png
+maps/backgrounds/AnimatedBackground (31).png
+maps/backgrounds/AnimatedBackground (32).png
+maps/backgrounds/AnimatedBackground (33).png
+maps/backgrounds/AnimatedBackground (34).png
+maps/backgrounds/AnimatedBackground (35).png
+maps/backgrounds/AnimatedBackground (36).png
+maps/backgrounds/AnimatedBackground (37).png
+maps/backgrounds/AnimatedBackground (38).png
+maps/backgrounds/AnimatedBackground (39).png
+maps/backgrounds/AnimatedBackground (4).png
+maps/backgrounds/AnimatedBackground (40).png
+maps/backgrounds/AnimatedBackground (41).png
+maps/backgrounds/AnimatedBackground (42).png
+maps/backgrounds/AnimatedBackground (43).png
+maps/backgrounds/AnimatedBackground (44).png
+maps/backgrounds/AnimatedBackground (45).png
+maps/backgrounds/AnimatedBackground (46).png
+maps/backgrounds/AnimatedBackground (47).png
+maps/backgrounds/AnimatedBackground (48).png
+maps/backgrounds/AnimatedBackground (49).png
+maps/backgrounds/AnimatedBackground (5).png
+maps/backgrounds/AnimatedBackground (50).png
+maps/backgrounds/AnimatedBackground (6).png
+maps/backgrounds/AnimatedBackground (7).png
+maps/backgrounds/AnimatedBackground (8).png
+maps/backgrounds/AnimatedBackground (9).png
 maps/schwebebahn_1.tsx
 maps/sheet.tsx
 maps/testmap.tmx

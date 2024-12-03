@@ -10,7 +10,10 @@ import braid.main.objects.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -67,6 +70,10 @@ public class TestScreen implements Screen {
     private Array <Item> items;
     private PriorityQueue <ItemDef> itemsToSpawn;
 
+    //Background Animation variables
+    private Animation<TextureRegion> backgroundAnimation;
+    private float elapsedTime;
+
 
     public TestScreen(Braid game) {
         // Setup basic world variables
@@ -91,7 +98,7 @@ public class TestScreen implements Screen {
         player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
 
         //
-        items =new  Array <Item>();
+        items = new Array <Item>();
         itemsToSpawn = new PriorityQueue<ItemDef>();
 
 
@@ -115,6 +122,20 @@ public class TestScreen implements Screen {
 
         // Initialisiere den InputHandler
         inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
+        //Load BackgroundAnimation frames
+        loadedBackgroundAnimation();
+    }
+
+    private void loadedBackgroundAnimation(){
+        Array<TextureRegion> frames = new Array<>();
+
+        for (int i = 1; i <= 50; i++){
+            String frameName = "AnimatedBackground (" + i + ").png";
+            Texture texture = new Texture(Gdx.files.internal("maps/backgrounds/" + frameName));
+            frames.add(new TextureRegion(texture));;
+        }
+
+        backgroundAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
     }
 
     public void spawnItem(ItemDef idef) {
@@ -141,6 +162,7 @@ public class TestScreen implements Screen {
         update(delta);
 
         clearScreen();
+        renderBackground();
         renderWorld();
 
         inputHandler.handleInput();
@@ -182,6 +204,32 @@ public class TestScreen implements Screen {
 
     private void updateCamera() {
         gameCamera.followTarget();
+    }
+
+    private void renderBackground(){
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        TextureRegion currentFrame = backgroundAnimation.getKeyFrame(elapsedTime);
+        game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
+        game.batch.begin();
+
+        //todo: hier noch rumspielen damit der Hintergrund sich wirklich mit der Camera/dem Player bewegt
+        float cameraX = gameCamera.getCamera().position.x - (worldWidth / 2f) / (Braid.PPM);
+        float cameraY = gameCamera.getCamera().position.y - (worldHeight / 2f) / (Braid.PPM);
+
+        float backgroundWidth = currentFrame.getRegionWidth() / Braid.PPM; //hier /2 dann kommt die richtige PPM raus
+        float backgroundHeight = currentFrame.getRegionHeight() / Braid.PPM;
+
+        int startX = (int) Math.floor(cameraX / backgroundWidth);
+        int endX = (int) Math.ceil(((cameraX + worldWidth / Braid.PPM) / backgroundWidth)/2f);
+        int startY = (int) Math.floor(cameraY/ backgroundHeight);
+        int endY = (int) Math.ceil(((cameraY + worldHeight / Braid.PPM) / backgroundHeight)/2f);
+
+        for(int x = startX; x < endX; x++){
+            for(int y = startY; y < endY; y++){
+                game.batch.draw(currentFrame, x*backgroundWidth/Braid.PPM, y*backgroundHeight/Braid.PPM, backgroundWidth, backgroundHeight);
+            }
+        }
+        game.batch.end();
     }
 
     private void renderWorld() {
