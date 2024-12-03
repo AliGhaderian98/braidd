@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
 
-public class InteractiveObject {
+public class InteractiveObject extends StaticGameObject {
 
     protected World world;
     protected TiledMap map;

@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.*;
  Elemente davon kümmern.
  ***********/
 
-public class Player extends GameObject {
+public class Player extends DynamicGameObject {
     // Enumeration to represent the possible animation states a player can be in
     public enum AnimationState {
         IDLE,

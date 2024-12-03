@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.*;
  erstellt werden können.
  ***********/
 
-public class Enemy extends GameObject{
+public class Enemy extends DynamicGameObject{
 
     private final TextureRegion stand;
     private RewindController rewindController;
