@@ -41,24 +41,4 @@ public class InteractiveGameObject extends GameObject {
     public void defineBody() {
 
     }
-
-    @Override
-    public float getStateTimer() {
-        return 0;
-    }
-
-    @Override
-    public void setStateTimer(float stateTimer) {
-
-    }
-
-    @Override
-    public Object getCurrentState() {
-        return null;
-    }
-
-    @Override
-    public void setCurrentState(Object currentState) {
-
-    }
 }

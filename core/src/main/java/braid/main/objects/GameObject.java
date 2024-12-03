@@ -43,13 +43,7 @@ public abstract class GameObject extends Actor {
 
     public void setRewindController(RewindController rewindController) { this.rewindController = rewindController; }
 
-    public abstract float getStateTimer();
 
-    public abstract void setStateTimer(float stateTimer);
-
-    public abstract Object getCurrentState();
-
-    public abstract void setCurrentState(Object currentState);
 }
 
 
