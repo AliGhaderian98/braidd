@@ -9,14 +9,12 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class InteractiveGameObject extends GameObject {
 
-    protected TiledMap map;
     protected Fixture fixture;
     protected boolean isSensor;
 
     // constructor for box shaped objects
     public InteractiveGameObject(World world, TiledMap map, Rectangle boundary, boolean isSensor) {
         super(world);
-        this.map = map;
         this.isSensor = isSensor;
 
         defineBody(boundary);
@@ -25,7 +23,6 @@ public class InteractiveGameObject extends GameObject {
     // constructor for circular objects
     public InteractiveGameObject(World world, TiledMap map, float radius, boolean isSensor, float posX, float posY) {
         super(world);
-        this.map = map;
         this.isSensor = isSensor;
 
         defineBody(radius, posX, posY);
