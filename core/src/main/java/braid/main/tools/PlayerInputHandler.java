@@ -20,8 +20,7 @@ public class PlayerInputHandler {
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
 
-    static final int ESC = Input.Keys.ESCAPE;
-
+    
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
         this.player = player;
         this.enemy = enemy;
@@ -57,7 +56,7 @@ public class PlayerInputHandler {
 
 
     private void handlePause() {
-        if (Gdx.input.isKeyJustPressed(ESC) && !gameIsPaused) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC")) && !gameIsPaused) {
             gameIsPaused = true;
             game.pause();
         }
@@ -114,6 +113,7 @@ public class PlayerInputHandler {
     private void handleMovement() {
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) || Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY"))) {
             if (Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) && !Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY")) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
+                KeyBindings.loadKeyBindings();
                 player.moveRight();
             }
             if (Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY")) && !Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {

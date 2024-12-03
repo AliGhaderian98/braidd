@@ -23,7 +23,6 @@ public class Braid extends Game {
   public static final int V_HEIGHT = 160; // alt: 160
   public static final float PPM = 100;
 
-  public static Map<String, Integer> KeyBindingsMap;
 
 
   public SpriteBatch batch;

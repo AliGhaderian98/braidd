@@ -76,7 +76,7 @@ public class PauseScreen implements Screen {
         // set up Stage
         stage.addActor(table);
 
-        // mark an option
+        // mark first option
         updateLabelSelection();
     }
 

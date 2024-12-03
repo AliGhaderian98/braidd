@@ -149,11 +149,7 @@ public class TestScreen implements Screen {
     public void update(float dt) {
         //stop rendering if game is Paused
         if(!gameIsPaused) {
-            if (Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY"))) {
-                System.out.println("move left pressed!");
-            }
-            System.out.println("KeyBindings HashMap reference: " + Braid.KeyBindingsMap.hashCode());
-
+            KeyBindings.loadKeyBindings();
             handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);

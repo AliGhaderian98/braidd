@@ -5,12 +5,19 @@ import com.badlogic.gdx.Preferences;
 
 // used to have a static preference for static Methods
 public class PreferencesManager {
-    private static com.badlogic.gdx.Preferences preferences;
+    private static com.badlogic.gdx.Preferences keyBindingPreferences;
+    private static com.badlogic.gdx.Preferences SliderPreferences;
 
-    public static Preferences getPreferences() {
-        if (preferences == null) {
-            preferences = Gdx.app.getPreferences("KeyBindingsPreferences");
+    public static Preferences getKeyBindingPreferences() {
+        if (keyBindingPreferences == null) {
+            keyBindingPreferences = Gdx.app.getPreferences("KeyBindingsPreferences");
         }
-        return preferences;
+        return keyBindingPreferences;
+    }
+    public static Preferences getSliderPreferences() {
+        if (SliderPreferences == null) {
+            SliderPreferences = Gdx.app.getPreferences("SliderPreferences");
+        }
+        return SliderPreferences;
     }
 }

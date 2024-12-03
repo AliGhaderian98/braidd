@@ -2,9 +2,10 @@ package braid.main.screens;
 
 import braid.main.Braid;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -27,6 +28,7 @@ public class OptionMenu implements Screen {
     private final Label Resolution, Fullscreen, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
+    private boolean isInFullscreen;
     private  Label  currentLabel;
 
     Slider musicSlider;
@@ -38,6 +40,8 @@ public class OptionMenu implements Screen {
         this.previusScreen = previusScreen;
         Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+        isInFullscreen = false;
+
 
         KeyBindings.loadKeyBindings();
 
@@ -104,8 +108,12 @@ public class OptionMenu implements Screen {
         table.add(soundeffectSlider);
         table.row();
         table.add(Keybindings);
+        loadSlider();
 
         stage.addActor(table);
+
+        // mark first option
+        updateLabelSelection();
 
     }
 
@@ -125,24 +133,24 @@ public class OptionMenu implements Screen {
 
     private void handleInput() {
         // navigation with Keys
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))) {
             selectedIndex = (selectedIndex + 1) % menuLabels.size;
             updateLabelSelection();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if(Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY"))){
             moveSlider(-1);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if(Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY"))){
             moveSlider(1);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
             executeSelectedAction();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             TestScreen.gameIsPaused = false;
             game.setScreen(new PauseScreen(game,previusScreen));
             dispose();
@@ -170,13 +178,7 @@ public class OptionMenu implements Screen {
             // TODO Resolution Drop down menu
 
         } else if (selectedLabel == Fullscreen) {
-            // TODO switch Fullscreen or back
-
-        } else if (selectedLabel == Music) {
-            // TODO Music Slider
-
-        } else if (selectedLabel == Soundeffekt) {
-            // TODO Soundeffekt Slider
+            toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
             game.setScreen(new KeybindsScreen(game,previusScreen));
@@ -184,6 +186,7 @@ public class OptionMenu implements Screen {
         }
     }
 
+    // moves the Slider of the selected Slider
     private void moveSlider(float move){
         if(currentLabel == Music){
             musicSlider.setValue(musicSlider.getValue() + move);
@@ -191,6 +194,29 @@ public class OptionMenu implements Screen {
         if(currentLabel == Soundeffekt){
             soundeffectSlider.setValue(soundeffectSlider.getValue() + move);
         }
+        saveSlider();
+    }
+
+    private void toggleFullscreen(){
+        if(!isInFullscreen){
+            Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            isInFullscreen = true;
+        }else {
+            Gdx.graphics.setWindowedMode(800,600);
+            isInFullscreen = false;
+        }
+    }
+
+    private void saveSlider(){
+        PreferencesManager.getSliderPreferences().putFloat("soundeffectSlider",soundeffectSlider.getValue());
+        PreferencesManager.getSliderPreferences().putFloat("musicSlider",musicSlider.getValue());
+        PreferencesManager.getSliderPreferences().flush();
+    }
+
+    private void loadSlider(){
+        soundeffectSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("soundeffectSlider",soundeffectSlider.getValue()));
+        musicSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("musicSlider",musicSlider.getValue()));
+
     }
 
     @Override
