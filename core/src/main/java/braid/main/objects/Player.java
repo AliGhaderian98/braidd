@@ -27,7 +27,6 @@ public class Player extends DynamicGameObject {
     private boolean runningRight;
     private boolean animationPaused;
     public float stateTimer;
-    private final TestScreen screen;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
@@ -41,7 +40,6 @@ public class Player extends DynamicGameObject {
     // Constructors
     public Player(World world, TestScreen screen) {
         super(world);
-        this.screen = screen;
 
         speed = 1f;
         currentState = AnimationState.IDLE;

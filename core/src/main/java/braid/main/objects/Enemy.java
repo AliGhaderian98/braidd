@@ -17,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.*;
 public class Enemy extends DynamicGameObject{
 
     private final TextureRegion stand;
-    private RewindController rewindController;
     private boolean dead = false;
 
 
@@ -70,11 +69,7 @@ public class Enemy extends DynamicGameObject{
         }
     }
 
-    public RewindController getRewindController() {
-        return rewindController;
-    }
-    public void setRewindController(RewindController rewindController) { this.rewindController = rewindController; }
-
+    // todo: animationen für gegner einbauen
     @Override
     public float getStateTimer() {
         return 0;

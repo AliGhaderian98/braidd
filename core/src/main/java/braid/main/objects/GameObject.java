@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  ***********/
 
 public abstract class GameObject extends Actor {
-    private RewindController rewindController;
+    protected RewindController rewindController;
 
     protected World world;
     public Body b2body;
