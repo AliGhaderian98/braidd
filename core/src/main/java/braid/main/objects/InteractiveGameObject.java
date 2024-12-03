@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
 
-public class InteractiveObject extends StaticGameObject {
+public class InteractiveGameObject extends GameObject {
 
     protected World world;
     protected TiledMap map;
@@ -14,7 +14,7 @@ public class InteractiveObject extends StaticGameObject {
     protected Body body;
     protected Fixture fixture;
 
-    public InteractiveObject(World world, TiledMap map, Rectangle boundary, boolean isSensor) {
+    public InteractiveGameObject(World world, TiledMap map, Rectangle boundary, boolean isSensor) {
         this.world = world;
         this.map = map;
         this.boundary = boundary;
@@ -34,5 +34,31 @@ public class InteractiveObject extends StaticGameObject {
         fixture = body.createFixture(fdef);
 
         shape.dispose();
+    }
+
+    //Notwendig, da diese abstrakte Methoden sind -> entweder nicht mehr abstrakt machen oder implementieren
+    @Override
+    public void defineBody() {
+
+    }
+
+    @Override
+    public float getStateTimer() {
+        return 0;
+    }
+
+    @Override
+    public void setStateTimer(float stateTimer) {
+
+    }
+
+    @Override
+    public Object getCurrentState() {
+        return null;
+    }
+
+    @Override
+    public void setCurrentState(Object currentState) {
+
     }
 }
