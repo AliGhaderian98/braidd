@@ -88,6 +88,8 @@ public class Player extends DynamicGameObject {
         Fixture feetFixture = b2body.createFixture(footFdef);
         feetFixture.setUserData("PlayerFeet");
 
+        shape.dispose();
+        feet.dispose();
     }
 
     public void update(float dt) {
