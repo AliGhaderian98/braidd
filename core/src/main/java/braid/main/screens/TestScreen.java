@@ -78,7 +78,7 @@ public class TestScreen implements Screen {
 
         // Setup Level Map
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("maps/testmap2.tmx");
+        map = mapLoader.load("maps/wintermap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         // setup Box2D world
