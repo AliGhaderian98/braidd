@@ -146,6 +146,7 @@ public class TestScreen implements Screen {
     }
 
     public void update(float dt) {
+        KeyBindings.loadKeyBindings();
         //stop rendering if game is Paused
         if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
@@ -166,11 +167,9 @@ public class TestScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
-            // Reset Game if Player wants to retry (PauseScreen)
-            //ResetIfNecessary();
         }
         else {
-            if(Gdx.input.isKeyPressed(SHIFT)) {
+            if(Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
                 player.setAlive(true);
                 gameIsPaused = false;
             }
