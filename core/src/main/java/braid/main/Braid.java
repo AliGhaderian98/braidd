@@ -29,7 +29,6 @@ public class Braid extends Game {
 
     Gdx.graphics.setWindowedMode(800, 600);
     batch = new SpriteBatch();
-    setScreen(new TestScreen(this));
     setScreen(new StartMenu(this));
   }
 

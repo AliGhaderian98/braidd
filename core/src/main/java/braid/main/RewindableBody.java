@@ -3,15 +3,16 @@ package braid.main;
  * Schnittstelle zwischen RewindController und GameObjects
  *******/
 
+import braid.main.objects.DynamicGameObject;
 import braid.main.objects.GameObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class RewindableBody implements Rewindable{
     private final Body b2body;
-    private final GameObject gameObject;
+    private final DynamicGameObject gameObject;
 
-    public RewindableBody(Body b2body, GameObject gameObject){
+    public RewindableBody(Body b2body, DynamicGameObject gameObject){
         this.b2body = b2body;
         this.gameObject = gameObject;
     }
