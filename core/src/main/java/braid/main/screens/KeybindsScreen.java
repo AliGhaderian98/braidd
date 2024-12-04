@@ -68,7 +68,7 @@ public class KeybindsScreen implements Screen {
         UP_KEY.setFontScale(0.7f);
         DOWN_KEY = new Label("DOWN KEY: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")), SelectionFont);
         DOWN_KEY.setFontScale(0.7f);
-        ResetKeybindings =  new Label("- ResetKeybindings -", SelectionFont);
+        ResetKeybindings =  new Label("- Reset to Default -", SelectionFont);
         ResetKeybindings.setFontScale(0.7f);
 
 
