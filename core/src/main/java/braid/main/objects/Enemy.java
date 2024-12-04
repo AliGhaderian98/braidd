@@ -22,7 +22,6 @@ public class Enemy extends DynamicGameObject{
     }
 
     private final TextureRegion stand;
-    private RewindController rewindController;
     private AnimationState currentState = AnimationState.ALIVE;
 
 
