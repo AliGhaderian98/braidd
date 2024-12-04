@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.*;
  Elemente davon kümmern.
  ***********/
 
-public class Player extends GameObject {
+public class Player extends DynamicGameObject {
     // Enumeration to represent the possible animation states a player can be in
     public enum AnimationState {
         IDLE,
@@ -27,7 +27,6 @@ public class Player extends GameObject {
     private boolean runningRight;
     private boolean animationPaused;
     public float stateTimer;
-    private final TestScreen screen;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
@@ -41,7 +40,6 @@ public class Player extends GameObject {
     // Constructors
     public Player(World world, TestScreen screen) {
         super(world);
-        this.screen = screen;
 
         speed = 1f;
         currentState = AnimationState.IDLE;
@@ -88,6 +86,8 @@ public class Player extends GameObject {
         Fixture feetFixture = b2body.createFixture(footFdef);
         feetFixture.setUserData("PlayerFeet");
 
+        shape.dispose();
+        feet.dispose();
     }
 
     public void update(float dt) {

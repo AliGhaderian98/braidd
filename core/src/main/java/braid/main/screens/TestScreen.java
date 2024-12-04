@@ -243,16 +243,11 @@ public class TestScreen implements Screen {
 
     @Override
     public void dispose() {
-        if(player.getTexture() != null){
-            map.dispose();
-            renderer.dispose();
+        map.dispose();
+        renderer.dispose();
 
-            world.dispose();
-            b2dr.dispose();
-
-            player.getTexture().dispose();
-        }
-
+        world.dispose();
+        b2dr.dispose();
     }
 
     public World getWorld() {
