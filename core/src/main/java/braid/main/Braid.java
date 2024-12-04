@@ -8,6 +8,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.Map;
+
 /***********
  Hauptklasse des Spiels, die zum Management aller anderen Teile dient.
  ***********/
@@ -20,6 +22,8 @@ public class Braid extends Game {
   public static final int V_WIDTH = 240; // alt: 240
   public static final int V_HEIGHT = 160; // alt: 160
   public static final float PPM = 100;
+
+
 
   public SpriteBatch batch;
 

@@ -1,6 +1,7 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -33,6 +34,8 @@ public class PauseScreen implements Screen {
         this.previousScreen = previusScreen;
         Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+
+        KeyBindings.loadKeyBindings();
 
         // different Fonts for different Lines on the Screen
         Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
@@ -73,7 +76,7 @@ public class PauseScreen implements Screen {
         // set up Stage
         stage.addActor(table);
 
-        // mark an option
+        // mark first option
         updateLabelSelection();
     }
 
@@ -94,18 +97,18 @@ public class PauseScreen implements Screen {
     }
     private void handleInput() {
         // navigation with Keys
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))){
             selectedIndex = (selectedIndex + 1) % menuLabels.size;
             updateLabelSelection();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
             executeSelectedAction();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             TestScreen.gameIsPaused = false;
             game.setScreen(previousScreen);
             dispose();

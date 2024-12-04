@@ -149,6 +149,7 @@ public class TestScreen implements Screen {
     public void update(float dt) {
         //stop rendering if game is Paused
         if(!gameIsPaused) {
+            KeyBindings.loadKeyBindings();
             handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);

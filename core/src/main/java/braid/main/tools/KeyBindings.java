@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.screens.KeybindsScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -22,11 +23,13 @@ public class KeyBindings {
         KeyBindingsMap.put("SPACEBAR", Input.Keys.SPACE);
         KeyBindingsMap.put("SHIFT", Input.Keys.SHIFT_LEFT);
         KeyBindingsMap.put("INTERACT", Input.Keys.E);
+        KeyBindingsMap.put("ENTER", Input.Keys.ENTER);
+        KeyBindingsMap.put("ESC", Input.Keys.ESCAPE);
     }
 
     // insert an action and get the Key to do this action
     public static int getKey(String action){
-        return KeyBindingsMap.getOrDefault(action,-1);
+        return  KeyBindingsMap.get(action);
     }
 
     // set an action with a key in the Hashmap
@@ -36,17 +39,18 @@ public class KeyBindings {
 
     // just returns the KeyBindingsMap
     public static Map<String,Integer> getKeyBindingsMap(){
-        return KeyBindingsMap;
+        return  KeyBindingsMap;
     }
 
-    // TODO fix changeBinding (irgendwo hängt es noch)
     public static void changeKeyBinding(String action){
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
-                //System.out.println("enter new KEy");
                 KeyBindings.setKey(action, keycode);
+                saveKeyBindings();
+                loadKeyBindings();
                 Gdx.input.setInputProcessor(null); // reset InputProcessor
+                KeybindsScreen.OverlayActive=false;
                 return true;
             }
         });
@@ -55,19 +59,18 @@ public class KeyBindings {
 
     // saves KeyBinds to KeyBindingsPreferences to save it over the runtime
     public static void saveKeyBindings() {
-
         // iterates throw the entire Map and load it into the KeyBindingsPreferences
         for (Map.Entry<String,Integer> entry : KeyBindings.getKeyBindingsMap().entrySet()){
-            PreferencesManager.getPreferences().putInteger(entry.getKey(), entry.getValue());
+            PreferencesManager.getKeyBindingPreferences().putInteger(entry.getKey(), entry.getValue());
         }
-            PreferencesManager.getPreferences().flush();
+            PreferencesManager.getKeyBindingPreferences().flush();
     }
 
     // load the saved changes to the KeybindingsMap
     public static void loadKeyBindings(){
         // iterates throw the entire KeyBindingsPreferences and load it into the KeyBindingsMap
         for(String action : KeyBindings.getKeyBindingsMap().keySet()){
-            int key = PreferencesManager.getPreferences().getInteger(action, KeyBindings.getKey(action));
+            int key = PreferencesManager.getKeyBindingPreferences().getInteger(action, KeyBindings.getKey(action));
             KeyBindings.setKey(action,key);
         }
     }
