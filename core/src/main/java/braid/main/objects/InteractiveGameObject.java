@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.physics.box2d.*;
 
 
-public class InteractiveGameObject extends GameObject {
+public abstract class InteractiveGameObject extends GameObject {
 
     protected Fixture fixture;
     protected boolean isSensor;
@@ -28,9 +28,6 @@ public class InteractiveGameObject extends GameObject {
         defineBody(radius, posX, posY);
     }
 
-    //Notwendig, da diese abstrakte Methoden sind -> entweder nicht mehr abstrakt machen oder implementieren
-    @Override
-    public void defineBody() {}
 
 
     public void defineBody(Rectangle boundary) {

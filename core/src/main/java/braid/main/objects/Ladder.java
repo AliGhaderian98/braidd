@@ -10,4 +10,8 @@ public class Ladder extends InteractiveGameObject{
         fixture.setUserData(this);
     }
 
+    @Override
+    public void defineBody() {
+
+    }
 }

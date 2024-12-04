@@ -224,11 +224,13 @@ public class Player extends DynamicGameObject {
     }
 
     public void jump() {
+        b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
     }
 
     public void jump(float multiplier) {
+        b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
     }

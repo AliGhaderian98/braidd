@@ -33,7 +33,6 @@ public class TestScreen implements Screen {
     private static final int GRAVITY = -10;
     private final TextureAtlas atlas;
     public static boolean gameIsPaused;
-    public static boolean resetgame;
 
     // Tools
     private final PlayerInputHandler inputHandler;

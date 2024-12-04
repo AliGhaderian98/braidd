@@ -7,6 +7,6 @@ public class ItemDef {
     public Class <?> type ;
     public ItemDef(Vector2 position, Class<?> type){
         this.position = position;
-        this.type =type;
+        this.type = type;
     }
 }

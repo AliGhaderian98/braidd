@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int maxRewindLength = 6000; //Anzahl der Frames/Minuten die wir saven wollen
+    private int maxRewindLength = 36000; //Anzahl der Frames/Minuten die wir saven wollen
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){
