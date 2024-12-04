@@ -58,10 +58,10 @@ public class OptionMenu implements Screen {
         sliderStyle.knob.setMinHeight(3);
         sliderStyle.knob.setMinWidth(3);
 
-        musicSlider = new Slider(0, 100, 1, false, sliderStyle);
-        soundeffectSlider = new Slider(0, 100, 1, false, sliderStyle);
-        musicSlider.setValue(50);
-        soundeffectSlider.setValue(50);
+        musicSlider = new Slider(0, 10, 1, false, sliderStyle);
+        soundeffectSlider = new Slider(0, 10, 1, false, sliderStyle);
+        musicSlider.setValue(8);
+        soundeffectSlider.setValue(8);
 
         //  Create Table
         Table table = new Table();
@@ -80,7 +80,7 @@ public class OptionMenu implements Screen {
         Resolution = new Label("Resolution", SelectionFont);
         Fullscreen = new Label("Fullscreen", SelectionFont);
         Music = new Label("Music", SelectionFont);
-        Soundeffekt = new Label("Soundeffekt", SelectionFont);
+        Soundeffekt = new Label("Sound Effects", SelectionFont);
         Keybindings = new Label("Keybindings", SelectionFont);
 
 
@@ -142,10 +142,10 @@ public class OptionMenu implements Screen {
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
-        if(Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY"))){
+        if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("LEFT_KEY"))){
             moveSlider(-1);
         }
-        if(Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY"))){
+        if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("RIGHT_KEY"))){
             moveSlider(1);
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {

@@ -50,7 +50,7 @@ public class PauseScreen implements Screen {
         Label PauseLabel = new Label("Game Paused", TitelFont);
         PauseLabel.setFontScale(2);
         Resume = new Label("Resume", SelectionFont);
-        mainMenu = new Label("main menu", SelectionFont);
+        mainMenu = new Label("Main Menu", SelectionFont);
         Retry = new Label("Retry", SelectionFont);
         Option = new Label("Option", SelectionFont);
         SaveAndExit = new Label("Save and Exit", SelectionFont);

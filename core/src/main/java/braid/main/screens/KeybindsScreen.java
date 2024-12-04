@@ -62,11 +62,11 @@ public class KeybindsScreen implements Screen {
         Jump.setFontScale(0.7f);
         Rewind = new Label("Rewind: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")), SelectionFont);
         Rewind.setFontScale(0.7f);
-        INTERACT = new Label("INTERACT: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")), SelectionFont);
+        INTERACT = new Label("Interact: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")), SelectionFont);
         INTERACT.setFontScale(0.7f);
-        UP_KEY = new Label("UP KEY: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")), SelectionFont);
+        UP_KEY = new Label("Move Up: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")), SelectionFont);
         UP_KEY.setFontScale(0.7f);
-        DOWN_KEY = new Label("DOWN KEY: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")), SelectionFont);
+        DOWN_KEY = new Label("Move Down: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")), SelectionFont);
         DOWN_KEY.setFontScale(0.7f);
         ResetKeybindings =  new Label("- Reset to Default -", SelectionFont);
         ResetKeybindings.setFontScale(0.7f);
@@ -176,11 +176,11 @@ public class KeybindsScreen implements Screen {
         // updates the current used Keybindings after a change
         RunLeft.setText("Move Left: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")));
         RunRight.setText("Move Right: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")));
-        UP_KEY.setText("UP KEY: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")));
-        DOWN_KEY.setText("DOWN KEY: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")));
+        UP_KEY.setText("Move Up: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")));
+        DOWN_KEY.setText("Move Down: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")));
         Jump.setText("Jump: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")));
         Rewind.setText("Rewind: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")));
-        INTERACT.setText("INTERACT: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")));
+        INTERACT.setText("Interact: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")));
     }
 
     private void executeSelectedAction() {
