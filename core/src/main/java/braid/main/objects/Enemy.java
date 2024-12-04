@@ -3,6 +3,7 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.TestScreen;
 import braid.main.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -22,8 +23,9 @@ public class Enemy extends DynamicGameObject{
         ALIVE;
     }
 
-    private final TextureRegion stand;
+    //private final TextureRegion stand;
     private AnimationState currentState = AnimationState.ALIVE;
+    private final Animation<TextureRegion> idle;
 
 
     // Konstruktor für die Initialisierung des Gegners
@@ -35,10 +37,10 @@ public class Enemy extends DynamicGameObject{
         defineBody();
 
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-        // Hier wird die Region vom ersten idle frame hardgecodet, später Rausnehmen wenn der gegner auch animiert ist
-        stand = new TextureRegion(sprite.getTexture(), 28, 2, 24, 24);
+
+        idle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        sprite.setRegion(stand);
+        sprite.setRegion(idle.getKeyFrame(0, false));
 
     }
 
@@ -67,7 +69,7 @@ public class Enemy extends DynamicGameObject{
         // Create head collider
         FixtureDef headFdef = new FixtureDef();
         PolygonShape head = new PolygonShape();
-        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 9 / Braid.PPM), 0);
+        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 10 / Braid.PPM), 0);
         headFdef.shape = head;
         headFdef.friction = 1f;
         Fixture headFixture = b2body.createFixture(headFdef);
