@@ -21,14 +21,14 @@ public class PauseScreen implements Screen {
 
     private final Stage stage;
     private final Game game;
-    private final Screen previousScreen;
+    private final TestScreen previousScreen;
 
     private final Label Resume,mainMenu, Retry, Option, SaveAndExit;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
 
 
-    public PauseScreen(Game game, Screen previusScreen){
+    public PauseScreen(Game game, TestScreen previusScreen){
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previusScreen;
@@ -140,9 +140,8 @@ public class PauseScreen implements Screen {
             // switch to Main Menu
 
         } else if (selectedLabel == Retry) {
-            TestScreen.gameIsPaused = false;
             game.setScreen(previousScreen);
-            TestScreen.resetgame = true;
+            previousScreen.reset();
             dispose();
 
         } else if (selectedLabel == Option) {

@@ -148,7 +148,7 @@ public class TestScreen implements Screen {
 
     public void update(float dt) {
         //stop rendering if game is Paused
-        if(!gameIsPaused) {
+        if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
             handleSpawningItems();
             // Update world physics
@@ -168,10 +168,11 @@ public class TestScreen implements Screen {
                 r.update();
             }
             // Reset Game if Player wants to retry (PauseScreen)
-            ResetIfNecessary();
+            //ResetIfNecessary();
         }
         else {
             if(Gdx.input.isKeyPressed(SHIFT)) {
+                player.setAlive(true);
                 gameIsPaused = false;
             }
         }
@@ -233,13 +234,10 @@ public class TestScreen implements Screen {
     public void hide() {
     }
 
-    public void ResetIfNecessary(){
-        if (!resetgame) {
-            return;
-        }
-        resetgame = false;
+    public void reset(){
+        gameIsPaused = false;
         // reset Screen
-        game.setScreen(new TestScreen((Braid) game));
+        game.setScreen(new TestScreen(game));
     }
 
     @Override

@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 //todo: fullscreen einstellung speichern
 public class OptionMenu implements Screen {
 
-    private final Screen previusScreen;
+    private final TestScreen previusScreen;
     private final Stage stage;
     private final Game game;
     private final Label Resolution, Fullscreen, Music, Soundeffekt, Keybindings;
@@ -35,7 +35,7 @@ public class OptionMenu implements Screen {
     Slider musicSlider;
     Slider soundeffectSlider;
 
-    public OptionMenu(Game game, Screen previusScreen) {
+    public OptionMenu(Game game, TestScreen previusScreen) {
         // Setup Screen
         this.game = game;
         this.previusScreen = previusScreen;

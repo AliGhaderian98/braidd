@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KeybindsScreen implements Screen {
 
-    private final Screen previusScreen;
+    private final TestScreen previusScreen;
     private final Stage mainStage;
     private final Stage Overlay;
     private final Game game;
@@ -32,7 +32,7 @@ public class KeybindsScreen implements Screen {
     private int selectedIndex = 0;
     public static boolean OverlayActive;
 
-    public KeybindsScreen(Game game, Screen previusScreen) {
+    public KeybindsScreen(Game game, TestScreen previusScreen) {
         // Setup Screen
         this.game = game;
         this.previusScreen = previusScreen;
