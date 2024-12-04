@@ -16,9 +16,14 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class Enemy extends GameObject{
 
+    public enum AnimationState {
+        DEAD,
+        ALIVE;
+    }
+
     private final TextureRegion stand;
     private RewindController rewindController;
-    private boolean dead = false;
+    private AnimationState currentState = AnimationState.ALIVE;
 
 
     // Konstruktor für die Initialisierung des Gegners
@@ -65,8 +70,11 @@ public class Enemy extends GameObject{
 
         rewindController.update();
 
-        if (dead) {
+        if (currentState == AnimationState.DEAD) {
             b2body.setActive(false);
+        }
+        else{
+            b2body.setActive(true);
         }
     }
 
@@ -87,18 +95,26 @@ public class Enemy extends GameObject{
 
     @Override
     public Object getCurrentState() {
-        return null;
+        if (isDead()){
+            return AnimationState.DEAD;
+        }
+        else if(!isDead()){
+            return AnimationState.ALIVE;
+        }
+        else return null;
     }
 
     @Override
-    public void setCurrentState(Object currentState) {
-
+    public void setCurrentState(Object animationStates) {
+        if (animationStates instanceof Enemy.AnimationState) {
+            this.currentState = (Enemy.AnimationState) animationStates;
+        }
     }
 
     public void die () {
-        dead = true;
+        currentState = AnimationState.DEAD;
     }
 
     //Getter
-    public boolean isDead() { return dead; }
+    public boolean isDead() { return currentState == AnimationState.DEAD; }
 }
