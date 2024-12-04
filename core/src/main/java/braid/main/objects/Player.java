@@ -69,18 +69,20 @@ public class Player extends DynamicGameObject {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        // Create main collider
         FixtureDef bodyFdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(9 / Braid.PPM);
+        shape.setRadius(8 / Braid.PPM);
 
         bodyFdef.shape = shape;
         bodyFdef.friction = 0f;
         Fixture bodyFixture = b2body.createFixture(bodyFdef);
         bodyFixture.setUserData("PlayerBody");
 
+        // Create feet collider
         FixtureDef footFdef = new FixtureDef();
         PolygonShape feet = new PolygonShape();
-        feet.setAsBox(4 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -10 / Braid.PPM), 0);
+        feet.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, -10 / Braid.PPM), 0);
         footFdef.shape = feet;
         footFdef.friction = 1f;
         Fixture feetFixture = b2body.createFixture(footFdef);
@@ -223,6 +225,11 @@ public class Player extends DynamicGameObject {
 
     public void jump() {
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
+        currentState = AnimationState.JUMPING;
+    }
+
+    public void jump(float multiplier) {
+        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
     }
 

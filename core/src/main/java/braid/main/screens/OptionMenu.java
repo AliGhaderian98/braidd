@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+//todo: fullscreen einstellung speichern
 public class OptionMenu implements Screen {
 
     private final Screen previusScreen;

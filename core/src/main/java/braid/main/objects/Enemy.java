@@ -5,6 +5,7 @@ import braid.main.screens.TestScreen;
 import braid.main.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 
@@ -56,12 +57,21 @@ public class Enemy extends DynamicGameObject{
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(9 / Braid.PPM);
+        shape.setRadius(8 / Braid.PPM);
 
         fdef.shape = shape;
         fdef.friction = 1f;
         Fixture bodyFixture = b2body.createFixture(fdef);
-        bodyFixture.setUserData(this);
+        bodyFixture.setUserData("EnemyBody");
+
+        // Create head collider
+        FixtureDef headFdef = new FixtureDef();
+        PolygonShape head = new PolygonShape();
+        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 9 / Braid.PPM), 0);
+        headFdef.shape = head;
+        headFdef.friction = 1f;
+        Fixture headFixture = b2body.createFixture(headFdef);
+        headFixture.setUserData(this);
     }
 
     public void update(float dt) {

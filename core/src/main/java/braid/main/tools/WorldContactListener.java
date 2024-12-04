@@ -21,6 +21,8 @@ public class WorldContactListener implements ContactListener {
             Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
             if (enemyFixture.getUserData() instanceof Enemy enemy) {
                 enemy.die();
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                player.jump(1.25f);
             }
         }
 
@@ -30,7 +32,8 @@ public class WorldContactListener implements ContactListener {
             }
 
             Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
-            if (enemyFixture.getUserData() instanceof Enemy enemy && !enemy.isDead()) {
+            //if (enemyFixture.getUserData() instanceof Enemy enemy && !enemy.isDead()) {
+            if ("EnemyBody".equals(enemyFixture.getUserData())) {
                 player.die();
             }
         }
