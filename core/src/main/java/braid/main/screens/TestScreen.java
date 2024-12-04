@@ -182,6 +182,7 @@ public class TestScreen implements Screen {
 
     private void updateCamera() {
         gameCamera.followTarget();
+        gameCamera.getCamera().update();
     }
 
     private void renderWorld() {

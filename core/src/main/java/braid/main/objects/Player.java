@@ -82,7 +82,7 @@ public class Player extends GameObject {
 
         FixtureDef footFdef = new FixtureDef();
         PolygonShape feet = new PolygonShape();
-        feet.setAsBox(6 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -8 / Braid.PPM), 0);
+        feet.setAsBox(4 / Braid.PPM, 2 / Braid.PPM, new Vector2(0, -10 / Braid.PPM), 0);
         footFdef.shape = feet;
         footFdef.friction = 1f;
         Fixture feetFixture = b2body.createFixture(footFdef);

@@ -42,14 +42,16 @@ public class GameCamera {
 
     public void followTarget() {
         float targetX = player.b2body.getPosition().x;
+        float targetY = player.b2body.getPosition().y;
 
         float minX = viewport.getWorldWidth() / 2;
         float maxX = mapWidth - viewport.getWorldWidth() / 2;
+        float minY = viewport.getWorldHeight() / 2;
+        float maxY = mapHeight - viewport.getWorldHeight() / 2;
 
 
         camera.position.x = Math.max(minX,Math.min(targetX,maxX));
-
-        camera.update();
+        camera.position.y = Math.max(minY,Math.min(targetY,maxY));
     }
 
     public void resize(int width, int height) {

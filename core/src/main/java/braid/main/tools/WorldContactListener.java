@@ -3,6 +3,7 @@ package braid.main.tools;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class WorldContactListener implements ContactListener {
@@ -16,24 +17,24 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
+        if ("PlayerFeet".equals(fixA.getUserData()) || "PlayerFeet".equals(fixB.getUserData())) {
+            Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
+            if (enemyFixture.getUserData() instanceof Enemy enemy) {
+                enemy.die();
+            }
+        }
+
         if ("PlayerBody".equals(fixA.getUserData()) || "PlayerBody".equals(fixB.getUserData())) {
             if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
                 player.atLadder(true);
             }
-            if(fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+
+            Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
+            if (enemyFixture.getUserData() instanceof Enemy enemy && !enemy.isDead()) {
                 player.die();
             }
         }
-        if ("PlayerFeet".equals(fixA.getUserData()) || "PlayerFeet".equals(fixB.getUserData())) {
-            if(fixA.getUserData() instanceof Enemy) {
-                Enemy enemy = (Enemy) fixA.getUserData();
-                enemy.die();
-            }
-            if(fixB.getUserData() instanceof Enemy) {
-                Enemy enemy = (Enemy) fixB.getUserData();
-                enemy.die();
-            }
-        }
+
     }
 
     @Override
