@@ -20,7 +20,7 @@ public class PlayerInputHandler {
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
 
-    
+
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
         this.player = player;
         this.enemy = enemy;
@@ -37,17 +37,6 @@ public class PlayerInputHandler {
             handleMovement();
             handleJumping();
             handleClimbing();
-
-            // move enemy based on the position of the player
-            if (enemy.getSprite().getX() < player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {
-                if (player.isClimbing()) {
-                    world.setGravity(new Vector2(0, 0));
-                }
-            }
         }
 
         handlePause();

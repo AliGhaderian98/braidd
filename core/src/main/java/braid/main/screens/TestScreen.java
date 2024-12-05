@@ -4,6 +4,8 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.enemies.PatrollingEnemy;
+import braid.main.enemies.Wissenschaftler;
 import braid.main.tools.*;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
@@ -62,7 +64,7 @@ public class TestScreen implements Screen {
 
     // GameObject Variables
     private final Player player;
-    private final Enemy enemy;
+    private Array<Enemy> enemies;
     private Array <Item> items;
     private PriorityQueue <ItemDef> itemsToSpawn;
 
@@ -99,8 +101,16 @@ public class TestScreen implements Screen {
         gameCamera.setMap(map);
 
         // Setup Enemy
-        enemy = new Enemy(world, this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+        Enemy enemy1 = new Wissenschaftler(world, this, player);
+        enemy1.setRewindController(new RewindController(new RewindableBody(enemy1.b2body, enemy1)));
+        Enemy enemy2 = new PatrollingEnemy(world, this);
+        enemy2.setRewindController(new RewindController(new RewindableBody(enemy2.b2body, enemy2)));
+        Enemy enemy3 = new Wissenschaftler(world, this, player);
+        enemy3.setRewindController(new RewindController(new RewindableBody(enemy3.b2body, enemy3)));
+        enemies = new Array<>();
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
 
         //Copy-Paste für Rewind:
         //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
@@ -108,12 +118,13 @@ public class TestScreen implements Screen {
         // Add all rewindable objects to Watcher
         rewindObjects = new Array<>();
         rewindObjects.add(player.getRewindController());
-        rewindObjects.add(enemy.getRewindController());
-
+        for (Enemy enemy : enemies) {
+            rewindObjects.add(enemy.getRewindController());
+        }
         world.setContactListener(new WorldContactListener(player));
 
         // Initialisiere den InputHandler
-        inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
+        inputHandler = new PlayerInputHandler(player,enemy1,world,game, rewindObjects);
     }
 
     public void spawnItem(ItemDef idef) {
@@ -156,7 +167,8 @@ public class TestScreen implements Screen {
 
             // Update Entities
             player.update(dt);
-            enemy.update(dt);
+            for (Enemy enemy : enemies)
+                enemy.update(dt);
 
             for(Item item : items)
                 item.update(dt);
@@ -195,8 +207,10 @@ public class TestScreen implements Screen {
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
-        if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
-            enemy.getSprite().draw(game.batch);
+        for (Enemy enemy : enemies) {
+            if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
+                enemy.getSprite().draw(game.batch);
+            }
         }
         game.batch.end();
 
