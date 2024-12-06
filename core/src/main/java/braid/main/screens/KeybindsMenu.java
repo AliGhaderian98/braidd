@@ -1,27 +1,26 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class KeybindsScreen implements Screen {
+public class KeybindsMenu implements Screen {
 
     private final TestScreen previusScreen;
     private final Stage mainStage;
@@ -32,7 +31,10 @@ public class KeybindsScreen implements Screen {
     private int selectedIndex = 0;
     public static boolean OverlayActive;
 
-    public KeybindsScreen(Game game, TestScreen previusScreen) {
+    // Sound
+    private final Sound menuSound;
+
+    public KeybindsMenu(Game game, TestScreen previusScreen) {
         // Setup Screen
         this.game = game;
         this.previusScreen = previusScreen;
@@ -41,6 +43,8 @@ public class KeybindsScreen implements Screen {
         mainStage = new Stage(viewport,((Braid) game).batch);
         Overlay = new Stage(viewport,((Braid) game).batch);
 
+        // Setup Sound
+        menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         //  Create Table
         Table table = new Table();
@@ -139,17 +143,21 @@ public class KeybindsScreen implements Screen {
     private void handleInput() {
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex + 1) % menuLabels.size;
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             game.setScreen(new OptionMenu(game,previusScreen));
             dispose();
         }

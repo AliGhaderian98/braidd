@@ -3,9 +3,11 @@ package braid.main;
 import braid.main.screens.StartMenu;
 //import braid.main.screens.PauseScreen;    Auskommentiert, da die KLasse noch nicht existiert bei mir (Mike)
 import braid.main.screens.TestScreen;
+import braid.main.tools.Audiomanager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Map;
@@ -27,12 +29,12 @@ public class Braid extends Game {
 
   public SpriteBatch batch;
 
-
   @Override
   public void create() {
 
     Gdx.graphics.setWindowedMode(800, 600);
     batch = new SpriteBatch();
+    Audiomanager.audiomanager();
     setScreen(new StartMenu(this));
   }
 

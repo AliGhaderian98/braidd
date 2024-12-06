@@ -1,12 +1,13 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -32,8 +33,11 @@ public class OptionMenu implements Screen {
     private boolean isInFullscreen;
     private  Label  currentLabel;
 
+    // Sound
+    private final Sound menuSound;
+
     Slider musicSlider;
-    Slider soundeffectSlider;
+    Slider sfxSlider;
 
     public OptionMenu(Game game, TestScreen previusScreen) {
         // Setup Screen
@@ -45,6 +49,9 @@ public class OptionMenu implements Screen {
 
 
         KeyBindings.loadKeyBindings();
+
+        // Setup Sound
+        menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // Set up Slider to control music and soundeffekt volume
         Texture knobTexture = new Texture(Gdx.files.internal("Slider/slider_knob.png"));
@@ -58,10 +65,10 @@ public class OptionMenu implements Screen {
         sliderStyle.knob.setMinHeight(3);
         sliderStyle.knob.setMinWidth(3);
 
-        musicSlider = new Slider(0, 10, 1, false, sliderStyle);
-        soundeffectSlider = new Slider(0, 10, 1, false, sliderStyle);
+        musicSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
+        sfxSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
         musicSlider.setValue(8);
-        soundeffectSlider.setValue(8);
+        sfxSlider.setValue(8);
 
         //  Create Table
         Table table = new Table();
@@ -106,7 +113,7 @@ public class OptionMenu implements Screen {
         table.row();
         table.add(Soundeffekt);
         table.row();
-        table.add(soundeffectSlider);
+        table.add(sfxSlider);
         table.row();
         table.add(Keybindings);
         loadSlider();
@@ -135,25 +142,29 @@ public class OptionMenu implements Screen {
     private void handleInput() {
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex + 1) % menuLabels.size;
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
         if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("LEFT_KEY"))){
-            moveSlider(-1);
+            moveSlider(-.1f);
         }
         if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("RIGHT_KEY"))){
-            moveSlider(1);
+            moveSlider(.1f);
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             TestScreen.gameIsPaused = false;
-            game.setScreen(new PauseScreen(game,previusScreen));
+            game.setScreen(new PauseMenu(game,previusScreen));
             dispose();
         }
     }
@@ -182,7 +193,7 @@ public class OptionMenu implements Screen {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsScreen(game,previusScreen));
+            game.setScreen(new KeybindsMenu(game,previusScreen));
             dispose();
         }
     }
@@ -193,9 +204,11 @@ public class OptionMenu implements Screen {
             musicSlider.setValue(musicSlider.getValue() + move);
         }
         if(currentLabel == Soundeffekt){
-            soundeffectSlider.setValue(soundeffectSlider.getValue() + move);
+            sfxSlider.setValue(sfxSlider.getValue() + move);
         }
         saveSlider();
+        loadSlider();
+        menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
     }
 
     private void toggleFullscreen(){
@@ -209,15 +222,14 @@ public class OptionMenu implements Screen {
     }
 
     private void saveSlider(){
-        PreferencesManager.getSliderPreferences().putFloat("soundeffectSlider",soundeffectSlider.getValue());
+        PreferencesManager.getSliderPreferences().putFloat("sfxSlider", sfxSlider.getValue());
         PreferencesManager.getSliderPreferences().putFloat("musicSlider",musicSlider.getValue());
         PreferencesManager.getSliderPreferences().flush();
     }
 
     private void loadSlider(){
-        soundeffectSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("soundeffectSlider",soundeffectSlider.getValue()));
+        sfxSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("sfxSlider", sfxSlider.getValue()));
         musicSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("musicSlider",musicSlider.getValue()));
-
     }
 
     @Override
@@ -244,4 +256,6 @@ public class OptionMenu implements Screen {
     public void dispose() {
         stage.dispose();
     }
+
+
 }

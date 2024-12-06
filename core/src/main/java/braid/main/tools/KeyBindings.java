@@ -1,6 +1,6 @@
 package braid.main.tools;
 
-import braid.main.screens.KeybindsScreen;
+import braid.main.screens.KeybindsMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -50,7 +50,7 @@ public class KeyBindings {
                 saveKeyBindings();
                 loadKeyBindings();
                 Gdx.input.setInputProcessor(null); // reset InputProcessor
-                KeybindsScreen.OverlayActive=false;
+                KeybindsMenu.OverlayActive=false;
                 return true;
             }
         });

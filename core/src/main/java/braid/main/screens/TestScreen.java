@@ -10,6 +10,7 @@ import braid.main.objects.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -34,6 +35,7 @@ public class TestScreen implements Screen {
     private final TextureAtlas atlas;
     public static boolean gameIsPaused;
 
+
     // Tools
     private final PlayerInputHandler inputHandler;
 
@@ -48,6 +50,9 @@ public class TestScreen implements Screen {
     private TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
+
+    // Music
+    private  Music Wintermusic;
 
     // Box2D variables
     private final World world;
@@ -93,6 +98,11 @@ public class TestScreen implements Screen {
         items =new  Array <Item>();
         itemsToSpawn = new PriorityQueue<ItemDef>();
 
+        // Setup Music
+        Wintermusic = Audiomanager.audiomanager.get("audio/music/background_music.mp3",Music.class);
+        Wintermusic.setLooping(true);
+        Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        Wintermusic.play();
 
         // Setup Game Camera
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
@@ -213,14 +223,20 @@ public class TestScreen implements Screen {
     public void pause() {
         // pause Game
         gameIsPaused = true;
+        Wintermusic.pause();
 
         // jumps to PauseScreen and saves Game state
-        game.setScreen(new PauseScreen(game,this));
+        game.setScreen(new PauseMenu(game,this));
     }
 
     @Override
     public void resume() {
         gameIsPaused = false;
+        Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        //System.out.println(Wintermusic.getVolume());
+        //System.out.println(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        Wintermusic.play();
+
     }
 
 
