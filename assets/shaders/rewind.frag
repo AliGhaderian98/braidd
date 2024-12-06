@@ -31,8 +31,7 @@ void main() {
     float grayscale = dot(c.rgb, vec3(0.299, 0.587, 0.114));
 
     // Desaturate: interpolate between original color and grayscale value
-    // The factor "0.5" can be adjusted to control the amount of desaturation
-    c.rgb = mix(c.rgb, vec3(grayscale), 0.5);  // 0.5 is the desaturation factor
+    c.rgb = mix(c.rgb, vec3(grayscale), 0.5);
 
     // Normalize accumulated color
     c = c / 9.5;

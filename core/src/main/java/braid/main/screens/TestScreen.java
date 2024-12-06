@@ -69,6 +69,7 @@ public class TestScreen implements Screen {
     private ShaderProgram activeShader;
     private FrameBuffer fbo;
     private SpriteBatch fboBatch;
+    private float time = 0f;
 
     // GameObject Variables
     private final Player player;
@@ -133,7 +134,7 @@ public class TestScreen implements Screen {
     private void setupShaders() {
         // define shader program
         String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
-        String fragmentShader = Gdx.files.internal("shaders/rewind.frag").readString();
+        String fragmentShader = Gdx.files.internal("shaders/crt-rewind.frag").readString();
         rewindShader = new ShaderProgram(vertexShader, fragmentShader);
         ShaderProgram.pedantic = false;
         if (!rewindShader.isCompiled()) {
@@ -169,6 +170,8 @@ public class TestScreen implements Screen {
     @Override
     public void render(float delta) {
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
+        time += delta;
+
         update(delta);
         inputHandler.handleInput();
 
@@ -184,8 +187,18 @@ public class TestScreen implements Screen {
         Texture fboTex = fbo.getColorBufferTexture();
 
         fboBatch.setShader(shader);
+
+
+
         fboBatch.begin();
         clearScreen();
+
+        if (activeShader != null) {
+            shader.setUniformf("u_time", time);
+            shader.setUniformf("u_resolution", gameCamera.getViewport().getScreenWidth(), gameCamera.getViewport().getScreenHeight());
+            shader.setUniformf("u_viewportOffset", gameCamera.getViewport().getScreenX(), gameCamera.getViewport().getScreenY());
+        }
+
         fboBatch.draw(fboTex,
             gameCamera.getViewport().getScreenX(),gameCamera.getViewport().getScreenY(),
             gameCamera.getViewport().getScreenWidth(), gameCamera.getViewport().getScreenHeight(),
