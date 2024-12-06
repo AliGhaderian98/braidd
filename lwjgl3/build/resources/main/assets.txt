@@ -32,3 +32,6 @@ maps/tilesets/sky.png
 maps/wintermap.tmx
 packedimages/sprites.atlas
 packedimages/sprites.png
+shaders/grey.frag
+shaders/rewind.frag
+shaders/standard.vert

@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -58,16 +59,16 @@ public class TestScreen implements Screen {
     private final Box2DDebugRenderer b2dr;
 
     // Rewind Control
-    private final Array<RewindController> rewindObjects;
+    public final Array<RewindController> rewindObjects;
 
     // Keys
     static int SHIFT = Input.Keys.SHIFT_LEFT;
 
     // Shaders
     private ShaderProgram rewindShader;
-    float time = 0;
-    Mesh screenMesh;
-    FrameBuffer frameBuffer;
+    private ShaderProgram activeShader;
+    private FrameBuffer fbo;
+    private SpriteBatch fboBatch;
 
     // GameObject Variables
     private final Player player;
@@ -122,44 +123,30 @@ public class TestScreen implements Screen {
         world.setContactListener(new WorldContactListener(player));
 
         // Initialise InputHandler
-        inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
+        //inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
+        inputHandler = new PlayerInputHandler(player,enemy,world,game, this);
 
         // Define Shader Programs
         setupShaders();
-
-        game.batch.setShader(rewindShader);
     }
 
     private void setupShaders() {
         // define shader program
         String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
-        String fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        String fragmentShader = Gdx.files.internal("shaders/rewind.frag").readString();
         rewindShader = new ShaderProgram(vertexShader, fragmentShader);
         ShaderProgram.pedantic = false;
         if (!rewindShader.isCompiled()) {
             throw new GdxRuntimeException("Shader compilation failed: " + rewindShader.getLog());
         }
 
-        // setup full screen mesh
-        float[] vertices = {
-            // x, y, u, v
-            -1, -1, 0, 0,  // bottom-left
-            1, -1, 1, 0,   // bottom-right
-            -1,  1, 0, 1,  // top-left
-            1,  1, 1, 1    // top-right
-        };
-
-        short[] indices = { 0, 1, 2, 1, 3, 2 };
-
-        screenMesh = new Mesh(true, 4, 6,
-            new VertexAttribute(VertexAttributes.Usage.Position, 2, "a_position"),
-            new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, "a_texCoord"));
-
-        screenMesh.setVertices(vertices);
-        screenMesh.setIndices(indices);
-
-        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        fboBatch = new SpriteBatch();
     }
+
+    public void setRewindShader() { activeShader = rewindShader; }
+
+    public void resetShader() { activeShader = null; }
 
     public void spawnItem(ItemDef idef) {
         itemsToSpawn.add(idef);
@@ -183,15 +170,27 @@ public class TestScreen implements Screen {
     public void render(float delta) {
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
+        inputHandler.handleInput();
 
-        frameBuffer.begin();
+        fbo.begin();
         clearScreen();
         renderWorld();
-        frameBuffer.end();
+        fbo.end();
 
-        applyPostprocessing();
+        applyPostProcessing(activeShader);
+    }
 
-        inputHandler.handleInput();
+    private void applyPostProcessing(ShaderProgram shader) {
+        Texture fboTex = fbo.getColorBufferTexture();
+
+        fboBatch.setShader(shader);
+        fboBatch.begin();
+        clearScreen();
+        fboBatch.draw(fboTex,
+            gameCamera.getViewport().getScreenX(),gameCamera.getViewport().getScreenY(),
+            gameCamera.getViewport().getScreenWidth(), gameCamera.getViewport().getScreenHeight(),
+            0,0,1,1);
+        fboBatch.end();
     }
 
     public void update(float dt) {
@@ -199,7 +198,6 @@ public class TestScreen implements Screen {
         //stop rendering if game is Paused
         if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
-            time+=dt;
 
             handleSpawningItems();
             // Update world physics
@@ -256,32 +254,11 @@ public class TestScreen implements Screen {
         game.batch.end();
     }
 
-    public void applyPostprocessing() {
-        Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
-        //frameBufferTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        clearScreen();
-        game.batch.begin();
-        game.batch.draw(frameBufferTexture, 0, 0, frameBufferTexture.getWidth(), frameBufferTexture.getHeight(),0,0,1,1);
-        game.batch.end();
-
-        /*
-
-        // apply shader to frame buffer
-        rewindShader.bind();
-        rewindShader.setUniformf("u_time", time);
-        rewindShader.setUniformf("u_resolution", Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        frameBufferTexture.bind(0);
-        screenMesh.render(rewindShader, GL20.GL_TRIANGLES);*/
-    }
 
     @Override
     public void resize(int width, int height) {
         gameCamera.resize(width, height);
-        if (frameBuffer != null) {
-            frameBuffer.dispose();
-        }
-        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
     @Override
@@ -321,8 +298,8 @@ public class TestScreen implements Screen {
         world.dispose();
         b2dr.dispose();
 
-        frameBuffer.dispose();
-        screenMesh.dispose();
+        fbo.dispose();
+        fboBatch.dispose();
     }
 
     public World getWorld() {

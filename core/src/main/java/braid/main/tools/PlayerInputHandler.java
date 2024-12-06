@@ -3,6 +3,7 @@ package braid.main.tools;
 import braid.main.RewindController;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import braid.main.screens.TestScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,16 +18,16 @@ public class PlayerInputHandler {
     private final Enemy enemy;
     private final World world;
     private final Game game;
-    private final Array<RewindController> rewindObjects;
+    private TestScreen screen;
     private boolean gameIsPaused;
 
 
-    public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
+    public PlayerInputHandler(Player player, Enemy enemy, World world, Game game,TestScreen screen) {
         this.player = player;
         this.enemy = enemy;
         this.world = world;
         this.game = game;
-        this.rewindObjects = rewindObjects;
+        this.screen = screen;
         this.gameIsPaused = false;
     }
 
@@ -86,23 +87,20 @@ public class PlayerInputHandler {
     private void handleRewind() {
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
-            for (RewindController r : rewindObjects) {
+            for (RewindController r : screen.rewindObjects) {
                 r.startRewinding();
             }
-            // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
+            // apply rewind shader
             if (player.getRewindController().hasRewindStorage()) {
-                player.setColor(Color.BLUE);
-                enemy.setColor(Color.BLUE);
+                screen.setRewindShader();
             } else {
-                player.setColor(Color.WHITE);
-                enemy.setColor(Color.WHITE);
+                screen.resetShader();
             }
         } else {
-            for (RewindController r : rewindObjects) {
+            for (RewindController r : screen.rewindObjects) {
                 r.stopRewinding();
             }
-            player.setColor(Color.WHITE);
-            enemy.setColor(Color.WHITE);
+            screen.resetShader();
         }
     }
 
