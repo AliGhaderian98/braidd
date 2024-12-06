@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -47,7 +48,7 @@ public class PauseMenu implements Screen {
 
         // different Fonts for different Lines on the Screen
         Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
 
         // Set up the whole space to write on.
         Table table = new Table();

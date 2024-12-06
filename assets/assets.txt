@@ -34,3 +34,4 @@ maps/tilesets/sky.png
 maps/wintermap.tmx
 packedimages/sprites.atlas
 packedimages/sprites.png
+textFonts/MenuTextFont.ttf
