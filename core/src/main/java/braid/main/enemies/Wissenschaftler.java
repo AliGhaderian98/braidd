@@ -6,11 +6,14 @@ import braid.main.objects.Player;
 import braid.main.screens.TestScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Wissenschaftler extends Enemy implements EnemyAI{
     private final Player player;
+    private float stateTimer = 0;
+
     public Wissenschaftler(World world, TestScreen screen, Player player) {
         super(world, screen);
         this.player = player;
@@ -20,15 +23,17 @@ public class Wissenschaftler extends Enemy implements EnemyAI{
 
         sprite = new Sprite(screen.getAtlas().findRegion("wissenschaftler"));
 
-        idle = new Animation<>(0.2f, screen.getAtlas().findRegions("wissenschaftler"), Animation.PlayMode.LOOP);
+        idle = new Animation<>(0.1f, screen.getAtlas().findRegions("wissenschaftler"), Animation.PlayMode.LOOP);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        sprite.setRegion(idle.getKeyFrame(0, false));
+        sprite.setRegion(idle.getKeyFrame(0, true));
     }
 
     public void update(float dt) {
         super.update(dt);
+        sprite.setRegion(getFrame(dt));
         attack();
     }
+
     public void defineBody() {
         BodyDef bdef = new BodyDef();
         bdef.position.set((Braid.V_WIDTH - 32) / Braid.PPM, 32 / Braid.PPM);
@@ -53,6 +58,14 @@ public class Wissenschaftler extends Enemy implements EnemyAI{
         Fixture headFixture = b2body.createFixture(headFdef);
         headFixture.setUserData(this);
     }
+
+    public TextureRegion getFrame(float dt){
+        // currently only has idle animation
+        stateTimer += dt;
+        return idle.getKeyFrame(stateTimer, true);
+    }
+
+
     @Override
     public void idle() {
 
