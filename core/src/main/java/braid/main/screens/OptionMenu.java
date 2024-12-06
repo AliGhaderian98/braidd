@@ -45,7 +45,8 @@ public class OptionMenu implements Screen {
         this.previusScreen = previusScreen;
         Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
-        isInFullscreen = false;
+        isInFullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", isInFullscreen));
+
 
 
         KeyBindings.loadKeyBindings();
@@ -219,6 +220,8 @@ public class OptionMenu implements Screen {
             Gdx.graphics.setWindowedMode(800,600);
             isInFullscreen = false;
         }
+        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",isInFullscreen);
+        PreferencesManager.getFullscreenPreferences().flush();
     }
 
     private void saveSlider(){
@@ -231,6 +234,7 @@ public class OptionMenu implements Screen {
         sfxSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("sfxSlider", sfxSlider.getValue()));
         musicSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("musicSlider",musicSlider.getValue()));
     }
+
 
     @Override
     public void resize(int i, int i1) {

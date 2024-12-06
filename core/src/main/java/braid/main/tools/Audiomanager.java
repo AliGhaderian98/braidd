@@ -1,6 +1,5 @@
 package braid.main.tools;
 
-import braid.main.screens.OptionMenu;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
