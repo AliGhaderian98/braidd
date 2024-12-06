@@ -9,11 +9,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
 public class B2WorldCreator {
@@ -37,8 +33,26 @@ public class B2WorldCreator {
 
             shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
             fdef.shape = shape;
-            body.createFixture(fdef);
+            Fixture groundFixture = body.createFixture(fdef);
+            groundFixture.setUserData(new UserData("Ground", this));
         }
+
+        MapLayer wallLayer = map.getLayers().get("Walls");
+        for (MapObject object : wallLayer.getObjects()) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+            fdef.shape = shape;
+            Fixture wallFixture = body.createFixture(fdef);
+            wallFixture.setUserData(new UserData("Wall", this));
+        }
+
 
         // Create Ladder Objects
         ladders = new Array<>();

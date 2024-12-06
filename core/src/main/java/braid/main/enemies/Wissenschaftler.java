@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.screens.TestScreen;
+import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -47,7 +48,7 @@ public class Wissenschaftler extends Enemy implements EnemyAI{
         fdef.shape = shape;
         fdef.friction = 1f;
         Fixture bodyFixture = b2body.createFixture(fdef);
-        bodyFixture.setUserData("EnemyBody");
+        bodyFixture.setUserData(new UserData("EnemyBody", this));
 
         // Create head collider
         FixtureDef headFdef = new FixtureDef();
@@ -56,7 +57,7 @@ public class Wissenschaftler extends Enemy implements EnemyAI{
         headFdef.shape = head;
         headFdef.friction = 1f;
         Fixture headFixture = b2body.createFixture(headFdef);
-        headFixture.setUserData(this);
+        headFixture.setUserData(new UserData("EnemyHead", this));
     }
 
     public TextureRegion getFrame(float dt){

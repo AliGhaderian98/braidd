@@ -101,6 +101,7 @@ public class TestScreen implements Screen {
         gameCamera.setMap(map);
 
         // Setup Enemy
+
         Enemy enemy1 = new Wissenschaftler(world, this, player);
         enemy1.setRewindController(new RewindController(new RewindableBody(enemy1.b2body, enemy1)));
         Enemy enemy2 = new PatrollingEnemy(world, this);
