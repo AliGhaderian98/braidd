@@ -32,7 +32,6 @@ public class WorldContactListener implements ContactListener {
             }
 
             Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
-            //if (enemyFixture.getUserData() instanceof Enemy enemy && !enemy.isDead()) {
             if ("EnemyBody".equals(enemyFixture.getUserData())) {
                 player.die();
             }

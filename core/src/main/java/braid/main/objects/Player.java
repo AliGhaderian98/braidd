@@ -198,6 +198,7 @@ public class Player extends DynamicGameObject {
         isAlive = false;
     }
 
+
     // Inputs
 
     public void moveRight() {
@@ -205,14 +206,17 @@ public class Player extends DynamicGameObject {
             b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
+
     public void moveLeft() {
         if (b2body.getLinearVelocity().x > -speed) {
             b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
+
     public void stopMovement() {
         b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y), b2body.getWorldCenter(), true);
     }
+
     public void climbUp() {
         currentState = AnimationState.CLIMBING;
         b2body.setGravityScale(0);
