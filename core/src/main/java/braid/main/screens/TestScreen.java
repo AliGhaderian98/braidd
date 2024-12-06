@@ -233,8 +233,6 @@ public class TestScreen implements Screen {
     public void resume() {
         gameIsPaused = false;
         Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
-        //System.out.println(Wintermusic.getVolume());
-        //System.out.println(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         Wintermusic.play();
 
     }
