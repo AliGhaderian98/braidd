@@ -10,7 +10,10 @@ import braid.main.objects.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -18,6 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.PriorityQueue;
@@ -59,6 +63,11 @@ public class TestScreen implements Screen {
     // Keys
     static int SHIFT = Input.Keys.SHIFT_LEFT;
 
+    // Shaders
+    private ShaderProgram rewindShader;
+    float time = 0;
+    Mesh screenMesh;
+    FrameBuffer frameBuffer;
 
     // GameObject Variables
     private final Player player;
@@ -112,8 +121,44 @@ public class TestScreen implements Screen {
 
         world.setContactListener(new WorldContactListener(player));
 
-        // Initialisiere den InputHandler
+        // Initialise InputHandler
         inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
+
+        // Define Shader Programs
+        setupShaders();
+
+        game.batch.setShader(rewindShader);
+    }
+
+    private void setupShaders() {
+        // define shader program
+        String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
+        String fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        rewindShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!rewindShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + rewindShader.getLog());
+        }
+
+        // setup full screen mesh
+        float[] vertices = {
+            // x, y, u, v
+            -1, -1, 0, 0,  // bottom-left
+            1, -1, 1, 0,   // bottom-right
+            -1,  1, 0, 1,  // top-left
+            1,  1, 1, 1    // top-right
+        };
+
+        short[] indices = { 0, 1, 2, 1, 3, 2 };
+
+        screenMesh = new Mesh(true, 4, 6,
+            new VertexAttribute(VertexAttributes.Usage.Position, 2, "a_position"),
+            new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, "a_texCoord"));
+
+        screenMesh.setVertices(vertices);
+        screenMesh.setIndices(indices);
+
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     }
 
     public void spawnItem(ItemDef idef) {
@@ -139,8 +184,12 @@ public class TestScreen implements Screen {
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         update(delta);
 
+        frameBuffer.begin();
         clearScreen();
         renderWorld();
+        frameBuffer.end();
+
+        applyPostprocessing();
 
         inputHandler.handleInput();
     }
@@ -150,6 +199,8 @@ public class TestScreen implements Screen {
         //stop rendering if game is Paused
         if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
+            time+=dt;
+
             handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);
@@ -187,26 +238,50 @@ public class TestScreen implements Screen {
 
     private void renderWorld() {
         renderer.setView(gameCamera.getCamera());
-
         renderer.render();
         b2dr.render(world, gameCamera.getCamera().combined);
-
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
 
+        // draw game objects
         game.batch.begin();
+
         player.getSprite().draw(game.batch);
         if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
             enemy.getSprite().draw(game.batch);
         }
-        game.batch.end();
 
         for(Item item :items)
             item.draw(game.batch);
+
+        game.batch.end();
+    }
+
+    public void applyPostprocessing() {
+        Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
+        //frameBufferTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        clearScreen();
+        game.batch.begin();
+        game.batch.draw(frameBufferTexture, 0, 0, frameBufferTexture.getWidth(), frameBufferTexture.getHeight(),0,0,1,1);
+        game.batch.end();
+
+        /*
+
+        // apply shader to frame buffer
+        rewindShader.bind();
+        rewindShader.setUniformf("u_time", time);
+        rewindShader.setUniformf("u_resolution", Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        frameBufferTexture.bind(0);
+        screenMesh.render(rewindShader, GL20.GL_TRIANGLES);*/
     }
 
     @Override
     public void resize(int width, int height) {
         gameCamera.resize(width, height);
+        if (frameBuffer != null) {
+            frameBuffer.dispose();
+        }
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
     }
 
     @Override
@@ -245,6 +320,9 @@ public class TestScreen implements Screen {
 
         world.dispose();
         b2dr.dispose();
+
+        frameBuffer.dispose();
+        screenMesh.dispose();
     }
 
     public World getWorld() {

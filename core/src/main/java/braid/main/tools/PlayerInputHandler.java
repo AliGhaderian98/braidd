@@ -20,7 +20,7 @@ public class PlayerInputHandler {
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
 
-    
+
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
         this.player = player;
         this.enemy = enemy;
@@ -92,13 +92,9 @@ public class PlayerInputHandler {
             // einfache Verfärbung der Sprites, um Rewind visuell deutlich zu machen
             if (player.getRewindController().hasRewindStorage()) {
                 player.setColor(Color.BLUE);
-            } else {
-                player.setColor(Color.WHITE);
-            }
-            if (enemy.getRewindController().hasRewindStorage()) {
                 enemy.setColor(Color.BLUE);
             } else {
-                //enemy.getSprite().setColor(Color.WHITE);
+                player.setColor(Color.WHITE);
                 enemy.setColor(Color.WHITE);
             }
         } else {
