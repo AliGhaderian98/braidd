@@ -26,7 +26,7 @@ float static_noise_intensity = 0.06;
 float aberration = 0.03;
 float brightness = 1.4;
 bool discolor = true;
-float vignette_intensity = 0.4;
+float vignette_intensity = 0.8;
 float vignette_opacity = 0.7;
 
 

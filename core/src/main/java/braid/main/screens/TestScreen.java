@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -70,6 +71,7 @@ public class TestScreen implements Screen {
     private FrameBuffer fbo;
     private SpriteBatch fboBatch;
     private float time = 0f;
+    private HUD rewindHUD;
 
     // GameObject Variables
     private final Player player;
@@ -143,6 +145,10 @@ public class TestScreen implements Screen {
 
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
         fboBatch = new SpriteBatch();
+
+        Sprite s = new Sprite(atlas.findRegion("rewind-symbol"));
+        s.setBounds(0,0,18,15);
+        rewindHUD = new HUD(game.batch, s);
     }
 
     public void setRewindShader() { activeShader = rewindShader; }
@@ -188,8 +194,6 @@ public class TestScreen implements Screen {
 
         fboBatch.setShader(shader);
 
-
-
         fboBatch.begin();
         clearScreen();
 
@@ -204,6 +208,29 @@ public class TestScreen implements Screen {
             gameCamera.getViewport().getScreenWidth(), gameCamera.getViewport().getScreenHeight(),
             0,0,1,1);
         fboBatch.end();
+
+        if (activeShader == rewindShader)
+            renderRewindHUD();
+    }
+
+  private void renderRewindHUD() {
+        // Save the previous OpenGL state
+        Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+
+        // Calculate black bar offsets (if any) from the FitViewport
+        float viewportX = rewindHUD.stage.getViewport().getScreenX();
+        float viewportY = rewindHUD.stage.getViewport().getScreenY();
+        float viewportWidth = rewindHUD.stage.getViewport().getScreenWidth();
+        float viewportHeight = rewindHUD.stage.getViewport().getScreenHeight();
+
+        // Set scissor to HUD's viewport to clip within bounds
+        Gdx.gl.glScissor((int) viewportX, (int) viewportY, (int) viewportWidth, (int) viewportHeight);
+
+        rewindHUD.stage.getViewport().apply();
+        rewindHUD.stage.draw();
+
+        // Restore OpenGL state
+        Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
     }
 
     public void update(float dt) {
@@ -271,6 +298,7 @@ public class TestScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gameCamera.resize(width, height);
+        rewindHUD.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
