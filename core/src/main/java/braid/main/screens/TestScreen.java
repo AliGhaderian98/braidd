@@ -5,7 +5,7 @@ import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
 import braid.main.enemies.PatrollingEnemy;
-import braid.main.enemies.Wissenschaftler;
+import braid.main.enemies.MadScientist;
 import braid.main.tools.*;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
@@ -64,7 +64,7 @@ public class TestScreen implements Screen {
 
     // GameObject Variables
     private final Player player;
-    private Array<Enemy> enemies;
+    private Array<Enemy> enemies = new Array<>();
     private Array <Item> items;
     private PriorityQueue <ItemDef> itemsToSpawn;
 
@@ -82,15 +82,18 @@ public class TestScreen implements Screen {
         map = mapLoader.load("maps/wintermap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
-        // setup Box2D world
-        world = new World(new Vector2(0, GRAVITY), true);
-        b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map);
+
 
         // Setup Player
+
+        // setup Box2D world
+        world = new World(new Vector2(0, GRAVITY), true);
+
         player = new Player(world, this);
         player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
 
+        b2dr = new Box2DDebugRenderer();
+        new B2WorldCreator(world, map, this);
         //
         items =new  Array <Item>();
         itemsToSpawn = new PriorityQueue<ItemDef>();
@@ -100,18 +103,8 @@ public class TestScreen implements Screen {
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
         gameCamera.setMap(map);
 
-        // Setup Enemy
 
-        Enemy enemy1 = new Wissenschaftler(world, this, player);
-        enemy1.setRewindController(new RewindController(new RewindableBody(enemy1.b2body, enemy1)));
-        Enemy enemy2 = new PatrollingEnemy(world, this);
-        enemy2.setRewindController(new RewindController(new RewindableBody(enemy2.b2body, enemy2)));
-        Enemy enemy3 = new Wissenschaftler(world, this, player);
-        enemy3.setRewindController(new RewindController(new RewindableBody(enemy3.b2body, enemy3)));
-        enemies = new Array<>();
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
+
 
         //Copy-Paste für Rewind:
         //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
@@ -125,7 +118,7 @@ public class TestScreen implements Screen {
         world.setContactListener(new WorldContactListener(player));
 
         // Initialisiere den InputHandler
-        inputHandler = new PlayerInputHandler(player,enemy1,world,game, rewindObjects);
+        inputHandler = new PlayerInputHandler(player, enemies.first(),world,game, rewindObjects);
     }
 
     public void spawnItem(ItemDef idef) {
@@ -168,8 +161,9 @@ public class TestScreen implements Screen {
 
             // Update Entities
             player.update(dt);
-            for (Enemy enemy : enemies)
+            for (Enemy enemy : enemies) {
                 enemy.update(dt);
+            }
 
             for(Item item : items)
                 item.update(dt);
@@ -217,6 +211,19 @@ public class TestScreen implements Screen {
 
         for(Item item :items)
             item.draw(game.batch);
+    }
+
+    public void spawnEnemy(String enemyType, float x, float y) {
+        if ("MadScientist".equals(enemyType)) {
+            addEnemy(new MadScientist(world, this, player, x,y));
+        } else if ("PatrollingEnemy".equals(enemyType)) {
+            addEnemy(new PatrollingEnemy(world, this, x, y));
+        }
+    }
+
+    private void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
     }
 
     @Override

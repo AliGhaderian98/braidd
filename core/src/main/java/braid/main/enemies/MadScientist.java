@@ -11,12 +11,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Wissenschaftler extends Enemy implements EnemyAI{
+public class MadScientist extends Enemy implements EnemyAI{
     private final Player player;
     private float stateTimer = 0;
 
-    public Wissenschaftler(World world, TestScreen screen, Player player) {
-        super(world, screen);
+    public MadScientist(World world, TestScreen screen, Player player, float x, float y) {
+        super(world, screen,x,y);
         this.player = player;
         defineBody();
 
@@ -79,10 +79,6 @@ public class Wissenschaftler extends Enemy implements EnemyAI{
             b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         } else if (getSprite().getX() > player.getSprite().getX()) {
             b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
-        } else {
-            if (player.isClimbing()) {
-                world.setGravity(new Vector2(0, 0));
-            }
         }
     }
 }

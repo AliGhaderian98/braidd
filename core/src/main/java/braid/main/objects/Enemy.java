@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.*;
  ***********/
 
 public abstract class Enemy extends DynamicGameObject{
+    private final float x,y;
 
     public enum AnimationState {
         DEAD,
@@ -29,11 +30,10 @@ public abstract class Enemy extends DynamicGameObject{
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, TestScreen screen) {
+    public Enemy(World world, TestScreen screen, float x, float y) {
         super(world);
-
-
-
+        this.x = x;
+        this.y = y;
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -93,4 +93,12 @@ public abstract class Enemy extends DynamicGameObject{
 
     //Getter
     public boolean isDead() { return currentState == AnimationState.DEAD; }
+
+    public void setPosition() {
+
+    }
+
+    public float getX() { return x;}
+    public float getY() { return y;}
+
 }

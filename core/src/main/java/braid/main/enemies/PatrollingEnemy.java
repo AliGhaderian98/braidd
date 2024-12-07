@@ -11,8 +11,9 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class PatrollingEnemy extends Enemy implements EnemyAI{
     private int direction = 1;
-    public PatrollingEnemy(World world, TestScreen screen) {
-        super(world, screen);
+
+    public PatrollingEnemy(World world, TestScreen screen, float x, float y) {
+        super(world, screen,x,y);
         defineBody();
         createsideSensor();
         createEdgeSensor();
@@ -30,9 +31,10 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
         super.update(dt);
         idle();
     }
+
     public void defineBody() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set((Braid.V_WIDTH - 32) / Braid.PPM, 32 / Braid.PPM);
+        bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM); // todo: position richtig initialisieren
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -54,6 +56,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
         Fixture headFixture = b2body.createFixture(headFdef);
         headFixture.setUserData(new UserData("EnemyHead", this));
     }
+
     @Override
     public void idle() {
         b2body.applyLinearImpulse(new Vector2(direction*getSpeed() * .6f, 0), b2body.getWorldCenter(), true);
@@ -79,14 +82,15 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
     public void createsideSensor() {
         // Create side sensors
         PolygonShape sideSensorShape = new PolygonShape();
-        sideSensorShape.setAsBox(2 / Braid.PPM, 4 / Braid.PPM, new Vector2(10 / Braid.PPM * direction, 0), 0);
+        sideSensorShape.setAsBox(7 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 0), 0);
 
         FixtureDef sideSensorDef = new FixtureDef();
         sideSensorDef.shape = sideSensorShape;
-        sideSensorDef.isSensor = true; // Sensors don't influence physics directly
+        sideSensorDef.isSensor = true;
 
         Fixture sideSensor = b2body.createFixture(sideSensorDef);
         sideSensor.setUserData(new UserData("SideSensor", this));
     }
+
     public void changeDirection() { direction *= -1; }
 }

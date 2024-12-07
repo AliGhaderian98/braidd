@@ -1,0 +1,27 @@
+package braid.main.enemies;
+
+import braid.main.objects.Enemy;
+import braid.main.screens.TestScreen;
+import com.badlogic.gdx.physics.box2d.World;
+
+public class UnhingedEnemy extends Enemy implements EnemyAI {
+
+    public UnhingedEnemy(World world, TestScreen screen, float x, float y) {
+        super(world, screen, x, y);
+    }
+
+    @Override
+    public void idle() {
+
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    public void defineBody() {
+
+    }
+}
