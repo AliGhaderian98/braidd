@@ -71,7 +71,7 @@ public class TestScreen implements Screen {
     private FrameBuffer fbo;
     private SpriteBatch fboBatch;
     private float time = 0f;
-    private HUD rewindHUD;
+    private RewindHUD rewindHUD;
 
     // GameObject Variables
     private final Player player;
@@ -148,7 +148,7 @@ public class TestScreen implements Screen {
 
         Sprite s = new Sprite(atlas.findRegion("rewind-symbol"));
         s.setBounds(0,0,18,15);
-        rewindHUD = new HUD(game.batch, s);
+        rewindHUD = new RewindHUD(game.batch, s);
     }
 
     public void setRewindShader() { activeShader = rewindShader; }

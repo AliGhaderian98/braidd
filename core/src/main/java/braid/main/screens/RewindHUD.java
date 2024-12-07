@@ -14,14 +14,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 
-public class HUD implements Disposable {
+public class RewindHUD implements Disposable {
     public Stage stage;
     private Viewport viewport;
     private Camera camera;
 
     Image rewindImage;
 
-    public HUD(SpriteBatch sb, Sprite sprite) {
+    public RewindHUD(SpriteBatch sb, Sprite sprite) {
         rewindImage = new Image(sprite);
 
         camera = new OrthographicCamera();
