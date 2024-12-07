@@ -77,7 +77,6 @@ public class WorldContactListener implements ContactListener {
             if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()))  {
                 PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
                 enemy.changeDirection();
-                System.out.println("AUFGERUFEN... aber direction ändert sich nicht?");
             }
         }
     }

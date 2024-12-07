@@ -119,6 +119,9 @@ public class TestScreen implements Screen {
 
         // Initialisiere den InputHandler
         inputHandler = new PlayerInputHandler(player, enemies.first(),world,game, rewindObjects);
+        for (Enemy enemy : enemies) {
+            System.out.println(enemy.b2body.getPosition().x + " " + enemy.b2body.getPosition().y);
+        }
     }
 
     public void spawnItem(ItemDef idef) {
@@ -161,6 +164,7 @@ public class TestScreen implements Screen {
 
             // Update Entities
             player.update(dt);
+
             for (Enemy enemy : enemies) {
                 enemy.update(dt);
             }

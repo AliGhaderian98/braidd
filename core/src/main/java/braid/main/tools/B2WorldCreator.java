@@ -27,7 +27,7 @@ public class B2WorldCreator {
         bdef = new BodyDef();
         shape = new PolygonShape();
         fdef = new FixtureDef();
-        
+
 
         spawnGround();
         spawnWalls();
@@ -88,8 +88,9 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             // Position of the enemy
-            float x = (rect.getX() + rect.getWidth() / 2) / Braid.PPM;
-            float y = (rect.getY() + rect.getHeight() / 2) / Braid.PPM;
+            float x = (rect.getX() + rect.getWidth() / 2);
+            float y = (rect.getY() + rect.getHeight() / 2);
+            System.out.println(x + " " + y);
 
             // Type of the enemy
             String type = (String) object.getProperties().get("type");

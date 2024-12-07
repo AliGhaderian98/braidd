@@ -37,7 +37,7 @@ public class MadScientist extends Enemy implements EnemyAI{
 
     public void defineBody() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set((Braid.V_WIDTH - 32) / Braid.PPM, 32 / Braid.PPM);
+        bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

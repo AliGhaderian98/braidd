@@ -15,7 +15,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
     public PatrollingEnemy(World world, TestScreen screen, float x, float y) {
         super(world, screen,x,y);
         defineBody();
-        createsideSensor();
+        createSideSensor();
         createEdgeSensor();
 
         speed = 0.15f;
@@ -34,7 +34,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
 
     public void defineBody() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM); // todo: position richtig initialisieren
+        bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -67,19 +67,34 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
 
     }
 
+
     public void createEdgeSensor() {
-        PolygonShape edgeSensorShape = new PolygonShape();
-        edgeSensorShape.setAsBox(2 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM * direction, -6 / Braid.PPM), 0);
+        // Sensor for the left side
+        PolygonShape leftEdgeSensorShape = new PolygonShape();
+        leftEdgeSensorShape.setAsBox(2 / Braid.PPM, 1 / Braid.PPM, new Vector2(-6 / Braid.PPM, -8 / Braid.PPM), 0);
 
-        FixtureDef edgeSensorDef = new FixtureDef();
-        edgeSensorDef.shape = edgeSensorShape;
-        edgeSensorDef.isSensor = true;
+        FixtureDef leftEdgeSensorDef = new FixtureDef();
+        leftEdgeSensorDef.shape = leftEdgeSensorShape;
+        leftEdgeSensorDef.isSensor = true;
 
-        Fixture edgeSensor = b2body.createFixture(edgeSensorDef);
-        edgeSensor.setUserData(new UserData("EdgeSensor", this));
+        Fixture leftEdgeSensor = b2body.createFixture(leftEdgeSensorDef);
+        leftEdgeSensor.setUserData(new UserData("EdgeSensor", this));
+
+        // Sensor for the right side
+        PolygonShape rightEdgeSensorShape = new PolygonShape();
+        rightEdgeSensorShape.setAsBox(2 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM, -8 / Braid.PPM), 0);
+
+        FixtureDef rightEdgeSensorDef = new FixtureDef();
+        rightEdgeSensorDef.shape = rightEdgeSensorShape;
+        rightEdgeSensorDef.isSensor = true;
+
+        Fixture rightEdgeSensor = b2body.createFixture(rightEdgeSensorDef);
+        rightEdgeSensor.setUserData(new UserData("EdgeSensor", this));
     }
 
-    public void createsideSensor() {
+
+
+    public void createSideSensor() {
         // Create side sensors
         PolygonShape sideSensorShape = new PolygonShape();
         sideSensorShape.setAsBox(7 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 0), 0);
