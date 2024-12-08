@@ -13,6 +13,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -40,6 +41,7 @@ public class TestScreen implements Screen {
     private final TextureAtlas atlas;
     public static boolean gameIsPaused;
 
+
     // Tools
     private final PlayerInputHandler inputHandler;
 
@@ -50,10 +52,14 @@ public class TestScreen implements Screen {
     // Camera
     private final GameCamera gameCamera;
 
+
     // Map
     private TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
+
+    // Music
+    private final Music Wintermusic;
 
     // Box2D variables
     private final World world;
@@ -85,6 +91,7 @@ public class TestScreen implements Screen {
         atlas = new TextureAtlas("packedimages/sprites.atlas");
         this.game = game;
 
+        // SetupKeybindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
 
@@ -106,6 +113,11 @@ public class TestScreen implements Screen {
         items =new  Array <Item>();
         itemsToSpawn = new PriorityQueue<ItemDef>();
 
+        // Setup Music
+        Wintermusic = Audiomanager.audiomanager.get("audio/music/background_music.mp3",Music.class);
+        Wintermusic.setLooping(true);
+        Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        Wintermusic.play();
 
         // Setup Game Camera
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
@@ -303,17 +315,23 @@ public class TestScreen implements Screen {
     }
 
     @Override
+
     public void pause() {
         // pause Game
         gameIsPaused = true;
+        Wintermusic.pause();
 
         // jumps to PauseScreen and saves Game state
-        game.setScreen(new PauseScreen(game,this));
+        game.setScreen(new PauseMenu(game,this));
     }
 
     @Override
     public void resume() {
+        KeyBindings.loadKeyBindings();
         gameIsPaused = false;
+        Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        Wintermusic.play();
+
     }
 
 

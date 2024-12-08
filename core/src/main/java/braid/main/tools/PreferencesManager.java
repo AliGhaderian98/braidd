@@ -20,4 +20,10 @@ public class PreferencesManager {
         }
         return SliderPreferences;
     }
+    public static Preferences getFullscreenPreferences(){
+        if (SliderPreferences == null) {
+            SliderPreferences = Gdx.app.getPreferences("FullscreenPreferences");
+        }
+        return SliderPreferences;
+    }
 }

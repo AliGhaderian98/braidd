@@ -1,11 +1,14 @@
 package braid.main.screens;
 
 import braid.main.Braid;
+import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
+import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,7 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class PauseScreen implements Screen {
+public class PauseMenu implements Screen {
 
     private final Stage stage;
     private final Game game;
@@ -27,19 +30,25 @@ public class PauseScreen implements Screen {
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
 
+    // Sound
+    private final Sound menuSound;
 
-    public PauseScreen(Game game, TestScreen previusScreen){
+    public PauseMenu(Game game, TestScreen previusScreen){
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previusScreen;
         Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
 
+        // Setup Keybinding
         KeyBindings.loadKeyBindings();
+
+        // Setup Sound
+        menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // different Fonts for different Lines on the Screen
         Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
 
         // Set up the whole space to write on.
         Table table = new Table();
@@ -98,18 +107,22 @@ public class PauseScreen implements Screen {
     private void handleInput() {
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))){
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex + 1) % menuLabels.size;
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex - 1 + menuLabels.size) % menuLabels.size;
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
-            TestScreen.gameIsPaused = false;
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            previousScreen.resume();
             game.setScreen(previousScreen);
             dispose();
         }
@@ -132,7 +145,7 @@ public class PauseScreen implements Screen {
         Label selectedLabel = menuLabels.get(selectedIndex);
 
         if (selectedLabel == Resume) {
-            TestScreen.gameIsPaused = false;
+            previousScreen.resume();
             game.setScreen(previousScreen);
             dispose();
 

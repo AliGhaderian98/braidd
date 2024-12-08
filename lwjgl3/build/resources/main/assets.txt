@@ -1,6 +1,8 @@
 Slider/skin.atlas
 Slider/slider_background.png
 Slider/slider_knob.png
+audio/music/background_music.mp3
+audio/sound/menuSound.mp3
 libgdx.png
 löwe.png
 maps/1_Industrial_Tileset_1.tsx
@@ -32,7 +34,4 @@ maps/tilesets/sky.png
 maps/wintermap.tmx
 packedimages/sprites.atlas
 packedimages/sprites.png
-shaders/crt-rewind.frag
-shaders/grey.frag
-shaders/rewind.frag
-shaders/standard.vert
+textFonts/MenuTextFont.ttf

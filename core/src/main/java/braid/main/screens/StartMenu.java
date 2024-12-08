@@ -2,7 +2,7 @@ package braid.main.screens;
 
 
 import braid.main.Braid;
-import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.awt.*;
-
 
 public class StartMenu extends ScreenAdapter {
     private  Stage stage;
@@ -33,7 +31,7 @@ public class StartMenu extends ScreenAdapter {
     @Override
     public void show() {
 
-
+        loadDisplayseedings();
         Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         Gdx.input.setInputProcessor(stage);
@@ -54,11 +52,20 @@ public class StartMenu extends ScreenAdapter {
         stage.addActor(table);
 
         table.add(startButton).pad(10);
+
+    }
+
+    private void loadDisplayseedings(){
+        boolean fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
+        if (fullscreen){
+            Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+        }
     }
 
     private void startGame() {
         game.setScreen(new TestScreen((Braid) game));
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -71,10 +78,12 @@ public class StartMenu extends ScreenAdapter {
         stage.act(delta);
         stage.draw();
     }
+
     @Override
     public void resize(int width, int hight) {
         stage.getViewport().update(width, hight, true);
     }
+
     @Override
     public void hide() {
         stage.dispose();

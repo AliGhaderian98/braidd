@@ -32,8 +32,6 @@ public class PlayerInputHandler {
     }
 
     public void handleInput() {
-        KeyBindings.loadKeyBindings();
-
         if(!player.getRewindController().isRewinding()) {
             handleMovement();
             handleJumping();

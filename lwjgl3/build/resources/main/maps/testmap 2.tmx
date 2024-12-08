@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="5">
+ <tileset firstgid="1" source="sheet.tsx"/>
+ <tileset firstgid="137" source="schwebebahn_1.tsx"/>
+ <layer id="4" name="background" width="15" height="10" tintcolor="#ffffff">
+  <data encoding="base64" compression="zlib">
+   eJxLYmBgSBrFo5jKGADDrTlt
+  </data>
+ </layer>
+ <layer id="5" name="background elements" width="15" height="10" opacity="0.6">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPOoG4C4i7gbgHiHuBuA+I+3Gol0BiTwbiKUA8FYinAfF0IJ4BxDNx6NVEYs8F4nlAPB+IFwDxQiBeBMSLofJmaHqtCPgDGbij8b1J0BuBxo8hQW8mGj+XBL3ooI4CvfQAAIOpD5o=
+  </data>
+ </layer>
+ <layer id="2" name="ground" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1ARSQCxNpl4ZIJbDIWePRSwFi16YujIgLgdiTgqwLAUYAOvLBLM=
+  </data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="1" x="0" y="128" width="240" height="32"/>
+  <object id="2" x="144" y="80" width="32" height="48"/>
+ </objectgroup>
+</map>
