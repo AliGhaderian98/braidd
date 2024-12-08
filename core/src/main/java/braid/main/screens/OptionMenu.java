@@ -23,7 +23,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-//todo: fullscreen einstellung speichern
 public class OptionMenu implements Screen {
 
     private final TestScreen previusScreen;
@@ -38,8 +37,8 @@ public class OptionMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    Slider musicSlider;
-    Slider sfxSlider;
+    private final Slider musicSlider;
+    private final Slider sfxSlider;
 
     public OptionMenu(Game game, TestScreen previusScreen) {
         // Setup Screen
@@ -64,16 +63,19 @@ public class OptionMenu implements Screen {
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(knobTexture));
 
-        sliderStyle.background.setMinHeight(5);
-        sliderStyle.background.setMinWidth(1000);
-        sliderStyle.knob.setMinHeight(5);
-        sliderStyle.knob.setMinWidth(10);
+        sliderStyle.background.setMinHeight(10);
+        sliderStyle.background.setMinWidth(10);
+        System.out.println(sliderStyle.background.getMinWidth());
+        sliderStyle.background.setMinWidth(20);
+        System.out.println(sliderStyle.background.getMinWidth());
+
+        sliderStyle.knob.setMinHeight(10);
+        sliderStyle.knob.setMinWidth(20);
 
 
         musicSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
         sfxSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
         musicSlider.setValue(8);
-        musicSlider.setSize(1000,100);
         sfxSlider.setValue(8);
 
         //  Create Table
@@ -107,9 +109,7 @@ public class OptionMenu implements Screen {
 
 
         // Setup Table
-        table.add(Options).expandX();
-        table.row();
-        table.add(Resolution).expandX().padTop(10f);
+        table.add(Options);
         table.row();
         table.add(Fullscreen);
         table.row();
