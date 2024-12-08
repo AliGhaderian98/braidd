@@ -78,6 +78,7 @@ public class TestScreen implements Screen {
         atlas = new TextureAtlas("packedimages/sprites.atlas");
         this.game = game;
 
+        // SetupKeybindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
 
