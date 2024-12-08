@@ -9,9 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,6 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import static com.badlogic.gdx.graphics.Color.GOLD;
+import static com.badlogic.gdx.graphics.Color.toFloatBits;
 
 public class PauseMenu implements Screen {
 
@@ -37,7 +38,9 @@ public class PauseMenu implements Screen {
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previusScreen;
-        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
+        viewport.apply();
+
         stage = new Stage(viewport,((Braid) game).batch);
 
         // Setup Keybinding
@@ -47,7 +50,7 @@ public class PauseMenu implements Screen {
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // different Fonts for different Lines on the Screen
-        Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(),Braid.BUWColor);
         Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
 
         // Set up the whole space to write on.
@@ -133,7 +136,7 @@ public class PauseMenu implements Screen {
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                label.setColor(Color.YELLOW); // selected
+                label.setColor(Braid.BUWColor); // selected
             } else {
                 label.setColor(Color.WHITE); // not selected
             }

@@ -11,35 +11,37 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class StartMenu extends ScreenAdapter {
-    private  Stage stage;
-    private  Skin skin;
+    private final Stage stage;
     private final Game game;
 
     public StartMenu(Game game){
         this.game = game;
-    }
-
-    @Override
-    public void show() {
-
+        
+        // load Keybindings
         loadDisplayseedings();
-        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
+
+        // Setup Viewport
+        Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
-        Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
 
+        // Setup Button
+        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
         TextButton startButton = new TextButton("Start", skin);
 
+        // Setup InputProcessor
+        Gdx.input.setInputProcessor(stage);
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -47,11 +49,12 @@ public class StartMenu extends ScreenAdapter {
             }
         });
 
+        // Setup Table
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
-        table.add(startButton).pad(10);
+        table.add(startButton);
 
     }
 

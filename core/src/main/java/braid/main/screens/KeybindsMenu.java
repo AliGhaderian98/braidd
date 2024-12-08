@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -52,8 +53,8 @@ public class KeybindsMenu implements Screen {
         table.setFillParent(true);
 
         // Setup Label styles for Title and Options
-        Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
 
         // Setup Title and Options for Screen
         Label Keybindings = new Label("Keybindings", TitelFont);
@@ -172,7 +173,7 @@ public class KeybindsMenu implements Screen {
                 if(selectedLabel == ResetKeybindings){
                     label.setColor(Color.RED); // selected and Label is ResetKeybindings
                 } else {
-                    label.setColor(Color.YELLOW); // selected
+                    label.setColor(Braid.BUWColor); // selected
                 }
             } else {
                 label.setColor(Color.WHITE); // not selected

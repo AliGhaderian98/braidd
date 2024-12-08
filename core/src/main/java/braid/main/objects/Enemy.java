@@ -53,7 +53,7 @@ public class Enemy extends DynamicGameObject{
 
     public void defineBody() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set((Braid.V_WIDTH - 32) / Braid.PPM, 32 / Braid.PPM);
+        bdef.position.set(180 / Braid.PPM, 32 / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

@@ -26,6 +26,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.PriorityQueue;
 
@@ -45,9 +47,6 @@ public class TestScreen implements Screen {
     // Tools
     private final PlayerInputHandler inputHandler;
 
-    // Screen
-    private final int worldWidth = Braid.V_WIDTH;
-    private final int worldHeight = Braid.V_HEIGHT;
 
     // Camera
     private final GameCamera gameCamera;
@@ -120,8 +119,9 @@ public class TestScreen implements Screen {
         Wintermusic.play();
 
         // Setup Game Camera
-        gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
+        gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
+
 
         // Setup Enemy
         enemy = new Enemy(world, this);

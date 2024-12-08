@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -62,13 +64,16 @@ public class OptionMenu implements Screen {
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(knobTexture));
 
-        sliderStyle.background.setMinHeight(3);
-        sliderStyle.knob.setMinHeight(3);
-        sliderStyle.knob.setMinWidth(3);
+        sliderStyle.background.setMinHeight(5);
+        sliderStyle.background.setMinWidth(1000);
+        sliderStyle.knob.setMinHeight(5);
+        sliderStyle.knob.setMinWidth(10);
+
 
         musicSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
         sfxSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
         musicSlider.setValue(8);
+        musicSlider.setSize(1000,100);
         sfxSlider.setValue(8);
 
         //  Create Table
@@ -78,8 +83,8 @@ public class OptionMenu implements Screen {
 
 
         // Setup Label styles for Title and Options
-        Label.LabelStyle TitelFont = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(new BitmapFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
 
 
         // Setup Title and Options
@@ -175,7 +180,7 @@ public class OptionMenu implements Screen {
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                label.setColor(Color.YELLOW); // selected
+                label.setColor(Braid.BUWColor); // selected
                 currentLabel = label;
             } else {
                 label.setColor(Color.WHITE); // not selected

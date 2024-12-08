@@ -8,6 +8,7 @@ import braid.main.tools.Audiomanager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Map;
@@ -21,10 +22,12 @@ import java.util.Map;
  */
 public class Braid extends Game {
 
-  public static final int V_WIDTH = 240; // alt: 240
-  public static final int V_HEIGHT = 160; // alt: 160
+  // Virtual Resolution
+  public static final int V_WIDTH = 3840; // alt: 240
+  public static final int V_HEIGHT = 2160; // alt: 160
   public static final float PPM = 100;
 
+  public static final Color BUWColor =  new Color(153f / 255f, 182f / 255f, 66f / 255f, 1);
 
 
   public SpriteBatch batch;
@@ -32,7 +35,7 @@ public class Braid extends Game {
   @Override
   public void create() {
 
-    Gdx.graphics.setWindowedMode(800, 600);
+    Gdx.graphics.setWindowedMode(1280, 720);
     batch = new SpriteBatch();
     Audiomanager.audiomanager();
     setScreen(new StartMenu(this));

@@ -9,7 +9,7 @@ public class TextFontManager {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("textFonts/MenuTextFont.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 10;
+        parameter.size = 150;
         BitmapFont font = generator.generateFont(parameter);
         generator.dispose();
 
