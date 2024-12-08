@@ -20,7 +20,7 @@ public class PlayerInputHandler {
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
 
-    
+
     public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
         this.player = player;
         this.enemy = enemy;
@@ -31,8 +31,6 @@ public class PlayerInputHandler {
     }
 
     public void handleInput() {
-        KeyBindings.loadKeyBindings();
-
         if(!player.getRewindController().isRewinding()) {
             handleMovement();
             handleJumping();

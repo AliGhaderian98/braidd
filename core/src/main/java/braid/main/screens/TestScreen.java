@@ -46,13 +46,14 @@ public class TestScreen implements Screen {
     // Camera
     private final GameCamera gameCamera;
 
+
     // Map
     private TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
 
     // Music
-    private  Music Wintermusic;
+    private final Music Wintermusic;
 
     // Box2D variables
     private final World world;
@@ -220,6 +221,7 @@ public class TestScreen implements Screen {
     }
 
     @Override
+
     public void pause() {
         // pause Game
         gameIsPaused = true;
@@ -231,6 +233,7 @@ public class TestScreen implements Screen {
 
     @Override
     public void resume() {
+        KeyBindings.loadKeyBindings();
         gameIsPaused = false;
         Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         Wintermusic.play();
