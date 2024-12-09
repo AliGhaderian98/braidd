@@ -28,7 +28,7 @@ public class OptionMenu implements Screen {
     private final TestScreen previusScreen;
     private final Stage stage;
     private final Game game;
-    private final Label Resolution, Fullscreen, Music, Soundeffekt, Keybindings;
+    private final Label Fullscreen, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
     private boolean isInFullscreen;
@@ -64,11 +64,7 @@ public class OptionMenu implements Screen {
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(knobTexture));
 
         sliderStyle.background.setMinHeight(10);
-        sliderStyle.background.setMinWidth(10);
-        System.out.println(sliderStyle.background.getMinWidth());
         sliderStyle.background.setMinWidth(20);
-        System.out.println(sliderStyle.background.getMinWidth());
-
         sliderStyle.knob.setMinHeight(10);
         sliderStyle.knob.setMinWidth(20);
 
@@ -92,7 +88,6 @@ public class OptionMenu implements Screen {
         // Setup Title and Options
         Label Options = new Label("Options", TitelFont);
         Options.setFontScale(2);
-        Resolution = new Label("Resolution", SelectionFont);
         Fullscreen = new Label("Fullscreen", SelectionFont);
         Music = new Label("Music", SelectionFont);
         Soundeffekt = new Label("Sound Effects", SelectionFont);
@@ -103,23 +98,22 @@ public class OptionMenu implements Screen {
 
         // fill Array with Labels to target a Label
         menuLabels = new Array<>();
-        menuLabels.add(Resolution,Fullscreen,Music, Soundeffekt);
-        menuLabels.add(Keybindings);
+        menuLabels.add(Music, Soundeffekt,Fullscreen, Keybindings);
 
 
 
         // Setup Table
         table.add(Options);
         table.row();
-        table.add(Fullscreen);
-        table.row();
         table.add(Music);
         table.row();
-        table.add(musicSlider);
+        table.add(musicSlider).width(500);
         table.row();
-        table.add(Soundeffekt);
+        table.add(Soundeffekt).padTop(50);
         table.row();
-        table.add(sfxSlider);
+        table.add(sfxSlider).width(500);
+        table.row();
+        table.add(Fullscreen).padTop(50);
         table.row();
         table.add(Keybindings);
         loadSlider();
@@ -192,10 +186,7 @@ public class OptionMenu implements Screen {
         // execute yellow targeted Option
         Label selectedLabel = menuLabels.get(selectedIndex);
 
-        if (selectedLabel == Resolution) {
-            // TODO Resolution Drop down menu
-
-        } else if (selectedLabel == Fullscreen) {
+        if (selectedLabel == Fullscreen) {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
