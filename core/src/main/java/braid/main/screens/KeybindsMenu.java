@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -32,6 +33,9 @@ public class KeybindsMenu implements Screen {
     private int selectedIndex = 0;
     public static boolean OverlayActive;
 
+    int width;
+    int height;
+
     // Sound
     private final Sound menuSound;
 
@@ -39,10 +43,14 @@ public class KeybindsMenu implements Screen {
         // Setup Screen
         this.game = game;
         this.previusScreen = previusScreen;
-        Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
 
         mainStage = new Stage(viewport,((Braid) game).batch);
         Overlay = new Stage(viewport,((Braid) game).batch);
+
+        // Setup ScreenRatio
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
 
         // Setup Sound
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
@@ -133,6 +141,7 @@ public class KeybindsMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         updateKeybindingLabel();
         handleInput();
+        updateScreenRatio();
         if(OverlayActive){
             Overlay.draw();
         }else{
@@ -173,10 +182,10 @@ public class KeybindsMenu implements Screen {
                 if(selectedLabel == ResetKeybindings){
                     label.setColor(Color.RED); // selected and Label is ResetKeybindings
                 } else {
-                    label.setColor(Braid.BUWColor); // selected
+                    label.setColor(Color.WHITE); // selected
                 }
             } else {
-                label.setColor(Color.WHITE); // not selected
+                label.setColor(Color.GRAY); // not selected
             }
         }
     }
@@ -220,7 +229,14 @@ public class KeybindsMenu implements Screen {
 
     @Override
     public void resize(int i, int i1) {
+        mainStage.getViewport().update(i,i1,true);
+        Overlay.getViewport().update(i,i1,true);
+    }
 
+    public void updateScreenRatio(){
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+        resize(width,height);
     }
 
     @Override
@@ -241,5 +257,6 @@ public class KeybindsMenu implements Screen {
     @Override
     public void dispose() {
         mainStage.dispose();
+        Overlay.dispose();
     }
 }

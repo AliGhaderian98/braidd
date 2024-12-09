@@ -15,8 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.*;
 
 import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.toFloatBits;
@@ -31,6 +30,9 @@ public class PauseMenu implements Screen {
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
 
+    int width;
+    int height;
+
     // Sound
     private final Sound menuSound;
 
@@ -38,10 +40,14 @@ public class PauseMenu implements Screen {
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previusScreen;
-        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
+        Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
         viewport.apply();
 
         stage = new Stage(viewport,((Braid) game).batch);
+
+        // Setup ScreenRatio
+         width = Gdx.graphics.getWidth();
+         height = Gdx.graphics.getHeight();
 
         // Setup Keybinding
         KeyBindings.loadKeyBindings();
@@ -103,6 +109,7 @@ public class PauseMenu implements Screen {
         Gdx.gl.glClearColor( 0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
+        updateScreenRatio();
         stage.draw();
 
 
@@ -136,9 +143,9 @@ public class PauseMenu implements Screen {
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                label.setColor(Braid.BUWColor); // selected
+                label.setColor(Color.WHITE); // selected
             } else {
-                label.setColor(Color.WHITE); // not selected
+                label.setColor(Color.GRAY); // not selected
             }
         }
     }
@@ -170,7 +177,13 @@ public class PauseMenu implements Screen {
     }
     @Override
     public void resize(int i, int i1) {
+        stage.getViewport().update(i,i1,true);
+    }
 
+    public void updateScreenRatio(){
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+        resize(width,height);
     }
 
     @Override

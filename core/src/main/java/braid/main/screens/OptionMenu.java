@@ -13,13 +13,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -34,6 +33,9 @@ public class OptionMenu implements Screen {
     private boolean isInFullscreen;
     private  Label  currentLabel;
 
+    int width;
+    int height;
+
     // Sound
     private final Sound menuSound;
 
@@ -44,11 +46,13 @@ public class OptionMenu implements Screen {
         // Setup Screen
         this.game = game;
         this.previusScreen = previusScreen;
-        Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         isInFullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", isInFullscreen));
 
-
+        // Setup ScreenRatio
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
 
         KeyBindings.loadKeyBindings();
 
@@ -136,6 +140,7 @@ public class OptionMenu implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
+        updateScreenRatio();
         stage.draw();
     }
 
@@ -174,10 +179,23 @@ public class OptionMenu implements Screen {
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                label.setColor(Braid.BUWColor); // selected
+                label.setColor(Color.WHITE); // selected
                 currentLabel = label;
             } else {
-                label.setColor(Color.WHITE); // not selected
+                label.setColor(Color.GRAY); // not selected
+            }
+
+            // mark Slider if the Label is selected
+            if (currentLabel == Music){
+                musicSlider.setColor(Color.WHITE);
+                sfxSlider.setColor(Color.GRAY);
+            }else if(currentLabel == Soundeffekt){
+                sfxSlider.setColor(Color.WHITE);
+                musicSlider.setColor(Color.GRAY);
+
+            }else {
+                musicSlider.setColor(Color.GRAY);
+                sfxSlider.setColor(Color.GRAY);
             }
         }
     }
@@ -234,7 +252,13 @@ public class OptionMenu implements Screen {
 
     @Override
     public void resize(int i, int i1) {
+        stage.getViewport().update(i,i1,true);
+    }
 
+    public void updateScreenRatio(){
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+        resize(width,height);
     }
 
     @Override
