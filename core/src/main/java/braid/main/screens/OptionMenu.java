@@ -67,10 +67,8 @@ public class OptionMenu implements Screen {
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(knobTexture));
 
-        sliderStyle.background.setMinHeight(10);
-        sliderStyle.background.setMinWidth(20);
-        sliderStyle.knob.setMinHeight(10);
-        sliderStyle.knob.setMinWidth(20);
+        sliderStyle.background.setMinHeight(20);
+        sliderStyle.knob.setMinHeight(20);
 
 
         musicSlider = new Slider(0, 1, 0.1f, false, sliderStyle);
