@@ -4,13 +4,13 @@ import braid.main.enemies.PatrollingEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.Objects;
 
 public class WorldContactListener implements ContactListener {
-    private Player player;
+    private final Player player;
     public WorldContactListener(Player player) {
         this.player = player;
     }
@@ -20,7 +20,10 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        playerFeetWithEnemy(userDataA, userDataB);
+
+
+
+        playerFeetWithEnemy(userDataA, userDataB, contact);
         playerBodyWithEnemy(userDataA, userDataB);
         patrollingEnemyWithWall(userDataA,userDataB);
     }
@@ -46,14 +49,19 @@ public class WorldContactListener implements ContactListener {
 
     }
 
-    private void playerFeetWithEnemy(UserData userDataA, UserData userDataB) {
+    private void playerFeetWithEnemy(UserData userDataA, UserData userDataB, Contact contact) {
+        WorldManifold worldManifold = contact.getWorldManifold();
+        Vector2 normal = worldManifold.getNormal();
+
         if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
 
             if (enemyData.getObject() instanceof Enemy enemy) {
-                enemy.die();
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
-                player.jump(1.25f);
+                if (normal.y < 0) {
+                    enemy.die();
+                    player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                    player.jump(1.25f);
+                }
             }
         }
     }
