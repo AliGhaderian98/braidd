@@ -11,17 +11,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class PlayerInputHandler {
     private final Player player;
-    //private final Enemy enemy;
     private final World world;
     private final Game game;
     private LevelScreen screen;
     private boolean gameIsPaused;
 
 
-    //public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
     public PlayerInputHandler(Player player, World world, Game game, LevelScreen screen) {
         this.player = player;
-        //this.enemy = enemy;
         this.world = world;
         this.game = game;
         this.screen = screen;
@@ -34,16 +31,9 @@ public class PlayerInputHandler {
             handleJumping();
             handleClimbing();
 
-            // move enemy based on the position of the player
-            /*if (enemy.getSprite().getX() < player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
-                enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {*/
             if (player.isClimbing()) {
                 world.setGravity(new Vector2(0, 0));
             }
-            //}
         }
 
         handlePause();
