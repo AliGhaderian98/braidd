@@ -15,13 +15,16 @@ public abstract class Item extends Sprite {
     protected boolean toDestroy;
     protected boolean destroyed;
     protected Body body;
+    protected float x,y;
 
     public Item(LevelScreen screen, float x, float y){
         this.screen = screen;
         this.world = screen.getWorld();
+        this.x = x;
+        this.y = y;
         setPosition(x,y);
         setBounds(getX(),getY(), 16/ Braid.PPM, 16/ Braid.PPM);
-        defineItem();
+
         toDestroy = false;
         destroyed = false;
     }
@@ -33,6 +36,7 @@ public abstract class Item extends Sprite {
             world.destroyBody(body);
             destroyed = true;
         }
+
     }
     public void draw(Batch batch){
         if(!destroyed)
