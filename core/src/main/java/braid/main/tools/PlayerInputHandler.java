@@ -15,17 +15,18 @@ import java.security.Key;
 
 public class PlayerInputHandler {
     private final Player player;
-    private final Enemy enemy;
+    //private final Enemy enemy;
     private final World world;
     private final Game game;
     private final Array<RewindController> rewindObjects;
     private boolean gameIsPaused;
-    
+
     static final int ESC = Input.Keys.ESCAPE;
 
-    public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
+    //public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
+    public PlayerInputHandler(Player player, World world, Game game, Array<RewindController> rewindObjects) {
         this.player = player;
-        this.enemy = enemy;
+        //this.enemy = enemy;
         this.world = world;
         this.game = game;
         this.rewindObjects = rewindObjects;
@@ -39,15 +40,15 @@ public class PlayerInputHandler {
             handleClimbing();
 
             // move enemy based on the position of the player
-            if (enemy.getSprite().getX() < player.getSprite().getX()) {
+            /*if (enemy.getSprite().getX() < player.getSprite().getX()) {
                 enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
             } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
                 enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {
+            } else {*/
                 if (player.isClimbing()) {
                     world.setGravity(new Vector2(0, 0));
                 }
-            }
+            //}
         }
 
         handlePause();
@@ -95,18 +96,18 @@ public class PlayerInputHandler {
             } else {
                 player.setColor(Color.WHITE);
             }
-            if (enemy.getRewindController().hasRewindStorage()) {
+            /*if (enemy.getRewindController().hasRewindStorage()) {
                 enemy.setColor(Color.BLUE);
             } else {
                 //enemy.getSprite().setColor(Color.WHITE);
                 enemy.setColor(Color.WHITE);
-            }
+            }*/
         } else {
             for (RewindController r : rewindObjects) {
                 r.stopRewinding();
             }
             player.setColor(Color.WHITE);
-            enemy.setColor(Color.WHITE);
+            //enemy.setColor(Color.WHITE);
         }
     }
 

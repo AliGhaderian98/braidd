@@ -44,11 +44,11 @@ public abstract class LevelScreen implements Screen {
     protected final World world;
     protected final Box2DDebugRenderer b2dr;
 
-    protected final Array<RewindController> rewindObjects;
+    protected Array<RewindController> rewindObjects;
 
 
     protected final Player player;
-    protected final Enemy enemy;
+    protected Array<Enemy> enemies;
     protected Array<Item> items;
     protected PriorityQueue<ItemDef> itemsToSpawn;
 
@@ -73,9 +73,12 @@ public abstract class LevelScreen implements Screen {
         new B2WorldCreator(world, map);
 
 
-        player = new Player(world, (TestScreen) this);
+        player = new Player(world, this);
         player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
 
+        enemies = new Array<>();
+
+        rewindObjects = new Array<>();
 
         items = new Array<>();
         itemsToSpawn = new PriorityQueue<>();
@@ -83,23 +86,15 @@ public abstract class LevelScreen implements Screen {
         gameCamera = new GameCamera(Braid.V_WIDTH, Braid.V_HEIGHT, player);
         gameCamera.setMap(map);
 
-
-        enemy = new Enemy(world, (TestScreen) this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
-
-        rewindObjects = new Array<>();
-        rewindObjects.add(player.getRewindController());
-        rewindObjects.add(enemy.getRewindController());
-
         world.setContactListener(new WorldContactListener(player));
-        inputHandler = new PlayerInputHandler(player, enemy, world, game, rewindObjects);
+        inputHandler = new PlayerInputHandler(player, world, game, rewindObjects);
     }
 
     public void handleSpawningItems() {
         if (!itemsToSpawn.isEmpty()) {
             ItemDef idef = itemsToSpawn.poll();
             if (idef.type == CollectableItem.class) {
-                items.add(new CollectableItem((TestScreen) this, idef.position.x, idef.position.y));
+                items.add(new CollectableItem(this, idef.position.x, idef.position.y));
             }
         }
     }
@@ -113,7 +108,10 @@ public abstract class LevelScreen implements Screen {
             world.step(dt, 6, 2);
 
             player.update(dt);
-            enemy.update(dt);
+
+            for (Enemy enemy : enemies) {
+                enemy.update(dt);
+            }
 
             for (Item item : items) {
                 item.update(dt);
@@ -158,8 +156,12 @@ public abstract class LevelScreen implements Screen {
 
         game.batch.begin();
         player.getSprite().draw(game.batch);
-        if (!enemy.isDead()) {
-            enemy.getSprite().draw(game.batch);
+
+        for (Enemy enemy : enemies)
+        {
+            if (!enemy.isDead()) {
+                enemy.getSprite().draw(game.batch);
+            }
         }
         game.batch.end();
 
