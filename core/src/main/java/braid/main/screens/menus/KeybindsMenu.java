@@ -42,9 +42,12 @@ public class KeybindsMenu implements Screen {
 
     // Sound
     private final Sound menuSound;
-    // TODO Esc und Enter nicht als eingabe erlauben (eingabe ignorieren)
-    // Todo beim verlassen des Screens booleans zurücksetzen
+
     public KeybindsMenu(Game game, LevelScreen previousScreen) {
+        // Default: disable all Overlay
+        OverlayActive = false;
+        changeNotPossible = false;
+
         // Setup Screen
         this.game = game;
         this.previousScreen = previousScreen;
@@ -192,8 +195,13 @@ public class KeybindsMenu implements Screen {
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            game.setScreen(new OptionMenu(game,previousScreen));
-            dispose();
+            if(changeNotPossible || OverlayActive){
+                changeNotPossible = false;
+                OverlayActive = false;
+            }else {
+                game.setScreen(new OptionMenu(game,previousScreen));
+                dispose();
+            }
         }
     }
 
