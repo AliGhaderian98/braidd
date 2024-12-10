@@ -2,7 +2,7 @@ package braid.main.enemies;
 
 import braid.main.Braid;
 import braid.main.objects.Enemy;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.*;
 public class PatrollingEnemy extends Enemy implements EnemyAI{
     private int direction = 1;
 
-    public PatrollingEnemy(World world, TestScreen screen, float x, float y) {
+    public PatrollingEnemy(World world, LevelScreen screen, float x, float y) {
         super(world, screen,x,y);
         defineBody();
         createSideSensor();

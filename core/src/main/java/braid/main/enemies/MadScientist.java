@@ -3,7 +3,7 @@ package braid.main.enemies;
 import braid.main.Braid;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,7 +15,7 @@ public class MadScientist extends Enemy implements EnemyAI{
     private final Player player;
     private float stateTimer = 0;
 
-    public MadScientist(World world, TestScreen screen, Player player, float x, float y) {
+    public MadScientist(World world, LevelScreen screen, Player player, float x, float y) {
         super(world, screen,x,y);
         this.player = player;
         defineBody();

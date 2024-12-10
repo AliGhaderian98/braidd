@@ -1,12 +1,14 @@
 package braid.main.enemies;
 
 import braid.main.objects.Enemy;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.logging.Level;
 
 public class UnhingedEnemy extends Enemy implements EnemyAI {
 
-    public UnhingedEnemy(World world, TestScreen screen, float x, float y) {
+    public UnhingedEnemy(World world, LevelScreen screen, float x, float y) {
         super(world, screen, x, y);
     }
 

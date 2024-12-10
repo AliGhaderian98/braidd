@@ -4,6 +4,8 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.enemies.MadScientist;
+import braid.main.enemies.PatrollingEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
@@ -91,9 +93,20 @@ public abstract class LevelScreen implements Screen {
         map = mapLoader.load(mapPath);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
+        // World setup
         world = new World(new Vector2(0, GRAVITY), true);
+
+
+        // Setup player
+        player = new Player(world, this);
+        player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
+
+        // Enemies
+        enemies = new Array<>();
+
+        // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(world, map, this);
 
 
         // Setup Music
@@ -102,12 +115,6 @@ public abstract class LevelScreen implements Screen {
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
 
-
-        // Setup game objects
-        player = new Player(world, this);
-        player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
-
-        enemies = new Array<>();
 
         rewindObjects = new Array<>();
 
@@ -333,4 +340,16 @@ public abstract class LevelScreen implements Screen {
     protected abstract LevelScreen getNewInstance();
 
 
+    public void spawnEnemy(String enemyType, float x, float y) {
+        if ("MadScientist".equals(enemyType)) {
+            addEnemy(new MadScientist(world, this, player, x,y));
+        } else if ("PatrollingEnemy".equals(enemyType)) {
+            addEnemy(new PatrollingEnemy(world, this, x, y));
+        }
+    }
+
+    private void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+    }
 }

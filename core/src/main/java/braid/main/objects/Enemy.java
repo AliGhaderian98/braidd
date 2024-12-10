@@ -1,12 +1,8 @@
 package braid.main.objects;
 
-import braid.main.Braid;
-import braid.main.screens.TestScreen;
-import braid.main.*;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 
@@ -30,7 +26,7 @@ public abstract class Enemy extends DynamicGameObject{
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, TestScreen screen, float x, float y) {
+    public Enemy(World world, LevelScreen screen, float x, float y) {
         super(world);
         this.x = x;
         this.y = y;

@@ -3,7 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
@@ -12,19 +12,22 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
+
+import java.util.logging.Level;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
     private Array<End> ends;
     private final World world;
     private final TiledMap map;
-    private final TestScreen screen;
+    private final LevelScreen screen;
     private BodyDef bdef;
     private PolygonShape shape;
     private FixtureDef fdef;
     private Body body;
 
-    public B2WorldCreator(World world, TiledMap map, TestScreen screen) {
+    public B2WorldCreator(World world, TiledMap map, LevelScreen screen) {
         this.map = map;
         this.world = world;
         this.screen = screen;
@@ -77,20 +80,22 @@ public class B2WorldCreator {
     }
 
     private void spawnLadders() {
-        MapLayer ladderLayer =  map.getLayers().get("Ladder");
+        MapLayer ladderLayer = map.getLayers().get("Ladder");
         for (MapObject object : ladderLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Ladder(world,map,rect);
+            new Ladder(world, map, rect);
         }
         // Create End Object
         ends = new Array<>();
-        MapLayer endLayer =  map.getLayers().get("End");
-        for (MapObject object : endLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        MapLayer endLayer = map.getLayers().get("End");
+        if (endLayer != null) {
+            for (MapObject object : endLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            End end = new End(world,map,rect);
-            ends.add(end);
+                End end = new End(world, map, rect);
+                ends.add(end);
+            }
         }
     }
 
@@ -98,6 +103,7 @@ public class B2WorldCreator {
         if (map.getLayers().get("Enemies") == null) return;
 
         MapLayer enemyLayer = map.getLayers().get("Enemies");
+
         for (MapObject object : enemyLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -111,9 +117,9 @@ public class B2WorldCreator {
 
             // Spawning enemy
             if ("MadScientist".equals(type)) {
-                screen.spawnEnemy("MadScientist",x,y);
+                screen.spawnEnemy("MadScientist", x, y);
             } else if ("PatrollingEnemy".equals(type)) {
-                screen.spawnEnemy("PatrollingEnemy",x,y);
+                screen.spawnEnemy("PatrollingEnemy", x, y);
             }
         }
 

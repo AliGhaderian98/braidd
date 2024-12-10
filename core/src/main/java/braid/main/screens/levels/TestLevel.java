@@ -14,10 +14,6 @@ public class TestLevel extends LevelScreen {
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
 
 
-        Enemy enemy = new Enemy(world, this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
-        enemies.add(enemy);
-
         rewindObjects.add(player.getRewindController());
         for (Enemy e : enemies) {
             rewindObjects.add(e.getRewindController());
