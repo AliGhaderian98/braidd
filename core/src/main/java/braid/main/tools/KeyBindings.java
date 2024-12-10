@@ -15,7 +15,7 @@ public class KeyBindings {
 
     // standard Keybindings
     public static void standardKeybindings(){
-        KeyBindingsMap = new HashMap<String, Integer>();
+        KeyBindingsMap = new HashMap<>();
         KeyBindingsMap.put("UP_KEY", Input.Keys.W);
         KeyBindingsMap.put("LEFT_KEY", Input.Keys.A);
         KeyBindingsMap.put("DOWN_KEY", Input.Keys.S);
