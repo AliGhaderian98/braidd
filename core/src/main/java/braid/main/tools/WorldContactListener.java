@@ -31,6 +31,12 @@ public class WorldContactListener implements ContactListener {
                 player.atLadder(true);
             }
 
+            if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
+                player.atEnd(true);
+                player.jump(1.25f); //Kontrolle
+
+            }
+
             Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
             if ("EnemyBody".equals(enemyFixture.getUserData())) {
                 player.die();
