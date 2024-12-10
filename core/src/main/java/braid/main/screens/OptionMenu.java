@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class OptionMenu implements Screen {
 
-    private final TestScreen previusScreen;
+    private final LevelScreen previousScreen;
     private final Stage stage;
     private final Game game;
     private final Label Fullscreen, Music, Soundeffekt, Keybindings;
@@ -41,10 +41,10 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Game game, TestScreen previusScreen) {
+    public OptionMenu(Game game, LevelScreen previousScreen) {
         // Setup Screen
         this.game = game;
-        this.previusScreen = previusScreen;
+        this.previousScreen = previousScreen;
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         isInFullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", isInFullscreen));
@@ -165,8 +165,8 @@ public class OptionMenu implements Screen {
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            TestScreen.gameIsPaused = false;
-            game.setScreen(new PauseMenu(game,previusScreen));
+            LevelScreen.gameIsPaused = false;
+            game.setScreen(new PauseMenu(game, previousScreen));
             dispose();
         }
     }
@@ -205,7 +205,7 @@ public class OptionMenu implements Screen {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsMenu(game,previusScreen));
+            game.setScreen(new KeybindsMenu(game, previousScreen));
             dispose();
         }
     }

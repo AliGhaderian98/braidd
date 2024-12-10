@@ -24,7 +24,7 @@ public class PauseMenu implements Screen {
 
     private final Stage stage;
     private final Game game;
-    private final TestScreen previousScreen;
+    private final LevelScreen previousScreen;
 
     private final Label Resume,mainMenu, Retry, Option, SaveAndExit;
     private final Array<Label> menuLabels;
@@ -36,7 +36,7 @@ public class PauseMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public PauseMenu(Game game, TestScreen previusScreen){
+    public PauseMenu(Game game, LevelScreen previusScreen){
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previusScreen;
