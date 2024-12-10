@@ -23,6 +23,7 @@ public class RewindHUD implements Disposable {
 
     public RewindHUD(SpriteBatch sb, Sprite sprite) {
         rewindImage = new Image(sprite);
+        rewindImage.setScale(12,12);
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, camera);
@@ -33,7 +34,7 @@ public class RewindHUD implements Disposable {
         table.setSize(Braid.V_WIDTH, Braid.V_HEIGHT);
         table.setFillParent(true);
 
-        table.add(rewindImage).padTop(20).padRight(20);
+        table.add(rewindImage).padTop(350).padRight(400);
 
         stage.addActor(table);
     }
