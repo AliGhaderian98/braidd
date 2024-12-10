@@ -1,7 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
-import braid.main.screens.TestScreen;
+import braid.main.screens.LevelScreen;
 import braid.main.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -29,7 +29,7 @@ public class Enemy extends DynamicGameObject{
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, TestScreen screen) {
+    public Enemy(World world, LevelScreen screen) {
         super(world);
 
         speed = 0.15f;

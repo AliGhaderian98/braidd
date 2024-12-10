@@ -3,7 +3,7 @@ package braid.main.tools;
 import braid.main.RewindController;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
-import braid.main.screens.TestScreen;
+import braid.main.screens.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,16 +15,17 @@ import com.badlogic.gdx.utils.Array;
 
 public class PlayerInputHandler {
     private final Player player;
-    private final Enemy enemy;
+    //private final Enemy enemy;
     private final World world;
     private final Game game;
-    private TestScreen screen;
+    private LevelScreen screen;
     private boolean gameIsPaused;
 
 
-    public PlayerInputHandler(Player player, Enemy enemy, World world, Game game,TestScreen screen) {
+    //public PlayerInputHandler(Player player, Enemy enemy, World world, Game game, Array<RewindController> rewindObjects) {
+    public PlayerInputHandler(Player player, World world, Game game, LevelScreen screen) {
         this.player = player;
-        this.enemy = enemy;
+        //this.enemy = enemy;
         this.world = world;
         this.game = game;
         this.screen = screen;
@@ -38,15 +39,15 @@ public class PlayerInputHandler {
             handleClimbing();
 
             // move enemy based on the position of the player
-            if (enemy.getSprite().getX() < player.getSprite().getX()) {
+            /*if (enemy.getSprite().getX() < player.getSprite().getX()) {
                 enemy.b2body.applyLinearImpulse(new Vector2(enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
             } else if (enemy.getSprite().getX() > player.getSprite().getX()) {
                 enemy.b2body.applyLinearImpulse(new Vector2(-enemy.getSpeed() * .5f, 0), enemy.b2body.getWorldCenter(), true);
-            } else {
-                if (player.isClimbing()) {
-                    world.setGravity(new Vector2(0, 0));
-                }
+            } else {*/
+            if (player.isClimbing()) {
+                world.setGravity(new Vector2(0, 0));
             }
+            //}
         }
 
         handlePause();

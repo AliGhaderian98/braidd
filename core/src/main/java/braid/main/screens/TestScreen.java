@@ -1,74 +1,30 @@
 package braid.main.screens;
 
-import braid.main.*;
-import braid.main.Items.CollectableItem;
+import braid.main.Braid;
 import braid.main.Items.Item;
-import braid.main.Items.ItemDef;
-import braid.main.tools.*;
+import braid.main.RewindController;
+import braid.main.RewindableBody;
 import braid.main.objects.Enemy;
-import braid.main.objects.Player;
+import braid.main.tools.Audiomanager;
+import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.PriorityQueue;
-
-/***********
-  Diese Klasse ist eine Testklasse, um die grundlegen Funktionen zu implementieren.
-  Sie stellt zudem einen Entwurf für die späteren Level Klassen dar.
- ***********/
-
-public class TestScreen implements Screen {
-    // World Variables
-    private final Braid game;
-    private static final int GRAVITY = -10;
-    private final TextureAtlas atlas;
-    public static boolean gameIsPaused;
-
-
-    // Tools
-    private final PlayerInputHandler inputHandler;
-
-
-    // Camera
-    private final GameCamera gameCamera;
-
-
-    // Map
-    private TmxMapLoader mapLoader;
-    private final TiledMap map;
-    private final OrthogonalTiledMapRenderer renderer;
+public class TestScreen extends LevelScreen {
 
     // Music
     private final Music Wintermusic;
-
-    // Box2D variables
-    private final World world;
-    private final Box2DDebugRenderer b2dr;
-
-    // Rewind Control
-    public final Array<RewindController> rewindObjects;
-
-    // Keys
-    static int SHIFT = Input.Keys.SHIFT_LEFT;
 
     // Shaders
     private ShaderProgram rewindShader;
@@ -78,39 +34,12 @@ public class TestScreen implements Screen {
     private float time = 0f;
     private RewindHUD rewindHUD;
 
-    // GameObject Variables
-    private final Player player;
-    private final Enemy enemy;
-    private Array <Item> items;
-    private PriorityQueue <ItemDef> itemsToSpawn;
-
-
     public TestScreen(Braid game) {
-        // Setup basic world variables
-        atlas = new TextureAtlas("packedimages/sprites.atlas");
-        this.game = game;
+        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas");
 
         // SetupKeybindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
-
-        // Setup Level Map
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("maps/wintermap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
-
-        // setup Box2D world
-        world = new World(new Vector2(0, GRAVITY), true);
-        b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map);
-
-        // Setup Player
-        player = new Player(world, this);
-        player.setRewindController(new RewindController(new RewindableBody(player.b2body, player)));
-
-        //
-        items =new  Array <Item>();
-        itemsToSpawn = new PriorityQueue<ItemDef>();
 
         // Setup Music
         Wintermusic = Audiomanager.audiomanager.get("audio/music/background_music.mp3",Music.class);
@@ -118,31 +47,19 @@ public class TestScreen implements Screen {
         Wintermusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         Wintermusic.play();
 
-        // Setup Game Camera
-        gameCamera = new GameCamera(25*16, 25*9, player);
-        gameCamera.setMap(map);
-
-
-        // Setup Enemy
-        enemy = new Enemy(world, this);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
-
-        //Copy-Paste für Rewind:
-        //das.setRewindController(new RewindController(new RewindableBody(das.b2body)));
-
-        // Add all rewindable objects to Watcher
-        rewindObjects = new Array<>();
-        rewindObjects.add(player.getRewindController());
-        rewindObjects.add(enemy.getRewindController());
-
-        world.setContactListener(new WorldContactListener(player));
-
-        // Initialise InputHandler
-        //inputHandler = new PlayerInputHandler(player,enemy,world,game, rewindObjects);
-        inputHandler = new PlayerInputHandler(player,enemy,world,game, this);
-
-        // Define Shader Programs
         setupShaders();
+
+        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+
+
+        Enemy enemy = new Enemy(world, this);
+        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+        enemies.add(enemy);
+
+        rewindObjects.add(player.getRewindController());
+        for (Enemy e : enemies) {
+            rewindObjects.add(e.getRewindController());
+        }
     }
 
     private void setupShaders() {
@@ -167,23 +84,6 @@ public class TestScreen implements Screen {
 
     public void resetShader() { activeShader = null; }
 
-    public void spawnItem(ItemDef idef) {
-        itemsToSpawn.add(idef);
-    }
-
-    public void handleSpawningItems() {
-        if (!itemsToSpawn.isEmpty()) {
-            ItemDef idef = itemsToSpawn.poll();
-            if (idef.type == CollectableItem.class) {
-                items.add(new CollectableItem(this, idef.position.x,idef.position.y));
-            }
-        }
-    }
-
-    @Override
-    public void show() {
-
-    }
 
     @Override
     public void render(float delta) {
@@ -225,7 +125,7 @@ public class TestScreen implements Screen {
             renderRewindHUD();
     }
 
-  private void renderRewindHUD() {
+    private void renderRewindHUD() {
         // Save the previous OpenGL state
         Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
 
@@ -277,54 +177,6 @@ public class TestScreen implements Screen {
         }
     }
 
-    private void clearScreen() {
-        ScreenUtils.clear(0, 0, 0, 1);
-    }
-
-    private void updateCamera() {
-        gameCamera.followTarget();
-        gameCamera.getCamera().update();
-    }
-
-    private void renderWorld() {
-        renderer.setView(gameCamera.getCamera());
-        renderer.render();
-        b2dr.render(world, gameCamera.getCamera().combined);
-        game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
-
-        // draw game objects
-        game.batch.begin();
-
-        player.getSprite().draw(game.batch);
-        if (!enemy.isDead()) { //Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
-            enemy.getSprite().draw(game.batch);
-        }
-
-        for(Item item :items)
-            item.draw(game.batch);
-
-        game.batch.end();
-    }
-
-
-    @Override
-    public void resize(int width, int height) {
-        gameCamera.resize(width, height);
-        rewindHUD.resize(width, height);
-        fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
-    }
-
-    @Override
-
-    public void pause() {
-        // pause Game
-        gameIsPaused = true;
-        Wintermusic.pause();
-
-        // jumps to PauseScreen and saves Game state
-        game.setScreen(new PauseMenu(game,this));
-    }
-
     @Override
     public void resume() {
         KeyBindings.loadKeyBindings();
@@ -334,13 +186,9 @@ public class TestScreen implements Screen {
 
     }
 
-
-    public TextureAtlas getAtlas() {
-        return atlas;
-    }
-
     @Override
-    public void hide() {
+    protected LevelScreen getNewInstance() {
+        return new TestScreen(game);
     }
 
     public void reset(){
@@ -363,5 +211,17 @@ public class TestScreen implements Screen {
 
     public World getWorld() {
         return world;
+    }
+}
+
+    @Override
+    public void show() {
+        // Custom behavior for showing TestScreen
+
+    }
+
+    @Override
+    public void hide() {
+
     }
 }

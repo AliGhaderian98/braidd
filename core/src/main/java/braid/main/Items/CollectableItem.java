@@ -1,6 +1,7 @@
 package braid.main.Items;
 
 import braid.main.Braid;
+import braid.main.screens.LevelScreen;
 import braid.main.screens.TestScreen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class CollectableItem extends Item {
-    public CollectableItem(TestScreen screen, float x, float y) {
+    public CollectableItem(LevelScreen screen, float x, float y) {
         super(screen, x, y);
         setRegion(screen.getAtlas().findRegion("CollectableItem"), 0 ,0, 16,16);
         velocity = new Vector2(0,0);
