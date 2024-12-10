@@ -42,7 +42,8 @@ public class KeybindsMenu implements Screen {
 
     // Sound
     private final Sound menuSound;
-
+    // TODO Esc und Enter nicht als eingabe erlauben (eingabe ignorieren)
+    // Todo beim verlassen des Screens booleans zurücksetzen
     public KeybindsMenu(Game game, LevelScreen previousScreen) {
         // Setup Screen
         this.game = game;
