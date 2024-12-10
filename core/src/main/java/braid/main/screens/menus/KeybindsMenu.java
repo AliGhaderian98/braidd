@@ -1,6 +1,7 @@
-package braid.main.screens;
+package braid.main.screens.menus;
 
 import braid.main.Braid;
+import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
@@ -13,13 +14,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KeybindsMenu implements Screen {

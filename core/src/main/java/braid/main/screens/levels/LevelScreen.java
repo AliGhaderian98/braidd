@@ -1,4 +1,4 @@
-package braid.main.screens;
+package braid.main.screens.levels;
 
 import braid.main.*;
 import braid.main.Items.CollectableItem;
@@ -6,9 +6,11 @@ import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
+import braid.main.rewind.RewindController;
+import braid.main.rewind.RewindableBody;
+import braid.main.screens.RewindHUD;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,7 +30,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
-import braid.main.screens.PauseMenu;
+import braid.main.screens.menus.PauseMenu;
 
 import java.util.PriorityQueue;
 
@@ -42,10 +44,8 @@ public abstract class LevelScreen implements Screen {
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused;
-    //public static boolean resetgame;
 
     protected final PlayerInputHandler inputHandler;
-    protected static final int SHIFT = Input.Keys.SHIFT_LEFT;
 
     // Camera and Map variables
     protected final GameCamera gameCamera;
@@ -68,15 +68,13 @@ public abstract class LevelScreen implements Screen {
     // Music
     private final Music music;
 
-    // Shaders
+    // Shader variables
     private ShaderProgram rewindShader;
     private ShaderProgram activeShader;
     private FrameBuffer fbo;
     private SpriteBatch fboBatch;
     private float time = 0f;
     private RewindHUD rewindHUD;
-
-
 
 
     public LevelScreen(Braid game, String mapPath, String atlasPath, String musicPath) {
@@ -96,7 +94,6 @@ public abstract class LevelScreen implements Screen {
         world = new World(new Vector2(0, GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(world, map);
-
 
 
         // Setup Music

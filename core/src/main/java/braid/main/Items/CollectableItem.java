@@ -1,12 +1,10 @@
 package braid.main.Items;
 
 import braid.main.Braid;
-import braid.main.screens.LevelScreen;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class CollectableItem extends Item {

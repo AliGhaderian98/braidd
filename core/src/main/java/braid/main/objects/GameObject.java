@@ -1,6 +1,6 @@
 package braid.main.objects;
 
-import braid.main.RewindController;
+import braid.main.rewind.RewindController;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;

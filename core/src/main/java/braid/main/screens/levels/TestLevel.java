@@ -1,14 +1,14 @@
-package braid.main.screens;
+package braid.main.screens.levels;
 
 import braid.main.Braid;
-import braid.main.RewindController;
-import braid.main.RewindableBody;
+import braid.main.rewind.RewindController;
+import braid.main.rewind.RewindableBody;
 import braid.main.objects.Enemy;
 
 
-public class TestScreen extends LevelScreen {
+public class TestLevel extends LevelScreen {
 
-    public TestScreen(Braid game) {
+    public TestLevel(Braid game) {
         super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
@@ -26,7 +26,7 @@ public class TestScreen extends LevelScreen {
 
     @Override
     protected LevelScreen getNewInstance() {
-        return new TestScreen(game);
+        return new TestLevel(game);
     }
 
 

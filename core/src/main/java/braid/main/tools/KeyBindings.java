@@ -1,6 +1,6 @@
 package braid.main.tools;
 
-import braid.main.screens.KeybindsMenu;
+import braid.main.screens.menus.KeybindsMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;

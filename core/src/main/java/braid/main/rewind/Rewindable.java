@@ -1,5 +1,4 @@
-package braid.main;
-import braid.main.objects.Player.AnimationState;
+package braid.main.rewind;
 import com.badlogic.gdx.math.Vector2;
 public interface Rewindable {
     Vector2 getPosition();

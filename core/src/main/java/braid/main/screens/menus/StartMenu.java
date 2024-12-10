@@ -1,7 +1,8 @@
-package braid.main.screens;
+package braid.main.screens.menus;
 
 
 import braid.main.Braid;
+import braid.main.screens.levels.TestLevel;
 import braid.main.tools.PreferencesManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -11,13 +12,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 
@@ -27,7 +26,7 @@ public class StartMenu extends ScreenAdapter {
 
     public StartMenu(Game game){
         this.game = game;
-        
+
         // load Keybindings
         loadDisplayseedings();
 
@@ -45,7 +44,7 @@ public class StartMenu extends ScreenAdapter {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new TestScreen((Braid) game));
+                game.setScreen(new TestLevel((Braid) game));
             }
         });
 
@@ -66,7 +65,7 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void startGame() {
-        game.setScreen(new TestScreen((Braid) game));
+        game.setScreen(new TestLevel((Braid) game));
     }
 
     @Override

@@ -1,8 +1,7 @@
 package braid.main.Items;
 
 import braid.main.Braid;
-import braid.main.screens.LevelScreen;
-import braid.main.screens.TestScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;

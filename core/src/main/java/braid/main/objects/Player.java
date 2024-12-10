@@ -1,14 +1,12 @@
 package braid.main.objects;
 
 import braid.main.Braid;
-import braid.main.screens.LevelScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-
-import java.util.logging.Level;
 //todo: Spring Animation fixen, stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven

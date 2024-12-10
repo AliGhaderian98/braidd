@@ -1,6 +1,7 @@
-package braid.main.screens;
+package braid.main.screens.menus;
 
 import braid.main.Braid;
+import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;

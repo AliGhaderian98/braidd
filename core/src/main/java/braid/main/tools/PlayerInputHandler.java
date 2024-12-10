@@ -1,16 +1,12 @@
 package braid.main.tools;
 
-import braid.main.RewindController;
-import braid.main.objects.Enemy;
+import braid.main.rewind.RewindController;
 import braid.main.objects.Player;
-import braid.main.screens.LevelScreen;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 
 public class PlayerInputHandler {
