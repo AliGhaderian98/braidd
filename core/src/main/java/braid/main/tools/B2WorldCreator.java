@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.objects.Ladder;
+import braid.main.objects.End;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
+    private Array<End> ends;
     public B2WorldCreator(World world, TiledMap map) {
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -48,6 +50,15 @@ public class B2WorldCreator {
 
             Ladder ladder = new Ladder(world,map,rect);
             ladders.add(ladder);
+        }
+        // Create End Object
+        ends = new Array<>();
+        MapLayer endLayer =  map.getLayers().get("End");
+        for (MapObject object : endLayer.getObjects()) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            End end = new End(world,map,rect);
+            ends.add(end);
         }
     }
 }

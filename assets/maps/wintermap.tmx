@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="59">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="86">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -122,6 +122,9 @@
 929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,929,930,931,932,933,934,935,936,937,938,894,863,2147484542,942,943,944,893,894,895,896
 </data>
  </layer>
+ <objectgroup id="9" name="End">
+  <object id="84" x="0" y="112" width="32" height="48"/>
+ </objectgroup>
  <objectgroup id="5" name="Ground">
   <object id="16" x="0" y="352" width="1024" height="32"/>
   <object id="17" x="848" y="304" width="80" height="48"/>

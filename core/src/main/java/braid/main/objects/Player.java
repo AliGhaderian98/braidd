@@ -35,6 +35,7 @@ public class Player extends DynamicGameObject {
     AnimationState previousState;
     private boolean isAlive;
     private boolean isAtLadder;
+    private boolean isAtEnd;
 
 
     // Constructors
@@ -176,6 +177,10 @@ public class Player extends DynamicGameObject {
     public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
 
     public boolean isAtLadder() { return isAtLadder; }
+
+    public void atEnd(boolean atEnd) { isAtEnd = atEnd; }
+
+    public boolean isAtEnd() { return  isAtEnd; }
 
     @Override
     public float getStateTimer() { return stateTimer; }
