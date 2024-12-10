@@ -1,60 +1,42 @@
 package braid.main.tools;
 
-import braid.main.objects.End;
+import braid.main.enemies.PatrollingEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.Objects;
+
 public class WorldContactListener implements ContactListener {
-    private Player player;
+    private final Player player;
     public WorldContactListener(Player player) {
         this.player = player;
     }
 
     @Override
     public void beginContact(Contact contact) {
-        Fixture fixA = contact.getFixtureA();
-        Fixture fixB = contact.getFixtureB();
+        UserData userDataA = (UserData) contact.getFixtureA().getUserData();
+        UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        if ("PlayerFeet".equals(fixA.getUserData()) || "PlayerFeet".equals(fixB.getUserData())) {
-            Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
-            if (enemyFixture.getUserData() instanceof Enemy enemy) {
-                enemy.die();
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
-                player.jump(1.25f);
-            }
-        }
 
-        if ("PlayerBody".equals(fixA.getUserData()) || "PlayerBody".equals(fixB.getUserData())) {
-            if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
-                player.atLadder(true);
-            }
 
-            if (fixA.getUserData() instanceof End || fixB.getUserData() instanceof End) {
-                player.atEnd(true);
-                player.jump(1.25f); //Kontrolle, später kann hier in Overworld navigiert werden (am besten mit Funktion, die danach wieder atEnd = false setzt)
 
-            }
-
-            Fixture enemyFixture = (fixA.getUserData() instanceof Enemy) ? fixA : fixB;
-            if ("EnemyBody".equals(enemyFixture.getUserData())) {
-                player.die();
-            }
-        }
-
+        playerFeetWithEnemy(userDataA, userDataB, contact);
+        playerBodyWithEnemy(userDataA, userDataB);
+        patrollingEnemyWithWall(userDataA,userDataB);
     }
+
+
 
     @Override
     public void endContact(Contact contact) {
-        Fixture fixA = contact.getFixtureA();
-        Fixture fixB = contact.getFixtureB();
+        UserData userDataA = (UserData) contact.getFixtureA().getUserData();
+        UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
-            player.atLadder(false);
-            player.stopClimbing();
-        }
+        contactEndedPlayerWithLadder(userDataA,userDataB);
+        patrollingEnemyOnEdge(userDataA,userDataB);
     }
 
     @Override
@@ -65,5 +47,62 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void playerFeetWithEnemy(UserData userDataA, UserData userDataB, Contact contact) {
+        WorldManifold worldManifold = contact.getWorldManifold();
+        Vector2 normal = worldManifold.getNormal();
+
+        if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
+            UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
+
+            if (enemyData.getObject() instanceof Enemy enemy) {
+                if (normal.y < 0) {
+                    enemy.die();
+                    player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                    player.jump(1.25f);
+                }
+            }
+        }
+    }
+
+    private void playerBodyWithEnemy(UserData userDataA, UserData userDataB) {
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+                player.atLadder(true);
+            }
+
+            UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
+            if ("EnemyBody".equals(enemyData.getName())) {
+                player.die();
+            }
+        }
+    }
+
+    private void patrollingEnemyWithWall(UserData userDataA, UserData userDataB) {
+        if ("SideSensor".equals(userDataA.getName()) || "SideSensor".equals(userDataB.getName())) {
+            UserData sideSensor = "SideSensor".equals(userDataA.getName()) ? userDataA : userDataB;
+            if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()))  {
+                PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
+                enemy.changeDirection();
+            }
+        }
+    }
+
+    private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+            player.atLadder(false);
+            player.stopClimbing();
+        }
+    }
+
+    private void patrollingEnemyOnEdge(UserData userDataA, UserData userDataB) {
+        if ("EdgeSensor".equals(userDataA.getName()) || "EdgeSensor".equals(userDataB.getName()) ) {
+            UserData edgeSensor = "EdgeSensor".equals(userDataA.getName()) ? userDataA : userDataB;
+
+            if (edgeSensor.getObject() instanceof PatrollingEnemy enemy) {
+                enemy.changeDirection();
+            }
+        }
     }
 }

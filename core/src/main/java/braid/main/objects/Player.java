@@ -1,6 +1,8 @@
 package braid.main.objects;
 
 import braid.main.Braid;
+import braid.main.screens.TestScreen;
+import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -78,7 +80,7 @@ public class Player extends DynamicGameObject {
         bodyFdef.shape = shape;
         bodyFdef.friction = 0f;
         Fixture bodyFixture = b2body.createFixture(bodyFdef);
-        bodyFixture.setUserData("PlayerBody");
+        bodyFixture.setUserData(new UserData("PlayerBody", this));
 
         // Create feet collider
         FixtureDef footFdef = new FixtureDef();
@@ -87,7 +89,7 @@ public class Player extends DynamicGameObject {
         footFdef.shape = feet;
         footFdef.friction = 1f;
         Fixture feetFixture = b2body.createFixture(footFdef);
-        feetFixture.setUserData("PlayerFeet");
+        feetFixture.setUserData(new UserData("PlayerFeet", this));
 
         shape.dispose();
         feet.dispose();

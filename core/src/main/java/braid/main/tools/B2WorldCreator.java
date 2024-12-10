@@ -3,6 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
+import braid.main.screens.TestScreen;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
@@ -10,23 +11,36 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
     private Array<End> ends;
-    public B2WorldCreator(World world, TiledMap map) {
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+    private final World world;
+    private final TiledMap map;
+    private final TestScreen screen;
+    private BodyDef bdef;
+    private PolygonShape shape;
+    private FixtureDef fdef;
+    private Body body;
 
-        // create ground bodies and fixtures
+    public B2WorldCreator(World world, TiledMap map, TestScreen screen) {
+        this.map = map;
+        this.world = world;
+        this.screen = screen;
+
+        bdef = new BodyDef();
+        shape = new PolygonShape();
+        fdef = new FixtureDef();
+
+
+        spawnGround();
+        spawnWalls();
+        spawnLadders();
+        spawnEnemies();
+    }
+
+    private void spawnGround() {
         MapLayer groundLayer = map.getLayers().get("Ground");
         for (MapObject object : groundLayer.getObjects()) {
 
@@ -39,17 +53,35 @@ public class B2WorldCreator {
 
             shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
             fdef.shape = shape;
-            body.createFixture(fdef);
+            Fixture groundFixture = body.createFixture(fdef);
+            groundFixture.setUserData(new UserData("Ground", this));
         }
+    }
 
-        // Create Ladder Objects
-        ladders = new Array<>();
+    private void spawnWalls() {
+        MapLayer wallLayer = map.getLayers().get("Walls");
+        for (MapObject object : wallLayer.getObjects()) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+            fdef.shape = shape;
+            Fixture wallFixture = body.createFixture(fdef);
+            wallFixture.setUserData(new UserData("Wall", this));
+        }
+    }
+
+    private void spawnLadders() {
         MapLayer ladderLayer =  map.getLayers().get("Ladder");
         for (MapObject object : ladderLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            Ladder ladder = new Ladder(world,map,rect);
-            ladders.add(ladder);
+            new Ladder(world,map,rect);
         }
         // Create End Object
         ends = new Array<>();
@@ -60,5 +92,30 @@ public class B2WorldCreator {
             End end = new End(world,map,rect);
             ends.add(end);
         }
+    }
+
+    private void spawnEnemies() {
+        if (map.getLayers().get("Enemies") == null) return;
+
+        MapLayer enemyLayer = map.getLayers().get("Enemies");
+        for (MapObject object : enemyLayer.getObjects()) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            // Position of the enemy
+            float x = (rect.getX() + rect.getWidth() / 2);
+            float y = (rect.getY() + rect.getHeight() / 2);
+            System.out.println(x + " " + y);
+
+            // Type of the enemy
+            String type = (String) object.getProperties().get("type");
+
+            // Spawning enemy
+            if ("MadScientist".equals(type)) {
+                screen.spawnEnemy("MadScientist",x,y);
+            } else if ("PatrollingEnemy".equals(type)) {
+                screen.spawnEnemy("PatrollingEnemy",x,y);
+            }
+        }
+
     }
 }

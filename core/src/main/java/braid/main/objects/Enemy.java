@@ -1,7 +1,8 @@
 package braid.main.objects;
 
 import braid.main.Braid;
-import braid.main.screens.levels.LevelScreen;
+import braid.main.screens.TestScreen;
+import braid.main.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,7 +16,8 @@ import com.badlogic.gdx.physics.box2d.*;
  erstellt werden können.
  ***********/
 
-public class Enemy extends DynamicGameObject{
+public abstract class Enemy extends DynamicGameObject{
+    private final float x,y;
 
     public enum AnimationState {
         DEAD,
@@ -24,23 +26,14 @@ public class Enemy extends DynamicGameObject{
 
     //private final TextureRegion stand;
     private AnimationState currentState = AnimationState.ALIVE;
-    private final Animation<TextureRegion> idle;
+    protected Animation<TextureRegion> idle;
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, LevelScreen screen) {
+    public Enemy(World world, TestScreen screen, float x, float y) {
         super(world);
-
-        speed = 0.15f;
-
-        defineBody();
-
-        sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-
-        idle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        sprite.setRegion(idle.getKeyFrame(0, false));
-
+        this.x = x;
+        this.y = y;
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -50,30 +43,7 @@ public class Enemy extends DynamicGameObject{
         // Gegner-spezifische Logik, z.B. Bewegungsmuster oder Interaktion mit dem Spieler
     }
 
-    public void defineBody() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(180 / Braid.PPM, 32 / Braid.PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(8 / Braid.PPM);
-
-        fdef.shape = shape;
-        fdef.friction = 1f;
-        Fixture bodyFixture = b2body.createFixture(fdef);
-        bodyFixture.setUserData("EnemyBody");
-
-        // Create head collider
-        FixtureDef headFdef = new FixtureDef();
-        PolygonShape head = new PolygonShape();
-        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 10 / Braid.PPM), 0);
-        headFdef.shape = head;
-        headFdef.friction = 1f;
-        Fixture headFixture = b2body.createFixture(headFdef);
-        headFixture.setUserData(this);
-    }
+    public abstract void defineBody();
 
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
@@ -123,4 +93,12 @@ public class Enemy extends DynamicGameObject{
 
     //Getter
     public boolean isDead() { return currentState == AnimationState.DEAD; }
+
+    public void setPosition() {
+
+    }
+
+    public float getX() { return x;}
+    public float getY() { return y;}
+
 }
