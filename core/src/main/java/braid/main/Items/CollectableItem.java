@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 public class CollectableItem extends Item {
     public CollectableItem(LevelScreen screen, float x, float y) {
         super(screen, x, y);
-        setRegion(screen.getAtlas().findRegion("CollectableItem"), 0 ,0, 16,16);
+        setRegion(screen.getAtlas().findRegion("page"), (int)x ,(int)y, 24,24);
         velocity = new Vector2(0,0);
     }
 

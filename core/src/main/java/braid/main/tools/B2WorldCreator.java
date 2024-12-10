@@ -1,6 +1,7 @@
 package braid.main.tools;
 
 import braid.main.Braid;
+import braid.main.Items.CollectableItem;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
 import braid.main.screens.levels.LevelScreen;
@@ -41,6 +42,7 @@ public class B2WorldCreator {
         spawnWalls();
         spawnLadders();
         spawnEnemies();
+        spawnItems();
     }
 
     private void spawnGround() {
@@ -123,5 +125,32 @@ public class B2WorldCreator {
             }
         }
 
+
+    }
+
+    private void spawnItems() {
+        if (map.getLayers().get("Items") == null) return;
+
+        MapLayer itemsLayer = map.getLayers().get("Items");
+
+        for (MapObject object : itemsLayer.getObjects()) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            // Position of the enemy
+            float x = (rect.getX() + rect.getWidth() / 2);
+            float y = (rect.getY() + rect.getHeight() / 2);
+
+
+            // Type of the enemy
+            String type = (String) object.getProperties().get("type");
+
+            // Spawning enemy
+            if ("Page".equals(type)) {
+                CollectableItem page = new CollectableItem(screen, x, y);
+
+            }
+
+
+        }
     }
 }
