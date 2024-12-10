@@ -30,10 +30,6 @@ public class PlayerInputHandler {
             handleMovement();
             handleJumping();
             handleClimbing();
-
-            if (player.isClimbing()) {
-                world.setGravity(new Vector2(0, 0));
-            }
         }
 
         handlePause();
