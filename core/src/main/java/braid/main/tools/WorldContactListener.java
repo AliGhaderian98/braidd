@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
@@ -31,9 +32,9 @@ public class WorldContactListener implements ContactListener {
                 player.atLadder(true);
             }
 
-            if (fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
+            if (fixA.getUserData() instanceof End || fixB.getUserData() instanceof End) {
                 player.atEnd(true);
-                player.jump(1.25f); //Kontrolle
+                player.jump(1.25f); //Kontrolle, später kann hier in Overworld navigiert werden (am besten mit Funktion, die danach wieder atEnd = false setzt)
 
             }
 
