@@ -84,6 +84,9 @@ public abstract class LevelScreen implements Screen {
         this.game = game;
         atlas = new TextureAtlas(atlasPath);
 
+        items = new Array<>();
+        itemsToSpawn = new PriorityQueue<>();
+
         // Load current keybindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
@@ -118,8 +121,7 @@ public abstract class LevelScreen implements Screen {
 
         rewindObjects = new Array<>();
 
-        items = new Array<>();
-        itemsToSpawn = new PriorityQueue<>();
+
 
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
@@ -351,5 +353,9 @@ public abstract class LevelScreen implements Screen {
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
         enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 }

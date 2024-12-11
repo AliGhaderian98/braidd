@@ -1,6 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
+import braid.main.tools.UserData;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Shape2D;
@@ -21,7 +22,7 @@ public abstract class InteractiveGameObject extends GameObject {
     }
 
     // constructor for circular objects
-    public InteractiveGameObject(World world, TiledMap map, float radius, boolean isSensor, float posX, float posY) {
+    public InteractiveGameObject(World world, float radius, boolean isSensor, float posX, float posY) {
         super(world);
         this.isSensor = isSensor;
 
@@ -61,6 +62,7 @@ public abstract class InteractiveGameObject extends GameObject {
         shape.setRadius(radius / Braid.PPM);
         fdef.shape = shape;
         fdef.isSensor = isSensor;
+
         fixture = b2body.createFixture(fdef);
 
         shape.dispose();

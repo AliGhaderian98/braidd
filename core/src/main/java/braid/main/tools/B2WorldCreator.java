@@ -146,7 +146,7 @@ public class B2WorldCreator {
 
             // Spawning enemy
             if ("Page".equals(type)) {
-                new CollectableItem(screen, x, y);
+                screen.addItem(new CollectableItem(screen, x, y));
             }
         }
     }

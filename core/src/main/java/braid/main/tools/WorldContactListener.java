@@ -1,13 +1,12 @@
 package braid.main.tools;
 
+import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-
-import java.util.Objects;
 
 public class WorldContactListener implements ContactListener {
     private final Player player;
@@ -20,14 +19,15 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
+        if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
+            playerWithItem(userDataA, userDataB);
+            playerWithLadder(userDataA, userDataB);
+            playerFeetWithEnemy(userDataA, userDataB);
+            playerBodyWithEnemy(userDataA, userDataB, contact);
+        }
 
-
-
-        playerFeetWithEnemy(userDataA, userDataB, contact);
-        playerBodyWithEnemy(userDataA, userDataB);
         patrollingEnemyWithWall(userDataA,userDataB);
     }
-
 
 
     @Override
@@ -49,32 +49,47 @@ public class WorldContactListener implements ContactListener {
 
     }
 
-    private void playerFeetWithEnemy(UserData userDataA, UserData userDataB, Contact contact) {
-        WorldManifold worldManifold = contact.getWorldManifold();
-        Vector2 normal = worldManifold.getNormal();
+    private void playerWithItem(UserData userDataA, UserData userDataB) {
+        UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
 
+        if (itemData.getObject() instanceof Item item) {
+            item.use();
+        }
+    }
+
+    private void playerFeetWithEnemy(UserData userDataA, UserData userDataB) {
         if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
 
             if (enemyData.getObject() instanceof Enemy enemy) {
-                if (normal.y < 0) {
-                    enemy.die();
-                    player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
-                    player.jump(1.25f);
-                }
+                enemy.die();
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                player.jump(1.25f);
             }
         }
     }
 
-    private void playerBodyWithEnemy(UserData userDataA, UserData userDataB) {
-        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
-            if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
-                player.atLadder(true);
-            }
+    private void playerWithLadder(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+            player.atLadder(true);
+        }
+    }
 
+    private void playerBodyWithEnemy(UserData userDataA, UserData userDataB, Contact contact) {
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
-            if ("EnemyBody".equals(enemyData.getName())) {
-                player.die();
+            WorldManifold worldManifold = contact.getWorldManifold();
+            Vector2 normal = worldManifold.getNormal();
+
+            if (enemyData.getObject() instanceof Enemy enemy) {
+                if (normal.y < -0.5f) {
+                    enemy.die();
+                    player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                    player.jump(1.25f);
+                }
+                else if ("EnemyBody".equals(enemyData.getName())) {
+                    player.die();
+                }
             }
         }
     }
