@@ -15,7 +15,7 @@ public class KeyBindings {
 
     // standard Keybindings
     public static void standardKeybindings(){
-        KeyBindingsMap = new HashMap<String, Integer>();
+        KeyBindingsMap = new HashMap<>();
         KeyBindingsMap.put("UP_KEY", Input.Keys.W);
         KeyBindingsMap.put("LEFT_KEY", Input.Keys.A);
         KeyBindingsMap.put("DOWN_KEY", Input.Keys.S);
@@ -46,11 +46,15 @@ public class KeyBindings {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
-                KeyBindings.setKey(action, keycode);
-                saveKeyBindings();
-                loadKeyBindings();
+                if(!alreadyInUse(keycode,action)) {
+                    KeyBindings.setKey(action, keycode);
+                    saveKeyBindings();
+                    loadKeyBindings();
+                }else {
+                    KeybindsMenu.changeNotPossible = true;
+                }
                 Gdx.input.setInputProcessor(null); // reset InputProcessor
-                KeybindsMenu.OverlayActive=false;
+                KeybindsMenu.OverlayActive = false;
                 return true;
             }
         });
@@ -73,6 +77,24 @@ public class KeyBindings {
             int key = PreferencesManager.getKeyBindingPreferences().getInteger(action, KeyBindings.getKey(action));
             KeyBindings.setKey(action,key);
         }
+    }
+
+    // checks if another action is using this keycode
+    public static boolean alreadyInUse(int keycode, String newAction){
+        for(String action : KeyBindings.getKeyBindingsMap().keySet()){
+            // checks if the Keycode is already in use
+            if(keycode == PreferencesManager.getKeyBindingPreferences().getInteger(action, KeyBindings.getKey(action))){
+                // checks if the Keycode is used by the same action
+                if(keycode == PreferencesManager.getKeyBindingPreferences().getInteger(newAction)){
+                    return false;
+                }else {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
     }
 
 }

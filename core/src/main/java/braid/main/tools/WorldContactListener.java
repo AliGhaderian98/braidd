@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
+import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
@@ -27,6 +28,8 @@ public class WorldContactListener implements ContactListener {
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
+        playerWithEnd(userDataA,userDataB);
+
     }
 
 
@@ -108,6 +111,13 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(false);
             player.stopClimbing();
+        }
+    }
+
+    private void playerWithEnd(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof End || userDataB.getObject() instanceof End) {
+            player.atEnd(true);
+            player.jump(1.25f); // Zur Kontrolle
         }
     }
 
