@@ -21,16 +21,19 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+
 public class KeybindsMenu implements Screen {
 
     private final LevelScreen previousScreen;
     private final Stage mainStage;
     private final Stage Overlay;
+    private final Stage ErrorOverlay;
     private final Game game;
     private final Label RunLeft, RunRight,UP_KEY,DOWN_KEY, Jump, Rewind, INTERACT, ResetKeybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
     public static boolean OverlayActive;
+    public static boolean changeNotPossible;
 
     int width;
     int height;
@@ -39,6 +42,10 @@ public class KeybindsMenu implements Screen {
     private final Sound menuSound;
 
     public KeybindsMenu(Game game, LevelScreen previousScreen) {
+        // Default: disable all Overlay
+        OverlayActive = false;
+        changeNotPossible = false;
+
         // Setup Screen
         this.game = game;
         this.previousScreen = previousScreen;
@@ -46,6 +53,8 @@ public class KeybindsMenu implements Screen {
 
         mainStage = new Stage(viewport,((Braid) game).batch);
         Overlay = new Stage(viewport,((Braid) game).batch);
+        ErrorOverlay = new Stage(viewport,((Braid) game).batch);
+
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -109,8 +118,6 @@ public class KeybindsMenu implements Screen {
         table.row();
         table.add(ResetKeybindings);
 
-
-
         // Setup Table for Overlay
         Label OverlayText = new Label("Press a Key to switch Keybindings", SelectionFont);
         Table OverlayTable = new Table();
@@ -119,8 +126,21 @@ public class KeybindsMenu implements Screen {
         OverlayTable.add(OverlayText).expandX();
 
 
+        // Setup Table for ErrorOverly
+        Label ErrorOverlayText = new Label("Key is already in use", SelectionFont);
+        Label ErrorOverlayText2 = new Label("Press Enter to proceed", SelectionFont);
+        ErrorOverlayText2.setFontScale(0.5f);
+        Table ErrorOverlayTable = new Table();
+        ErrorOverlayTable.center();
+        ErrorOverlayTable.setFillParent(true);
+        ErrorOverlayTable.add(ErrorOverlayText).expandX();
+        ErrorOverlayTable.row();
+        ErrorOverlayTable.add(ErrorOverlayText2).expandX();
+
+
         mainStage.addActor(table);
         Overlay.addActor(OverlayTable);
+        ErrorOverlay.addActor(ErrorOverlayTable);
 
 
         // mark first option
@@ -143,10 +163,12 @@ public class KeybindsMenu implements Screen {
         updateScreenRatio();
         if(OverlayActive){
             Overlay.draw();
-        }else{
+        }else if(changeNotPossible){
+            ErrorOverlay.draw();
+        }
+        else{
             mainStage.draw();
         }
-
     }
 
     private void handleInput() {
@@ -162,13 +184,22 @@ public class KeybindsMenu implements Screen {
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
+            if(changeNotPossible){
+                changeNotPossible = false;
+            } else {
+                executeSelectedAction();
+            }
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            executeSelectedAction();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            game.setScreen(new OptionMenu(game,previousScreen));
-            dispose();
+            if(changeNotPossible || OverlayActive){
+                changeNotPossible = false;
+                OverlayActive = false;
+            }else {
+                game.setScreen(new OptionMenu(game,previousScreen));
+                dispose();
+            }
         }
     }
 
@@ -236,6 +267,10 @@ public class KeybindsMenu implements Screen {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         resize(width,height);
+    }
+
+    private void executeENTER(){
+
     }
 
     @Override

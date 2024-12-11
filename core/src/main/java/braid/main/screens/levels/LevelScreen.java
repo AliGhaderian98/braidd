@@ -296,6 +296,7 @@ public abstract class LevelScreen implements Screen {
     @Override
     public void pause() {
         gameIsPaused = true;
+        music.pause();
         game.setScreen(new PauseMenu(game, this));
     }
 

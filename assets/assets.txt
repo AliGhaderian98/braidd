@@ -1,3 +1,4 @@
+Slider/skin(1).atlas
 Slider/skin.atlas
 Slider/slider_background.png
 Slider/slider_knob.png
