@@ -4,6 +4,7 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.screens.levels.TestLevel;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -34,26 +36,21 @@ public class StartMenu extends ScreenAdapter {
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
 
+        // Setup Label Styles
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
 
-        // Setup Button
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-        TextButton startButton = new TextButton("Start", skin);
+        // Setup lable
+        Label Startmessage = new Label("Press ENTER to Proceed", TitelFont);
 
-        // Setup InputProcessor
-        Gdx.input.setInputProcessor(stage);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new TestLevel((Braid) game));
-            }
-        });
+
+
 
         // Setup Table
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
-        table.add(startButton);
+        table.add(Startmessage);
 
     }
 
