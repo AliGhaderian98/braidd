@@ -5,6 +5,7 @@ import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -34,6 +35,10 @@ public class PlayerInputHandler {
 
         handlePause();
         handleRewind();
+
+        // En-/Disable Box2D Debug renderer, delete later
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9))
+            LevelScreen.debugRendererEnabled = !LevelScreen.debugRendererEnabled;
     }
 
 

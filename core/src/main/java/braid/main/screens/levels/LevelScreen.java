@@ -47,6 +47,7 @@ public abstract class LevelScreen implements Screen {
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused;
+    public static boolean debugRendererEnabled = true;
 
     protected final PlayerInputHandler inputHandler;
 
@@ -241,7 +242,8 @@ public abstract class LevelScreen implements Screen {
     private void renderWorld() {
         renderer.setView(gameCamera.getCamera());
         renderer.render();
-        b2dr.render(world, gameCamera.getCamera().combined);
+        if (debugRendererEnabled)
+            b2dr.render(world, gameCamera.getCamera().combined);
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
 
         // draw game objects
