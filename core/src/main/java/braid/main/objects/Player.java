@@ -20,14 +20,17 @@ public class Player extends DynamicGameObject {
         IDLE,
         JUMPING,
         RUNNING,
-        CLIMBING
+        CLIMBING,
+        FALLING
     }
 
     // Animation variables
-    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing;
+    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing, LionLanding, LionFalling;
     private boolean runningRight;
     private boolean animationPaused;
     public float stateTimer;
+
+    private boolean isGrounded;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
@@ -60,6 +63,8 @@ public class Player extends DynamicGameObject {
         LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
         LionRunning = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
         LionJumping = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
+        LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
+        LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
     }
 
@@ -97,11 +102,12 @@ public class Player extends DynamicGameObject {
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        //System.out.println("currentState: "+currentState +",    isGrounded: "+ isGrounded);
     }
 
     public TextureRegion getFrame(float dt){
         // regions for the different States
-        currentState = getCurrentState();
+        //currentState = getCurrentState();
 
         testAnimationPause();
 
@@ -110,9 +116,11 @@ public class Player extends DynamicGameObject {
         }
 
         previousState = currentState;
+
         TextureRegion region = switch (currentState) {
             case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
             case JUMPING -> LionJumping.getKeyFrame(0, false);
+            case FALLING -> LionFalling.getKeyFrame(0,false);
             case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
             default -> LionIdle.getKeyFrame(stateTimer, true);
         };
@@ -142,13 +150,22 @@ public class Player extends DynamicGameObject {
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
         currentState = AnimationState.IDLE;
+        isGrounded = true;
+    }
+
+    public void fall() {
+        if (currentState != AnimationState.JUMPING) {
+            currentState = AnimationState.FALLING;
+            isGrounded = false;
+        }
     }
 
     @Override
     public AnimationState getCurrentState() {
         if (currentState == AnimationState.CLIMBING)
             return AnimationState.CLIMBING;
-        else if (b2body.getLinearVelocity().y != 0)
+        //else if (b2body.getLinearVelocity().y != 0)
+        else if (!isGrounded)
             return AnimationState.JUMPING;
         else if (b2body.getLinearVelocity().x != 0)
             return AnimationState.RUNNING;
@@ -169,9 +186,24 @@ public class Player extends DynamicGameObject {
 
     public final float getClimbingSpeed() { return climbingSpeed; }
     public void stopClimbing() {
-        currentState = AnimationState.IDLE;
+        if (currentState != AnimationState.JUMPING) {
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            else
+                currentState = AnimationState.FALLING;
+        }
         b2body.setGravityScale(1);
     }
+
+    public void setIsGrounded(boolean b) {
+        isGrounded = b;
+        if (!b)
+            currentState = AnimationState.JUMPING;
+        else
+            currentState = AnimationState.IDLE;
+    }
+
+    public boolean isGrounded() { return isGrounded; }
 
 
 
@@ -208,23 +240,37 @@ public class Player extends DynamicGameObject {
     // Inputs
 
     public void moveRight() {
+        //if (currentState != AnimationState.JUMPING && currentState != AnimationState.CLIMBING)
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x < speed) {
             b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
 
     public void moveLeft() {
+        //if (currentState != AnimationState.JUMPING && currentState != AnimationState.CLIMBING)
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x > -speed) {
             b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
 
     public void stopMovement() {
-        b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y), b2body.getWorldCenter(), true);
+        if (currentState != AnimationState.CLIMBING) {
+        //    if (currentState != AnimationState.JUMPING)
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+        }
+        // b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y),
+        // b2body.getWorldCenter(), true);
     }
 
     public void climbUp() {
         currentState = AnimationState.CLIMBING;
+        isGrounded = false;
         b2body.setGravityScale(0);
         b2body.setLinearVelocity(0, getClimbingSpeed());
     }
@@ -237,12 +283,14 @@ public class Player extends DynamicGameObject {
         b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
+        isGrounded = false;
     }
 
     public void jump(float multiplier) {
         b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
+        isGrounded = false;
     }
 
 }
