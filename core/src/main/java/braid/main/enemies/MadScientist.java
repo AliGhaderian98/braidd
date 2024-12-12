@@ -19,6 +19,8 @@ public class MadScientist extends Enemy implements EnemyAI {
     private float stateTimer = 0;
     private float chargedSpeed = 0f;
     private float respawnCd = 10f;
+    private float jumpCd = 5f;
+    private float attackCd = 2f;
     private float climbingSpeed;
     private boolean isAtLadder;
 
@@ -29,7 +31,6 @@ public class MadScientist extends Enemy implements EnemyAI {
         defineBody();
 
         speed = 0.15f;
-        climbingSpeed = 0.5f;
 
         sprite = new Sprite(screen.getAtlas().findRegion("wissenschaftler"));
 
@@ -42,8 +43,12 @@ public class MadScientist extends Enemy implements EnemyAI {
     public void update(float dt) {
         super.update(dt);
         respawnCd -= dt;
+        jumpCd -= dt;
+        attackCd -= dt;
+        climbingSpeed = dt;
         sprite.setRegion(getFrame(dt));
         attack();
+        System.out.println("Enemy Y: " + getY() + " y Velocity: " +b2body.getLinearVelocity().y );
     }
 
     public void defineBody() {
@@ -89,16 +94,25 @@ public class MadScientist extends Enemy implements EnemyAI {
         return isAtLadder;
     }
 
-    public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
+    public void atLadder(boolean atLadder) {
+        isAtLadder = atLadder;
+    }
 
 
+    public void move(float moveSpeed) {
+        b2body.applyLinearImpulse(new Vector2((moveSpeed) * .5f, 0), b2body.getWorldCenter(), true);
+    }
 
-    public void jump(float jumpHeight){
-        if (getSprite().getY() < player.getSprite().getY()) {
-            b2body.applyLinearImpulse(new Vector2(0, jumpHeight), b2body.getWorldCenter(), true);
-        } else if ((getSprite().getY() > player.getSprite().getY())) {
+    public void jump(float jumpHeight) {
+
+        if(!isJumping()) {
             b2body.applyLinearImpulse(new Vector2(0, jumpHeight), b2body.getWorldCenter(), true);
         }
+    }
+
+    public boolean isJumping() {
+        return Math.abs(b2body.getLinearVelocity().y) > 0.15;
+
     }
 
     @Override
@@ -108,33 +122,51 @@ public class MadScientist extends Enemy implements EnemyAI {
 
     @Override
     public void attack() {
+        if (respawnCd <= 0) {
+            respawnCd = this.getCurrentState() == AnimationState.ALIVE ? respawnCd : 10f;
+            this.setCurrentState(Enemy.AnimationState.ALIVE) ;
+            b2body.setLinearVelocity(0, 0);
+        }
+        else if(!player.isAlive()){
+            attackCd = 5f;
+            chargedSpeed = 2f;
+            return;
+
+        }
+
+        if(attackCd > 0){
+            b2body.setActive(false);
+            chargedSpeed = 2f;
+            return;
+
+        }
+
         if (player.getRewindController().isRewinding()) {
             b2body.setActive(false);
             chargedSpeed += 0.5f;
             chargedSpeed = Math.min(5f, chargedSpeed);
-            b2body.setLinearVelocity(0, 0);
-        } else {
-            if (respawnCd <= 0) {
-                this.setCurrentState(Enemy.AnimationState.ALIVE);
-                respawnCd = 10f;
-                chargedSpeed = 0f;
-                speed = 0.15f;
-                b2body.setLinearVelocity(0, 0);
+        } else if(chargedSpeed > 0 && attackCd <= 0){
+            b2body.setLinearVelocity(new Vector2(player.b2body.getPosition().x - b2body.getPosition().x, player.b2body.getPosition().y - b2body.getPosition().y).nor().scl(chargedSpeed + player.getSpeed()));
+            chargedSpeed = Math.min(chargedSpeed-2.5f, 0);
+        }else{
+            if (isAtLadder()){
+                b2body.setGravityScale(0);
+                b2body.setLinearVelocity(0, (float) Math.sin(climbingSpeed * 20));
             }
-            float moveSpeed = getSpeed() + chargedSpeed;
-            if(isAtLadder()){
-                b2body.setLinearVelocity(0, climbingSpeed = (getSprite().getY() > player.getSprite().getY()) ? climbingSpeed : -climbingSpeed);
+            else {
+                b2body.setGravityScale(1f);
+                float moveSpeed = getSpeed();
+                if (b2body.getPosition().x < player.b2body.getPosition().x) {
+                    move(moveSpeed);
+                } else if (b2body.getPosition().x > player.b2body.getPosition().x) {
+                    move(-moveSpeed);
+                }
 
-            }else if (getSprite().getX() < player.getSprite().getX()) {
-                b2body.applyLinearImpulse(new Vector2((moveSpeed) * .5f, 0), b2body.getWorldCenter(), true);
-                chargedSpeed = Math.max(chargedSpeed - 2.5f, 0);
-            }else if (getSprite().getX() > player.getSprite().getX()) {
-                b2body.applyLinearImpulse(new Vector2(-(moveSpeed) * .5f, 0), b2body.getWorldCenter(), true);
-                chargedSpeed = Math.max(chargedSpeed - 2.5f, 0);
+                if (!isJumping() && player.b2body.getPosition().y > b2body.getPosition().y && jumpCd <= 0) {
+                    jump(2f);
+                    jumpCd = 3f;
 
-            }
-            if (!isJumping()) {
-                jump(moveSpeed);
+                }
             }
         }
     }

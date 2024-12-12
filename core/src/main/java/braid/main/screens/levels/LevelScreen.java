@@ -107,7 +107,6 @@ public abstract class LevelScreen implements Screen {
 
         // Enemies
         enemies = new Array<>();
-        madScientist = new MadScientist(world, this, player, 344.0f, 40.0f);
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -349,6 +348,7 @@ public abstract class LevelScreen implements Screen {
 
     public void spawnEnemy(String enemyType, float x, float y) {
         if ("MadScientist".equals(enemyType)) {
+            madScientist = new MadScientist(world, this, player, x, y);
             addEnemy(madScientist);
 
         } else if ("PatrollingEnemy".equals(enemyType)) {

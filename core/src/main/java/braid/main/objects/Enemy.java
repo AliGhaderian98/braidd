@@ -92,10 +92,6 @@ public abstract class Enemy extends DynamicGameObject{
 
     }
 
-    public boolean isJumping() {
-        return b2body.getLinearVelocity().y != 0;
-
-    }
 
 
     public float getX() { return x;}
