@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
+import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
@@ -25,6 +26,7 @@ public class WorldContactListener implements ContactListener {
             playerWithLadder(userDataA, userDataB);
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
+            playerWithUnhingedEnemyRadius(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
@@ -40,6 +42,7 @@ public class WorldContactListener implements ContactListener {
 
         contactEndedPlayerWithLadder(userDataA,userDataB);
         patrollingEnemyOnEdge(userDataA,userDataB);
+        endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
     }
 
     @Override
@@ -50,6 +53,24 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void playerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
+        if ("EnemyRadius".equals(userDataA.getName()) || "EnemyRadius".equals(userDataB.getName())) {
+            UnhingedEnemy unhingedEnemy = ("EnemyRadius".equals(userDataA.getName())) ?  (UnhingedEnemy) userDataA.getObject() : (UnhingedEnemy) userDataB.getObject();
+
+            unhingedEnemy.setPlayerIsInRange(true);
+
+        }
+    }
+
+    private void endPlayerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
+        if ("EnemyRadius".equals(userDataA.getName()) || "EnemyRadius".equals(userDataB.getName())) {
+            UnhingedEnemy unhingedEnemy = ("EnemyRadius".equals(userDataA.getName())) ?  (UnhingedEnemy) userDataA.getObject() : (UnhingedEnemy) userDataB.getObject();
+
+            unhingedEnemy.setPlayerIsInRange(false);
+
+        }
     }
 
     private void playerWithItem(UserData userDataA, UserData userDataB) {
@@ -64,7 +85,10 @@ public class WorldContactListener implements ContactListener {
         if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
 
-            if (enemyData.getObject() instanceof Enemy enemy) {
+            if (enemyData.getObject() instanceof UnhingedEnemy && "EnemyBody".equals(enemyData.getName())) {
+                player.die();
+            }
+            else if (enemyData.getObject() instanceof Enemy enemy && "EnemyHead".equals(enemyData.getName())) {
                 enemy.die();
                 player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
                 player.jump(1.25f);
@@ -84,7 +108,7 @@ public class WorldContactListener implements ContactListener {
             WorldManifold worldManifold = contact.getWorldManifold();
             Vector2 normal = worldManifold.getNormal();
 
-            if (enemyData.getObject() instanceof Enemy enemy) {
+            if (enemyData.getObject() instanceof Enemy enemy ) {
                 if (normal.y < -0.5f) {
                     enemy.die();
                     player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);

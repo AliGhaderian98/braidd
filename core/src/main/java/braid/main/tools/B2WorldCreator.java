@@ -112,7 +112,6 @@ public class B2WorldCreator {
             // Position of the enemy
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
-            System.out.println(x + " " + y);
 
             // Type of the enemy
             String type = (String) object.getProperties().get("type");
@@ -122,6 +121,8 @@ public class B2WorldCreator {
                 screen.spawnEnemy("MadScientist", x, y);
             } else if ("PatrollingEnemy".equals(type)) {
                 screen.spawnEnemy("PatrollingEnemy", x, y);
+            } else if ("UnhingedEnemy".equals(type)) {
+                screen.spawnEnemy("UnhingedEnemy", x, y);
             }
         }
 

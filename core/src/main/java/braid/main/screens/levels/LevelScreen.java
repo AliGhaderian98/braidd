@@ -6,6 +6,7 @@ import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
+import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
@@ -348,6 +349,8 @@ public abstract class LevelScreen implements Screen {
             addEnemy(new MadScientist(world, this, player, x,y));
         } else if ("PatrollingEnemy".equals(enemyType)) {
             addEnemy(new PatrollingEnemy(world, this, x, y));
+        } else if ("UnhingedEnemy".equals(enemyType)) {
+            addEnemy((new UnhingedEnemy(world, this, player, x, y)));
         }
     }
 
