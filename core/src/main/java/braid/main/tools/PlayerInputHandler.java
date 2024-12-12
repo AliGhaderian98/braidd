@@ -69,7 +69,9 @@ public class PlayerInputHandler {
         // Zeitmechanik für Rewind-Funktion
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
             for (RewindController r : screen.rewindObjects) {
-                r.startRewinding();
+                if(r != null) {
+                    r.startRewinding();
+                }
             }
             // apply rewind shader
             if (player.getRewindController().hasRewindStorage()) {
@@ -79,7 +81,9 @@ public class PlayerInputHandler {
             }
         } else {
             for (RewindController r : screen.rewindObjects) {
-                r.stopRewinding();
+                if(r != null) {
+                    r.stopRewinding();
+                }
             }
             screen.resetShader();
         }

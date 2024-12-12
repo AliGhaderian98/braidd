@@ -15,6 +15,8 @@ import com.badlogic.gdx.physics.box2d.*;
 public abstract class Enemy extends DynamicGameObject{
     private final float x,y;
 
+
+
     public enum AnimationState {
         DEAD,
         ALIVE;
@@ -43,15 +45,11 @@ public abstract class Enemy extends DynamicGameObject{
 
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
-
-        rewindController.update();
-
-        if (currentState == AnimationState.DEAD) {
-            b2body.setActive(false);
+        if(rewindController != null) {
+            rewindController.update();
         }
-        else{
-            b2body.setActive(true);
-        }
+
+        b2body.setActive(currentState != AnimationState.DEAD);
     }
 
     // todo: animationen für gegner einbauen
@@ -93,6 +91,12 @@ public abstract class Enemy extends DynamicGameObject{
     public void setPosition() {
 
     }
+
+    public boolean isJumping() {
+        return b2body.getLinearVelocity().y != 0;
+
+    }
+
 
     public float getX() { return x;}
     public float getY() { return y;}

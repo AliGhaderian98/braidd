@@ -61,6 +61,7 @@ public abstract class LevelScreen implements Screen {
 
     // Game Objects
     protected final Player player;
+    protected MadScientist madScientist;
     protected Array<Enemy> enemies;
     protected Array<Item> items;
     protected PriorityQueue<ItemDef> itemsToSpawn;
@@ -106,6 +107,7 @@ public abstract class LevelScreen implements Screen {
 
         // Enemies
         enemies = new Array<>();
+        madScientist = new MadScientist(world, this, player, 344.0f, 40.0f);
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -122,12 +124,12 @@ public abstract class LevelScreen implements Screen {
         rewindObjects = new Array<>();
 
 
-
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
 
-        world.setContactListener(new WorldContactListener(player));
+        world.setContactListener(new WorldContactListener(player, madScientist));
+
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
     }
@@ -284,7 +286,9 @@ public abstract class LevelScreen implements Screen {
             updateCamera();
 
             for (RewindController r : rewindObjects) {
-                r.update();
+                if(r != null) {
+                    r.update();
+                }
             }
         }
         else {
@@ -345,7 +349,8 @@ public abstract class LevelScreen implements Screen {
 
     public void spawnEnemy(String enemyType, float x, float y) {
         if ("MadScientist".equals(enemyType)) {
-            addEnemy(new MadScientist(world, this, player, x,y));
+            addEnemy(madScientist);
+
         } else if ("PatrollingEnemy".equals(enemyType)) {
             addEnemy(new PatrollingEnemy(world, this, x, y));
         }
@@ -353,7 +358,9 @@ public abstract class LevelScreen implements Screen {
 
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
-        enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+        if(!"MadScientist".equals(enemy.getClass().getSimpleName())) {
+            enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+        }
     }
 
     public void addItem(Item item) {

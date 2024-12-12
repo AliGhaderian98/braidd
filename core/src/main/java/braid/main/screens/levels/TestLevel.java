@@ -15,8 +15,8 @@ public class TestLevel extends LevelScreen {
 
 
         rewindObjects.add(player.getRewindController());
-        for (Enemy e : enemies) {
-            rewindObjects.add(e.getRewindController());
+        for (Enemy enemy : enemies) {
+            rewindObjects.add(enemy.getRewindController());
         }
     }
 

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int maxRewindLength = 36000; //Anzahl der Frames/Minuten die wir saven wollen
+    private int maxRewindLength = 38000; //Anzahl der Frames/Minuten die wir saven wollen
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){
@@ -36,7 +36,7 @@ public class RewindController {
     }
 
     public boolean isRewinding() {
-        return isRewinding;
+        return isRewinding || states.size() <= 2;
     }
 
     public void recordState(){
@@ -46,25 +46,26 @@ public class RewindController {
             states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));
     }
 
-    public void applyRewind(){
+    public void applyRewind() {
         int rewindSpeed = 0;
 
-        if(!states.isEmpty() && rewindable != null) {// NullPointer
-            for(int i = 0; i < rewindSpeed && !states.isEmpty(); i++) {
+        if (states.size() >= (rewindSpeed + 2) && rewindable != null) {// NullPointer
+            for (int i = 0; i < rewindSpeed && !states.isEmpty(); i++) {
                 states.remove(states.size() - 1);
             }
-            if(!states.isEmpty() && rewindable != null) {
+            if (states.size() >= 2 && rewindable != null) {
                 State rewindState = states.remove(states.size() - 1);
 
                 rewindable.setPosition(rewindState.position());
                 rewindable.setVelocity(rewindState.velocity());
                 rewindable.setStateTimer(rewindState.stateTimer());
                 rewindable.setCurrentState(rewindState.animationState());
+            }else{
+                stopRewinding();
             }
-        } else{
+        } else {
             stopRewinding();
         }
-
     }
 
     public boolean hasRewindStorage() {

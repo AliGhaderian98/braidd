@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import braid.main.rewind.RewindController.*;
 
 public class PatrollingEnemy extends Enemy implements EnemyAI{
     private int direction = 1;
@@ -59,7 +60,9 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
 
     @Override
     public void idle() {
-        b2body.applyLinearImpulse(new Vector2(direction*getSpeed() * .6f, 0), b2body.getWorldCenter(), true);
+        if(!this.getRewindController().isRewinding()) {
+            b2body.applyLinearImpulse(new Vector2(direction * getSpeed() * .6f, 0), b2body.getWorldCenter(), true);
+        }
     }
 
     @Override

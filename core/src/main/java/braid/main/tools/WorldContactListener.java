@@ -1,6 +1,7 @@
 package braid.main.tools;
 
 import braid.main.Items.Item;
+import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.objects.End;
 import braid.main.objects.Enemy;
@@ -11,8 +12,11 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class WorldContactListener implements ContactListener {
     private final Player player;
-    public WorldContactListener(Player player) {
+    private final MadScientist madScientist;
+
+    public WorldContactListener(Player player, MadScientist madScientist) {
         this.player = player;
+        this.madScientist = (MadScientist) madScientist;
     }
 
     @Override
@@ -30,6 +34,10 @@ public class WorldContactListener implements ContactListener {
         patrollingEnemyWithWall(userDataA,userDataB);
         playerWithEnd(userDataA,userDataB);
 
+        if (userDataA.getObject() instanceof Enemy || userDataB.getObject() instanceof Enemy) {
+            MadScientistWithLadder(userDataA, userDataB);
+            MadScientistFeetWithEnemy(userDataA, userDataB);
+        }
     }
 
 
@@ -72,9 +80,28 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void MadScientistFeetWithEnemy(UserData userDataA, UserData userDataB) {
+        if ("MadScientistFeet".equals(userDataA.getName()) || "MadScientistFeet".equals(userDataB.getName())) {
+            UserData enemyData = (!(userDataA.getObject() instanceof MadScientist)) ? userDataA : userDataB;
+
+            if (enemyData.getObject() instanceof Enemy enemy) {
+                enemy.die();
+                madScientist.b2body.setLinearVelocity(madScientist.b2body.getLinearVelocity().x, 0);
+                madScientist.jump(1.25f);
+
+            }
+        }
+    }
+
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(true);
+        }
+    }
+
+    private void MadScientistWithLadder(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+            madScientist.atLadder(true);
         }
     }
 
@@ -131,3 +158,4 @@ public class WorldContactListener implements ContactListener {
         }
     }
 }
+
