@@ -59,7 +59,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
 
     @Override
     public void idle() {
-        b2body.applyLinearImpulse(new Vector2(direction*getSpeed() * .6f, 0), b2body.getWorldCenter(), true);
+        b2body.setLinearVelocity(new Vector2(direction*getSpeed() * 2f, 0));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
     public void createEdgeSensor() {
         // Sensor for the left side
         PolygonShape leftEdgeSensorShape = new PolygonShape();
-        leftEdgeSensorShape.setAsBox(2 / Braid.PPM, 1 / Braid.PPM, new Vector2(-6 / Braid.PPM, -8 / Braid.PPM), 0);
+        leftEdgeSensorShape.setAsBox(1 / Braid.PPM, 1 / Braid.PPM, new Vector2(-6 / Braid.PPM, -12 / Braid.PPM), 0);
 
         FixtureDef leftEdgeSensorDef = new FixtureDef();
         leftEdgeSensorDef.shape = leftEdgeSensorShape;
@@ -82,7 +82,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
 
         // Sensor for the right side
         PolygonShape rightEdgeSensorShape = new PolygonShape();
-        rightEdgeSensorShape.setAsBox(2 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM, -8 / Braid.PPM), 0);
+        rightEdgeSensorShape.setAsBox(1 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM, -12 / Braid.PPM), 0);
 
         FixtureDef rightEdgeSensorDef = new FixtureDef();
         rightEdgeSensorDef.shape = rightEdgeSensorShape;

@@ -83,10 +83,12 @@ public class B2WorldCreator {
 
     private void spawnLadders() {
         MapLayer ladderLayer = map.getLayers().get("Ladder");
-        for (MapObject object : ladderLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        if (ladderLayer != null) {
+            for (MapObject object : ladderLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Ladder(world, map, rect);
+                new Ladder(world, map, rect);
+            }
         }
         // Create End Object
         ends = new Array<>();
