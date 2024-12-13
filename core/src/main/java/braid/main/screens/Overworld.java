@@ -17,9 +17,6 @@ import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -65,7 +62,7 @@ public class Overworld implements Screen {
         stage.addActor(player);
 
         // Final setup steps
-        camera = new OverworldCamera(25*16, 25*9, player);
+        camera = new OverworldCamera(35*16, 35*9, player);
         camera.setMap(map);
 
         setupInput();
@@ -103,16 +100,10 @@ public class Overworld implements Screen {
 
                 if (node != player.getCurrentNode()) {
                     player.setCurrentNode(node);
-                    player.move();
+                    player.moveToCurrentNode();
                 }
 
                 return true;
-            }
-
-            @Override
-            public boolean keyUp (int keycode) {
-                // your touch up code here
-                return true; // return true to indicate the event was handled
             }
         });
 

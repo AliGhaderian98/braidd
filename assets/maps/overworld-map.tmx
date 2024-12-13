@@ -50,12 +50,12 @@
    <properties>
     <property name="hasNeighborEast" type="bool" value="true"/>
     <property name="hasNeighborNorth" type="bool" value="false"/>
-    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="true"/>
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="15"/>
     <property name="neighborNorth" type="object" value="0"/>
-    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="27"/>
     <property name="neighborWest" type="object" value="27"/>
    </properties>
    <ellipse/>
@@ -68,7 +68,7 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
-    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="26"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="0"/>
    </properties>
