@@ -1,11 +1,8 @@
-package braid.main.tools;
+package braid.main.overworld;
 
 import braid.main.Braid;
-import braid.main.objects.OverworldPlayer;
-import braid.main.objects.Player;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 

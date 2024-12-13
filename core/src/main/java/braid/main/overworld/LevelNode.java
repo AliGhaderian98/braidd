@@ -1,15 +1,11 @@
-package braid.main.objects;
+package braid.main.overworld;
 
 import braid.main.Braid;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
-public class OverworldNode {
-    private enum Type {LEVEL, ANCHOR};
+public class LevelNode extends OverworldNode {
     private enum LevelName {
         HBF,
         UNI,
@@ -26,8 +22,7 @@ public class OverworldNode {
     };
 
     private LevelName name;
-    private Vector2 position;
-    private Type type;
+
     private boolean isUnlocked;
 
     private boolean hasNeighborNorth;
@@ -35,21 +30,19 @@ public class OverworldNode {
     private boolean hasNeighborSouth;
     private boolean hasNeighborWest;
 
-    private LevelName neighborNorth;
-    private LevelName neighborEast;
-    private LevelName neighborSouth;
-    private LevelName neighborWest;
+    private String neighborNorth;
+    private String neighborEast;
+    private String neighborSouth;
+    private String neighborWest;
 
-    public OverworldNode(EllipseMapObject base) {
+    // private LevelScreen level;
+
+
+    public LevelNode(EllipseMapObject base) {
         name = stringToLevelName(base.getName());
 
         position = new Vector2((base.getEllipse().x + base.getEllipse().width/2) / Braid.PPM,
                                 (base.getEllipse().y + base.getEllipse().height/2) / Braid.PPM);
-
-        if (name == LevelName.ANCHORSOUTH)
-            type = Type.ANCHOR;
-        else
-            type = Type.LEVEL;
 
         isUnlocked = (boolean) base.getProperties().get("isUnlocked");
 
@@ -61,28 +54,29 @@ public class OverworldNode {
 
         MapObject temp = (MapObject) base.getProperties().get("neighborNorth");
         if (temp != null)
-            neighborNorth = stringToLevelName(temp.getName());
-        else neighborNorth = LevelName.NONE;
+            neighborNorth = temp.getName();
+        else neighborNorth = "NONE";
 
         temp = (MapObject) base.getProperties().get("neighborEast");
         if (temp != null)
-            neighborEast = stringToLevelName(temp.getName());
-        else neighborEast = LevelName.NONE;
+            neighborEast = temp.getName();
+        else neighborEast = "NONE";
 
         temp = (MapObject) base.getProperties().get("neighborSouth");
         if (temp != null)
-            neighborSouth = stringToLevelName(temp.getName());
-        else neighborSouth = LevelName.NONE;
+            neighborSouth = temp.getName();
+        else neighborSouth = "NONE";
 
         temp = (MapObject) base.getProperties().get("neighborWest");
         if (temp != null)
-            neighborWest = stringToLevelName(temp.getName());
-        else neighborWest = LevelName.NONE;
+            neighborWest = temp.getName();
+        else neighborWest = "NONE";
     }
 
 
 
     // Getters and Setters
+    @Override
     public String getName() { return name.toString(); }
 
     private LevelName stringToLevelName(String string) {
@@ -105,8 +99,6 @@ public class OverworldNode {
     }
 
     public boolean nameEquals(String value) { return stringToLevelName(value) == name; }
-
-    public Vector2 getPosition() { return position; }
 
     public boolean isUnlocked() { return isUnlocked; }
     public void isUnlocked(boolean value) { isUnlocked = value; }

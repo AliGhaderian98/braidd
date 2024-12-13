@@ -1,11 +1,8 @@
-package braid.main.screens;
+package braid.main.overworld;
 
 import braid.main.Braid;
 
-import braid.main.objects.OverworldNode;
-import braid.main.objects.OverworldPlayer;
 import braid.main.tools.KeyBindings;
-import braid.main.tools.OverworldCamera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -14,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -33,12 +32,13 @@ public class Overworld implements Screen {
     private final TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
-
+    private int railLayerIndex;
 
     private Stage stage;
     private OverworldPlayer player;
 
-    private Array<OverworldNode> nodes;
+    public Array<OverworldNode> nodes;
+    //private Array<PolylineMapObject> lines;
 
 
     public Overworld(Braid game) {
@@ -54,11 +54,21 @@ public class Overworld implements Screen {
         map = mapLoader.load("maps/overworld-map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
+        railLayerIndex = map.getLayers().getIndex("rails-img");
+
+
         setupMapNodes();
 
         stage = new Stage();
-        player = new OverworldPlayer(this, nodes.first().getPosition().x, nodes.first().getPosition().y);
-        player.setCurrentNode(nodes.first());
+        OverworldNode uni = nodes.first();
+        for (OverworldNode n : nodes) {
+            if (Objects.equals(n.getName(), "UNI"))
+                uni = n;
+        }
+
+        player = new OverworldPlayer(this, uni.getPosition().x, uni.getPosition().y);
+        player.setPreviousNode(uni);
+        player.setCurrentNode(uni);
         stage.addActor(player);
 
         // Final setup steps
@@ -73,32 +83,43 @@ public class Overworld implements Screen {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown (int keycode) {
+                if (player.isMoving())
+                    return true;
+
+
                 String newNode = "";
+
+                OverworldNode node = player.getCurrentNode();
+                LevelNode check = (LevelNode) node;
+
                 switch (keycode) {
                     case Input.Keys.W:
-                        if (player.getCurrentNode().hasNeighborNorth())
-                            newNode = player.getCurrentNode().getNeighborNorth();
+                        if (check.hasNeighborNorth())
+                            newNode = check.getNeighborNorth();
                         break;
                     case Input.Keys.D:
-                        if (player.getCurrentNode().hasNeighborEast())
-                            newNode = player.getCurrentNode().getNeighborEast();
+                        if (check.hasNeighborEast())
+                            newNode = check.getNeighborEast();
                         break;
                     case Input.Keys.S:
-                        if (player.getCurrentNode().hasNeighborSouth())
-                            newNode = player.getCurrentNode().getNeighborSouth();
+                        if (check.hasNeighborSouth())
+                            newNode = check.getNeighborSouth();
                         break;
                     case Input.Keys.A:
-                        if (player.getCurrentNode().hasNeighborWest())
-                            newNode = player.getCurrentNode().getNeighborWest();
+                        if (check.hasNeighborWest())
+                            newNode = check.getNeighborWest();
                         break;
                 };
-                OverworldNode node = player.getCurrentNode();
+
+                newNode = newNode.toUpperCase();
+
                 for (OverworldNode n : nodes) {
                     if (Objects.equals(n.getName(), newNode))
                         node = n;
                 }
 
-                if (node != player.getCurrentNode()) {
+                if (!Objects.equals(node.getName(), player.getCurrentNode().getName())) {
+                    player.setPreviousNode(player.getCurrentNode());
                     player.setCurrentNode(node);
                     player.moveToCurrentNode();
                 }
@@ -114,9 +135,14 @@ public class Overworld implements Screen {
 
         nodes = new Array<>();
 
-        for (MapObject mo : nodeLayer.getObjects()) {
-            EllipseMapObject cmo = (EllipseMapObject) mo;
-            nodes.add(new OverworldNode(cmo));
+        for (EllipseMapObject ellipse : nodeLayer.getObjects().getByType(EllipseMapObject.class)) {
+            nodes.add(new LevelNode(ellipse));
+        }
+
+        MapLayer transitionLayer = map.getLayers().get("transitions");
+
+        for (RectangleMapObject rect : transitionLayer.getObjects().getByType(RectangleMapObject.class)) {
+            nodes.add(new TransitionNode(rect));
         }
     }
 
@@ -146,7 +172,7 @@ public class Overworld implements Screen {
 
     private void renderWorld() {
         renderer.setView(camera.getCamera());
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < railLayerIndex; i++)
             renderer.render(new int[] {i});
         game.batch.setProjectionMatrix(camera.getCamera().combined);
 
@@ -155,7 +181,7 @@ public class Overworld implements Screen {
         player.getSprite().draw(game.batch);
         game.batch.end();
 
-        for (int i = 3; i < map.getLayers().getCount(); i++) {
+        for (int i = railLayerIndex; i < map.getLayers().getCount(); i++) {
             renderer.render(new int[] { i });
         }
 
