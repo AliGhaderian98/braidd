@@ -1,5 +1,6 @@
 package braid.main;
 //Steuerung und Logik vom Char und erste Logik für Gegner (Invoker?)
+import braid.main.screens.Overworld;
 import braid.main.screens.menus.StartMenu;
 //import braid.main.screens.PauseScreen;    Auskommentiert, da die KLasse noch nicht existiert bei mir (Mike)
 import braid.main.tools.Audiomanager;
@@ -34,7 +35,8 @@ public class Braid extends Game {
         Gdx.graphics.setWindowedMode(1280, 720);
         batch = new SpriteBatch();
         Audiomanager.audiomanager();
-        setScreen(new StartMenu(this));
+        // setScreen(new StartMenu(this));
+        setScreen(new Overworld(this));
     }
 
     @Override

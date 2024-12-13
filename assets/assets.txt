@@ -14,6 +14,8 @@ maps/Props.tsx
 maps/Sample.tsx
 maps/mid-layer-a.tsx
 maps/mid-layer-b.tsx
+maps/overworld-map.tmx
+maps/overworld-tiles.tsx
 maps/patrollingEnemyMap.tmx
 maps/prop-sheet.tsx
 maps/schwebebahn_1.tsx
@@ -25,10 +27,13 @@ maps/tilesets/1_Industrial_Tileset_1.png
 maps/tilesets/1_Industrial_Tileset_1B.png
 maps/tilesets/3_Far_Background_Tile.png
 maps/tilesets/Anim_Robot_Jump1_v1.png
+maps/tilesets/Map_tiles.png
 maps/tilesets/Props.png
 maps/tilesets/Sample.png
 maps/tilesets/mid-layer-a.png
 maps/tilesets/mid-layer-b.png
+maps/tilesets/overworld-dots.png
+maps/tilesets/overworld-rails.png
 maps/tilesets/prop-sheet.png
 maps/tilesets/schwebebahn_1.png
 maps/tilesets/sheet.png
