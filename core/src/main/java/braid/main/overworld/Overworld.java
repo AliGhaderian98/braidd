@@ -274,6 +274,7 @@ public class Overworld implements Screen {
     @Override
     public void pause() {
         gameIsPaused = true;
+        Gdx.input.setInputProcessor(null);
         game.setScreen(new PauseMenu(game, this));
     }
 
