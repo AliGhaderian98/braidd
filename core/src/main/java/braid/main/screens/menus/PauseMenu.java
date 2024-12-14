@@ -75,18 +75,24 @@ public class PauseMenu implements Screen {
 
         // fill Array with Labels to target a label
         menuLabels = new Array<>();
-        menuLabels.add(Resume, mainMenu, Retry, Option);
-        menuLabels.add(SaveAndExit);
+
+        menuLabels.add(Resume);
+       if(!(previousScreen instanceof Overworld)) { // Leave this point out if the pause screen is opened from the Overworld
+            menuLabels.add(mainMenu, Retry);
+        }
+        menuLabels.add(Option, SaveAndExit);
 
         // set up table
         table.add(PauseLabel).expandX();
         table.row();
         table.add(Resume).expandX().padTop(10f);
         table.row();
-        table.add(mainMenu).expandX();
-        table.row();
-        table.add(Retry).expandX();
-        table.row();
+        if(!(previousScreen instanceof Overworld)) { // don´t show these points if the pause screen is opened from the Overworld
+            table.add(mainMenu).expandX();
+            table.row();
+            table.add(Retry).expandX();
+            table.row();
+        }
         table.add(Option).expandX();
         table.row();
         table.add(SaveAndExit).expandX();

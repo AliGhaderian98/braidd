@@ -26,7 +26,7 @@ import java.util.Objects;
 public class Overworld implements Screen {
     private final Braid game;
     private final TextureAtlas atlas;
-    public static boolean gameIsPaused = false;
+    public static boolean gameIsPaused;
 
     // Camera and Map variables
     private final OverworldCamera camera;
@@ -104,6 +104,10 @@ public class Overworld implements Screen {
         OverworldNode node = player.getCurrentNode();
         LevelNode check = (LevelNode) node;
 
+        if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))){
+            pause();
+        }
+
         switch (keycode) {
             case Input.Keys.W:
                 if (check.hasNeighborNorth())
@@ -161,17 +165,19 @@ public class Overworld implements Screen {
 
     @Override
     public void render(float delta) {
-        delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
+        if(!gameIsPaused) {
+            delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
 
-        KeyBindings.loadKeyBindings();
+            KeyBindings.loadKeyBindings();
 
-        stage.act(delta);
-        player.update();
+            stage.act(delta);
+            player.update();
 
-        updateCamera();
+            updateCamera();
 
-        clearScreen();
-        renderWorld();
+            clearScreen();
+            renderWorld();
+        }
     }
 
     private void clearScreen() {

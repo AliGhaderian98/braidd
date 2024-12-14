@@ -34,7 +34,8 @@ public class Braid extends Game {
         Gdx.graphics.setWindowedMode(1280, 720);
         batch = new SpriteBatch();
         Audiomanager.audiomanager();
-        setScreen(new StartMenu(this));
+        //setScreen(new StartMenu(this));
+        setScreen(new Overworld(this));
     }
 
     @Override
