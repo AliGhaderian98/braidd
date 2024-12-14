@@ -129,7 +129,7 @@ public abstract class LevelScreen implements Screen {
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
 
-        world.setContactListener(new WorldContactListener(player));
+        world.setContactListener(new WorldContactListener(player, game));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
     }

@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.Braid;
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -7,12 +8,16 @@ import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
+import braid.main.overworld.Overworld;
+import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class WorldContactListener implements ContactListener {
     private final Player player;
-    public WorldContactListener(Player player) {
+    private Braid game;
+    public WorldContactListener(Player player, Braid game) {
+        this.game = game;
         this.player = player;
     }
 
@@ -141,7 +146,8 @@ public class WorldContactListener implements ContactListener {
     private void playerWithEnd(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof End || userDataB.getObject() instanceof End) {
             player.atEnd(true);
-            player.jump(1.25f); // Zur Kontrolle
+            //player.jump(1.25f); // Zur Kontrolle
+            game.setScreen(new Overworld(game));
         }
     }
 
