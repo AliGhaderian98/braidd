@@ -24,6 +24,7 @@ public class Overworld implements Screen {
     private final Braid game;
     private final TextureAtlas atlas;
     public static boolean gameIsPaused;
+    private InputProcessor inputProcessor;
 
     // Camera and Map variables
     private final OverworldCamera camera;
@@ -31,13 +32,11 @@ public class Overworld implements Screen {
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
     private int railLayerIndex;
+    public Array<OverworldNode> nodes;
 
     private Stage stage;
     private OverworldPlayer player;
 
-    public Array<OverworldNode> nodes;
-
-    private InputProcessor inputProcessor;
 
     public Overworld(Braid game) {
         this.game = game;
@@ -58,6 +57,8 @@ public class Overworld implements Screen {
         setupMapNodes();
 
         stage = new Stage();
+
+        // find start node -> currently just hard set to uni
         OverworldNode uni = nodes.first();
         for (OverworldNode n : nodes) {
             if (Objects.equals(n.getName(), "UNI"))
@@ -81,8 +82,14 @@ public class Overworld implements Screen {
         inputProcessor = new InputAdapter() {
             @Override
             public boolean keyDown (int keycode) {
-                if (keycode == Input.Keys.ESCAPE && !gameIsPaused) {
-                    pause();
+
+                //if (keycode == Input.Keys.ESCAPE && !gameIsPaused) {
+                if (keycode == KeyBindings.getKey("ESC") && !gameIsPaused) {
+                    new Thread(() -> {
+                        long time = System.currentTimeMillis();
+                        while (System.currentTimeMillis() < time + 1){}
+                        Gdx.app.postRunnable(() -> pause() );
+                    }).start();
                     return true;
                 }
 
@@ -103,25 +110,19 @@ public class Overworld implements Screen {
         OverworldNode node = player.getCurrentNode();
         LevelNode check = (LevelNode) node;
 
-        switch (keycode) {
-            case Input.Keys.W:
-                if (check.hasNeighborNorth())
-                    newNode = check.getNeighborNorth();
-                break;
-            case Input.Keys.D:
-                if (check.hasNeighborEast())
-                    newNode = check.getNeighborEast();
-                break;
-            case Input.Keys.S:
-                if (check.hasNeighborSouth())
-                    newNode = check.getNeighborSouth();
-                break;
-            case Input.Keys.A:
-                if (check.hasNeighborWest())
-                    newNode = check.getNeighborWest();
-                break;
+        if (keycode == KeyBindings.getKey("UP_KEY")) {
+            if (check.hasNeighborNorth())
+                newNode = check.getNeighborNorth();
+        } else if (keycode == KeyBindings.getKey("RIGHT_KEY")) {
+            if (check.hasNeighborEast())
+                newNode = check.getNeighborEast();
+        } else if (keycode == KeyBindings.getKey("DOWN_KEY")) {
+            if (check.hasNeighborSouth())
+                newNode = check.getNeighborSouth();
+        } else if (keycode == KeyBindings.getKey("LEFT_KEY")) {
+            if (check.hasNeighborWest())
+                newNode = check.getNeighborWest();
         }
-        ;
 
         newNode = newNode.toUpperCase();
 
@@ -160,10 +161,9 @@ public class Overworld implements Screen {
 
     @Override
     public void render(float delta) {
+        KeyBindings.loadKeyBindings();
         if(!gameIsPaused) {
             delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
-
-            KeyBindings.loadKeyBindings();
 
             stage.act(delta);
             player.update();
@@ -208,21 +208,14 @@ public class Overworld implements Screen {
 
     @Override
     public void pause() {
-        new Thread(() -> {
-            long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() < time + 1){}
-            Gdx.app.postRunnable(() -> {
-                gameIsPaused = true;
-                game.setScreen(new PauseMenu(game, this));
-            });
-        }).start();
-
-
+        gameIsPaused = true;
+        game.setScreen(new PauseMenu(game, this));
     }
 
     @Override
     public void resume() {
         KeyBindings.loadKeyBindings();
+        setupInput();
         gameIsPaused = false;
     }
 
