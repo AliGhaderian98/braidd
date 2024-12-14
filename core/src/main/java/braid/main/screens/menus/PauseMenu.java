@@ -1,6 +1,7 @@
 package braid.main.screens.menus;
 
 import braid.main.Braid;
+import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
@@ -23,7 +24,7 @@ public class PauseMenu implements Screen {
 
     private final Stage stage;
     private final Game game;
-    private final LevelScreen previousScreen;
+    private final Screen previousScreen;
 
     private final Label Resume,mainMenu, Retry, Option, SaveAndExit;
     private final Array<Label> menuLabels;
@@ -35,10 +36,10 @@ public class PauseMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public PauseMenu(Game game, LevelScreen previusScreen){
+    public PauseMenu(Game game, Screen previousScreen){
         // Setup Screen and save World for resume
         this.game = game;
-        this.previousScreen = previusScreen;
+        this.previousScreen = previousScreen;
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
         viewport.apply();
 
@@ -139,10 +140,15 @@ public class PauseMenu implements Screen {
 
     private void updateLabelSelection() {
         // show visually selected Element
+        Label selectedLabel = menuLabels.get(selectedIndex);
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                label.setColor(Color.WHITE); // selected
+                if(selectedLabel == Retry && previousScreen instanceof Overworld){
+                    label.setColor(Color.RED); // selected and Label is ResetKeybindings
+                } else {
+                    label.setColor(Color.WHITE); // selected
+                }
             } else {
                 label.setColor(Color.GRAY); // not selected
             }
@@ -162,9 +168,11 @@ public class PauseMenu implements Screen {
             // switch to Main Menu
 
         } else if (selectedLabel == Retry) {
-            game.setScreen(previousScreen);
-            previousScreen.reset();
-            dispose();
+            if (previousScreen instanceof LevelScreen) {
+                game.setScreen(previousScreen);
+                ((LevelScreen) previousScreen).reset();
+                dispose();
+            }
 
         } else if (selectedLabel == Option) {
             game.setScreen(new OptionMenu(game,previousScreen));

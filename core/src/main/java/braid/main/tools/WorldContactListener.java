@@ -10,6 +10,7 @@ import braid.main.objects.Ladder;
 import braid.main.objects.Player;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -146,8 +147,13 @@ public class WorldContactListener implements ContactListener {
     private void playerWithEnd(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof End || userDataB.getObject() instanceof End) {
             player.atEnd(true);
-            //player.jump(1.25f); // Zur Kontrolle
-            game.setScreen(new Overworld(game));
+
+            // switch to overworld after 0.2 second delay
+            new Thread(() -> {
+                long time = System.currentTimeMillis();
+                while (System.currentTimeMillis() < time + 200){}
+                Gdx.app.postRunnable(() -> game.setScreen(new Overworld(game)));
+            }).start();
         }
     }
 

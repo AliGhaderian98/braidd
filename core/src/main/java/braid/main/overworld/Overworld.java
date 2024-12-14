@@ -2,6 +2,7 @@ package braid.main.overworld;
 
 import braid.main.Braid;
 
+import braid.main.screens.menus.PauseMenu;
 import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -83,51 +84,58 @@ public class Overworld implements Screen {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown (int keycode) {
+                if (keycode == Input.Keys.ESCAPE && !gameIsPaused) {
+                    pause();
+                }
+
                 if (player.isMoving())
                     return true;
 
-
-                String newNode = "";
-
-                OverworldNode node = player.getCurrentNode();
-                LevelNode check = (LevelNode) node;
-
-                switch (keycode) {
-                    case Input.Keys.W:
-                        if (check.hasNeighborNorth())
-                            newNode = check.getNeighborNorth();
-                        break;
-                    case Input.Keys.D:
-                        if (check.hasNeighborEast())
-                            newNode = check.getNeighborEast();
-                        break;
-                    case Input.Keys.S:
-                        if (check.hasNeighborSouth())
-                            newNode = check.getNeighborSouth();
-                        break;
-                    case Input.Keys.A:
-                        if (check.hasNeighborWest())
-                            newNode = check.getNeighborWest();
-                        break;
-                };
-
-                newNode = newNode.toUpperCase();
-
-                for (OverworldNode n : nodes) {
-                    if (Objects.equals(n.getName(), newNode))
-                        node = n;
-                }
-
-                if (!Objects.equals(node.getName(), player.getCurrentNode().getName())) {
-                    player.setPreviousNode(player.getCurrentNode());
-                    player.setCurrentNode(node);
-                    player.moveToCurrentNode();
-                }
-
+                handleMovement(keycode);
                 return true;
             }
         });
 
+    }
+
+    private void handleMovement(int keycode) {
+        String newNode = "";
+
+        OverworldNode node = player.getCurrentNode();
+        LevelNode check = (LevelNode) node;
+
+        switch (keycode) {
+            case Input.Keys.W:
+                if (check.hasNeighborNorth())
+                    newNode = check.getNeighborNorth();
+                break;
+            case Input.Keys.D:
+                if (check.hasNeighborEast())
+                    newNode = check.getNeighborEast();
+                break;
+            case Input.Keys.S:
+                if (check.hasNeighborSouth())
+                    newNode = check.getNeighborSouth();
+                break;
+            case Input.Keys.A:
+                if (check.hasNeighborWest())
+                    newNode = check.getNeighborWest();
+                break;
+        }
+        ;
+
+        newNode = newNode.toUpperCase();
+
+        for (OverworldNode n : nodes) {
+            if (Objects.equals(n.getName(), newNode))
+                node = n;
+        }
+
+        if (!Objects.equals(node.getName(), player.getCurrentNode().getName())) {
+            player.setPreviousNode(player.getCurrentNode());
+            player.setCurrentNode(node);
+            player.moveToCurrentNode();
+        }
     }
 
     private void setupMapNodes() {
@@ -199,12 +207,14 @@ public class Overworld implements Screen {
 
     @Override
     public void pause() {
-
+        gameIsPaused = true;
+        game.setScreen(new PauseMenu(game, this));
     }
 
     @Override
     public void resume() {
-
+        KeyBindings.loadKeyBindings();
+        gameIsPaused = false;
     }
 
     @Override

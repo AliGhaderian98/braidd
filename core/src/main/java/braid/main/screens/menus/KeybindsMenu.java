@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KeybindsMenu implements Screen {
 
-    private final LevelScreen previousScreen;
+    private final Screen previousScreen;
     private final Stage mainStage;
     private final Stage Overlay;
     private final Stage ErrorOverlay;
@@ -41,7 +41,7 @@ public class KeybindsMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public KeybindsMenu(Game game, LevelScreen previousScreen) {
+    public KeybindsMenu(Game game, Screen previousScreen) {
         // Default: disable all Overlay
         OverlayActive = false;
         changeNotPossible = false;

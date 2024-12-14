@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class OptionMenu implements Screen {
 
-    private final LevelScreen previousScreen;
+    private final Screen previousScreen;
     private final Stage stage;
     private final Game game;
     private final Label Fullscreen, Music, Soundeffekt, Keybindings;
@@ -42,7 +42,7 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Game game, LevelScreen previousScreen) {
+    public OptionMenu(Game game, Screen previousScreen) {
         // Setup Screen
         this.game = game;
         this.previousScreen = previousScreen;
