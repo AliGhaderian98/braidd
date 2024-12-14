@@ -229,7 +229,7 @@ public class OptionMenu implements Screen {
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             isInFullscreen = true;
         }else {
-            Gdx.graphics.setWindowedMode(800,600);
+            Gdx.graphics.setWindowedMode(16*80,9*80);
             isInFullscreen = false;
         }
         PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",isInFullscreen);
