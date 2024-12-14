@@ -107,6 +107,20 @@ public class OverworldPlayer extends Actor {
                             currentNode = n;
                     }
                     moveToCurrentNode();
+                } else if (Objects.equals(currentNode.getName(), "WEGZURUNI") && !((LevelNode) currentNode).isUnlocked()) {
+                    String next;
+                    if (previousNode instanceof TransitionNode) {
+                        next = "HBF";
+                    } else {
+                        next = ((LevelNode) currentNode).getNeighborEast().toUpperCase();
+                    }
+
+                    previousNode = currentNode;
+                    for (OverworldNode n : overworld.nodes) {
+                        if (Objects.equals(n.getName(), next))
+                            currentNode = n;
+                    }
+                    moveToCurrentNode();
                 } else {
                     isMoving = false;
                 }

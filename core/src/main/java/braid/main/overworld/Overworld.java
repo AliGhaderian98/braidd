@@ -2,6 +2,7 @@ package braid.main.overworld;
 
 import braid.main.Braid;
 
+import braid.main.screens.levels.TestLevel;
 import braid.main.screens.menus.PauseMenu;
 import braid.main.tools.KeyBindings;
 import com.badlogic.gdx.*;
@@ -83,7 +84,7 @@ public class Overworld implements Screen {
             @Override
             public boolean keyDown (int keycode) {
 
-                //if (keycode == Input.Keys.ESCAPE && !gameIsPaused) {
+                // Pause game
                 if (keycode == KeyBindings.getKey("ESC") && !gameIsPaused) {
                     new Thread(() -> {
                         long time = System.currentTimeMillis();
@@ -93,6 +94,16 @@ public class Overworld implements Screen {
                     return true;
                 }
 
+                // Enter level
+                if (keycode == KeyBindings.getKey("INTERACT") || keycode == Input.Keys.ENTER) {
+                    OverworldNode node = player.getCurrentNode();
+                    if (node instanceof LevelNode && ((LevelNode) node).isUnlocked()) {
+                        enterLevel(node.getName());
+                        return true;
+                    }
+                }
+
+                // Handle overworld movement only if the player is not currently moving
                 if (player.isMoving())
                     return true;
 
@@ -102,6 +113,60 @@ public class Overworld implements Screen {
         };
 
         Gdx.input.setInputProcessor(inputProcessor);
+    }
+
+    private void enterLevel(String levelName) {
+        // get next level based on current node
+        Screen newScreen = switch (levelName) {
+            case "UNI" -> new TestLevel(game);
+            // case "HBF" ->
+            // case "FREUDENBERG" ->
+            // case "LUISENVIERTEL" ->
+            // case "ARKADEN" ->
+            // case "OBERBARMEN" ->
+            // case "WEGZURUNI" ->
+            // case "SCHLOSSBURG" ->
+            // case "BAYER" ->
+            // case "ZOO" ->
+            default -> throw new IllegalStateException("Unexpected level name: " + levelName);
+        };
+
+        // Zoom transition
+        final float targetZoom = 0.5f;
+        final float zoomSpeed = 0.01f;
+        final float targetRotation = -20f;
+        final float rotationSpeed = -.4f;
+
+        new Thread(() -> {
+            float currentRotation = 0f;
+
+            while (camera.getCamera().zoom > targetZoom && currentRotation > targetRotation) {
+                camera.getCamera().zoom -= zoomSpeed;
+                if (camera.getCamera().zoom < targetZoom) {
+                    camera.getCamera().zoom = targetZoom;
+                }
+
+                camera.getCamera().rotate(rotationSpeed);  // Rotate the camera
+                currentRotation += rotationSpeed;         // Track total rotation
+                if (currentRotation < targetRotation) {
+                    currentRotation = targetRotation;     // Clamp to target rotation
+                }
+
+                camera.getCamera().update();
+
+                try {
+                    Thread.sleep(16);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Transition to the new level once zoom completes
+            Gdx.app.postRunnable(() -> game.setScreen(newScreen));
+        }).start();
+
+        // Remove overworld input processor
+        Gdx.input.setInputProcessor(null);
     }
 
     private void handleMovement(int keycode) {

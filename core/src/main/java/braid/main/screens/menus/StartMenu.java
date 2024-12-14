@@ -2,6 +2,7 @@ package braid.main.screens.menus;
 
 
 import braid.main.Braid;
+import braid.main.overworld.Overworld;
 import braid.main.screens.levels.TestLevel;
 import braid.main.tools.PreferencesManager;
 import braid.main.tools.TextFontManager;
@@ -42,9 +43,6 @@ public class StartMenu extends ScreenAdapter {
         // Setup lable
         Label Startmessage = new Label("Press ENTER to Proceed", TitelFont);
 
-
-
-
         // Setup Table
         Table table = new Table();
         table.setFillParent(true);
@@ -62,7 +60,7 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void startGame() {
-        game.setScreen(new TestLevel((Braid) game));
+        game.setScreen(new Overworld((Braid) game));
     }
 
     @Override

@@ -35,8 +35,6 @@ public class LevelNode extends OverworldNode {
     private String neighborSouth;
     private String neighborWest;
 
-    // private LevelScreen level;
-
 
     public LevelNode(EllipseMapObject base) {
         name = stringToLevelName(base.getName());
