@@ -146,15 +146,10 @@ public class PauseMenu implements Screen {
 
     private void updateLabelSelection() {
         // show visually selected Element
-        Label selectedLabel = menuLabels.get(selectedIndex);
         for (int i = 0; i < menuLabels.size; i++) {
             Label label = menuLabels.get(i);
             if (i == selectedIndex) {
-                if(selectedLabel == Retry && previousScreen instanceof Overworld){
-                    label.setColor(Color.RED); // selected and Label is ResetKeybindings
-                } else {
-                    label.setColor(Color.WHITE); // selected
-                }
+                label.setColor(Color.WHITE); // selected
             } else {
                 label.setColor(Color.GRAY); // not selected
             }

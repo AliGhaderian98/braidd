@@ -4,10 +4,7 @@ import braid.main.Braid;
 
 import braid.main.screens.menus.PauseMenu;
 import braid.main.tools.KeyBindings;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -39,8 +36,8 @@ public class Overworld implements Screen {
     private OverworldPlayer player;
 
     public Array<OverworldNode> nodes;
-    //private Array<PolylineMapObject> lines;
 
+    private InputProcessor inputProcessor;
 
     public Overworld(Braid game) {
         this.game = game;
@@ -81,11 +78,12 @@ public class Overworld implements Screen {
     }
 
     private void setupInput() {
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        inputProcessor = new InputAdapter() {
             @Override
             public boolean keyDown (int keycode) {
                 if (keycode == Input.Keys.ESCAPE && !gameIsPaused) {
                     pause();
+                    return true;
                 }
 
                 if (player.isMoving())
@@ -94,8 +92,9 @@ public class Overworld implements Screen {
                 handleMovement(keycode);
                 return true;
             }
-        });
+        };
 
+        Gdx.input.setInputProcessor(inputProcessor);
     }
 
     private void handleMovement(int keycode) {
@@ -103,10 +102,6 @@ public class Overworld implements Screen {
 
         OverworldNode node = player.getCurrentNode();
         LevelNode check = (LevelNode) node;
-
-        if(Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))){
-            pause();
-        }
 
         switch (keycode) {
             case Input.Keys.W:
@@ -213,8 +208,16 @@ public class Overworld implements Screen {
 
     @Override
     public void pause() {
-        gameIsPaused = true;
-        game.setScreen(new PauseMenu(game, this));
+        new Thread(() -> {
+            long time = System.currentTimeMillis();
+            while (System.currentTimeMillis() < time + 1){}
+            Gdx.app.postRunnable(() -> {
+                gameIsPaused = true;
+                game.setScreen(new PauseMenu(game, this));
+            });
+        }).start();
+
+
     }
 
     @Override
