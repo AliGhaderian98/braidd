@@ -29,6 +29,7 @@ public class OptionMenu implements Screen {
     private final Game game;
     private final Label Fullscreen, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
+    private final Boolean Reduced;
     private int selectedIndex = 0;
     private  Label  currentLabel;
 
@@ -41,10 +42,12 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Game game, Screen previousScreen) {
-        // Setup Screen
+    public OptionMenu(Game game, Screen previousScreen, Boolean Reduced) {
         this.game = game;
         this.previousScreen = previousScreen;
+        this.Reduced = Reduced;
+
+        // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         Braid.Fullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", Braid.Fullscreen));
@@ -166,7 +169,7 @@ public class OptionMenu implements Screen {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             LevelScreen.gameIsPaused = false;
-            game.setScreen(new PauseMenu(game, previousScreen));
+            game.setScreen(new PauseMenu(game, previousScreen,Reduced));
             dispose();
         }
     }
@@ -198,14 +201,14 @@ public class OptionMenu implements Screen {
     }
 
     private void executeSelectedAction() {
-        // execute yellow targeted Option
+        // execute targeted Option
         Label selectedLabel = menuLabels.get(selectedIndex);
 
         if (selectedLabel == Fullscreen) {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsMenu(game, previousScreen));
+            game.setScreen(new KeybindsMenu(game, previousScreen, Reduced));
             dispose();
         }
     }

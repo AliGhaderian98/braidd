@@ -31,6 +31,7 @@ public class KeybindsMenu implements Screen {
     private final Game game;
     private final Label RunLeft, RunRight,UP_KEY,DOWN_KEY, Jump, Rewind, INTERACT, ResetKeybindings;
     private final Array<Label> menuLabels;
+    private final Boolean Reduced;
     private int selectedIndex = 0;
     public static boolean OverlayActive;
     public static boolean changeNotPossible;
@@ -41,7 +42,7 @@ public class KeybindsMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public KeybindsMenu(Game game, Screen previousScreen) {
+    public KeybindsMenu(Game game, Screen previousScreen, Boolean Reduced) {
         // Default: disable all Overlay
         OverlayActive = false;
         changeNotPossible = false;
@@ -49,6 +50,7 @@ public class KeybindsMenu implements Screen {
         // Setup Screen
         this.game = game;
         this.previousScreen = previousScreen;
+        this.Reduced = Reduced;
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
 
         mainStage = new Stage(viewport,((Braid) game).batch);
@@ -197,7 +199,7 @@ public class KeybindsMenu implements Screen {
                 changeNotPossible = false;
                 OverlayActive = false;
             }else {
-                game.setScreen(new OptionMenu(game,previousScreen));
+                game.setScreen(new OptionMenu(game,previousScreen, Reduced));
                 dispose();
             }
         }

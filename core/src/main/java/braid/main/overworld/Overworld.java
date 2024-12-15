@@ -5,12 +5,11 @@ import braid.main.Braid;
 import braid.main.screens.levels.TestLevel;
 import braid.main.screens.menus.PauseMenu;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.Savegames;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -34,6 +33,7 @@ public class Overworld implements Screen {
     private final OrthogonalTiledMapRenderer renderer;
     private int railLayerIndex;
     public Array<OverworldNode> nodes;
+
 
     private Stage stage;
     private OverworldPlayer player;
@@ -219,6 +219,7 @@ public class Overworld implements Screen {
         }
     }
 
+
     @Override
     public void show() {
 
@@ -275,7 +276,7 @@ public class Overworld implements Screen {
     public void pause() {
         gameIsPaused = true;
         Gdx.input.setInputProcessor(null);
-        game.setScreen(new PauseMenu(game, this));
+        game.setScreen(new PauseMenu(game, this,true));
     }
 
     @Override

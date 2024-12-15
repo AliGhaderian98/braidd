@@ -4,6 +4,7 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.TestLevel;
+import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
@@ -30,8 +31,9 @@ public class StartMenu extends ScreenAdapter {
     public StartMenu(Game game){
         this.game = game;
 
-        // load Keybindings
-        loadDisplayseedings();
+        // Load current keybindings
+        KeyBindings.standardKeybindings();
+        KeyBindings.loadKeyBindings();
 
         // Setup Viewport
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
@@ -60,7 +62,8 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void startGame() {
-        game.setScreen(new Overworld((Braid) game));
+        game.setScreen(new SavegameMenu(game));
+
     }
 
     @Override
