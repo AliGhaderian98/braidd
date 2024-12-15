@@ -28,6 +28,7 @@ public class B2WorldCreator {
     private FixtureDef fdef;
     private Body body;
 
+
     public B2WorldCreator(World world, TiledMap map, LevelScreen screen) {
         this.map = map;
         this.world = world;

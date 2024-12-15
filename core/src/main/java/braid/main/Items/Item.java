@@ -1,6 +1,7 @@
 package braid.main.Items;
 
 import braid.main.Braid;
+import braid.main.Scenes.Hud;
 import braid.main.objects.InteractiveGameObject;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -44,9 +45,12 @@ public abstract class Item extends InteractiveGameObject {
     public void draw(Batch batch){
         if(!destroyed)
             sprite.draw(batch);
+
+
     }
     public void destroy(){
         toDestroy = true;
+        Hud.addScore(200);
     }
 
 }

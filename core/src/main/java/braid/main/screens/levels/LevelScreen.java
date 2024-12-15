@@ -4,6 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.Scenes.Hud;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -80,6 +81,10 @@ public abstract class LevelScreen implements Screen {
     private float time = 0f;
     private RewindHUD rewindHUD;
 
+    private Hud hud;
+
+
+
 
     public LevelScreen(Braid game, String mapPath, String atlasPath, String musicPath) {
         // Setup Game Variables
@@ -132,6 +137,7 @@ public abstract class LevelScreen implements Screen {
         world.setContactListener(new WorldContactListener(player, game));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
+        hud = new Hud(game.batch);
     }
 
     private void setupShaders() {
@@ -188,6 +194,8 @@ public abstract class LevelScreen implements Screen {
         fbo.end();
 
         applyPostProcessing(activeShader);
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     private void clearScreen() {
@@ -275,6 +283,7 @@ public abstract class LevelScreen implements Screen {
 
             // Update Entities
             player.update(dt);
+            hud.update(dt);
 
             for (Enemy enemy : enemies) {
                 enemy.update(dt);
