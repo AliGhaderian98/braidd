@@ -25,7 +25,7 @@ public class Braid extends Game {
     public static final float PPM = 100;
 
     public static final Color BUWColor =  new Color(153f / 255f, 182f / 255f, 66f / 255f, 1);
-
+    public static boolean Fullscreen;
 
     public SpriteBatch batch;
 
