@@ -6,6 +6,7 @@ import braid.main.objects.Ladder;
 import braid.main.objects.End;
 import braid.main.objects.MovingPlatform;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
@@ -111,16 +112,15 @@ public class B2WorldCreator {
 
     private void spawnMovingPlatform() {
         MapLayer movingPlatformLayer = map.getLayers().get("MovingPlatform");
+        TextureRegion movingPlatformRegion = screen.getAtlas().findRegion("plattform");
 
         for (MapObject object : movingPlatformLayer.getObjects()) {
             if (object instanceof RectangleMapObject) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                float rangeX = Float.parseFloat(object.getProperties().get("rangeX", "100", String.class));
-                float speed = Float.parseFloat(object.getProperties().get("speed", "1.5", String.class));
+                float rangeX = (float) object.getProperties().get("rangeX");
+                float speed = (float) object.getProperties().get("speed");
 
-               MovingPlatform movingPlatform = new MovingPlatform(world, map, rect, rangeX, speed);
-              // movingPlatforms.add(movingPlatform);
-                screen.addMovingPlatform(new MovingPlatform(world, map, rect, speed, rangeX));
+                screen.addMovingPlatform(new MovingPlatform(world, map, movingPlatformRegion, rect, speed, rangeX));
 
 
             }
