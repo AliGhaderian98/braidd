@@ -45,6 +45,9 @@ public class Player extends DynamicGameObject {
     private boolean isAlive;
     private boolean isAtLadder;
     private boolean isAtEnd;
+    private boolean isAtMovingPlatform;
+    private float platformVelocity = 0;
+    private boolean onPlatform = false;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -74,6 +77,14 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
+    }
+
+    public void setPlatformVelocity(float velocity) {
+        this.platformVelocity = velocity;
+    }
+
+    public void setAtMovingPlatform(boolean onPlatform) {
+        this.onPlatform = onPlatform;
     }
 
     // Methods
@@ -110,6 +121,12 @@ public class Player extends DynamicGameObject {
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+
+
+        if (onPlatform) {
+            b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
+        }
+
     }
 
     public TextureRegion getFrame(float dt){
@@ -220,6 +237,9 @@ public class Player extends DynamicGameObject {
     public boolean isGrounded() { return isGrounded; }
 
 
+    public void atMovingPlatform(boolean atMovingPlatform) { isAtMovingPlatform = atMovingPlatform; }
+
+    public boolean isAtMovingPlatform() {return isAtMovingPlatform; }
 
     public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
 
