@@ -7,6 +7,7 @@ import com.badlogic.gdx.Preferences;
 public class PreferencesManager {
     private static com.badlogic.gdx.Preferences keyBindingPreferences;
     private static com.badlogic.gdx.Preferences SliderPreferences;
+    private static com.badlogic.gdx.Preferences FullscreenPreferences;
 
     public static Preferences getKeyBindingPreferences() {
         if (keyBindingPreferences == null) {
@@ -21,9 +22,9 @@ public class PreferencesManager {
         return SliderPreferences;
     }
     public static Preferences getFullscreenPreferences(){
-        if (SliderPreferences == null) {
-            SliderPreferences = Gdx.app.getPreferences("FullscreenPreferences");
+        if (FullscreenPreferences == null) {
+            FullscreenPreferences = Gdx.app.getPreferences("FullscreenPreferences");
         }
-        return SliderPreferences;
+        return FullscreenPreferences;
     }
 }

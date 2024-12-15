@@ -53,8 +53,8 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void loadDisplayseedings(){
-        boolean fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
-        if (fullscreen){
+        Braid.Fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
+        if (Braid.Fullscreen){
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
         }
     }

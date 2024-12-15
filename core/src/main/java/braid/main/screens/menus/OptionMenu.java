@@ -30,7 +30,6 @@ public class OptionMenu implements Screen {
     private final Label Fullscreen, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
-    private boolean isInFullscreen;
     private  Label  currentLabel;
 
     int width;
@@ -48,7 +47,7 @@ public class OptionMenu implements Screen {
         this.previousScreen = previousScreen;
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
-        isInFullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", isInFullscreen));
+        Braid.Fullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", Braid.Fullscreen));
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -225,14 +224,14 @@ public class OptionMenu implements Screen {
     }
 
     private void toggleFullscreen(){
-        if(!isInFullscreen){
+        if(!Braid.Fullscreen){
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-            isInFullscreen = true;
+            Braid.Fullscreen = true;
         }else {
             Gdx.graphics.setWindowedMode(16*80,9*80);
-            isInFullscreen = false;
+            Braid.Fullscreen = false;
         }
-        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",isInFullscreen);
+        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",Braid.Fullscreen);
         PreferencesManager.getFullscreenPreferences().flush();
     }
 
