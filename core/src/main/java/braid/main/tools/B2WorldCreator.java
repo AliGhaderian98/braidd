@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.Items.CollectableItem;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
+import braid.main.objects.MovingPlatform;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
@@ -19,6 +20,8 @@ import java.util.logging.Level;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
+    private final Array<MovingPlatform> movingPlatforms = new Array<>();
+   // private  Array<MovingPlatform> movingPlatforms;
     private Array<End> ends;
     private final World world;
     private final TiledMap map;
@@ -33,6 +36,8 @@ public class B2WorldCreator {
         this.world = world;
         this.screen = screen;
 
+
+
         bdef = new BodyDef();
         shape = new PolygonShape();
         fdef = new FixtureDef();
@@ -42,6 +47,7 @@ public class B2WorldCreator {
         spawnWalls();
         spawnLadders();
         spawnEnemies();
+        spawnMovingPlatform();
         spawnItems();
     }
 
@@ -103,33 +109,54 @@ public class B2WorldCreator {
         }
     }
 
-    private void spawnEnemies() {
-        if (map.getLayers().get("Enemies") == null) return;
+    private void spawnMovingPlatform() {
+        MapLayer movingPlatformLayer = map.getLayers().get("MovingPlatform");
 
-        MapLayer enemyLayer = map.getLayers().get("Enemies");
+        for (MapObject object : movingPlatformLayer.getObjects()) {
+            if (object instanceof RectangleMapObject) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                float rangeX = Float.parseFloat(object.getProperties().get("rangeX", "100", String.class));
+                float speed = Float.parseFloat(object.getProperties().get("speed", "1.5", String.class));
 
-        for (MapObject object : enemyLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+               MovingPlatform movingPlatform = new MovingPlatform(world, map, rect, rangeX, speed);
+              // movingPlatforms.add(movingPlatform);
+                screen.addMovingPlatform(new MovingPlatform(world, map, rect, speed, rangeX));
 
-            // Position of the enemy
-            float x = (rect.getX() + rect.getWidth() / 2);
-            float y = (rect.getY() + rect.getHeight() / 2);
 
-            // Type of the enemy
-            String type = (String) object.getProperties().get("type");
+            }
+        }
 
-            // Spawning enemy
-            if ("MadScientist".equals(type)) {
-                screen.spawnEnemy("MadScientist", x, y);
-            } else if ("PatrollingEnemy".equals(type)) {
-                screen.spawnEnemy("PatrollingEnemy", x, y);
-            } else if ("UnhingedEnemy".equals(type)) {
-                screen.spawnEnemy("UnhingedEnemy", x, y);
+    }
+
+        private void spawnEnemies() {
+            if (map.getLayers().get("Enemies") == null) return;
+
+            MapLayer enemyLayer = map.getLayers().get("Enemies");
+
+            for (MapObject object : enemyLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+                // Position of the enemy
+                float x = (rect.getX() + rect.getWidth() / 2);
+                float y = (rect.getY() + rect.getHeight() / 2);
+
+                // Type of the enemy
+                String type = (String) object.getProperties().get("type");
+
+                // Spawning enemy
+                if ("MadScientist".equals(type)) {
+                    screen.spawnEnemy("MadScientist", x, y);
+                } else if ("PatrollingEnemy".equals(type)) {
+                    screen.spawnEnemy("PatrollingEnemy", x, y);
+                } else if ("UnhingedEnemy".equals(type)) {
+                    screen.spawnEnemy("UnhingedEnemy", x, y);
+                }
             }
         }
 
 
-    }
+
+
 
     private void spawnItems() {
         if (map.getLayers().get("Items") == null) return;

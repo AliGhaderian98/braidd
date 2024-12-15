@@ -3,10 +3,7 @@ package braid.main.tools;
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
-import braid.main.objects.End;
-import braid.main.objects.Enemy;
-import braid.main.objects.Ladder;
-import braid.main.objects.Player;
+import braid.main.objects.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -24,6 +21,7 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
             playerWithItem(userDataA, userDataB);
             playerWithLadder(userDataA, userDataB);
+            //playerWithMovingPlatform(userDataA, userDataB);
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
@@ -31,6 +29,7 @@ public class WorldContactListener implements ContactListener {
 
         patrollingEnemyWithWall(userDataA,userDataB);
         playerWithEnd(userDataA,userDataB);
+        playerWithMovingPlatform(userDataA, userDataB);
 
     }
 
@@ -41,6 +40,7 @@ public class WorldContactListener implements ContactListener {
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
         contactEndedPlayerWithLadder(userDataA,userDataB);
+        contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
         patrollingEnemyOnEdge(userDataA,userDataB);
         endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
     }
@@ -96,6 +96,29 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
+                ? (MovingPlatform) userDataA.getObject()
+                : (MovingPlatform) userDataB.getObject();
+
+            player.atMovingPlatform(true);
+            player.setPlatformVelocity(platform.b2body.getLinearVelocity().x);
+
+
+        }
+
+    }
+
+    private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            player.atMovingPlatform(false);
+            player.setPlatformVelocity(0);
+        }
+    }
+
+
+
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(true);
@@ -130,6 +153,13 @@ public class WorldContactListener implements ContactListener {
             }
         }
     }
+
+    /*private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            player.atMovingPlatform(false);
+
+        }
+    }*/
 
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
