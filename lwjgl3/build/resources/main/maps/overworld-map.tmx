@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="106">
+ <tileset firstgid="1" source="overworld-tiles.tsx"/>
+ <layer id="1" name="background" width="100" height="64">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="6" name="backgroundobjects" width="100" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt0ckJgFAQRMHhB+KCmoILav5p2VmIWAXvPvRUAQAAAAAAAAAAAADA93Stqk9DGtOU5rS0ty/7pzW7b2lPRzrTlW7/AAAAAAAAAAAAAAAA4AceEB0CmQ==
+  </data>
+ </layer>
+ <imagelayer id="3" name="dots">
+  <image source="tilesets/overworld-dots.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="2" name="rails-img">
+  <image source="tilesets/overworld-rails.png" width="1600" height="1024"/>
+ </imagelayer>
+ <objectgroup id="4" name="rails" visible="0">
+  <object id="2" x="244.909" y="926">
+   <polyline points="0,0 0.0909091,-107.909 97.8338,-205.662"/>
+  </object>
+  <object id="4" x="408.875" y="914.25">
+   <polyline points="0,0 0,-127.375 -66.2011,-193.867"/>
+  </object>
+  <object id="5" x="284.909" y="507">
+   <polyline points="1093.05,-34.1739 1026.87,-34.1304 996.265,-64.913 901.874,-65 849.091,-12.3478 849.091,21.913 808.874,61.8261 747.83,61.8261 673.091,-12.8696 672.874,-151.261 601.221,-222.87 409.221,-223 356.134,-170.261 356.047,-109 380.352,-109 395.091,-94.1739 395.134,-59.913 371.091,-35.913 316.221,-35.8696 155.96,-36 122.178,-2.04348 0.836957,-2.04348 0.181818,79.8182 58.0791,137.976 58.0318,213.569"/>
+  </object>
+  <object id="6" x="284.938" y="505">
+   <polyline points="-59.9375,-305.938 -59.875,-275 0,-215.313 0,0 -137.063,0 -174.875,37.875 -175,126.625"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="transitions">
+  <object id="39" name="transition06" x="244.946" y="817.853">
+   <properties>
+    <property name="neighborA" type="object" value="103"/>
+    <property name="neighborB" type="object" value="102"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="41" name="transition07" x="408.896" y="786.958">
+   <properties>
+    <property name="neighborA" type="object" value="104"/>
+    <property name="neighborB" type="object" value="102"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="42" name="transition05" x="343.063" y="645.031">
+   <properties>
+    <property name="neighborA" type="object" value="102"/>
+    <property name="neighborB" type="object" value="43"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="43" name="transition04" x="285.078" y="587.297">
+   <properties>
+    <property name="neighborA" type="object" value="99"/>
+    <property name="neighborB" type="object" value="42"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="44" name="transition08" x="407.289" y="504.889">
+   <properties>
+    <property name="neighborA" type="object" value="98"/>
+    <property name="neighborB" type="object" value="45"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="45" name="transition09" x="440.75" y="471.156">
+   <properties>
+    <property name="neighborA" type="object" value="44"/>
+    <property name="neighborB" type="object" value="97"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="46" name="transition03" x="110.1" y="542.633">
+   <properties>
+    <property name="neighborA" type="object" value="100"/>
+    <property name="neighborB" type="object" value="101"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="47" name="transition10" x="656.219" y="471.094">
+   <properties>
+    <property name="neighborA" type="object" value="97"/>
+    <property name="neighborB" type="object" value="48"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="48" name="transition11" x="680.063" y="447.313">
+   <properties>
+    <property name="neighborA" type="object" value="47"/>
+    <property name="neighborB" type="object" value="49"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="49" name="transition12" x="679.938" y="412.938">
+   <properties>
+    <property name="neighborA" type="object" value="48"/>
+    <property name="neighborB" type="object" value="50"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="50" name="transition13" x="665.375" y="398.063">
+   <properties>
+    <property name="neighborA" type="object" value="49"/>
+    <property name="neighborB" type="object" value="96"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="51" name="transition14" x="641.068" y="336.75">
+   <properties>
+    <property name="neighborA" type="object" value="96"/>
+    <property name="neighborB" type="object" value="52"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="52" name="transition15" x="693.756" y="284.078">
+   <properties>
+    <property name="neighborA" type="object" value="51"/>
+    <property name="neighborB" type="object" value="53"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="53" name="transition16" x="886.228" y="284.189">
+   <properties>
+    <property name="neighborA" type="object" value="52"/>
+    <property name="neighborB" type="object" value="54"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="54" name="transition17" x="958.031" y="355.906">
+   <properties>
+    <property name="neighborA" type="object" value="53"/>
+    <property name="neighborB" type="object" value="55"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="55" name="transition18" x="958.063" y="494.25">
+   <properties>
+    <property name="neighborA" type="object" value="54"/>
+    <property name="neighborB" type="object" value="56"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="56" name="transition19" x="1032.78" y="568.906">
+   <properties>
+    <property name="neighborA" type="object" value="55"/>
+    <property name="neighborB" type="object" value="57"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="57" name="transition20" x="1094.34" y="568.875">
+   <properties>
+    <property name="neighborA" type="object" value="56"/>
+    <property name="neighborB" type="object" value="58"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="58" name="transition21" x="1133.91" y="529.188">
+   <properties>
+    <property name="neighborA" type="object" value="57"/>
+    <property name="neighborB" type="object" value="59"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="59" name="transition22" x="1134.09" y="494.813">
+   <properties>
+    <property name="neighborA" type="object" value="58"/>
+    <property name="neighborB" type="object" value="60"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="60" name="transition23" x="1186.78" y="442.219">
+   <properties>
+    <property name="neighborA" type="object" value="59"/>
+    <property name="neighborB" type="object" value="61"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="61" name="transition24" x="1281.22" y="442.156">
+   <properties>
+    <property name="neighborA" type="object" value="60"/>
+    <property name="neighborB" type="object" value="62"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="62" name="transition25" x="1311.75" y="473">
+   <properties>
+    <property name="neighborA" type="object" value="61"/>
+    <property name="neighborB" type="object" value="95"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="63" name="transition02" x="284.906" y="289.875">
+   <properties>
+    <property name="neighborA" type="object" value="99"/>
+    <property name="neighborB" type="object" value="64"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="64" name="transition01" x="225.188" y="230.25">
+   <properties>
+    <property name="neighborA" type="object" value="105"/>
+    <property name="neighborB" type="object" value="63"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="nodes">
+  <object id="95" name="schlossBurg" type="level" x="1369.75" y="465.136" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="false"/>
+    <property name="hasNeighborNorth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="62"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="96" name="freudenberg" type="level" x="632.925" y="389.972" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="false"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="50"/>
+    <property name="neighborNorth" type="object" value="51"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="97" name="uni" type="level" x="592.925" y="462.881" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="true"/>
+    <property name="neighborEast" type="object" value="47"/>
+    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="45"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="98" name="wegZurUni" type="level" x="367.925" y="496.949" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="44"/>
+    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="99"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="99" name="hbf" type="level" x="276.834" y="497.063" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="true"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="98"/>
+    <property name="neighborNorth" type="object" value="63"/>
+    <property name="neighborSouth" type="object" value="43"/>
+    <property name="neighborWest" type="object" value="100"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="100" name="arkaden" type="level" x="140.016" y="497.335" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="true"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="99"/>
+    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="46"/>
+    <property name="neighborWest" type="object" value="46"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="101" name="luisenviertel" type="level" x="102.198" y="623.881" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="true"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="46"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="102" name="anchorSouth" type="anchor" x="341.133" y="718.791" width="3.5299" height="3.50947">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="true"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="true"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="41"/>
+    <property name="neighborNorth" type="object" value="42"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="39"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="103" name="bayer" type="level" x="237.121" y="917.917" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="false"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="false"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="39"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="104" name="zoo" type="level" x="400.912" y="905.834" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="false"/>
+    <property name="hasNeighborNorth" type="bool" value="true"/>
+    <property name="hasNeighborSouth" type="bool" value="false"/>
+    <property name="hasNeighborWest" type="bool" value="false"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="41"/>
+    <property name="neighborSouth" type="object" value="0"/>
+    <property name="neighborWest" type="object" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="105" name="oberbarmen" type="level" x="216.975" y="191.229" width="15.9674" height="15.875">
+   <properties>
+    <property name="hasNeighborEast" type="bool" value="false"/>
+    <property name="hasNeighborNorth" type="bool" value="false"/>
+    <property name="hasNeighborSouth" type="bool" value="true"/>
+    <property name="hasNeighborWest" type="bool" value="false"/>
+    <property name="isUnlocked" type="bool" value="false"/>
+    <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborNorth" type="object" value="0"/>
+    <property name="neighborSouth" type="object" value="64"/>
+    <property name="neighborWest" type="object" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
