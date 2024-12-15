@@ -209,6 +209,14 @@ public class Overworld implements Screen {
         nodes = new Array<>();
 
         for (EllipseMapObject ellipse : nodeLayer.getObjects().getByType(EllipseMapObject.class)) {
+            /*LevelNode node = new LevelNode(ellipse);
+            // AnchorSouth ist nur der Ankerpunkt zwischen Bayer und dem Zoo, daher ist
+            //   der isUnlocked wert nicht gegeben
+            if (!Objects.equals(node.getName(), "ANCHORSOUTH")) {
+                node.isUnlocked(savegame.getUnlockStatus(node.getName()));
+            }
+            nodes.add(node);*/
+
             nodes.add(new LevelNode(ellipse));
         }
 
