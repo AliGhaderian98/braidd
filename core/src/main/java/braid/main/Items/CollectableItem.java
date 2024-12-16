@@ -1,11 +1,10 @@
 package braid.main.Items;
 
 import braid.main.Braid;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -49,6 +48,7 @@ public class CollectableItem extends Item {
 
     @Override
     public void use() {
+        LevelHUD.addScore(1);
         destroy();
     }
 

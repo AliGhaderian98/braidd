@@ -1,4 +1,4 @@
-package braid.main.screens;
+package braid.main.screens.huds;
 
 
 import braid.main.Braid;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Preferences;
 public class PreferencesManager {
     private static com.badlogic.gdx.Preferences keyBindingPreferences;
     private static com.badlogic.gdx.Preferences SliderPreferences;
+    private static com.badlogic.gdx.Preferences Countdownpreferences;
 
     public static Preferences getKeyBindingPreferences() {
         if (keyBindingPreferences == null) {
@@ -25,5 +26,11 @@ public class PreferencesManager {
             SliderPreferences = Gdx.app.getPreferences("FullscreenPreferences");
         }
         return SliderPreferences;
+    }
+    public static Preferences getcuntdownsettingsPreferences(){
+        if (Countdownpreferences == null) {
+            Countdownpreferences = Gdx.app.getPreferences("Countdownpreferences");
+        }
+        return Countdownpreferences;
     }
 }

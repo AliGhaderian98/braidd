@@ -4,6 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -11,7 +12,8 @@ import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
-import braid.main.screens.RewindHUD;
+import braid.main.screens.huds.RewindHUD;
+import braid.main.screens.menus.StartMenu;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -80,6 +82,10 @@ public abstract class LevelScreen implements Screen {
     private float time = 0f;
     private RewindHUD rewindHUD;
 
+    private LevelHUD levelHUD;
+
+
+
 
     public LevelScreen(Braid game, String mapPath, String atlasPath, String musicPath) {
         // Setup Game Variables
@@ -89,9 +95,11 @@ public abstract class LevelScreen implements Screen {
         items = new Array<>();
         itemsToSpawn = new PriorityQueue<>();
 
-        // Load current keybindings
+        // Load current Bindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
+        StartMenu.loadTimervisabile();
+
 
         // Setup level map
         mapLoader = new TmxMapLoader();
@@ -124,7 +132,6 @@ public abstract class LevelScreen implements Screen {
         rewindObjects = new Array<>();
 
 
-
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
@@ -132,6 +139,14 @@ public abstract class LevelScreen implements Screen {
         world.setContactListener(new WorldContactListener(player, game));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
+
+        int maxPages = 0;
+        for (int i = 0; i < items.size; i++ ) {
+            if (items.get(i) instanceof CollectableItem)
+                maxPages++;
+        }
+
+        levelHUD = new LevelHUD(game.batch, atlas, maxPages);
     }
 
     private void setupShaders() {
@@ -188,6 +203,7 @@ public abstract class LevelScreen implements Screen {
         fbo.end();
 
         applyPostProcessing(activeShader);
+        game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
     }
 
     private void clearScreen() {
@@ -260,6 +276,8 @@ public abstract class LevelScreen implements Screen {
             item.draw(game.batch);
 
         game.batch.end();
+
+        levelHUD.stage.draw();
     }
 
 
@@ -275,6 +293,7 @@ public abstract class LevelScreen implements Screen {
 
             // Update Entities
             player.update(dt);
+            levelHUD.update(dt);
 
             for (Enemy enemy : enemies) {
                 enemy.update(dt);
@@ -317,6 +336,7 @@ public abstract class LevelScreen implements Screen {
     public void resize(int width, int height) {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
+        levelHUD.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
