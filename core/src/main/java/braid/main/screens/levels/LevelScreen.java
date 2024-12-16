@@ -4,7 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
-import braid.main.Scenes.Hud;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -12,7 +12,7 @@ import braid.main.objects.Enemy;
 import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
-import braid.main.screens.RewindHUD;
+import braid.main.screens.huds.RewindHUD;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -81,7 +81,7 @@ public abstract class LevelScreen implements Screen {
     private float time = 0f;
     private RewindHUD rewindHUD;
 
-    private Hud hud;
+    private LevelHUD levelHUD;
 
 
 
@@ -137,7 +137,7 @@ public abstract class LevelScreen implements Screen {
         world.setContactListener(new WorldContactListener(player, game));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
-        hud = new Hud(game.batch);
+        levelHUD = new LevelHUD(game.batch, atlas);
     }
 
     private void setupShaders() {
@@ -194,8 +194,8 @@ public abstract class LevelScreen implements Screen {
         fbo.end();
 
         applyPostProcessing(activeShader);
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+        game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
+        levelHUD.stage.draw();
     }
 
     private void clearScreen() {
@@ -283,7 +283,7 @@ public abstract class LevelScreen implements Screen {
 
             // Update Entities
             player.update(dt);
-            hud.update(dt);
+            levelHUD.update(dt);
 
             for (Enemy enemy : enemies) {
                 enemy.update(dt);

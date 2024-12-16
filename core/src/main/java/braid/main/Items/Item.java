@@ -1,14 +1,10 @@
 package braid.main.Items;
 
-import braid.main.Braid;
-import braid.main.Scenes.Hud;
 import braid.main.objects.InteractiveGameObject;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class Item extends InteractiveGameObject {
     protected LevelScreen screen;
@@ -50,7 +46,6 @@ public abstract class Item extends InteractiveGameObject {
     }
     public void destroy(){
         toDestroy = true;
-        Hud.addScore(200);
     }
 
 }
