@@ -28,6 +28,8 @@ public class LevelHUD implements Disposable {
     Image pageImage;
 
     private final long startTime;
+    private long pauseTime;
+    private long tempTimeStamp;
     private long elapsedTime;
 
     private static boolean timerVisible;
@@ -37,6 +39,8 @@ public class LevelHUD implements Disposable {
     public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
 
         startTime = System.currentTimeMillis();
+        pauseTime = 0;
+        tempTimeStamp = System.currentTimeMillis();
         elapsedTime = 0;
         collectedPages = 0;
         LevelHUD.maxPages = maxPages;
@@ -68,7 +72,7 @@ public class LevelHUD implements Disposable {
     }
 
     public void update(float dt){
-        elapsedTime = System.currentTimeMillis() - startTime;
+        elapsedTime = System.currentTimeMillis() - (startTime+pauseTime);
 
         // Convert elapsed time to hours, minutes, seconds, and milliseconds
         long hours = (elapsedTime / (1000 * 60 * 60)) % 24;
@@ -113,6 +117,14 @@ public class LevelHUD implements Disposable {
     public static boolean isTimerVisible() { return timerVisible; }
 
     public static void setTimerVisible(boolean value) { timerVisible = value; }
+
+    public void pause() {
+        tempTimeStamp = System.currentTimeMillis();
+    }
+
+    public void resume() {
+        pauseTime += System.currentTimeMillis() - tempTimeStamp;
+    }
 
 
     public void dispose(){stage.dispose();}
