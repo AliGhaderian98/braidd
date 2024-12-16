@@ -184,14 +184,7 @@ public class Player extends DynamicGameObject {
 
     @Override
     public AnimationState getCurrentState() {
-        if (currentState == AnimationState.CLIMBING)
-            return AnimationState.CLIMBING;
-        else if (!isGrounded)
-            return AnimationState.JUMPING;
-        else if (b2body.getLinearVelocity().x != 0)
-            return AnimationState.RUNNING;
-        else
-            return AnimationState.IDLE;
+        return currentState;
     }
 
     //Getter und Setter
