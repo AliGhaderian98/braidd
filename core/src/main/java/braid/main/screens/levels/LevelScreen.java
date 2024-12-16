@@ -129,7 +129,6 @@ public abstract class LevelScreen implements Screen {
         rewindObjects = new Array<>();
 
 
-
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
@@ -137,7 +136,14 @@ public abstract class LevelScreen implements Screen {
         world.setContactListener(new WorldContactListener(player, game));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
-        levelHUD = new LevelHUD(game.batch, atlas);
+
+        int maxPages = 0;
+        for (int i = 0; i < items.size; i++ ) {
+            if (items.get(i) instanceof CollectableItem)
+                maxPages++;
+        }
+
+        levelHUD = new LevelHUD(game.batch, atlas, maxPages);
     }
 
     private void setupShaders() {

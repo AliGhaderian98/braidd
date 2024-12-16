@@ -20,9 +20,10 @@ public class LevelHUD implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private static Integer score;
+    private static Integer collectedPages;
+    private static Integer maxPages;
     private final Label timerLabel;
-    private static Label scoreLabel;
+    private static Label pageLabel;
     Image pageImage;
 
     private final long startTime;
@@ -30,10 +31,11 @@ public class LevelHUD implements Disposable {
 
 
 
-    public LevelHUD(SpriteBatch batch, TextureAtlas atlas){
+    public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
         startTime = System.currentTimeMillis();
         elapsedTime = 0;
-        score = 0;
+        collectedPages = 0;
+        LevelHUD.maxPages = maxPages;
         viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(viewport,batch);
 
@@ -47,10 +49,10 @@ public class LevelHUD implements Disposable {
         table.setFillParent(true);
 
         timerLabel = new Label("00.00", TextFont);
-        scoreLabel = new Label(String.format("%d",score), TextFont);
+        pageLabel = new Label(String.format("%d/%d", collectedPages, LevelHUD.maxPages), TextFont);
 
         Table scoreTable = new Table();
-        scoreTable.add(scoreLabel);
+        scoreTable.add(pageLabel);
         scoreTable.add(pageImage).padLeft(40).padRight(160).padTop(160);
 
         table.add(timerLabel).expandX().align(Align.left).pad(100);
@@ -95,8 +97,8 @@ public class LevelHUD implements Disposable {
     }
 
     public static void addScore (int value){
-        score += value;
-        scoreLabel.setText(String.format("%d",score));
+        collectedPages += value;
+        pageLabel.setText(String.format("%d/%d", collectedPages, maxPages));
     }
 
     public boolean isTimerVisible() { return timerLabel.isVisible(); }
