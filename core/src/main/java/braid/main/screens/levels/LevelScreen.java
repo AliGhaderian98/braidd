@@ -195,7 +195,6 @@ public abstract class LevelScreen implements Screen {
 
         applyPostProcessing(activeShader);
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
-        levelHUD.stage.draw();
     }
 
     private void clearScreen() {
@@ -268,6 +267,8 @@ public abstract class LevelScreen implements Screen {
             item.draw(game.batch);
 
         game.batch.end();
+
+        levelHUD.stage.draw();
     }
 
 
@@ -326,6 +327,7 @@ public abstract class LevelScreen implements Screen {
     public void resize(int width, int height) {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
+        levelHUD.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 

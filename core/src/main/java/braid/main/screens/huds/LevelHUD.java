@@ -21,15 +21,18 @@ public class LevelHUD implements Disposable {
     private Viewport viewport;
 
     private static Integer score;
-    private final Label countdownLabel;
+    private final Label timerLabel;
     private static Label scoreLabel;
-    private final long startTime;
-
     Image pageImage;
+
+    private final long startTime;
+    private long elapsedTime;
+
 
 
     public LevelHUD(SpriteBatch batch, TextureAtlas atlas){
         startTime = System.currentTimeMillis();
+        elapsedTime = 0;
         score = 0;
         viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(viewport,batch);
@@ -43,21 +46,21 @@ public class LevelHUD implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label("00.00", TextFont);
+        timerLabel = new Label("00.00", TextFont);
         scoreLabel = new Label(String.format("%d",score), TextFont);
 
         Table scoreTable = new Table();
         scoreTable.add(scoreLabel);
         scoreTable.add(pageImage).padLeft(40).padRight(160).padTop(160);
 
-        table.add(countdownLabel).expandX().align(Align.left).pad(100);
+        table.add(timerLabel).expandX().align(Align.left).pad(100);
         table.add(scoreTable).expandX().align(Align.right).pad(100);
 
         stage.addActor(table);
     }
 
     public void update(float dt){
-        long elapsedTime = System.currentTimeMillis() - startTime;
+        elapsedTime = System.currentTimeMillis() - startTime;
 
         // Convert elapsed time to hours, minutes, seconds, and milliseconds
         long hours = (elapsedTime / (1000 * 60 * 60)) % 24;
@@ -84,13 +87,25 @@ public class LevelHUD implements Disposable {
             formattedTime.append(String.format("%02d", milliseconds));
         }
 
-        countdownLabel.setText(formattedTime);
+        timerLabel.setText(formattedTime);
+    }
+
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
     }
 
     public static void addScore (int value){
         score += value;
         scoreLabel.setText(String.format("%d",score));
     }
+
+    public boolean isTimerVisible() { return timerLabel.isVisible(); }
+
+    public void setTimerVisible(boolean value) {
+        timerLabel.setVisible(value);
+    }
+
+
 
     public void dispose(){stage.dispose();}
 
