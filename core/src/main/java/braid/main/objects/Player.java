@@ -46,6 +46,7 @@ public class Player extends DynamicGameObject {
     private boolean isAtLadder;
     private boolean isAtEnd;
 
+    // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
     private Vector2 minMoveLimit;
 
@@ -109,7 +110,6 @@ public class Player extends DynamicGameObject {
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
-        System.out.println(b2body.getLinearVelocity().y);
     }
 
     public TextureRegion getFrame(float dt){
@@ -186,7 +186,6 @@ public class Player extends DynamicGameObject {
     public AnimationState getCurrentState() {
         if (currentState == AnimationState.CLIMBING)
             return AnimationState.CLIMBING;
-        //else if (b2body.getLinearVelocity().y != 0)
         else if (!isGrounded)
             return AnimationState.JUMPING;
         else if (b2body.getLinearVelocity().x != 0)
