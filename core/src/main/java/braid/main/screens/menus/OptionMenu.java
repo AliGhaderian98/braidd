@@ -95,9 +95,7 @@ public class OptionMenu implements Screen {
         Music = new Label("Music", SelectionFont);
         Soundeffekt = new Label("Sound Effects", SelectionFont);
         Keybindings = new Label("Keybindings", SelectionFont);
-        Timer = new Label("visibility Playtime:  " + LevelHUD.isTimerVisible(), SelectionFont);
-
-
+        Timer = new Label("Timer:  " + booltoString(LevelHUD.isTimerVisible()), SelectionFont);
 
 
 
@@ -266,7 +264,14 @@ public class OptionMenu implements Screen {
 
 
     private void updateLabel() {
-        Timer.setText("visibility Playtime:  " + LevelHUD.isTimerVisible());
+        Timer.setText("Timer:  " + booltoString(LevelHUD.isTimerVisible()));
+    }
+
+    private String booltoString(boolean value) {
+        if (value)
+            return "Ein";
+        else
+            return "Aus";
     }
 
 
