@@ -3,6 +3,7 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,7 +24,8 @@ public class Player extends DynamicGameObject {
         JUMPING,
         RUNNING,
         CLIMBING,
-        FALLING
+        FALLING,
+        LANDING
     }
 
     // Animation variables
@@ -33,6 +35,7 @@ public class Player extends DynamicGameObject {
     public float stateTimer;
 
     private boolean isGrounded;
+    private boolean landingAnimationPlaying = false;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
@@ -106,13 +109,10 @@ public class Player extends DynamicGameObject {
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
-        //System.out.println("currentState: "+currentState +",    isGrounded: "+ isGrounded);
+        System.out.println(b2body.getLinearVelocity().y);
     }
 
     public TextureRegion getFrame(float dt){
-        // regions for the different States
-        //currentState = getCurrentState();
-
         testAnimationPause();
 
         if (!animationPaused) {
@@ -121,13 +121,20 @@ public class Player extends DynamicGameObject {
 
         previousState = currentState;
 
-        TextureRegion region = switch (currentState) {
-            case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
-            case JUMPING -> LionJumping.getKeyFrame(0, false);
-            case FALLING -> LionFalling.getKeyFrame(0,false);
-            case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
-            default -> LionIdle.getKeyFrame(stateTimer, true);
-        };
+        TextureRegion region;
+
+        if (landingAnimationPlaying)
+            region = LionLanding.getKeyFrame(0,false);
+        else {
+            region = switch (currentState) {
+                case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
+                case JUMPING -> LionJumping.getKeyFrame(0, false);
+                case FALLING -> LionFalling.getKeyFrame(0,false);
+                case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
+                default -> LionIdle.getKeyFrame(stateTimer, true);
+            };
+        }
+
 
         //checking if the model has to be flipped
         if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
@@ -153,8 +160,19 @@ public class Player extends DynamicGameObject {
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
-        currentState = AnimationState.IDLE;
+        currentState = AnimationState.LANDING;
         isGrounded = true;
+        if (b2body.getLinearVelocity().y < -3.5) {
+            landingAnimationPlaying = true;
+            new Thread(() -> {
+                long time = System.currentTimeMillis();
+                while (System.currentTimeMillis() < time + 250){}
+                Gdx.app.postRunnable(() -> {
+                    landingAnimationPlaying = false;
+                } );
+            }).start();
+        }
+
     }
 
     public void fall() {
