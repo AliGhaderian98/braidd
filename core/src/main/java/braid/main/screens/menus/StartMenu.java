@@ -4,7 +4,6 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.LevelHUD;
-import braid.main.screens.levels.TestLevel;
 import braid.main.tools.PreferencesManager;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
@@ -13,13 +12,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -31,10 +26,11 @@ public class StartMenu extends ScreenAdapter {
     public StartMenu(Game game){
         this.game = game;
 
+        LevelHUD.setTimerVisible(false);
 
         // load Bindings
         loadDisplayseedings();
-        loadTimervisabile();
+        loadTimerVisible();
 
         // Setup Viewport
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
@@ -79,7 +75,7 @@ public class StartMenu extends ScreenAdapter {
         stage.draw();
     }
 
-    public static void loadTimervisabile(){
+    public static void loadTimerVisible(){
         LevelHUD.setTimerVisible(PreferencesManager.getcuntdownsettingsPreferences().getBoolean("Countdownpreferences"));
     }
 

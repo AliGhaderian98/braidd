@@ -98,7 +98,7 @@ public abstract class LevelScreen implements Screen {
         // Load current Bindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
-        StartMenu.loadTimervisabile();
+        StartMenu.loadTimerVisible();
 
 
         // Setup level map
