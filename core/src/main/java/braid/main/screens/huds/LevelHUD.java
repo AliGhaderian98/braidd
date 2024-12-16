@@ -29,6 +29,8 @@ public class LevelHUD implements Disposable {
     private final long startTime;
     private long elapsedTime;
 
+    private static boolean timerVisible = true;
+
 
 
     public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
@@ -57,6 +59,8 @@ public class LevelHUD implements Disposable {
 
         table.add(timerLabel).expandX().align(Align.left).pad(100);
         table.add(scoreTable).expandX().align(Align.right).pad(100);
+
+        timerLabel.setVisible(timerVisible);
 
         stage.addActor(table);
     }
@@ -90,6 +94,9 @@ public class LevelHUD implements Disposable {
         }
 
         timerLabel.setText(formattedTime);
+
+        if (timerVisible != timerLabel.isVisible())
+            timerLabel.setVisible(timerVisible);
     }
 
     public void resize(int width, int height) {
@@ -101,12 +108,9 @@ public class LevelHUD implements Disposable {
         pageLabel.setText(String.format("%d/%d", collectedPages, maxPages));
     }
 
-    public boolean isTimerVisible() { return timerLabel.isVisible(); }
+    public static boolean isTimerVisible() { return timerVisible; }
 
-    public void setTimerVisible(boolean value) {
-        timerLabel.setVisible(value);
-    }
-
+    public static void setTimerVisible(boolean value) { timerVisible = value; }
 
 
     public void dispose(){stage.dispose();}
