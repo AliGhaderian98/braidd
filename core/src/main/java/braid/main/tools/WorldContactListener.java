@@ -11,6 +11,7 @@ import braid.main.objects.Player;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -115,7 +116,27 @@ public class WorldContactListener implements ContactListener {
 
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+            UserData ladderData = (userDataA.getObject() instanceof Ladder) ? userDataA : userDataB;
             player.atLadder(true);
+
+            Vector2 max = new Vector2(0,0);
+            Vector2 min = new Vector2(0,0);
+
+            PolygonShape polygonShape = (PolygonShape) ((Ladder) ladderData.getObject()).b2body.getFixtureList().first().getShape();
+            Vector2 vertex = new Vector2();
+
+            for (int i = 0; i < polygonShape.getVertexCount(); i++) {
+                polygonShape.getVertex(i, vertex);
+                // Transform vertex to world coordinates
+                vertex = (((Ladder) ladderData.getObject()).b2body).getWorldPoint(vertex);
+
+                min.x = Math.min(min.x, vertex.x);
+                min.y = Math.min(min.y, vertex.y);
+                max.x = Math.max(max.x, vertex.x);
+                max.y = Math.max(max.y, vertex.y);
+            }
+
+            player.setMoveLimits(max, min);
         }
     }
 
@@ -159,6 +180,7 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(false);
+            player.resetMoveLimits();
             player.stopClimbing();
         }
     }

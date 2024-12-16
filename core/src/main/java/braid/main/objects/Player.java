@@ -6,6 +6,8 @@ import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 //todo: Spring Animation fixen, stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
@@ -41,6 +43,8 @@ public class Player extends DynamicGameObject {
     private boolean isAtLadder;
     private boolean isAtEnd;
 
+    private Vector2 maxMoveLimit;
+    private Vector2 minMoveLimit;
 
     // Constructors
     public Player(World world, LevelScreen screen) {
@@ -231,6 +235,16 @@ public class Player extends DynamicGameObject {
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
 
+    public void setMoveLimits(Vector2 max, Vector2 min) {
+        maxMoveLimit = max;
+        minMoveLimit = min;
+    }
+
+    public void resetMoveLimits() {
+        maxMoveLimit = null;
+        minMoveLimit = null;
+    }
+
     public void die() {
         LevelScreen.gameIsPaused = true;
         isAlive = false;
@@ -240,7 +254,6 @@ public class Player extends DynamicGameObject {
     // Inputs
 
     public void moveRight() {
-        //if (currentState != AnimationState.JUMPING && currentState != AnimationState.CLIMBING)
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x < speed) {
@@ -249,7 +262,6 @@ public class Player extends DynamicGameObject {
     }
 
     public void moveLeft() {
-        //if (currentState != AnimationState.JUMPING && currentState != AnimationState.CLIMBING)
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x > -speed) {
@@ -259,20 +271,26 @@ public class Player extends DynamicGameObject {
 
     public void stopMovement() {
         if (currentState != AnimationState.CLIMBING) {
-        //    if (currentState != AnimationState.JUMPING)
             if (isGrounded)
                 currentState = AnimationState.IDLE;
             b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
         }
-        // b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y),
-        // b2body.getWorldCenter(), true);
     }
 
     public void climbUp() {
         currentState = AnimationState.CLIMBING;
         isGrounded = false;
         b2body.setGravityScale(0);
-        b2body.setLinearVelocity(0, getClimbingSpeed());
+        Vector2 newPos = new Vector2(b2body.getPosition());
+
+        if (b2body.getPosition().y < maxMoveLimit.y)
+            b2body.setLinearVelocity(0, getClimbingSpeed());
+        else {
+            b2body.setLinearVelocity(0, 0);
+            newPos.y = MathUtils.clamp(b2body.getPosition().y, minMoveLimit.y, maxMoveLimit.y);
+        }
+
+        b2body.setTransform(newPos, b2body.getAngle());
     }
 
     public void climbDown() {
