@@ -13,6 +13,7 @@ import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
 import braid.main.screens.huds.RewindHUD;
+import braid.main.screens.menus.StartMenu;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -94,9 +95,11 @@ public abstract class LevelScreen implements Screen {
         items = new Array<>();
         itemsToSpawn = new PriorityQueue<>();
 
-        // Load current keybindings
+        // Load current Bindings
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
+        StartMenu.loadTimervisabile();
+
 
         // Setup level map
         mapLoader = new TmxMapLoader();

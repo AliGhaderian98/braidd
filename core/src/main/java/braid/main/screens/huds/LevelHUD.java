@@ -1,6 +1,7 @@
 package braid.main.screens.huds;
 
 import braid.main.Braid;
+import braid.main.screens.menus.StartMenu;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,11 +30,12 @@ public class LevelHUD implements Disposable {
     private final long startTime;
     private long elapsedTime;
 
-    private static boolean timerVisible = true;
+    private static boolean timerVisible;
 
 
 
     public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
+
         startTime = System.currentTimeMillis();
         elapsedTime = 0;
         collectedPages = 0;

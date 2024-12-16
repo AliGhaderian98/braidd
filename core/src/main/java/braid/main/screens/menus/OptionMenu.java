@@ -1,6 +1,7 @@
 package braid.main.screens.menus;
 
 import braid.main.Braid;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
@@ -27,7 +28,7 @@ public class OptionMenu implements Screen {
     private final Screen previousScreen;
     private final Stage stage;
     private final Game game;
-    private final Label Fullscreen, Music, Soundeffekt, Keybindings;
+    private final Label Fullscreen,Timer, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
     private boolean isInFullscreen;
@@ -94,13 +95,16 @@ public class OptionMenu implements Screen {
         Music = new Label("Music", SelectionFont);
         Soundeffekt = new Label("Sound Effects", SelectionFont);
         Keybindings = new Label("Keybindings", SelectionFont);
+        Timer = new Label("visibility Playtime:  " + LevelHUD.isTimerVisible(), SelectionFont);
+
 
 
 
 
         // fill Array with Labels to target a Label
         menuLabels = new Array<>();
-        menuLabels.add(Music, Soundeffekt,Fullscreen, Keybindings);
+        menuLabels.add(Music, Soundeffekt,Fullscreen, Timer);
+        menuLabels.add(Keybindings);
 
 
 
@@ -116,6 +120,8 @@ public class OptionMenu implements Screen {
         table.add(sfxSlider).width(500);
         table.row();
         table.add(Fullscreen).padTop(50);
+        table.row();
+        table.add(Timer);
         table.row();
         table.add(Keybindings);
         loadSlider();
@@ -137,6 +143,7 @@ public class OptionMenu implements Screen {
         // show table
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        updateLabel();
         handleInput();
         updateScreenRatio();
         stage.draw();
@@ -208,8 +215,13 @@ public class OptionMenu implements Screen {
         } else if (selectedLabel == Keybindings) {
             game.setScreen(new KeybindsMenu(game, previousScreen));
             dispose();
+        } else if (selectedLabel == Timer) {
+            LevelHUD.setTimerVisible(!LevelHUD.isTimerVisible());
+            saveTimervisabile();
         }
     }
+
+
 
     // moves the Slider of the selected Slider
     private void moveSlider(float move){
@@ -242,9 +254,19 @@ public class OptionMenu implements Screen {
         PreferencesManager.getSliderPreferences().flush();
     }
 
+    private void saveTimervisabile() {
+        PreferencesManager.getcuntdownsettingsPreferences().putBoolean("Countdownpreferences",LevelHUD.isTimerVisible() );
+        PreferencesManager.getcuntdownsettingsPreferences().flush();
+    }
+
     private void loadSlider(){
         sfxSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("sfxSlider", sfxSlider.getValue()));
         musicSlider.setValue(PreferencesManager.getSliderPreferences().getFloat("musicSlider",musicSlider.getValue()));
+    }
+
+
+    private void updateLabel() {
+        Timer.setText("visibility Playtime:  " + LevelHUD.isTimerVisible());
     }
 
 

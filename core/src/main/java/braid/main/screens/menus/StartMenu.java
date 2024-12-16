@@ -3,6 +3,7 @@ package braid.main.screens.menus;
 
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.TestLevel;
 import braid.main.tools.PreferencesManager;
 import braid.main.tools.TextFontManager;
@@ -30,8 +31,10 @@ public class StartMenu extends ScreenAdapter {
     public StartMenu(Game game){
         this.game = game;
 
-        // load Keybindings
+
+        // load Bindings
         loadDisplayseedings();
+        loadTimervisabile();
 
         // Setup Viewport
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
@@ -74,6 +77,10 @@ public class StartMenu extends ScreenAdapter {
 
         stage.act(delta);
         stage.draw();
+    }
+
+    public static void loadTimervisabile(){
+        LevelHUD.setTimerVisible(PreferencesManager.getcuntdownsettingsPreferences().getBoolean("Countdownpreferences"));
     }
 
     @Override
