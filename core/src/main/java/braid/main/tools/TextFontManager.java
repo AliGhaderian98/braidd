@@ -18,7 +18,7 @@ public class TextFontManager {
     public static BitmapFont getmidTextFont() {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("textFonts/MenuTextFont.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 120;
+        parameter.size = 80;
         BitmapFont font = generator.generateFont(parameter);
         generator.dispose();
 
@@ -28,7 +28,7 @@ public class TextFontManager {
     public static BitmapFont getlittleTextFont() {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("textFonts/MenuTextFont.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 90;
+        parameter.size = 60;
         BitmapFont font = generator.generateFont(parameter);
         generator.dispose();
 

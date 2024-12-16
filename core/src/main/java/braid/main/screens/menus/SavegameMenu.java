@@ -3,10 +3,7 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
-import braid.main.tools.Audiomanager;
-import braid.main.tools.KeyBindings;
-import braid.main.tools.PreferencesManager;
-import braid.main.tools.TextFontManager;
+import braid.main.tools.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,6 +11,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -32,9 +30,10 @@ public class SavegameMenu implements Screen{
 
 
     // Labels show on Screen
-    private final Label Savegame1, Savegame2, Savegame3;
-    private final Label SG1Collectibles,SG2Collectibles,SG3Collectibles;
-    private final Label SG1UnlockedLevel, SG2UnlockedLevel, SG3UnlockedLevel;
+    private final Label Savegame1, Savegame2, Savegame3, Savegame4, Savegame5, Savegame6, Savegame7, Savegame8, Savegame9, Savegame10;
+    private final Label SG1Collectibles, SG2Collectibles, SG3Collectibles, SG4Collectibles, SG5Collectibles, SG6Collectibles, SG7Collectibles, SG8Collectibles, SG9Collectibles, SG10Collectibles;
+    private final Label SG1UnlockedLevel, SG2UnlockedLevel, SG3UnlockedLevel, SG4UnlockedLevel, SG5UnlockedLevel, SG6UnlockedLevel, SG7UnlockedLevel, SG8UnlockedLevel, SG9UnlockedLevel, SG10UnlockedLevel;
+    private final Group SG1, SG2, SG3, SG4, SG5, SG6, SG7, SG8, SG9, SG10;
 
     // used to target a Label
     private final Array<Label> SaveGameLabels;
@@ -47,6 +46,7 @@ public class SavegameMenu implements Screen{
 
 
     public SavegameMenu(Game game) {
+        Savemanager savemanager = new Savemanager();
         this.game = game;
 
         // Setup Screen
@@ -75,6 +75,17 @@ public class SavegameMenu implements Screen{
         Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.getmidTextFont(), Color.GRAY);
         Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.getlittleTextFont(), Color.GRAY);
 
+        // Setup Groups for better Handing of the Labels
+        SG1 = new Group();
+        SG2 = new Group();
+        SG3 = new Group();
+        SG4 = new Group();
+        SG5 = new Group();
+        SG6 = new Group();
+        SG7 = new Group();
+        SG8 = new Group();
+        SG9 = new Group();
+        SG10 = new Group();
 
 
         // Setup Title and Options
@@ -84,24 +95,129 @@ public class SavegameMenu implements Screen{
         Savegame1 = new Label("Savegame 1", SelectionFont);
         Savegame2 = new Label("Savegame 2", SelectionFont);
         Savegame3 = new Label("Savegame 3", SelectionFont);
+        Savegame4 = new Label("Savegame 4", SelectionFont);
+        Savegame5 = new Label("Savegame 5", SelectionFont);
+        Savegame6 = new Label("Savegame 6", SelectionFont);
+        Savegame7 = new Label("Savegame 7", SelectionFont);
+        Savegame8 = new Label("Savegame 8", SelectionFont);
+        Savegame9 = new Label("Savegame 9", SelectionFont);
+        Savegame10 = new Label("Savegame 10", SelectionFont);
+
+
+        Savegame1.setPosition(0,0);
+        Savegame2.setPosition(0,0);
+        Savegame3.setPosition(0,0);
+        Savegame4.setPosition(0,0);
+        Savegame5.setPosition(0,0);
+        Savegame6.setPosition(0,0);
+        Savegame7.setPosition(0,0);
+        Savegame8.setPosition(0,0);
+        Savegame9.setPosition(0,0);
+        Savegame10.setPosition(0,0);
+
 
         SG1Collectibles = new Label("Collectibles 1", LittleSelectionFont);
         SG2Collectibles = new Label("Collectibles 2", LittleSelectionFont);
         SG3Collectibles = new Label("Collectibles 3", LittleSelectionFont);
+        SG4Collectibles = new Label("Collectibles 4", LittleSelectionFont);
+        SG5Collectibles = new Label("Collectibles 5", LittleSelectionFont);
+        SG6Collectibles = new Label("Collectibles 6", LittleSelectionFont);
+        SG7Collectibles = new Label("Collectibles 7", LittleSelectionFont);
+        SG8Collectibles = new Label("Collectibles 8", LittleSelectionFont);
+        SG9Collectibles = new Label("Collectibles 9", LittleSelectionFont);
+        SG10Collectibles = new Label("Collectibles 10", LittleSelectionFont);
+
+        SG10Collectibles.setPosition(0,100);
+        SG9Collectibles.setPosition(0,100);
+        SG8Collectibles.setPosition(0,100);
+        SG7Collectibles.setPosition(0,100);
+        SG6Collectibles.setPosition(0,100);
+        SG5Collectibles.setPosition(0,100);
+        SG4Collectibles.setPosition(0,100);
+        SG3Collectibles.setPosition(0,100);
+        SG2Collectibles.setPosition(0,100);
+        SG1Collectibles.setPosition(0,100);
+
 
         SG1UnlockedLevel = new Label("Unlocked Levels 1", LittleSelectionFont);
         SG2UnlockedLevel = new Label("Unlocked Levels 2", LittleSelectionFont);
         SG3UnlockedLevel = new Label("Unlocked Levels 3", LittleSelectionFont);
+        SG4UnlockedLevel = new Label("Unlocked Levels 4", LittleSelectionFont);
+        SG5UnlockedLevel = new Label("Unlocked Levels 5", LittleSelectionFont);
+        SG6UnlockedLevel = new Label("Unlocked Levels 6", LittleSelectionFont);
+        SG7UnlockedLevel = new Label("Unlocked Levels 7", LittleSelectionFont);
+        SG8UnlockedLevel = new Label("Unlocked Levels 8", LittleSelectionFont);
+        SG9UnlockedLevel = new Label("Unlocked Levels 9", LittleSelectionFont);
+        SG10UnlockedLevel = new Label("Unlocked Levels 10", LittleSelectionFont);
+
+        SG1UnlockedLevel.setPosition(0,200);
+        SG2UnlockedLevel.setPosition(0,200);
+        SG3UnlockedLevel.setPosition(0,200);
+        SG4UnlockedLevel.setPosition(0,200);
+        SG5UnlockedLevel.setPosition(0,200);
+        SG6UnlockedLevel.setPosition(0,200);
+        SG7UnlockedLevel.setPosition(0,200);
+        SG8UnlockedLevel.setPosition(0,200);
+        SG9UnlockedLevel.setPosition(0,200);
+        SG10UnlockedLevel.setPosition(0,200);
+
+        SG1.addActor(Savegame1);
+        SG1.addActor(SG1Collectibles);
+        SG1.addActor(SG1UnlockedLevel);
+
+        SG2.addActor(Savegame2);
+        SG2.addActor(SG2Collectibles);
+        SG2.addActor(SG2UnlockedLevel);
+
+        SG3.addActor(Savegame3);
+        SG3.addActor(SG3Collectibles);
+        SG3.addActor(SG3UnlockedLevel);
+
+        SG4.addActor(Savegame4);
+        SG4.addActor(SG4Collectibles);
+        SG4.addActor(SG4UnlockedLevel);
+
+        SG5.addActor(Savegame5);
+        SG5.addActor(SG5Collectibles);
+        SG5.addActor(SG5UnlockedLevel);
+
+        SG6.addActor(Savegame6);
+        SG6.addActor(SG6Collectibles);
+        SG6.addActor(SG6UnlockedLevel);
+
+        SG7.addActor(Savegame7);
+        SG7.addActor(SG7Collectibles);
+        SG7.addActor(SG7UnlockedLevel);
+
+        SG8.addActor(Savegame8);
+        SG8.addActor(SG8Collectibles);
+        SG8.addActor(SG8UnlockedLevel);
+
+        SG9.addActor(Savegame9);
+        SG9.addActor(SG9Collectibles);
+        SG9.addActor(SG9UnlockedLevel);
+
+        SG10.addActor(Savegame10);
+        SG10.addActor(SG10Collectibles);
+        SG10.addActor(SG10UnlockedLevel);
+
+
+
 
 
         // fill Array with Labels to target a Label
         SaveGameLabels = new Array<>();
-        SaveGameLabels.add(Savegame1,Savegame2,Savegame3);
+        SaveGameLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
+        SaveGameLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
+        SaveGameLabels.add(Savegame9,Savegame10);
+
 
         // fill Array with all Labels to reset the Color
         AllLabels = new Array<>();
-        AllLabels.add(Savegame1,Savegame2,Savegame3);
-        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles);
+        AllLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
+        AllLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
+        AllLabels.add(Savegame9,Savegame10);
+        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles,SG4UnlockedLevel);
         AllLabels.add(SG1UnlockedLevel,SG2UnlockedLevel,SG3UnlockedLevel);
 
 
@@ -109,23 +225,29 @@ public class SavegameMenu implements Screen{
         // Setup Table
         table.add(Title);
         table.row();
-        table.add(Savegame1).padTop(10f);
+        table.add(SG1).width(200).height(0).pad(10);
         table.row();
-        table.add(SG1Collectibles);
+        table.add(SG2).width(200).height(50).pad(10);
         table.row();
-        table.add(SG1UnlockedLevel);
+        table.add(SG3).width(200).height(100).pad(10);
         table.row();
-        table.add(Savegame2).padTop(10f);
+        table.add(SG4).width(200).height(150).pad(10);
         table.row();
-        table.add(SG2Collectibles);
+        table.add(SG5).width(200).height(200).pad(10);
         table.row();
-        table.add(SG2UnlockedLevel);
+        table.add(SG6).width(200).height(250).pad(10);
         table.row();
-        table.add(Savegame3).padTop(10f);
+        table.add(SG7).width(200).height(300).pad(10);
         table.row();
-        table.add(SG3Collectibles);
+        table.add(SG8).width(200).height(350).pad(10);
         table.row();
-        table.add(SG3UnlockedLevel);
+        table.add(SG9).width(200).height(400).pad(10);
+        table.row();
+        table.add(SG10).width(200).height(450).pad(10);
+
+
+
+
 
         stage.addActor(table);
 

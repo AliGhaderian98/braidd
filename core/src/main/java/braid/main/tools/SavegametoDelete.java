@@ -1,22 +1,18 @@
 package braid.main.tools;
 
-import braid.main.Items.CollectableItem;
-import braid.main.overworld.LevelNode;
-
 import java.util.Map;
-import java.util.Timer;
 
-public class Savegame {
+public class SavegametoDelete {
 
+    public static int SaveGameKEY;
     //public  Map<LevelNode, CollectableItem> Collectables;
-    public  Map<LevelNode,Boolean> UnlockedLevels;
+    public  Map<String,Boolean> UnlockedLevels;
     //public Timer Playtime;
 
-    public Savegame(Map<LevelNode,Boolean> UnlockedLevels) {
-        // this.Collectables = Collectables;
-        this.UnlockedLevels = UnlockedLevels;
-        //this.Playtime = Playtime;
-    }
+
+
+    public SavegametoDelete() {}
+
         /*
     public Timer getTimer(){
         return Playtime;
@@ -42,13 +38,15 @@ public class Savegame {
 */
 
 
-    public void  setUnlockedLevels(Map<LevelNode,Boolean> UnlockedLevels){
+    public void  setUnlockedLevels(Map<String,Boolean> UnlockedLevels){
         this.UnlockedLevels = UnlockedLevels;
     }
 
-    public Map<LevelNode,Boolean> getUnlockedLevels(){
+    public  Map<String,Boolean> getUnlockedLevels(){
         return UnlockedLevels;
     }
+
+
 
 
 
