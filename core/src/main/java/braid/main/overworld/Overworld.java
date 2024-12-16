@@ -227,6 +227,7 @@ public class Overworld implements Screen {
     @Override
     public void render(float delta) {
         KeyBindings.loadKeyBindings();
+
         if(!gameIsPaused) {
             delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
 
@@ -283,6 +284,17 @@ public class Overworld implements Screen {
         KeyBindings.loadKeyBindings();
         setupInput();
         gameIsPaused = false;
+
+        new Thread(() -> {
+            long time = System.currentTimeMillis();
+            while (System.currentTimeMillis() < time){}
+            Gdx.app.postRunnable(() -> {
+                resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            } );
+        }).start();
+
+
+
     }
 
     @Override
