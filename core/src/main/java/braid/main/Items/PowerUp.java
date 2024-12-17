@@ -14,22 +14,32 @@ public class PowerUp extends Item {
     TypeOfPowerUp readTypePowerUp;
 
     public PowerUp(LevelScreen screen, float x, float y,TypeOfPowerUp givenTypeOfPowerUp) {
-        super(screen, x, y, 6);
+        super(screen, x, y, 7);
 
         fixture.setUserData(new UserData("item", this));
+        readTypePowerUp = givenTypeOfPowerUp;
 
         //defineItem();
-        sprite = new Sprite(screen.getAtlas().findRegion("page")); //Später andere Sprites je nach TypeOfPowerUp
+        String regionName = getRegionName();
+        sprite = new Sprite(screen.getAtlas().findRegion(regionName)); //Später andere Sprites je nach TypeOfPowerUp
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y-getHeight()/2);
 
-        readTypePowerUp = givenTypeOfPowerUp;
     }
     public enum TypeOfPowerUp {
         RITALIN,
         GLEITER,
         HAMMER;
 
+    }
+
+    private String getRegionName() {
+        return switch (readTypePowerUp) {
+            case RITALIN -> "ritalin";
+            // case GLEITER -> "gleiter";
+            // case HAMMER -> "hammer";
+            default -> "page";
+        };
     }
 
     public void defineItem() {
