@@ -162,7 +162,7 @@ public class Player extends DynamicGameObject {
     public void land() {
         currentState = AnimationState.LANDING;
         isGrounded = true;
-        if (b2body.getLinearVelocity().y < -3.5) {
+        if (b2body.getLinearVelocity().y < -3.75) {
             landingAnimationPlaying = true;
             new Thread(() -> {
                 long time = System.currentTimeMillis();
