@@ -140,15 +140,15 @@ public class B2WorldCreator {
         for (MapObject object : itemsLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            // Position of the enemy
+            // Position of the Item
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
 
-            // Type of the enemy
+            // Type of the Item
             String type = (String) object.getProperties().get("type");
 
-            // Spawning enemy
+            // Spawning Item
             if ("Page".equals(type)) {
                 screen.addItem(new CollectableItem(screen, x, y));
             }
