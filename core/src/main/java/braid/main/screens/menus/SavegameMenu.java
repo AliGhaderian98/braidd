@@ -11,6 +11,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -27,7 +28,8 @@ public class SavegameMenu implements Screen{
     private final Stage stage;
     private final Game game;
     private final ScrollPane scrollPane;
-    private final Table table;
+    private final Table table, rootTable;
+    private float ScrolPoint;
 
     int width;
     int height;
@@ -61,7 +63,7 @@ public class SavegameMenu implements Screen{
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
-
+        ScrolPoint = 0;
 
         KeyBindings.loadKeyBindings();
 
@@ -71,8 +73,7 @@ public class SavegameMenu implements Screen{
 
         //  Create Table
         table = new Table();
-
-        Table rootTable = new Table();
+        rootTable = new Table();
 
 
         // Setup Label styles for Title and Options
@@ -108,19 +109,6 @@ public class SavegameMenu implements Screen{
         Savegame9 = new Label("Savegame 9", SelectionFont);
         Savegame10 = new Label("Savegame 10", SelectionFont);
 
-
-        Savegame1.setPosition(0,0);
-        Savegame2.setPosition(0,0);
-        Savegame3.setPosition(0,0);
-        Savegame4.setPosition(0,0);
-        Savegame5.setPosition(0,0);
-        Savegame6.setPosition(0,0);
-        Savegame7.setPosition(0,0);
-        Savegame8.setPosition(0,0);
-        Savegame9.setPosition(0,0);
-        Savegame10.setPosition(0,0);
-
-
         SG1Collectibles = new Label("Collectibles 1", LittleSelectionFont);
         SG2Collectibles = new Label("Collectibles 2", LittleSelectionFont);
         SG3Collectibles = new Label("Collectibles 3", LittleSelectionFont);
@@ -132,18 +120,6 @@ public class SavegameMenu implements Screen{
         SG9Collectibles = new Label("Collectibles 9", LittleSelectionFont);
         SG10Collectibles = new Label("Collectibles 10", LittleSelectionFont);
 
-        SG10Collectibles.setPosition(0,0);
-        SG9Collectibles.setPosition(0,0);
-        SG8Collectibles.setPosition(0,0);
-        SG7Collectibles.setPosition(0,0);
-        SG6Collectibles.setPosition(0,0);
-        SG5Collectibles.setPosition(0,0);
-        SG4Collectibles.setPosition(0,0);
-        SG3Collectibles.setPosition(0,0);
-        SG2Collectibles.setPosition(0,0);
-        SG1Collectibles.setPosition(0,0);
-
-
         SG1UnlockedLevel = new Label("Unlocked Levels 1", LittleSelectionFont);
         SG2UnlockedLevel = new Label("Unlocked Levels 2", LittleSelectionFont);
         SG3UnlockedLevel = new Label("Unlocked Levels 3", LittleSelectionFont);
@@ -154,17 +130,6 @@ public class SavegameMenu implements Screen{
         SG8UnlockedLevel = new Label("Unlocked Levels 8", LittleSelectionFont);
         SG9UnlockedLevel = new Label("Unlocked Levels 9", LittleSelectionFont);
         SG10UnlockedLevel = new Label("Unlocked Levels 10", LittleSelectionFont);
-
-        SG1UnlockedLevel.setPosition(0,0);
-        SG2UnlockedLevel.setPosition(0,0);
-        SG3UnlockedLevel.setPosition(0,0);
-        SG4UnlockedLevel.setPosition(0,0);
-        SG5UnlockedLevel.setPosition(0,0);
-        SG6UnlockedLevel.setPosition(0,0);
-        SG7UnlockedLevel.setPosition(0,0);
-        SG8UnlockedLevel.setPosition(0,0);
-        SG9UnlockedLevel.setPosition(0,0);
-        SG10UnlockedLevel.setPosition(0,0);
 
         SG1.addActor(Savegame1);
         SG1.addActor(SG1Collectibles);
@@ -232,8 +197,14 @@ public class SavegameMenu implements Screen{
         AllLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
         AllLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
         AllLabels.add(Savegame9,Savegame10);
-        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles,SG4UnlockedLevel);
+
+        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles,SG4Collectibles);
+        AllLabels.add(SG5Collectibles,SG6Collectibles,SG7Collectibles,SG8Collectibles);
+        AllLabels.add(SG9Collectibles,SG10Collectibles);
+
         AllLabels.add(SG1UnlockedLevel,SG2UnlockedLevel,SG3UnlockedLevel);
+        AllLabels.add(SG4UnlockedLevel,SG5UnlockedLevel,SG6UnlockedLevel);
+        AllLabels.add(SG7UnlockedLevel,SG8UnlockedLevel,SG9UnlockedLevel,SG10UnlockedLevel);
 
 
 
@@ -266,12 +237,9 @@ public class SavegameMenu implements Screen{
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollbarsVisible(true);
 
-        table.invalidate();
-        scrollPane.layout();
 
         rootTable.setFillParent(true);
-        rootTable.add(scrollPane).expand().fill();
-
+        rootTable.add(scrollPane).expand().fill().pad(10);
 
         stage.addActor(rootTable);
 
@@ -287,30 +255,16 @@ public class SavegameMenu implements Screen{
         handleInput();
         updateScreenRatio();
         stage.draw();
-
     }
 
 
     private void handleInput() {
-        float scrollSpeed = 200 * Gdx.graphics.getDeltaTime();
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))) {
-            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            selectedIndex = (selectedIndex + 1) % SaveGameLabels.size;
-            float newScrollY = Math.min(scrollPane.getMaxY(), scrollPane.getScrollY() + 100);
-            scrollPane.scrollTo(0, newScrollY, scrollPane.getWidth(), scrollPane.getHeight(), false, true);
-            System.out.println("Scroll Down - New ScrollY: " + newScrollY);
-
-            updateLabelSelection();
+            handleGoingDown();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
-            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            selectedIndex = (selectedIndex - 1 + SaveGameLabels.size) % SaveGameLabels.size;
-            float newScrollY = Math.max(0, scrollPane.getScrollY() - 100);
-            scrollPane.setScrollY(newScrollY);
-            System.out.println("Scroll Up - New ScrollY: " + newScrollY);
-
-            updateLabelSelection();
+            handleGoingUp();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
@@ -321,6 +275,33 @@ public class SavegameMenu implements Screen{
             LevelScreen.gameIsPaused = false;
             game.setScreen(new PauseMenu(game, this,true));
         }
+    }
+// TODO sync scroll with selected Index
+    private void handleGoingDown() {
+        float newScrollValuY = scrollPane.getScrollY() + 200;
+
+        menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+        selectedIndex = (selectedIndex + 1) % SaveGameLabels.size;
+
+        if (newScrollValuY <= scrollPane.getMaxY()) {
+            scrollPane.setScrollY(newScrollValuY);
+            scrollPane.layout();
+        }
+        updateLabelSelection();
+    }
+
+    private void handleGoingUp() {
+        float newScrollValuY = scrollPane.getScrollY() - 160
+                ;
+
+        menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+        selectedIndex = (selectedIndex - 1 + SaveGameLabels.size) % SaveGameLabels.size;
+
+        if (newScrollValuY >= 0) {
+            scrollPane.setScrollY(newScrollValuY);
+            scrollPane.layout();
+        }
+        updateLabelSelection();
     }
 
     private void updateLabelSelection() {
@@ -338,20 +319,35 @@ public class SavegameMenu implements Screen{
         }
 
         // mark the Selected Savegame with the Attributes white
-        if(currentLabel == Savegame1){
-            Savegame1.setColor(Color.WHITE);
-            SG1Collectibles.setColor(Color.WHITE);
-            SG1UnlockedLevel.setColor(Color.WHITE);
+        if (currentLabel.equals(Savegame1)) {
+            setGroupColor(SG1);
+        } else if (currentLabel.equals(Savegame2)) {
+            setGroupColor(SG2);
+        } else if (currentLabel.equals(Savegame3)) {
+            setGroupColor(SG3);
+        } else if (currentLabel.equals(Savegame4)) {
+            setGroupColor(SG4);
+        } else if (currentLabel.equals(Savegame5)) {
+            setGroupColor(SG5);
+        } else if (currentLabel.equals(Savegame6)) {
+            setGroupColor(SG6);
+        } else if (currentLabel.equals(Savegame7)) {
+            setGroupColor(SG7);
+        } else if (currentLabel.equals(Savegame8)) {
+            setGroupColor(SG8);
+        } else if (currentLabel.equals(Savegame9)) {
+            setGroupColor(SG9);
+        } else if (currentLabel.equals(Savegame10)) {
+            setGroupColor(SG10);
+        }
 
-        } else if (currentLabel == Savegame2) {
-            Savegame2.setColor(Color.WHITE);
-            SG2Collectibles.setColor(Color.WHITE);
-            SG2UnlockedLevel.setColor(Color.WHITE);
+    }
 
-        }else if(currentLabel == Savegame3){
-            Savegame3.setColor(Color.WHITE);
-            SG3Collectibles.setColor(Color.WHITE);
-            SG3UnlockedLevel.setColor(Color.WHITE);
+    private void setGroupColor(Group group){
+        for (Actor actor : group.getChildren()) {
+            if (actor instanceof Label) {
+                ((Label) actor).setColor(Color.WHITE);
+            }
         }
     }
 
@@ -386,6 +382,10 @@ public class SavegameMenu implements Screen{
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         resize(width,height);
+        table.invalidate();
+        scrollPane.layout();
+        scrollPane.updateVisualScroll();
+
     }
 
     @Override
