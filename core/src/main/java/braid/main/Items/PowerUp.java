@@ -13,6 +13,8 @@ public class PowerUp extends Item {
 
     TypeOfPowerUp readTypePowerUp;
 
+    private final float ritalinJumpModifier = 1.43f;
+
     public PowerUp(LevelScreen screen, float x, float y,TypeOfPowerUp givenTypeOfPowerUp) {
         super(screen, x, y, 7);
 
@@ -60,7 +62,7 @@ public class PowerUp extends Item {
     @Override
     public void use(Player player) {
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
-            player.setJumpSpeed(5.0f);
+            player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
         }
         destroy();
     }
