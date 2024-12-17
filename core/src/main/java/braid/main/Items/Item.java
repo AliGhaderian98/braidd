@@ -1,6 +1,7 @@
 package braid.main.Items;
 
 import braid.main.objects.InteractiveGameObject;
+import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -29,7 +30,8 @@ public abstract class Item extends InteractiveGameObject {
         destroyed = false;
     }
     //public abstract void defineItem();
-    public abstract void use();
+    public abstract void use(Player player);
+
 
     public void update(float dt){
         if(toDestroy && !destroyed){

@@ -165,6 +165,10 @@ public class Player extends DynamicGameObject {
         return jumpSpeed;
     }
 
+    public void setJumpSpeed(float jumpSpeed) {
+        this.jumpSpeed = jumpSpeed;
+    }
+
     public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
 
     public final float getClimbingSpeed() { return climbingSpeed; }
