@@ -26,6 +26,8 @@ public class SavegameMenu implements Screen{
 
     private final Stage stage;
     private final Game game;
+    private final ScrollPane scrollPane;
+    private final Table table;
 
     int width;
     int height;
@@ -54,6 +56,7 @@ public class SavegameMenu implements Screen{
         // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+        Gdx.input.setInputProcessor(stage);
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -67,13 +70,10 @@ public class SavegameMenu implements Screen{
 
 
         //  Create Table
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
+        table = new Table();
 
-        ScrollPane scrollPane = new ScrollPane(table);
-        scrollPane.setScrollingDisabled(true,false);
-        scrollPane.setFadeScrollBars(false);
+        Table rootTable = new Table();
+
 
         // Setup Label styles for Title and Options
         Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
@@ -238,33 +238,42 @@ public class SavegameMenu implements Screen{
 
 
         // Setup Table
-        table.add(scrollPane).expand().fill();
         table.add(Title);
         table.row();
-        table.add(SG1).width(200).pad(20);
+        table.add(SG1).width(200).pad(20).row();
         table.row();
-        table.add(SG2).width(200).pad(20);
+        table.add(SG2).width(200).pad(20).row();
         table.row();
-        table.add(SG3).width(200).pad(20);
+        table.add(SG3).width(200).pad(20).row();
         table.row();
-        table.add(SG4).width(200).pad(20);
+        table.add(SG4).width(200).pad(20).row();
         table.row();
-        table.add(SG5).width(200).pad(20);
+        table.add(SG5).width(200).pad(20).row();
         table.row();
-        table.add(SG6).width(200).pad(20);
+        table.add(SG6).width(200).pad(20).row();
         table.row();
-        table.add(SG7).width(200).pad(20);
+        table.add(SG7).width(200).pad(20).row();
         table.row();
-        table.add(SG8).width(200).pad(20);
+        table.add(SG8).width(200).pad(20).row();
         table.row();
-        table.add(SG9).width(200).pad(20);
+        table.add(SG9).width(200).pad(20).row();
         table.row();
-        table.add(SG10).width(200).pad(20);
+        table.add(SG10).width(200).pad(20).row();
 
 
+        scrollPane = new ScrollPane(table);
+        scrollPane.setScrollingDisabled(true,false);
+        scrollPane.setFadeScrollBars(false);
+        scrollPane.setScrollbarsVisible(true);
+
+        table.invalidate();
+        scrollPane.layout();
+
+        rootTable.setFillParent(true);
+        rootTable.add(scrollPane).expand().fill();
 
 
-        stage.addActor(table);
+        stage.addActor(rootTable);
 
         // mark first option
         updateLabelSelection();
@@ -278,19 +287,29 @@ public class SavegameMenu implements Screen{
         handleInput();
         updateScreenRatio();
         stage.draw();
+
     }
 
 
     private void handleInput() {
+        float scrollSpeed = 200 * Gdx.graphics.getDeltaTime();
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex + 1) % SaveGameLabels.size;
+            float newScrollY = Math.min(scrollPane.getMaxY(), scrollPane.getScrollY() + 100);
+            scrollPane.scrollTo(0, newScrollY, scrollPane.getWidth(), scrollPane.getHeight(), false, true);
+            System.out.println("Scroll Down - New ScrollY: " + newScrollY);
+
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("UP_KEY"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             selectedIndex = (selectedIndex - 1 + SaveGameLabels.size) % SaveGameLabels.size;
+            float newScrollY = Math.max(0, scrollPane.getScrollY() - 100);
+            scrollPane.setScrollY(newScrollY);
+            System.out.println("Scroll Up - New ScrollY: " + newScrollY);
+
             updateLabelSelection();
         }
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ENTER"))) {
