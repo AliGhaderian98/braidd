@@ -100,7 +100,8 @@ public class PlayerInputHandler {
                 player.moveLeft();
             }
         } else {
-            player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+            //player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+            player.stopMovement();
         }
     }
 }

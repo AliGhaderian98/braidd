@@ -11,6 +11,7 @@ import braid.main.objects.Player;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -30,6 +31,7 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
             playerWithItem(userDataA, userDataB);
             playerWithLadder(userDataA, userDataB);
+            playerFeetWithGround(userDataA, userDataB);
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
@@ -46,8 +48,9 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        contactEndedPlayerWithLadder(userDataA,userDataB);
-        patrollingEnemyOnEdge(userDataA,userDataB);
+        contactEndedPlayerWithGround(userDataA, userDataB);
+        contactEndedPlayerWithLadder(userDataA, userDataB);
+        patrollingEnemyOnEdge(userDataA, userDataB);
         endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
     }
 
@@ -87,6 +90,15 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerFeetWithGround(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
+            if (!player.isGrounded()) {
+                player.land();
+            }
+        }
+    }
+
     private void playerFeetWithEnemy(UserData userDataA, UserData userDataB) {
         if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
@@ -104,7 +116,27 @@ public class WorldContactListener implements ContactListener {
 
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+            UserData ladderData = (userDataA.getObject() instanceof Ladder) ? userDataA : userDataB;
             player.atLadder(true);
+
+            Vector2 max = new Vector2(0,0);
+            Vector2 min = new Vector2(0,0);
+
+            PolygonShape polygonShape = (PolygonShape) ((Ladder) ladderData.getObject()).b2body.getFixtureList().first().getShape();
+            Vector2 vertex = new Vector2();
+
+            for (int i = 0; i < polygonShape.getVertexCount(); i++) {
+                polygonShape.getVertex(i, vertex);
+                // Transform vertex to world coordinates
+                vertex = (((Ladder) ladderData.getObject()).b2body).getWorldPoint(vertex);
+
+                min.x = Math.min(min.x, vertex.x);
+                min.y = Math.min(min.y, vertex.y);
+                max.x = Math.max(max.x, vertex.x);
+                max.y = Math.max(max.y, vertex.y);
+            }
+
+            player.setMoveLimits(max, min);
         }
     }
 
@@ -127,6 +159,14 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
+            if (player.isGrounded())
+                player.fall();
+        }
+    }
+
     private void patrollingEnemyWithWall(UserData userDataA, UserData userDataB) {
         if ("SideSensor".equals(userDataA.getName()) || "SideSensor".equals(userDataB.getName())) {
             UserData sideSensor = "SideSensor".equals(userDataA.getName()) ? userDataA : userDataB;
@@ -140,6 +180,7 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(false);
+            player.resetMoveLimits();
             player.stopClimbing();
         }
     }

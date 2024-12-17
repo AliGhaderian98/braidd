@@ -3,9 +3,12 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 //todo: Spring Animation fixen, stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
@@ -20,14 +23,19 @@ public class Player extends DynamicGameObject {
         IDLE,
         JUMPING,
         RUNNING,
-        CLIMBING
+        CLIMBING,
+        FALLING,
+        LANDING
     }
 
     // Animation variables
-    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing;
+    private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing, LionLanding, LionFalling;
     private boolean runningRight;
     private boolean animationPaused;
     public float stateTimer;
+
+    private boolean isGrounded;
+    private boolean landingAnimationPlaying = false;
 
     // Player specific variables
     float jumpSpeed = 3.5f;
@@ -38,6 +46,9 @@ public class Player extends DynamicGameObject {
     private boolean isAtLadder;
     private boolean isAtEnd;
 
+    // Movement limits e.g. when climbing
+    private Vector2 maxMoveLimit;
+    private Vector2 minMoveLimit;
 
     // Constructors
     public Player(World world, LevelScreen screen) {
@@ -60,6 +71,8 @@ public class Player extends DynamicGameObject {
         LionIdle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
         LionRunning = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-run"), Animation.PlayMode.LOOP);
         LionJumping = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-jump"), Animation.PlayMode.NORMAL);
+        LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
+        LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
     }
 
@@ -100,9 +113,6 @@ public class Player extends DynamicGameObject {
     }
 
     public TextureRegion getFrame(float dt){
-        // regions for the different States
-        currentState = getCurrentState();
-
         testAnimationPause();
 
         if (!animationPaused) {
@@ -110,12 +120,21 @@ public class Player extends DynamicGameObject {
         }
 
         previousState = currentState;
-        TextureRegion region = switch (currentState) {
-            case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
-            case JUMPING -> LionJumping.getKeyFrame(0, false);
-            case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
-            default -> LionIdle.getKeyFrame(stateTimer, true);
-        };
+
+        TextureRegion region;
+
+        if (landingAnimationPlaying)
+            region = LionLanding.getKeyFrame(0,false);
+        else {
+            region = switch (currentState) {
+                case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
+                case JUMPING -> LionJumping.getKeyFrame(0, false);
+                case FALLING -> LionFalling.getKeyFrame(0,false);
+                case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
+                default -> LionIdle.getKeyFrame(stateTimer, true);
+            };
+        }
+
 
         //checking if the model has to be flipped
         if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
@@ -141,19 +160,31 @@ public class Player extends DynamicGameObject {
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
-        currentState = AnimationState.IDLE;
+        currentState = AnimationState.LANDING;
+        isGrounded = true;
+        if (b2body.getLinearVelocity().y < -3.75) {
+            landingAnimationPlaying = true;
+            new Thread(() -> {
+                long time = System.currentTimeMillis();
+                while (System.currentTimeMillis() < time + 250){}
+                Gdx.app.postRunnable(() -> {
+                    landingAnimationPlaying = false;
+                } );
+            }).start();
+        }
+
+    }
+
+    public void fall() {
+        if (currentState != AnimationState.JUMPING) {
+            currentState = AnimationState.FALLING;
+            isGrounded = false;
+        }
     }
 
     @Override
     public AnimationState getCurrentState() {
-        if (currentState == AnimationState.CLIMBING)
-            return AnimationState.CLIMBING;
-        else if (b2body.getLinearVelocity().y != 0)
-            return AnimationState.JUMPING;
-        else if (b2body.getLinearVelocity().x != 0)
-            return AnimationState.RUNNING;
-        else
-            return AnimationState.IDLE;
+        return currentState;
     }
 
     //Getter und Setter
@@ -169,9 +200,24 @@ public class Player extends DynamicGameObject {
 
     public final float getClimbingSpeed() { return climbingSpeed; }
     public void stopClimbing() {
-        currentState = AnimationState.IDLE;
+        if (currentState != AnimationState.JUMPING) {
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            else
+                currentState = AnimationState.FALLING;
+        }
         b2body.setGravityScale(1);
     }
+
+    public void setIsGrounded(boolean b) {
+        isGrounded = b;
+        if (!b)
+            currentState = AnimationState.JUMPING;
+        else
+            currentState = AnimationState.IDLE;
+    }
+
+    public boolean isGrounded() { return isGrounded; }
 
 
 
@@ -199,6 +245,16 @@ public class Player extends DynamicGameObject {
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
 
+    public void setMoveLimits(Vector2 max, Vector2 min) {
+        maxMoveLimit = max;
+        minMoveLimit = min;
+    }
+
+    public void resetMoveLimits() {
+        maxMoveLimit = null;
+        minMoveLimit = null;
+    }
+
     public void die() {
         LevelScreen.gameIsPaused = true;
         isAlive = false;
@@ -208,25 +264,43 @@ public class Player extends DynamicGameObject {
     // Inputs
 
     public void moveRight() {
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x < speed) {
             b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
 
     public void moveLeft() {
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x > -speed) {
             b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
         }
     }
 
     public void stopMovement() {
-        b2body.applyLinearImpulse(new Vector2(0, b2body.getLinearVelocity().y), b2body.getWorldCenter(), true);
+        if (currentState != AnimationState.CLIMBING) {
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+        }
     }
 
     public void climbUp() {
         currentState = AnimationState.CLIMBING;
+        isGrounded = false;
         b2body.setGravityScale(0);
-        b2body.setLinearVelocity(0, getClimbingSpeed());
+        Vector2 newPos = new Vector2(b2body.getPosition());
+
+        if (b2body.getPosition().y < maxMoveLimit.y)
+            b2body.setLinearVelocity(0, getClimbingSpeed());
+        else {
+            b2body.setLinearVelocity(0, 0);
+            newPos.y = MathUtils.clamp(b2body.getPosition().y, minMoveLimit.y, maxMoveLimit.y);
+        }
+
+        b2body.setTransform(newPos, b2body.getAngle());
     }
 
     public void climbDown() {
@@ -237,12 +311,14 @@ public class Player extends DynamicGameObject {
         b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
+        isGrounded = false;
     }
 
     public void jump(float multiplier) {
         b2body.setGravityScale(1);
         b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
         currentState = AnimationState.JUMPING;
+        isGrounded = false;
     }
 
 }
