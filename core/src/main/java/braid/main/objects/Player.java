@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-//todo: Spring Animation fixen, stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
+//todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
