@@ -236,7 +236,6 @@ public class Player extends DynamicGameObject {
 
     public boolean isGrounded() { return isGrounded; }
 
-
     public void atMovingPlatform(boolean atMovingPlatform) { isAtMovingPlatform = atMovingPlatform; }
 
     public boolean isAtMovingPlatform() {return isAtMovingPlatform; }

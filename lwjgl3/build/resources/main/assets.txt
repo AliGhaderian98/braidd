@@ -17,6 +17,7 @@ maps/mid-layer-b.tsx
 maps/overworld-map.tmx
 maps/overworld-tiles.tsx
 maps/patrollingEnemyMap.tmx
+maps/patrollingEnemyMap.tmx
 maps/prop-sheet.tsx
 maps/schwebebahn_1.tsx
 maps/sheet.tsx

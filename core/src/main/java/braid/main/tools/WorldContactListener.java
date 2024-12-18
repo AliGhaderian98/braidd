@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
+import braid.main.objects.*;
 import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
@@ -51,9 +52,7 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        contactEndedPlayerWithLadder(userDataA,userDataB);
         contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
-        patrollingEnemyOnEdge(userDataA,userDataB);
         contactEndedPlayerWithGround(userDataA, userDataB);
         contactEndedPlayerWithLadder(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
