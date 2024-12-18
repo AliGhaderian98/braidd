@@ -358,6 +358,9 @@ public class SavegameMenu implements Screen{
 
         // load targeted Safegame
         if (currentLabel == Savegame1) {
+            Savemanager saveManager = new Savemanager();
+            saveManager.createSavegame();
+
             game.setScreen(new Overworld((Braid) game));
 
         } else if (currentLabel == Savegame2) {
