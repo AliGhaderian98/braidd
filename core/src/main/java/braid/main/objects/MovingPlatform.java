@@ -21,6 +21,7 @@ public class MovingPlatform extends InteractiveGameObject {
     private boolean movingRight = true;
     private final Rectangle boundary;
     private final Sprite sprite;
+    private Player player;
 
     public MovingPlatform(World world, TiledMap map, TextureRegion region, Rectangle boundary, float rangeX, float speed) {
         super(world, boundary, region,false);
@@ -64,12 +65,21 @@ public class MovingPlatform extends InteractiveGameObject {
         }
 
         float velocityX = movingRight ? speed : -speed;
-        b2body.setLinearVelocity(velocityX*dt, 0);
+        b2body.setLinearVelocity(velocityX*0.01f, 0);
 
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
+        if (player != null) {
+            if (player.getPlatformVelocity() != b2body.getLinearVelocity().x)
+                player.setPlatformVelocity(b2body.getLinearVelocity().x);
+        }
 
-        System.out.println("CurrentX: " + currentX + ", StartX: " + startX + ", RangeX: " + rangeX + ", MovingRight: " + movingRight);
+
+        //System.out.println("CurrentX: " + currentX + ", StartX: " + startX + ", RangeX: " + rangeX + ", MovingRight: " + movingRight);
+    }
+
+    public void setPlayer(Player p) {
+        player = p;
     }
 
     public void draw(Batch batch) {

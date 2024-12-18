@@ -83,6 +83,8 @@ public class Player extends DynamicGameObject {
         this.platformVelocity = velocity;
     }
 
+    public float getPlatformVelocity() { return platformVelocity; }
+
     public void setAtMovingPlatform(boolean onPlatform) {
         this.onPlatform = onPlatform;
     }
@@ -126,6 +128,9 @@ public class Player extends DynamicGameObject {
         if (onPlatform) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
+
+        System.out.println("Plattform Vel.: "+platformVelocity+", Current Vel.:"+b2body.getLinearVelocity().x);
+
 
     }
 
@@ -302,7 +307,8 @@ public class Player extends DynamicGameObject {
         if (currentState != AnimationState.CLIMBING) {
             if (isGrounded)
                 currentState = AnimationState.IDLE;
-            b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+            if (!isAtMovingPlatform)
+                b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
         }
     }
 

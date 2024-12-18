@@ -33,16 +33,17 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
             playerWithItem(userDataA, userDataB);
             playerWithLadder(userDataA, userDataB);
-            //playerWithMovingPlatform(userDataA, userDataB);
+            playerWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
+            playerWithEnd(userDataA,userDataB);
+
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
-        playerWithEnd(userDataA,userDataB);
-        playerWithMovingPlatform(userDataA, userDataB);
+        //playerWithMovingPlatform(userDataA, userDataB);
 
     }
 
@@ -126,7 +127,9 @@ public class WorldContactListener implements ContactListener {
                 : (MovingPlatform) userDataB.getObject();
 
             player.atMovingPlatform(true);
-            player.setPlatformVelocity(platform.b2body.getLinearVelocity().x);
+            player.setIsGrounded(true);
+            platform.setPlayer(player);
+            //player.setPlatformVelocity(platform.b2body.getLinearVelocity().x);
 
 
         }
@@ -135,7 +138,13 @@ public class WorldContactListener implements ContactListener {
 
     private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
+                ? (MovingPlatform) userDataA.getObject()
+                : (MovingPlatform) userDataB.getObject();
+
             player.atMovingPlatform(false);
+            player.fall();
+            platform.setPlayer(null);
             player.setPlatformVelocity(0);
         }
     }
