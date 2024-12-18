@@ -36,20 +36,14 @@ public class CollectableItem extends Item {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-       /* fdef.filter.categoryBits = Braid.ENEMY_BIT;
-        fdef.filter.maskBits = Braid.GROUND_BIT |
-            Braid.COIN_BIT |
-            Braid.BRICK_BIT |
-            Braid.ENEMY_BIT |
-            Braid.OBJEKT_BIT |
-            Braid.BRAID_BIT; */
-
     }
 
     @Override
     public void use() {
-        LevelHUD.addScore(1);
-        destroy();
+        if (!toDestroy) {
+            LevelHUD.addScore(1);
+            destroy();
+        }
     }
 
     @Override
