@@ -276,29 +276,32 @@ public class SavegameMenu implements Screen{
             game.setScreen(new PauseMenu(game, this,true));
         }
     }
-// TODO sync scroll with selected Index
     private void handleGoingDown() {
-        float newScrollValuY = scrollPane.getScrollY() + 200;
 
         menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
         selectedIndex = (selectedIndex + 1) % SaveGameLabels.size;
 
-        if (newScrollValuY <= scrollPane.getMaxY()) {
-            scrollPane.setScrollY(newScrollValuY);
+        if (selectedIndex == 5) {
+            scrollPane.setScrollY(1400);
+            scrollPane.layout();
+        } else if (selectedIndex < 5) {
+            scrollPane.setScrollY(0);
             scrollPane.layout();
         }
         updateLabelSelection();
     }
 
     private void handleGoingUp() {
-        float newScrollValuY = scrollPane.getScrollY() - 160
                 ;
 
         menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
         selectedIndex = (selectedIndex - 1 + SaveGameLabels.size) % SaveGameLabels.size;
 
-        if (newScrollValuY >= 0) {
-            scrollPane.setScrollY(newScrollValuY);
+        if (selectedIndex == 5) {
+            scrollPane.setScrollY(0);
+            scrollPane.layout();
+        } else if (selectedIndex > 5) {
+            scrollPane.setScrollY(1400);
             scrollPane.layout();
         }
         updateLabelSelection();
