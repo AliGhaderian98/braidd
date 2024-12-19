@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -45,6 +46,7 @@ public class Savemanager {
     }
 
     private static void createDummySavegame() {
+        currentsavegame.SaveGameKEY = SavegameMenu.currentSavegamKey;
         currentsavegame.Collectables = new HashMap<>();
         for(int i=0; i<10;i++){
             dummyCollectablesBool = new Array<>();
