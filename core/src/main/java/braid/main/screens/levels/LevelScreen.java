@@ -329,6 +329,8 @@ public abstract class LevelScreen implements Screen {
 
     @Override
     public void dispose() {
+        Savemanager.saveGame();
+
         map.dispose();
         renderer.dispose();
 

@@ -6,6 +6,7 @@ import braid.main.overworld.Overworld;
 import braid.main.screens.levels.TestLevel;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.Savemanager;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -63,7 +64,6 @@ public class StartMenu extends ScreenAdapter {
 
     private void startGame() {
         game.setScreen(new SavegameMenu(game));
-
     }
 
     @Override
@@ -85,7 +85,8 @@ public class StartMenu extends ScreenAdapter {
     }
 
     @Override
-    public void hide() {
+    public void dispose() {
+        Savemanager.saveGame();
         stage.dispose();
     }
 }

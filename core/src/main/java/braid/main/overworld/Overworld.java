@@ -4,7 +4,9 @@ import braid.main.Braid;
 
 import braid.main.screens.levels.TestLevel;
 import braid.main.screens.menus.PauseMenu;
+import braid.main.screens.menus.SavegameMenu;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.Savemanager;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
@@ -42,7 +44,8 @@ public class Overworld implements Screen {
         this.game = game;
         atlas = new TextureAtlas("packedimages/sprites.atlas");
 
-        // Load current keybindings
+        // Load current GameData
+        Savemanager.currentsavegame = Savemanager.loadGame(SavegameMenu.currentSavegamKey);
         KeyBindings.standardKeybindings();
         KeyBindings.loadKeyBindings();
 
@@ -110,7 +113,6 @@ public class Overworld implements Screen {
                 return true;
             }
         };
-
         Gdx.input.setInputProcessor(inputProcessor);
     }
 

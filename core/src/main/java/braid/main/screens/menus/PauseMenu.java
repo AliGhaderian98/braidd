@@ -3,10 +3,7 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
-import braid.main.tools.Audiomanager;
-import braid.main.tools.KeyBindings;
-import braid.main.tools.PreferencesManager;
-import braid.main.tools.TextFontManager;
+import braid.main.tools.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -181,7 +178,7 @@ public class PauseMenu implements Screen {
             game.setScreen(new OptionMenu(game,previousScreen, Reduced));
 
         } else if (selectedLabel == SaveAndExit) {
-            // save is missing
+            Savemanager.saveGame();
             Gdx.app.exit();
         }
     }
@@ -213,6 +210,7 @@ public class PauseMenu implements Screen {
 
     @Override
     public void dispose() {
+        Savemanager.saveGame();
         stage.dispose();
     }
 
