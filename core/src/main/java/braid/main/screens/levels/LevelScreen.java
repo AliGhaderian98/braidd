@@ -322,7 +322,7 @@ public abstract class LevelScreen implements Screen {
         gameIsPaused = true;
         music.pause();
         levelHUD.pause();
-        game.setScreen(new PauseMenu(game, this));
+        game.setScreen(new PauseMenu(game, this, false));
     }
 
     @Override
@@ -351,6 +351,8 @@ public abstract class LevelScreen implements Screen {
 
     @Override
     public void dispose() {
+        Savemanager.saveGame();
+
         map.dispose();
         renderer.dispose();
 

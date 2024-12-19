@@ -3,10 +3,7 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
-import braid.main.tools.Audiomanager;
-import braid.main.tools.KeyBindings;
-import braid.main.tools.PreferencesManager;
-import braid.main.tools.TextFontManager;
+import braid.main.tools.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -30,8 +27,8 @@ public class OptionMenu implements Screen {
     private final Game game;
     private final Label Fullscreen,Timer, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
+    private final Boolean Reduced;
     private int selectedIndex = 0;
-    private boolean isInFullscreen;
     private  Label  currentLabel;
 
     int width;
@@ -43,13 +40,15 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Game game, Screen previousScreen) {
-        // Setup Screen
+    public OptionMenu(Game game, Screen previousScreen, Boolean Reduced) {
         this.game = game;
         this.previousScreen = previousScreen;
+        this.Reduced = Reduced;
+
+        // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
-        isInFullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", isInFullscreen));
+        Braid.Fullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", Braid.Fullscreen));
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -172,7 +171,7 @@ public class OptionMenu implements Screen {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             LevelScreen.gameIsPaused = false;
-            game.setScreen(new PauseMenu(game, previousScreen));
+            game.setScreen(new PauseMenu(game, previousScreen,Reduced));
             dispose();
         }
     }
@@ -204,14 +203,14 @@ public class OptionMenu implements Screen {
     }
 
     private void executeSelectedAction() {
-        // execute yellow targeted Option
+        // execute targeted Option
         Label selectedLabel = menuLabels.get(selectedIndex);
 
         if (selectedLabel == Fullscreen) {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsMenu(game, previousScreen));
+            game.setScreen(new KeybindsMenu(game, previousScreen, Reduced));
             dispose();
         } else if (selectedLabel == Timer) {
             LevelHUD.setTimerVisible(!LevelHUD.isTimerVisible());
@@ -235,14 +234,14 @@ public class OptionMenu implements Screen {
     }
 
     private void toggleFullscreen(){
-        if(!isInFullscreen){
+        if(!Braid.Fullscreen){
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-            isInFullscreen = true;
+            Braid.Fullscreen = true;
         }else {
             Gdx.graphics.setWindowedMode(16*80,9*80);
-            isInFullscreen = false;
+            Braid.Fullscreen = false;
         }
-        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",isInFullscreen);
+        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",Braid.Fullscreen);
         PreferencesManager.getFullscreenPreferences().flush();
     }
 
@@ -303,6 +302,8 @@ public class OptionMenu implements Screen {
 
     @Override
     public void dispose() {
+        Savemanager.saveGame();
+
         stage.dispose();
     }
 

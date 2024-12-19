@@ -4,6 +4,7 @@ import braid.main.overworld.Overworld;
 //import braid.main.screens.PauseScreen;    Auskommentiert, da die KLasse noch nicht existiert bei mir (Mike)
 import braid.main.screens.menus.StartMenu;
 import braid.main.tools.Audiomanager;
+import braid.main.tools.Savemanager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -25,7 +26,7 @@ public class Braid extends Game {
     public static final float PPM = 100;
 
     public static final Color BUWColor =  new Color(153f / 255f, 182f / 255f, 66f / 255f, 1);
-
+    public static boolean Fullscreen;
 
     public SpriteBatch batch;
 

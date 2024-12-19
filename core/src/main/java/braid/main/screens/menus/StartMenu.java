@@ -4,7 +4,10 @@ package braid.main.screens.menus;
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.LevelHUD;
+import braid.main.screens.levels.TestLevel;
+import braid.main.tools.KeyBindings;
 import braid.main.tools.PreferencesManager;
+import braid.main.tools.Savemanager;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -31,6 +34,8 @@ public class StartMenu extends ScreenAdapter {
         // load Bindings
         loadDisplayseedings();
         loadTimerVisible();
+        KeyBindings.standardKeybindings();
+        KeyBindings.loadKeyBindings();
 
         // Setup Viewport
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT, new OrthographicCamera());
@@ -52,14 +57,14 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void loadDisplayseedings(){
-        boolean fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
-        if (fullscreen){
+        Braid.Fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
+        if (Braid.Fullscreen){
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
         }
     }
 
     private void startGame() {
-        game.setScreen(new Overworld((Braid) game));
+        game.setScreen(new SavegameMenu(game));
     }
 
     @Override
@@ -85,7 +90,8 @@ public class StartMenu extends ScreenAdapter {
     }
 
     @Override
-    public void hide() {
+    public void dispose() {
+        Savemanager.saveGame();
         stage.dispose();
     }
 }

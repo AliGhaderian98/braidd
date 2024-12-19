@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class CollectableItem extends Item {
 
+    public static Boolean isCollected;
+
     public CollectableItem(LevelScreen screen, float x, float y) {
         super(screen, x, y, 6);
 
