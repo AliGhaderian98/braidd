@@ -1,6 +1,5 @@
 package braid.main.tools;
 
-import braid.main.overworld.Overworld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -34,43 +33,35 @@ public class Savemanager {
     // LevelNodes for creation
     public static Array<String> LevelNodes;
 
-    // dummyObjects to fill with Information
-    public Map<String,Boolean> dummyUnlockedLevels;
-    public Map<String, Array<Boolean>> dummyCollectables;
-    public Array<Boolean> dummyCollectablesBool;
-    public long dummyPlaytime;
+    // dummyArray to fill with Information
+    public static Array<Boolean> dummyCollectablesBool;
 
 
     // to create dummyObjects
-    public void createSavegame(){
+    public static void createSavegame(){
         fillLevelNodes();
         createDummySavegame();
-        for(int i=1; i<11;i++){
-            saveGame();
-        }
+        saveGame();
     }
 
-    private void createDummySavegame() {
-        dummyPlaytime = 9;
-
-        dummyCollectables = new HashMap<>();
+    private static void createDummySavegame() {
+        currentsavegame.Collectables = new HashMap<>();
         for(int i=0; i<10;i++){
             dummyCollectablesBool = new Array<>();
-            dummyCollectables.put(LevelNodes.get(i),dummyCollectablesBool);
+            currentsavegame.Collectables.put(LevelNodes.get(i),dummyCollectablesBool);
             for(int z = 0; z< 10; z++){
-                dummyCollectablesBool.add(true);
+                dummyCollectablesBool.add(false);
             }
         }
 
-        dummyUnlockedLevels = new HashMap<>();
+        currentsavegame.UnlockedLevels = new HashMap<>();
         for(int i=0; i<10;i++){
-            dummyUnlockedLevels.put(LevelNodes.get(i),true);
+            currentsavegame.UnlockedLevels.put(LevelNodes.get(i),true);
         }
-
     }
 
 
-    private void fillLevelNodes(){
+    private static void fillLevelNodes(){
         LevelNodes = new Array<>();
         LevelNodes.add("HBF", "UNI", "FREUDENBERG", "LUISENVIERTEL");
         LevelNodes.add("ARKADEN", "OBERBARMEN", "WEGZURUNI", "SCHLOSSBURG");
@@ -97,7 +88,9 @@ public class Savemanager {
         if(file.exists()){
             return SaveGamesDoc.fromJson(Savegame.class, file.readString());
         } else{
-            return new Savegame();
+           currentsavegame = new Savegame();
+            createSavegame();
+            return currentsavegame;
         }
     }
 
