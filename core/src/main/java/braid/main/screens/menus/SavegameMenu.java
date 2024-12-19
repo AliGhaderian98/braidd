@@ -358,8 +358,6 @@ public class SavegameMenu implements Screen{
 
         // load targeted Safegame
         if (currentLabel == Savegame1) {
-            Savemanager saveManager = new Savemanager();
-            saveManager.createSavegame();
 
             game.setScreen(new Overworld((Braid) game));
 
@@ -372,6 +370,11 @@ public class SavegameMenu implements Screen{
         dispose();
     }
 
+    public static void loadGame(int SavegameKey){
+        Savemanager saveManager = new Savemanager();
+        saveManager.createSavegame();
+        Savemanager.Savegame savegame = saveManager.loadGame(SavegameKey);
+    }
 
 
     @Override
