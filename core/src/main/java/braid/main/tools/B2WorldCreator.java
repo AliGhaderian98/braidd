@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
+import braid.main.Items.PowerUp;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
 import braid.main.screens.levels.LevelScreen;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.logging.Level;
+
+import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
@@ -151,6 +154,10 @@ public class B2WorldCreator {
             // Spawning Item
             if ("Page".equals(type)) {
                 screen.addItem(new CollectableItem(screen, x, y));
+            }
+
+            if ("RITALIN".equals(type)) {
+                screen.addItem((new PowerUp(screen, x, y, RITALIN)));
             }
         }
     }

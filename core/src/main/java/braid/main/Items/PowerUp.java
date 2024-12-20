@@ -2,7 +2,6 @@ package braid.main.Items;
 
 import braid.main.Braid;
 import braid.main.objects.Player;
-import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,25 +9,44 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-public class CollectableItem extends Item {
+public class PowerUp extends Item {
 
-    public static Boolean isCollected;
+    TypeOfPowerUp readTypePowerUp;
 
-    public CollectableItem(LevelScreen screen, float x, float y) {
-        super(screen, x, y, 6);
+    private final float ritalinJumpModifier = 1.43f;
+
+    public PowerUp(LevelScreen screen, float x, float y,TypeOfPowerUp givenTypeOfPowerUp) {
+        super(screen, x, y, 7);
 
         fixture.setUserData(new UserData("item", this));
+        readTypePowerUp = givenTypeOfPowerUp;
 
         //defineItem();
-        sprite = new Sprite(screen.getAtlas().findRegion("page"));
+        String regionName = getRegionName();
+        sprite = new Sprite(screen.getAtlas().findRegion(regionName)); //Später andere Sprites je nach TypeOfPowerUp
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
         sprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y-getHeight()/2);
+
+    }
+    public enum TypeOfPowerUp {
+        RITALIN,
+        GLEITER,
+        HAMMER;
+
     }
 
+    private String getRegionName() {
+        return switch (readTypePowerUp) {
+            case RITALIN -> "ritalin";
+            // case GLEITER -> "gleiter";
+            // case HAMMER -> "hammer";
+            default -> "page";
+        };
+    }
 
     public void defineItem() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(x / Braid.PPM,y / Braid.PPM);
+        bdef.position.set(x / Braid.PPM, y / Braid.PPM);
 
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
@@ -43,10 +61,10 @@ public class CollectableItem extends Item {
 
     @Override
     public void use(Player player) {
-        if (!toDestroy) {
-            LevelHUD.addScore(1);
-            destroy();
+        if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
+            player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
         }
+        destroy();
     }
 
     @Override

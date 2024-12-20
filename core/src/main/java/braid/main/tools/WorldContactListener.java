@@ -87,7 +87,7 @@ public class WorldContactListener implements ContactListener {
         UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
 
         if (itemData.getObject() instanceof Item item) {
-            item.use();
+            item.use(player);
         }
     }
 
