@@ -129,7 +129,7 @@ public class Overworld implements Screen {
             // case "SCHLOSSBURG" ->
             // case "BAYER" ->
             // case "ZOO" ->
-            default -> throw new IllegalStateException("Unexpected level name: " + levelName);
+            default -> throw new IllegalStateException("Level does not exist yet: " + levelName);
         };
 
         // Zoom transition
@@ -147,10 +147,10 @@ public class Overworld implements Screen {
                     camera.getCamera().zoom = targetZoom;
                 }
 
-                camera.getCamera().rotate(rotationSpeed);  // Rotate the camera
-                currentRotation += rotationSpeed;         // Track total rotation
+                camera.getCamera().rotate(rotationSpeed);
+                currentRotation += rotationSpeed;
                 if (currentRotation < targetRotation) {
-                    currentRotation = targetRotation;     // Clamp to target rotation
+                    currentRotation = targetRotation;
                 }
 
                 camera.getCamera().update();

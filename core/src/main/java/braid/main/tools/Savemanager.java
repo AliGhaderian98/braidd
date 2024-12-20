@@ -15,8 +15,9 @@ public class Savemanager {
     // These Parts will be Saved over Runtime
     public static class Savegame {
         public int SaveGameKEY;
-        public  Map<String, Array<Boolean>> Collectables;
+        public Map<String, Array<Boolean>> Collectables;
         public Map<String, Boolean> UnlockedLevels;
+        public int numUnlockedBeforeWegZurUni;
         public long Playtime;
 
         public Savegame() {}
@@ -60,6 +61,8 @@ public class Savemanager {
         for(int i=0; i<10;i++){
             currentsavegame.UnlockedLevels.put(LevelNodes.get(i),true);
         }
+
+        currentsavegame.numUnlockedBeforeWegZurUni = 0;
     }
 
 
@@ -99,6 +102,34 @@ public class Savemanager {
     public static void updatePlaytime(){
         totalSessionTime = System.currentTimeMillis() - playtimeStart;
         currentsavegame.Playtime += totalSessionTime;
+    }
+
+    public static void unlockNextLevel(String currentLevel) {
+        switch (currentLevel) {
+            case "UNI" -> currentsavegame.UnlockedLevels.put("FREUDENBERG", true);
+            case "FREUDENBERG" -> currentsavegame.UnlockedLevels.put("ARKADEN", true);
+            case "ARKADEN" -> currentsavegame.UnlockedLevels.put("LUISENVIERTEL", true);
+            case "LUISENVIERTEL" -> currentsavegame.UnlockedLevels.put("HBF", true);
+            case "HBF" -> {
+                currentsavegame.UnlockedLevels.put("OBERBARMEN", true);
+                currentsavegame.UnlockedLevels.put("ZOO", true);
+                currentsavegame.UnlockedLevels.put("BAYER", true);
+            }
+            case "OBERBARMEN", "BAYER", "ZOO" -> {
+                currentsavegame.numUnlockedBeforeWegZurUni += 1;
+                unlockWegZurUni();
+            }
+            default -> throw new IllegalStateException("Unknown Leve Name: " + currentLevel);
+        }
+    }
+
+    public static void unlockSchlossBurg() {
+        Savemanager.currentsavegame.UnlockedLevels.put("SCHLOSSBURG", true);
+    }
+
+    private static void unlockWegZurUni() {
+        if (currentsavegame.numUnlockedBeforeWegZurUni >= 3)
+            currentsavegame.UnlockedLevels.put("WEGZURUNI", true);
     }
 
 
