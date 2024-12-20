@@ -20,11 +20,11 @@ import static com.badlogic.gdx.graphics.Color.toFloatBits;
 public class PauseMenu implements Screen {
 
     private final Stage stage;
-    private final Game game;
+    private final Braid game;
     private final Boolean Reduced;
     private final Screen previousScreen;
 
-    private final Label Resume,mainMenu, Retry, Option, SaveAndExit;
+    private final Label Resume, Retry, Option, Overworld, Startmenu, SaveAndExit;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
 
@@ -34,7 +34,7 @@ public class PauseMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public PauseMenu(Game game, Screen previousScreen, Boolean Reduced){
+    public PauseMenu(Braid game, Screen previousScreen, Boolean Reduced){
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previousScreen;
@@ -67,7 +67,8 @@ public class PauseMenu implements Screen {
         Label PauseLabel = new Label("Game Paused", TitelFont);
         PauseLabel.setFontScale(2);
         Resume = new Label("Resume", SelectionFont);
-        mainMenu = new Label("Main Menu", SelectionFont);
+        Overworld = new Label("Overworld", SelectionFont);
+        Startmenu = new Label("Startmenu", SelectionFont);
         Retry = new Label("Retry", SelectionFont);
         Option = new Label("Option", SelectionFont);
         SaveAndExit = new Label("Save and Exit", SelectionFont);
@@ -77,7 +78,7 @@ public class PauseMenu implements Screen {
 
         menuLabels.add(Resume);
        if(!Reduced) { // Leave this point out if the pause screen is opened from the Overworld or SaveGameMenu
-            menuLabels.add(mainMenu, Retry);
+            menuLabels.add(Retry,Overworld,Startmenu);
         }
         menuLabels.add(Option, SaveAndExit);
 
@@ -87,9 +88,11 @@ public class PauseMenu implements Screen {
         table.add(Resume).expandX().padTop(10f);
         table.row();
         if(!Reduced) { // don´t show these points if the pause screen is opened from the Overworld or SaveGameMenu
-            table.add(mainMenu).expandX();
-            table.row();
             table.add(Retry).expandX();
+            table.row();
+            table.add(Overworld).expandX();
+            table.row();
+            table.add(Startmenu).expandX();
             table.row();
         }
         table.add(Option).expandX();
@@ -164,9 +167,6 @@ public class PauseMenu implements Screen {
             game.setScreen(previousScreen);
             dispose();
 
-        } else if (selectedLabel == mainMenu) {
-            // switch to Main Menu
-
         } else if (selectedLabel == Retry) {
             if (previousScreen instanceof LevelScreen) {
                 game.setScreen(previousScreen);
@@ -176,6 +176,14 @@ public class PauseMenu implements Screen {
 
         } else if (selectedLabel == Option) {
             game.setScreen(new OptionMenu(game,previousScreen, Reduced));
+
+        } else if (selectedLabel == Overworld) {
+            game.setScreen(new Overworld(game));
+            dispose();
+
+        } else if (selectedLabel == Startmenu) {
+            game.setScreen(new StartMenu(game));
+            dispose();
 
         } else if (selectedLabel == SaveAndExit) {
             Savemanager.saveGame();

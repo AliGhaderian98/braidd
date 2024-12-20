@@ -24,7 +24,7 @@ public class OptionMenu implements Screen {
 
     private final Screen previousScreen;
     private final Stage stage;
-    private final Game game;
+    private final Braid game;
     private final Label Fullscreen,Timer, Music, Soundeffekt, Keybindings;
     private final Array<Label> menuLabels;
     private final Boolean Reduced;
@@ -40,7 +40,7 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Game game, Screen previousScreen, Boolean Reduced) {
+    public OptionMenu(Braid game, Screen previousScreen, Boolean Reduced) {
         this.game = game;
         this.previousScreen = previousScreen;
         this.Reduced = Reduced;
@@ -210,7 +210,7 @@ public class OptionMenu implements Screen {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsMenu(game, previousScreen, Reduced));
+            game.setScreen(new KeybindsMenu((game), previousScreen, Reduced));
             dispose();
         } else if (selectedLabel == Timer) {
             LevelHUD.setTimerVisible(!LevelHUD.isTimerVisible());

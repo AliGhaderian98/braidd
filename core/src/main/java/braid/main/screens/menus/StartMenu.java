@@ -24,9 +24,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class StartMenu extends ScreenAdapter {
     private final Stage stage;
-    private final Game game;
+    private final Braid game;
 
-    public StartMenu(Game game){
+    public StartMenu(Braid game){
         this.game = game;
 
         LevelHUD.setTimerVisible(false);

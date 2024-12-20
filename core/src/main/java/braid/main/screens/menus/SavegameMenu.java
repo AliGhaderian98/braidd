@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class SavegameMenu implements Screen{
 
     private final Stage stage;
-    private final Game game;
+    private final Braid game;
     private final ScrollPane scrollPane;
     private final Table table, rootTable;
     public static int currentSavegamKey;
@@ -51,7 +51,7 @@ public class SavegameMenu implements Screen{
     private final Sound menuSound;
 
 
-    public SavegameMenu(Game game) {
+    public SavegameMenu(Braid game) {
         this.game = game;
 
         // Setup Screen

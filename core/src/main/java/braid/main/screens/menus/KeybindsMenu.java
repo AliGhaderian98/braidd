@@ -25,7 +25,7 @@ public class KeybindsMenu implements Screen {
     private final Stage mainStage;
     private final Stage Overlay;
     private final Stage ErrorOverlay;
-    private final Game game;
+    private final Braid game;
     private final Label RunLeft, RunRight,UP_KEY,DOWN_KEY, Jump, Rewind, INTERACT, ResetKeybindings;
     private final Array<Label> menuLabels;
     private final Boolean Reduced;
@@ -39,7 +39,7 @@ public class KeybindsMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public KeybindsMenu(Game game, Screen previousScreen, Boolean Reduced) {
+    public KeybindsMenu(Braid game, Screen previousScreen, Boolean Reduced) {
         // Default: disable all Overlay
         OverlayActive = false;
         changeNotPossible = false;
