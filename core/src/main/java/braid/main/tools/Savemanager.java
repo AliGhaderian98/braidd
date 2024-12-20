@@ -81,6 +81,7 @@ public class Savemanager {
         saveData.SaveGameKEY = currentsavegame.SaveGameKEY;
         saveData.Collectables = currentsavegame.Collectables;
         saveData.Playtime = currentsavegame.Playtime;
+        saveData.numUnlockedBeforeWegZurUni = currentsavegame.numUnlockedBeforeWegZurUni;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
         file.writeString(SaveGamesDoc.toJson(saveData),false);
