@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 //todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
@@ -45,9 +44,9 @@ public class Player extends DynamicGameObject {
     private boolean isAlive;
     private boolean isAtLadder;
     private boolean isAtEnd;
-    private boolean isAtMovingPlatform;
+    private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
-    private boolean onPlatform = false;
+    private boolean moving = false;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -77,16 +76,6 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
-    }
-
-    public void setPlatformVelocity(float velocity) {
-        this.platformVelocity = velocity;
-    }
-
-    public float getPlatformVelocity() { return platformVelocity; }
-
-    public void setAtMovingPlatform(boolean onPlatform) {
-        this.onPlatform = onPlatform;
     }
 
     // Methods
@@ -124,14 +113,13 @@ public class Player extends DynamicGameObject {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
-
-        if (onPlatform) {
+        if (isOnMovingPlatform && !moving) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
 
-        System.out.println("Plattform Vel.: "+platformVelocity+", Current Vel.:"+b2body.getLinearVelocity().x);
-
-
+        System.out.println("Moving: "+moving+
+            ", SpeedX: "+b2body.getLinearVelocity().x+
+            ", MaxSpeed: "+ speed);
     }
 
     public TextureRegion getFrame(float dt){
@@ -179,8 +167,6 @@ public class Player extends DynamicGameObject {
     }
 
 
-
-    // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
         currentState = AnimationState.LANDING;
         isGrounded = true;
@@ -204,81 +190,6 @@ public class Player extends DynamicGameObject {
         }
     }
 
-    @Override
-    public AnimationState getCurrentState() {
-        return currentState;
-    }
-
-    //Getter und Setter
-    public boolean isJumping() {
-        return currentState == AnimationState.JUMPING;
-    }
-
-    public final float getJumpSpeed() {
-        return jumpSpeed;
-    }
-
-    public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
-
-    public final float getClimbingSpeed() { return climbingSpeed; }
-    public void stopClimbing() {
-        if (currentState != AnimationState.JUMPING) {
-            if (isGrounded)
-                currentState = AnimationState.IDLE;
-            else
-                currentState = AnimationState.FALLING;
-        }
-        b2body.setGravityScale(1);
-    }
-
-    public void setIsGrounded(boolean b) {
-        isGrounded = b;
-        if (!b)
-            currentState = AnimationState.JUMPING;
-        else
-            currentState = AnimationState.IDLE;
-    }
-
-    public boolean isGrounded() { return isGrounded; }
-
-    public void atMovingPlatform(boolean atMovingPlatform) { isAtMovingPlatform = atMovingPlatform; }
-
-    public boolean isAtMovingPlatform() {return isAtMovingPlatform; }
-
-    public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
-
-    public boolean isAtLadder() { return isAtLadder; }
-
-    public void atEnd(boolean atEnd) { isAtEnd = atEnd; }
-
-    public boolean isAtEnd() { return  isAtEnd; }
-
-    @Override
-    public float getStateTimer() { return stateTimer; }
-
-    @Override
-    public void setStateTimer(float stateTimer) { this.stateTimer = stateTimer; }
-
-    @Override
-    public void setCurrentState(Object animationStates) {
-        if (animationStates instanceof AnimationState) {
-            this.currentState = (AnimationState) animationStates;
-        }
-    }
-
-    public boolean isAlive() { return isAlive; }
-    public void setAlive(boolean alive) { isAlive = alive;}
-
-    public void setMoveLimits(Vector2 max, Vector2 min) {
-        maxMoveLimit = max;
-        minMoveLimit = min;
-    }
-
-    public void resetMoveLimits() {
-        maxMoveLimit = null;
-        minMoveLimit = null;
-    }
-
     public void die() {
         LevelScreen.gameIsPaused = true;
         isAlive = false;
@@ -288,6 +199,7 @@ public class Player extends DynamicGameObject {
     // Inputs
 
     public void moveRight() {
+        moving = true;
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x < speed) {
@@ -296,6 +208,7 @@ public class Player extends DynamicGameObject {
     }
 
     public void moveLeft() {
+        moving = true;
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x > -speed) {
@@ -304,10 +217,11 @@ public class Player extends DynamicGameObject {
     }
 
     public void stopMovement() {
+        moving = false;
         if (currentState != AnimationState.CLIMBING) {
             if (isGrounded)
                 currentState = AnimationState.IDLE;
-            if (!isAtMovingPlatform)
+            if (!isOnMovingPlatform)
                 b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
         }
     }
@@ -346,4 +260,88 @@ public class Player extends DynamicGameObject {
         isGrounded = false;
     }
 
+
+
+
+    //Getter und Setter
+
+    @Override
+    public AnimationState getCurrentState() {
+        return currentState;
+    }
+
+    public boolean isJumping() {
+        return currentState == AnimationState.JUMPING;
+    }
+
+    public final float getJumpSpeed() {
+        return jumpSpeed;
+    }
+
+    public boolean isClimbing() {return currentState == AnimationState.CLIMBING;}
+
+    public final float getClimbingSpeed() { return climbingSpeed; }
+    public void stopClimbing() {
+        if (currentState != AnimationState.JUMPING) {
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            else
+                currentState = AnimationState.FALLING;
+        }
+        b2body.setGravityScale(1);
+    }
+
+    public void setIsGrounded(boolean b) {
+        isGrounded = b;
+        if (!b)
+            currentState = AnimationState.JUMPING;
+        else
+            currentState = AnimationState.IDLE;
+    }
+
+    public boolean isGrounded() { return isGrounded; }
+
+    public void setPlatformVelocity(float velocity) {
+        this.platformVelocity = velocity;
+    }
+
+    public float getPlatformVelocity() { return platformVelocity; }
+
+    public void onMovingPlatform(boolean value) { isOnMovingPlatform = value; }
+
+    public boolean onMovingPlatform() {return isOnMovingPlatform; }
+
+    public void atLadder(boolean atLadder) { isAtLadder = atLadder; }
+
+    public boolean isAtLadder() { return isAtLadder; }
+
+    public void atEnd(boolean atEnd) { isAtEnd = atEnd; }
+
+    public boolean isAtEnd() { return  isAtEnd; }
+
+    @Override
+    public float getStateTimer() { return stateTimer; }
+
+    @Override
+    public void setStateTimer(float stateTimer) { this.stateTimer = stateTimer; }
+
+    @Override
+    public void setCurrentState(Object animationStates) {
+        if (animationStates instanceof AnimationState) {
+            this.currentState = (AnimationState) animationStates;
+        }
+    }
+
+    public boolean isAlive() { return isAlive; }
+    public void setAlive(boolean alive) { isAlive = alive;}
+
+    public void setMoveLimits(Vector2 max, Vector2 min) {
+        maxMoveLimit = max;
+        minMoveLimit = min;
+    }
+
+    public void resetMoveLimits() {
+        maxMoveLimit = null;
+        minMoveLimit = null;
+    }
 }

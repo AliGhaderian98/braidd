@@ -10,10 +10,7 @@ import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
 import braid.main.overworld.Overworld;
-import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
-import braid.main.objects.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -33,7 +30,7 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
             playerWithItem(userDataA, userDataB);
             playerWithLadder(userDataA, userDataB);
-            playerWithMovingPlatform(userDataA, userDataB);
+            playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
 
@@ -120,18 +117,17 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
-    private void playerWithMovingPlatform(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+    private void playerFeetWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform)) {
+
             MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
                 ? (MovingPlatform) userDataA.getObject()
                 : (MovingPlatform) userDataB.getObject();
 
-            player.atMovingPlatform(true);
+            player.onMovingPlatform(true);
             player.setIsGrounded(true);
             platform.setPlayer(player);
-            //player.setPlatformVelocity(platform.b2body.getLinearVelocity().x);
-
-
         }
 
     }
@@ -142,7 +138,7 @@ public class WorldContactListener implements ContactListener {
                 ? (MovingPlatform) userDataA.getObject()
                 : (MovingPlatform) userDataB.getObject();
 
-            player.atMovingPlatform(false);
+            player.onMovingPlatform(false);
             player.fall();
             platform.setPlayer(null);
             player.setPlatformVelocity(0);

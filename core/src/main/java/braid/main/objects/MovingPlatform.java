@@ -65,7 +65,7 @@ public class MovingPlatform extends InteractiveGameObject {
         }
 
         float velocityX = movingRight ? speed : -speed;
-        b2body.setLinearVelocity(velocityX*0.01f, 0);
+        b2body.setLinearVelocity(velocityX*0.005f, 0);
 
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
@@ -73,9 +73,6 @@ public class MovingPlatform extends InteractiveGameObject {
             if (player.getPlatformVelocity() != b2body.getLinearVelocity().x)
                 player.setPlatformVelocity(b2body.getLinearVelocity().x);
         }
-
-
-        //System.out.println("CurrentX: " + currentX + ", StartX: " + startX + ", RangeX: " + rangeX + ", MovingRight: " + movingRight);
     }
 
     public void setPlayer(Player p) {
