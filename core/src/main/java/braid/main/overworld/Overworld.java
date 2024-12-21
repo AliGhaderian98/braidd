@@ -36,14 +36,14 @@ public class Overworld implements Screen {
     private final TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
-    private int railLayerIndex;
+    private final int railLayerIndex;
     public Array<OverworldNode> nodes;
 
-    private Stage stage;
-    private OverworldPlayer player;
+    private final Stage stage;
+    private final OverworldPlayer player;
 
-    private FrameBuffer fbo;
-    private SpriteBatch fboBatch;
+    private final FrameBuffer fbo;
+    private final SpriteBatch fboBatch;
     private Texture fboTex;
 
 
@@ -62,7 +62,6 @@ public class Overworld implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
         railLayerIndex = map.getLayers().getIndex("rails-img");
-
 
         setupMapNodes();
 
@@ -237,11 +236,8 @@ public class Overworld implements Screen {
         }
     }
 
-
     @Override
-    public void show() {
-
-    }
+    public void show() {}
 
     @Override
     public void render(float delta) {
@@ -260,6 +256,7 @@ public class Overworld implements Screen {
             renderWorld();
             fbo.end();
 
+            // Save rendered image in frame buffer
             fboTex = fbo.getColorBufferTexture();
             fboTex.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
@@ -269,6 +266,7 @@ public class Overworld implements Screen {
             Gdx.gl.glTexParameterf(Gdx.gl.GL_TEXTURE_2D, Gdx.gl.GL_TEXTURE_WRAP_T, Gdx.gl.GL_CLAMP_TO_EDGE);
 
             fboBatch.begin();
+            clearScreen();
             fboBatch.draw(fboTex,
                 camera.getViewport().getScreenX(),camera.getViewport().getScreenY(),
                 camera.getViewport().getScreenWidth(), camera.getViewport().getScreenHeight(),
@@ -308,6 +306,7 @@ public class Overworld implements Screen {
     @Override
     public void resize(int width, int height) {
         camera.resize(width, height);
+        fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
     @Override
@@ -330,9 +329,6 @@ public class Overworld implements Screen {
                 resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             } );
         }).start();
-
-
-
     }
 
     @Override
@@ -348,8 +344,8 @@ public class Overworld implements Screen {
         fboBatch.dispose();
     }
 
-    // Getters and setters
 
+    // Getters and setters
 
     public TextureAtlas getAtlas() {
         return atlas;

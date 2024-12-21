@@ -306,7 +306,9 @@ public abstract class LevelScreen implements Screen {
 
     public void update(float dt) {
         KeyBindings.loadKeyBindings();
-        //stop rendering if game is Paused
+        levelHUD.update(dt);
+
+        //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
 
@@ -316,7 +318,6 @@ public abstract class LevelScreen implements Screen {
 
             // Update Entities
             player.update(dt);
-            levelHUD.update(dt);
 
             for (Enemy enemy : enemies) {
                 enemy.update(dt);

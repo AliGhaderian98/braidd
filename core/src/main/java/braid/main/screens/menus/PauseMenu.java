@@ -113,8 +113,7 @@ public class PauseMenu implements Screen {
 
         // mark first option
         updateLabelSelection();
-
-
+        
         pauseShader = createPauseShader();
     }
 
