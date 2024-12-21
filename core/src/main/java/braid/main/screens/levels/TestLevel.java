@@ -1,6 +1,7 @@
 package braid.main.screens.levels;
 
 import braid.main.Braid;
+import braid.main.objects.MovingPlatform;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
 import braid.main.objects.Enemy;
@@ -17,6 +18,10 @@ public class TestLevel extends LevelScreen {
         rewindObjects.add(player.getRewindController());
         for (Enemy e : enemies) {
             rewindObjects.add(e.getRewindController());
+        }
+
+        for (MovingPlatform m : movingPlatforms) {
+            rewindObjects.add(m.getRewindController());
         }
     }
 

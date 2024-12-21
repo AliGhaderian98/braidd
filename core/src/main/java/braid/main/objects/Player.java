@@ -116,10 +116,6 @@ public class Player extends DynamicGameObject {
         if (isOnMovingPlatform && !moving) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
-
-        System.out.println("Moving: "+moving+
-            ", SpeedX: "+b2body.getLinearVelocity().x+
-            ", MaxSpeed: "+ speed);
     }
 
     public TextureRegion getFrame(float dt){

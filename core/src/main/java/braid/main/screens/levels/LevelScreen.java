@@ -4,6 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.rewind.RewindableStaticBody;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
@@ -399,6 +400,7 @@ public abstract class LevelScreen implements Screen {
 
     public void addMovingPlatform(MovingPlatform movingPlatform) {
         movingPlatforms.add(movingPlatform);
+        movingPlatform.setRewindController(new RewindController(new RewindableStaticBody(movingPlatform.b2body, movingPlatform)));
     }
 
     public void addItem(Item item) {
