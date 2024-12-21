@@ -4,6 +4,8 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.overworld.Overworld;
+import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
@@ -16,6 +18,7 @@ import braid.main.screens.huds.RewindHUD;
 import braid.main.screens.menus.StartMenu;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -37,7 +40,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import braid.main.screens.menus.PauseMenu;
 
-import java.util.PriorityQueue;
 
 /***********
  Basisklasse für Level, die grundlegende Funktionen bereitstellt, die von allen
@@ -67,7 +69,6 @@ public abstract class LevelScreen implements Screen {
     protected final Player player;
     protected Array<Enemy> enemies;
     protected Array<Item> items;
-    protected PriorityQueue<ItemDef> itemsToSpawn;
 
     public Array<RewindController> rewindObjects;
 
@@ -77,6 +78,7 @@ public abstract class LevelScreen implements Screen {
     // Shader variables
     private ShaderProgram rewindShader;
     private ShaderProgram hitShader;
+    private ShaderProgram pauseShader;
     private ShaderProgram activeShader;
     private FrameBuffer fbo;
     private Texture fboTex;
@@ -85,7 +87,8 @@ public abstract class LevelScreen implements Screen {
     private RewindHUD rewindHUD;
 
     private LevelHUD levelHUD;
-
+    private FinishHUD finishHUD;
+    private boolean finished = false;
 
 
 
@@ -95,7 +98,6 @@ public abstract class LevelScreen implements Screen {
         atlas = new TextureAtlas(atlasPath);
 
         items = new Array<>();
-        itemsToSpawn = new PriorityQueue<>();
 
         // Load current Bindings
         KeyBindings.standardKeybindings();
@@ -138,7 +140,7 @@ public abstract class LevelScreen implements Screen {
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
 
-        world.setContactListener(new WorldContactListener(player, game));
+        world.setContactListener(new WorldContactListener(player, game, this));
         inputHandler = new PlayerInputHandler(player, world, game, this);
         setupShaders();
 
@@ -168,6 +170,14 @@ public abstract class LevelScreen implements Screen {
             throw new GdxRuntimeException("Shader compilation failed: " + hitShader.getLog());
         }
 
+        vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
+        fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        pauseShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!pauseShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + pauseShader.getLog());
+        }
+
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
         fboBatch = new SpriteBatch();
 
@@ -178,10 +188,13 @@ public abstract class LevelScreen implements Screen {
         rewindHUD = new RewindHUD(game.batch, rs, ps);
     }
 
-    public void setRewindShader() { activeShader = rewindShader; }
+    public void setRewindShader() {
+        if (!finished)
+            activeShader = rewindShader;
+    }
 
     public void removeRewindShader() {
-        if (activeShader != hitShader)
+        if (activeShader == rewindShader)
             resetShader();
     }
 
@@ -189,15 +202,6 @@ public abstract class LevelScreen implements Screen {
 
     public void resetShader() { activeShader = null; }
 
-
-    public void handleSpawningItems() {
-        if (!itemsToSpawn.isEmpty()) {
-            ItemDef idef = itemsToSpawn.poll();
-            if (idef.type == CollectableItem.class) {
-                items.add(new CollectableItem(this, idef.position.x, idef.position.y));
-            }
-        }
-    }
     public World getWorld() {
         return world;
     }
@@ -221,6 +225,9 @@ public abstract class LevelScreen implements Screen {
         fbo.end();
 
         applyPostProcessing(activeShader);
+        if (finished)
+            renderFinishHUD();
+
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
     }
 
@@ -277,6 +284,26 @@ public abstract class LevelScreen implements Screen {
         Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
     }
 
+    private void renderFinishHUD() {
+        // Save the previous OpenGL state
+        Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+
+        // Calculate black bar offsets (if any) from the FitViewport
+        float viewportX = finishHUD.stage.getViewport().getScreenX();
+        float viewportY = finishHUD.stage.getViewport().getScreenY();
+        float viewportWidth = finishHUD.stage.getViewport().getScreenWidth();
+        float viewportHeight = finishHUD.stage.getViewport().getScreenHeight();
+
+        // Set scissor to HUD's viewport to clip within bounds
+        Gdx.gl.glScissor((int) viewportX, (int) viewportY, (int) viewportWidth, (int) viewportHeight);
+
+        finishHUD.stage.getViewport().apply();
+        finishHUD.stage.draw();
+
+        // Restore OpenGL state
+        Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
+    }
+
 
     private void renderWorld() {
         renderer.setView(gameCamera.getCamera());
@@ -306,13 +333,14 @@ public abstract class LevelScreen implements Screen {
 
     public void update(float dt) {
         KeyBindings.loadKeyBindings();
-        levelHUD.update(dt);
+
+        if( !(gameIsPaused && player.isAlive()) )
+            levelHUD.update(dt);
 
         //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
             KeyBindings.loadKeyBindings();
 
-            handleSpawningItems();
             // Update world physics
             world.step(dt, 6, 2);
 
@@ -334,12 +362,25 @@ public abstract class LevelScreen implements Screen {
             }
         }
         else {
-            if(Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
+            if(!finished && Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
                 player.setAlive(true);
                 gameIsPaused = false;
                 resetShader();
             }
+            if(finished &&
+                (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT")) ||
+                Gdx.input.isKeyJustPressed(Input.Keys.ENTER))) {
+
+                game.setScreen(new Overworld(game));
+            }
         }
+    }
+
+    public void finish() {
+        finished = true;
+        gameIsPaused = true;
+        activeShader = pauseShader;
+        finishHUD = new FinishHUD(game.batch, atlas);
     }
 
     @Override
@@ -364,6 +405,8 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
+        if (finished)
+            finishHUD.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 

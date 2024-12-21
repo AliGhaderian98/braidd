@@ -19,9 +19,12 @@ import com.badlogic.gdx.physics.box2d.*;
 public class WorldContactListener implements ContactListener {
     private final Player player;
     private Braid game;
-    public WorldContactListener(Player player, Braid game) {
+    private LevelScreen screen;
+
+    public WorldContactListener(Player player, Braid game, LevelScreen screen) {
         this.game = game;
         this.player = player;
+        this.screen = screen;
     }
 
     @Override
@@ -194,7 +197,8 @@ public class WorldContactListener implements ContactListener {
             new Thread(() -> {
                 long time = System.currentTimeMillis();
                 while (System.currentTimeMillis() < time + 200){}
-                Gdx.app.postRunnable(() -> game.setScreen(new Overworld(game)));
+                //Gdx.app.postRunnable(() -> game.setScreen(new Overworld(game)));
+                Gdx.app.postRunnable(() -> screen.finish());
             }).start();
         }
     }

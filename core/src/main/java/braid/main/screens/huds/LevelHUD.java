@@ -1,7 +1,6 @@
 package braid.main.screens.huds;
 
 import braid.main.Braid;
-import braid.main.screens.menus.StartMenu;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,7 +29,7 @@ public class LevelHUD implements Disposable {
     private final long startTime;
     private long pauseTime;
     private long tempTimeStamp;
-    private long elapsedTime;
+    private static long elapsedTime;
 
     private static boolean timerVisible;
 
@@ -128,5 +127,9 @@ public class LevelHUD implements Disposable {
 
 
     public void dispose(){stage.dispose();}
+
+    public static int getCollectedPages() { return collectedPages; }
+    public static int getMaxPages() { return maxPages; }
+    public static long getElapsedTime() { return elapsedTime; }
 
 }
