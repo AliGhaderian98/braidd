@@ -169,11 +169,11 @@ public class SavegameMenu implements Screen{
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             executeSelectedAction();
         }
-        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
+        /*if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             LevelScreen.gameIsPaused = false;
             game.setScreen(new PauseMenu(game, this,true));
-        }
+        }*/
     }
 
     // scrolling down

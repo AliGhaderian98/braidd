@@ -9,10 +9,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.*;
 
 import static com.badlogic.gdx.graphics.Color.toFloatBits;
@@ -24,6 +26,9 @@ public class PauseMenu implements Screen {
     private final Boolean Reduced;
     private final Screen previousScreen;
 
+    private final Texture background;
+    private final ShaderProgram pauseShader;
+
     private final Label Resume, Retry, Option, Overworld, Startmenu, SaveAndExit;
     private final Array<Label> menuLabels;
     private int selectedIndex = 0;
@@ -34,11 +39,15 @@ public class PauseMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public PauseMenu(Braid game, Screen previousScreen, Boolean Reduced){
+    public PauseMenu(Braid game, Screen previousScreen, Boolean Reduced, Texture background){
         // Setup Screen and save World for resume
         this.game = game;
         this.previousScreen = previousScreen;
         this.Reduced = Reduced;
+        this.background = background;
+
+
+
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
         viewport.apply();
 
@@ -77,7 +86,7 @@ public class PauseMenu implements Screen {
         menuLabels = new Array<>();
 
         menuLabels.add(Resume);
-       if(!Reduced) { // Leave this point out if the pause screen is opened from the Overworld or SaveGameMenu
+        if(!Reduced) { // Leave this point out if the pause screen is opened from the Overworld or SaveGameMenu
             menuLabels.add(Retry,Overworld,Startmenu);
         }
         menuLabels.add(Option, SaveAndExit);
@@ -104,6 +113,21 @@ public class PauseMenu implements Screen {
 
         // mark first option
         updateLabelSelection();
+
+
+        pauseShader = createPauseShader();
+    }
+
+    private ShaderProgram createPauseShader() {
+        final ShaderProgram pauseShader;
+        String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
+        String fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        pauseShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!pauseShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + pauseShader.getLog());
+        }
+        return pauseShader;
     }
 
     @Override
@@ -118,10 +142,24 @@ public class PauseMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
         updateScreenRatio();
+
+        game.batch.setShader(pauseShader);
+        pauseShader.setUniformf("u_resolution", stage.getViewport().getScreenWidth(), stage.getViewport().getScreenHeight());
+
+        game.batch.begin();
+        game.batch.draw(background,
+            stage.getViewport().getScreenX(),stage.getViewport().getScreenY(),
+            stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight(),
+            0,0,1,1);
+        game.batch.end();
+
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
+
+        game.batch.setShader(null);
+
         stage.draw();
-
-
     }
+
     private void handleInput() {
         // navigation with Keys
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("DOWN_KEY"))){
@@ -175,7 +213,7 @@ public class PauseMenu implements Screen {
             }
 
         } else if (selectedLabel == Option) {
-            game.setScreen(new OptionMenu(game,previousScreen, Reduced));
+            game.setScreen(new OptionMenu(game,previousScreen, Reduced, background));
 
         } else if (selectedLabel == Overworld) {
             game.setScreen(new Overworld(game));

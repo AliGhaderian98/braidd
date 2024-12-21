@@ -13,10 +13,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -31,6 +33,9 @@ public class OptionMenu implements Screen {
     private int selectedIndex = 0;
     private  Label  currentLabel;
 
+    private final Texture background;
+    private final ShaderProgram pauseShader;
+
     int width;
     int height;
 
@@ -40,10 +45,11 @@ public class OptionMenu implements Screen {
     private final Slider musicSlider;
     private final Slider sfxSlider;
 
-    public OptionMenu(Braid game, Screen previousScreen, Boolean Reduced) {
+    public OptionMenu(Braid game, Screen previousScreen, Boolean Reduced, Texture background) {
         this.game = game;
         this.previousScreen = previousScreen;
         this.Reduced = Reduced;
+        this.background = background;
 
         // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
@@ -128,6 +134,19 @@ public class OptionMenu implements Screen {
         // mark first option
         updateLabelSelection();
 
+        pauseShader = createPauseShader();
+    }
+
+    private ShaderProgram createPauseShader() {
+        final ShaderProgram pauseShader;
+        String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
+        String fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        pauseShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!pauseShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + pauseShader.getLog());
+        }
+        return pauseShader;
     }
 
     @Override
@@ -143,6 +162,21 @@ public class OptionMenu implements Screen {
         updateLabel();
         handleInput();
         updateScreenRatio();
+
+        game.batch.setShader(pauseShader);
+        pauseShader.setUniformf("u_resolution", stage.getViewport().getScreenWidth(), stage.getViewport().getScreenHeight());
+
+        game.batch.begin();
+        game.batch.draw(background,
+            stage.getViewport().getScreenX(),stage.getViewport().getScreenY(),
+            stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight(),
+            0,0,1,1);
+        game.batch.end();
+
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
+
+        game.batch.setShader(null);
+
         stage.draw();
     }
 
@@ -171,7 +205,7 @@ public class OptionMenu implements Screen {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             LevelScreen.gameIsPaused = false;
-            game.setScreen(new PauseMenu(game, previousScreen,Reduced));
+            game.setScreen(new PauseMenu(game, previousScreen, Reduced, background));
             dispose();
         }
     }
@@ -210,7 +244,7 @@ public class OptionMenu implements Screen {
             toggleFullscreen();
 
         } else if (selectedLabel == Keybindings) {
-            game.setScreen(new KeybindsMenu((game), previousScreen, Reduced));
+            game.setScreen(new KeybindsMenu((game), previousScreen, Reduced, background));
             dispose();
         } else if (selectedLabel == Timer) {
             LevelHUD.setTimerVisible(!LevelHUD.isTimerVisible());

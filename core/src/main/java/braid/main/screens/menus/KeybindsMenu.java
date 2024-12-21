@@ -11,10 +11,13 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -29,6 +32,8 @@ public class KeybindsMenu implements Screen {
     private final Label RunLeft, RunRight,UP_KEY,DOWN_KEY, Jump, Rewind, INTERACT, ResetKeybindings;
     private final Array<Label> menuLabels;
     private final Boolean Reduced;
+    private final Texture background;
+    private final ShaderProgram pauseShader;
     private int selectedIndex = 0;
     public static boolean OverlayActive;
     public static boolean changeNotPossible;
@@ -39,7 +44,7 @@ public class KeybindsMenu implements Screen {
     // Sound
     private final Sound menuSound;
 
-    public KeybindsMenu(Braid game, Screen previousScreen, Boolean Reduced) {
+    public KeybindsMenu(Braid game, Screen previousScreen, Boolean Reduced, Texture background) {
         // Default: disable all Overlay
         OverlayActive = false;
         changeNotPossible = false;
@@ -48,6 +53,7 @@ public class KeybindsMenu implements Screen {
         this.game = game;
         this.previousScreen = previousScreen;
         this.Reduced = Reduced;
+        this.background = background;
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
 
         mainStage = new Stage(viewport,((Braid) game).batch);
@@ -145,6 +151,19 @@ public class KeybindsMenu implements Screen {
         // mark first option
         updateLabelSelection();
 
+        pauseShader = createPauseShader();
+    }
+
+    private ShaderProgram createPauseShader() {
+        final ShaderProgram pauseShader;
+        String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
+        String fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
+        pauseShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!pauseShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + pauseShader.getLog());
+        }
+        return pauseShader;
     }
 
     @Override
@@ -160,6 +179,21 @@ public class KeybindsMenu implements Screen {
         updateKeybindingLabel();
         handleInput();
         updateScreenRatio();
+
+        game.batch.setShader(pauseShader);
+        pauseShader.setUniformf("u_resolution", mainStage.getViewport().getScreenWidth(), mainStage.getViewport().getScreenHeight());
+
+        game.batch.begin();
+        game.batch.draw(background,
+            mainStage.getViewport().getScreenX(),mainStage.getViewport().getScreenY(),
+            mainStage.getViewport().getWorldWidth(), mainStage.getViewport().getWorldHeight(),
+            0,0,1,1);
+        game.batch.end();
+
+        game.batch.setProjectionMatrix(mainStage.getCamera().combined);
+
+        game.batch.setShader(null);
+
         if(OverlayActive){
             Overlay.draw();
         }else if(changeNotPossible){
@@ -196,7 +230,7 @@ public class KeybindsMenu implements Screen {
                 changeNotPossible = false;
                 OverlayActive = false;
             }else {
-                game.setScreen(new OptionMenu(game,previousScreen, Reduced));
+                game.setScreen(new OptionMenu(game,previousScreen, Reduced, background));
                 dispose();
             }
         }

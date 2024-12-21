@@ -78,6 +78,7 @@ public abstract class LevelScreen implements Screen {
     private ShaderProgram rewindShader;
     private ShaderProgram activeShader;
     private FrameBuffer fbo;
+    private Texture fboTex;
     private SpriteBatch fboBatch;
     private float time = 0f;
     private RewindHUD rewindHUD;
@@ -211,7 +212,7 @@ public abstract class LevelScreen implements Screen {
     }
 
     private void applyPostProcessing(ShaderProgram shader) {
-        Texture fboTex = fbo.getColorBufferTexture();
+        fboTex = fbo.getColorBufferTexture();
 
         fboBatch.setShader(shader);
 
@@ -322,7 +323,7 @@ public abstract class LevelScreen implements Screen {
         gameIsPaused = true;
         music.pause();
         levelHUD.pause();
-        game.setScreen(new PauseMenu(game, this, false));
+        game.setScreen(new PauseMenu(game, this, false, fboTex));
     }
 
     @Override

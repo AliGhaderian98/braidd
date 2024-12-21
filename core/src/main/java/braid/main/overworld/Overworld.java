@@ -8,7 +8,11 @@ import braid.main.screens.menus.SavegameMenu;
 import braid.main.tools.KeyBindings;
 import braid.main.tools.Savemanager;
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -35,9 +39,12 @@ public class Overworld implements Screen {
     private int railLayerIndex;
     public Array<OverworldNode> nodes;
 
-
     private Stage stage;
     private OverworldPlayer player;
+
+    private FrameBuffer fbo;
+    private SpriteBatch fboBatch;
+    private Texture fboTex;
 
 
     public Overworld(Braid game) {
@@ -79,6 +86,8 @@ public class Overworld implements Screen {
 
         setupInput();
 
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        fboBatch = new SpriteBatch();
     }
 
     private void setupInput() {
@@ -246,8 +255,27 @@ public class Overworld implements Screen {
 
             updateCamera();
 
+            fbo.begin();
             clearScreen();
             renderWorld();
+            fbo.end();
+
+            fboTex = fbo.getColorBufferTexture();
+            fboTex.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+            // Flip the texture vertically
+            fboTex.bind();
+            Gdx.gl.glTexParameterf(Gdx.gl.GL_TEXTURE_2D, Gdx.gl.GL_TEXTURE_WRAP_S, Gdx.gl.GL_CLAMP_TO_EDGE);
+            Gdx.gl.glTexParameterf(Gdx.gl.GL_TEXTURE_2D, Gdx.gl.GL_TEXTURE_WRAP_T, Gdx.gl.GL_CLAMP_TO_EDGE);
+
+            fboBatch.begin();
+            fboBatch.draw(fboTex,
+                camera.getViewport().getScreenX(),camera.getViewport().getScreenY(),
+                camera.getViewport().getScreenWidth(), camera.getViewport().getScreenHeight(),
+                0,0,1,1);
+            fboBatch.end();
+
+            game.batch.setProjectionMatrix(camera.getCamera().combined);
         }
     }
 
@@ -286,7 +314,7 @@ public class Overworld implements Screen {
     public void pause() {
         gameIsPaused = true;
         Gdx.input.setInputProcessor(null);
-        game.setScreen(new PauseMenu(game, this,true));
+        game.setScreen(new PauseMenu(game, this,true, fboTex));
     }
 
     @Override
@@ -316,6 +344,8 @@ public class Overworld implements Screen {
     public void dispose() {
         map.dispose();
         renderer.dispose();
+        fbo.dispose();
+        fboBatch.dispose();
     }
 
     // Getters and setters
