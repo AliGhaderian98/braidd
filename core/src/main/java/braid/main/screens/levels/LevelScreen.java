@@ -76,6 +76,7 @@ public abstract class LevelScreen implements Screen {
 
     // Shader variables
     private ShaderProgram rewindShader;
+    private ShaderProgram hitShader;
     private ShaderProgram activeShader;
     private FrameBuffer fbo;
     private Texture fboTex;
@@ -160,15 +161,31 @@ public abstract class LevelScreen implements Screen {
             throw new GdxRuntimeException("Shader compilation failed: " + rewindShader.getLog());
         }
 
+        fragmentShader = Gdx.files.internal("shaders/red.frag").readString();
+        hitShader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!hitShader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + hitShader.getLog());
+        }
+
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
         fboBatch = new SpriteBatch();
 
-        Sprite s = new Sprite(atlas.findRegion("rewind-symbol"));
-        s.setBounds(0,0,18,15);
-        rewindHUD = new RewindHUD(game.batch, s);
+        Sprite rs = new Sprite(atlas.findRegion("rewind-symbol"));
+        rs.setBounds(0,0,18,15);
+        Sprite ps = new Sprite(atlas.findRegion("pause-symbol"));
+        ps.setBounds(0,0,18,15);
+        rewindHUD = new RewindHUD(game.batch, rs, ps);
     }
 
     public void setRewindShader() { activeShader = rewindShader; }
+
+    public void removeRewindShader() {
+        if (activeShader != hitShader)
+            resetShader();
+    }
+
+    public void setHitShader() { activeShader = hitShader; }
 
     public void resetShader() { activeShader = null; }
 
@@ -231,8 +248,13 @@ public abstract class LevelScreen implements Screen {
             0,0,1,1);
         fboBatch.end();
 
-        if (activeShader == rewindShader)
+        if (activeShader == rewindShader) {
+            rewindHUD.rewindMode();
             renderRewindHUD();
+        } else if (activeShader == hitShader) {
+            rewindHUD.pauseMode();
+            renderRewindHUD();
+        }
     }
 
     private void renderRewindHUD() {
@@ -314,6 +336,7 @@ public abstract class LevelScreen implements Screen {
             if(Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
                 player.setAlive(true);
                 gameIsPaused = false;
+                resetShader();
             }
         }
     }

@@ -48,7 +48,7 @@ public class PauseMenu implements Screen {
 
 
 
-        Viewport viewport = new ExtendViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
+        Viewport viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT,new OrthographicCamera());
         viewport.apply();
 
         stage = new Stage(viewport,((Braid) game).batch);

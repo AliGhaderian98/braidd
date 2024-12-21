@@ -80,13 +80,13 @@ public class PlayerInputHandler {
             if (player.getRewindController().hasRewindStorage()) {
                 screen.setRewindShader();
             } else {
-                screen.resetShader();
+                screen.removeRewindShader();
             }
         } else {
             for (RewindController r : screen.rewindObjects) {
                 r.stopRewinding();
             }
-            screen.resetShader();
+            screen.removeRewindShader();
         }
     }
 

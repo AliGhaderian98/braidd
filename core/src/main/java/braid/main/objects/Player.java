@@ -28,6 +28,8 @@ public class Player extends DynamicGameObject {
         LANDING
     }
 
+    LevelScreen screen;
+
     // Animation variables
     private final Animation<TextureRegion> LionIdle, LionRunning, LionJumping, LionClimbing, LionLanding, LionFalling;
     private boolean runningRight;
@@ -53,6 +55,7 @@ public class Player extends DynamicGameObject {
     // Constructors
     public Player(World world, LevelScreen screen) {
         super(world);
+        this.screen = screen;
 
         speed = 1f;
         currentState = AnimationState.IDLE;
@@ -260,6 +263,7 @@ public class Player extends DynamicGameObject {
     }
 
     public void die() {
+        screen.setHitShader();
         LevelScreen.gameIsPaused = true;
         isAlive = false;
     }

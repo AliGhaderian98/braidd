@@ -4,11 +4,13 @@ package braid.main.screens.huds;
 import braid.main.Braid;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -16,14 +18,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class RewindHUD implements Disposable {
     public Stage stage;
-    private Viewport viewport;
+    private final Viewport viewport;
     private Camera camera;
 
-    Image rewindImage;
+    Image activeImage;
+    SpriteDrawable rewindImage;
+    SpriteDrawable pauseImage;
 
-    public RewindHUD(SpriteBatch sb, Sprite sprite) {
-        rewindImage = new Image(sprite);
-        rewindImage.setScale(12,12);
+    public RewindHUD(SpriteBatch sb, Sprite rewindSprite, Sprite pauseSprite) {
+        rewindImage = new SpriteDrawable(rewindSprite);
+
+        pauseImage = new SpriteDrawable(pauseSprite);
+
+        activeImage = new Image();
+        activeImage.setDrawable(rewindImage);
+        activeImage.setScale(12,12);
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(Braid.V_WIDTH, Braid.V_HEIGHT, camera);
@@ -34,10 +43,14 @@ public class RewindHUD implements Disposable {
         table.setSize(Braid.V_WIDTH, Braid.V_HEIGHT);
         table.setFillParent(true);
 
-        table.add(rewindImage).padTop(350).padRight(400);
+        table.add(activeImage).padTop(350).padRight(400);
 
         stage.addActor(table);
     }
+
+    public void rewindMode() { activeImage.setDrawable(rewindImage); }
+
+    public void pauseMode() { activeImage.setDrawable(pauseImage); }
 
     public void resize(int width, int height) {
         viewport.update(width, height, true);
