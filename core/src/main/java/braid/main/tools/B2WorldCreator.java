@@ -5,6 +5,7 @@ import braid.main.Items.CollectableItem;
 import braid.main.Items.PowerUp;
 import braid.main.objects.Ladder;
 import braid.main.objects.End;
+import braid.main.objects.Sign;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
@@ -47,6 +48,18 @@ public class B2WorldCreator {
         spawnLadders();
         spawnEnemies();
         spawnItems();
+        spawnSigns();
+    }
+
+    private void spawnSigns() {
+        MapLayer signLayer = map.getLayers().get("Signs");
+        if (signLayer != null) {
+            for (MapObject object : signLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+                new Sign(world, map, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
+            }
+        }
     }
 
     private void spawnGround() {

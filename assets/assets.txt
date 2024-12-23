@@ -1,7 +1,3 @@
-SaveGameFiles/SaveGame1.json
-SaveGameFiles/SaveGame2.json
-SaveGameFiles/SaveGame3.json
-SaveGameFiles/SaveGame4.json
 Slider/skin(1).atlas
 Slider/skin.atlas
 Slider/slider_background.png

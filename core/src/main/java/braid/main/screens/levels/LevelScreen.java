@@ -75,6 +75,9 @@ public abstract class LevelScreen implements Screen {
     // Music
     private final Music music;
 
+    // Subtitles
+    private final SubtitleManager subtitleManager;
+
     // Shader variables
     private ShaderProgram rewindShader;
     private ShaderProgram hitShader;
@@ -98,6 +101,9 @@ public abstract class LevelScreen implements Screen {
         atlas = new TextureAtlas(atlasPath);
 
         items = new Array<>();
+
+        subtitleManager = new SubtitleManager(this);
+        subtitleManager.addSubtitle(new Subtitle("HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI", 50,50));
 
         // Load current Bindings
         KeyBindings.standardKeybindings();
@@ -131,6 +137,8 @@ public abstract class LevelScreen implements Screen {
         music.setLooping(true);
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
+
+
 
 
         rewindObjects = new Array<>();
@@ -225,6 +233,8 @@ public abstract class LevelScreen implements Screen {
         fbo.end();
 
         applyPostProcessing(activeShader);
+
+        subtitleManager.render(delta);
         if (finished)
             renderFinishHUD();
 
@@ -360,6 +370,9 @@ public abstract class LevelScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
+
+            // Update Subtitles
+            subtitleManager.render(dt);
         }
         else {
             if(!finished && Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
@@ -456,4 +469,6 @@ public abstract class LevelScreen implements Screen {
     public void addItem(Item item) {
         items.add(item);
     }
+
+    public SubtitleManager getSubtitleManager() { return subtitleManager; }
 }

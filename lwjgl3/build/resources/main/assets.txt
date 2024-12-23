@@ -15,6 +15,7 @@ maps/Sample.tsx
 maps/mid-layer-a.tsx
 maps/mid-layer-b.tsx
 maps/overworld-map.tmx
+maps/overworld-tiles-new.tsx
 maps/overworld-tiles.tsx
 maps/patrollingEnemyMap.tmx
 maps/prop-sheet.tsx
@@ -27,6 +28,7 @@ maps/tilesets/1_Industrial_Tileset_1.png
 maps/tilesets/1_Industrial_Tileset_1B.png
 maps/tilesets/3_Far_Background_Tile.png
 maps/tilesets/Anim_Robot_Jump1_v1.png
+maps/tilesets/BaseSet.png
 maps/tilesets/Map_tiles.png
 maps/tilesets/Props.png
 maps/tilesets/Sample.png
@@ -43,6 +45,6 @@ packedimages/sprites.atlas
 packedimages/sprites.png
 shaders/crt-rewind.frag
 shaders/grey.frag
-shaders/rewind.frag
+shaders/red.frag
 shaders/standard.vert
 textFonts/MenuTextFont.ttf
