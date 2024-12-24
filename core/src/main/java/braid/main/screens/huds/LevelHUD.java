@@ -1,6 +1,7 @@
 package braid.main.screens.huds;
 
 import braid.main.Braid;
+import braid.main.Items.PowerUp;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -34,7 +35,9 @@ public class LevelHUD implements Disposable {
 
     private Image powerUpImage;
     private Image powerUpBackground;
+    private Image powerUpTimer;
     private Animation<TextureRegion> powerUpBackgroundAnimation;
+    private Animation<TextureRegion> powerUpTimerAnimation;
     private float stateTime = 0;
     private SpriteDrawable ritalin;
     private Stack powerUp;
@@ -70,13 +73,25 @@ public class LevelHUD implements Disposable {
         powerUpBackground.setOrigin(Align.center);
         powerUpBackground.setScale(2,2);
 
+        powerUpTimerAnimation = new Animation<>(PowerUp.getMaxTime()/1000f/13f, atlas.findRegions("circle-timer"), Animation.PlayMode.NORMAL);
+        powerUpTimer = new Image(powerUpTimerAnimation.getKeyFrame(0));
+        powerUpTimer.setOrigin(Align.center);
+        powerUpTimer.setScale(1.5f, 1.5f);
+        powerUpTimer.setSize(powerUpBackground.getWidth(), powerUpBackground.getHeight());
+
         ritalin = new SpriteDrawable(atlas.createSprite("ritalin"));
         powerUpImage = new Image();
         powerUpImage.setDrawable(ritalin);
+        powerUpTimer.setOrigin(Align.center);
 
         powerUp = new Stack();
         powerUp.add(powerUpBackground);
+        powerUp.add(powerUpTimer);
         powerUp.add(powerUpImage);
+        System.out.println("Background: ("+powerUpBackground.getWidth()+", "+powerUpBackground.getHeight()+")");
+        System.out.println("Timer: ("+powerUpTimer.getWidth()+", "+powerUpTimer.getHeight()+")");
+        System.out.println("Image: ("+powerUpImage.getWidth()+", "+powerUpImage.getHeight()+")");
+        System.out.println("Stack: ("+powerUp.getPrefWidth()+", "+powerUp.getPrefHeight()+")");
 
         Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.WHITE);
 
@@ -148,6 +163,8 @@ public class LevelHUD implements Disposable {
             stateTime += dt;
             TextureRegion currentFrame = powerUpBackgroundAnimation.getKeyFrame(stateTime);
             powerUpBackground.setDrawable(new Image(currentFrame).getDrawable());
+            currentFrame = powerUpTimerAnimation.getKeyFrame(stateTime);
+            powerUpTimer.setDrawable(new Image(currentFrame).getDrawable());
         }
     }
 

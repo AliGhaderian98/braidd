@@ -21,7 +21,7 @@ public class PowerUp extends Item {
     private final float floatSpeed = 300f/Braid.PPM;
 
     private boolean toReset = false;
-    private int maxTime = 10000; // 10 second timer measured in ms
+    private static final int maxTime = 10000; // 10 second timer measured in ms
 
 
 
@@ -63,7 +63,7 @@ public class PowerUp extends Item {
         // deactivate power up after maxTime is over
         new Thread(() -> {
             long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() < time + maxTime){} // add update to levelHUD here
+            while (System.currentTimeMillis() < time + maxTime){}
             Gdx.app.postRunnable(() -> reset(player) );
         }).start();
     }
@@ -75,6 +75,8 @@ public class PowerUp extends Item {
             player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
         }
     }
+
+    public static int getMaxTime() { return maxTime; }
 
     @Override
     public void update(float dt) {
