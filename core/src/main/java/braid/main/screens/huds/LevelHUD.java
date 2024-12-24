@@ -73,7 +73,7 @@ public class LevelHUD implements Disposable {
         powerUpBackground.setOrigin(Align.center);
         powerUpBackground.setScale(2,2);
 
-        powerUpTimerAnimation = new Animation<>(PowerUp.getMaxTime()/1000f/13f, atlas.findRegions("circle-timer"), Animation.PlayMode.NORMAL);
+        powerUpTimerAnimation = new Animation<>(PowerUp.getMaxTime()/1000f/13f, atlas.findRegions("circle-timer"), Animation.PlayMode.LOOP);
         powerUpTimer = new Image(powerUpTimerAnimation.getKeyFrame(0));
         powerUpTimer.setOrigin(Align.center);
         powerUpTimer.setScale(1.5f, 1.5f);
@@ -88,10 +88,6 @@ public class LevelHUD implements Disposable {
         powerUp.add(powerUpBackground);
         powerUp.add(powerUpTimer);
         powerUp.add(powerUpImage);
-        System.out.println("Background: ("+powerUpBackground.getWidth()+", "+powerUpBackground.getHeight()+")");
-        System.out.println("Timer: ("+powerUpTimer.getWidth()+", "+powerUpTimer.getHeight()+")");
-        System.out.println("Image: ("+powerUpImage.getWidth()+", "+powerUpImage.getHeight()+")");
-        System.out.println("Stack: ("+powerUp.getPrefWidth()+", "+powerUp.getPrefHeight()+")");
 
         Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.WHITE);
 
