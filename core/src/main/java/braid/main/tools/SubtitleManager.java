@@ -18,7 +18,8 @@ public class SubtitleManager {
 
     public SubtitleManager(LevelScreen screen) {
         subtitles = new Array<>();
-        font = new BitmapFont();
+        //font = new BitmapFont();
+        font = TextFontManager.getPixelFont();
         batch = new SpriteBatch();
 
     }

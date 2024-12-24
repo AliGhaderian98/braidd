@@ -14,7 +14,7 @@ public class Sign extends InteractiveGameObject {
     public Sign(World world, TiledMap map, Rectangle boundary, SubtitleManager subtitleManager, String text) {
         super(world,map,boundary, true);
         this.subtitleManager = subtitleManager;
-        this.subtitle = new Subtitle(text, boundary.x, boundary.y);
+        this.subtitle = new Subtitle(text, boundary.x, boundary.y+20);
 
         subtitleManager.addSubtitle(subtitle);
 
