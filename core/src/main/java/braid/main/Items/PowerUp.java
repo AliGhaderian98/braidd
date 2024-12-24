@@ -2,6 +2,7 @@ package braid.main.Items;
 
 import braid.main.Braid;
 import braid.main.objects.Player;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
@@ -56,18 +57,20 @@ public class PowerUp extends Item {
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
         }
+        LevelHUD.activatePowerUp(getRegionName());
         destroy();
 
         // deactivate power up after maxTime is over
         new Thread(() -> {
             long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() < time + maxTime){}
+            while (System.currentTimeMillis() < time + maxTime){} // add update to levelHUD here
             Gdx.app.postRunnable(() -> reset(player) );
         }).start();
     }
 
     public void reset(Player player) {
         toReset = true;
+        LevelHUD.resetPowerUp();
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
         }

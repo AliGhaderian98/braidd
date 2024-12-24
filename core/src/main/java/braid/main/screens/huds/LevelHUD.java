@@ -4,16 +4,22 @@ import braid.main.Braid;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.Objects;
 
 
 public class LevelHUD implements Disposable {
@@ -24,7 +30,18 @@ public class LevelHUD implements Disposable {
     private static Integer maxPages;
     private final Label timerLabel;
     private static Label pageLabel;
-    Image pageImage;
+    private Image pageImage;
+
+    private Image powerUpImage;
+    private Image powerUpBackground;
+    private Animation<TextureRegion> powerUpBackgroundAnimation;
+    private float stateTime = 0;
+    private SpriteDrawable ritalin;
+    private Stack powerUp;
+    private static String activePowerUp;
+    private static boolean justActivated;
+
+    private static boolean powerUpActive;
 
     private final long startTime;
     private long pauseTime;
@@ -36,7 +53,6 @@ public class LevelHUD implements Disposable {
 
 
     public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
-
         startTime = System.currentTimeMillis();
         pauseTime = 0;
         tempTimeStamp = System.currentTimeMillis();
@@ -48,6 +64,19 @@ public class LevelHUD implements Disposable {
 
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(8,8);
+
+        powerUpBackgroundAnimation = new Animation<>(0.1f, atlas.findRegions("ball"), Animation.PlayMode.LOOP);
+        powerUpBackground = new Image(powerUpBackgroundAnimation.getKeyFrame(0));
+        powerUpBackground.setOrigin(Align.center);
+        powerUpBackground.setScale(2,2);
+
+        ritalin = new SpriteDrawable(atlas.createSprite("ritalin"));
+        powerUpImage = new Image();
+        powerUpImage.setDrawable(ritalin);
+
+        powerUp = new Stack();
+        powerUp.add(powerUpBackground);
+        powerUp.add(powerUpImage);
 
         Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.WHITE);
 
@@ -65,7 +94,11 @@ public class LevelHUD implements Disposable {
         table.add(timerLabel).expandX().align(Align.left).pad(100);
         table.add(scoreTable).expandX().align(Align.right).pad(100);
 
+        table.row();
+        table.add(powerUp).colspan(2).expandX().align(Align.right).padRight(160);
+
         timerLabel.setVisible(timerVisible);
+        powerUp.setVisible(false);
 
         stage.addActor(table);
     }
@@ -102,6 +135,36 @@ public class LevelHUD implements Disposable {
 
         if (timerVisible != timerLabel.isVisible())
             timerLabel.setVisible(timerVisible);
+
+        if (powerUpActive != powerUp.isVisible())
+            powerUp.setVisible(powerUpActive);
+
+        if (justActivated) {
+            setActivePowerUp();
+            justActivated = false;
+        }
+
+        if (powerUpActive) {
+            stateTime += dt;
+            TextureRegion currentFrame = powerUpBackgroundAnimation.getKeyFrame(stateTime);
+            powerUpBackground.setDrawable(new Image(currentFrame).getDrawable());
+        }
+    }
+
+    public static void activatePowerUp(String type) {
+        powerUpActive = true;
+        justActivated = true;
+        activePowerUp = type;
+    }
+
+    public static void resetPowerUp() {
+        powerUpActive = false;
+    }
+
+    private void setActivePowerUp() {
+        if (Objects.equals(activePowerUp, "ritalin")) {
+            powerUpImage.setDrawable(ritalin);
+        }
     }
 
     public void resize(int width, int height) {
