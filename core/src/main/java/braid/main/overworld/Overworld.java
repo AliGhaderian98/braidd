@@ -22,6 +22,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.Objects;
 
@@ -96,11 +97,12 @@ public class Overworld implements Screen {
 
                 // Pause game
                 if (keycode == KeyBindings.getKey("ESC") && !gameIsPaused) {
-                    new Thread(() -> {
-                        long time = System.currentTimeMillis();
-                        while (System.currentTimeMillis() < time + 1){}
-                        Gdx.app.postRunnable(() -> pause() );
-                    }).start();
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            pause();
+                        }
+                    }, 0f);
                     return true;
                 }
 
@@ -146,33 +148,39 @@ public class Overworld implements Screen {
         final float targetRotation = -20f;
         final float rotationSpeed = -.4f;
 
-        new Thread(() -> {
+        Timer.schedule(new Timer.Task() {
             float currentRotation = 0f;
 
-            while (camera.getCamera().zoom > targetZoom && currentRotation > targetRotation) {
-                camera.getCamera().zoom -= zoomSpeed;
-                if (camera.getCamera().zoom < targetZoom) {
-                    camera.getCamera().zoom = targetZoom;
+            @Override
+            public void run() {
+                boolean zooming = camera.getCamera().zoom > targetZoom;
+                boolean rotating = currentRotation > targetRotation;
+
+                if (zooming) {
+                    camera.getCamera().zoom -= zoomSpeed;
+                    if (camera.getCamera().zoom < targetZoom) {
+                        camera.getCamera().zoom = targetZoom;
+                    }
                 }
 
-                camera.getCamera().rotate(rotationSpeed);
-                currentRotation += rotationSpeed;
-                if (currentRotation < targetRotation) {
-                    currentRotation = targetRotation;
+                if (rotating) {
+                    camera.getCamera().rotate(rotationSpeed);
+                    currentRotation += rotationSpeed;
+                    if (currentRotation < targetRotation) {
+                        currentRotation = targetRotation;
+                    }
                 }
 
                 camera.getCamera().update();
 
-                try {
-                    Thread.sleep(16);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                // End timer and transition to the new level once goal camera position is reached
+                if (!zooming && !rotating) {
+                    cancel();
+                    Gdx.app.postRunnable(() -> game.setScreen(newScreen));
                 }
             }
+        }, 0, 0.016f); // runs every 16 milliseconds
 
-            // Transition to the new level once zoom completes
-            Gdx.app.postRunnable(() -> game.setScreen(newScreen));
-        }).start();
 
         // Remove overworld input processor
         Gdx.input.setInputProcessor(null);
@@ -322,13 +330,12 @@ public class Overworld implements Screen {
         setupInput();
         gameIsPaused = false;
 
-        new Thread(() -> {
-            long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() < time){}
-            Gdx.app.postRunnable(() -> {
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
                 resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            } );
-        }).start();
+            }
+        }, 0);
     }
 
     @Override

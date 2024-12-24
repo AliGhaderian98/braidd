@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Timer;
 //todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
@@ -167,13 +168,13 @@ public class Player extends DynamicGameObject {
         isGrounded = true;
         if (b2body.getLinearVelocity().y < -3.75) {
             landingAnimationPlaying = true;
-            new Thread(() -> {
-                long time = System.currentTimeMillis();
-                while (System.currentTimeMillis() < time + 250){}
-                Gdx.app.postRunnable(() -> {
+
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
                     landingAnimationPlaying = false;
-                } );
-            }).start();
+                }
+            }, 0.25f);
         }
 
     }

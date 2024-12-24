@@ -15,6 +15,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Timer;
 
 public class WorldContactListener implements ContactListener {
     private final Player player;
@@ -194,12 +195,12 @@ public class WorldContactListener implements ContactListener {
             player.atEnd(true);
 
             // switch to overworld after 0.2 second delay
-            new Thread(() -> {
-                long time = System.currentTimeMillis();
-                while (System.currentTimeMillis() < time + 200){}
-                //Gdx.app.postRunnable(() -> game.setScreen(new Overworld(game)));
-                Gdx.app.postRunnable(() -> screen.finish());
-            }).start();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    screen.finish();
+                }
+            }, 0.2f);
         }
     }
 

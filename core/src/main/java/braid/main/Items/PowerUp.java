@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.utils.Timer;
 
 public class PowerUp extends Item {
 
@@ -21,7 +22,7 @@ public class PowerUp extends Item {
     private final float floatSpeed = 300f/Braid.PPM;
 
     private boolean toReset = false;
-    private static final int maxTime = 10000; // 10 second timer measured in ms
+    private static final int maxTime = 10; // 10 second timer measured in ms
 
 
 
@@ -61,11 +62,12 @@ public class PowerUp extends Item {
         destroy();
 
         // deactivate power up after maxTime is over
-        new Thread(() -> {
-            long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() < time + maxTime){}
-            Gdx.app.postRunnable(() -> reset(player) );
-        }).start();
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                Gdx.app.postRunnable(() -> reset(player));
+            }
+        }, maxTime);
     }
 
     public void reset(Player player) {

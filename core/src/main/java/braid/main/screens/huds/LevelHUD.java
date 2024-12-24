@@ -38,7 +38,7 @@ public class LevelHUD implements Disposable {
     private Image powerUpTimer;
     private Animation<TextureRegion> powerUpBackgroundAnimation;
     private Animation<TextureRegion> powerUpTimerAnimation;
-    private float stateTime = 0;
+    private static float stateTime = 0;
     private SpriteDrawable ritalin;
     private Stack powerUp;
     private static String activePowerUp;
@@ -66,23 +66,25 @@ public class LevelHUD implements Disposable {
         stage = new Stage(viewport,batch);
 
         pageImage = new Image(atlas.findRegion("page"));
-        pageImage.setScale(8,8);
+        pageImage.setScale(8);
 
         powerUpBackgroundAnimation = new Animation<>(0.1f, atlas.findRegions("ball"), Animation.PlayMode.LOOP);
         powerUpBackground = new Image(powerUpBackgroundAnimation.getKeyFrame(0));
+        powerUpBackground.setScale(7);
         powerUpBackground.setOrigin(Align.center);
-        powerUpBackground.setScale(2,2);
 
-        powerUpTimerAnimation = new Animation<>(PowerUp.getMaxTime()/1000f/13f, atlas.findRegions("circle-timer"), Animation.PlayMode.LOOP);
+        powerUpTimerAnimation = new Animation<>(PowerUp.getMaxTime()/13f, atlas.findRegions("circle-timer"), Animation.PlayMode.NORMAL);
         powerUpTimer = new Image(powerUpTimerAnimation.getKeyFrame(0));
-        powerUpTimer.setOrigin(Align.center);
-        powerUpTimer.setScale(1.5f, 1.5f);
+        powerUpTimer.setScale(3f);
         powerUpTimer.setSize(powerUpBackground.getWidth(), powerUpBackground.getHeight());
+        powerUpTimer.setOrigin(Align.center);
 
         ritalin = new SpriteDrawable(atlas.createSprite("ritalin"));
         powerUpImage = new Image();
+        powerUpImage.setScale(2f);
         powerUpImage.setDrawable(ritalin);
-        powerUpTimer.setOrigin(Align.center);
+        powerUpImage.setSize(powerUpBackground.getWidth(), powerUpBackground.getHeight());
+        powerUpImage.setOrigin(Align.center);
 
         powerUp = new Stack();
         powerUp.add(powerUpBackground);
@@ -106,7 +108,7 @@ public class LevelHUD implements Disposable {
         table.add(scoreTable).expandX().align(Align.right).pad(100);
 
         table.row();
-        table.add(powerUp).colspan(2).expandX().align(Align.right).padRight(160);
+        table.add(powerUp).colspan(2).expandX().align(Align.right).padRight(180).padTop(60);
 
         timerLabel.setVisible(timerVisible);
         powerUp.setVisible(false);
@@ -168,6 +170,7 @@ public class LevelHUD implements Disposable {
         powerUpActive = true;
         justActivated = true;
         activePowerUp = type;
+        stateTime = 0f;
     }
 
     public static void resetPowerUp() {
