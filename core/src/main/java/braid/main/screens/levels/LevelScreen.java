@@ -230,11 +230,11 @@ public abstract class LevelScreen implements Screen {
         fbo.begin();
         clearScreen();
         renderWorld();
+        subtitleManager.render(delta);
         fbo.end();
 
         applyPostProcessing(activeShader);
 
-        subtitleManager.render(delta);
         if (finished)
             renderFinishHUD();
 
