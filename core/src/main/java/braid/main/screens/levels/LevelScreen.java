@@ -4,7 +4,6 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
-import braid.main.rewind.RewindableStaticBody;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
@@ -28,12 +27,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -400,7 +396,7 @@ public abstract class LevelScreen implements Screen {
 
     public void addMovingPlatform(MovingPlatform movingPlatform) {
         movingPlatforms.add(movingPlatform);
-        movingPlatform.setRewindController(new RewindController(new RewindableStaticBody(movingPlatform.b2body, movingPlatform)));
+        movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
     }
 
     public void addItem(Item item) {

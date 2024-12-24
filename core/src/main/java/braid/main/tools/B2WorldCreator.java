@@ -121,9 +121,7 @@ public class B2WorldCreator {
                 float rangeX = (float) object.getProperties().get("rangeX");
                 float speed = (float) object.getProperties().get("speed");
 
-                screen.addMovingPlatform(new MovingPlatform(world, map, movingPlatformRegion, rect, speed, rangeX));
-
-
+                screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX));
             }
         }
 
