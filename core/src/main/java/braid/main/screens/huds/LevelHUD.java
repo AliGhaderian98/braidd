@@ -68,6 +68,8 @@ public class LevelHUD implements Disposable {
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(8);
 
+        powerUpActive = false;
+
         powerUpBackgroundAnimation = new Animation<>(0.1f, atlas.findRegions("ball"), Animation.PlayMode.LOOP);
         powerUpBackground = new Image(powerUpBackgroundAnimation.getKeyFrame(0));
         powerUpBackground.setScale(7);

@@ -50,7 +50,7 @@ public abstract class LevelScreen implements Screen {
     protected final Braid game;
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
-    public static boolean gameIsPaused;
+    public static boolean gameIsPaused = false;
     public static boolean debugRendererEnabled = true;
 
     protected final PlayerInputHandler inputHandler;
@@ -96,6 +96,7 @@ public abstract class LevelScreen implements Screen {
         // Setup Game Variables
         this.game = game;
         atlas = new TextureAtlas(atlasPath);
+        gameIsPaused = false;
 
         items = new Array<>();
 
