@@ -35,8 +35,10 @@ public class Player extends DynamicGameObject {
     private boolean animationPaused;
     public float stateTimer;
 
-    private boolean isGrounded;
+    private boolean isGrounded = true;
     private boolean landingAnimationPlaying = false;
+
+    private Timer.Task landingTask;
 
     // Player specific variables
     private final float defaultGravity = 1.2f;
@@ -45,9 +47,11 @@ public class Player extends DynamicGameObject {
     public boolean holdingJump;
     float jumpSpeed = 3.0f;
 
-    private boolean coyoteActive = false;
     private final float maxCoyoteTime = 0.15f;
-    private float coyoteTimer = maxCoyoteTime;
+    private boolean coyoteActive = false;
+
+    private final float jumpBufferTime = 0.1f;
+    private boolean jumpBuffered;
 
     final float climbingSpeed = 1f;
 
@@ -86,6 +90,14 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
+
+        landingTask = new Timer.Task() {
+            @Override
+            public void run() {
+                landingAnimationPlaying = false;
+                currentState = AnimationState.IDLE;
+            }
+        };
     }
 
     // Methods
@@ -135,11 +147,6 @@ public class Player extends DynamicGameObject {
         // apply higher descending velocity
         if (!isClimbing() && b2body.getLinearVelocity().y < 0) {
             b2body.setGravityScale(descendingGravity);
-        }
-
-        // update coyote time timer
-        if (coyoteActive) {
-            coyoteTimer += dt;
         }
     }
 
@@ -191,31 +198,29 @@ public class Player extends DynamicGameObject {
 
     // temporäre Methode, soll später mit Kollisionen automatisch erfolgen
     public void land() {
-        currentState = AnimationState.LANDING;
-        isGrounded = true;
-        holdingJump = false;
-        coyoteActive = false;
-        coyoteTimer = maxCoyoteTime;
+        if (jumpBuffered || b2body.getLinearVelocity().y > 0) {
+            jump(1f);
+            jumpBuffered = false;
+        } else if(!isGrounded && b2body.getLinearVelocity().y < 0) {
+            currentState = AnimationState.IDLE;
+            isGrounded = true;
+            holdingJump = false;
+            coyoteActive = false;
 
-        if (b2body.getLinearVelocity().y < -4.75) {
-            landingAnimationPlaying = true;
+            if (b2body.getLinearVelocity().y < -4.75) {
+                currentState = AnimationState.LANDING;
+                landingAnimationPlaying = true;
 
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    landingAnimationPlaying = false;
-                }
-            }, 0.25f);
+                Timer.schedule(landingTask, 0.25f);
+            }
         }
-
     }
 
     public void fall() {
         if (currentState != AnimationState.JUMPING) {
             currentState = AnimationState.FALLING;
             isGrounded = false;
-            coyoteActive = true;
-            coyoteTimer = 0;
+            setCoyoteTime();
         }
     }
 
@@ -296,7 +301,7 @@ public class Player extends DynamicGameObject {
         minMoveLimit = null;
     }
 
-    public boolean hasCoyoteTime() { return coyoteTimer < maxCoyoteTime; }
+    public boolean hasCoyoteTime() { return coyoteActive; }
 
     public void die() {
         screen.setHitShader();
@@ -352,10 +357,36 @@ public class Player extends DynamicGameObject {
     }
 
     public void jump(float multiplier) {
+        if (landingTask.isScheduled()) {
+            landingTask.cancel();
+            landingAnimationPlaying = false;
+        }
+        currentState = AnimationState.JUMPING;
         b2body.setGravityScale(1);
         b2body.setLinearVelocity(new Vector2(0, getJumpSpeed()*multiplier));
-        currentState = AnimationState.JUMPING;
         isGrounded = false;
+    }
+
+    public void setJumpBuffer() {
+        if (!jumpBuffered) {
+            jumpBuffered = true;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    jumpBuffered = false;
+                }
+            }, jumpBufferTime);
+        }
+    }
+
+    private void setCoyoteTime() {
+        coyoteActive = true;
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                coyoteActive = false;
+            }
+        }, maxCoyoteTime);
     }
 
 }
