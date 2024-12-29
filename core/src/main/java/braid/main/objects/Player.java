@@ -3,12 +3,10 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
@@ -41,8 +39,13 @@ public class Player extends DynamicGameObject {
     private boolean landingAnimationPlaying = false;
 
     // Player specific variables
-    float jumpSpeed = 3.5f;
+    private final float defaultGravity = 1.2f;
+    private final float descendingGravity = defaultGravity*1.3f;
+    private final float variableJumpHeightFactor = 0.5f;
+    public boolean holdingJump;
+    float jumpSpeed = 3.0f;
     final float climbingSpeed = 1f;
+
     AnimationState currentState;
     AnimationState previousState;
     private boolean isAlive;
@@ -114,6 +117,17 @@ public class Player extends DynamicGameObject {
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+
+        // apply variable jump height
+        if (holdingJump && b2body.getLinearVelocity().y > 0)
+            b2body.setGravityScale(variableJumpHeightFactor *defaultGravity);
+        else
+            b2body.setGravityScale(defaultGravity);
+
+        // apply higher descending velocity
+        if (b2body.getLinearVelocity().y < 0) {
+            b2body.setGravityScale(descendingGravity);
+        }
     }
 
     public TextureRegion getFrame(float dt){
@@ -166,7 +180,9 @@ public class Player extends DynamicGameObject {
     public void land() {
         currentState = AnimationState.LANDING;
         isGrounded = true;
-        if (b2body.getLinearVelocity().y < -3.75) {
+        holdingJump = false;
+
+        if (b2body.getLinearVelocity().y < -4.5) {
             landingAnimationPlaying = true;
 
             Timer.schedule(new Timer.Task() {

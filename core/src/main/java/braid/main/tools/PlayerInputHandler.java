@@ -68,6 +68,11 @@ public class PlayerInputHandler {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()) {
             player.jump();
         }
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("SPACEBAR"))) {
+            player.holdingJump = true;
+        } else {
+            player.holdingJump = false;
+        }
     }
 
     private void handleRewind() {
