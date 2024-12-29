@@ -44,6 +44,11 @@ public class Player extends DynamicGameObject {
     private final float variableJumpHeightFactor = 0.5f;
     public boolean holdingJump;
     float jumpSpeed = 3.0f;
+
+    private boolean coyoteActive = false;
+    private final float maxCoyoteTime = 0.15f;
+    private float coyoteTimer = maxCoyoteTime;
+
     final float climbingSpeed = 1f;
 
     AnimationState currentState;
@@ -119,14 +124,22 @@ public class Player extends DynamicGameObject {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         // apply variable jump height
-        if (holdingJump && b2body.getLinearVelocity().y > 0)
-            b2body.setGravityScale(variableJumpHeightFactor *defaultGravity);
-        else
-            b2body.setGravityScale(defaultGravity);
+        if (isJumping()) {
+            if (holdingJump && b2body.getLinearVelocity().y > 0)
+                b2body.setGravityScale(variableJumpHeightFactor *defaultGravity);
+            else
+                b2body.setGravityScale(defaultGravity);
+
+        }
 
         // apply higher descending velocity
-        if (b2body.getLinearVelocity().y < 0) {
+        if (!isClimbing() && b2body.getLinearVelocity().y < 0) {
             b2body.setGravityScale(descendingGravity);
+        }
+
+        // update coyote time timer
+        if (coyoteActive) {
+            coyoteTimer += dt;
         }
     }
 
@@ -181,8 +194,10 @@ public class Player extends DynamicGameObject {
         currentState = AnimationState.LANDING;
         isGrounded = true;
         holdingJump = false;
+        coyoteActive = false;
+        coyoteTimer = maxCoyoteTime;
 
-        if (b2body.getLinearVelocity().y < -4.5) {
+        if (b2body.getLinearVelocity().y < -4.75) {
             landingAnimationPlaying = true;
 
             Timer.schedule(new Timer.Task() {
@@ -199,6 +214,8 @@ public class Player extends DynamicGameObject {
         if (currentState != AnimationState.JUMPING) {
             currentState = AnimationState.FALLING;
             isGrounded = false;
+            coyoteActive = true;
+            coyoteTimer = 0;
         }
     }
 
@@ -279,6 +296,8 @@ public class Player extends DynamicGameObject {
         minMoveLimit = null;
     }
 
+    public boolean hasCoyoteTime() { return coyoteTimer < maxCoyoteTime; }
+
     public void die() {
         screen.setHitShader();
         LevelScreen.gameIsPaused = true;
@@ -332,16 +351,9 @@ public class Player extends DynamicGameObject {
         b2body.setLinearVelocity(0, -getClimbingSpeed());
     }
 
-    public void jump() {
-        b2body.setGravityScale(1);
-        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
-        currentState = AnimationState.JUMPING;
-        isGrounded = false;
-    }
-
     public void jump(float multiplier) {
         b2body.setGravityScale(1);
-        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
+        b2body.setLinearVelocity(new Vector2(0, getJumpSpeed()*multiplier));
         currentState = AnimationState.JUMPING;
         isGrounded = false;
     }

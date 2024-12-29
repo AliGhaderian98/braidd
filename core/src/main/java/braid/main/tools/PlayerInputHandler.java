@@ -65,8 +65,9 @@ public class PlayerInputHandler {
     }
 
     private void handleJumping() {
-        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()) {
-            player.jump();
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()
+            && (player.isClimbing() || player.isGrounded() || player.hasCoyoteTime())) {
+            player.jump(1);
         }
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("SPACEBAR"))) {
             player.holdingJump = true;
