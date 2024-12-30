@@ -37,7 +37,10 @@ public class Overworld implements Screen {
     private final TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
+
+
     private final int railLayerIndex;
+    private Array<MapLayer> railLayers;
     public Array<OverworldNode> nodes;
 
     private final Stage stage;
@@ -62,7 +65,9 @@ public class Overworld implements Screen {
         map = mapLoader.load("maps/overworld-map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 
-        railLayerIndex = map.getLayers().getIndex("rails-img");
+        railLayerIndex = map.getLayers().getIndex("rails_1");
+
+        setRailVisibility();
 
         setupMapNodes();
 
@@ -193,16 +198,16 @@ public class Overworld implements Screen {
         LevelNode check = (LevelNode) node;
 
         if (keycode == KeyBindings.getKey("UP_KEY")) {
-            if (check.hasNeighborNorth())
+            if (check.hasNeighborNorth() && check.levelNeighborNorthUnlocked())
                 newNode = check.getNeighborNorth();
         } else if (keycode == KeyBindings.getKey("RIGHT_KEY")) {
-            if (check.hasNeighborEast())
+            if (check.hasNeighborEast() && check.levelNeighborEastUnlocked())
                 newNode = check.getNeighborEast();
         } else if (keycode == KeyBindings.getKey("DOWN_KEY")) {
-            if (check.hasNeighborSouth())
+            if (check.hasNeighborSouth() && check.levelNeighborSouthUnlocked())
                 newNode = check.getNeighborSouth();
         } else if (keycode == KeyBindings.getKey("LEFT_KEY")) {
-            if (check.hasNeighborWest())
+            if (check.hasNeighborWest() && check.levelNeighborWestUnlocked())
                 newNode = check.getNeighborWest();
         }
 
@@ -218,6 +223,24 @@ public class Overworld implements Screen {
             player.setCurrentNode(node);
             player.moveToCurrentNode();
         }
+    }
+
+    private void setRailVisibility() {
+        railLayers = new Array<>();
+        for (MapLayer layer : map.getLayers()) {
+            if (layer.getName().startsWith("rails_")) {
+                railLayers.add(layer);
+                switch (layer.getName()) {
+                    case "rails_2" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("ARKADEN"));
+                    case "rails_3" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("LUISENVIERTEL"));
+                    case "rails_4" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("HBF"));
+                    case "rails_5" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("ZOO"));
+                    case "rails_SB" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("SCHLOSSBURG"));
+                }
+            }
+        }
+
+
     }
 
     private void setupMapNodes() {

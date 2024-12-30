@@ -1,6 +1,7 @@
 package braid.main.overworld;
 
 import braid.main.Braid;
+import braid.main.tools.Savemanager;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.math.Vector2;
@@ -34,6 +35,11 @@ public class LevelNode extends OverworldNode {
     private String neighborEast;
     private String neighborSouth;
     private String neighborWest;
+
+    private boolean levelNeighborNorthUnlocked = false;
+    private boolean levelNeighborEastUnlocked = false;
+    private boolean levelNeighborSouthUnlocked = false;
+    private boolean levelNeighborWestUnlocked = false;
 
 
     public LevelNode(EllipseMapObject base) {
@@ -69,6 +75,23 @@ public class LevelNode extends OverworldNode {
         if (temp != null)
             neighborWest = temp.getName();
         else neighborWest = "NONE";
+
+        // get values whether neighboring levels are unlocked
+        temp = (MapObject) base.getProperties().get("neighborLevelNorth");
+        if (temp != null)
+            levelNeighborNorthUnlocked = Savemanager.currentsavegame.UnlockedLevels.get(temp.getName().toUpperCase());
+
+        temp = (MapObject) base.getProperties().get("neighborLevelEast");
+        if (temp != null)
+            levelNeighborEastUnlocked = Savemanager.currentsavegame.UnlockedLevels.get(temp.getName().toUpperCase());
+
+        temp = (MapObject) base.getProperties().get("neighborLevelSouth");
+        if (temp != null)
+            levelNeighborSouthUnlocked = Savemanager.currentsavegame.UnlockedLevels.get(temp.getName().toUpperCase());
+
+        temp = (MapObject) base.getProperties().get("neighborLevelWest");
+        if (temp != null)
+            levelNeighborWestUnlocked = Savemanager.currentsavegame.UnlockedLevels.get(temp.getName().toUpperCase());
     }
 
 
@@ -108,8 +131,13 @@ public class LevelNode extends OverworldNode {
     public boolean hasNeighborSouth() { return hasNeighborSouth; }
     public boolean hasNeighborWest() { return hasNeighborWest; }
 
-    public String getNeighborNorth() { return neighborNorth.toString(); }
-    public String getNeighborEast() { return neighborEast.toString(); }
-    public String getNeighborSouth() { return neighborSouth.toString(); }
-    public String getNeighborWest() { return neighborWest.toString(); }
+    public String getNeighborNorth() { return neighborNorth; }
+    public String getNeighborEast() { return neighborEast; }
+    public String getNeighborSouth() { return neighborSouth; }
+    public String getNeighborWest() { return neighborWest; }
+
+    public boolean levelNeighborNorthUnlocked() { return levelNeighborNorthUnlocked; }
+    public boolean levelNeighborEastUnlocked() { return levelNeighborEastUnlocked; }
+    public boolean levelNeighborSouthUnlocked() { return levelNeighborSouthUnlocked; }
+    public boolean levelNeighborWestUnlocked() { return levelNeighborWestUnlocked; }
 }
