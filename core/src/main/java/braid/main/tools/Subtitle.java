@@ -77,7 +77,7 @@ public class Subtitle {
         // Draw the text
         batch.begin();
         font.setColor(Color.BLACK);
-        font.draw(batch, fullText, boxX + 10, boxY + boxHeight - 10, wrapWidth, Align.left, true);
+        font.draw(batch, currentText, boxX + 10, boxY + boxHeight - 10, wrapWidth, Align.left, true);
         batch.end();
     }
 }
