@@ -103,7 +103,7 @@ public abstract class LevelScreen implements Screen {
         items = new Array<>();
 
         subtitleManager = new SubtitleManager(this);
-        subtitleManager.addSubtitle(new Subtitle("HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI", 50,50));
+        subtitleManager.addSubtitle(new Subtitle("HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI"));
 
         // Load current Bindings
         KeyBindings.standardKeybindings();
@@ -230,7 +230,7 @@ public abstract class LevelScreen implements Screen {
         fbo.begin();
         clearScreen();
         renderWorld();
-        subtitleManager.render(delta);
+        subtitleManager.render(delta);      // Update Subtitles
         fbo.end();
 
         applyPostProcessing(activeShader);
@@ -370,9 +370,6 @@ public abstract class LevelScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
-
-            // Update Subtitles
-            subtitleManager.render(dt);
         }
         else {
             if(!finished && Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="LibGDXGdxJsonFiles">
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame1.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame10.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame2.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame3.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame4.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame5.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame6.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame7.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame8.json" />
+    <file url="file://$PROJECT_DIR$/assets/SaveGameFiles/SaveGame9.json" />
+  </component>
   <component name="LibGDXSkins">
     <file url="file://$PROJECT_DIR$/assets/Slider/UISlider.json" />
     <file url="file://$PROJECT_DIR$/assets/Slider/slider_background.png" />
