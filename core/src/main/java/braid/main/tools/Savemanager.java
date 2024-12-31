@@ -15,6 +15,7 @@ public class Savemanager {
     // These Parts will be Saved over Runtime
     public static class Savegame {
         public int SaveGameKEY;
+        public String SaveGAmeName;
         public Map<String, Array<Boolean>> Collectables;
         public Map<String, Boolean> UnlockedLevels;
         public int numUnlockedBeforeWegZurUni;
@@ -98,6 +99,11 @@ public class Savemanager {
             createSavegame();
             return currentsavegame;
         }
+    }
+
+    public static boolean existGame(int SaveGameKEY){
+        FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ SaveGameKEY + ".json");
+        return file.exists();
     }
 
     public static void updatePlaytime(){

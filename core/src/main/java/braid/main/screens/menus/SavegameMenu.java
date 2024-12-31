@@ -40,6 +40,8 @@ public class SavegameMenu implements Screen{
     // Labels show on Screen
     private Label[] savegames, collectibles, unlockedLevels;
     private Group[] VerticalGroups;
+    private int TotalSavegame;
+    private Label newSaveGame,nomoreSaveGames;
 
     // used to target a Label
     private final Array<Label> SaveGameLabels;
@@ -68,6 +70,7 @@ public class SavegameMenu implements Screen{
         // Setup Sound
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
+        CountTotalSavegames();
 
         //  Create Table
         table = new Table();
@@ -81,6 +84,10 @@ public class SavegameMenu implements Screen{
 
         // Setup Title and Options
         Label Title = new Label("Save games", TitelFont);
+        newSaveGame = new Label("new Savegame", SelectionFont);
+        nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
+        nomoreSaveGames.setColor(Color.RED);
+
         Title.setFontScale(2);
 
         // create Labels and Groups
@@ -89,31 +96,31 @@ public class SavegameMenu implements Screen{
         unlockedLevels = new Label[11];
         VerticalGroups = new VerticalGroup[11];
 
-        for (int i = 1; i <= 10; i++) {
+        SaveGameLabels = new Array<>();
+        AllLabels = new Array<>();
+
+
+        for (int i = 1; i <= TotalSavegame; i++) {
+            // create Labels
             savegames[i] = new Label("Savegame: " + i, SelectionFont);
             collectibles[i] = new Label("Collectibles: " + i, LittleSelectionFont);
             unlockedLevels[i] = new Label("Unlocked Levels: " + i, LittleSelectionFont);
 
+            // add Labels to Groups
             VerticalGroups [i] = new VerticalGroup();
             VerticalGroups [i].addActor(savegames[i]);
             VerticalGroups [i].addActor(collectibles[i]);
             VerticalGroups [i].addActor(unlockedLevels[i]);
-        }
 
-        // fill Array with Labels to target a Label
-        SaveGameLabels = new Array<>();
-        for(int i=1;i<=10;i++){
+            // fill Array with Labels to target a Label
             SaveGameLabels.add(savegames [i]);
-        }
 
-
-        // fill Array with all Labels to reset the Color
-        AllLabels = new Array<>();
-        for(int i=1;i<=10;i++){
+            // fill Array with all Labels to reset the Color
             AllLabels.add(savegames [i]);
             AllLabels.add(collectibles [i]);
             AllLabels.add(unlockedLevels [i]);
         }
+
 
 
 
@@ -125,6 +132,16 @@ public class SavegameMenu implements Screen{
             table.row();
             table.add(VerticalGroups [i]).width(200).pad(20).row();
         }
+
+        // add new Savegame/ Warning to Tablestructure
+        if(TotalSavegame < 10){
+            SaveGameLabels.add(newSaveGame);
+            AllLabels.add(newSaveGame);
+            table.add(newSaveGame);
+        }else{
+            table.add(nomoreSaveGames);
+        }
+
 
         // Set up a ScrollPane to see all Save games
         scrollPane = new ScrollPane(table);
@@ -237,6 +254,8 @@ public class SavegameMenu implements Screen{
             setGroupColor(VerticalGroups [9]);
         } else if (currentLabel.equals(savegames[10])) {
             setGroupColor(VerticalGroups [10]);
+        } else if(currentLabel.equals(newSaveGame)){
+            newSaveGame.setColor(Color.WHITE);
         }
 
     }
@@ -244,26 +263,39 @@ public class SavegameMenu implements Screen{
     private void setGroupColor(Group group){
         for (Actor actor : group.getChildren()) {
             if (actor instanceof Label) {
-                ((Label) actor).setColor(Color.WHITE);
+                actor.setColor(Color.WHITE);
             }
         }
     }
 
+
     private void executeSelectedAction() {
         // load targeted SafeGame
-        for (int i = 1; i <= 10; i++) {
-            if (savegames [i].equals(currentLabel)) {
-                startOverWorld(Integer.parseInt(currentLabel.toString().substring(17)));
-                return;
-            }
+        if (currentLabel == newSaveGame){
+            startOverWorld(TotalSavegame+1);
+            dispose();
+
+        }else {
+            startOverWorld(Integer.parseInt(currentLabel.toString().substring(17)));
+            dispose();
         }
-        dispose();
     }
 
     private void startOverWorld(int selectedSavegame) {
         Savemanager.playtimeStart = System.currentTimeMillis();
         currentSavegamKey = selectedSavegame;
         game.setScreen(new Overworld((Braid) game));
+    }
+
+    private void CountTotalSavegames(){
+        TotalSavegame=0;
+
+        for(int i=1;i<=10;i++){
+            if(Savemanager.existGame(i)){
+                TotalSavegame++;
+            }
+        }
+        System.out.println(TotalSavegame);
     }
 
 
