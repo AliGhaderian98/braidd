@@ -45,6 +45,6 @@ packedimages/sprites.atlas
 packedimages/sprites.png
 shaders/crt-rewind.frag
 shaders/grey.frag
-shaders/rewind.frag
+shaders/red.frag
 shaders/standard.vert
 textFonts/MenuTextFont.ttf

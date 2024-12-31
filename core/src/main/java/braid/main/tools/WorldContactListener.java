@@ -43,11 +43,10 @@ public class WorldContactListener implements ContactListener {
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
+            playerWithSign(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
-        //playerWithMovingPlatform(userDataA, userDataB);
-
     }
 
 
@@ -61,6 +60,7 @@ public class WorldContactListener implements ContactListener {
         contactEndedPlayerWithLadder(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
         endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
+        playerWithSignEnds(userDataA, userDataB);
     }
 
     @Override
@@ -71,6 +71,24 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void playerWithSignEnds(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
+            Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
+
+            sign.setShowing(false);
+            sign.getSubtitle().setCurrentText("");
+        }
+    }
+
+    private void playerWithSign(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
+            Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
+            sign.setShowing(true);
+        }
     }
 
     private void playerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
@@ -215,13 +233,6 @@ public class WorldContactListener implements ContactListener {
             }
         }
     }
-
-    /*private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
-            player.atMovingPlatform(false);
-
-        }
-    }*/
 
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {

@@ -64,3 +64,4 @@ shaders/grey.frag
 shaders/red.frag
 shaders/standard.vert
 textFonts/MenuTextFont.ttf
+textFonts/pixelfont.ttf
