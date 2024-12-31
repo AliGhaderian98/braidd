@@ -2,10 +2,13 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.tools.UserData;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.physics.box2d.*;
+import org.w3c.dom.css.Rect;
 
 
 public abstract class InteractiveGameObject extends GameObject {
@@ -27,6 +30,14 @@ public abstract class InteractiveGameObject extends GameObject {
         this.isSensor = isSensor;
 
         defineBody(radius, posX, posY);
+    }
+
+    // constructor for objects size based on sprite
+    public InteractiveGameObject(World world, Rectangle boundary, TextureRegion region, boolean isSensor) {
+        super(world);
+        this.isSensor = isSensor;
+
+        defineBody(boundary, region);
     }
 
 
@@ -65,6 +76,24 @@ public abstract class InteractiveGameObject extends GameObject {
 
         fixture = b2body.createFixture(fdef);
 
+        shape.dispose();
+    }
+
+    public void defineBody(Rectangle boundary, TextureRegion region) {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set((boundary.getX() + boundary.getWidth() / 2) / Braid.PPM,
+            (boundary.getY() + boundary.getHeight() / 2) / Braid.PPM);
+        bdef.type = BodyDef.BodyType.KinematicBody;
+
+        b2body = world.createBody(bdef);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(region.getRegionWidth() / 4f / Braid.PPM, region.getRegionHeight() / 4f / Braid.PPM);
+
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = shape;
+
+        fixture = b2body.createFixture(fdef);
         shape.dispose();
     }
 }

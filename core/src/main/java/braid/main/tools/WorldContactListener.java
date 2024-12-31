@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.Items.Item;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
+import braid.main.objects.*;
 import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
@@ -12,7 +13,6 @@ import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
@@ -36,14 +36,17 @@ public class WorldContactListener implements ContactListener {
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
             playerWithItem(userDataA, userDataB);
             playerWithLadder(userDataA, userDataB);
+            playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
+            playerWithEnd(userDataA,userDataB);
+
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
-        playerWithEnd(userDataA,userDataB);
+        //playerWithMovingPlatform(userDataA, userDataB);
 
     }
 
@@ -53,6 +56,7 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
+        contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
         contactEndedPlayerWithGround(userDataA, userDataB);
         contactEndedPlayerWithLadder(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
@@ -119,6 +123,36 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerFeetWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform)) {
+
+            MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
+                ? (MovingPlatform) userDataA.getObject()
+                : (MovingPlatform) userDataB.getObject();
+
+            player.onMovingPlatform(true);
+            player.setIsGrounded(true);
+            platform.setPlayer(player);
+        }
+
+    }
+
+    private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
+                ? (MovingPlatform) userDataA.getObject()
+                : (MovingPlatform) userDataB.getObject();
+
+            player.onMovingPlatform(false);
+            player.fall();
+            platform.setPlayer(null);
+            player.setPlatformVelocity(0);
+        }
+    }
+
+
+
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             UserData ladderData = (userDataA.getObject() instanceof Ladder) ? userDataA : userDataB;
@@ -181,6 +215,13 @@ public class WorldContactListener implements ContactListener {
             }
         }
     }
+
+    /*private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+            player.atMovingPlatform(false);
+
+        }
+    }*/
 
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {

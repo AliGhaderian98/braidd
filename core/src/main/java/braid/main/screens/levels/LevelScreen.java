@@ -11,6 +11,7 @@ import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.Enemy;
+import braid.main.objects.MovingPlatform;
 import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
@@ -68,6 +69,7 @@ public abstract class LevelScreen implements Screen {
     // Game Objects
     protected final Player player;
     protected Array<Enemy> enemies;
+    protected Array<MovingPlatform> movingPlatforms;
     protected Array<Item> items;
 
     public Array<RewindController> rewindObjects;
@@ -122,6 +124,8 @@ public abstract class LevelScreen implements Screen {
         // Enemies
         enemies = new Array<>();
 
+        movingPlatforms = new Array<>();
+
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(world, map, this);
@@ -153,6 +157,7 @@ public abstract class LevelScreen implements Screen {
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages);
     }
+
 
     private void setupShaders() {
         // define shader program
@@ -326,6 +331,9 @@ public abstract class LevelScreen implements Screen {
         for(Item item :items)
             item.draw(game.batch);
 
+        for(MovingPlatform movingPlatform :movingPlatforms)
+            movingPlatform.draw(game.batch);
+
         game.batch.end();
 
         levelHUD.stage.draw();
@@ -354,6 +362,9 @@ public abstract class LevelScreen implements Screen {
 
             for(Item item : items)
                 item.update(dt);
+
+            for(MovingPlatform movingPlatform : movingPlatforms)
+                movingPlatform.update(dt);
 
             // Update Camera
             updateCamera();
@@ -454,6 +465,11 @@ public abstract class LevelScreen implements Screen {
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
         enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+    }
+
+    public void addMovingPlatform(MovingPlatform movingPlatform) {
+        movingPlatforms.add(movingPlatform);
+        movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
     }
 
     public void addItem(Item item) {
