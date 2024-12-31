@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Arrays;
+
 
 public class SavegameMenu implements Screen{
 
@@ -36,16 +38,14 @@ public class SavegameMenu implements Screen{
 
 
     // Labels show on Screen
-    private  Label Savegame1, Savegame2, Savegame3, Savegame4, Savegame5, Savegame6, Savegame7, Savegame8, Savegame9, Savegame10;
-    private  Label SG1Collectibles, SG2Collectibles, SG3Collectibles, SG4Collectibles, SG5Collectibles, SG6Collectibles, SG7Collectibles, SG8Collectibles, SG9Collectibles, SG10Collectibles;
-    private  Label SG1UnlockedLevel, SG2UnlockedLevel, SG3UnlockedLevel, SG4UnlockedLevel, SG5UnlockedLevel, SG6UnlockedLevel, SG7UnlockedLevel, SG8UnlockedLevel, SG9UnlockedLevel, SG10UnlockedLevel;
-    private  VerticalGroup SG1, SG2, SG3, SG4, SG5, SG6, SG7, SG8, SG9, SG10;
+    private Label[] savegames, collectibles, unlockedLevels;
+    private Group[] VerticalGroups;
 
     // used to target a Label
     private final Array<Label> SaveGameLabels;
     private final Array<Label> AllLabels;
     private int selectedIndex = 0;
-    private  Label  currentLabel;
+    private Label currentLabel;
 
     // Sound
     private final Sound menuSound;
@@ -76,59 +76,55 @@ public class SavegameMenu implements Screen{
 
         // Setup Label styles for Title and Options
         Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.getmidTextFont(), Color.GRAY);
+        Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.getlittleTextFont(), Color.GRAY);
 
         // Setup Title and Options
         Label Title = new Label("Save games", TitelFont);
         Title.setFontScale(2);
 
         // create Labels and Groups
-        createLabels();
+        savegames = new Label[11];
+        collectibles = new Label[11];
+        unlockedLevels = new Label[11];
+        VerticalGroups = new VerticalGroup[11];
+
+        for (int i = 1; i <= 10; i++) {
+            savegames[i] = new Label("Savegame: " + i, SelectionFont);
+            collectibles[i] = new Label("Collectibles: " + i, LittleSelectionFont);
+            unlockedLevels[i] = new Label("Unlocked Levels: " + i, LittleSelectionFont);
+
+            VerticalGroups [i] = new VerticalGroup();
+            VerticalGroups [i].addActor(savegames[i]);
+            VerticalGroups [i].addActor(collectibles[i]);
+            VerticalGroups [i].addActor(unlockedLevels[i]);
+        }
 
         // fill Array with Labels to target a Label
         SaveGameLabels = new Array<>();
-        SaveGameLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
-        SaveGameLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
-        SaveGameLabels.add(Savegame9,Savegame10);
+        for(int i=1;i<=10;i++){
+            SaveGameLabels.add(savegames [i]);
+        }
 
 
         // fill Array with all Labels to reset the Color
         AllLabels = new Array<>();
-        AllLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
-        AllLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
-        AllLabels.add(Savegame9,Savegame10);
+        for(int i=1;i<=10;i++){
+            AllLabels.add(savegames [i]);
+            AllLabels.add(collectibles [i]);
+            AllLabels.add(unlockedLevels [i]);
+        }
 
-        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles,SG4Collectibles);
-        AllLabels.add(SG5Collectibles,SG6Collectibles,SG7Collectibles,SG8Collectibles);
-        AllLabels.add(SG9Collectibles,SG10Collectibles);
-
-        AllLabels.add(SG1UnlockedLevel,SG2UnlockedLevel,SG3UnlockedLevel);
-        AllLabels.add(SG4UnlockedLevel,SG5UnlockedLevel,SG6UnlockedLevel);
-        AllLabels.add(SG7UnlockedLevel,SG8UnlockedLevel,SG9UnlockedLevel,SG10UnlockedLevel);
 
 
 
         // Setup Table
         table.add(Title);
-        table.row();
-        table.add(SG1).width(200).pad(20).row();
-        table.row();
-        table.add(SG2).width(200).pad(20).row();
-        table.row();
-        table.add(SG3).width(200).pad(20).row();
-        table.row();
-        table.add(SG4).width(200).pad(20).row();
-        table.row();
-        table.add(SG5).width(200).pad(20).row();
-        table.row();
-        table.add(SG6).width(200).pad(20).row();
-        table.row();
-        table.add(SG7).width(200).pad(20).row();
-        table.row();
-        table.add(SG8).width(200).pad(20).row();
-        table.row();
-        table.add(SG9).width(200).pad(20).row();
-        table.row();
-        table.add(SG10).width(200).pad(20).row();
+
+        for (int i = 1; i <= 10; i++) {
+            table.row();
+            table.add(VerticalGroups [i]).width(200).pad(20).row();
+        }
 
         // Set up a ScrollPane to see all Save games
         scrollPane = new ScrollPane(table);
@@ -221,26 +217,26 @@ public class SavegameMenu implements Screen{
         }
 
         // mark the Selected Savegame with the Attributes white
-        if (currentLabel.equals(Savegame1)) {
-            setGroupColor(SG1);
-        } else if (currentLabel.equals(Savegame2)) {
-            setGroupColor(SG2);
-        } else if (currentLabel.equals(Savegame3)) {
-            setGroupColor(SG3);
-        } else if (currentLabel.equals(Savegame4)) {
-            setGroupColor(SG4);
-        } else if (currentLabel.equals(Savegame5)) {
-            setGroupColor(SG5);
-        } else if (currentLabel.equals(Savegame6)) {
-            setGroupColor(SG6);
-        } else if (currentLabel.equals(Savegame7)) {
-            setGroupColor(SG7);
-        } else if (currentLabel.equals(Savegame8)) {
-            setGroupColor(SG8);
-        } else if (currentLabel.equals(Savegame9)) {
-            setGroupColor(SG9);
-        } else if (currentLabel.equals(Savegame10)) {
-            setGroupColor(SG10);
+        if (currentLabel.equals(savegames[1])) {
+            setGroupColor(VerticalGroups [1]);
+        } else if (currentLabel.equals(savegames[2])) {
+            setGroupColor(VerticalGroups [2]);
+        } else if (currentLabel.equals(savegames[3])) {
+            setGroupColor(VerticalGroups [3]);
+        } else if (currentLabel.equals(savegames[4])) {
+            setGroupColor(VerticalGroups [4]);
+        } else if (currentLabel.equals(savegames[5])) {
+            setGroupColor(VerticalGroups [5]);
+        } else if (currentLabel.equals(savegames[6])) {
+            setGroupColor(VerticalGroups [6]);
+        } else if (currentLabel.equals(savegames[7])) {
+            setGroupColor(VerticalGroups [7]);
+        } else if (currentLabel.equals(savegames[8])) {
+            setGroupColor(VerticalGroups [8]);
+        } else if (currentLabel.equals(savegames[9])) {
+            setGroupColor(VerticalGroups [9]);
+        } else if (currentLabel.equals(savegames[10])) {
+            setGroupColor(VerticalGroups [10]);
         }
 
     }
@@ -255,8 +251,11 @@ public class SavegameMenu implements Screen{
 
     private void executeSelectedAction() {
         // load targeted SafeGame
-        if(currentLabel instanceof Label){
-            startOverWorld(Integer.parseInt(currentLabel.toString().substring(16)));
+        for (int i = 1; i <= 10; i++) {
+            if (savegames [i].equals(currentLabel)) {
+                startOverWorld(Integer.parseInt(currentLabel.toString().substring(17)));
+                return;
+            }
         }
         dispose();
     }
@@ -300,107 +299,6 @@ public class SavegameMenu implements Screen{
     @Override
     public void hide() {
 
-    }
-    private void createLabels(){
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.getmidTextFont(), Color.GRAY);
-        Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.getlittleTextFont(), Color.GRAY);
-
-        // Setup Labels
-        Savegame1 = new Label("Savegame 1", SelectionFont);
-        Savegame2 = new Label("Savegame 2", SelectionFont);
-        Savegame3 = new Label("Savegame 3", SelectionFont);
-        Savegame4 = new Label("Savegame 4", SelectionFont);
-        Savegame5 = new Label("Savegame 5", SelectionFont);
-        Savegame6 = new Label("Savegame 6", SelectionFont);
-        Savegame7 = new Label("Savegame 7", SelectionFont);
-        Savegame8 = new Label("Savegame 8", SelectionFont);
-        Savegame9 = new Label("Savegame 9", SelectionFont);
-        Savegame10 = new Label("Savegame 10", SelectionFont);
-
-        SG1Collectibles = new Label("Collectibles 1", LittleSelectionFont);
-        SG2Collectibles = new Label("Collectibles 2", LittleSelectionFont);
-        SG3Collectibles = new Label("Collectibles 3", LittleSelectionFont);
-        SG4Collectibles = new Label("Collectibles 4", LittleSelectionFont);
-        SG5Collectibles = new Label("Collectibles 5", LittleSelectionFont);
-        SG6Collectibles = new Label("Collectibles 6", LittleSelectionFont);
-        SG7Collectibles = new Label("Collectibles 7", LittleSelectionFont);
-        SG8Collectibles = new Label("Collectibles 8", LittleSelectionFont);
-        SG9Collectibles = new Label("Collectibles 9", LittleSelectionFont);
-        SG10Collectibles = new Label("Collectibles 10", LittleSelectionFont);
-
-        SG1UnlockedLevel = new Label("Unlocked Levels 1", LittleSelectionFont);
-        SG2UnlockedLevel = new Label("Unlocked Levels 2", LittleSelectionFont);
-        SG3UnlockedLevel = new Label("Unlocked Levels 3", LittleSelectionFont);
-        SG4UnlockedLevel = new Label("Unlocked Levels 4", LittleSelectionFont);
-        SG5UnlockedLevel = new Label("Unlocked Levels 5", LittleSelectionFont);
-        SG6UnlockedLevel = new Label("Unlocked Levels 6", LittleSelectionFont);
-        SG7UnlockedLevel = new Label("Unlocked Levels 7", LittleSelectionFont);
-        SG8UnlockedLevel = new Label("Unlocked Levels 8", LittleSelectionFont);
-        SG9UnlockedLevel = new Label("Unlocked Levels 9", LittleSelectionFont);
-        SG10UnlockedLevel = new Label("Unlocked Levels 10", LittleSelectionFont);
-
-
-        // Setup Groups for better Handing of the Labels
-        SG1 = new VerticalGroup();
-        SG2 = new VerticalGroup();
-        SG3 = new VerticalGroup();
-        SG4 = new VerticalGroup();
-        SG5 = new VerticalGroup();
-        SG6 = new VerticalGroup();
-        SG7 = new VerticalGroup();
-        SG8 = new VerticalGroup();
-        SG9 = new VerticalGroup();
-        SG10 = new VerticalGroup();
-
-        SG1.addActor(Savegame1);
-        SG1.addActor(SG1Collectibles);
-        SG1.addActor(SG1UnlockedLevel);
-        SG1.space(10);
-
-        SG2.addActor(Savegame2);
-        SG2.addActor(SG2Collectibles);
-        SG2.addActor(SG2UnlockedLevel);
-        SG2.space(10);
-
-        SG3.addActor(Savegame3);
-        SG3.addActor(SG3Collectibles);
-        SG3.addActor(SG3UnlockedLevel);
-        SG3.space(10);
-
-        SG4.addActor(Savegame4);
-        SG4.addActor(SG4Collectibles);
-        SG4.addActor(SG4UnlockedLevel);
-        SG4.space(10);
-
-        SG5.addActor(Savegame5);
-        SG5.addActor(SG5Collectibles);
-        SG5.addActor(SG5UnlockedLevel);
-        SG5.space(10);
-
-        SG6.addActor(Savegame6);
-        SG6.addActor(SG6Collectibles);
-        SG6.addActor(SG6UnlockedLevel);
-        SG6.space(10);
-
-        SG7.addActor(Savegame7);
-        SG7.addActor(SG7Collectibles);
-        SG7.addActor(SG7UnlockedLevel);
-        SG7.space(10);
-
-        SG8.addActor(Savegame8);
-        SG8.addActor(SG8Collectibles);
-        SG8.addActor(SG8UnlockedLevel);
-        SG8.space(10);
-
-        SG9.addActor(Savegame9);
-        SG9.addActor(SG9Collectibles);
-        SG9.addActor(SG9UnlockedLevel);
-        SG9.space(10);
-
-        SG10.addActor(Savegame10);
-        SG10.addActor(SG10Collectibles);
-        SG10.addActor(SG10UnlockedLevel);
-        SG10.space(10);
     }
 
     @Override
