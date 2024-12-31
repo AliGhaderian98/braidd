@@ -217,6 +217,7 @@ public class Player extends DynamicGameObject {
                 currentState = AnimationState.LANDING;
                 landingAnimationPlaying = true;
 
+                landingTask.cancel();
                 Timer.schedule(landingTask, 0.25f);
             }
         }
@@ -265,9 +266,7 @@ public class Player extends DynamicGameObject {
 
     public void setIsGrounded(boolean b) {
         isGrounded = b;
-        if (!b)
-            currentState = AnimationState.JUMPING;
-        else
+        if (b)
             currentState = AnimationState.IDLE;
     }
 

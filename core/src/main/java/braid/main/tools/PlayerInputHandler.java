@@ -17,6 +17,9 @@ public class PlayerInputHandler {
     private LevelScreen screen;
     private boolean gameIsPaused;
 
+    private boolean rewindBuffer = false;
+    private boolean rewinding = false;
+
 
     public PlayerInputHandler(Player player, World world, Game game, LevelScreen screen) {
         this.player = player;
@@ -78,9 +81,11 @@ public class PlayerInputHandler {
         }
     }
 
+    // Zeitmechanik für Rewind-Funktion
     private void handleRewind() {
-        // Zeitmechanik für Rewind-Funktion
+        rewindBuffer = rewinding;
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
+            rewinding = true;
             for (RewindController r : screen.rewindObjects) {
                 r.startRewinding();
             }
@@ -88,14 +93,18 @@ public class PlayerInputHandler {
             if (player.getRewindController().hasRewindStorage()) {
                 screen.setRewindShader();
             } else {
+                rewinding = false;
                 screen.removeRewindShader();
             }
         } else {
             for (RewindController r : screen.rewindObjects) {
                 r.stopRewinding();
             }
+            rewinding = false;
             screen.removeRewindShader();
         }
+        if (!rewinding && rewindBuffer)
+            player.setIsGrounded(player.b2body.getLinearVelocity().y == 0);
     }
 
     private void handleMovement() {
