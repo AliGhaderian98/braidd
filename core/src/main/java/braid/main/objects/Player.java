@@ -328,6 +328,7 @@ public class Player extends DynamicGameObject {
     // Inputs
 
     public void moveRight() {
+        moving = true;
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x < speed) {
@@ -336,6 +337,7 @@ public class Player extends DynamicGameObject {
     }
 
     public void moveLeft() {
+        moving = true;
         if (isGrounded)
             currentState = AnimationState.RUNNING;
         if (b2body.getLinearVelocity().x > -speed) {
