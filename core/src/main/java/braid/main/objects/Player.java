@@ -3,7 +3,6 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,12 +35,26 @@ public class Player extends DynamicGameObject {
     private boolean animationPaused;
     public float stateTimer;
 
-    private boolean isGrounded;
+    private boolean isGrounded = true;
     private boolean landingAnimationPlaying = false;
 
+    private Timer.Task landingTask;
+
     // Player specific variables
-    float jumpSpeed = 3.5f;
+    private final float defaultGravity = 1.2f;
+    private final float descendingGravity = defaultGravity*1.3f;
+    private final float variableJumpHeightFactor = 0.5f;
+    public boolean holdingJump;
+    float jumpSpeed = 3.0f;
+
+    private final float maxCoyoteTime = 0.15f;
+    private boolean coyoteActive = false;
+
+    private final float jumpBufferTime = 0.1f;
+    private boolean jumpBuffered;
+
     final float climbingSpeed = 1f;
+
     AnimationState currentState;
     AnimationState previousState;
     private boolean isAlive;
@@ -80,6 +93,14 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
+
+        landingTask = new Timer.Task() {
+            @Override
+            public void run() {
+                landingAnimationPlaying = false;
+                currentState = AnimationState.IDLE;
+            }
+        };
     }
 
     // Methods
@@ -117,6 +138,21 @@ public class Player extends DynamicGameObject {
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
+        // apply variable jump height
+        if (isJumping()) {
+            if (holdingJump && b2body.getLinearVelocity().y > 0)
+                b2body.setGravityScale(variableJumpHeightFactor *defaultGravity);
+            else
+                b2body.setGravityScale(defaultGravity);
+
+        }
+
+        // apply higher descending velocity
+        if (!isClimbing() && b2body.getLinearVelocity().y < 0) {
+            b2body.setGravityScale(descendingGravity);
+        }
+
+        // update velocity on moving platform
         if (isOnMovingPlatform && !moving) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
@@ -168,100 +204,31 @@ public class Player extends DynamicGameObject {
 
 
     public void land() {
-        currentState = AnimationState.LANDING;
-        isGrounded = true;
-        if (b2body.getLinearVelocity().y < -3.75) {
-            landingAnimationPlaying = true;
+        if (jumpBuffered || b2body.getLinearVelocity().y > 0) {
+            jump(1f);
+            jumpBuffered = false;
+        } else if(!isGrounded && b2body.getLinearVelocity().y < 0) {
+            currentState = AnimationState.IDLE;
+            isGrounded = true;
+            holdingJump = false;
+            coyoteActive = false;
 
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    landingAnimationPlaying = false;
-                }
-            }, 0.25f);
+            if (b2body.getLinearVelocity().y < -4.75) {
+                currentState = AnimationState.LANDING;
+                landingAnimationPlaying = true;
+
+                Timer.schedule(landingTask, 0.25f);
+            }
         }
-
     }
 
     public void fall() {
         if (currentState != AnimationState.JUMPING) {
             currentState = AnimationState.FALLING;
             isGrounded = false;
+            setCoyoteTime();
         }
     }
-
-    public void die() {
-        screen.setHitShader();
-        LevelScreen.gameIsPaused = true;
-        isAlive = false;
-    }
-
-
-    // Inputs
-
-    public void moveRight() {
-        moving = true;
-        if (isGrounded)
-            currentState = AnimationState.RUNNING;
-        if (b2body.getLinearVelocity().x < speed) {
-            b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
-        }
-    }
-
-    public void moveLeft() {
-        moving = true;
-        if (isGrounded)
-            currentState = AnimationState.RUNNING;
-        if (b2body.getLinearVelocity().x > -speed) {
-            b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
-        }
-    }
-
-    public void stopMovement() {
-        moving = false;
-        if (currentState != AnimationState.CLIMBING) {
-            if (isGrounded)
-                currentState = AnimationState.IDLE;
-            if (!isOnMovingPlatform)
-                b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
-        }
-    }
-
-    public void climbUp() {
-        currentState = AnimationState.CLIMBING;
-        isGrounded = false;
-        b2body.setGravityScale(0);
-        Vector2 newPos = new Vector2(b2body.getPosition());
-
-        if (b2body.getPosition().y < maxMoveLimit.y)
-            b2body.setLinearVelocity(0, getClimbingSpeed());
-        else {
-            b2body.setLinearVelocity(0, 0);
-            newPos.y = MathUtils.clamp(b2body.getPosition().y, minMoveLimit.y, maxMoveLimit.y);
-        }
-
-        b2body.setTransform(newPos, b2body.getAngle());
-    }
-
-    public void climbDown() {
-        b2body.setLinearVelocity(0, -getClimbingSpeed());
-    }
-
-    public void jump() {
-        b2body.setGravityScale(1);
-        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()), b2body.getWorldCenter(), true);
-        currentState = AnimationState.JUMPING;
-        isGrounded = false;
-    }
-
-    public void jump(float multiplier) {
-        b2body.setGravityScale(1);
-        b2body.applyLinearImpulse(new Vector2(0, getJumpSpeed()*multiplier), b2body.getWorldCenter(), true);
-        currentState = AnimationState.JUMPING;
-        isGrounded = false;
-    }
-
-
 
 
     //Getter und Setter
@@ -349,4 +316,95 @@ public class Player extends DynamicGameObject {
         maxMoveLimit = null;
         minMoveLimit = null;
     }
+
+    public boolean hasCoyoteTime() { return coyoteActive; }
+
+    public void die() {
+        screen.setHitShader();
+        LevelScreen.gameIsPaused = true;
+        isAlive = false;
+    }
+
+
+    // Inputs
+
+    public void moveRight() {
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
+        if (b2body.getLinearVelocity().x < speed) {
+            b2body.applyLinearImpulse(new Vector2(getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
+        }
+    }
+
+    public void moveLeft() {
+        if (isGrounded)
+            currentState = AnimationState.RUNNING;
+        if (b2body.getLinearVelocity().x > -speed) {
+            b2body.applyLinearImpulse(new Vector2(-getSpeed() * .5f, 0), b2body.getWorldCenter(), true);
+        }
+    }
+
+    public void stopMovement() {
+        moving = false;
+        if (currentState != AnimationState.CLIMBING) {
+            if (isGrounded)
+                currentState = AnimationState.IDLE;
+            if (!isOnMovingPlatform)
+                b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+        }
+    }
+
+    public void climbUp() {
+        currentState = AnimationState.CLIMBING;
+        isGrounded = false;
+        b2body.setGravityScale(0);
+        Vector2 newPos = new Vector2(b2body.getPosition());
+
+        if (b2body.getPosition().y < maxMoveLimit.y)
+            b2body.setLinearVelocity(0, getClimbingSpeed());
+        else {
+            b2body.setLinearVelocity(0, 0);
+            newPos.y = MathUtils.clamp(b2body.getPosition().y, minMoveLimit.y, maxMoveLimit.y);
+        }
+
+        b2body.setTransform(newPos, b2body.getAngle());
+    }
+
+    public void climbDown() {
+        b2body.setLinearVelocity(0, -getClimbingSpeed());
+    }
+
+    public void jump(float multiplier) {
+        if (landingTask.isScheduled()) {
+            landingTask.cancel();
+            landingAnimationPlaying = false;
+        }
+        currentState = AnimationState.JUMPING;
+        b2body.setGravityScale(1);
+        b2body.setLinearVelocity(new Vector2(0, getJumpSpeed()*multiplier));
+        isGrounded = false;
+    }
+
+    public void setJumpBuffer() {
+        if (!jumpBuffered) {
+            jumpBuffered = true;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    jumpBuffered = false;
+                }
+            }, jumpBufferTime);
+        }
+    }
+
+    private void setCoyoteTime() {
+        coyoteActive = true;
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                coyoteActive = false;
+            }
+        }, maxCoyoteTime);
+    }
+
 }

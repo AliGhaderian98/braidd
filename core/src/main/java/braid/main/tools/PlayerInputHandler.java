@@ -65,8 +65,16 @@ public class PlayerInputHandler {
     }
 
     private void handleJumping() {
-        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()) {
-            player.jump();
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isJumping()
+            && (player.isClimbing() || player.isGrounded() || player.hasCoyoteTime())) {
+            player.jump(1);
+        }
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isGrounded())
+            player.setJumpBuffer();
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("SPACEBAR"))) {
+            player.holdingJump = true;
+        } else {
+            player.holdingJump = false;
         }
     }
 
@@ -100,8 +108,8 @@ public class PlayerInputHandler {
                 player.moveLeft();
             }
         } else {
-            //player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
-            player.stopMovement();
+            if (player.b2body.getLinearVelocity().x != 0)
+                player.stopMovement();
         }
     }
 }
