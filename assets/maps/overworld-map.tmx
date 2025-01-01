@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="106">
- <tileset firstgid="1" source="overworld-tiles.tsx"/>
- <tileset firstgid="577" source="overworld-tiles-new.tsx"/>
+ <tileset firstgid="577" source="tilesets/overworld-tiles.tsx"/>
  <layer id="8" name="background" width="100" height="64">
   <data encoding="base64" compression="zlib">
    eJzt3F0uRDEUB/BJ7wKQWJGXIeZZhCV4MMIzwiKMDYhdDCEkNsJMhMQKtBnNdKrtvf0+7T0P/zDDcJ3fPb0f1RmTwWCsyQnN1l/OaS5oLoXncuXYsM01Bz3g5IzmFj3AROyNPZoDQB43NKcAapTDQ7S4prkH4NFHE+7BxykovSGbTHriIntA6g2dS802sge03uhbz5TqIbrUZFK6R229Insc0uwDqLFLarheKeH8Cj3y19YlNRxLuMcdzRXBMSt3RjQ7FZnU1CO1mNTUI7lMjizStx7JYRLSo8YekU1in3NNaR40eXQwqaFHxHkpnlTX7e80H5rMLC1KNGHzghMhKovSPUoYt7iDrv5QPHjt2efPZHXciukh76ex7u/bOuT20PWJ7c/t6tFWH3HuJYSVrUMKD94D7Fj+1GLxSbPRxPGQ/6fDNm3zZKrnXH9XaA/V+auqN1j915tlmIXtWNXVQz7X94loY9qGXB5t1w/s8VqzWnux/i7XHnJ9TOOJb2+47hNQPLp4udTdth6pLErzMJmEstH1SMhxqlQP24Sqier8KEVvQPMw2bR5pahVnz26OqFHXo+aM6TZRY9gtdxWRL4PbnqtygI93Bx0tRxpnMToXose9klxTxiyh25ccB0rfLelbd+G4BFjzrZtXHAdK3zMUs2XuG5frHn0mPuhau45xr6RwyOGSYoxgfdR13OhVA4hPGQTn2NJ6r+9i0uOOd0QY0yIY3uu+WzVcYcboQeMcKPUYxV6wAt6wAp6wAp6wAp6wAp6wEpID59rdPQI7+HTI+gRziPEPRP0COfhewzJcd8OaiB4YG+gB9T4OrzQbDarHuwxyyt6JPeYE31/zKXvnSochgBqACkpPeT1HLwvZgR7ROVhWlusWmts68HWc6g8xuih9OiyVk9es2fjwU3YupofsvjItgHPd/093sjimP1t6aH6GvaGv4e4plX3fslfZHmuJYc5pv5fmhISwsP1PWGxL8weqvWTuvA1xj7vJY4eZg+X+NzbRY//+QVBUn67

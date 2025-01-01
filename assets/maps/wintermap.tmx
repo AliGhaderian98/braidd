@@ -3,13 +3,14 @@
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="Sample.tsx"/>
- <tileset firstgid="1025" source="sky.tsx"/>
- <tileset firstgid="1441" source="mid-layer-b.tsx"/>
- <tileset firstgid="1701" source="mid-layer-a.tsx"/>
- <tileset firstgid="1961" source="Props.tsx"/>
- <tileset firstgid="2217" source="prop-sheet.tsx"/>
- <tileset firstgid="2622" source="sheet.tsx"/>
+ <tileset firstgid="1" source="tilesets/Sample.tsx"/>
+ <tileset firstgid="1025" source="tilesets/sky.tsx"/>
+ <tileset firstgid="1441" source="tilesets/mid-layer-b.tsx"/>
+ <tileset firstgid="1701" source="tilesets/mid-layer-a.tsx"/>
+ <tileset firstgid="1961" source="tilesets/Props.tsx"/>
+ <tileset firstgid="2217" source="tilesets/prop-sheet.tsx"/>
+ <tileset firstgid="2622" source="tilesets/sheet.tsx"/>
+ <tileset firstgid="2622" source="tilesets/sheet.tsx"/>
  <layer id="2" name="Background 1" width="64" height="24">
   <data encoding="csv">
 1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1048,1049,1050,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1048,1049,1050,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,
@@ -319,14 +320,6 @@
   <object id="232" x="112" y="336" width="16" height="16">
    <properties>
     <property name="type" value="RITALIN"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup id="15" name="MovingPlatform">
-  <object id="171" x="815.5" y="80" width="47.5" height="18">
-   <properties>
-    <property name="rangeX" type="float" value="100"/>
-    <property name="speed" type="float" value="1.5"/>
    </properties>
   </object>
  </objectgroup>

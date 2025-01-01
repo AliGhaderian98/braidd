@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="106">
- <tileset firstgid="1" source="overworld-tiles.tsx"/>
- <tileset firstgid="577" source="overworld-tiles-new.tsx"/>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="106">
+ <tileset firstgid="577" source="tilesets/overworld-tiles.tsx"/>
  <layer id="8" name="background" width="100" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt3EFOwzAQBVCUHgC4UjeA6BohOAILQHQNCA4BXABxC0BwF0DiEDiLqGmwk/F4bI/dv/gSIFo18zLjJJY6b7a25oRcm9yY3BL/P2bOTS4qDbUG8IAHPOw5MjlR5PFgcqWgdjk8+hb3Ji8KPGo2oc4pLb0xNHmszIXqoak3XC412FA9tPVGrT1Tm0ffpUSTWj1K7RWqx6nJsYIac1LS/QrVo9QegYe+lLSWTB3Ls8ldg5mlxaMWk1J6hHo8NZiU0CM+x5PD5MwjNfSIb31Sm0h6lNAjnBr1TWJfc72avDnyzjDR3iPcOqW6b/8y+Xbkx9OiBJNN9GijdW6V5tHVvv35s1mfWzE9ls3qmX4/0n1WmoerT3zfl+rROTw53qe/9yJhpdGj64F2Lf+YsPg12Z3F8ViOOFAytU9m+5sWD9v1q6032vrvzFZpLXxnFdXjUujYhjZjnyGXx9T9Q/v79my99v36c+49hvUZmyehvcE9J7R4ULw4dfetRyqL0jzGTKRsXD0iOadK9fCNVE1s10cpekObx5jNlFeKWm2yB9UJHnk9as6eySE8xGq5b8mBx2ttFvDgObhquXA49eN6LTz8k+KZsGYP11zgzorQzzJ1bmvwiLFnOzUXuLMixCzVfgn388XaR495Hi4YJpxzI4dHDJMUM6HrI+q1UCoHCY+hSchakvrYKS459nQlZozE2p5rP9u27nRG8NCRzij1rIKHvsBDV+ChK/DQFXjoCjx0RdIj5B4dHvIeIT0CDzkPiWcm8JDzCF1Dcjy30xoNHugNeGgNPHQltwfWDl0e6A14aE5OD8wqXR7ojTge3O9LhkccD+53wsJD3iPku8ThIe8R8mwXHv/zB6ADLxk=
+   eJzt3F0uRDEUB/BJ7wKQWJGXIeZZhCV4MMIzwiKMDYhdDCEkNsJMhMQKtBnNdKrtvf0+7T0P/zDDcJ3fPb0f1RmTwWCsyQnN1l/OaS5oLoXncuXYsM01Bz3g5IzmFj3AROyNPZoDQB43NKcAapTDQ7S4prkH4NFHE+7BxykovSGbTHriIntA6g2dS802sge03uhbz5TqIbrUZFK6R229Insc0uwDqLFLarheKeH8Cj3y19YlNRxLuMcdzRXBMSt3RjQ7FZnU1CO1mNTUI7lMjizStx7JYRLSo8YekU1in3NNaR40eXQwqaFHxHkpnlTX7e80H5rMLC1KNGHzghMhKovSPUoYt7iDrv5QPHjt2efPZHXciukh76ex7u/bOuT20PWJ7c/t6tFWH3HuJYSVrUMKD94D7Fj+1GLxSbPRxPGQ/6fDNm3zZKrnXH9XaA/V+auqN1j915tlmIXtWNXVQz7X94loY9qGXB5t1w/s8VqzWnux/i7XHnJ9TOOJb2+47hNQPLp4udTdth6pLErzMJmEstH1SMhxqlQP24Sqier8KEVvQPMw2bR5pahVnz26OqFHXo+aM6TZRY9gtdxWRL4PbnqtygI93Bx0tRxpnMToXose9klxTxiyh25ccB0rfLelbd+G4BFjzrZtXHAdK3zMUs2XuG5frHn0mPuhau45xr6RwyOGSYoxgfdR13OhVA4hPGQTn2NJ6r+9i0uOOd0QY0yIY3uu+WzVcYcboQeMcKPUYxV6wAt6wAp6wAp6wAp6wAp6wEpID59rdPQI7+HTI+gRziPEPRP0COfhewzJcd8OaiB4YG+gB9T4OrzQbDarHuwxyyt6JPeYE31/zKXvnSochgBqACkpPeT1HLwvZgR7ROVhWlusWmts68HWc6g8xuih9OiyVk9es2fjwU3YupofsvjItgHPd/093sjimP1t6aH6GvaGv4e4plX3fslfZHmuJYc5pv5fmhISwsP1PWGxL8weqvWTuvA1xj7vJY4eZg+X+NzbRY//+QVBUn67
   </data>
  </layer>
  <layer id="9" name="backgroundobjects" width="100" height="64">
   <data encoding="base64" compression="zlib">
-   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
+   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
+  </data>
+ </layer>
+ <layer id="11" name="backgroundobjects2" width="100" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt2ctNw0AQAFBfQlwABdACF04UAD0gLhQAdAASd7hBCekAblACTYBEBxzZSKyUXdnBCf6s4D3JGskHK5rRzI6dqgLG9jFrvr+7M+7v+I/uQ+4fWvKfO1SPwT2HWrx0rMfSJvWjuzh7mmbTbbh315LzTetHN+tmz2PI91O43sL1vpL7tnOFcjjjy+KMh2bOE0h5/xhW08xZl3PvH+Na1kfOy3dmrwUAAICiXM2n/gVQrt/0x0JvTaIt76/qMYmY90UW+dn5gN/SY130xfDiOWLfWu86y8/+PI19OarTSLODWVWdrPzfelynsS8XdRpJxblxGmpxs1KPyzqN2z7XfNpMnBt5f2zzjK6RdnFu5P2xzTO6RtqZI2UxQ8pihpTFvCpLH/sV/eljv6I/+byK/fLpG+sk8v0q9sved/SNdVz2q7LYrwAAAAAAAODv+gJd2zdr
   </data>
  </layer>
  <imagelayer id="3" name="dots">
-  <image source="tilesets/overworld-dots.png" width="1600" height="1024"/>
+  <image source="tilesets/overworld/overworld-dots.png" width="1600" height="1024"/>
  </imagelayer>
- <imagelayer id="2" name="rails-img">
-  <image source="tilesets/overworld-rails.png" width="1600" height="1024"/>
+ <imagelayer id="2" name="rails_1">
+  <image source="tilesets/overworld/overworld-rails1.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="13" name="rails_2">
+  <image source="tilesets/overworld/overworld-rails2.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="14" name="rails_3">
+  <image source="tilesets/overworld/overworld-rails3.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="15" name="rails_4">
+  <image source="tilesets/overworld/overworld-rails4.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="16" name="rails_5">
+  <image source="tilesets/overworld/overworld-rails5.png" width="1600" height="1024"/>
+ </imagelayer>
+ <imagelayer id="17" name="rails_SB">
+  <image source="tilesets/overworld/overworld-railsSB.png" width="1600" height="1024"/>
  </imagelayer>
  <objectgroup id="4" name="rails" visible="0">
   <object id="2" x="244.909" y="926">
@@ -32,7 +51,7 @@
    <polyline points="-59.9375,-305.938 -59.875,-275 0,-215.313 0,0 -137.063,0 -174.875,37.875 -175,126.625"/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="transitions">
+ <objectgroup id="5" name="transitions" visible="0">
   <object id="39" name="transition06" x="244.946" y="817.853">
    <properties>
     <property name="neighborA" type="object" value="103"/>
@@ -218,6 +237,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborLevelEast" type="object" value="0"/>
+    <property name="neighborLevelNorth" type="object" value="0"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="96"/>
     <property name="neighborNorth" type="object" value="0"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="62"/>
@@ -232,6 +255,10 @@
     <property name="hasNeighborWest" type="bool" value="false"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="50"/>
+    <property name="neighborLevelEast" type="object" value="97"/>
+    <property name="neighborLevelNorth" type="object" value="95"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="51"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="0"/>
@@ -246,6 +273,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="true"/>
     <property name="neighborEast" type="object" value="47"/>
+    <property name="neighborLevelEast" type="object" value="96"/>
+    <property name="neighborLevelNorth" type="object" value="0"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="100"/>
     <property name="neighborNorth" type="object" value="0"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="45"/>
@@ -260,6 +291,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="44"/>
+    <property name="neighborLevelEast" type="object" value="97"/>
+    <property name="neighborLevelNorth" type="object" value="0"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="99"/>
     <property name="neighborNorth" type="object" value="0"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="99"/>
@@ -274,6 +309,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="98"/>
+    <property name="neighborLevelEast" type="object" value="97"/>
+    <property name="neighborLevelNorth" type="object" value="105"/>
+    <property name="neighborLevelSouth" type="object" value="104"/>
+    <property name="neighborLevelWest" type="object" value="100"/>
     <property name="neighborNorth" type="object" value="63"/>
     <property name="neighborSouth" type="object" value="43"/>
     <property name="neighborWest" type="object" value="100"/>
@@ -288,6 +327,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="99"/>
+    <property name="neighborLevelEast" type="object" value="97"/>
+    <property name="neighborLevelNorth" type="object" value="0"/>
+    <property name="neighborLevelSouth" type="object" value="101"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="0"/>
     <property name="neighborSouth" type="object" value="46"/>
     <property name="neighborWest" type="object" value="46"/>
@@ -302,6 +345,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborLevelEast" type="object" value="0"/>
+    <property name="neighborLevelNorth" type="object" value="100"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="46"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="0"/>
@@ -316,6 +363,10 @@
     <property name="hasNeighborWest" type="bool" value="true"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="41"/>
+    <property name="neighborLevelEast" type="object" value="104"/>
+    <property name="neighborLevelNorth" type="object" value="99"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="103"/>
     <property name="neighborNorth" type="object" value="42"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="39"/>
@@ -330,6 +381,10 @@
     <property name="hasNeighborWest" type="bool" value="false"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborLevelEast" type="object" value="0"/>
+    <property name="neighborLevelNorth" type="object" value="99"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="39"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="0"/>
@@ -344,6 +399,10 @@
     <property name="hasNeighborWest" type="bool" value="false"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborLevelEast" type="object" value="0"/>
+    <property name="neighborLevelNorth" type="object" value="99"/>
+    <property name="neighborLevelSouth" type="object" value="0"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="41"/>
     <property name="neighborSouth" type="object" value="0"/>
     <property name="neighborWest" type="object" value="0"/>
@@ -358,6 +417,10 @@
     <property name="hasNeighborWest" type="bool" value="false"/>
     <property name="isUnlocked" type="bool" value="false"/>
     <property name="neighborEast" type="object" value="0"/>
+    <property name="neighborLevelEast" type="object" value="0"/>
+    <property name="neighborLevelNorth" type="object" value="0"/>
+    <property name="neighborLevelSouth" type="object" value="99"/>
+    <property name="neighborLevelWest" type="object" value="0"/>
     <property name="neighborNorth" type="object" value="0"/>
     <property name="neighborSouth" type="object" value="64"/>
     <property name="neighborWest" type="object" value="0"/>
