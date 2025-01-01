@@ -11,11 +11,12 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class CollectableItem extends Item {
+    private int ID;
+    public Boolean isCollected;
 
-    public static Boolean isCollected;
-
-    public CollectableItem(LevelScreen screen, float x, float y) {
+    public CollectableItem(LevelScreen screen, float x, float y, int id) {
         super(screen, x, y, 6);
+        this.ID = id;
 
         fixture.setUserData(new UserData("item", this));
 

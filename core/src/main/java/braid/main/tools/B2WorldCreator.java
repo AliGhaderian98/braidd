@@ -188,7 +188,7 @@ public class B2WorldCreator {
 
             // Spawning Item
             if ("Page".equals(type)) {
-                screen.addItem(new CollectableItem(screen, x, y));
+                screen.addItem(new CollectableItem(screen, x, y, (Integer) object.getProperties().get("ID")));
             }
 
             if ("RITALIN".equals(type)) {
