@@ -82,6 +82,7 @@ public class Savemanager {
     public static void saveGame() {
         Savegame saveData = new Savegame();
         updatePlaytime();
+        saveData.SaveGameName = currentsavegame.SaveGameName;
         saveData.UnlockedLevels = currentsavegame.UnlockedLevels;
         saveData.SaveGameKEY = currentsavegame.SaveGameKEY;
         saveData.Collectables = currentsavegame.Collectables;
