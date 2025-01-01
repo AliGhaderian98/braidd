@@ -16,8 +16,8 @@ audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 libgdx.png
 löwe.png
-maps/braid-tiled-project.tiled-project
-maps/braid-tiled-project.tiled-session
+maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/overworld-map.tmx
 maps/patrollingEnemyMap.tmx
 maps/testmap2.tmx
