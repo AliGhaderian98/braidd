@@ -15,7 +15,7 @@ public class Savemanager {
     // These Parts will be Saved over Runtime
     public static class Savegame {
         public int SaveGameKEY;
-        public String SaveGAmeName;
+        public String SaveGameName;
         public Map<String, Array<Boolean>> Collectables;
         public Map<String, Boolean> UnlockedLevels;
         public int numUnlockedBeforeWegZurUni;
@@ -48,7 +48,11 @@ public class Savemanager {
     }
 
     private static void createDummySavegame() {
+        // already given
+        currentsavegame.SaveGameName = SavegameMenu.newSavegameName;
         currentsavegame.SaveGameKEY = SavegameMenu.currentSavegamKey;
+
+        // DummyCreation
         currentsavegame.Collectables = new HashMap<>();
         for(int i=0; i<10;i++){
             dummyCollectablesBool = new Array<>();
@@ -139,6 +143,35 @@ public class Savemanager {
             currentsavegame.UnlockedLevels.put("WEGZURUNI", true);
     }
 
+    public static int AmountUnlockedLevels(Savegame savegame){
+        int unlockedlevels = 0;
+        for(Boolean entry : savegame.UnlockedLevels.values()){
+            if(entry)
+                unlockedlevels++;
+        }
+    return unlockedlevels;
+    }
+
+    public static int AmountFoundCollectables(Savegame savegame){
+        int FoundCollectables = 0;
+        for(Array<Boolean> entry : savegame.Collectables.values()){
+            for(Boolean Value : entry){
+                if(Value){
+                    FoundCollectables++;
+
+                }
+            }
+        }
+        return FoundCollectables;
+    }
+
+    public static String getSavegameName(Savegame savegame){
+        if(savegame.SaveGameName == null){
+            return "Savegame " + savegame.SaveGameKEY;
+        } else {
+            return savegame.SaveGameName;
+        }
+    }
 
     // debug Methode
     public void printSavegame(Savegame savegame){
@@ -150,7 +183,7 @@ public class Savemanager {
             System.out.println(LevelNodes.get(i) + ": "+ savegame.Collectables.get(LevelNodes.get(i)));
         }
         System.out.println(" ");
-
     }
+
 
 }

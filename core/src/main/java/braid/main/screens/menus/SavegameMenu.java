@@ -2,10 +2,9 @@ package braid.main.screens.menus;
 
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
-import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.*;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -14,24 +13,21 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.Arrays;
-
 
 public class SavegameMenu implements Screen{
 
-    private final Stage stage;
+    private final Stage stage, Overlay;
     private final Braid game;
     private final ScrollPane scrollPane;
-    private final Table table, rootTable;
+    private final Table table, rootTable, Overlaytable;
     public static int currentSavegamKey;
+    private TextField textField;
 
     int width;
     int height;
@@ -41,7 +37,7 @@ public class SavegameMenu implements Screen{
     private Label[] savegames, collectibles, unlockedLevels;
     private Group[] VerticalGroups;
     private int TotalSavegame;
-    private Label newSaveGame,nomoreSaveGames;
+    private Label newSaveGame,nomoreSaveGames, Title, OverlayTitel;
 
     // used to target a Label
     private final Array<Label> SaveGameLabels;
@@ -52,14 +48,23 @@ public class SavegameMenu implements Screen{
     // Sound
     private final Sound menuSound;
 
+    private boolean Overlayacitv;
+    public static String newSavegameName;
+
 
     public SavegameMenu(Braid game) {
         this.game = game;
 
+        // disable Overlay first
+        Overlayacitv = false;
+
         // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+        Overlay = new Stage(viewport,((Braid) game).batch);
+
         Gdx.input.setInputProcessor(stage);
+
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -75,6 +80,14 @@ public class SavegameMenu implements Screen{
         //  Create Table
         table = new Table();
         rootTable = new Table();
+        Overlaytable = new Table();
+
+        // Create Textfield
+        Skin textFieldskin = new Skin(Gdx.files.internal("uiskin.json"));
+        textField = new TextField("", textFieldskin);
+        textField.setMessageText("");
+        textField.getStyle().font.getData().setScale(3f);
+
 
 
         // Setup Label styles for Title and Options
@@ -82,8 +95,9 @@ public class SavegameMenu implements Screen{
         Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.getmidTextFont(), Color.GRAY);
         Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.getlittleTextFont(), Color.GRAY);
 
-        // Setup Title and Options
-        Label Title = new Label("Save games", TitelFont);
+        // Setup Title and footnote and OverlayTitle
+        OverlayTitel = new Label("Enter a Name for your Savegame", SelectionFont);
+        Title = new Label("Save games", TitelFont);
         newSaveGame = new Label("new Savegame", SelectionFont);
         nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
         nomoreSaveGames.setColor(Color.RED);
@@ -101,27 +115,31 @@ public class SavegameMenu implements Screen{
 
 
         for (int i = 1; i <= TotalSavegame; i++) {
-            // create Labels
-            savegames[i] = new Label("Savegame: " + i, SelectionFont);
-            collectibles[i] = new Label("Collectibles: " + i, LittleSelectionFont);
-            unlockedLevels[i] = new Label("Unlocked Levels: " + i, LittleSelectionFont);
+            if (Savemanager.existGame(i)) {
 
-            // add Labels to Groups
-            VerticalGroups [i] = new VerticalGroup();
-            VerticalGroups [i].addActor(savegames[i]);
-            VerticalGroups [i].addActor(collectibles[i]);
-            VerticalGroups [i].addActor(unlockedLevels[i]);
+                // load saved Contend for this Savegame
+                Savemanager.currentsavegame = Savemanager.loadGame(i);
 
-            // fill Array with Labels to target a Label
-            SaveGameLabels.add(savegames [i]);
+                // create Labels
+                savegames[i] = new Label(Savemanager.getSavegameName(Savemanager.currentsavegame), SelectionFont);
+                collectibles[i] = new Label("Collectibles: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
+                unlockedLevels [i] = new Label("Unlocked Levels: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
 
-            // fill Array with all Labels to reset the Color
-            AllLabels.add(savegames [i]);
-            AllLabels.add(collectibles [i]);
-            AllLabels.add(unlockedLevels [i]);
+                // add Labels to Groups
+                VerticalGroups[i] = new VerticalGroup();
+                VerticalGroups[i].addActor(savegames[i]);
+                VerticalGroups[i].addActor(collectibles[i]);
+                VerticalGroups[i].addActor(unlockedLevels[i]);
+
+                // fill Array with Labels to target a Label
+                SaveGameLabels.add(savegames[i]);
+
+                // fill Array with all Labels to reset the Color
+                AllLabels.add(savegames[i]);
+                AllLabels.add(collectibles[i]);
+                AllLabels.add(unlockedLevels[i]);
+            }
         }
-
-
 
 
 
@@ -148,12 +166,19 @@ public class SavegameMenu implements Screen{
         scrollPane.setScrollingDisabled(true,false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollbarsVisible(true);
-
-
         rootTable.setFillParent(true);
         rootTable.add(scrollPane).expand().fill().pad(10);
 
         stage.addActor(rootTable);
+
+
+        // Set up Overlay
+        Overlaytable.setFillParent(true);
+        Overlaytable.add(OverlayTitel);
+        Overlaytable.row();
+        Overlaytable.add(textField).width(1000).height(100);
+        Overlay.addActor(Overlaytable);
+
 
         // mark first option
         updateLabelSelection();
@@ -166,7 +191,11 @@ public class SavegameMenu implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
         updateScreenRatio();
-        stage.draw();
+        if (Overlayacitv){
+            Overlay.draw();
+        }else {
+            stage.draw();
+        }
     }
 
 
@@ -188,6 +217,8 @@ public class SavegameMenu implements Screen{
             game.setScreen(new PauseMenu(game, this,true));
         }*/
     }
+
+
 
     // scrolling down
     private void handleGoingDown() {
@@ -270,13 +301,32 @@ public class SavegameMenu implements Screen{
 
 
     private void executeSelectedAction() {
-        // load targeted SafeGame
-        if (currentLabel == newSaveGame){
-            startOverWorld(TotalSavegame+1);
+        if(Overlayacitv){
+            // TODO hier läuft irgendwas schief
+            // Start new Game with defined Name for the Savegame
+            newSavegameName = textField.getText();
+            System.out.println("Eingabe: " + newSavegameName);
+
+            Overlay.unfocus(textField);
+            Gdx.input.setInputProcessor(null);
+            Overlayacitv=false;
+
+            //System.out.println("Aktiver InputProcessor: " + Gdx.input.getInputProcessor());
+            textField.setDisabled(true);
+
+            startOverWorld(TotalSavegame + 1);
             dispose();
+        }
+
+        if (currentLabel == newSaveGame){
+            // a new Savegame was targeted -> User can enter a Name for his Savegame
+            Overlayacitv = true;
+            Gdx.input.setInputProcessor(Overlay);
+            Overlay.setKeyboardFocus(textField);
 
         }else {
-            startOverWorld(Integer.parseInt(currentLabel.toString().substring(17)));
+            // an existing Savegame was targeted
+            startOverWorld(currentSavegamKey + 1);
             dispose();
         }
     }
@@ -289,13 +339,11 @@ public class SavegameMenu implements Screen{
 
     private void CountTotalSavegames(){
         TotalSavegame=0;
-
         for(int i=1;i<=10;i++){
             if(Savemanager.existGame(i)){
                 TotalSavegame++;
             }
         }
-        System.out.println(TotalSavegame);
     }
 
 
@@ -337,5 +385,6 @@ public class SavegameMenu implements Screen{
     public void dispose() {
         Savemanager.saveGame();
         stage.dispose();
+        Overlay.dispose();
     }
 }

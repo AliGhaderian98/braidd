@@ -129,6 +129,7 @@ public class Overworld implements Screen {
             }
         };
         Gdx.input.setInputProcessor(inputProcessor);
+
     }
 
     private void enterLevel(String levelName) {
