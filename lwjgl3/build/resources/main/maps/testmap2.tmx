@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="29">
- <tileset firstgid="1" source="1_Industrial_Tileset_1.tsx"/>
- <tileset firstgid="97" source="3_Far_Background_Tile.tsx"/>
- <tileset firstgid="101" source="sheet.tsx"/>
- <tileset firstgid="237" source="1_Industrial_Tileset_1B.tsx"/>
+ <tileset firstgid="1" source="tilesets/1_Industrial_Tileset_1.tsx"/>
+ <tileset firstgid="97" source="tilesets/3_Far_Background_Tile.tsx"/>
+ <tileset firstgid="101" source="tilesets/sheet.tsx"/>
+ <tileset firstgid="237" source="tilesets/1_Industrial_Tileset_1B.tsx"/>
  <layer id="6" name="Background" width="40" height="10">
   <data encoding="csv">
 97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,

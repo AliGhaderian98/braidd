@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="235">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="239">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -339,6 +339,11 @@
   <object id="232" x="112" y="336" width="16" height="16">
    <properties>
     <property name="type" value="RITALIN"/>
+   </properties>
+  </object>
+  <object id="237" x="912" y="80" width="16" height="16">
+   <properties>
+    <property name="type" value="GLEITER"/>
    </properties>
   </object>
  </objectgroup>

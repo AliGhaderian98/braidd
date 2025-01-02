@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="235">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="239">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="Sample.tsx"/>
- <tileset firstgid="1025" source="sky.tsx"/>
- <tileset firstgid="1441" source="mid-layer-b.tsx"/>
- <tileset firstgid="1701" source="mid-layer-a.tsx"/>
- <tileset firstgid="1961" source="Props.tsx"/>
- <tileset firstgid="2217" source="prop-sheet.tsx"/>
- <tileset firstgid="2622" source="sheet.tsx"/>
+ <tileset firstgid="1" source="tilesets/Sample.tsx"/>
+ <tileset firstgid="1025" source="tilesets/sky.tsx"/>
+ <tileset firstgid="1441" source="tilesets/mid-layer-b.tsx"/>
+ <tileset firstgid="1701" source="tilesets/mid-layer-a.tsx"/>
+ <tileset firstgid="1961" source="tilesets/Props.tsx"/>
+ <tileset firstgid="2217" source="tilesets/prop-sheet.tsx"/>
+ <tileset firstgid="2622" source="tilesets/sheet.tsx"/>
  <layer id="2" name="Background 1" width="64" height="24">
   <data encoding="csv">
 1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1048,1049,1050,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1048,1049,1050,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,
@@ -218,101 +218,121 @@
  <objectgroup id="13" name="Items">
   <object id="151" x="80" y="336" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="0"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="199" x="944" y="336" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="9"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="200" x="464.25" y="305.25" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="4"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="201" x="480.25" y="289.25" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="5"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="202" x="496.25" y="289.25" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="6"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="203" x="512.25" y="289.25" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="7"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="204" x="528.25" y="305.25" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="8"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="211" x="192" y="320" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="1"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="212" x="208" y="320" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="2"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="213" x="224" y="320" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="3"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="222" x="944" y="64" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="10"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="223" x="752" y="160" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="12"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="224" x="768" y="160" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="11"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="225" x="544" y="208" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="15"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="226" x="560" y="208" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="14"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="227" x="576" y="208" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="13"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="228" x="240" y="192" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="18"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="229" x="272" y="192" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="16"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="230" x="64" y="144" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="19"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
   <object id="231" x="256" y="176" width="16" height="16">
    <properties>
+    <property name="ID" type="int" value="17"/>
     <property name="type" value="Page"/>
    </properties>
   </object>
@@ -321,5 +341,46 @@
     <property name="type" value="RITALIN"/>
    </properties>
   </object>
+  <object id="237" x="912" y="80" width="16" height="16">
+   <properties>
+    <property name="type" value="GLEITER"/>
+   </properties>
+  </object>
  </objectgroup>
+ <objectgroup id="15" name="MovingPlatform">
+  <object id="171" x="815.5" y="80" width="47.5" height="18">
+   <properties>
+    <property name="rangeX" type="float" value="100"/>
+    <property name="speed" type="float" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="16" name="MovingPlatformLayer" width="64" height="24" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,143,149,150,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
 </map>

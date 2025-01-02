@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.logging.Level;
 
+import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
 import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
 
 public class B2WorldCreator {
@@ -190,10 +191,14 @@ public class B2WorldCreator {
             if ("Page".equals(type)) {
                 screen.addItem(new CollectableItem(screen, x, y, (Integer) object.getProperties().get("ID")));
             }
-
+            if ("GLEITER".equals(type)) {
+                screen.addItem((new PowerUp(screen, x, y, GLEITER)));
+            }
             if ("RITALIN".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, RITALIN)));
             }
+
+
         }
     }
 }

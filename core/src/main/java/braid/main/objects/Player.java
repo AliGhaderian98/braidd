@@ -42,7 +42,7 @@ public class Player extends DynamicGameObject {
 
     // Player specific variables
     private final float defaultGravity = 1.2f;
-    private final float descendingGravity = defaultGravity*1.3f;
+    private float descendingGravity = defaultGravity*1.3f; //Soll glaube ich nicht mehr Final sein, wegen Gleiter
     private final float variableJumpHeightFactor = 0.5f;
     public boolean holdingJump;
     float jumpSpeed = 3.0f;
@@ -408,4 +408,11 @@ public class Player extends DynamicGameObject {
         }, maxCoyoteTime);
     }
 
+    public void setDescendingGravity(float descendingGravity) {
+        this.descendingGravity = descendingGravity;
+    }
+
+    public float getDescendingGravity() {
+        return descendingGravity;
+    }
 }

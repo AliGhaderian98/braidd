@@ -16,6 +16,7 @@ public class PowerUp extends Item {
 
     TypeOfPowerUp readTypePowerUp;
     private final float ritalinJumpModifier = 1.43f;
+    private final float gleiterDescendingModifier = 0.01f;
 
     private final float floatRange = 3f/Braid.PPM;
     private float time = 0f;
@@ -47,7 +48,7 @@ public class PowerUp extends Item {
     private String getRegionName() {
         return switch (readTypePowerUp) {
             case RITALIN -> "ritalin";
-            // case GLEITER -> "gleiter";
+            case GLEITER -> "ritalin"; //Später Gleiter, wenn Sprite vorhanden ist
             // case HAMMER -> "hammer";
             default -> "page";
         };
@@ -57,6 +58,10 @@ public class PowerUp extends Item {
     public void use(Player player) {
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
+
+        }
+        if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
+            player.setDescendingGravity(player.getDescendingGravity()*gleiterDescendingModifier);
         }
         LevelHUD.activatePowerUp(getRegionName());
         destroy();
@@ -75,6 +80,9 @@ public class PowerUp extends Item {
         LevelHUD.resetPowerUp();
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
+        }
+        if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
+            player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
         }
     }
 
