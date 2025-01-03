@@ -1,0 +1,10 @@
+{
+  maxHeight: 2048,
+  maxWidth: 2048,
+  minHeight: 16,
+  minWidth: 16,
+  paddingX: 2,
+  paddingY: 2,
+  combineSubdirectories: true,
+  flattenPaths: true
+}
