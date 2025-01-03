@@ -35,7 +35,9 @@ public class PowerUp extends Item {
 
         String regionName = getRegionName(); //Später andere Sprites je nach TypeOfPowerUp
         sprite = new Sprite(screen.getAtlas().findRegion(regionName));
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
+        sprite.setBounds(0,0,
+            sprite.getRegionWidth()/ Braid.PPM,
+            sprite.getRegionHeight()/Braid.PPM);
         sprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y-getHeight()/2);
 
     }
@@ -48,10 +50,14 @@ public class PowerUp extends Item {
     private String getRegionName() {
         return switch (readTypePowerUp) {
             case RITALIN -> "ritalin";
-            case GLEITER -> "ritalin"; //Später Gleiter, wenn Sprite vorhanden ist
+            case GLEITER -> "balloon"; //Später Gleiter, wenn Sprite vorhanden ist
             // case HAMMER -> "hammer";
             default -> "page";
         };
+    }
+
+    public String getType() {
+        return readTypePowerUp.toString().toLowerCase();
     }
 
     @Override
@@ -63,7 +69,7 @@ public class PowerUp extends Item {
         if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*gleiterDescendingModifier);
         }
-        LevelHUD.activatePowerUp(getRegionName());
+        LevelHUD.activatePowerUp(getType());
         destroy();
 
         // deactivate power up after maxTime is over
