@@ -33,7 +33,7 @@ public class FinishHUD implements Disposable {
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(10,10);
 
-        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.WHITE);
+        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.WHITE);
 
         finishLabel = new Label("LEVEL FINISHED!", TextFont);
         finishLabel.setFontScale(2);

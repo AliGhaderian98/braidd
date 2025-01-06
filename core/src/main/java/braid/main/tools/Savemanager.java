@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class Savemanager {
 
+
+
     // These Parts will be Saved over Runtime
     public static class Savegame {
         public int SaveGameKEY;
@@ -41,18 +43,19 @@ public class Savemanager {
 
 
     // to create dummyObjects
-    public static void createSavegame(){
+    public static void createSavegame(int freeSpot){
+
+        // already given
+        currentsavegame.SaveGameName = SavegameMenu.newSavegameName;
+        currentsavegame.SaveGameKEY = freeSpot;
+
         fillLevelNodes();
         createDummySavegame();
         saveGame();
     }
 
+    // DummyCreation
     private static void createDummySavegame() {
-        // already given
-        currentsavegame.SaveGameName = SavegameMenu.newSavegameName;
-        currentsavegame.SaveGameKEY = SavegameMenu.currentSavegamKey;
-
-        // DummyCreation
         currentsavegame.Collectables = new HashMap<>();
         for(int i=0; i<10;i++){
             dummyCollectablesBool = new Array<>();
@@ -101,14 +104,52 @@ public class Savemanager {
             return SaveGamesDoc.fromJson(Savegame.class, file.readString());
         } else{
            currentsavegame = new Savegame();
-            createSavegame();
+            createSavegame(SaveGameKEY);
             return currentsavegame;
+        }
+    }
+
+    public static void deleteSavegame(int SaveGameKeY){
+        FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ SaveGameKeY + ".json");
+
+        if(file.exists()){
+            file.delete();
         }
     }
 
     public static boolean existGame(int SaveGameKEY){
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ SaveGameKEY + ".json");
         return file.exists();
+    }
+
+    public static int findOpenspot() {
+        for (int i=1; 11>=i; i++){
+            if(!existGame(i)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public static void rebalenceSavegames() {
+        for (int i = 1; i >= 11; i++) {
+            if (findOpenspot() < CountTotalSavegames() && existGame(i) && i > 1) {
+                loadGame(i);
+                currentsavegame.SaveGameKEY = findOpenspot();
+                saveGame();
+            }
+        }
+    }
+
+    public static int CountTotalSavegames(){
+        // TODO check ob alle in reih und glid sind mit sysout
+        int totalSavegame = 0;
+        for(int i=1;i<=10;i++){
+            if(existGame(i)){
+                totalSavegame++;
+            }
+        }
+        return totalSavegame;
     }
 
     public static void updatePlaytime(){
@@ -173,6 +214,34 @@ public class Savemanager {
             return savegame.SaveGameName;
         }
     }
+
+    public static String getSavegamePlaytimeTOString(Savegame savegame){
+        // init var for calculation and String return
+
+        long PlaytimeInMilli = savegame.Playtime;
+        int h = 0;
+        int min = 0;
+        int sec = 0 ;
+
+        while (PlaytimeInMilli > 1000){ // as long as Playtime is grader than 1 second
+            if(PlaytimeInMilli >=  3600000){  // 1 hour = 3.600.000
+                h++;
+                PlaytimeInMilli = PlaytimeInMilli - 3600000;
+
+            }else if (PlaytimeInMilli >= 60000 ){  // 1 minute = 60.000
+                min++;
+                PlaytimeInMilli = PlaytimeInMilli - 60000;
+
+
+            } else {   // 1 second
+                sec++;
+                PlaytimeInMilli = PlaytimeInMilli - 1000;
+            }
+        }
+        return h + "h "+ min + "min " + sec + "sec ";
+    }
+
+
 
     // debug Methode
     public void printSavegame(Savegame savegame){

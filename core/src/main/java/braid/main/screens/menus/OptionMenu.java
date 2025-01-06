@@ -67,8 +67,8 @@ public class OptionMenu implements Screen {
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // Set up Slider to control music and soundeffekt volume
-        Texture knobTexture = new Texture(Gdx.files.internal("Slider/slider_knob.png"));
-        Texture backgroundTexture = new Texture(Gdx.files.internal("Slider/slider_background.png"));
+        Texture knobTexture = new Texture(Gdx.files.internal("MenuDirectory/Slider/slider_knob.png"));
+        Texture backgroundTexture = new Texture(Gdx.files.internal("MenuDirectory/Slider/slider_background.png"));
 
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
@@ -90,8 +90,8 @@ public class OptionMenu implements Screen {
 
 
         // Setup Label styles for Title and Options
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.GRAY);
 
 
         // Setup Title and Options

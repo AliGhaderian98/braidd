@@ -64,8 +64,8 @@ public class PauseMenu implements Screen {
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // different Fonts for different Lines on the Screen
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(),Braid.BUWColor);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150),Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.GRAY);
 
         // Set up the whole space to write on.
         Table table = new Table();
@@ -113,7 +113,7 @@ public class PauseMenu implements Screen {
 
         // mark first option
         updateLabelSelection();
-        
+
         pauseShader = createPauseShader();
     }
 
@@ -215,10 +215,12 @@ public class PauseMenu implements Screen {
             game.setScreen(new OptionMenu(game,previousScreen, Reduced, background));
 
         } else if (selectedLabel == Overworld) {
+            Savemanager.saveGame();
             game.setScreen(new Overworld(game));
             dispose();
 
         } else if (selectedLabel == Startmenu) {
+            Savemanager.saveGame();
             game.setScreen(new StartMenu(game));
             dispose();
 
