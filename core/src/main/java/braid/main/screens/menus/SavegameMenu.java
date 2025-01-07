@@ -409,6 +409,7 @@ public class SavegameMenu implements Screen{
         Savemanager.playtimeStart = System.currentTimeMillis();
         currentSavegamKey = selectedSavegame;
         Savemanager.currentsavegame = Savemanager.loadGame(selectedSavegame);
+
         game.setScreen(new Overworld((Braid) game));
     }
 

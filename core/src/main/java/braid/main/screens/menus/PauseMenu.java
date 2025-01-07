@@ -87,9 +87,9 @@ public class PauseMenu implements Screen {
 
         menuLabels.add(Resume);
         if(!Reduced) { // Leave this point out if the pause screen is opened from the Overworld or SaveGameMenu
-            menuLabels.add(Retry,Overworld,Startmenu);
+            menuLabels.add(Retry,Overworld);
         }
-        menuLabels.add(Option, SaveAndExit);
+        menuLabels.add(Startmenu, Option, SaveAndExit);
 
         // set up table
         table.add(PauseLabel).expandX();
@@ -101,9 +101,9 @@ public class PauseMenu implements Screen {
             table.row();
             table.add(Overworld).expandX();
             table.row();
-            table.add(Startmenu).expandX();
-            table.row();
         }
+        table.add(Startmenu).expandX();
+        table.row();
         table.add(Option).expandX();
         table.row();
         table.add(SaveAndExit).expandX();
