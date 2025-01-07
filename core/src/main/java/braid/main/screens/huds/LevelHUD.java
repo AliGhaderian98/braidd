@@ -41,6 +41,7 @@ public class LevelHUD implements Disposable {
     private static float stateTime = 0;
     private SpriteDrawable ritalin;
     private SpriteDrawable gleiter;
+    private SpriteDrawable hammer;
     private Stack powerUp;
     private static String activePowerUp;
     private static boolean justActivated;
@@ -84,6 +85,7 @@ public class LevelHUD implements Disposable {
 
         ritalin = new SpriteDrawable(atlas.createSprite("ritalin"));
         gleiter = new SpriteDrawable(atlas.createSprite("balloon-small"));
+        hammer = new SpriteDrawable(atlas.createSprite("hammer"));
         powerUpImage = new Image();
         powerUpImage.setScale(2f);
         powerUpImage.setDrawable(ritalin);
@@ -185,6 +187,7 @@ public class LevelHUD implements Disposable {
         switch(activePowerUp) {
             case "ritalin" -> powerUpImage.setDrawable(ritalin);
             case "gleiter" -> powerUpImage.setDrawable(gleiter);
+            case "hammer" -> powerUpImage.setDrawable(hammer);
         }
     }
 

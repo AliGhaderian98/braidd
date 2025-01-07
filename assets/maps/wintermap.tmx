@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="241">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="242">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -193,7 +193,6 @@
  </objectgroup>
  <objectgroup id="19" name="Brick">
   <object id="239" x="720" y="288" width="64" height="64"/>
-  <object id="240" x="516" y="494.667"/>
  </objectgroup>
  <objectgroup id="11" name="Enemies">
   <properties>
@@ -349,6 +348,11 @@
   <object id="237" x="912" y="80" width="16" height="16">
    <properties>
     <property name="type" value="GLEITER"/>
+   </properties>
+  </object>
+  <object id="241" x="672" y="336" width="16" height="16">
+   <properties>
+    <property name="type" value="HAMMER"/>
    </properties>
   </object>
  </objectgroup>

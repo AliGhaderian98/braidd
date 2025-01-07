@@ -50,8 +50,8 @@ public class PowerUp extends Item {
     private String getRegionName() {
         return switch (readTypePowerUp) {
             case RITALIN -> "ritalin";
-            case GLEITER -> "balloon"; //Später Gleiter, wenn Sprite vorhanden ist
-            // case HAMMER -> "hammer";
+            case GLEITER -> "balloon";
+            case HAMMER -> "hammer";
             default -> "page";
         };
     }
@@ -64,10 +64,12 @@ public class PowerUp extends Item {
     public void use(Player player) {
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
-
         }
         if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*gleiterDescendingModifier);
+        }
+        if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
+            player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier); //Platzhalter
         }
         LevelHUD.activatePowerUp(getType());
         destroy();
@@ -89,6 +91,10 @@ public class PowerUp extends Item {
         }
         if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
+        }
+        if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
+            player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier)); //Platzhalterd
+
         }
     }
 

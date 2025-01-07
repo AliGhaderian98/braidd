@@ -21,8 +21,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.logging.Level;
 
-import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
-import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
+import static braid.main.Items.PowerUp.TypeOfPowerUp.*;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
@@ -215,6 +214,9 @@ public class B2WorldCreator {
             }
             if ("RITALIN".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, RITALIN)));
+            }
+            if ("HAMMER".equals(type)) {
+                screen.addItem((new PowerUp(screen, x, y, HAMMER)));
             }
 
 
