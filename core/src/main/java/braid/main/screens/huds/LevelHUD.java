@@ -95,7 +95,7 @@ public class LevelHUD implements Disposable {
         powerUp.add(powerUpTimer);
         powerUp.add(powerUpImage);
 
-        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.WHITE);
+        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.WHITE);
 
         Table table = new Table();
         table.top();

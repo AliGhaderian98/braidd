@@ -2,62 +2,82 @@ package braid.main.screens.menus;
 
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
-import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.*;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Objects;
+
 
 public class SavegameMenu implements Screen{
 
-    private final Stage stage;
+    private final Stage stage, overlay;
     private final Braid game;
     private final ScrollPane scrollPane;
-    private final Table table, rootTable;
+    private final Table table, rootTable, overlayTable;
     public static int currentSavegamKey;
+    private boolean rdyToDelete;
 
     int width;
     int height;
 
 
     // Labels show on Screen
-    private  Label Savegame1, Savegame2, Savegame3, Savegame4, Savegame5, Savegame6, Savegame7, Savegame8, Savegame9, Savegame10;
-    private  Label SG1Collectibles, SG2Collectibles, SG3Collectibles, SG4Collectibles, SG5Collectibles, SG6Collectibles, SG7Collectibles, SG8Collectibles, SG9Collectibles, SG10Collectibles;
-    private  Label SG1UnlockedLevel, SG2UnlockedLevel, SG3UnlockedLevel, SG4UnlockedLevel, SG5UnlockedLevel, SG6UnlockedLevel, SG7UnlockedLevel, SG8UnlockedLevel, SG9UnlockedLevel, SG10UnlockedLevel;
-    private  VerticalGroup SG1, SG2, SG3, SG4, SG5, SG6, SG7, SG8, SG9, SG10;
+    private Label[] savegames, collectibles, unlockedLevels, playtimes;
+    private Image[] trashcans;
+    private Group[] verticalGroups;
+    private Label newSaveGame,nomoreSaveGames, title, overlayTitle, noNameWaring;
+    private int totalSavegame;
+    private TextField textField;
+
+
 
     // used to target a Label
-    private final Array<Label> SaveGameLabels;
-    private final Array<Label> AllLabels;
+    private final Array<Label> saveGameLabels;
+    private final Array<Label> allLabels;
     private int selectedIndex = 0;
-    private  Label  currentLabel;
+    private Label currentLabel;
 
     // Sound
     private final Sound menuSound;
+
+    // Textures
+    private final Texture texturetrashcan, textureopenTrashcan;
+    private final Sprite trashcan, opentrashcan;
+
+    private boolean overlayActive;
+    public static String newSavegameName;
 
 
     public SavegameMenu(Braid game) {
         this.game = game;
 
+
+        // disable Overlay first
+        overlayActive = false;
+
         // Setup Screen
         Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
+        overlay = new Stage(viewport,((Braid) game).batch);
+
         Gdx.input.setInputProcessor(stage);
+
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -68,79 +88,137 @@ public class SavegameMenu implements Screen{
         // Setup Sound
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
+        totalSavegame = Savemanager.CountTotalSavegames();
 
         //  Create Table
         table = new Table();
         rootTable = new Table();
+        overlayTable = new Table();
+
+        // Create TrashcanSkin
+        texturetrashcan = new Texture(Gdx.files.internal("MenuDirectory/TrashCan/TrashCan.png"));
+        textureopenTrashcan = new Texture(Gdx.files.internal("MenuDirectory/TrashCan/TrashCanOpen.png"));
+        trashcan = new Sprite(texturetrashcan);
+        opentrashcan = new Sprite(textureopenTrashcan);
+
+
+
+        // Create Textfield
+        Skin textFieldskin = new Skin(Gdx.files.internal("uiskin.json"));
+        textField = new TextField("", textFieldskin);
+        textField.setMessageText("");
+        textField.getStyle().font.getData().setScale(3f);
+
 
 
         // Setup Label styles for Title and Options
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(80), Color.GRAY);
+        Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(60), Color.GRAY);
+        Label.LabelStyle TinySelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(50), Color.GRAY);
 
-        // Setup Title and Options
-        Label Title = new Label("Save games", TitelFont);
-        Title.setFontScale(2);
+
+        // Setup Title and footnote and OverlayTitle
+        overlayTitle = new Label("Enter a Name for your Savegame", SelectionFont);
+        noNameWaring = new Label("You need to Enter a Name!",LittleSelectionFont);
+        noNameWaring.setColor(new Color(Color.RED));
+        title = new Label("Save games", TitelFont);
+        newSaveGame = new Label("new Savegame", SelectionFont);
+        nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
+        nomoreSaveGames.setColor(Color.RED);
+
+        title.setFontScale(2);
 
         // create Labels and Groups
-        createLabels();
+        savegames = new Label[11];
+        collectibles = new Label[11];
+        unlockedLevels = new Label[11];
+        playtimes = new Label[11];
+        trashcans = new Image[11];
 
-        // fill Array with Labels to target a Label
-        SaveGameLabels = new Array<>();
-        SaveGameLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
-        SaveGameLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
-        SaveGameLabels.add(Savegame9,Savegame10);
+        verticalGroups = new VerticalGroup[11];
+
+        saveGameLabels = new Array<>();
+        allLabels = new Array<>();
 
 
-        // fill Array with all Labels to reset the Color
-        AllLabels = new Array<>();
-        AllLabels.add(Savegame1,Savegame2,Savegame3,Savegame4);
-        AllLabels.add(Savegame5,Savegame6,Savegame7,Savegame8);
-        AllLabels.add(Savegame9,Savegame10);
+        for (int i = 1; i <= 11; i++) {
+            if (Savemanager.existGame(i)) {
 
-        AllLabels.add(SG1Collectibles,SG2Collectibles,SG3Collectibles,SG4Collectibles);
-        AllLabels.add(SG5Collectibles,SG6Collectibles,SG7Collectibles,SG8Collectibles);
-        AllLabels.add(SG9Collectibles,SG10Collectibles);
+                // load saved Contend for this Savegame
+                Savemanager.currentsavegame = Savemanager.loadGame(i);
 
-        AllLabels.add(SG1UnlockedLevel,SG2UnlockedLevel,SG3UnlockedLevel);
-        AllLabels.add(SG4UnlockedLevel,SG5UnlockedLevel,SG6UnlockedLevel);
-        AllLabels.add(SG7UnlockedLevel,SG8UnlockedLevel,SG9UnlockedLevel,SG10UnlockedLevel);
+
+                // create Labels
+                savegames[i] = new Label(Savemanager.getSavegameName(Savemanager.currentsavegame), SelectionFont);
+                collectibles[i] = new Label("Collectibles: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
+                unlockedLevels [i] = new Label("Unlocked Levels: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
+                playtimes [i] = new Label("Time Played: " + Savemanager.getSavegamePlaytimeTOString(Savemanager.currentsavegame), TinySelectionFont);
+                trashcans[i] = new Image(new TextureRegionDrawable(new TextureRegion(trashcan.getTexture())));
+
+                // add Labels to Groups
+                verticalGroups[i] = new VerticalGroup();
+                verticalGroups[i].addActor(savegames[i]);
+                verticalGroups[i].addActor(collectibles[i]);
+                verticalGroups[i].addActor(unlockedLevels[i]);
+                verticalGroups[i].addActor(playtimes[i]);
+
+
+                // fill Array with Labels to target a Label
+                saveGameLabels.add(savegames[i]);
+
+                // fill Array with all Labels to reset the Color
+                allLabels.add(savegames[i]);
+                allLabels.add(collectibles[i]);
+                allLabels.add(unlockedLevels[i]);
+                allLabels.add(playtimes[i]);
+            }
+        }
 
 
 
         // Setup Table
-        table.add(Title);
+        table.add(title).colspan(2).center().padBottom(20);;
+
+        for (int i = 1; i <= 10; i++) {
+            if (verticalGroups[i] != null) {
+                table.row();
+                table.add(verticalGroups[i]).right().pad(10);
+                table.add(trashcans[i]).size(50).pad(10).left();
+            }
+        }
         table.row();
-        table.add(SG1).width(200).pad(20).row();
-        table.row();
-        table.add(SG2).width(200).pad(20).row();
-        table.row();
-        table.add(SG3).width(200).pad(20).row();
-        table.row();
-        table.add(SG4).width(200).pad(20).row();
-        table.row();
-        table.add(SG5).width(200).pad(20).row();
-        table.row();
-        table.add(SG6).width(200).pad(20).row();
-        table.row();
-        table.add(SG7).width(200).pad(20).row();
-        table.row();
-        table.add(SG8).width(200).pad(20).row();
-        table.row();
-        table.add(SG9).width(200).pad(20).row();
-        table.row();
-        table.add(SG10).width(200).pad(20).row();
+
+        // add new Savegame/ Warning to Tablestructure
+        if(totalSavegame < 10){
+            saveGameLabels.add(newSaveGame);
+            allLabels.add(newSaveGame);
+            table.add(newSaveGame).colspan(2).center().padTop(20);;
+        }else{
+            table.add(nomoreSaveGames).colspan(2).center().padTop(20);;
+        }
+
 
         // Set up a ScrollPane to see all Save games
         scrollPane = new ScrollPane(table);
         scrollPane.setScrollingDisabled(true,false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollbarsVisible(true);
-
-
         rootTable.setFillParent(true);
         rootTable.add(scrollPane).expand().fill().pad(10);
 
         stage.addActor(rootTable);
+
+
+        // Set up Overlay
+        overlayTable.setFillParent(true);
+        overlayTable.add(overlayTitle);
+        overlayTable.row();
+        overlayTable.add(textField).width(1000).height(100).row();
+        overlayTable.add(noNameWaring);
+        noNameWaring.setVisible(false);
+        overlay.addActor(overlayTable);
+
 
         // mark first option
         updateLabelSelection();
@@ -153,7 +231,11 @@ public class SavegameMenu implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         handleInput();
         updateScreenRatio();
-        stage.draw();
+        if (overlayActive){
+            overlay.draw();
+        }else {
+            stage.draw();
+        }
     }
 
 
@@ -169,22 +251,45 @@ public class SavegameMenu implements Screen{
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             executeSelectedAction();
         }
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("RIGHT_KEY"))) {
+            handleGoingRIGHT();
+        }
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("LEFT_KEY"))) {
+            handleGoingLEFT();
+        }
         /*if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC"))) {
             menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            LevelScreen.gameIsPaused = false;
             game.setScreen(new PauseMenu(game, this,true));
         }*/
     }
 
+    private void handleGoingLEFT() {
+        if(currentLabel != newSaveGame && rdyToDelete && !overlayActive){
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            trashcans[selectedIndex + 1].setDrawable(new TextureRegionDrawable(new TextureRegion(trashcan.getTexture())));
+        }
+        rdyToDelete = false;
+    }
+
+    private void handleGoingRIGHT() {
+        if(currentLabel != newSaveGame && !rdyToDelete && !overlayActive){
+            menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            trashcans [selectedIndex + 1].setDrawable(new TextureRegionDrawable(new TextureRegion(opentrashcan.getTexture())));
+            rdyToDelete = true;
+        }
+    }
+
+
     // scrolling down
     private void handleGoingDown() {
+        rdyToDelete = false;
         menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-        selectedIndex = (selectedIndex + 1) % SaveGameLabels.size;
+        selectedIndex = (selectedIndex + 1) % saveGameLabels.size;
 
-        if (selectedIndex == 5) {
+        if (selectedIndex  > 4) {
             scrollPane.setScrollY(1400);
             scrollPane.layout();
-        } else if (selectedIndex < 5) {
+        } else if (selectedIndex < 4) {
             scrollPane.setScrollY(0);
             scrollPane.layout();
         }
@@ -193,10 +298,11 @@ public class SavegameMenu implements Screen{
 
     // scrolling up
     private void handleGoingUp() {
+        rdyToDelete = false;
         menuSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-        selectedIndex = (selectedIndex - 1 + SaveGameLabels.size) % SaveGameLabels.size;
+        selectedIndex = (selectedIndex - 1 + saveGameLabels.size) % saveGameLabels.size;
 
-        if (selectedIndex == 5) {
+        if (selectedIndex < 5) {
             scrollPane.setScrollY(0);
             scrollPane.layout();
         } else if (selectedIndex > 5) {
@@ -208,62 +314,102 @@ public class SavegameMenu implements Screen{
 
     private void updateLabelSelection() {
         // Set every Labele back to Grey
-        for (int i = 0; i < AllLabels.size; i++) {
-             AllLabels.get(i).setColor(Color.GRAY);
+        for (int i = 0; i < allLabels.size; i++) {
+             allLabels.get(i).setColor(Color.GRAY);
+        }
+
+        // Hide every trashcan
+        for(int i=1; totalSavegame>=i;i++){
+            if(trashcans [i] != null) {
+                trashcans[i].setDrawable(new TextureRegionDrawable(new TextureRegion(trashcan.getTexture())));
+                trashcans[i].setVisible(false);
+            }
         }
 
         // Set current Label
-        for (int i = 0; i < SaveGameLabels.size; i++) {
-            Label label = SaveGameLabels.get(i);
+        for (int i = 0; i < saveGameLabels.size; i++) {
+            Label label = saveGameLabels.get(i);
             if (i == selectedIndex) {
                 currentLabel = label;
             }
         }
-
-        // mark the Selected Savegame with the Attributes white
-        if (currentLabel.equals(Savegame1)) {
-            setGroupColor(SG1);
-        } else if (currentLabel.equals(Savegame2)) {
-            setGroupColor(SG2);
-        } else if (currentLabel.equals(Savegame3)) {
-            setGroupColor(SG3);
-        } else if (currentLabel.equals(Savegame4)) {
-            setGroupColor(SG4);
-        } else if (currentLabel.equals(Savegame5)) {
-            setGroupColor(SG5);
-        } else if (currentLabel.equals(Savegame6)) {
-            setGroupColor(SG6);
-        } else if (currentLabel.equals(Savegame7)) {
-            setGroupColor(SG7);
-        } else if (currentLabel.equals(Savegame8)) {
-            setGroupColor(SG8);
-        } else if (currentLabel.equals(Savegame9)) {
-            setGroupColor(SG9);
-        } else if (currentLabel.equals(Savegame10)) {
-            setGroupColor(SG10);
+        // set trashcan for current savegame to visible
+        if(trashcans [selectedIndex + 1] != null){
+            trashcans [selectedIndex + 1].setVisible(true);
         }
 
+        // mark the Selected Savegame with the Attributes white
+        for (int i=1;i<=10;i++){
+            if (currentLabel.equals(savegames[i])) {
+                setGroupColor(verticalGroups[i]);
+                currentSavegamKey=i;
+            }
+        }
+       if(currentLabel.equals(newSaveGame)){
+            newSaveGame.setColor(Color.WHITE);
+            currentSavegamKey = totalSavegame+1;
+        }
     }
 
     private void setGroupColor(Group group){
         for (Actor actor : group.getChildren()) {
             if (actor instanceof Label) {
-                ((Label) actor).setColor(Color.WHITE);
+                actor.setColor(Color.WHITE);
             }
         }
     }
 
+
     private void executeSelectedAction() {
-        // load targeted SafeGame
-        if(currentLabel instanceof Label){
-            startOverWorld(Integer.parseInt(currentLabel.toString().substring(16)));
+        if (overlayActive) {
+            // Start new Game with defined Name for the Savegame
+            if(Objects.equals(textField.getText(), "")){
+                noNameWaring.setVisible(true);
+            }else {
+                newSavegameName = textField.getText();
+                overlay.unfocus(textField);
+                Gdx.input.setInputProcessor(null);
+                overlayActive = false;
+                textField.setDisabled(true);
+
+                startnewOverworld();
+                dispose();
+            }
+        } else {
+            if (currentLabel == newSaveGame) {
+                // a new Savegame was targeted -> User can enter a Name for his Savegame
+                overlayActive = true;
+                Gdx.input.setInputProcessor(overlay);
+                overlay.setKeyboardFocus(textField);
+
+            } else if (rdyToDelete) {
+                // delete Savegame and relode screen
+                Savemanager.deleteSavegame(currentSavegamKey);
+
+                if(Savemanager.CountTotalSavegames() != 0){
+                    Savemanager.rebalenceSavegames();
+                }
+                game.setScreen(new SavegameMenu(game));
+
+            } else {
+                // an existing Savegame was targeted
+                startOverWorld(currentSavegamKey);
+                dispose();
+            }
+
         }
-        dispose();
+    }
+
+    private void startnewOverworld() {
+        int freeSpot = Savemanager.findOpenspot();
+        startOverWorld(freeSpot);
     }
 
     private void startOverWorld(int selectedSavegame) {
         Savemanager.playtimeStart = System.currentTimeMillis();
         currentSavegamKey = selectedSavegame;
+        Savemanager.currentsavegame = Savemanager.loadGame(selectedSavegame);
+
         game.setScreen(new Overworld((Braid) game));
     }
 
@@ -301,111 +447,10 @@ public class SavegameMenu implements Screen{
     public void hide() {
 
     }
-    private void createLabels(){
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.getmidTextFont(), Color.GRAY);
-        Label.LabelStyle LittleSelectionFont = new Label.LabelStyle(TextFontManager.getlittleTextFont(), Color.GRAY);
-
-        // Setup Labels
-        Savegame1 = new Label("Savegame 1", SelectionFont);
-        Savegame2 = new Label("Savegame 2", SelectionFont);
-        Savegame3 = new Label("Savegame 3", SelectionFont);
-        Savegame4 = new Label("Savegame 4", SelectionFont);
-        Savegame5 = new Label("Savegame 5", SelectionFont);
-        Savegame6 = new Label("Savegame 6", SelectionFont);
-        Savegame7 = new Label("Savegame 7", SelectionFont);
-        Savegame8 = new Label("Savegame 8", SelectionFont);
-        Savegame9 = new Label("Savegame 9", SelectionFont);
-        Savegame10 = new Label("Savegame 10", SelectionFont);
-
-        SG1Collectibles = new Label("Collectibles 1", LittleSelectionFont);
-        SG2Collectibles = new Label("Collectibles 2", LittleSelectionFont);
-        SG3Collectibles = new Label("Collectibles 3", LittleSelectionFont);
-        SG4Collectibles = new Label("Collectibles 4", LittleSelectionFont);
-        SG5Collectibles = new Label("Collectibles 5", LittleSelectionFont);
-        SG6Collectibles = new Label("Collectibles 6", LittleSelectionFont);
-        SG7Collectibles = new Label("Collectibles 7", LittleSelectionFont);
-        SG8Collectibles = new Label("Collectibles 8", LittleSelectionFont);
-        SG9Collectibles = new Label("Collectibles 9", LittleSelectionFont);
-        SG10Collectibles = new Label("Collectibles 10", LittleSelectionFont);
-
-        SG1UnlockedLevel = new Label("Unlocked Levels 1", LittleSelectionFont);
-        SG2UnlockedLevel = new Label("Unlocked Levels 2", LittleSelectionFont);
-        SG3UnlockedLevel = new Label("Unlocked Levels 3", LittleSelectionFont);
-        SG4UnlockedLevel = new Label("Unlocked Levels 4", LittleSelectionFont);
-        SG5UnlockedLevel = new Label("Unlocked Levels 5", LittleSelectionFont);
-        SG6UnlockedLevel = new Label("Unlocked Levels 6", LittleSelectionFont);
-        SG7UnlockedLevel = new Label("Unlocked Levels 7", LittleSelectionFont);
-        SG8UnlockedLevel = new Label("Unlocked Levels 8", LittleSelectionFont);
-        SG9UnlockedLevel = new Label("Unlocked Levels 9", LittleSelectionFont);
-        SG10UnlockedLevel = new Label("Unlocked Levels 10", LittleSelectionFont);
-
-
-        // Setup Groups for better Handing of the Labels
-        SG1 = new VerticalGroup();
-        SG2 = new VerticalGroup();
-        SG3 = new VerticalGroup();
-        SG4 = new VerticalGroup();
-        SG5 = new VerticalGroup();
-        SG6 = new VerticalGroup();
-        SG7 = new VerticalGroup();
-        SG8 = new VerticalGroup();
-        SG9 = new VerticalGroup();
-        SG10 = new VerticalGroup();
-
-        SG1.addActor(Savegame1);
-        SG1.addActor(SG1Collectibles);
-        SG1.addActor(SG1UnlockedLevel);
-        SG1.space(10);
-
-        SG2.addActor(Savegame2);
-        SG2.addActor(SG2Collectibles);
-        SG2.addActor(SG2UnlockedLevel);
-        SG2.space(10);
-
-        SG3.addActor(Savegame3);
-        SG3.addActor(SG3Collectibles);
-        SG3.addActor(SG3UnlockedLevel);
-        SG3.space(10);
-
-        SG4.addActor(Savegame4);
-        SG4.addActor(SG4Collectibles);
-        SG4.addActor(SG4UnlockedLevel);
-        SG4.space(10);
-
-        SG5.addActor(Savegame5);
-        SG5.addActor(SG5Collectibles);
-        SG5.addActor(SG5UnlockedLevel);
-        SG5.space(10);
-
-        SG6.addActor(Savegame6);
-        SG6.addActor(SG6Collectibles);
-        SG6.addActor(SG6UnlockedLevel);
-        SG6.space(10);
-
-        SG7.addActor(Savegame7);
-        SG7.addActor(SG7Collectibles);
-        SG7.addActor(SG7UnlockedLevel);
-        SG7.space(10);
-
-        SG8.addActor(Savegame8);
-        SG8.addActor(SG8Collectibles);
-        SG8.addActor(SG8UnlockedLevel);
-        SG8.space(10);
-
-        SG9.addActor(Savegame9);
-        SG9.addActor(SG9Collectibles);
-        SG9.addActor(SG9UnlockedLevel);
-        SG9.space(10);
-
-        SG10.addActor(Savegame10);
-        SG10.addActor(SG10Collectibles);
-        SG10.addActor(SG10UnlockedLevel);
-        SG10.space(10);
-    }
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
         stage.dispose();
+        overlay.dispose();
     }
 }

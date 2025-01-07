@@ -42,7 +42,7 @@ public class StartMenu extends ScreenAdapter {
         stage = new Stage(viewport,((Braid) game).batch);
 
         // Setup Label Styles
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Braid.BUWColor);
 
         // Setup lable
         Label Startmessage = new Label("Press ENTER to Proceed", TitelFont);
@@ -91,7 +91,7 @@ public class StartMenu extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
         stage.dispose();
     }
 }

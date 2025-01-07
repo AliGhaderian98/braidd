@@ -75,8 +75,8 @@ public class KeybindsMenu implements Screen {
         table.setFillParent(true);
 
         // Setup Label styles for Title and Options
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(), Braid.BUWColor);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.GRAY);
 
         // Setup Title and Options for Screen
         Label Keybindings = new Label("Keybindings", TitelFont);
@@ -324,7 +324,7 @@ public class KeybindsMenu implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
 
         mainStage.dispose();
         Overlay.dispose();

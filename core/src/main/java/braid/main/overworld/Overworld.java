@@ -55,6 +55,8 @@ public class Overworld implements Screen {
         this.game = game;
         atlas = new TextureAtlas("packedimages/sprites.atlas");
 
+        gameIsPaused = false;
+
         // Load current GameData
         Savemanager.currentsavegame = Savemanager.loadGame(SavegameMenu.currentSavegamKey);
         KeyBindings.standardKeybindings();
@@ -129,6 +131,7 @@ public class Overworld implements Screen {
             }
         };
         Gdx.input.setInputProcessor(inputProcessor);
+
     }
 
     private void enterLevel(String levelName) {

@@ -64,8 +64,8 @@ public class PauseMenu implements Screen {
         menuSound = Audiomanager.audiomanager.get("audio/sound/menuSound.mp3", Sound.class);
 
         // different Fonts for different Lines on the Screen
-        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(),Braid.BUWColor);
-        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(), Color.GRAY);
+        Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(150),Braid.BUWColor);
+        Label.LabelStyle SelectionFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.GRAY);
 
         // Set up the whole space to write on.
         Table table = new Table();
@@ -87,9 +87,9 @@ public class PauseMenu implements Screen {
 
         menuLabels.add(Resume);
         if(!Reduced) { // Leave this point out if the pause screen is opened from the Overworld or SaveGameMenu
-            menuLabels.add(Retry,Overworld,Startmenu);
+            menuLabels.add(Retry,Overworld);
         }
-        menuLabels.add(Option, SaveAndExit);
+        menuLabels.add(Startmenu, Option, SaveAndExit);
 
         // set up table
         table.add(PauseLabel).expandX();
@@ -101,9 +101,9 @@ public class PauseMenu implements Screen {
             table.row();
             table.add(Overworld).expandX();
             table.row();
-            table.add(Startmenu).expandX();
-            table.row();
         }
+        table.add(Startmenu).expandX();
+        table.row();
         table.add(Option).expandX();
         table.row();
         table.add(SaveAndExit).expandX();
@@ -113,7 +113,7 @@ public class PauseMenu implements Screen {
 
         // mark first option
         updateLabelSelection();
-        
+
         pauseShader = createPauseShader();
     }
 
@@ -215,15 +215,17 @@ public class PauseMenu implements Screen {
             game.setScreen(new OptionMenu(game,previousScreen, Reduced, background));
 
         } else if (selectedLabel == Overworld) {
+            Savemanager.saveGame(true);
             game.setScreen(new Overworld(game));
             dispose();
 
         } else if (selectedLabel == Startmenu) {
+            Savemanager.saveGame(true);
             game.setScreen(new StartMenu(game));
             dispose();
 
         } else if (selectedLabel == SaveAndExit) {
-            Savemanager.saveGame();
+            Savemanager.saveGame(true);
             Gdx.app.exit();
         }
     }
@@ -255,7 +257,7 @@ public class PauseMenu implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
         stage.dispose();
     }
 
