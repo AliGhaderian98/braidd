@@ -38,6 +38,7 @@ public class WorldContactListener implements ContactListener {
             playerWithLadder(userDataA, userDataB);
             playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
+            playerFeetWithBrick(userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
 
             playerFeetWithEnemy(userDataA, userDataB);
@@ -57,6 +58,7 @@ public class WorldContactListener implements ContactListener {
 
         contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
         contactEndedPlayerWithGround(userDataA, userDataB);
+        contactEndedPlayerWithBrick(userDataA, userDataB);
         contactEndedPlayerWithLadder(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
         endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
@@ -120,6 +122,15 @@ public class WorldContactListener implements ContactListener {
     private void playerFeetWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
+            if (!player.isGrounded()) {
+                player.land();
+            }
+        }
+    }
+
+    private void playerFeetWithBrick(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
             if (!player.isGrounded()) {
                 player.land();
             }
@@ -219,6 +230,14 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
+            if (player.isGrounded())
+                player.fall();
+        }
+    }
+
+    private void contactEndedPlayerWithBrick(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
             if (player.isGrounded())
                 player.fall();
         }

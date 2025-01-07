@@ -49,6 +49,7 @@ public class B2WorldCreator {
 
         spawnGround();
         spawnWalls();
+        spawnBricks();
         spawnLadders();
         spawnEnemies();
         spawnMovingPlatform();
@@ -100,6 +101,24 @@ public class B2WorldCreator {
             fdef.shape = shape;
             Fixture wallFixture = body.createFixture(fdef);
             wallFixture.setUserData(new UserData("Wall", this));
+        }
+    }
+
+    private void spawnBricks() {
+        MapLayer brickLayer = map.getLayers().get("Brick");
+        for (MapObject object : brickLayer.getObjects()) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+            fdef.shape = shape;
+            Fixture brickFixture = body.createFixture(fdef);
+            brickFixture.setUserData(new UserData("Brick", this));
         }
     }
 
