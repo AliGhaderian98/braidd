@@ -47,6 +47,12 @@ dependencies {
 
 }
 
+task packTextures(type: JavaExec) {
+  mainClass.set("com.badlogic.gdx.tools.texturepacker.TexturePacker")
+  classpath = sourceSets.main.runtimeClasspath
+  args = ['../assets/sprites', '../assets/packedimages', 'sprites']
+}
+
 def os = System.properties['os.name'].toLowerCase()
 
 run {
@@ -54,6 +60,17 @@ run {
   setIgnoreExitValue(true)
 
   if (os.contains('mac')) jvmArgs += "-XstartOnFirstThread"
+
+  // only pack textures when input files have been changed
+  def inputDir = file('../assets/sprites')
+  def outputDir = file('../assets/packedimages')
+
+  if (inputDir.exists() && inputDir.listFiles().any { it.lastModified() > outputDir.lastModified() }) {
+    println "Changes detected in sprites directory. Running packTextures task."
+    dependsOn packTextures
+  } else {
+    println "No changes detected in sprites directory. Skipping packTextures task."
+  }
 }
 
 jar {
