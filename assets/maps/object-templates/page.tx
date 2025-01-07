@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object type="page" width="16" height="16">
+  <properties>
+   <property name="ID" type="int" value="0"/>
+   <property name="type" value="Page"/>
+  </properties>
+ </object>
+</template>

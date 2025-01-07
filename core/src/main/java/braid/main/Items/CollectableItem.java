@@ -29,6 +29,7 @@ public class CollectableItem extends Item {
     @Override
     public void use(Player player) {
         if (!toDestroy) {
+            System.out.println(ID);
             LevelHUD.addScore(1);
             destroy();
         }

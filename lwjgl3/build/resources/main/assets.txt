@@ -9,6 +9,13 @@ audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/object-templates/gleiter.tx
+maps/object-templates/movingPlatform.tx
+maps/object-templates/page.tx
+maps/object-templates/patrollingEnemy.tx
+maps/object-templates/ritalin.tx
+maps/object-templates/sign.tx
+maps/object-templates/unhingedEnemy.tx
 maps/overworld-map.tmx
 maps/patrollingEnemyMap.tmx
 maps/testmap2.tmx
