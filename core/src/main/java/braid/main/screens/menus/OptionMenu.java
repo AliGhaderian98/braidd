@@ -337,7 +337,7 @@ public class OptionMenu implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
 
         stage.dispose();
     }

@@ -51,7 +51,7 @@ public class Savemanager {
 
         fillLevelNodes();
         createDummySavegame();
-        saveGame();
+        saveGame(false);
     }
 
     // DummyCreation
@@ -82,9 +82,10 @@ public class Savemanager {
     }
 
     // saves the Game into an external File
-    public static void saveGame() {
+    public static void saveGame(boolean updatePlaytime) {
         Savegame saveData = new Savegame();
-        updatePlaytime();
+        if (updatePlaytime) { updatePlaytime(); }
+
         saveData.SaveGameName = currentsavegame.SaveGameName;
         saveData.UnlockedLevels = currentsavegame.UnlockedLevels;
         saveData.SaveGameKEY = currentsavegame.SaveGameKEY;
@@ -132,17 +133,17 @@ public class Savemanager {
     }
 
     public static void rebalenceSavegames() {
-        for (int i = 1; i >= 11; i++) {
-            if (findOpenspot() < CountTotalSavegames() && existGame(i) && i > 1) {
-                loadGame(i);
+        for (int i = 1; i <= 11; i++) {
+            if (findOpenspot() <= CountTotalSavegames() && existGame(i) && i > 1 && CountTotalSavegames() != 0) {
+                currentsavegame = loadGame(i);
                 currentsavegame.SaveGameKEY = findOpenspot();
-                saveGame();
+                saveGame(false);
+                deleteSavegame(i);
             }
         }
     }
 
     public static int CountTotalSavegames(){
-        // TODO check ob alle in reih und glid sind mit sysout
         int totalSavegame = 0;
         for(int i=1;i<=10;i++){
             if(existGame(i)){

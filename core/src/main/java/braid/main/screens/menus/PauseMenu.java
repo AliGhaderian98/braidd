@@ -215,17 +215,17 @@ public class PauseMenu implements Screen {
             game.setScreen(new OptionMenu(game,previousScreen, Reduced, background));
 
         } else if (selectedLabel == Overworld) {
-            Savemanager.saveGame();
+            Savemanager.saveGame(true);
             game.setScreen(new Overworld(game));
             dispose();
 
         } else if (selectedLabel == Startmenu) {
-            Savemanager.saveGame();
+            Savemanager.saveGame(true);
             game.setScreen(new StartMenu(game));
             dispose();
 
         } else if (selectedLabel == SaveAndExit) {
-            Savemanager.saveGame();
+            Savemanager.saveGame(true);
             Gdx.app.exit();
         }
     }
@@ -257,7 +257,7 @@ public class PauseMenu implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
         stage.dispose();
     }
 

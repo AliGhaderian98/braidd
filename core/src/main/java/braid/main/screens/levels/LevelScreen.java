@@ -443,7 +443,7 @@ public abstract class LevelScreen implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
 
         map.dispose();
         renderer.dispose();

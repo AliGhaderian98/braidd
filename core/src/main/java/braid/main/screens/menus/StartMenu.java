@@ -91,7 +91,7 @@ public class StartMenu extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
         stage.dispose();
     }
 }

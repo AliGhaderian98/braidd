@@ -324,7 +324,7 @@ public class KeybindsMenu implements Screen {
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
+        Savemanager.saveGame(true);
 
         mainStage.dispose();
         Overlay.dispose();

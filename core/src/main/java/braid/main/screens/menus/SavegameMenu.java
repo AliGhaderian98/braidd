@@ -21,6 +21,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Objects;
+
 
 public class SavegameMenu implements Screen{
 
@@ -39,7 +41,7 @@ public class SavegameMenu implements Screen{
     private Label[] savegames, collectibles, unlockedLevels, playtimes;
     private Image[] trashcans;
     private Group[] verticalGroups;
-    private Label newSaveGame,nomoreSaveGames, title, overlayTitle;
+    private Label newSaveGame,nomoreSaveGames, title, overlayTitle, noNameWaring;
     private int totalSavegame;
     private TextField textField;
 
@@ -118,6 +120,8 @@ public class SavegameMenu implements Screen{
 
         // Setup Title and footnote and OverlayTitle
         overlayTitle = new Label("Enter a Name for your Savegame", SelectionFont);
+        noNameWaring = new Label("You need to Enter a Name!",LittleSelectionFont);
+        noNameWaring.setColor(new Color(Color.RED));
         title = new Label("Save games", TitelFont);
         newSaveGame = new Label("new Savegame", SelectionFont);
         nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
@@ -210,7 +214,9 @@ public class SavegameMenu implements Screen{
         overlayTable.setFillParent(true);
         overlayTable.add(overlayTitle);
         overlayTable.row();
-        overlayTable.add(textField).width(1000).height(100);
+        overlayTable.add(textField).width(1000).height(100).row();
+        overlayTable.add(noNameWaring);
+        noNameWaring.setVisible(false);
         overlay.addActor(overlayTable);
 
 
@@ -357,15 +363,18 @@ public class SavegameMenu implements Screen{
     private void executeSelectedAction() {
         if (overlayActive) {
             // Start new Game with defined Name for the Savegame
-            newSavegameName = textField.getText();
-            overlay.unfocus(textField);
-            Gdx.input.setInputProcessor(null);
-            overlayActive = false;
-            textField.setDisabled(true);
+            if(Objects.equals(textField.getText(), "")){
+                noNameWaring.setVisible(true);
+            }else {
+                newSavegameName = textField.getText();
+                overlay.unfocus(textField);
+                Gdx.input.setInputProcessor(null);
+                overlayActive = false;
+                textField.setDisabled(true);
 
-            startnewOverworld();
-            dispose();
-
+                startnewOverworld();
+                dispose();
+            }
         } else {
             if (currentLabel == newSaveGame) {
                 // a new Savegame was targeted -> User can enter a Name for his Savegame
@@ -376,9 +385,11 @@ public class SavegameMenu implements Screen{
             } else if (rdyToDelete) {
                 // delete Savegame and relode screen
                 Savemanager.deleteSavegame(currentSavegamKey);
-                Savemanager.rebalenceSavegames();
+
+                if(Savemanager.CountTotalSavegames() != 0){
+                    Savemanager.rebalenceSavegames();
+                }
                 game.setScreen(new SavegameMenu(game));
-                dispose();
 
             } else {
                 // an existing Savegame was targeted
@@ -438,7 +449,6 @@ public class SavegameMenu implements Screen{
 
     @Override
     public void dispose() {
-        Savemanager.saveGame();
         stage.dispose();
         overlay.dispose();
     }
