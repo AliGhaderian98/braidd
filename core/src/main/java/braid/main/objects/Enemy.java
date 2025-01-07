@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class Enemy extends DynamicGameObject{
     private final float x,y;
+    private float stateTimer = 0;
 
     public enum AnimationState {
         DEAD,
@@ -22,7 +23,7 @@ public abstract class Enemy extends DynamicGameObject{
 
     //private final TextureRegion stand;
     private AnimationState currentState = AnimationState.ALIVE;
-    protected Animation<TextureRegion> idle;
+    protected Animation<TextureRegion> idle, walking, running, attacking;
 
 
     // Konstruktor für die Initialisierung des Gegners
@@ -96,5 +97,11 @@ public abstract class Enemy extends DynamicGameObject{
 
     public float getX() { return x;}
     public float getY() { return y;}
+
+    public TextureRegion getFrame(float dt, Animation<TextureRegion> animation){
+        // currently only has idle animation
+        stateTimer += dt;
+        return animation.getKeyFrame(stateTimer, true);
+    }
 
 }

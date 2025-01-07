@@ -154,7 +154,7 @@ public class B2WorldCreator {
             float y = (rect.getY() + rect.getHeight() / 2);
 
             // Type of the enemy
-            String type = (String) object.getProperties().get("type");
+            String type = object.getName();
 
             // Spawning enemy
             if ("MadScientist".equals(type)) {
@@ -163,6 +163,8 @@ public class B2WorldCreator {
                 screen.spawnEnemy("PatrollingEnemy", x, y);
             } else if ("UnhingedEnemy".equals(type)) {
                 screen.spawnEnemy("UnhingedEnemy", x, y);
+            } else if ("Knight".equals(type)) {
+                screen.spawnEnemy("Knight", x, y);
             }
         }
     }
@@ -185,7 +187,8 @@ public class B2WorldCreator {
 
 
             // Type of the Item
-            String type = (String) object.getProperties().get("type");
+            String type = object.getName();
+
 
             // Spawning Item
             if ("Page".equals(type)) {

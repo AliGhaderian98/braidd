@@ -4,6 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.enemies.Knight;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
@@ -470,6 +471,8 @@ public abstract class LevelScreen implements Screen {
             addEnemy(new PatrollingEnemy(world, this, x, y));
         } else if ("UnhingedEnemy".equals(enemyType)) {
             addEnemy((new UnhingedEnemy(world, this, player, x, y)));
+        } else if ("Knight".equals(enemyType)) {
+            addEnemy((new Knight(world, this,player, x, y)));
         }
     }
 

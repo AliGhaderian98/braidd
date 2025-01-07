@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.Item;
+import braid.main.enemies.Knight;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.*;
@@ -43,6 +44,8 @@ public class WorldContactListener implements ContactListener {
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
             playerWithUnhingedEnemyRadius(userDataA, userDataB);
+            playerWithKnightEnemyRadius(userDataA, userDataB);
+            playerWithKnightAttack(userDataA, userDataB);
             playerWithSign(userDataA, userDataB);
         }
 
@@ -59,7 +62,9 @@ public class WorldContactListener implements ContactListener {
         contactEndedPlayerWithGround(userDataA, userDataB);
         contactEndedPlayerWithLadder(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
-        endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
+        contactEndedPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
+        contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
+        contactEndedPlayerWithKnightAttack(userDataA, userDataB);
         playerWithSignEnds(userDataA, userDataB);
     }
 
@@ -71,6 +76,42 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void contactEndedPlayerWithKnightAttack(UserData userDataA, UserData userDataB) {
+        if ("KnightEnemyAttackingRadius".equals(userDataA.getName()) || "KnightEnemyAttackingRadius".equals(userDataB.getName()) &&
+            (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player)) {
+            Knight knight = ("KnightEnemyAttackingRadius".equals(userDataA.getName())) ?  (Knight) userDataA.getObject() : (Knight) userDataB.getObject();
+
+            knight.setPlayerIsInAttackingRange(false);
+        }
+    }
+
+    private void playerWithKnightAttack(UserData userDataA, UserData userDataB) {
+        if ("KnightEnemyAttackingRadius".equals(userDataA.getName()) || "KnightEnemyAttackingRadius".equals(userDataB.getName()) &&
+            (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player)) {
+            Knight knight = ("KnightEnemyAttackingRadius".equals(userDataA.getName())) ?  (Knight) userDataA.getObject() : (Knight) userDataB.getObject();
+
+            knight.setPlayerIsInAttackingRange(true);
+        }
+    }
+
+    private void playerWithKnightEnemyRadius(UserData userDataA, UserData userDataB) {
+        if ("KnightEnemyRadius".equals(userDataA.getName()) || "KnightEnemyRadius".equals(userDataB.getName()) &&
+            (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player)) {
+            Knight knight = ("KnightEnemyRadius".equals(userDataA.getName())) ?  (Knight) userDataA.getObject() : (Knight) userDataB.getObject();
+
+            knight.setPlayerIsInRange(true);
+        }
+    }
+
+    private void contactEndedPlayerWithKnightEnemyRadius(UserData userDataA, UserData userDataB) {
+        if ("KnightEnemyRadius".equals(userDataA.getName()) || "KnightEnemyRadius".equals(userDataB.getName()) &&
+            (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player)) {
+            Knight knight = ("KnightEnemyRadius".equals(userDataA.getName())) ?  (Knight) userDataA.getObject() : (Knight) userDataB.getObject();
+
+            knight.setPlayerIsInRange(false);
+        }
     }
 
     private void playerWithSignEnds(UserData userDataA, UserData userDataB) {
@@ -100,7 +141,7 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
-    private void endPlayerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
+    private void contactEndedPlayerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
         if ("EnemyRadius".equals(userDataA.getName()) || "EnemyRadius".equals(userDataB.getName())) {
             UnhingedEnemy unhingedEnemy = ("EnemyRadius".equals(userDataA.getName())) ?  (UnhingedEnemy) userDataA.getObject() : (UnhingedEnemy) userDataB.getObject();
 
