@@ -94,7 +94,7 @@ public class Savemanager {
         saveData.numUnlockedBeforeWegZurUni = currentsavegame.numUnlockedBeforeWegZurUni;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
-        file.writeString(SaveGamesDoc.toJson(saveData),false);
+        file.writeString(SaveGamesDoc.prettyPrint(saveData),false);
     }
 
     // load from the external file (into Overworld)
