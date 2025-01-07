@@ -9,3 +9,4 @@
 /core/build/
 /.gradle/
 /assets/maps/braid-maps.tiled-session
+/lwjgl3/build/resources/main/

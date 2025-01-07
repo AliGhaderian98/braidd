@@ -1,4 +1,4 @@
-SaveGameFiles/SaveGame1.json
+SaveGameFiles/SaveGame2.json
 Slider/skin(1).atlas
 Slider/skin.atlas
 Slider/slider_background.png
@@ -8,6 +8,7 @@ audio/sound/menuSound.mp3
 libgdx.png
 löwe.png
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/overworld-map.tmx
 maps/patrollingEnemyMap.tmx
 maps/testmap2.tmx

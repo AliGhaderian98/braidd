@@ -1,4 +1,3 @@
-SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
 Slider/skin(1).atlas
 Slider/skin.atlas
