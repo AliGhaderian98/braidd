@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <object type="enemy" width="16" height="16">
-  <properties>
-   <property name="type" value="PatrollingEnemy"/>
-  </properties>
- </object>
+ <object name="PatrollingEnemy" type="enemy" width="16" height="16"/>
 </template>

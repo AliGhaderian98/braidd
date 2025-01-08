@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <object type="powerup" width="16" height="16">
-  <properties>
-   <property name="type" value="GLEITER"/>
-  </properties>
- </object>
+ <object name="Gleiter" type="powerup" width="16" height="16"/>
 </template>

@@ -123,7 +123,11 @@
 </data>
  </layer>
  <objectgroup id="16" name="Signs">
-  <object id="234" template="object-templates/sign.tx" x="640" y="336"/>
+  <object id="234" x="640" y="336" width="16" height="16">
+   <properties>
+    <property name="Text" value="Achtung! Starker Gegner voraus"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="1" name="GroundLayer" width="64" height="24" opacity="0.9">
   <data encoding="csv">
