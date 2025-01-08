@@ -18,10 +18,10 @@ public class Savemanager {
     public static class Savegame {
         public int SaveGameKEY;
         public String SaveGameName;
-        public Map<String, Array<Boolean>> Collectables;
         public Map<String, Boolean> UnlockedLevels;
         public int numUnlockedBeforeWegZurUni;
         public long Playtime;
+        public Map<String, Array<Boolean>> Collectables;
 
         public Savegame() {}
     }
