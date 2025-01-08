@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="245">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="247">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -198,7 +198,11 @@
   <object id="154" template="object-templates/unhingedEnemy.tx" type="enemy" x="928" y="336"/>
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
   <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192"/>
-  <object id="243" template="object-templates/knight.tx" type="enemy" x="320" y="336"/>
+  <object id="243" template="object-templates/knight.tx" type="enemy" x="320" y="336">
+   <properties>
+    <property name="rewindable" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="13" name="Items">
   <object id="151" template="object-templates/page.tx" type="page" x="80" y="336"/>

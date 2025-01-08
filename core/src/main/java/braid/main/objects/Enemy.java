@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class Enemy extends DynamicGameObject{
     private final float x,y;
+    private final boolean rewindable;
     private float stateTimer = 0;
 
     public enum AnimationState {
@@ -27,10 +28,11 @@ public abstract class Enemy extends DynamicGameObject{
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, LevelScreen screen, float x, float y) {
+    public Enemy(World world, LevelScreen screen, float x, float y, boolean rewindable) {
         super(world);
         this.x = x;
         this.y = y;
+        this.rewindable = rewindable;
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -45,7 +47,8 @@ public abstract class Enemy extends DynamicGameObject{
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
-        rewindController.update();
+        if (rewindable)
+            rewindController.update();
 
         if (currentState == AnimationState.DEAD) {
             b2body.setActive(false);
@@ -103,5 +106,7 @@ public abstract class Enemy extends DynamicGameObject{
         stateTimer += dt;
         return animation.getKeyFrame(stateTimer, true);
     }
+
+    public boolean isRewindable() { return rewindable; }
 
 }

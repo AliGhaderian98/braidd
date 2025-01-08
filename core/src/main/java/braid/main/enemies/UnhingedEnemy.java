@@ -17,8 +17,8 @@ public class UnhingedEnemy extends Enemy implements EnemyAI {
     private float stateTimer = 0;
     private Player player;
     private boolean playerIsInRange = false;
-    public UnhingedEnemy(World world, LevelScreen screen, Player player, float x, float y) {
-        super(world, screen,x,y);
+    public UnhingedEnemy(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable) {
+        super(world, screen,x,y, rewindable);
         this.player = player;
         defineBody();
 

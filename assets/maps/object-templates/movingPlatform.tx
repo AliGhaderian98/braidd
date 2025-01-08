@@ -3,6 +3,7 @@
  <object name="MovingPlatform" width="47.5" height="18">
   <properties>
    <property name="rangeX" type="float" value="100"/>
+   <property name="rewindable" type="bool" value="true"/>
    <property name="speed" type="float" value="1"/>
   </properties>
  </object>

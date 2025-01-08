@@ -15,8 +15,8 @@ public class MadScientist extends Enemy implements EnemyAI{
     private final Player player;
     private float stateTimer = 0;
 
-    public MadScientist(World world, LevelScreen screen, Player player, float x, float y) {
-        super(world, screen,x,y);
+    public MadScientist(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable) {
+        super(world, screen,x,y, rewindable);
         this.player = player;
         defineBody();
 

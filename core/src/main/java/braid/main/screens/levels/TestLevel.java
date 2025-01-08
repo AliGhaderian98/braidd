@@ -13,16 +13,6 @@ public class TestLevel extends LevelScreen {
         super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
-
-
-        rewindObjects.add(player.getRewindController());
-        for (Enemy e : enemies) {
-            rewindObjects.add(e.getRewindController());
-        }
-
-        for (MovingPlatform m : movingPlatforms) {
-            rewindObjects.add(m.getRewindController());
-        }
     }
 
     @Override

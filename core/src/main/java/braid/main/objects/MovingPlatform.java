@@ -21,14 +21,16 @@ public class MovingPlatform extends InteractiveGameObject {
 
     private MovingPlatform.AnimationState currentState = MovingPlatform.AnimationState.RIGHT;
 
+    private final boolean rewindable;
     private final float rangeX;
     private final float speed;
     private final float startX;
     private final Sprite sprite;
     private Player player;
 
-    public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed) {
+    public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
         super(world, boundary, region,false);
+        this.rewindable = rewindable;
         this.rangeX = rangeX / 2;
         this.speed = speed;
         this.startX = b2body.getPosition().x;
@@ -88,4 +90,6 @@ public class MovingPlatform extends InteractiveGameObject {
             this.currentState = (MovingPlatform.AnimationState) animationStates;
         }
     }
+
+    public boolean isRewindable() { return rewindable; }
 }
