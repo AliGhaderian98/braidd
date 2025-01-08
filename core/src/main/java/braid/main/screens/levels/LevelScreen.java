@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.maps.tiled.BaseTmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -116,7 +117,8 @@ public abstract class LevelScreen implements Screen {
 
 
         // Setup level map
-        mapLoader = new TmxMapLoader();
+        //mapLoader = new TmxMapLoader();
+        mapLoader = new TemplateTmxMapLoader();
         map = mapLoader.load(mapPath);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
 

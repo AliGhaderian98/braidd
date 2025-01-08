@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="244">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="245">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -194,123 +194,114 @@
   <properties>
    <property name="type" value=""/>
   </properties>
-  <object id="138" name="PatrollingEnemy" x="256" y="192" width="16" height="16"/>
-  <object id="140" name="PatrollingEnemy" x="576" y="224" width="16" height="16"/>
-  <object id="141" name="PatrollingEnemy" x="400" y="256" width="16" height="16"/>
-  <object id="154" name="UnhingedEnemy" x="928" y="336" width="16" height="16"/>
+  <object id="140" template="object-templates/patrollingEnemy.tx" type="enemy" x="576" y="224"/>
+  <object id="154" template="object-templates/unhingedEnemy.tx" type="enemy" x="928" y="336"/>
+  <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
+  <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192"/>
   <object id="243" name="Knight" x="320" y="336" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="Items">
-  <object id="151" name="Page" x="80" y="336" width="16" height="16">
-   <properties>
-    <property name="ID" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="199" name="Page" x="944" y="336" width="16" height="16">
+  <object id="151" template="object-templates/page.tx" type="page" x="80" y="336"/>
+  <object id="199" template="object-templates/page.tx" x="944" y="336">
    <properties>
     <property name="ID" type="int" value="9"/>
    </properties>
   </object>
-  <object id="200" name="Page" x="464.25" y="305.25" width="16" height="16">
+  <object id="200" template="object-templates/page.tx" x="464.25" y="305.25">
    <properties>
     <property name="ID" type="int" value="4"/>
    </properties>
   </object>
-  <object id="201" name="Page" x="480.25" y="289.25" width="16" height="16">
+  <object id="201" template="object-templates/page.tx" x="480.25" y="289.25">
    <properties>
     <property name="ID" type="int" value="5"/>
    </properties>
   </object>
-  <object id="202" name="Page" x="496.25" y="289.25" width="16" height="16">
+  <object id="202" template="object-templates/page.tx" x="496.25" y="289.25">
    <properties>
     <property name="ID" type="int" value="6"/>
    </properties>
   </object>
-  <object id="203" name="Page" x="512.25" y="289.25" width="16" height="16">
+  <object id="203" template="object-templates/page.tx" x="512.25" y="289.25">
    <properties>
     <property name="ID" type="int" value="7"/>
    </properties>
   </object>
-  <object id="204" name="Page" x="528.25" y="305.25" width="16" height="16">
+  <object id="204" template="object-templates/page.tx" x="528.25" y="305.25">
    <properties>
     <property name="ID" type="int" value="8"/>
    </properties>
   </object>
-  <object id="211" name="Page" x="192" y="320" width="16" height="16">
+  <object id="211" template="object-templates/page.tx" x="192" y="320">
    <properties>
     <property name="ID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="212" name="Page" x="208" y="320" width="16" height="16">
+  <object id="212" template="object-templates/page.tx" x="208" y="320">
    <properties>
     <property name="ID" type="int" value="2"/>
    </properties>
   </object>
-  <object id="213" name="Page" x="224" y="320" width="16" height="16">
+  <object id="213" template="object-templates/page.tx" x="224" y="320">
    <properties>
     <property name="ID" type="int" value="3"/>
    </properties>
   </object>
-  <object id="222" name="Page" x="944" y="64" width="16" height="16">
+  <object id="222" template="object-templates/page.tx" x="944" y="64">
    <properties>
     <property name="ID" type="int" value="10"/>
    </properties>
   </object>
-  <object id="223" name="Page" x="752" y="160" width="16" height="16">
+  <object id="223" template="object-templates/page.tx" x="752" y="160">
    <properties>
     <property name="ID" type="int" value="12"/>
    </properties>
   </object>
-  <object id="224" name="Page" x="768" y="160" width="16" height="16">
+  <object id="224" template="object-templates/page.tx" x="768" y="160">
    <properties>
     <property name="ID" type="int" value="11"/>
    </properties>
   </object>
-  <object id="225" name="Page" x="544" y="208" width="16" height="16">
+  <object id="225" template="object-templates/page.tx" x="544" y="208">
    <properties>
     <property name="ID" type="int" value="15"/>
    </properties>
   </object>
-  <object id="226" name="Page" x="560" y="208" width="16" height="16">
+  <object id="226" template="object-templates/page.tx" x="560" y="208">
    <properties>
     <property name="ID" type="int" value="14"/>
    </properties>
   </object>
-  <object id="227" name="Page" x="576" y="208" width="16" height="16">
+  <object id="227" template="object-templates/page.tx" x="576" y="208">
    <properties>
     <property name="ID" type="int" value="13"/>
    </properties>
   </object>
-  <object id="228" name="Page" x="240" y="192" width="16" height="16">
+  <object id="228" template="object-templates/page.tx" x="240" y="192">
    <properties>
     <property name="ID" type="int" value="18"/>
    </properties>
   </object>
-  <object id="229" name="Page" x="272" y="192" width="16" height="16">
+  <object id="229" template="object-templates/page.tx" x="272" y="192">
    <properties>
     <property name="ID" type="int" value="16"/>
    </properties>
   </object>
-  <object id="230" name="Page" x="64" y="144" width="16" height="16">
+  <object id="230" template="object-templates/page.tx" x="64" y="144">
    <properties>
     <property name="ID" type="int" value="19"/>
    </properties>
   </object>
-  <object id="231" name="Page" x="256" y="176" width="16" height="16">
+  <object id="231" template="object-templates/page.tx" x="256" y="176">
    <properties>
     <property name="ID" type="int" value="17"/>
    </properties>
   </object>
-  <object id="232" name="RITALIN" x="112" y="336" width="16" height="16"/>
-  <object id="237" name="GLEITER" x="912" y="80" width="16" height="16"/>
+  <object id="232" template="object-templates/ritalin.tx" type="powerup" x="112" y="336"/>
+  <object id="237" template="object-templates/gleiter.tx" type="powerup" x="912" y="80"/>
  </objectgroup>
  <objectgroup id="15" name="MovingPlatform">
-  <object id="171" x="815.5" y="80" width="47.5" height="18">
-   <properties>
-    <property name="rangeX" type="float" value="100"/>
-    <property name="speed" type="float" value="1"/>
-   </properties>
-  </object>
+  <object id="171" template="object-templates/movingPlatform.tx" x="815.5" y="80"/>
  </objectgroup>
  <layer id="16" name="MovingPlatformLayer" width="64" height="24" visible="0">
   <data encoding="csv">

@@ -169,10 +169,6 @@ public class B2WorldCreator {
         }
     }
 
-
-
-
-
     private void spawnItems() {
         if (map.getLayers().get("Items") == null) return;
 
@@ -187,17 +183,16 @@ public class B2WorldCreator {
 
 
             // Type of the Item
-            String type = object.getName();
-
+            String type = (String) object.getName();
 
             // Spawning Item
             if ("Page".equals(type)) {
                 screen.addItem(new CollectableItem(screen, x, y, (Integer) object.getProperties().get("ID")));
             }
-            if ("GLEITER".equals(type)) {
+            if ("Gleiter".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, GLEITER)));
             }
-            if ("RITALIN".equals(type)) {
+            if ("Ritalin".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, RITALIN)));
             }
 

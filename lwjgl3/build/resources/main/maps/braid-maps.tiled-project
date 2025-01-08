@@ -10,5 +10,45 @@
     "properties": [
     ],
     "propertyTypes": [
+        {
+            "color": "#ffd4c89d",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+            ],
+            "name": "page",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffff6060",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+            ],
+            "name": "enemy",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        },
+        {
+            "color": "#ff00ff1e",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+            ],
+            "name": "powerup",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        }
     ]
 }
