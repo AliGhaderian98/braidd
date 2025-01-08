@@ -152,6 +152,16 @@ public abstract class LevelScreen implements Screen {
 
         rewindObjects = new Array<>();
 
+        rewindObjects.add(player.getRewindController());
+        for (Enemy e : enemies) {
+            if (e.isRewindable())
+                rewindObjects.add(e.getRewindController());
+        }
+
+        for (MovingPlatform m : movingPlatforms) {
+            if (m.isRewindable())
+                rewindObjects.add(m.getRewindController());
+        }
 
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
@@ -466,15 +476,15 @@ public abstract class LevelScreen implements Screen {
     protected abstract LevelScreen getNewInstance();
 
 
-    public void spawnEnemy(String enemyType, float x, float y) {
+    public void spawnEnemy(String enemyType, float x, float y, boolean rewindable) {
         if ("MadScientist".equals(enemyType)) {
-            addEnemy(new MadScientist(world, this, player, x,y));
+            addEnemy(new MadScientist(world, this, player, x,y, rewindable));
         } else if ("PatrollingEnemy".equals(enemyType)) {
-            addEnemy(new PatrollingEnemy(world, this, x, y));
+            addEnemy(new PatrollingEnemy(world, this, x, y, rewindable));
         } else if ("UnhingedEnemy".equals(enemyType)) {
-            addEnemy((new UnhingedEnemy(world, this, player, x, y)));
+            addEnemy((new UnhingedEnemy(world, this, player, x, y, rewindable)));
         } else if ("Knight".equals(enemyType)) {
-            addEnemy((new Knight(world, this,player, x, y)));
+            addEnemy((new Knight(world, this,player, x, y, rewindable)));
         }
     }
 

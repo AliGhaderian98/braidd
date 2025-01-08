@@ -135,7 +135,7 @@ public class B2WorldCreator {
                 float rangeX = (float) object.getProperties().get("rangeX");
                 float speed = (float) object.getProperties().get("speed");
 
-                screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX));
+                screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX, (boolean) object.getProperties().get("rewindable")));
             }
         }
 
@@ -158,13 +158,13 @@ public class B2WorldCreator {
 
             // Spawning enemy
             if ("MadScientist".equals(type)) {
-                screen.spawnEnemy("MadScientist", x, y);
+                screen.spawnEnemy("MadScientist", x, y, (boolean) object.getProperties().get("rewindable"));
             } else if ("PatrollingEnemy".equals(type)) {
-                screen.spawnEnemy("PatrollingEnemy", x, y);
+                screen.spawnEnemy("PatrollingEnemy", x, y, (boolean) object.getProperties().get("rewindable"));
             } else if ("UnhingedEnemy".equals(type)) {
-                screen.spawnEnemy("UnhingedEnemy", x, y);
+                screen.spawnEnemy("UnhingedEnemy", x, y, (boolean) object.getProperties().get("rewindable"));
             } else if ("Knight".equals(type)) {
-                screen.spawnEnemy("Knight", x, y);
+                screen.spawnEnemy("Knight", x, y, (boolean) object.getProperties().get("rewindable"));
             }
         }
     }

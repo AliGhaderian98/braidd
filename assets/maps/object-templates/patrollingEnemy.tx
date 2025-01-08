@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <object name="PatrollingEnemy" type="enemy" width="16" height="16"/>
+ <object name="PatrollingEnemy" type="enemy" width="16" height="16">
+  <properties>
+   <property name="rewindable" type="bool" value="true"/>
+  </properties>
+ </object>
 </template>

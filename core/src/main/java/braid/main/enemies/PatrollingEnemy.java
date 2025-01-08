@@ -12,8 +12,8 @@ import com.badlogic.gdx.physics.box2d.*;
 public class PatrollingEnemy extends Enemy implements EnemyAI{
     private int direction = 1;
 
-    public PatrollingEnemy(World world, LevelScreen screen, float x, float y) {
-        super(world, screen,x,y);
+    public PatrollingEnemy(World world, LevelScreen screen, float x, float y, boolean rewindable) {
+        super(world, screen,x,y, rewindable);
         defineBody();
         createSideSensor();
         createEdgeSensor();
