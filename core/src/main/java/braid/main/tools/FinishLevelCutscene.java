@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.Braid;
 import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Timer;
 
 public class FinishLevelCutscene {
     private class Schwebebahn extends Actor {
@@ -21,7 +23,8 @@ public class FinishLevelCutscene {
         public Schwebebahn() {
             super();
             sprite = new Sprite(level.getAtlas().findRegion("schwebebahn"));
-            open = new Animation<>(0.1f, level.getAtlas().findRegions("schwebebahn"), Animation.PlayMode.NORMAL);
+            sprite.setScale(4f);
+            open = new Animation<>(0.05f, level.getAtlas().findRegions("schwebebahn"), Animation.PlayMode.NORMAL);
         }
 
         @Override
@@ -36,6 +39,12 @@ public class FinishLevelCutscene {
                 sprite.setRegion(open.getKeyFrame(stateTimer));
             }
         }
+
+        public void open() { opening = true; }
+
+        public float getAnimationDuration() {
+            return open.getAnimationDuration();
+        }
     }
 
     private final LevelScreen level;
@@ -44,7 +53,8 @@ public class FinishLevelCutscene {
     private final TiledMap map;
     private final Stage stage;
     private final Schwebebahn schwebebahn;
-    private boolean playing = true;
+    private boolean playing = false;
+    private boolean isFinished = false;
 
     public FinishLevelCutscene(LevelScreen level, SpriteBatch batch, Player player, TiledMap map) {
         this.level = level;
@@ -55,36 +65,59 @@ public class FinishLevelCutscene {
         stage = new Stage();
         schwebebahn = new Schwebebahn();
 
+        stage.addActor(schwebebahn);
+    }
+
+    private void setSchwebebahnPosition() {
         Vector2 playerPosition = player.b2body.getPosition();
+        playerPosition.y *= Braid.PPM;
         Vector2 maxMapCoords = new Vector2(map.getProperties().get("width", Integer.class) *
                                                 map.getProperties().get("tilewidth", Integer.class),
                                             map.getProperties().get("height", Integer.class) *
                                                 map.getProperties().get("tileheight", Integer.class));
 
-        Vector2 spawnPosition = new Vector2(0, playerPosition.y);
+        Vector2 spawnPosition = new Vector2(0,
+            playerPosition.y + schwebebahn.sprite.getHeight()*schwebebahn.sprite.getScaleY());
         // schwebebahn gets spawned in on the right
         if (playerPosition.x < maxMapCoords.x/2)
             spawnPosition.x = maxMapCoords.x + schwebebahn.sprite.getWidth()/2;
-        // schebebahn gets spawned in on the left
-        else
+        // schwebebahn gets spawned in on the left
+        else {
             spawnPosition.x = 0 - schwebebahn.sprite.getWidth()/2;
+            schwebebahn.facingRight = true;
+            schwebebahn.sprite.flip(true, false);
+        }
 
         schwebebahn.setPosition(spawnPosition.x, spawnPosition.y);
-
-        stage.addActor(schwebebahn);
     }
 
     public void play() {
-        schwebebahn.addAction(Actions.moveTo(player.b2body.getPosition().x, schwebebahn.getY(), 1f));
+        playing = true;
+        setSchwebebahnPosition();
+        schwebebahn.addAction(Actions.sequence(
+            Actions.moveTo(player.b2body.getPosition().x, schwebebahn.getY(), 1f),
+            Actions.run(() -> schwebebahn.open()),
+            Actions.delay(schwebebahn.getAnimationDuration() + 1f),
+            Actions.run(() -> isFinished = true),
+            Actions.run(() -> level.setFinishHUD())
+        ));
     }
 
     public void render(float delta) {
         stage.act(delta);
         schwebebahn.update(delta);
-        schwebebahn.draw(batch, 1f);
+        batch.begin();
+        //schwebebahn.draw(batch, 1f);
         stage.draw();
+        batch.end();
     }
 
     public boolean isPlaying() { return playing; }
+
+    public boolean isFinished() { return isFinished; }
+
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height);
+    }
 
 }

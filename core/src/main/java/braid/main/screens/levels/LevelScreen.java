@@ -94,6 +94,8 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
+    private FinishLevelCutscene finishLevelCutscene;
+    private int lastBackgroundIndex;
 
 
 
@@ -165,6 +167,10 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages);
+
+        finishHUD = new FinishHUD(game.batch, atlas);
+        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, player, map);
+        lastBackgroundIndex = map.getLayers().getIndex("Background 1");
     }
 
 
@@ -236,13 +242,13 @@ public abstract class LevelScreen implements Screen {
 
         fbo.begin();
         clearScreen();
-        renderWorld();
+        renderWorld(delta);
         subtitleManager.render(delta);      // Update Subtitles
         fbo.end();
 
         applyPostProcessing(activeShader);
 
-        if (finished)
+        if (finishLevelCutscene.isFinished())
             renderFinishHUD();
 
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
@@ -322,9 +328,16 @@ public abstract class LevelScreen implements Screen {
     }
 
 
-    private void renderWorld() {
+    private void renderWorld(float delta) {
         renderer.setView(gameCamera.getCamera());
-        renderer.render();
+
+        for (int i = 0; i < lastBackgroundIndex; i++)
+            renderer.render(new int[] {i});
+        if (finishLevelCutscene.isPlaying())
+            finishLevelCutscene.render(delta);
+        for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
+            renderer.render(new int[] { i });
+
         if (debugRendererEnabled)
             b2dr.render(world, gameCamera.getCamera().combined);
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
@@ -402,8 +415,12 @@ public abstract class LevelScreen implements Screen {
     public void finish() {
         finished = true;
         gameIsPaused = true;
+        finishLevelCutscene.play();
+    }
+
+    public void setFinishHUD() {
         activeShader = pauseShader;
-        finishHUD = new FinishHUD(game.batch, atlas);
+        finishHUD.updateHUD();
     }
 
     @Override
@@ -430,8 +447,10 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
-        if (finished)
+        if (finished) {
             finishHUD.resize(width, height);
+            finishLevelCutscene.resize(width, height);
+        }
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 

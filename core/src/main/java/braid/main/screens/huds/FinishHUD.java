@@ -85,6 +85,11 @@ public class FinishHUD implements Disposable {
         return formattedTime;
     }
 
+    public void updateHUD() {
+        timeLabel.setText("time: "+formatTime(LevelHUD.getElapsedTime()));
+        pageLabel.setText(String.format("collected pages: %d/%d", LevelHUD.getCollectedPages(), LevelHUD.getMaxPages()));
+    }
+
 
     public void resize(int width, int height) {
         viewport.update(width, height, true);
