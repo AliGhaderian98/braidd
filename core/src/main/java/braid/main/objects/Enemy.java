@@ -2,8 +2,11 @@ package braid.main.objects;
 
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+
+import java.util.logging.Level;
 
 
 /***********
@@ -15,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.*;
 public abstract class Enemy extends DynamicGameObject{
     private final float x,y;
     private final boolean rewindable;
+    protected final String type;
     private float stateTimer = 0;
 
     public enum AnimationState {
@@ -28,11 +32,12 @@ public abstract class Enemy extends DynamicGameObject{
 
 
     // Konstruktor für die Initialisierung des Gegners
-    public Enemy(World world, LevelScreen screen, float x, float y, boolean rewindable) {
+    public Enemy(World world, LevelScreen screen, float x, float y, boolean rewindable, String type) {
         super(world);
         this.x = x;
         this.y = y;
         this.rewindable = rewindable;
+        this.type = type;
     }
 
     // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
@@ -43,6 +48,8 @@ public abstract class Enemy extends DynamicGameObject{
     }
 
     public abstract void defineBody();
+
+    public abstract void setSprite(TextureAtlas atlas);
 
     public void update(float dt) {
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);

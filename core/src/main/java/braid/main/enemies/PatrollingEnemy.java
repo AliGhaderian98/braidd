@@ -6,29 +6,28 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class PatrollingEnemy extends Enemy implements EnemyAI{
     private int direction = 1;
 
-    public PatrollingEnemy(World world, LevelScreen screen, float x, float y, boolean rewindable) {
-        super(world, screen,x,y, rewindable);
+    public PatrollingEnemy(World world, LevelScreen screen, float x, float y, boolean rewindable, String type) {
+        super(world, screen,x,y, rewindable, type);
         defineBody();
         createSideSensor();
         createEdgeSensor();
 
         speed = 0.15f;
 
-        sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
-
-        idle = new Animation<>(0.2f, screen.getAtlas().findRegions("lion-idle"), Animation.PlayMode.LOOP);
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        sprite.setRegion(idle.getKeyFrame(0, false));
+        setSprite(screen.getAtlas());
     }
 
     public void update(float dt) {
         super.update(dt);
+        sprite.setRegion(getFrame(dt, walking));
+        sprite.setFlip(direction<0,false);
         idle();
     }
 
@@ -41,6 +40,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(8 / Braid.PPM);
+        shape.setPosition(new Vector2(0, -3/Braid.PPM));
 
         fdef.shape = shape;
         fdef.friction = 1f;
@@ -55,6 +55,30 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
         headFdef.friction = 1f;
         Fixture headFixture = b2body.createFixture(headFdef);
         headFixture.setUserData(new UserData("EnemyHead", this));
+    }
+
+    @Override
+    public void setSprite(TextureAtlas atlas) {
+        switch (type) {
+            case ("cat") -> {
+                sprite = new Sprite(atlas.findRegion("cat-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("cat-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.1f, atlas.findRegions("cat-run"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
+            default -> {
+                sprite = new Sprite(atlas.findRegion("lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0, idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()/ Braid.PPM,
+                    sprite.getRegionHeight()/Braid.PPM);
+            }
+        }
     }
 
     @Override
@@ -97,7 +121,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
     public void createSideSensor() {
         // Create side sensors
         PolygonShape sideSensorShape = new PolygonShape();
-        sideSensorShape.setAsBox(7 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 0), 0);
+        sideSensorShape.setAsBox(9 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 0), 0);
 
         FixtureDef sideSensorDef = new FixtureDef();
         sideSensorDef.shape = sideSensorShape;
@@ -107,5 +131,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI{
         sideSensor.setUserData(new UserData("SideSensor", this));
     }
 
-    public void changeDirection() { direction *= -1; }
+    public void changeDirection() {
+        direction *= -1;
+    }
 }

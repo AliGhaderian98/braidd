@@ -3,6 +3,7 @@
  <object name="PatrollingEnemy" type="enemy" width="16" height="16">
   <properties>
    <property name="rewindable" type="bool" value="true"/>
+   <property name="type" value=""/>
   </properties>
  </object>
 </template>

@@ -476,15 +476,15 @@ public abstract class LevelScreen implements Screen {
     protected abstract LevelScreen getNewInstance();
 
 
-    public void spawnEnemy(String enemyType, float x, float y, boolean rewindable) {
+    public void spawnEnemy(String enemyType, float x, float y, boolean rewindable, String type) {
         if ("MadScientist".equals(enemyType)) {
-            addEnemy(new MadScientist(world, this, player, x,y, rewindable));
+            addEnemy(new MadScientist(world, this, player, x,y, rewindable, type));
         } else if ("PatrollingEnemy".equals(enemyType)) {
-            addEnemy(new PatrollingEnemy(world, this, x, y, rewindable));
+            addEnemy(new PatrollingEnemy(world, this, x, y, rewindable, type));
         } else if ("UnhingedEnemy".equals(enemyType)) {
-            addEnemy((new UnhingedEnemy(world, this, player, x, y, rewindable)));
+            addEnemy((new UnhingedEnemy(world, this, player, x, y, rewindable, type)));
         } else if ("Knight".equals(enemyType)) {
-            addEnemy((new Knight(world, this,player, x, y, rewindable)));
+            addEnemy((new Knight(world, this,player, x, y, rewindable, type)));
         }
     }
 

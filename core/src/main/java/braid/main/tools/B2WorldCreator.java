@@ -158,13 +158,21 @@ public class B2WorldCreator {
 
             // Spawning enemy
             if ("MadScientist".equals(type)) {
-                screen.spawnEnemy("MadScientist", x, y, (boolean) object.getProperties().get("rewindable"));
+                screen.spawnEnemy("MadScientist", x, y,
+                    (boolean) object.getProperties().get("rewindable"),
+                    (String) object.getProperties().get("type"));
             } else if ("PatrollingEnemy".equals(type)) {
-                screen.spawnEnemy("PatrollingEnemy", x, y, (boolean) object.getProperties().get("rewindable"));
+                screen.spawnEnemy("PatrollingEnemy", x, y,
+                    (boolean) object.getProperties().get("rewindable"),
+                    (String) object.getProperties().get("type"));
             } else if ("UnhingedEnemy".equals(type)) {
-                screen.spawnEnemy("UnhingedEnemy", x, y, (boolean) object.getProperties().get("rewindable"));
+                screen.spawnEnemy("UnhingedEnemy", x, y,
+                    (boolean) object.getProperties().get("rewindable"),
+                    (String) object.getProperties().get("type"));
             } else if ("Knight".equals(type)) {
-                screen.spawnEnemy("Knight", x, y, (boolean) object.getProperties().get("rewindable"));
+                screen.spawnEnemy("Knight", x, y,
+                    (boolean) object.getProperties().get("rewindable"),
+                    (String) object.getProperties().get("type"));
             }
         }
     }

@@ -7,6 +7,7 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -17,23 +18,31 @@ public class Knight extends Enemy implements EnemyAI {
     private final Player player;
     private int direction = 0;
 
-    public Knight(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable) {
-        super(world, screen, x, y, rewindable);
+    public Knight(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable, String type) {
+        super(world, screen, x, y, rewindable, type);
         this.player = player;
 
         speed = 0.5f;
 
-        sprite = new Sprite(screen.getAtlas().findRegion("knight-idle"));
-
-        idle = new Animation<>(0.2f, screen.getAtlas().findRegions("knight-idle"), Animation.PlayMode.LOOP);
-        walking = new Animation<>(0.2f, screen.getAtlas().findRegions("knight-walk"), Animation.PlayMode.LOOP);
-        running = new Animation<>(0.2f, screen.getAtlas().findRegions("knight-run"), Animation.PlayMode.LOOP);
-        attacking = new Animation<>(0.2f, screen.getAtlas().findRegions("knight-attack"), Animation.PlayMode.LOOP);
-
-        sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
-        sprite.setRegion(idle.getKeyFrame(0, false));
+        setSprite(screen.getAtlas());
 
         defineBody();
+    }
+
+    @Override
+    public void setSprite(TextureAtlas atlas) {
+        switch (type) {
+            default -> {
+                sprite = new Sprite(atlas.findRegion("knight-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("knight-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.1f, atlas.findRegions("knight-walk"), Animation.PlayMode.LOOP);
+                running = new Animation<>(0.1f, atlas.findRegions("knight-run"), Animation.PlayMode.LOOP);
+                attacking = new Animation<>(0.1f, atlas.findRegions("knight-attack"), Animation.PlayMode.LOOP);
+
+                sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
+                sprite.setRegion(idle.getKeyFrame(0, false));
+            }
+        }
     }
 
     public void update(float dt) {
@@ -47,6 +56,8 @@ public class Knight extends Enemy implements EnemyAI {
         } else {
             walking(dt);
         }
+        sprite.flip(b2body.getLinearVelocity().x<0,false);
+
     }
 
     private void run(float dt) {
@@ -116,7 +127,7 @@ public class Knight extends Enemy implements EnemyAI {
         // Create EnemyBody
         FixtureDef fdef = new FixtureDef();
         PolygonShape bodyShape = new PolygonShape();
-        bodyShape.setAsBox(5 / Braid.PPM, 15 / Braid.PPM);
+        bodyShape.setAsBox(5 / Braid.PPM, 16 / Braid.PPM, new Vector2(0, -3/Braid.PPM), 0);
 
         fdef.shape = bodyShape;
         fdef.friction = 1f;

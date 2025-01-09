@@ -7,6 +7,7 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -15,14 +16,14 @@ public class MadScientist extends Enemy implements EnemyAI{
     private final Player player;
     private float stateTimer = 0;
 
-    public MadScientist(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable) {
-        super(world, screen,x,y, rewindable);
+    public MadScientist(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable, String type) {
+        super(world, screen,x,y, rewindable, type);
         this.player = player;
         defineBody();
 
         speed = 0.15f;
 
-        sprite = new Sprite(screen.getAtlas().findRegion("wissenschaftler"));
+        setSprite(screen.getAtlas());
 
         idle = new Animation<>(0.1f, screen.getAtlas().findRegions("wissenschaftler"), Animation.PlayMode.LOOP);
         sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
@@ -66,6 +67,10 @@ public class MadScientist extends Enemy implements EnemyAI{
         return idle.getKeyFrame(stateTimer, true);
     }
 
+    @Override
+    public void setSprite(TextureAtlas atlas) {
+        sprite = new Sprite(atlas.findRegion("wissenschaftler"));
+    }
 
     @Override
     public void idle() {

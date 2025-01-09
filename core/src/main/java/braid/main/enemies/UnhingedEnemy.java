@@ -7,6 +7,7 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -17,18 +18,26 @@ public class UnhingedEnemy extends Enemy implements EnemyAI {
     private float stateTimer = 0;
     private Player player;
     private boolean playerIsInRange = false;
-    public UnhingedEnemy(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable) {
-        super(world, screen,x,y, rewindable);
+    public UnhingedEnemy(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable, String type) {
+        super(world, screen,x,y, rewindable, type);
         this.player = player;
         defineBody();
 
         speed = 0.15f;
 
-        sprite = new Sprite(screen.getAtlas().findRegion("wissenschaftler"));
+        setSprite(screen.getAtlas());
+    }
 
-        idle = new Animation<>(0.1f, screen.getAtlas().findRegions("wissenschaftler"), Animation.PlayMode.LOOP);
-        sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
-        sprite.setRegion(idle.getKeyFrame(0, true));
+    @Override
+    public void setSprite(TextureAtlas atlas) {
+        switch (type) {
+            default -> {
+                sprite = new Sprite(atlas.findRegion("wissenschaftler"));
+                idle = new Animation<>(0.1f, atlas.findRegions("wissenschaftler"), Animation.PlayMode.LOOP);
+                sprite.setBounds(0,0,24/ Braid.PPM, 24/Braid.PPM);
+                sprite.setRegion(idle.getKeyFrame(0, true));
+            }
+        }
     }
 
     public void update(float dt){
@@ -71,6 +80,7 @@ public class UnhingedEnemy extends Enemy implements EnemyAI {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(8 / Braid.PPM);
+        shape.setPosition(new Vector2(0, -3/Braid.PPM));
 
         fdef.shape = shape;
         fdef.friction = 1f;
