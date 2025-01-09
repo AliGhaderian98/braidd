@@ -134,6 +134,11 @@ public class WorldContactListener implements ContactListener {
             if (!player.isGrounded()) {
                 player.land();
             }
+            UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
+
+            if (brickData.getObject() instanceof Brick brick) {
+                brick.disappear();
+            }
         }
     }
 

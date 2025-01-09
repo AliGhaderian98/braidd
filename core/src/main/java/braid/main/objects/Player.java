@@ -130,8 +130,20 @@ public class Player extends DynamicGameObject {
         Fixture feetFixture = b2body.createFixture(footFdef);
         feetFixture.setUserData(new UserData("PlayerFeet", this));
 
-        shape.dispose();
+//        shape.dispose(); //Kann das weg?
         feet.dispose();
+
+        // Create Hammer collider
+        FixtureDef hammerFdef = new FixtureDef();
+        PolygonShape hammer = new PolygonShape();
+        hammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
+        hammerFdef.shape = hammer;
+        hammerFdef.friction = 1f;
+        Fixture hammerFixture = b2body.createFixture(hammerFdef);
+        hammerFixture.setUserData(new UserData("HammerHitBox", this));
+
+        shape.dispose();
+        hammer.dispose();
     }
 
     public void update(float dt) {

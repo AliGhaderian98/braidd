@@ -3,10 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.PowerUp;
-import braid.main.objects.Ladder;
-import braid.main.objects.End;
-import braid.main.objects.MovingPlatform;
-import braid.main.objects.Sign;
+import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -118,6 +115,8 @@ public class B2WorldCreator {
             fdef.shape = shape;
             Fixture brickFixture = body.createFixture(fdef);
             brickFixture.setUserData(new UserData("Brick", this));
+
+            screen.addBrick(new Brick(world, map, rect));
         }
     }
 

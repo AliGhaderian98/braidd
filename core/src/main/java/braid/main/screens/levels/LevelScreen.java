@@ -4,6 +4,7 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
+import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
@@ -71,6 +72,7 @@ public abstract class LevelScreen implements Screen {
     protected Array<Enemy> enemies;
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<Item> items;
+    protected Array<Brick> bricks;
 
     public Array<RewindController> rewindObjects;
 
@@ -131,6 +133,8 @@ public abstract class LevelScreen implements Screen {
         enemies = new Array<>();
 
         movingPlatforms = new Array<>();
+
+        bricks = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -344,6 +348,7 @@ public abstract class LevelScreen implements Screen {
 
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
+        for (Brick brick :bricks)
 
         game.batch.end();
 
@@ -485,6 +490,10 @@ public abstract class LevelScreen implements Screen {
 
     public void addItem(Item item) {
         items.add(item);
+    }
+
+    public void addBrick (Brick brick) {
+        bricks.add(brick);
     }
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }
