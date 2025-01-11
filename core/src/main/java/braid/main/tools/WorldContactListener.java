@@ -39,6 +39,7 @@ public class WorldContactListener implements ContactListener {
             playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
             playerFeetWithBrick(userDataA, userDataB);
+            hammerHitBoxWithBrick (userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
 
             playerFeetWithEnemy(userDataA, userDataB);
@@ -86,19 +87,23 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void playerWithSign(UserData userDataA, UserData userDataB) {
-        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
-            (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
-            Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
-            sign.setShowing(true);
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+                (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
+                Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
+                sign.setShowing(true);
+            }
         }
     }
 
     private void playerWithUnhingedEnemyRadius(UserData userDataA, UserData userDataB) {
-        if ("EnemyRadius".equals(userDataA.getName()) || "EnemyRadius".equals(userDataB.getName())) {
-            UnhingedEnemy unhingedEnemy = ("EnemyRadius".equals(userDataA.getName())) ?  (UnhingedEnemy) userDataA.getObject() : (UnhingedEnemy) userDataB.getObject();
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if ("EnemyRadius".equals(userDataA.getName()) || "EnemyRadius".equals(userDataB.getName())) {
+                UnhingedEnemy unhingedEnemy = ("EnemyRadius".equals(userDataA.getName())) ? (UnhingedEnemy) userDataA.getObject() : (UnhingedEnemy) userDataB.getObject();
 
-            unhingedEnemy.setPlayerIsInRange(true);
+                unhingedEnemy.setPlayerIsInRange(true);
 
+            }
         }
     }
 
@@ -112,10 +117,13 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void playerWithItem(UserData userDataA, UserData userDataB) {
-        UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
 
-        if (itemData.getObject() instanceof Item item) {
-            item.use(player);
+            UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
+
+            if (itemData.getObject() instanceof Item item) {
+                item.use(player);
+            }
         }
     }
 
@@ -134,10 +142,17 @@ public class WorldContactListener implements ContactListener {
             if (!player.isGrounded()) {
                 player.land();
             }
+        }
+    }
+
+    private void hammerHitBoxWithBrick(UserData userDataA, UserData userDataB) {
+        if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
             UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
 
             if (brickData.getObject() instanceof Brick brick) {
                 brick.disappear();
+                player.jump(1);
             }
         }
     }
@@ -188,28 +203,30 @@ public class WorldContactListener implements ContactListener {
 
 
     private void playerWithLadder(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
-            UserData ladderData = (userDataA.getObject() instanceof Ladder) ? userDataA : userDataB;
-            player.atLadder(true);
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+                UserData ladderData = (userDataA.getObject() instanceof Ladder) ? userDataA : userDataB;
+                player.atLadder(true);
 
-            Vector2 max = new Vector2(0,0);
-            Vector2 min = new Vector2(0,0);
+                Vector2 max = new Vector2(0, 0);
+                Vector2 min = new Vector2(0, 0);
 
-            PolygonShape polygonShape = (PolygonShape) ((Ladder) ladderData.getObject()).b2body.getFixtureList().first().getShape();
-            Vector2 vertex = new Vector2();
+                PolygonShape polygonShape = (PolygonShape) ((Ladder) ladderData.getObject()).b2body.getFixtureList().first().getShape();
+                Vector2 vertex = new Vector2();
 
-            for (int i = 0; i < polygonShape.getVertexCount(); i++) {
-                polygonShape.getVertex(i, vertex);
-                // Transform vertex to world coordinates
-                vertex = (((Ladder) ladderData.getObject()).b2body).getWorldPoint(vertex);
+                for (int i = 0; i < polygonShape.getVertexCount(); i++) {
+                    polygonShape.getVertex(i, vertex);
+                    // Transform vertex to world coordinates
+                    vertex = (((Ladder) ladderData.getObject()).b2body).getWorldPoint(vertex);
 
-                min.x = Math.min(min.x, vertex.x);
-                min.y = Math.min(min.y, vertex.y);
-                max.x = Math.max(max.x, vertex.x);
-                max.y = Math.max(max.y, vertex.y);
+                    min.x = Math.min(min.x, vertex.x);
+                    min.y = Math.min(min.y, vertex.y);
+                    max.x = Math.max(max.x, vertex.x);
+                    max.y = Math.max(max.y, vertex.y);
+                }
+
+                player.setMoveLimits(max, min);
             }
-
-            player.setMoveLimits(max, min);
         }
     }
 
@@ -259,24 +276,28 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
-            player.atLadder(false);
-            player.resetMoveLimits();
-            player.stopClimbing();
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
+                player.atLadder(false);
+                player.resetMoveLimits();
+                player.stopClimbing();
+            }
         }
     }
 
     private void playerWithEnd(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof End || userDataB.getObject() instanceof End) {
-            player.atEnd(true);
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            if (userDataA.getObject() instanceof End || userDataB.getObject() instanceof End) {
+                player.atEnd(true);
 
-            // switch to overworld after 0.2 second delay
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    screen.finish();
-                }
-            }, 0.2f);
+                // switch to overworld after 0.2 second delay
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        screen.finish();
+                    }
+                }, 0.2f);
+            }
         }
     }
 

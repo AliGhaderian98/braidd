@@ -139,8 +139,10 @@ public class Player extends DynamicGameObject {
         hammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
         hammerFdef.shape = hammer;
         hammerFdef.friction = 1f;
+        hammerFdef.isSensor = true;
         Fixture hammerFixture = b2body.createFixture(hammerFdef);
         hammerFixture.setUserData(new UserData("HammerHitBox", this));
+
 
         shape.dispose();
         hammer.dispose();
