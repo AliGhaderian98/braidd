@@ -10,8 +10,6 @@
  <tileset firstgid="1961" source="tilesets/Props.tsx"/>
  <tileset firstgid="2217" source="tilesets/prop-sheet.tsx"/>
  <tileset firstgid="2622" source="tilesets/sheet.tsx"/>
- <tileset firstgid="2758" source="tilesets/Zoo/tileset-tiles.tsx"/>
- <tileset firstgid="2758" source="tilesets/Zoo/kenney_pixel-platformer/Tiled/tileset-tiles.tsx"/>
  <tileset firstgid="2758" name="Rock-Tilset" tilewidth="32" tileheight="32" tilecount="0" columns="0"/>
  <tileset firstgid="2758" source="tilesets/Zoo/Farm-Tiled.tsx"/>
  <tileset firstgid="2870" source="tilesets/Zoo/Deko-Tiled.tsx"/>

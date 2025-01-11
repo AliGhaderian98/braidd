@@ -5,6 +5,7 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
+SaveGameFiles/SaveGame2.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
@@ -27,6 +28,7 @@ maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
+maps/tilesets/Zoo/Basic-Tiled.tsx
 maps/tilesets/Zoo/Basic-Tiled/License.txt
 maps/tilesets/Zoo/Basic-Tiled/Tiled/Basic-Tiled.tsx
 maps/tilesets/Zoo/Basic-Tiled/Tilemap/tilemap-backgrounds.png
@@ -240,6 +242,9 @@ maps/tilesets/Zoo/Basic-Tiled/Tiles/tile_0179.png
 maps/tilesets/Zoo/Basic-Tiled/Tilesheet (Backgrounds).txt
 maps/tilesets/Zoo/Basic-Tiled/Tilesheet (Characters).txt
 maps/tilesets/Zoo/Basic-Tiled/Tilesheet (Tiles).txt
+maps/tilesets/Zoo/Deko-Tiled.tsx
+maps/tilesets/Zoo/Deko-Tiled/spr_tile_decor.png
+maps/tilesets/Zoo/Farm-Tiled.tsx
 maps/tilesets/Zoo/Farm-Tiled/Construct 3/Pixel Platformer.c3p
 maps/tilesets/Zoo/Farm-Tiled/Construct 3/Readme.txt
 maps/tilesets/Zoo/Farm-Tiled/License.txt
@@ -360,6 +365,8 @@ maps/tilesets/Zoo/Farm-Tiled/Tiles/tile_0109.png
 maps/tilesets/Zoo/Farm-Tiled/Tiles/tile_0110.png
 maps/tilesets/Zoo/Farm-Tiled/Tiles/tile_0111.png
 maps/tilesets/Zoo/Farm-Tiled/Tilesheet.txt
+maps/tilesets/Zoo/Marble-Tilset.tsx
+maps/tilesets/Zoo/Rock-Tilset.tsx
 maps/tilesets/Zoo/Rocks-Tiled/License.txt
 maps/tilesets/Zoo/Rocks-Tiled/Preview.png
 maps/tilesets/Zoo/Rocks-Tiled/Sample.png
@@ -698,6 +705,12 @@ maps/tilesets/Zoo/Rocks-Tiled/Tiles/Stone/tile_0078.png
 maps/tilesets/Zoo/Rocks-Tiled/Tiles/Stone/tile_0079.png
 maps/tilesets/Zoo/Rocks-Tiled/Tiles/Stone/tile_0080.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilesheet.txt
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_1.png
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_2.png
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_3.png
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_4.png
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack1.png
+maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack2.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
