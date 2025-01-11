@@ -18,7 +18,9 @@ public abstract class DynamicGameObject extends GameObject {
     //Methoden
     @Override
     public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
+        b2body.setTransform(x,y,0);
+        b2body.setLinearVelocity(0, 0);
+        b2body.setAngularVelocity(0);
     }
 
     @Override

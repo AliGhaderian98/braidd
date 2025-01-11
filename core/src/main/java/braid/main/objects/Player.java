@@ -136,7 +136,7 @@ public class Player extends DynamicGameObject {
 
     public void update(float dt) {
         sprite.setRegion(getFrame(dt));
-        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         // apply variable jump height
         if (isJumping()) {

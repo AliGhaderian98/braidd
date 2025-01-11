@@ -44,7 +44,6 @@ public abstract class Enemy extends DynamicGameObject{
     @Override
     public void act(float delta) {
         super.act(delta); // Aufruf der GameObject-Logik
-        // Gegner-spezifische Logik, z.B. Bewegungsmuster oder Interaktion mit dem Spieler
     }
 
     public abstract void defineBody();
@@ -52,7 +51,7 @@ public abstract class Enemy extends DynamicGameObject{
     public abstract void setSprite(TextureAtlas atlas);
 
     public void update(float dt) {
-        setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+        sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         if (rewindable)
             rewindController.update();
@@ -65,7 +64,6 @@ public abstract class Enemy extends DynamicGameObject{
         }
     }
 
-    // todo: animationen für gegner einbauen
     @Override
     public float getStateTimer() {
         return 0;
