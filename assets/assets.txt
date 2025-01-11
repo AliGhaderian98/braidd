@@ -5,7 +5,6 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
-SaveGameFiles/SaveGame2.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 maps/braid-maps.tiled-project

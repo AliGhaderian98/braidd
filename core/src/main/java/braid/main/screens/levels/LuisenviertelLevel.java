@@ -10,13 +10,14 @@ public class LuisenviertelLevel extends LevelScreen {
 
     public LuisenviertelLevel(Braid game) {
         super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        levelName = "LUISENVIERTEL";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
     }
 
     @Override
     protected LevelScreen getNewInstance() {
-        return new TestLevel(game);
+        return new LuisenviertelLevel(game);
     }
 
 

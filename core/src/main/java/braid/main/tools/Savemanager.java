@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.overworld.Overworld;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -19,7 +20,11 @@ public class Savemanager {
         public int SaveGameKEY;
         public String SaveGameName;
         public Map<String, Boolean> UnlockedLevels;
-        public int numUnlockedBeforeWegZurUni;
+        public String lastLevel;
+        public boolean wegZurUniJustUnlocked;
+        public boolean oberbarmenFinished;
+        public boolean zooFinished;
+        public boolean bayerFinished;
         public long Playtime;
         public Map<String, Array<Boolean>> Collectables;
 
@@ -60,17 +65,22 @@ public class Savemanager {
         for(int i=0; i<10;i++){
             dummyCollectablesBool = new Array<>();
             currentsavegame.Collectables.put(LevelNodes.get(i),dummyCollectablesBool);
-            for(int z = 0; z< 10; z++){
+            for(int z = 0; z < 5; z++){
                 dummyCollectablesBool.add(false);
             }
         }
 
         currentsavegame.UnlockedLevels = new HashMap<>();
         for(int i=0; i<10;i++){
-            currentsavegame.UnlockedLevels.put(LevelNodes.get(i),true);
+            currentsavegame.UnlockedLevels.put(LevelNodes.get(i),false);
         }
+        currentsavegame.UnlockedLevels.put("UNI", true);
+        currentsavegame.lastLevel = "UNI";
 
-        currentsavegame.numUnlockedBeforeWegZurUni = 0;
+        currentsavegame.wegZurUniJustUnlocked = false;
+        currentsavegame.oberbarmenFinished = false;
+        currentsavegame.zooFinished = false;
+        currentsavegame.bayerFinished = false;
     }
 
 
@@ -91,7 +101,11 @@ public class Savemanager {
         saveData.SaveGameKEY = currentsavegame.SaveGameKEY;
         saveData.Collectables = currentsavegame.Collectables;
         saveData.Playtime = currentsavegame.Playtime;
-        saveData.numUnlockedBeforeWegZurUni = currentsavegame.numUnlockedBeforeWegZurUni;
+        saveData.lastLevel = currentsavegame.lastLevel;
+        saveData.oberbarmenFinished = currentsavegame.oberbarmenFinished;
+        saveData.zooFinished = currentsavegame.zooFinished;
+        saveData.bayerFinished = currentsavegame.bayerFinished;
+        saveData.wegZurUniJustUnlocked = currentsavegame.wegZurUniJustUnlocked;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
         file.writeString(SaveGamesDoc.prettyPrint(saveData),false);
@@ -104,7 +118,7 @@ public class Savemanager {
         if(file.exists()){
             return SaveGamesDoc.fromJson(Savegame.class, file.readString());
         } else{
-           currentsavegame = new Savegame();
+            currentsavegame = new Savegame();
             createSavegame(SaveGameKEY);
             return currentsavegame;
         }
@@ -132,7 +146,7 @@ public class Savemanager {
         return 0;
     }
 
-    public static void rebalenceSavegames() {
+    public static void rebalanceSavegames() {
         for (int i = 1; i <= 11; i++) {
             if (findOpenspot() <= CountTotalSavegames() && existGame(i) && i > 1 && CountTotalSavegames() != 0) {
                 currentsavegame = loadGame(i);
@@ -169,11 +183,20 @@ public class Savemanager {
                 currentsavegame.UnlockedLevels.put("ZOO", true);
                 currentsavegame.UnlockedLevels.put("BAYER", true);
             }
-            case "OBERBARMEN", "BAYER", "ZOO" -> {
-                currentsavegame.numUnlockedBeforeWegZurUni += 1;
+            case "OBERBARMEN" -> {
+                currentsavegame.oberbarmenFinished = true;
                 unlockWegZurUni();
             }
-            default -> throw new IllegalStateException("Unknown Leve Name: " + currentLevel);
+            case "BAYER" -> {
+                currentsavegame.bayerFinished = true;
+                unlockWegZurUni();
+            }
+            case "ZOO" -> {
+                currentsavegame.zooFinished = true;
+                unlockWegZurUni();
+            }
+            case "SCHLOSSBURG", "WEGZURUNI" -> {}
+            default -> throw new IllegalStateException("Unknown Level Name: " + currentLevel);
         }
     }
 
@@ -182,8 +205,11 @@ public class Savemanager {
     }
 
     private static void unlockWegZurUni() {
-        if (currentsavegame.numUnlockedBeforeWegZurUni >= 3)
+        if (currentsavegame.oberbarmenFinished && currentsavegame.zooFinished && currentsavegame.bayerFinished) {
+            if (!currentsavegame.UnlockedLevels.get("WEGZURUNI"))
+                currentsavegame.wegZurUniJustUnlocked = true;
             currentsavegame.UnlockedLevels.put("WEGZURUNI", true);
+        }
     }
 
     public static int AmountUnlockedLevels(Savegame savegame){

@@ -1,6 +1,7 @@
 package braid.main.overworld;
 
 import braid.main.Braid;
+import braid.main.tools.Savemanager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -85,7 +86,6 @@ public class OverworldPlayer extends Actor {
     }
 
     public void moveToCurrentNode() {
-        //addAction(Actions.moveTo(currentNode.getPosition().x, currentNode.getPosition().y, 1f));
         isMoving = true;
 
         Vector2 position = new Vector2(getX(), getY());
@@ -123,6 +123,14 @@ public class OverworldPlayer extends Actor {
                     moveToCurrentNode();
                 } else {
                     isMoving = false;
+                }
+
+                // force enter the wegZurUni level if it was just unlocked
+                if (Objects.equals(currentNode.getName(), "WEGZURUNI") && Savemanager.currentsavegame.wegZurUniJustUnlocked) {
+                    overworld.enterLevel(currentNode.getName());
+                    // reset flag that this level was just unlocked to false after starting level for the first time
+                    if (Savemanager.currentsavegame.wegZurUniJustUnlocked)
+                        Savemanager.currentsavegame.wegZurUniJustUnlocked = false;
                 }
             })
         ));

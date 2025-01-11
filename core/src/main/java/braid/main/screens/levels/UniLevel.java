@@ -10,13 +10,14 @@ public class UniLevel extends LevelScreen {
 
     public UniLevel(Braid game) {
         super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        levelName = "UNI";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
     }
 
     @Override
     protected LevelScreen getNewInstance() {
-        return new TestLevel(game);
+        return new UniLevel(game);
     }
 
 

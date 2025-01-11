@@ -197,10 +197,14 @@
   <object id="140" template="object-templates/patrollingEnemy.tx" type="enemy" x="576" y="224"/>
   <object id="154" template="object-templates/unhingedEnemy.tx" type="enemy" x="928" y="336"/>
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
-  <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192"/>
+  <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192">
+   <properties>
+    <property name="type" value="cat"/>
+   </properties>
+  </object>
   <object id="243" template="object-templates/knight.tx" type="enemy" x="320" y="336">
    <properties>
-    <property name="rewindable" type="bool" value="false"/>
+    <property name="rewindable" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

@@ -2,6 +2,7 @@ package braid.main.screens.menus;
 
 import braid.main.Braid;
 import braid.main.overworld.Overworld;
+import braid.main.screens.levels.UniLevel;
 import braid.main.tools.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -41,7 +42,7 @@ public class SavegameMenu implements Screen{
     private Label[] savegames, collectibles, unlockedLevels, playtimes;
     private Image[] trashcans;
     private Group[] verticalGroups;
-    private Label newSaveGame,nomoreSaveGames, title, overlayTitle, noNameWaring;
+    private Label newSaveGame,nomoreSaveGames, title, overlayTitle, noNameWarning;
     private int totalSavegame;
     private TextField textField;
 
@@ -120,8 +121,8 @@ public class SavegameMenu implements Screen{
 
         // Setup Title and footnote and OverlayTitle
         overlayTitle = new Label("Enter a Name for your Savegame", SelectionFont);
-        noNameWaring = new Label("You need to Enter a Name!",LittleSelectionFont);
-        noNameWaring.setColor(new Color(Color.RED));
+        noNameWarning = new Label("You need to Enter a Name!",LittleSelectionFont);
+        noNameWarning.setColor(new Color(Color.RED));
         title = new Label("Save games", TitelFont);
         newSaveGame = new Label("new Savegame", SelectionFont);
         nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
@@ -215,8 +216,8 @@ public class SavegameMenu implements Screen{
         overlayTable.add(overlayTitle);
         overlayTable.row();
         overlayTable.add(textField).width(1000).height(100).row();
-        overlayTable.add(noNameWaring);
-        noNameWaring.setVisible(false);
+        overlayTable.add(noNameWarning);
+        noNameWarning.setVisible(false);
         overlay.addActor(overlayTable);
 
 
@@ -364,7 +365,7 @@ public class SavegameMenu implements Screen{
         if (overlayActive) {
             // Start new Game with defined Name for the Savegame
             if(Objects.equals(textField.getText(), "")){
-                noNameWaring.setVisible(true);
+                noNameWarning.setVisible(true);
             }else {
                 newSavegameName = textField.getText();
                 overlay.unfocus(textField);
@@ -372,7 +373,7 @@ public class SavegameMenu implements Screen{
                 overlayActive = false;
                 textField.setDisabled(true);
 
-                startnewOverworld();
+                startNewGame();
                 dispose();
             }
         } else {
@@ -387,7 +388,7 @@ public class SavegameMenu implements Screen{
                 Savemanager.deleteSavegame(currentSavegamKey);
 
                 if(Savemanager.CountTotalSavegames() != 0){
-                    Savemanager.rebalenceSavegames();
+                    Savemanager.rebalanceSavegames();
                 }
                 game.setScreen(new SavegameMenu(game));
 
@@ -400,9 +401,15 @@ public class SavegameMenu implements Screen{
         }
     }
 
-    private void startnewOverworld() {
+    private void startNewGame() {
         int freeSpot = Savemanager.findOpenspot();
-        startOverWorld(freeSpot);
+        //startOverWorld(freeSpot);
+
+        Savemanager.playtimeStart = System.currentTimeMillis();
+        currentSavegamKey = freeSpot;
+        Savemanager.currentsavegame = Savemanager.loadGame(freeSpot);
+
+        game.setScreen(new UniLevel((Braid) game));
     }
 
     private void startOverWorld(int selectedSavegame) {

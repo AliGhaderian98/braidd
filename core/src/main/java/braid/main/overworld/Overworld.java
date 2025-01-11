@@ -2,7 +2,7 @@ package braid.main.overworld;
 
 import braid.main.Braid;
 
-import braid.main.screens.levels.TestLevel;
+import braid.main.screens.levels.*;
 import braid.main.screens.menus.PauseMenu;
 import braid.main.screens.menus.SavegameMenu;
 import braid.main.tools.KeyBindings;
@@ -75,16 +75,16 @@ public class Overworld implements Screen {
 
         stage = new Stage();
 
-        // find start node -> currently just hard set to uni
-        OverworldNode uni = nodes.first();
+        // find start node
+        OverworldNode startNode = nodes.first();
         for (OverworldNode n : nodes) {
-            if (Objects.equals(n.getName(), "UNI"))
-                uni = n;
+            if (Objects.equals(n.getName(), Savemanager.currentsavegame.lastLevel))
+                startNode = n;
         }
 
-        player = new OverworldPlayer(this, uni.getPosition().x, uni.getPosition().y);
-        player.setPreviousNode(uni);
-        player.setCurrentNode(uni);
+        player = new OverworldPlayer(this, startNode.getPosition().x, startNode.getPosition().y);
+        player.setPreviousNode(startNode);
+        player.setCurrentNode(startNode);
         stage.addActor(player);
 
         // Final setup steps
@@ -134,20 +134,20 @@ public class Overworld implements Screen {
 
     }
 
-    private void enterLevel(String levelName) {
+    public void enterLevel(String levelName) {
         // get next level based on current node
         Screen newScreen = switch (levelName) {
-            case "UNI" -> new TestLevel(game);
-            // case "HBF" ->
-            // case "FREUDENBERG" ->
-            // case "LUISENVIERTEL" ->
-            // case "ARKADEN" ->
-            // case "OBERBARMEN" ->
-            // case "WEGZURUNI" ->
-            // case "SCHLOSSBURG" ->
-            // case "BAYER" ->
-            // case "ZOO" ->
-            default -> throw new IllegalStateException("Level does not exist yet: " + levelName);
+            case "UNI" -> new UniLevel(game);
+            case "HBF" -> new HBFLevel(game);
+            case "FREUDENBERG" -> new FreudenbergLevel(game);
+            case "LUISENVIERTEL" -> new LuisenviertelLevel(game);
+            case "ARKADEN" -> new ArkadenLevel(game);
+            case "OBERBARMEN" -> new OberbarmenLevel(game);
+            case "WEGZURUNI" -> new WegZurUniLevel(game);
+            case "SCHLOSSBURG" -> new SchlossBurgLevel(game);
+            case "BAYER" -> new BayerLevel(game);
+            case "ZOO" -> new ZooLevel(game);
+            default -> throw new IllegalStateException("Unknown Levelname: " + levelName);
         };
 
         // Zoom transition
@@ -234,6 +234,7 @@ public class Overworld implements Screen {
             if (layer.getName().startsWith("rails_")) {
                 railLayers.add(layer);
                 switch (layer.getName()) {
+                    case "rails_1" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("FREUDENBERG"));
                     case "rails_2" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("ARKADEN"));
                     case "rails_3" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("LUISENVIERTEL"));
                     case "rails_4" -> layer.setVisible(Savemanager.currentsavegame.UnlockedLevels.get("HBF"));

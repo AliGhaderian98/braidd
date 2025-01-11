@@ -49,6 +49,8 @@ import braid.main.screens.menus.PauseMenu;
  Levelklassen benötigt werden.
  ***********/
 public abstract class LevelScreen implements Screen {
+    protected String levelName;
+
     // Basic Game variables
     protected final Braid game;
     private static final int GRAVITY = -10;
@@ -241,6 +243,7 @@ public abstract class LevelScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         time += delta;
 
@@ -413,6 +416,11 @@ public abstract class LevelScreen implements Screen {
     }
 
     public void finish() {
+        if (!finished) {
+            Savemanager.unlockNextLevel(levelName);
+            Savemanager.currentsavegame.lastLevel = levelName;
+            Savemanager.saveGame(false);
+        }
         finished = true;
         gameIsPaused = true;
         activeShader = pauseShader;
@@ -422,6 +430,8 @@ public abstract class LevelScreen implements Screen {
     @Override
     public void pause() {
         if (!finished) {
+            Savemanager.currentsavegame.lastLevel = levelName;
+            Savemanager.saveGame(false);
             gameIsPaused = true;
             music.pause();
             levelHUD.pause();

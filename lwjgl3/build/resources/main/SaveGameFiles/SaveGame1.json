@@ -1,29 +1,24 @@
 {
 SaveGameKEY: 1
-SaveGameName: test2
+SaveGameName: hjhsd
+UnlockedLevels: {
+	class: java.util.HashMap
+	UNI: true
+	SCHLOSSBURG: false
+	ARKADEN: false
+	WEGZURUNI: false
+	BAYER: false
+	OBERBARMEN: false
+	ZOO: false
+	FREUDENBERG: true
+	HBF: false
+	LUISENVIERTEL: false
+}
+lastLevel: FREUDENBERG
+Playtime: 30658
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -66,48 +61,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	ARKADEN: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -150,48 +105,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	BAYER: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -234,48 +149,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	ZOO: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -318,48 +193,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	HBF: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -402,40 +237,6 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 }
-UnlockedLevels: {
-	class: java.util.HashMap
-	UNI: true
-	SCHLOSSBURG: true
-	ARKADEN: true
-	WEGZURUNI: true
-	BAYER: true
-	OBERBARMEN: true
-	ZOO: true
-	FREUDENBERG: true
-	HBF: true
-	LUISENVIERTEL: true
-}
-Playtime: 458783
 }
