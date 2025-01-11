@@ -12,7 +12,7 @@ public class ZooLevel extends LevelScreen {
         super(game, "maps/ZooLevel.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "ZOO";
 
-        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(32/Braid.PPM, 54/Braid.PPM);
     }
 
     @Override
