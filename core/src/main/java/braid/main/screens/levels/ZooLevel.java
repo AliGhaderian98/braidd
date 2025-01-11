@@ -9,7 +9,7 @@ import braid.main.objects.Enemy;
 public class ZooLevel extends LevelScreen {
 
     public ZooLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/ZooLevel.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "ZOO";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
