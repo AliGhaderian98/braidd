@@ -212,6 +212,17 @@ public class Savemanager {
         }
     }
 
+    public static void unlockCollectable(int ID, String level) {
+        if (currentsavegame.Collectables.containsKey(level)) {
+            Array<Boolean> collectablesArray = currentsavegame.Collectables.get(level);
+            if (collectablesArray != null && collectablesArray.size > ID) {
+                collectablesArray.set(ID, true);
+            } else {
+                System.err.println("Given Collectable ID of '"+ID+"' is out of range: max of 5 Collectables per Level allowed!");
+            }
+        }
+    }
+
     public static int AmountUnlockedLevels(Savegame savegame){
         int unlockedlevels = 0;
         for(Boolean entry : savegame.UnlockedLevels.values()){

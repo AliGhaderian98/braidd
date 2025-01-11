@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.objects.Player;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.LevelScreen;
+import braid.main.tools.Savemanager;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,10 +14,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 public class CollectableItem extends Item {
     private int ID;
     public Boolean isCollected;
+    LevelScreen screen;
 
     public CollectableItem(LevelScreen screen, float x, float y, int id) {
         super(screen, x, y, 6);
         this.ID = id;
+        this.screen = screen;
 
         fixture.setUserData(new UserData("item", this));
 
@@ -29,6 +32,7 @@ public class CollectableItem extends Item {
     @Override
     public void use(Player player) {
         if (!toDestroy) {
+            Savemanager.unlockCollectable(ID, screen.getLevelName());
             LevelHUD.addScore(1);
             destroy();
         }

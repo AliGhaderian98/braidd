@@ -15,29 +15,29 @@ UnlockedLevels: {
 	LUISENVIERTEL: false
 }
 lastLevel: FREUDENBERG
-Playtime: 30658
+Playtime: 77941
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	SCHLOSSBURG: [
@@ -175,7 +175,7 @@ Collectables: {
 	FREUDENBERG: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean

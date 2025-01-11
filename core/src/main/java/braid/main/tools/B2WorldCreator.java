@@ -195,7 +195,10 @@ public class B2WorldCreator {
 
             // Spawning Item
             if ("Page".equals(type)) {
-                screen.addItem(new CollectableItem(screen, x, y, (Integer) object.getProperties().get("ID")));
+                Array<Boolean> savedCollectables = Savemanager.currentsavegame.Collectables.get(screen.getLevelName());
+                int pageID = (Integer) object.getProperties().get("ID");
+                if (pageID >= savedCollectables.size || !savedCollectables.get(pageID))
+                    screen.addItem(new CollectableItem(screen, x, y, pageID));
             }
             if ("Gleiter".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, GLEITER)));

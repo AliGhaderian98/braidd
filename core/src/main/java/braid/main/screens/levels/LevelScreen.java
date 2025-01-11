@@ -106,6 +106,7 @@ public abstract class LevelScreen implements Screen {
         this.game = game;
         atlas = new TextureAtlas(atlasPath);
         gameIsPaused = false;
+        setLevelName();
 
         items = new Array<>();
 
@@ -513,4 +514,29 @@ public abstract class LevelScreen implements Screen {
     }
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }
+
+    public String getLevelName() { return levelName; }
+
+    private void setLevelName() {
+        if (this instanceof ArkadenLevel)
+            levelName = "ARKADEN";
+        else if (this instanceof BayerLevel)
+            levelName = "BAYER";
+        else if (this instanceof FreudenbergLevel)
+            levelName = "FREUDENBERG";
+        else if (this instanceof HBFLevel)
+            levelName = "HBF";
+        else if (this instanceof LuisenviertelLevel)
+            levelName = "LUISENVIERTEL";
+        else if (this instanceof OberbarmenLevel)
+            levelName = "OBERBARMEN";
+        else if (this instanceof SchlossBurgLevel)
+            levelName = "SCHLOSSBURG";
+        else if (this instanceof UniLevel)
+            levelName = "UNI";
+        else if (this instanceof WegZurUniLevel)
+            levelName = "WEGZURUNI";
+        else if (this instanceof ZooLevel)
+            levelName = "ZOO";
+    }
 }
