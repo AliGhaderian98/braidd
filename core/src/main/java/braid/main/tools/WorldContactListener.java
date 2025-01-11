@@ -50,6 +50,8 @@ public class WorldContactListener implements ContactListener {
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
+        playerWithSchalter(userDataA, userDataB);
+
     }
 
 
@@ -66,6 +68,7 @@ public class WorldContactListener implements ContactListener {
         contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
         contactEndedPlayerWithKnightAttack(userDataA, userDataB);
         playerWithSignEnds(userDataA, userDataB);
+        contactEndedPlayerWithSchalter(userDataA,userDataB);
     }
 
     @Override
@@ -76,6 +79,26 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void playerWithSchalter(UserData userDataA, UserData userDataB) {
+        if (("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) &&
+        (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter)) {
+            Schalter schalter = userDataA.getObject() instanceof Schalter
+                ? (Schalter) userDataA.getObject()
+                : (Schalter) userDataB.getObject();
+            player.addNearbyFixture(schalter.getFixture());
+        }
+    }
+
+    private void contactEndedPlayerWithSchalter(UserData userDataA, UserData userDataB) {
+        if (("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) &&
+            (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter)) {
+            Schalter schalter = userDataA.getObject() instanceof Schalter
+                ? (Schalter) userDataA.getObject()
+                : (Schalter) userDataB.getObject();
+            player.removeNearbyFixture(schalter.getFixture());
+        }
     }
 
     private void contactEndedPlayerWithKnightAttack(UserData userDataA, UserData userDataB) {

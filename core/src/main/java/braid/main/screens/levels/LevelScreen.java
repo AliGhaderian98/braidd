@@ -5,6 +5,7 @@ import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
 import braid.main.enemies.Knight;
+import braid.main.objects.Schalter;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
@@ -37,6 +38,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -74,6 +76,8 @@ public abstract class LevelScreen implements Screen {
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<Item> items;
 
+    private final Array<Schalter> schalters = new Array<>();
+
     public Array<RewindController> rewindObjects;
 
     // Music
@@ -96,6 +100,19 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
+
+    private Array<Fixture> nearbyFixtures = new Array<>();
+    public Array<Fixture> getNearbyFixtures() {
+        return nearbyFixtures;
+    }
+    /*public void addNearbyFixture(Fixture fixture) {
+        if (!nearbyFixtures.contains(fixture, true)) {
+            nearbyFixtures.add(fixture);
+        }
+    }
+    public void removeNearbyFixture(Fixture fixture) {
+        nearbyFixtures.removeValue(fixture, true);
+    }*/
 
 
 
@@ -178,6 +195,17 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages);
+    }
+
+    public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            for (Fixture fixture : getNearbyFixtures()) {
+                if (fixture.getUserData() instanceof UserData userData) {
+                    Schalter schalter = (Schalter) userData.getObject();
+                    schalter.toggle();
+                }
+            }
+        }
     }
 
 
@@ -358,6 +386,8 @@ public abstract class LevelScreen implements Screen {
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
 
+        drawSchalters(game.batch);
+
         game.batch.end();
 
         levelHUD.stage.draw();
@@ -365,10 +395,13 @@ public abstract class LevelScreen implements Screen {
 
 
     public void update(float dt) {
+
         KeyBindings.loadKeyBindings();
 
         if( !(gameIsPaused && player.isAlive()) )
             levelHUD.update(dt);
+        updateSchalters(dt);
+        handleInput();
 
         //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
@@ -409,6 +442,18 @@ public abstract class LevelScreen implements Screen {
 
                 game.setScreen(new Overworld(game));
             }
+        }
+    }
+
+    public void updateSchalters(float dt) {
+        for (Schalter schalter : schalters) {
+            schalter.update(dt);
+        }
+    }
+
+    public void drawSchalters(SpriteBatch batch) {
+        for (Schalter schalter : schalters) {
+            schalter.draw(batch);
         }
     }
 
@@ -496,6 +541,10 @@ public abstract class LevelScreen implements Screen {
     public void addMovingPlatform(MovingPlatform movingPlatform) {
         movingPlatforms.add(movingPlatform);
         movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
+    }
+
+    public void addSchalter(Schalter schalter) {
+        schalters.add(schalter);
     }
 
     public void addItem(Item item) {

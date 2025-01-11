@@ -1,6 +1,19 @@
 {
 SaveGameKEY: 1
-SaveGameName: test2
+SaveGameName: saman
+UnlockedLevels: {
+	class: java.util.HashMap
+	UNI: true
+	SCHLOSSBURG: true
+	ARKADEN: true
+	WEGZURUNI: true
+	BAYER: true
+	OBERBARMEN: true
+	ZOO: true
+	FREUDENBERG: true
+	HBF: true
+	LUISENVIERTEL: true
+}
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -424,18 +437,4 @@ Collectables: {
 		}
 	]
 }
-UnlockedLevels: {
-	class: java.util.HashMap
-	UNI: true
-	SCHLOSSBURG: true
-	ARKADEN: true
-	WEGZURUNI: true
-	BAYER: true
-	OBERBARMEN: true
-	ZOO: true
-	FREUDENBERG: true
-	HBF: true
-	LUISENVIERTEL: true
-}
-Playtime: 458783
 }

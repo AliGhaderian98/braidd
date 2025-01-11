@@ -27,6 +27,7 @@ public class MovingPlatform extends InteractiveGameObject {
     private final float startX;
     private final Sprite sprite;
     private Player player;
+    private boolean isActive = true;
 
     public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
         super(world, boundary, region,false);
@@ -42,10 +43,20 @@ public class MovingPlatform extends InteractiveGameObject {
         fixture.setUserData(new UserData("MovingPlatform", this));
     }
 
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     @Override
     public void defineBody() {}
 
     public void update(float dt) {
+
+        if (!isActive) {
+            b2body.setLinearVelocity(0, 0);
+            return;
+        }
+
         // determine movement direction
         float currentX = b2body.getPosition().x;
         if (movingRight() && currentX > startX + rangeX) {

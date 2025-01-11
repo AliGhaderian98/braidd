@@ -3,10 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.PowerUp;
-import braid.main.objects.Ladder;
-import braid.main.objects.End;
-import braid.main.objects.MovingPlatform;
-import braid.main.objects.Sign;
+import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -27,6 +24,7 @@ import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
 public class B2WorldCreator {
     private Array<Ladder> ladders;
     private final Array<MovingPlatform> movingPlatforms = new Array<>();
+   // private final Array<Schalter> schalters = new Array<>();
     private Array<End> ends;
     private final World world;
     private final TiledMap map;
@@ -54,6 +52,7 @@ public class B2WorldCreator {
         spawnMovingPlatform();
         spawnItems();
         spawnSigns();
+        spawnSchalter();
     }
 
     private void spawnSigns() {
@@ -207,4 +206,28 @@ public class B2WorldCreator {
 
         }
     }
+
+    private void spawnSchalter() {
+        MapLayer schalterLayer = map.getLayers().get("Schalter");
+        TextureRegion schalterRegion = screen.getAtlas().findRegion("schalter");
+
+        for (MapObject object : schalterLayer.getObjects()) {
+            if (object instanceof RectangleMapObject) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                MovingPlatform linkedPlatform = findLinkedPlatform((String) object.getProperties().get("linkedPlatform"));
+                screen.addSchalter(new Schalter(world, schalterRegion, rect, linkedPlatform));
+            }
+        }
+    }
+
+
+    private MovingPlatform findLinkedPlatform(String platformName) {
+        for (MovingPlatform platform : movingPlatforms) {
+            if (platform.getName().equals(platformName)) {
+                return platform;
+            }
+        }
+        return null;
+    }
+
 }

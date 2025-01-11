@@ -3,12 +3,15 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 //todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
@@ -103,6 +106,19 @@ public class Player extends DynamicGameObject {
         };
     }
 
+    private Array<Fixture> nearbyFixtures = new Array<>();
+    public Array<Fixture> getNearbyFixtures() {
+        return nearbyFixtures;
+    }
+    public void addNearbyFixture(Fixture fixture) {
+        if (!nearbyFixtures.contains(fixture, true)) {
+            nearbyFixtures.add(fixture);
+        }
+    }
+    public void removeNearbyFixture(Fixture fixture) {
+        nearbyFixtures.removeValue(fixture, true);
+    }
+
     // Methods
     @Override
     public void defineBody() {
@@ -134,7 +150,19 @@ public class Player extends DynamicGameObject {
         feet.dispose();
     }
 
+    /*public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            for (Fixture fixture : getNearbyFixtures()) {
+                if (fixture.getUserData() instanceof UserData userData) {
+                    Schalter schalter = (Schalter) userData.getObject();
+                    schalter.toggle();
+                }
+            }
+        }
+    }*/
+
     public void update(float dt) {
+       // handleInput();
         sprite.setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 

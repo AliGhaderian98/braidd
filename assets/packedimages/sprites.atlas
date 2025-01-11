@@ -822,14 +822,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 264, 21
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 492, 464
@@ -1525,7 +1525,7 @@ balloon
   index: -1
 balloon-small
   rotate: false
-  xy: 624, 67
+  xy: 624, 41
   size: 18, 19
   orig: 18, 19
   offset: 0, 0
@@ -1561,6 +1561,13 @@ rewind-symbol
 ritalin
   rotate: false
   xy: 624, 88
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+schalter
+  rotate: false
+  xy: 624, 62
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -1714,49 +1721,49 @@ schwebimini_e
   index: -1
 schwebimini_n
   rotate: false
-  xy: 624, 49
+  xy: 1904, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 1904, 874
+  xy: 1922, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_nw
   rotate: false
-  xy: 624, 31
+  xy: 1940, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_s
   rotate: false
-  xy: 1922, 874
+  xy: 1958, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 1940, 874
+  xy: 1976, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 1958, 874
+  xy: 1994, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 1976, 874
+  xy: 1350, 624
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

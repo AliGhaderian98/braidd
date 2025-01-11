@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="247">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="249">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -164,6 +164,13 @@
   <object id="48" x="80" y="160" width="16" height="64"/>
   <object id="49" x="1008" y="112" width="16" height="144"/>
  </objectgroup>
+ <objectgroup id="19" name="Schalter">
+  <object id="248" name="Schalter" x="968.333" y="76.3333" width="19" height="18">
+   <properties>
+    <property name="linkedPlatform" value="plattform"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="9" name="Ground">
   <object id="59" x="0" y="352" width="848"/>
   <object id="70" x="976" y="232" width="31.6667" height="24"/>
@@ -197,10 +204,14 @@
   <object id="140" template="object-templates/patrollingEnemy.tx" type="enemy" x="576" y="224"/>
   <object id="154" template="object-templates/unhingedEnemy.tx" type="enemy" x="928" y="336"/>
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
-  <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192"/>
+  <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192">
+   <properties>
+    <property name="type" value="cat"/>
+   </properties>
+  </object>
   <object id="243" template="object-templates/knight.tx" type="enemy" x="320" y="336">
    <properties>
-    <property name="rewindable" type="bool" value="false"/>
+    <property name="rewindable" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
