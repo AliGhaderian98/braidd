@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="400" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="19" nextobjectid="255">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="400" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="19" nextobjectid="260">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -205,6 +205,12 @@
   <properties>
    <property name="type" value=""/>
   </properties>
+  <object id="259" name="IdleEnemy" type="enemy" x="263.409" y="470.203">
+   <properties>
+    <property name="rewindable" type="bool" value="true"/>
+    <property name="type" value="idleEnemy"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="13" name="Items"/>
  <objectgroup id="15" name="MovingPlatform">
