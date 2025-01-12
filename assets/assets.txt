@@ -11,6 +11,7 @@ audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/object-templates/IdleEnemy.tx
 maps/object-templates/gleiter.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
