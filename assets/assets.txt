@@ -17,14 +17,12 @@ maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
-maps/tilesets/brick.tsx
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
 maps/tilesets/images/Anim_Robot_Jump1_v1.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
-maps/tilesets/images/brick.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
 maps/tilesets/images/prop-sheet.png
@@ -270,6 +268,7 @@ sprites/lion-run/lion-run_5.png
 sprites/lion-run/lion-run_6.png
 sprites/misc/balloon-small.png
 sprites/misc/balloon.png
+sprites/misc/brick.png
 sprites/misc/hammer.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
