@@ -7,6 +7,7 @@ import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -17,14 +18,16 @@ public class IdleEnemy extends Enemy implements EnemyAI{
         super(world, screen,x,y, rewindable, type);
         defineBody();
 
-
         speed = 0.15f;
 
         setSprite(screen.getAtlas());
+        setStateTimer(MathUtils.random(0,idle.getKeyFrames().length*60/idle.getFrameDuration() ));
+
     }
 
     public void update(float dt) {
         super.update(dt);
+        sprite.setRegion(getFrame(dt, idle));
 
     }
 
@@ -61,7 +64,6 @@ public class IdleEnemy extends Enemy implements EnemyAI{
             case ("cat") -> {
                 sprite = new Sprite(atlas.findRegion("cat-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("cat-idle"), Animation.PlayMode.LOOP);
-                walking = new Animation<>(0.1f, atlas.findRegions("cat-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
@@ -70,7 +72,7 @@ public class IdleEnemy extends Enemy implements EnemyAI{
 
             case ("Bird1") -> {
                 sprite = new Sprite(atlas.findRegion("Bird1"));
-                idle = new Animation<>(0.1f, atlas.findRegions("Bird1"), Animation.PlayMode.LOOP);
+                idle = new Animation<>(0.4f, atlas.findRegions("Bird1"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
@@ -80,7 +82,6 @@ public class IdleEnemy extends Enemy implements EnemyAI{
             default -> {
                 sprite = new Sprite(atlas.findRegion("lion-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
-                walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0, idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,
