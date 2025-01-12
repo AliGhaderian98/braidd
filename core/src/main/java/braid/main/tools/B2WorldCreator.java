@@ -13,9 +13,11 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
@@ -129,12 +131,26 @@ public class B2WorldCreator {
         TextureRegion movingPlatformRegion = screen.getAtlas().findRegion("plattform");
 
         for (MapObject object : movingPlatformLayer.getObjects()) {
-            if (object instanceof RectangleMapObject) {
+            if (Objects.equals(object.getName(), "MovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float rangeX = (float) object.getProperties().get("rangeX");
                 float speed = (float) object.getProperties().get("speed");
 
                 screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX, (boolean) object.getProperties().get("rewindable")));
+            } else if (Objects.equals(object.getName(), "GoalMovingPlatform")) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                float speed = (float) object.getProperties().get("speed");
+
+                MapObject schalter = (MapObject) object.getProperties().get("schalter");
+                int schalterPosX = (int) schalter.getProperties().get("X");
+                int schalterPosY = (int) schalter.getProperties().get("Y");
+
+                MapObject goal = (MapObject) object.getProperties().get("goalPosition");
+                int goalPosX = (int) goal.getProperties().get("X");
+                int goalPosY = (int) goal.getProperties().get("Y");
+
+                screen.addGoalMovingPlatform(new GoalMovingPlatform(world, movingPlatformRegion, rect, speed,
+                    schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
 
