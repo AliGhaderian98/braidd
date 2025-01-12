@@ -3,6 +3,8 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class FinishLevelCutscene {
     private class Schwebebahn extends Actor {
@@ -49,6 +52,7 @@ public class FinishLevelCutscene {
 
     private final LevelScreen level;
     private final SpriteBatch batch;
+    private final FitViewport viewport;
     private final Player player;
     private final TiledMap map;
     private final Stage stage;
@@ -62,9 +66,13 @@ public class FinishLevelCutscene {
         this.player = player;
         this.map = map;
 
-        stage = new Stage();
-        schwebebahn = new Schwebebahn();
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
 
+        viewport = new FitViewport(width, height, new OrthographicCamera());
+        stage = new Stage(viewport);
+
+        schwebebahn = new Schwebebahn();
         stage.addActor(schwebebahn);
     }
 
@@ -106,10 +114,7 @@ public class FinishLevelCutscene {
     public void render(float delta) {
         stage.act(delta);
         schwebebahn.update(delta);
-        batch.begin();
-        //schwebebahn.draw(batch, 1f);
         stage.draw();
-        batch.end();
     }
 
     public boolean isPlaying() { return playing; }
@@ -118,6 +123,7 @@ public class FinishLevelCutscene {
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height);
+        stage.getCamera().update();
     }
 
 }

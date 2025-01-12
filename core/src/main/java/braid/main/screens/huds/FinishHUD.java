@@ -2,6 +2,7 @@ package braid.main.screens.huds;
 
 import braid.main.Braid;
 import braid.main.tools.TextFontManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -57,6 +58,8 @@ public class FinishHUD implements Disposable {
         table.add(timeLabel).padTop(100);
 
         stage.addActor(table);
+
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     private StringBuilder formatTime(long time) {
@@ -93,6 +96,7 @@ public class FinishHUD implements Disposable {
 
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        stage.getCamera().update();
     }
 
     @Override
