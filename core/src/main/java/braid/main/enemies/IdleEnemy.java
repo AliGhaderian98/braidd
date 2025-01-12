@@ -21,7 +21,7 @@ public class IdleEnemy extends Enemy implements EnemyAI{
         speed = 0.15f;
 
         setSprite(screen.getAtlas());
-        setStateTimer(MathUtils.random(0,idle.getKeyFrames().length*60/idle.getFrameDuration() ));
+        setStateTimer(MathUtils.random(0,idle.getKeyFrames().length));
 
     }
 
@@ -60,6 +60,7 @@ public class IdleEnemy extends Enemy implements EnemyAI{
 
     @Override
     public void setSprite(TextureAtlas atlas) {
+        int Bridnumber = 0;
         switch (type) {
             case ("cat") -> {
                 sprite = new Sprite(atlas.findRegion("cat-idle"));
@@ -69,14 +70,26 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
                     sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
-
             case ("Bird1") -> {
-                sprite = new Sprite(atlas.findRegion("Bird1"));
-                idle = new Animation<>(0.4f, atlas.findRegions("Bird1"), Animation.PlayMode.LOOP);
-                sprite.setRegion(getFrame(0,idle));
-                sprite.setBounds(0,0,
-                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
-                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+                Bridnumber = 1;
+            }
+            case ("Bird2") -> {
+                Bridnumber = 2;
+            }
+            case ("Bird3") -> {
+                Bridnumber = 3;
+            }
+            case ("Bird4") -> {
+                Bridnumber = 4;
+            }
+            case ("Bird5") -> {
+                Bridnumber = 5;
+            }
+            case ("Bird6") -> {
+                Bridnumber = 6;
+            }
+            case ("Bird7") -> {
+                Bridnumber = 7;
             }
 
             default -> {
@@ -87,6 +100,16 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()/ Braid.PPM,
                     sprite.getRegionHeight()/Braid.PPM);
             }
+        }
+
+        // Enemy is a Bird
+        if(Bridnumber != 0){
+            sprite = new Sprite(atlas.findRegion("Bird"+Bridnumber));
+            idle = new Animation<>(0.4f, atlas.findRegions("Bird"+Bridnumber), Animation.PlayMode.LOOP);
+            sprite.setRegion(getFrame(0,idle));
+            sprite.setBounds(0,0,
+                sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                sprite.getRegionHeight()*0.75f/Braid.PPM);
         }
     }
 
