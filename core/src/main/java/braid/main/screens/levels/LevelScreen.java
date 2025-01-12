@@ -447,10 +447,8 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
-        //if (finished) {
-            finishHUD.resize(width, height);
-            finishLevelCutscene.resize(width, height);
-        //}
+        finishHUD.resize(width, height);
+        finishLevelCutscene.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 

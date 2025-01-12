@@ -70,7 +70,7 @@ public class FinishLevelCutscene {
         int height = Gdx.graphics.getHeight();
 
         viewport = new FitViewport(width, height, new OrthographicCamera());
-        stage = new Stage(viewport);
+        stage = new Stage(viewport, batch);
 
         schwebebahn = new Schwebebahn();
         stage.addActor(schwebebahn);
