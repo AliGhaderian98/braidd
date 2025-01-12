@@ -70,6 +70,7 @@ public class PowerUp extends Item {
         }
         if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier); //Platzhalter
+            player.setHammerActive(true);
         }
         LevelHUD.activatePowerUp(getType());
         destroy();
@@ -94,6 +95,8 @@ public class PowerUp extends Item {
         }
         if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
             player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier)); //Platzhalter
+            player.setHammerActive(false);
+
 
         }
     }

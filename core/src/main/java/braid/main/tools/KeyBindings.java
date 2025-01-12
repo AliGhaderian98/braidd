@@ -25,6 +25,7 @@ public class KeyBindings {
         KeyBindingsMap.put("INTERACT", Input.Keys.E);
         KeyBindingsMap.put("ENTER", Input.Keys.ENTER);
         KeyBindingsMap.put("ESC", Input.Keys.ESCAPE);
+        KeyBindingsMap.put("HAMMER", Input.Keys.Q);
     }
 
     // insert an action and get the Key to do this action

@@ -9,10 +9,12 @@ import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
+import braid.main.tools.KeyBindings;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
@@ -64,6 +66,7 @@ public class WorldContactListener implements ContactListener {
         patrollingEnemyOnEdge(userDataA, userDataB);
         endPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
         playerWithSignEnds(userDataA, userDataB);
+        endHammerBoxWithBrick(userDataA,userDataB);
     }
 
     @Override
@@ -146,13 +149,26 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void hammerHitBoxWithBrick(UserData userDataA, UserData userDataB) {
+
+            if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
+                (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+                UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
+
+                if (brickData.getObject() instanceof Brick brick) {
+                    if (player.isHammerActive()) {
+                        brick.setBreakable(true);
+                    }
+                }
+            }
+    }
+
+    private void endHammerBoxWithBrick (UserData userDataA, UserData userDataB) {
         if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
             UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
 
             if (brickData.getObject() instanceof Brick brick) {
-                brick.disappear();
-                player.jump(1);
+                brick.setBreakable(false);
             }
         }
     }

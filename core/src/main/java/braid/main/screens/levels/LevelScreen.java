@@ -348,7 +348,7 @@ public abstract class LevelScreen implements Screen {
 
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
-        for (Brick brick :bricks)
+        for (Brick brick :bricks) // notwendig?
 
         game.batch.end();
 
@@ -382,6 +382,9 @@ public abstract class LevelScreen implements Screen {
             for(MovingPlatform movingPlatform : movingPlatforms)
                 movingPlatform.update(dt);
 
+            for (Brick bricks : bricks) {
+                bricks.update(dt);
+            }
             // Update Camera
             updateCamera();
 

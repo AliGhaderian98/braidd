@@ -1,6 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
+import braid.main.Items.PowerUp;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -47,6 +48,7 @@ public class Player extends DynamicGameObject {
     public boolean holdingJump;
     float jumpSpeed = 3.0f;
 
+
     private final float maxCoyoteTime = 0.15f;
     private boolean coyoteActive = false;
 
@@ -63,6 +65,7 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
+    private boolean hammerActive = false;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -319,6 +322,10 @@ public class Player extends DynamicGameObject {
 
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
+
+    public boolean isHammerActive() {return hammerActive;}
+
+    public void setHammerActive(boolean hammerActive) {this.hammerActive = hammerActive;}
 
     public void setMoveLimits(Vector2 max, Vector2 min) {
         maxMoveLimit = max;
