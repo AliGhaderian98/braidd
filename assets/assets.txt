@@ -102,8 +102,8 @@ shaders/red.frag
 shaders/standard.vert
 sprites/animals/Birds/Background/Bird1/Bird1_1.png
 sprites/animals/Birds/Background/Bird1/Bird1_2.png
-sprites/animals/Birds/Background/Bird1/Bird2_1.png
-sprites/animals/Birds/Background/Bird1/Bird2_2.png
+sprites/animals/Birds/Background/Bird2/Bird2_1.png
+sprites/animals/Birds/Background/Bird2/Bird2_2.png
 sprites/animals/Birds/Background/Bird3/Bird3_1.png
 sprites/animals/Birds/Background/Bird3/Bird3_2.png
 sprites/animals/Birds/Background/Bird4/Bird4_1.png
