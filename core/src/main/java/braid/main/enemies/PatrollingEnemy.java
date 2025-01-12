@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class PatrollingEnemy extends Enemy implements EnemyAI{
+public class PatrollingEnemy extends Enemy implements EnemyAI {
     private int direction = 1;
 
     public PatrollingEnemy(World world, LevelScreen screen, float x, float y, boolean rewindable, String type) {

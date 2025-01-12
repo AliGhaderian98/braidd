@@ -11,6 +11,7 @@ audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/object-templates/IdleEnemy.tx
 maps/object-templates/gleiter.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
@@ -65,12 +66,6 @@ maps/tilesets/Zoo/Rocks-Tiled/Tilemap/sand_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilesheet.txt
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_1.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_2.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_3.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_4.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack1.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack2.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
@@ -372,3 +367,4 @@ sprites/wissenschaftler/wissenschaftler_8.png
 sprites/wissenschaftler/wissenschaftler_9.png
 textFonts/MenuTextFont.ttf
 textFonts/pixelfont.ttf
+ui/uiskin.json

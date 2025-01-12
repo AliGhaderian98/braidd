@@ -4,13 +4,10 @@ import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
 import braid.main.Items.ItemDef;
-import braid.main.enemies.Knight;
+import braid.main.enemies.*;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
-import braid.main.enemies.MadScientist;
-import braid.main.enemies.PatrollingEnemy;
-import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.MovingPlatform;
 import braid.main.objects.Player;
@@ -496,6 +493,8 @@ public abstract class LevelScreen implements Screen {
             addEnemy((new UnhingedEnemy(world, this, player, x, y, rewindable, type)));
         } else if ("Knight".equals(enemyType)) {
             addEnemy((new Knight(world, this,player, x, y, rewindable, type)));
+        } else if ("IdleEnemy".equals(enemyType)) {
+            addEnemy((new IdleEnemy(world, this, x, y, rewindable, type)));
         }
     }
 
