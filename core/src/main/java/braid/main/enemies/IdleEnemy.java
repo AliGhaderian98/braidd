@@ -34,7 +34,26 @@ public class IdleEnemy extends Enemy implements EnemyAI{
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(8 / Braid.PPM);
+        shape.setPosition(new Vector2(0, -3/Braid.PPM));
+
+        fdef.shape = shape;
+        fdef.friction = 1f;
+        Fixture bodyFixture = b2body.createFixture(fdef);
+        bodyFixture.setUserData(new UserData("EnemyBody", this));
+
+        // Create head collider
+        FixtureDef headFdef = new FixtureDef();
+        PolygonShape head = new PolygonShape();
+        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 10 / Braid.PPM), 0);
+        headFdef.shape = head;
+        headFdef.friction = 1f;
+        Fixture headFixture = b2body.createFixture(headFdef);
+        headFixture.setUserData(new UserData("EnemyHead", this));
     }
+
 
     @Override
     public void setSprite(TextureAtlas atlas) {
@@ -48,6 +67,16 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
                     sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
+
+            case ("Bird1") -> {
+                sprite = new Sprite(atlas.findRegion("Bird1"));
+                idle = new Animation<>(0.1f, atlas.findRegions("Bird1"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
+
             default -> {
                 sprite = new Sprite(atlas.findRegion("lion-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
@@ -62,7 +91,6 @@ public class IdleEnemy extends Enemy implements EnemyAI{
 
     @Override
     public void idle() {
-
     }
 
     @Override

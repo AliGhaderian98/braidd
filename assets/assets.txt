@@ -65,12 +65,6 @@ maps/tilesets/Zoo/Rocks-Tiled/Tilemap/sand_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilesheet.txt
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_1.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_2.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_3.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaBg_4.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack1.png
-maps/tilesets/Zoo/Taiga Forest(Background Bär)/TaigaPack2.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
@@ -106,6 +100,20 @@ shaders/crt-rewind.frag
 shaders/grey.frag
 shaders/red.frag
 shaders/standard.vert
+sprites/animals/Birds/Background/Bird1/Bird1_1.png
+sprites/animals/Birds/Background/Bird1/Bird1_2.png
+sprites/animals/Birds/Background/Bird2/Bird2.1.png
+sprites/animals/Birds/Background/Bird2/Bird2.2.png
+sprites/animals/Birds/Background/Bird3/Bird3.1.png
+sprites/animals/Birds/Background/Bird3/Bird3.2.png
+sprites/animals/Birds/Background/Bird4/Bird4.1.png
+sprites/animals/Birds/Background/Bird4/Bird4.2.png
+sprites/animals/Birds/Background/Bird5/Bird5.1.png
+sprites/animals/Birds/Background/Bird5/Bird5.2.png
+sprites/animals/Birds/Background/Bird6/Bird6.1.png
+sprites/animals/Birds/Background/Bird6/Bird6.2.png
+sprites/animals/Birds/Background/Bird7/Bird7.1.png
+sprites/animals/Birds/Background/Bird7/Bird7.2.png
 sprites/animals/bird-die_01.png
 sprites/animals/bird-die_02.png
 sprites/animals/bird-die_03.png
