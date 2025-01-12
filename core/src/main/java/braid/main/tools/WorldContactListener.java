@@ -58,14 +58,16 @@ public class WorldContactListener implements ContactListener {
         UserData userDataA = (UserData) contact.getFixtureA().getUserData();
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
-        contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
-        contactEndedPlayerWithGround(userDataA, userDataB);
-        contactEndedPlayerWithLadder(userDataA, userDataB);
+        if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
+            contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
+            contactEndedPlayerWithGround(userDataA, userDataB);
+            contactEndedPlayerWithLadder(userDataA, userDataB);
+            contactEndedPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
+            contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
+            contactEndedPlayerWithKnightAttack(userDataA, userDataB);
+            playerWithSignEnds(userDataA, userDataB);
+        }
         patrollingEnemyOnEdge(userDataA, userDataB);
-        contactEndedPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
-        contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
-        contactEndedPlayerWithKnightAttack(userDataA, userDataB);
-        playerWithSignEnds(userDataA, userDataB);
     }
 
     @Override
