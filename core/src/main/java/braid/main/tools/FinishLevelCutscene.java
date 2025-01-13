@@ -3,25 +3,18 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class FinishLevelCutscene {
     private class Schwebebahn extends Actor {
         public Sprite sprite;
-        private Animation<TextureRegion> open;
+        private final Animation<TextureRegion> open;
         public boolean facingRight = false;
         private float stateTimer = 0;
         public boolean opening = false;
@@ -76,17 +69,15 @@ public class FinishLevelCutscene {
 
     private final LevelScreen level;
     private final Player player;
-    private final TiledMap map;
     private final Stage stage;
     private final Schwebebahn schwebebahn;
     private final SchwebebahnRail schwebebahnRail;
     private boolean playing = false;
     private boolean isFinished = false;
 
-    public FinishLevelCutscene(LevelScreen level, SpriteBatch batch, Viewport viewport, Player player, TiledMap map) {
+    public FinishLevelCutscene(LevelScreen level, SpriteBatch batch, Viewport viewport, Player player) {
         this.level = level;
         this.player = player;
-        this.map = map;
 
         stage = new Stage(viewport, batch);
 
@@ -124,9 +115,10 @@ public class FinishLevelCutscene {
         setSchwebebahnPosition();
 
         schwebebahnRail.addAction(Actions.sequence(
-            Actions.moveTo(schwebebahnRail.getX(), schwebebahn.getY(), 0.3f), // schwebebahnRail action
+            Actions.moveTo(schwebebahnRail.getX(), schwebebahn.getY(), 0.3f, Interpolation.sineOut),
             Actions.run(() -> schwebebahn.addAction(Actions.sequence(
-                Actions.moveTo((player.b2body.getPosition().x - schwebebahn.sprite.getWidth() / 2), schwebebahn.getY(), 1.5f),
+                Actions.moveTo((player.b2body.getPosition().x - schwebebahn.sprite.getWidth() / 2), schwebebahn.getY(),
+                    1.5f, Interpolation.fastSlow),
                 Actions.run(schwebebahn::open),
                 Actions.delay(schwebebahn.getAnimationDuration() + 1f),
                 Actions.run(() -> isFinished = true),

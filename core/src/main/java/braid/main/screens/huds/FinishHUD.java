@@ -62,30 +62,13 @@ public class FinishHUD implements Disposable {
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    private StringBuilder formatTime(long time) {
+    private String formatTime(long time) {
         long hours = (time / (1000 * 60 * 60)) % 24;
         long minutes = (time / (1000 * 60)) % 60;
         long seconds = (time / 1000) % 60;
         long milliseconds = (time % 1000)/10;
 
-        StringBuilder formattedTime = new StringBuilder();
-
-        if (hours > 0) {
-            formattedTime.append(String.format("%d:", hours));
-        }
-        if (minutes > 0 || hours > 0) {
-            formattedTime.append(String.format("%02d:", minutes));
-        }
-        if (seconds > 0 || minutes > 0 || hours > 0) {
-            formattedTime.append(String.format("%02d", seconds));
-        }
-        if (milliseconds > 0) {
-            if (!formattedTime.isEmpty()) {
-                formattedTime.append(".");
-            }
-            formattedTime.append(String.format("%02d", milliseconds));
-        }
-        return formattedTime;
+        return String.format("%d:%02d:%02d.%02d", hours, minutes, seconds, milliseconds);
     }
 
     public void updateHUD() {
