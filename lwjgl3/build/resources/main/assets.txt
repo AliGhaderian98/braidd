@@ -5,11 +5,13 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
-SaveGameFiles/SaveGame2.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/object-templates/GoalMovingPlatform.tx
+maps/object-templates/GoalMovingPlatformPosition.tx
+maps/object-templates/Schalter.tx
 maps/overworld-map.tmx
 maps/patrollingEnemyMap.tmx
 maps/testmap2.tmx
@@ -287,6 +289,7 @@ sprites/run-smoke/run-smoke_08.png
 sprites/run-smoke/run-smoke_09.png
 sprites/run-smoke/run-smoke_10.png
 sprites/run-smoke/run-smoke_11.png
+sprites/schwebebahn-opendoor/schwebebahn-rails.png
 sprites/schwebebahn-opendoor/schwebebahn_1.png
 sprites/schwebebahn-opendoor/schwebebahn_2.png
 sprites/schwebebahn-opendoor/schwebebahn_3.png

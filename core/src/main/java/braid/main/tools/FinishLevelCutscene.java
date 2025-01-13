@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class FinishLevelCutscene {
     private class Schwebebahn extends Actor {
@@ -26,13 +29,15 @@ public class FinishLevelCutscene {
         public Schwebebahn() {
             super();
             sprite = new Sprite(level.getAtlas().findRegion("schwebebahn"));
-            sprite.setScale(4f);
+            sprite.setBounds(0,0,sprite.getRegionWidth()/ Braid.PPM, sprite.getRegionHeight()/Braid.PPM);
             open = new Animation<>(0.05f, level.getAtlas().findRegions("schwebebahn"), Animation.PlayMode.NORMAL);
         }
 
         @Override
         public void draw(Batch batch, float parentAlpha) {
             sprite.setPosition(getX(), getY());
+            if (facingRight)
+                sprite.setFlip(true, false);
             sprite.draw(batch);
         }
 
@@ -50,64 +55,83 @@ public class FinishLevelCutscene {
         }
     }
 
+    private class SchwebebahnRail extends Actor {
+        public Sprite sprite;
+
+        public SchwebebahnRail() {
+            super();
+            sprite = new Sprite(level.getAtlas().findRegion("schwebebahn-rails"));
+            sprite.setBounds(0,0,sprite.getRegionWidth()/ Braid.PPM, sprite.getRegionHeight()/Braid.PPM);
+
+            Vector2 screenTopEdge = stage.getViewport().unproject(new Vector2(0, stage.getViewport().getScreenHeight()));
+            setY(screenTopEdge.y);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            sprite.setPosition(getX(), getY());
+            sprite.draw(batch);
+        }
+    }
+
     private final LevelScreen level;
-    private final SpriteBatch batch;
-    private final FitViewport viewport;
     private final Player player;
     private final TiledMap map;
     private final Stage stage;
     private final Schwebebahn schwebebahn;
+    private final SchwebebahnRail schwebebahnRail;
     private boolean playing = false;
     private boolean isFinished = false;
 
-    public FinishLevelCutscene(LevelScreen level, SpriteBatch batch, Player player, TiledMap map) {
+    public FinishLevelCutscene(LevelScreen level, SpriteBatch batch, Viewport viewport, Player player, TiledMap map) {
         this.level = level;
-        this.batch = batch;
         this.player = player;
         this.map = map;
 
-        int width = Gdx.graphics.getWidth();
-        int height = Gdx.graphics.getHeight();
-
-        viewport = new FitViewport(width, height, new OrthographicCamera());
         stage = new Stage(viewport, batch);
 
         schwebebahn = new Schwebebahn();
         stage.addActor(schwebebahn);
+        schwebebahnRail = new SchwebebahnRail();
+        stage.addActor(schwebebahnRail);
     }
 
     private void setSchwebebahnPosition() {
         Vector2 playerPosition = player.b2body.getPosition();
         playerPosition.y *= Braid.PPM;
-        Vector2 maxMapCoords = new Vector2(map.getProperties().get("width", Integer.class) *
-                                                map.getProperties().get("tilewidth", Integer.class),
-                                            map.getProperties().get("height", Integer.class) *
-                                                map.getProperties().get("tileheight", Integer.class));
+
+        Vector2 screenRightEdge = stage.getViewport().unproject(new Vector2(stage.getViewport().getScreenWidth(), 0));
+        Vector2 screenLeftEdge = stage.getViewport().unproject(new Vector2(0, 0));
+        Vector2 screenTopEdgeCenter = stage.getViewport().unproject(new Vector2(stage.getViewport().getScreenWidth()/2f, 0));
 
         Vector2 spawnPosition = new Vector2(0,
-            playerPosition.y + schwebebahn.sprite.getHeight()*schwebebahn.sprite.getScaleY());
+            playerPosition.y/Braid.PPM + (schwebebahn.sprite.getHeight()/Braid.PPM));
         // schwebebahn gets spawned in on the right
-        if (playerPosition.x < maxMapCoords.x/2)
-            spawnPosition.x = maxMapCoords.x + schwebebahn.sprite.getWidth()/2;
+        if (playerPosition.x < screenRightEdge.x)
+            spawnPosition.x = screenRightEdge.x;
         // schwebebahn gets spawned in on the left
         else {
-            spawnPosition.x = 0 - schwebebahn.sprite.getWidth()/2;
+            spawnPosition.x = screenLeftEdge.x - schwebebahn.sprite.getWidth();
             schwebebahn.facingRight = true;
-            schwebebahn.sprite.flip(true, false);
         }
 
         schwebebahn.setPosition(spawnPosition.x, spawnPosition.y);
+        schwebebahnRail.setPosition((screenTopEdgeCenter.x - schwebebahnRail.sprite.getWidth()/2), screenTopEdgeCenter.y);
     }
 
     public void play() {
         playing = true;
         setSchwebebahnPosition();
-        schwebebahn.addAction(Actions.sequence(
-            Actions.moveTo(player.b2body.getPosition().x, schwebebahn.getY(), 1f),
-            Actions.run(() -> schwebebahn.open()),
-            Actions.delay(schwebebahn.getAnimationDuration() + 1f),
-            Actions.run(() -> isFinished = true),
-            Actions.run(() -> level.setFinishHUD())
+
+        schwebebahnRail.addAction(Actions.sequence(
+            Actions.moveTo(schwebebahnRail.getX(), schwebebahn.getY(), 0.3f), // schwebebahnRail action
+            Actions.run(() -> schwebebahn.addAction(Actions.sequence(
+                Actions.moveTo((player.b2body.getPosition().x - schwebebahn.sprite.getWidth() / 2), schwebebahn.getY(), 1.5f),
+                Actions.run(schwebebahn::open),
+                Actions.delay(schwebebahn.getAnimationDuration() + 1f),
+                Actions.run(() -> isFinished = true),
+                Actions.run(level::setFinishHUD)
+            )))
         ));
     }
 

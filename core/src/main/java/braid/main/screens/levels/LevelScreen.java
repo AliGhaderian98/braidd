@@ -169,7 +169,7 @@ public abstract class LevelScreen implements Screen {
         levelHUD = new LevelHUD(game.batch, atlas, maxPages);
 
         finishHUD = new FinishHUD(game.batch, atlas);
-        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, player, map);
+        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, gameCamera.getViewport(), player, map);
         lastBackgroundIndex = map.getLayers().getIndex("Background 1");
     }
 
