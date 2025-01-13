@@ -47,9 +47,11 @@ maps/tilesets/Zoo/Farm-Tiled/Construct 3/Readme.txt
 maps/tilesets/Zoo/Farm-Tiled/License.txt
 maps/tilesets/Zoo/Farm-Tiled/Preview.png
 maps/tilesets/Zoo/Farm-Tiled/Sample.png
+maps/tilesets/Zoo/Farm-Tiled/Tilemap/Farm2.png
 maps/tilesets/Zoo/Farm-Tiled/Tilemap/tilemap.png
 maps/tilesets/Zoo/Farm-Tiled/Tilemap/tilemap_packed.png
 maps/tilesets/Zoo/Farm-Tiled/Tilesheet.txt
+maps/tilesets/Zoo/Farm2.tsx
 maps/tilesets/Zoo/Marble-Tilset.tsx
 maps/tilesets/Zoo/Rock-Tilset.tsx
 maps/tilesets/Zoo/Rocks-Tiled/License.txt
