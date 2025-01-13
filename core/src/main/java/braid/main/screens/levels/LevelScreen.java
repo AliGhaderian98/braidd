@@ -349,7 +349,7 @@ public abstract class LevelScreen implements Screen {
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
         for (Brick brick :bricks) // notwendig?
-
+            brick.draw(game.batch);
         game.batch.end();
 
         levelHUD.stage.draw();

@@ -103,6 +103,7 @@ public class B2WorldCreator {
     private void spawnBricks() {
         MapLayer brickLayer = map.getLayers().get("Brick");
         TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
+
         for (MapObject object : brickLayer.getObjects()) {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -117,7 +118,7 @@ public class B2WorldCreator {
             Fixture brickFixture = body.createFixture(fdef);
             brickFixture.setUserData(new UserData("Brick", this));
 
-            screen.addBrick(new Brick(world, brickRegion, map, rect));
+            screen.addBrick(new Brick(world,map, rect,true, brickRegion));
         }
     }
 

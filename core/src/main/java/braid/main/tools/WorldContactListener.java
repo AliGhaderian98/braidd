@@ -156,6 +156,7 @@ public class WorldContactListener implements ContactListener {
 
                 if (brickData.getObject() instanceof Brick brick) {
                     if (player.isHammerActive()) {
+                        player.jump(2);
                         brick.setBreakable(true);
                     }
                 }
