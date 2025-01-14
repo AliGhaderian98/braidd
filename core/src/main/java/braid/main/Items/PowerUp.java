@@ -62,6 +62,7 @@ public class PowerUp extends Item {
 
     @Override
     public void use(Player player) {
+
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
         }

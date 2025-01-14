@@ -223,28 +223,28 @@ dog-die
   index: 2
 dog-die
   rotate: false
-  xy: 202, 3
+  xy: 1964, 892
   size: 48, 32
   orig: 48, 32
   offset: 0, 0
   index: 3
 dog-die
   rotate: false
-  xy: 656, 528
+  xy: 202, 3
   size: 48, 32
   orig: 48, 32
   offset: 0, 0
   index: 4
 dog-idle
   rotate: false
-  xy: 1416, 674
+  xy: 656, 528
   size: 48, 32
   orig: 48, 32
   offset: 0, 0
   index: 2
 dog-idle
   rotate: false
-  xy: 1964, 892
+  xy: 1416, 674
   size: 48, 32
   orig: 48, 32
   offset: 0, 0
@@ -1532,14 +1532,14 @@ balloon-small
   index: -1
 brick
   rotate: false
-  xy: 2000, 942
-  size: 16, 80
-  orig: 16, 80
+  xy: 2000, 926
+  size: 16, 96
+  orig: 16, 96
   offset: 0, 0
   index: -1
 hammer
   rotate: false
-  xy: 1324, 608
+  xy: 1988, 874
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1567,7 +1567,7 @@ plattform
   index: -1
 rewind-symbol
   rotate: false
-  xy: 1988, 875
+  xy: 2018, 929
   size: 18, 15
   orig: 18, 15
   offset: 0, 0
@@ -1721,56 +1721,56 @@ schwebebahn
   index: 9
 schwebimini_e
   rotate: false
-  xy: 624, 101
+  xy: 1324, 608
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_n
   rotate: false
-  xy: 624, 83
+  xy: 624, 101
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 624, 65
+  xy: 624, 83
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_nw
   rotate: false
-  xy: 624, 47
+  xy: 624, 65
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_s
   rotate: false
-  xy: 624, 29
+  xy: 624, 47
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 1120, 590
+  xy: 624, 29
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 1138, 590
+  xy: 1120, 590
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 1156, 590
+  xy: 1138, 590
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

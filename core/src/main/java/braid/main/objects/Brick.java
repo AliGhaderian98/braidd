@@ -18,7 +18,7 @@ public class Brick extends InteractiveGameObject {
     private TextureRegion region;
 
     public Brick(World world, TiledMap map, Rectangle boundary, boolean isSensor, TextureRegion region) {
-        super(world,map, boundary, true);
+        super(world,map, boundary, false);
         this.region = region;
 
         sprite = new Sprite(region);
