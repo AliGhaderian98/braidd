@@ -382,8 +382,8 @@ public abstract class LevelScreen implements Screen {
             for(MovingPlatform movingPlatform : movingPlatforms)
                 movingPlatform.update(dt);
 
-            for (Brick bricks : bricks) {
-                bricks.update(dt);
+            for (Brick brick : bricks) {
+                brick.update(dt);
             }
             // Update Camera
             updateCamera();

@@ -152,25 +152,24 @@ public class WorldContactListener implements ContactListener {
 
             if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
                 (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
-                UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
+                if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+                    (userDataA.getObject() instanceof Brick || userDataB.getObject() instanceof Brick)) {
 
-                if (brickData.getObject() instanceof Brick brick) {
                     if (player.isHammerActive()) {
-                        player.jump(2);
-                        brick.setBreakable(true);
+
+                        Brick brick = (userDataA.getObject() instanceof Brick) ? (Brick) userDataA.getObject() : (Brick) userDataB.getObject();
+                        player.setCollidingBrick(brick);
                     }
                 }
+
             }
     }
 
     private void endHammerBoxWithBrick (UserData userDataA, UserData userDataB) {
         if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
-            UserData brickData = (userDataA.getObject() instanceof Brick) ? userDataA : userDataB;
 
-            if (brickData.getObject() instanceof Brick brick) {
-                brick.setBreakable(false);
-            }
+            player.resetCollidingBrick();
         }
     }
 

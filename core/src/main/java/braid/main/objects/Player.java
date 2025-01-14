@@ -66,6 +66,7 @@ public class Player extends DynamicGameObject {
     private float platformVelocity = 0;
     private boolean moving = false;
     private boolean hammerActive = false;
+    private Brick collidingBrick;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -248,7 +249,6 @@ public class Player extends DynamicGameObject {
         }
     }
 
-
     //Getter und Setter
 
     @Override
@@ -326,6 +326,14 @@ public class Player extends DynamicGameObject {
     public boolean isHammerActive() {return hammerActive;}
 
     public void setHammerActive(boolean hammerActive) {this.hammerActive = hammerActive;}
+
+
+    public Brick getCollidingBrick() { return collidingBrick; }
+
+    public void setCollidingBrick(Brick collidingBrick) { this.collidingBrick = collidingBrick; }
+
+    public void resetCollidingBrick() {this.collidingBrick = null;}
+
 
     public void setMoveLimits(Vector2 max, Vector2 min) {
         maxMoveLimit = max;

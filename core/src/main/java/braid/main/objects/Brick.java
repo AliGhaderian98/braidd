@@ -13,7 +13,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Brick extends InteractiveGameObject {
     private final Sprite sprite;
-    private boolean breakable = false;
+    private boolean toDestroy = false;
+    private boolean destroyed = false;
     private TextureRegion region;
 
     public Brick(World world, TiledMap map, Rectangle boundary, boolean isSensor, TextureRegion region) {
@@ -34,28 +35,23 @@ public class Brick extends InteractiveGameObject {
     }
 
     public void update(float dt) {
-    //    if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("HAMMER")))
-            disappear();
+        if (toDestroy && !destroyed) {
+            world.destroyBody(b2body);
+            destroyed = true;
+        }
     }
 
-    public void disappear () {
-        if (isBreakable()) {
-  //          world.destroyBody(b2body);
-        }
+    public void use () {
+        toDestroy = true;
     }
     @Override
     public void defineBody() {
 
     }
     public void draw(Batch batch) {
-        sprite.draw(batch);
+        if (!destroyed)
+            sprite.draw(batch);
     }
 
-    public boolean isBreakable() {
-        return breakable;
-    }
 
-    public void setBreakable(boolean breakable) {
-        this.breakable = breakable;
-    }
 }

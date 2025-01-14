@@ -1,5 +1,6 @@
 package braid.main.tools;
 
+import braid.main.objects.Brick;
 import braid.main.rewind.RewindController;
 import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
@@ -34,6 +35,7 @@ public class PlayerInputHandler {
             handleMovement();
             handleJumping();
             handleClimbing();
+            handleDestroyingBrick();
         }
 
         handlePause();
@@ -119,6 +121,15 @@ public class PlayerInputHandler {
         } else {
             if (player.b2body.getLinearVelocity().x != 0)
                 player.stopMovement();
+        }
+    }
+
+    private void handleDestroyingBrick() {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("HAMMER"))) {
+            if (player.getCollidingBrick() != null) {
+                Brick brick = player.getCollidingBrick();
+                brick.use();
+            }
         }
     }
 }
