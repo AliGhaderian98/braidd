@@ -448,6 +448,7 @@ public abstract class LevelScreen implements Screen {
         gameIsPaused = false;
         // reset Screen
         game.setScreen(getNewInstance());
+        player.setNewestPowerUp(false);
     }
 
     @Override
