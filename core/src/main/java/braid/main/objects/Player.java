@@ -65,8 +65,14 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
+    private boolean activePowerUp = false;
     private boolean hammerActive = false;
     private Brick collidingBrick;
+    private PowerUp.TypeOfPowerUp previousPowerUp;
+    private boolean newestPowerUp = true;
+
+
+
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -138,18 +144,27 @@ public class Player extends DynamicGameObject {
         feet.dispose();
 
         // Create Hammer collider
-        FixtureDef hammerFdef = new FixtureDef();
-        PolygonShape hammer = new PolygonShape();
-        hammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
-        hammerFdef.shape = hammer;
-        hammerFdef.friction = 1f;
-        hammerFdef.isSensor = true;
-        Fixture hammerFixture = b2body.createFixture(hammerFdef);
-        hammerFixture.setUserData(new UserData("HammerHitBox", this));
+        FixtureDef rechteHammerFdef = new FixtureDef();
+        PolygonShape rechterHammer = new PolygonShape();
+        rechterHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
+        rechteHammerFdef.shape = rechterHammer;
+        rechteHammerFdef.friction = 1f;
+        rechteHammerFdef.isSensor = true;
+        Fixture rechteHammerFixture = b2body.createFixture(rechteHammerFdef);
+        rechteHammerFixture.setUserData(new UserData("RechteHammerHitBox", this));
+
+        FixtureDef linkeHammerFdef = new FixtureDef();
+        PolygonShape linkerHammer = new PolygonShape();
+        linkerHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(-0.25F, 35 / Braid.PPM), 0);
+        linkeHammerFdef.shape = linkerHammer;
+        linkeHammerFdef.friction = 1f;
+        linkeHammerFdef.isSensor = true;
+        Fixture linkeHammerFixture = b2body.createFixture(linkeHammerFdef);
+        linkeHammerFixture.setUserData(new UserData("LinkeHammerHitBox", this));
 
 
         shape.dispose();
-        hammer.dispose();
+        rechterHammer.dispose();
     }
 
     public void update(float dt) {
@@ -323,13 +338,21 @@ public class Player extends DynamicGameObject {
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
 
-    public boolean isHammerActive() {return hammerActive;}
+    public boolean isActivePowerUp() { return activePowerUp; }
+    public void setActivePowerUp(boolean activePowerUp) { this.activePowerUp = activePowerUp; }
 
+    public boolean isHammerActive() {return hammerActive;}
     public void setHammerActive(boolean hammerActive) {this.hammerActive = hammerActive;}
 
+    public PowerUp.TypeOfPowerUp getPreviousPowerUp() { return previousPowerUp; }
+    public void setPreviousPowerUp(PowerUp.TypeOfPowerUp previousPowerUp) { this.previousPowerUp = previousPowerUp; }
+
+
+    public boolean isNewestPowerUp() { return newestPowerUp; }
+
+    public void setNewestPowerUp(boolean newestPowerUp) { this.newestPowerUp = newestPowerUp; }
 
     public Brick getCollidingBrick() { return collidingBrick; }
-
     public void setCollidingBrick(Brick collidingBrick) { this.collidingBrick = collidingBrick; }
 
     public void resetCollidingBrick() {this.collidingBrick = null;}

@@ -108,8 +108,6 @@ public class B2WorldCreator {
         for (MapObject object : brickLayer.getObjects()) {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-
             screen.addBrick(new Brick(world,map, rect,true, brickRegion));
         }
     }

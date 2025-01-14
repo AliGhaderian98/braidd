@@ -497,6 +497,7 @@ public abstract class LevelScreen implements Screen {
 
     public void addBrick (Brick brick) {
         bricks.add(brick);
+        brick.setRewindController((new RewindController((new RewindableBody(brick.b2body,brick)))));
     }
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }
