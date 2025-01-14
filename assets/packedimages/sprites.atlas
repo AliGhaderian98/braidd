@@ -27,77 +27,77 @@ bird-die
   index: 2
 bird-die
   rotate: false
-  xy: 2000, 1006
+  xy: 1120, 608
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 3
 bird-die
   rotate: false
-  xy: 1120, 608
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 4
-bird-fly
-  rotate: false
-  xy: 2000, 988
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-bird-fly
-  rotate: false
   xy: 1154, 608
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
-  index: 2
-bird-fly
-  rotate: false
-  xy: 2000, 970
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 3
+  index: 4
 bird-fly
   rotate: false
   xy: 1188, 608
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
-  index: 4
-bird-fly
-  rotate: false
-  xy: 2000, 952
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 5
+  index: 1
 bird-fly
   rotate: false
   xy: 1222, 608
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
+  index: 2
+bird-fly
+  rotate: false
+  xy: 1256, 608
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 3
+bird-fly
+  rotate: false
+  xy: 1290, 608
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 4
+bird-fly
+  rotate: false
+  xy: 330, 19
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 5
+bird-fly
+  rotate: false
+  xy: 1482, 774
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
   index: 6
 bird-idle
   rotate: false
-  xy: 1256, 608
+  xy: 1548, 824
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 2
 bird-idle
   rotate: false
-  xy: 1290, 608
+  xy: 1614, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 3
 bird-idle
   rotate: false
-  xy: 330, 19
+  xy: 1648, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
@@ -300,84 +300,84 @@ dog-run
   index: 6
 rat-die
   rotate: false
-  xy: 1482, 774
+  xy: 1682, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 1
-rat-idle
-  rotate: false
-  xy: 1482, 774
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-rat-run
-  rotate: false
-  xy: 1482, 774
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-rat-die
-  rotate: false
-  xy: 1548, 824
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 2
-rat-die
-  rotate: false
-  xy: 1614, 874
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 3
-rat-die
-  rotate: false
-  xy: 1648, 874
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 4
 rat-idle
   rotate: false
   xy: 1682, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
+  index: 1
+rat-run
+  rotate: false
+  xy: 1682, 874
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+rat-die
+  rotate: false
+  xy: 1716, 874
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+rat-die
+  rotate: false
+  xy: 1750, 874
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 3
+rat-die
+  rotate: false
+  xy: 1784, 874
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 4
+rat-idle
+  rotate: false
+  xy: 1818, 874
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
   index: 2
 rat-idle
   rotate: false
-  xy: 1716, 874
+  xy: 1852, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 3
 rat-idle
   rotate: false
-  xy: 1750, 874
+  xy: 1886, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 4
 rat-run
   rotate: false
-  xy: 1784, 874
+  xy: 1920, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 2
 rat-run
   rotate: false
-  xy: 1818, 874
+  xy: 1954, 874
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 3
 rat-run
   rotate: false
-  xy: 1852, 874
+  xy: 1350, 624
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
@@ -1399,7 +1399,7 @@ land-smoke
   index: 9
 lion-climb
   rotate: false
-  xy: 2000, 926
+  xy: 2018, 998
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -1420,98 +1420,98 @@ lion-climb
   index: 4
 lion-climb
   rotate: false
-  xy: 624, 478
+  xy: 2018, 972
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 3
+lion-idle
+  rotate: false
+  xy: 2018, 946
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+lion-idle
+  rotate: false
+  xy: 624, 452
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
 lion-idle
   rotate: false
   xy: 624, 426
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
-  index: 1
+  index: 3
 lion-idle
   rotate: false
   xy: 624, 400
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
-  index: 2
-lion-idle
-  rotate: false
-  xy: 624, 374
-  size: 24, 24
-  orig: 24, 24
-  offset: 0, 0
-  index: 3
-lion-idle
-  rotate: false
-  xy: 624, 348
-  size: 24, 24
-  orig: 24, 24
-  offset: 0, 0
   index: 4
 lion-fall
   rotate: false
-  xy: 624, 452
+  xy: 624, 478
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 lion-jump
   rotate: false
-  xy: 624, 322
+  xy: 624, 374
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 lion-land
   rotate: false
-  xy: 624, 296
+  xy: 624, 348
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 lion-run
   rotate: false
-  xy: 624, 270
+  xy: 624, 322
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 1
 lion-run
   rotate: false
-  xy: 624, 244
+  xy: 624, 296
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 2
 lion-run
   rotate: false
-  xy: 624, 218
+  xy: 624, 270
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 3
 lion-run
   rotate: false
-  xy: 624, 192
+  xy: 624, 244
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 4
 lion-run
   rotate: false
-  xy: 624, 166
+  xy: 624, 218
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: 5
 lion-run
   rotate: false
-  xy: 624, 140
+  xy: 624, 192
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -1525,28 +1525,28 @@ balloon
   index: -1
 balloon-small
   rotate: false
-  xy: 624, 67
+  xy: 624, 119
   size: 18, 19
   orig: 18, 19
   offset: 0, 0
   index: -1
 brick
   rotate: false
-  xy: 1886, 874
-  size: 16, 16
-  orig: 16, 16
+  xy: 2000, 942
+  size: 16, 80
+  orig: 16, 80
   offset: 0, 0
   index: -1
 hammer
   rotate: false
-  xy: 624, 49
+  xy: 1324, 608
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 page
   rotate: false
-  xy: 624, 114
+  xy: 624, 166
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -1567,14 +1567,14 @@ plattform
   index: -1
 rewind-symbol
   rotate: false
-  xy: 1324, 609
+  xy: 1988, 875
   size: 18, 15
   orig: 18, 15
   offset: 0, 0
   index: -1
 ritalin
   rotate: false
-  xy: 624, 88
+  xy: 624, 140
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -1721,56 +1721,56 @@ schwebebahn
   index: 9
 schwebimini_e
   rotate: false
-  xy: 1904, 874
+  xy: 624, 101
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_n
   rotate: false
-  xy: 624, 31
+  xy: 624, 83
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 1922, 874
+  xy: 624, 65
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_nw
   rotate: false
-  xy: 1940, 874
+  xy: 624, 47
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_s
   rotate: false
-  xy: 1958, 874
+  xy: 624, 29
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 1976, 874
+  xy: 1120, 590
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 1994, 874
+  xy: 1138, 590
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 1350, 624
+  xy: 1156, 590
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

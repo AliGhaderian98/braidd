@@ -125,7 +125,7 @@ public class PlayerInputHandler {
     }
 
     private void handleDestroyingBrick() {
-        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("HAMMER"))) {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))) {
             if (player.getCollidingBrick() != null) {
                 Brick brick = player.getCollidingBrick();
                 brick.use();
