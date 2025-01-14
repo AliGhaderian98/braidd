@@ -150,7 +150,7 @@ public class B2WorldCreator {
                 int goalPosY = (int) goal.getProperties().get("Y");
 
                 screen.addGoalMovingPlatform(new GoalMovingPlatform(world, movingPlatformRegion, rect, speed,
-                    schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                     schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
 

@@ -543,6 +543,11 @@ public abstract class LevelScreen implements Screen {
         movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
     }
 
+    public void addGoalMovingPlatform(MovingPlatform movingPlatform) {
+        movingPlatforms.add(movingPlatform);
+        movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
+    }
+
     public void addSchalter(Schalter schalter) {
         schalters.add(schalter);
     }
