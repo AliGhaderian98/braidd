@@ -10,7 +10,7 @@ import braid.main.tools.Savemanager;
 public class WegZurUniLevel extends LevelScreen {
 
     public WegZurUniLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/WEGZURUNI.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "WEGZURUNI";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
