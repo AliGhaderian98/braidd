@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
@@ -85,15 +86,26 @@ public class B2WorldCreator {
     private void spawnWalls() {
         MapLayer wallLayer = map.getLayers().get("Walls");
         for (MapObject object : wallLayer.getObjects()) {
-
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            float rotation = 0;
+            if (object.getProperties().containsKey("rotation")) {
+                rotation =  (float) object.getProperties().get("rotation");
+                System.out.println(rotation);
+            }
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
-
+            bdef.position.set(
+                (rect.getX() + rect.getWidth() / 2) / Braid.PPM,
+                (rect.getY() + rect.getHeight() / 2) / Braid.PPM
+            );
             body = world.createBody(bdef);
 
-            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+            shape.setAsBox(
+                (rect.getWidth() / 2) / Braid.PPM,
+                (rect.getHeight() / 2) / Braid.PPM,
+                new Vector2(0, 0),
+                (float) -Math.toRadians(rotation)
+            );
             fdef.shape = shape;
             Fixture wallFixture = body.createFixture(fdef);
             wallFixture.setUserData(new UserData("Wall", this));

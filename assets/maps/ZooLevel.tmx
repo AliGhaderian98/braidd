@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="20" nextobjectid="1296">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="20" nextobjectid="1296">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -578,7 +578,6 @@
   <object id="368" x="1779.88" y="846.292" width="43.5833" height="6.75"/>
   <object id="369" x="1511.54" y="959.375" width="129.167" height="6.75"/>
   <object id="370" x="1776.38" y="1211.13" width="174.25" height="6.75"/>
-  <object id="373" x="718.325" y="1397.57" width="5.35993" height="33.7814" rotation="43.225"/>
   <object id="460" x="2286" y="1476" width="108" height="90"/>
   <object id="461" x="2466" y="1422" width="108" height="144"/>
   <object id="463" x="2318.38" y="1368.29" width="60.9166" height="6.75"/>
@@ -1217,6 +1216,7 @@
   <object id="1293" x="1494.02" y="976.874" width="14.9556" height="5.01441" rotation="0.549008"/>
   <object id="1294" x="1494" y="981.914" width="9.93338" height="5.01441" rotation="0.549008"/>
   <object id="1295" x="1493.93" y="986.982" width="3.97782" height="2.9033" rotation="0.549008"/>
+  <object id="373" x="718.325" y="1397.57" width="5.35993" height="33.7814" rotation="43.225"/>
  </objectgroup>
  <objectgroup id="11" name="Enemies">
   <properties>
