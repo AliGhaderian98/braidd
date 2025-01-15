@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 2
-SaveGameName: d
+SaveGameName: aa
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -15,7 +15,7 @@ UnlockedLevels: {
 	LUISENVIERTEL: false
 }
 lastLevel: UNI
-Playtime: 19054
+Playtime: 12960
 Collectables: {
 	class: java.util.HashMap
 	UNI: [

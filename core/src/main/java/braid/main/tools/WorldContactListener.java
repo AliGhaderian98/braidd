@@ -252,11 +252,11 @@ public class WorldContactListener implements ContactListener {
             player.setIsGrounded(true);
             platform.setPlayer(player);
         }
-
     }
 
     private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform)) {
             MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
                 ? (MovingPlatform) userDataA.getObject()
                 : (MovingPlatform) userDataB.getObject();
@@ -318,16 +318,18 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+            if (player.isGrounded()) {
                 player.fall();
+            }
         }
     }
 
     private void contactEndedPlayerWithBrick(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+            if (player.isGrounded()) {
                 player.fall();
+            }
         }
     }
 

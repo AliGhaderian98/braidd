@@ -12,7 +12,7 @@ public class HBFLevel extends LevelScreen {
         super(game, "maps/HBF.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "HBF";
 
-        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(32/Braid.PPM, 48/Braid.PPM);
     }
 
     @Override
