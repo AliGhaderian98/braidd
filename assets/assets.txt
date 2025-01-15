@@ -8,9 +8,9 @@ SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
+maps/Entwurf-1 (Freudenberg).tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/object-templates/Brick.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
@@ -33,6 +33,34 @@ maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.png
+maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.tsx
+maps/tilesets/FreudenBerg/Bilder/2d_car.jpg
+maps/tilesets/FreudenBerg/Bilder/2d_car.tsx
+maps/tilesets/FreudenBerg/Bilder/Blue Sky.tsx
+maps/tilesets/FreudenBerg/Bilder/Car.tsx
+maps/tilesets/FreudenBerg/Bilder/Cloud 2.tsx
+maps/tilesets/FreudenBerg/Bilder/Cloud Tileset.png
+maps/tilesets/FreudenBerg/Bilder/Door.png
+maps/tilesets/FreudenBerg/Bilder/Mobile - Angry Birds - Post-Chrome Characters.tsx
+maps/tilesets/FreudenBerg/Bilder/PC Computer - RPG Maker MV - Blue Sky.png
+maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.png
+maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.zip
+maps/tilesets/FreudenBerg/Bilder/Snow.tsx
+maps/tilesets/FreudenBerg/Bilder/car junkyard.png
+maps/tilesets/FreudenBerg/Bilder/city_tiles_by_carchagui_ddrixpq.png
+maps/tilesets/FreudenBerg/Bilder/exercises-X-material.zip
+maps/tilesets/FreudenBerg/Bilder/floor.tsx
+maps/tilesets/FreudenBerg/Bilder/florest downt.png
+maps/tilesets/FreudenBerg/Bilder/free_to_use__rpg_tileset_by_virydyan_ddvahtl.png
+maps/tilesets/FreudenBerg/Bilder/layer 1 florest.png
+maps/tilesets/FreudenBerg/Bilder/layer 2 florest fog.png
+maps/tilesets/FreudenBerg/Bilder/layer 3 grass.png
+maps/tilesets/FreudenBerg/Bilder/layer 4 mountain.png
+maps/tilesets/FreudenBerg/Bilder/layer 5 mountain and sky.png
+maps/tilesets/FreudenBerg/Bilder/sky up.png
+maps/tilesets/FreudenBerg/Bilder/snow_tiles_by_droid779_dcc7m3a.png
+maps/tilesets/FreudenBerg/Bilder/test.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
 maps/tilesets/Zoo/Basic-Tiled.tsx
