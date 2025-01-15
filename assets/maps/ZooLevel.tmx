@@ -756,7 +756,7 @@
     <property name="type" value="Bird1"/>
    </properties>
   </object>
-  <object id="409" template="object-templates/IdleEnemy.tx" x="1686.5" y="810">
+  <object id="409" template="object-templates/IdleEnemy.tx" x="1655.83" y="810.667">
    <properties>
     <property name="type" value="Bird1"/>
    </properties>
