@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="32" tilewidth="16" tileheight="16" infinite="1" nextlayerid="29" nextobjectid="279">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="16" tileheight="16" infinite="1" nextlayerid="29" nextobjectid="279">
  <tileset firstgid="1" source="../tilesets/oldcitys.tsx"/>
  <tileset firstgid="71" source="../tilesets/alteSchwebebahn.tsx"/>
  <tileset firstgid="72" source="../tilesets/oldcityu.tsx"/>
  <tileset firstgid="328" source="../../../Zoo/Basic-Tiled.tsx"/>
  <tileset firstgid="508" source="../tilesets/steampunk1.tsx"/>
- <layer id="27" name="Background1" width="96" height="32">
+ <layer id="27" name="Background1" width="128" height="96">
   <data encoding="csv">
-   <chunk x="-32" y="16" width="16" height="16">
+   <chunk x="0" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -27,9 +27,9 @@
 </chunk>
   </data>
  </layer>
- <layer id="28" name="Background1.5" width="96" height="32">
+ <layer id="28" name="Background1.5" width="128" height="96">
   <data encoding="csv">
-   <chunk x="0" y="-64" width="16" height="16">
+   <chunk x="32" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -47,7 +47,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="32" y="-64" width="16" height="16">
+   <chunk x="64" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -65,7 +65,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="64" y="-64" width="16" height="16">
+   <chunk x="96" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -85,9 +85,9 @@
 </chunk>
   </data>
  </layer>
- <layer id="12" name="Ground" width="96" height="32">
+ <layer id="12" name="Ground" width="128" height="96">
   <data encoding="csv">
-   <chunk x="16" y="-64" width="16" height="16">
+   <chunk x="48" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -105,7 +105,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="32" y="-64" width="16" height="16">
+   <chunk x="64" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -123,7 +123,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="48" y="-64" width="16" height="16">
+   <chunk x="80" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -141,7 +141,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="64" y="-64" width="16" height="16">
+   <chunk x="96" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -159,7 +159,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="0" y="-48" width="16" height="16">
+   <chunk x="32" y="16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,1073742011,1073742011,1073742011,
@@ -177,7 +177,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="80" y="-48" width="16" height="16">
+   <chunk x="112" y="16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1073742011,1073742011,1073742011,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -195,7 +195,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="0" y="-32" width="16" height="16">
+   <chunk x="32" y="32" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,74,75,74,75,74,75,0,0,0,0,0,0,
@@ -213,7 +213,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="80" y="-32" width="16" height="16">
+   <chunk x="112" y="32" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,74,75,74,75,74,75,74,75,74,75,74,75,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -231,7 +231,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="0" y="-16" width="16" height="16">
+   <chunk x="32" y="48" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -249,7 +249,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="0" y="0" width="16" height="16">
+   <chunk x="32" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -267,7 +267,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,73,74,75,74,75,74,75,74,75,74,75,74,75,74,75
 </chunk>
-   <chunk x="16" y="0" width="16" height="16">
+   <chunk x="48" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -285,7 +285,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,74,75,74,75,74,75,74,75,74,75,74,75
 </chunk>
-   <chunk x="32" y="0" width="16" height="16">
+   <chunk x="64" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -303,7 +303,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,74,75,74,75,74,75,74,75,74,75,0,0
 </chunk>
-   <chunk x="48" y="0" width="16" height="16">
+   <chunk x="80" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -321,7 +321,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,74,75,74,75,74,75,74,75,74,75,74,75,74,75
 </chunk>
-   <chunk x="64" y="0" width="16" height="16">
+   <chunk x="96" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -339,7 +339,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,74,75,74,75,74,75,74,75,74,75,74,75
 </chunk>
-   <chunk x="80" y="0" width="16" height="16">
+   <chunk x="112" y="64" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -357,7 +357,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,74,75,74,75,74,75,74,75,74,75,74,75,74,75
 </chunk>
-   <chunk x="0" y="16" width="16" height="16">
+   <chunk x="32" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -375,7 +375,7 @@
 49,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,
 57,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58
 </chunk>
-   <chunk x="16" y="16" width="16" height="16">
+   <chunk x="48" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -393,7 +393,7 @@
 50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,
 58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58
 </chunk>
-   <chunk x="32" y="16" width="16" height="16">
+   <chunk x="64" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,74,75,
@@ -411,7 +411,7 @@
 50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,
 58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,0
 </chunk>
-   <chunk x="48" y="16" width="16" height="16">
+   <chunk x="80" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 74,75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -429,7 +429,7 @@
 50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,
 58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58
 </chunk>
-   <chunk x="64" y="16" width="16" height="16">
+   <chunk x="96" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -447,7 +447,7 @@
 50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,
 58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58
 </chunk>
-   <chunk x="80" y="16" width="16" height="16">
+   <chunk x="112" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -467,9 +467,9 @@
 </chunk>
   </data>
  </layer>
- <layer id="24" name="Tile Layer 14" width="96" height="32">
+ <layer id="24" name="Tile Layer 14" width="128" height="96">
   <data encoding="csv">
-   <chunk x="48" y="16" width="16" height="16">
+   <chunk x="80" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -487,7 +487,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
-   <chunk x="64" y="16" width="16" height="16">
+   <chunk x="96" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -507,9 +507,9 @@
 </chunk>
   </data>
  </layer>
- <layer id="4" name="Schwebebahn" width="96" height="32" offsetx="-17.3333" offsety="-20">
+ <layer id="4" name="Schwebebahn" width="128" height="96" offsetx="-17.3333" offsety="-20">
   <data encoding="csv">
-   <chunk x="0" y="16" width="16" height="16">
+   <chunk x="32" y="80" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -530,199 +530,199 @@
   </data>
  </layer>
  <objectgroup id="5" name="NPC">
-  <object id="1" template="../../../../object-templates/sign.tx" x="192" y="400" width="64" height="66"/>
+  <object id="1" template="../../../../object-templates/sign.tx" x="704" y="1424" width="64" height="66"/>
  </objectgroup>
  <objectgroup id="6" name="MovingPlattforms">
-  <object id="88" x="208" y="336" width="64" height="16"/>
-  <object id="90" x="304" y="368" width="64" height="16"/>
-  <object id="97" template="../../../../object-templates/movingPlatformType2.tx" x="920.472" y="45.3333" width="61.5" height="18">
+  <object id="88" x="720" y="1360" width="64" height="16"/>
+  <object id="90" x="816" y="1392" width="64" height="16"/>
+  <object id="97" template="../../../../object-templates/movingPlatformType2.tx" x="1432.47" y="1069.33" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="232"/>
     <property name="rewindable" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="216" template="../../../../object-templates/movingPlatformType2.tx" x="921.333" y="-50" width="61.5" height="18">
+  <object id="216" template="../../../../object-templates/movingPlatformType2.tx" x="1433.33" y="974" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="235"/>
     <property name="rewindable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="217" template="../../../../object-templates/movingPlatformType2.tx" x="928" y="-177.333" width="61.5" height="18">
+  <object id="217" template="../../../../object-templates/movingPlatformType2.tx" x="1440" y="846.667" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="238"/>
     <property name="speed" type="float" value="2"/>
    </properties>
   </object>
-  <object id="218" template="../../../../object-templates/movingPlatformType2.tx" x="928" y="-277.333" width="61.5" height="18">
+  <object id="218" template="../../../../object-templates/movingPlatformType2.tx" x="1440" y="746.667" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="237"/>
     <property name="rewindable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="219" template="../../../../object-templates/movingPlatformType2.tx" x="736" y="-464" width="61.5" height="18">
+  <object id="219" template="../../../../object-templates/movingPlatformType2.tx" x="1248" y="560" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="242"/>
     <property name="speed" type="float" value="3"/>
    </properties>
   </object>
-  <object id="220" template="../../../../object-templates/movingPlatformType2.tx" x="736" y="-560" width="61.5" height="18">
+  <object id="220" template="../../../../object-templates/movingPlatformType2.tx" x="1248" y="464" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="245"/>
     <property name="rewindable" type="bool" value="false"/>
     <property name="speed" type="float" value="2"/>
    </properties>
   </object>
-  <object id="221" template="../../../../object-templates/movingPlatformType2.tx" x="736" y="-656" width="61.5" height="18">
+  <object id="221" template="../../../../object-templates/movingPlatformType2.tx" x="1248" y="368" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="251"/>
     <property name="rewindable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="222" template="../../../../object-templates/movingPlatformType2.tx" x="736" y="-752" width="61.5" height="18">
+  <object id="222" template="../../../../object-templates/movingPlatformType2.tx" x="1248" y="272" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="255"/>
    </properties>
   </object>
-  <object id="223" template="../../../../object-templates/movingPlatformType2.tx" x="656" y="336" width="61.5" height="18">
+  <object id="223" template="../../../../object-templates/movingPlatformType2.tx" x="1168" y="1360" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="264"/>
    </properties>
   </object>
-  <object id="224" template="../../../../object-templates/movingPlatformType2.tx" x="560" y="384" width="61.5" height="18">
+  <object id="224" template="../../../../object-templates/movingPlatformType2.tx" x="1072" y="1408" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="265"/>
    </properties>
   </object>
-  <object id="225" template="../../../../object-templates/movingPlatformType2.tx" x="816" y="336" width="61.5" height="18">
+  <object id="225" template="../../../../object-templates/movingPlatformType2.tx" x="1328" y="1360" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="267"/>
    </properties>
   </object>
-  <object id="226" template="../../../../object-templates/movingPlatformType2.tx" x="896" y="384" width="61.5" height="18">
+  <object id="226" template="../../../../object-templates/movingPlatformType2.tx" x="1408" y="1408" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="263"/>
    </properties>
   </object>
-  <object id="231" template="../../../../object-templates/GoalPosition.tx" x="961" y="56"/>
-  <object id="232" template="../../../../object-templates/GoalPosition.tx" x="593" y="102"/>
-  <object id="235" x="596" y="-82.6667">
+  <object id="231" template="../../../../object-templates/GoalPosition.tx" x="1473" y="1080"/>
+  <object id="232" template="../../../../object-templates/GoalPosition.tx" x="1105" y="1126"/>
+  <object id="235" x="1108" y="941.333">
    <point/>
   </object>
-  <object id="237" x="590.667" y="-267.333">
+  <object id="237" x="1102.67" y="756.667">
    <point/>
   </object>
-  <object id="238" x="594" y="-166.667">
+  <object id="238" x="1106" y="857.333">
    <point/>
   </object>
-  <object id="241" x="593.333" y="-372.667">
+  <object id="241" x="1105.33" y="651.333">
    <point/>
   </object>
-  <object id="242" x="158.667" y="-456">
+  <object id="242" x="670.667" y="568">
    <point/>
   </object>
-  <object id="245" x="767.333" y="-590.667">
+  <object id="245" x="1279.33" y="433.333">
    <point/>
   </object>
-  <object id="248" x="831.333" y="-700">
+  <object id="248" x="1343.33" y="324">
    <point/>
   </object>
-  <object id="249" x="686" y="-707.333">
+  <object id="249" x="1198" y="316.667">
    <point/>
   </object>
-  <object id="251" x="767.333" y="-621.333">
+  <object id="251" x="1279.33" y="402.667">
    <point/>
   </object>
-  <object id="252" x="664.667" y="-808">
+  <object id="252" x="1176.67" y="216">
    <point/>
   </object>
-  <object id="255" x="895.333" y="-808.667">
+  <object id="255" x="1407.33" y="215.333">
    <point/>
   </object>
-  <object id="256" template="../../../../object-templates/movingPlatformType2.tx" x="926.583" y="-384.333" width="61.5" height="18">
+  <object id="256" template="../../../../object-templates/movingPlatformType2.tx" x="1438.58" y="639.667" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="241"/>
    </properties>
   </object>
-  <object id="257" template="../../../../object-templates/movingPlatformType2.tx" x="735.75" y="-751.5" width="61.5" height="18">
+  <object id="257" template="../../../../object-templates/movingPlatformType2.tx" x="1247.75" y="272.5" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="249"/>
    </properties>
   </object>
-  <object id="258" template="../../../../object-templates/movingPlatformType2.tx" x="735.75" y="-752" width="61.5" height="18">
+  <object id="258" template="../../../../object-templates/movingPlatformType2.tx" x="1247.75" y="272" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="252"/>
    </properties>
   </object>
-  <object id="259" template="../../../../object-templates/movingPlatformType2.tx" x="735.25" y="-752" width="61.5" height="18">
+  <object id="259" template="../../../../object-templates/movingPlatformType2.tx" x="1247.25" y="272" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="248"/>
     <property name="speed" type="float" value="1.5"/>
    </properties>
   </object>
-  <object id="261" template="../../../../object-templates/GoalPosition.tx" x="766.667" y="80"/>
-  <object id="262" template="../../../../object-templates/movingPlatformType2.tx" x="737.25" y="237.667" width="61.5" height="18">
+  <object id="261" template="../../../../object-templates/GoalPosition.tx" x="1278.67" y="1104"/>
+  <object id="262" template="../../../../object-templates/movingPlatformType2.tx" x="1249.25" y="1261.67" width="61.5" height="18">
    <properties>
     <property name="goalPosition" type="object" value="261"/>
    </properties>
   </object>
-  <object id="263" template="../../../../object-templates/GoalPosition.tx" x="928.667" y="284"/>
-  <object id="264" template="../../../../object-templates/GoalPosition.tx" x="590.667" y="290"/>
-  <object id="265" template="../../../../object-templates/GoalPosition.tx" x="770" y="380.667"/>
-  <object id="267" template="../../../../object-templates/GoalPosition.tx" x="847.333" y="286.667"/>
-  <object id="270" template="../../../../object-templates/ritalin.tx" x="1130.67" y="346.667" width="44" height="37.3333"/>
+  <object id="263" template="../../../../object-templates/GoalPosition.tx" x="1440.67" y="1308"/>
+  <object id="264" template="../../../../object-templates/GoalPosition.tx" x="1102.67" y="1314"/>
+  <object id="265" template="../../../../object-templates/GoalPosition.tx" x="1282" y="1404.67"/>
+  <object id="267" template="../../../../object-templates/GoalPosition.tx" x="1359.33" y="1310.67"/>
+  <object id="270" template="../../../../object-templates/ritalin.tx" x="1642.67" y="1370.67" width="44" height="37.3333"/>
  </objectgroup>
  <objectgroup id="10" name="Walls">
-  <object id="110" x="1536" y="-2592" width="32" height="3584"/>
-  <object id="111" x="-30" y="-2558" width="32" height="3584"/>
-  <object id="189" x="1088" y="416" height="64"/>
-  <object id="190" x="992" y="416" height="64"/>
+  <object id="110" x="2048" y="-1568" width="32" height="3584"/>
+  <object id="111" x="482" y="-1534" width="32" height="3584"/>
+  <object id="189" x="1600" y="1440" height="64"/>
+  <object id="190" x="1504" y="1440" height="64"/>
  </objectgroup>
- <objectgroup id="7" name="Ground" visible="0">
-  <object id="74" x="-135.102" y="239.738" width="869.306" height="10.2313"/>
-  <object id="79" x="736.204" y="286.265" width="65.0051" height="17.3231"/>
-  <object id="93" x="-141.102" y="304.163" width="348.598" height="15.5647"/>
-  <object id="107" x="-144" y="-480" width="302.367" height="16.898"/>
-  <object id="108" x="1344" y="-496" width="302.367" height="16.898"/>
-  <object id="117" x="687.333" y="-960" width="158.517" height="16.898"/>
-  <object id="148" x="1358.44" y="-639.735" width="47.6939" height="15.898"/>
-  <object id="149" x="1280.74" y="-736.224" width="48.1939" height="16.898"/>
-  <object id="150" x="1200.15" y="-816.816" width="47.1939" height="15.398"/>
-  <object id="151" x="1104.16" y="-864.51" width="47.1939" height="16.898"/>
-  <object id="152" x="1022.57" y="-896.806" width="47.7959" height="15.898"/>
-  <object id="153" x="943.48" y="-928.704" width="48.2959" height="17.398"/>
-  <object id="154" x="862.388" y="-943.602" width="47.7959" height="16.398"/>
-  <object id="155" x="1406.53" y="-305.571" width="264.571" height="18.898"/>
-  <object id="157" x="-141.102" y="-222.98" width="204.878" height="15.898"/>
-  <object id="167" x="1312" y="304" width="339.573" height="15.5647"/>
-  <object id="164" x="1230.78" y="334.292" width="65.0272" height="18.898"/>
-  <object id="166" x="1118.39" y="381.755" width="63.3606" height="18.898"/>
-  <object id="188" x="992" y="416" width="96" height="48"/>
-  <object id="193" name="Ground" x="-48" y="448" width="1632" height="64"/>
-  <object id="194" x="797.347" y="240.218" width="869.306" height="10.2313"/>
-  <object id="195" x="128" y="-640.133" width="47.6939" height="15.898"/>
-  <object id="196" x="205.2" y="-736.622" width="48.1939" height="16.898"/>
-  <object id="197" x="286.79" y="-817.214" width="47.1939" height="15.398"/>
-  <object id="198" x="382.78" y="-864.908" width="47.1939" height="16.898"/>
-  <object id="199" x="463.768" y="-897.204" width="47.7959" height="15.898"/>
-  <object id="200" x="542.358" y="-929.102" width="48.2959" height="17.398"/>
-  <object id="201" x="623.95" y="-944" width="47.7959" height="16.398"/>
-  <object id="275" x="1408" y="-576" width="47.6939" height="15.898"/>
+ <objectgroup id="7" name="Ground">
+  <object id="74" x="376.898" y="1263.74" width="869.306" height="10.2313"/>
+  <object id="79" x="1248.2" y="1310.26" width="65.0051" height="17.3231"/>
+  <object id="93" x="370.898" y="1328.16" width="348.598" height="15.5647"/>
+  <object id="107" x="368" y="544" width="302.367" height="16.898"/>
+  <object id="108" x="1856" y="528" width="302.367" height="16.898"/>
+  <object id="117" x="1199.33" y="64" width="158.517" height="16.898"/>
+  <object id="148" x="1870.44" y="384.265" width="47.6939" height="15.898"/>
+  <object id="149" x="1792.74" y="287.776" width="48.1939" height="16.898"/>
+  <object id="150" x="1712.15" y="207.184" width="47.1939" height="15.398"/>
+  <object id="151" x="1616.16" y="159.49" width="47.1939" height="16.898"/>
+  <object id="152" x="1534.57" y="127.194" width="47.7959" height="15.898"/>
+  <object id="153" x="1455.48" y="95.296" width="48.2959" height="17.398"/>
+  <object id="154" x="1374.39" y="80.398" width="47.7959" height="16.398"/>
+  <object id="155" x="1918.53" y="718.429" width="264.571" height="18.898"/>
+  <object id="157" x="370.898" y="801.02" width="204.878" height="15.898"/>
+  <object id="167" x="1824" y="1328" width="339.573" height="15.5647"/>
+  <object id="164" x="1742.78" y="1358.29" width="65.0272" height="18.898"/>
+  <object id="166" x="1630.39" y="1405.76" width="63.3606" height="18.898"/>
+  <object id="188" x="1504" y="1440" width="96" height="48"/>
+  <object id="193" name="Ground" x="464" y="1472" width="1632" height="64"/>
+  <object id="194" x="1309.35" y="1264.22" width="869.306" height="10.2313"/>
+  <object id="195" x="640" y="383.867" width="47.6939" height="15.898"/>
+  <object id="196" x="717.2" y="287.378" width="48.1939" height="16.898"/>
+  <object id="197" x="798.79" y="206.786" width="47.1939" height="15.398"/>
+  <object id="198" x="894.78" y="159.092" width="47.1939" height="16.898"/>
+  <object id="199" x="975.768" y="126.796" width="47.7959" height="15.898"/>
+  <object id="200" x="1054.36" y="94.898" width="48.2959" height="17.398"/>
+  <object id="201" x="1135.95" y="80" width="47.7959" height="16.398"/>
+  <object id="275" x="1920" y="448" width="47.6939" height="15.898"/>
  </objectgroup>
- <objectgroup id="9" name="Items" visible="0">
-  <object id="114" name="SchwebebahnItem2" type="schwebebahnPart" x="125.697" y="-687.152" width="48" height="47"/>
-  <object id="115" name="SchwebebahnItem1" type="schwebebahnPart" x="1448" y="396" width="64" height="64"/>
-  <object id="158" name="SchwebebahnItem3.1" x="8.66667" y="-274.167" width="47.5" height="47"/>
-  <object id="159" template="../../../../object-templates/page.tx" x="1487" y="-353.5" width="34" height="40"/>
-  <object id="182" template="../../../../object-templates/ritalin.tx" x="864.667" y="190" width="44" height="37.3333"/>
-  <object id="183" template="../../../../object-templates/ritalin.tx" x="589.5" y="190.333" width="41" height="40.1667"/>
-  <object id="269" template="../../../../object-templates/ritalin.tx" x="996" y="7.33335" width="44" height="37.3333"/>
-  <object id="271" template="../../../../object-templates/ritalin.tx" x="510.333" y="-210.667" width="44" height="37.3333"/>
-  <object id="272" template="../../../../object-templates/gleiter.tx" x="182.583" y="-256.583" width="50.8333" height="42.5"/>
-  <object id="273" template="../../../../object-templates/gleiter.tx" x="1243.58" y="-201.25" width="50.8333" height="42.5"/>
-  <object id="274" template="../../../../object-templates/ritalin.tx" x="1353" y="-535.667" width="44" height="37.3333"/>
-  <object id="276" template="../../../../object-templates/gleiter.tx" x="868.583" y="-867.25" width="50.8333" height="42.5"/>
-  <object id="277" template="../../../../object-templates/page.tx" x="17" y="-526" width="34" height="40"/>
-  <object id="278" template="../../../../object-templates/page.tx" x="1367" y="-680" width="34" height="40"/>
+ <objectgroup id="9" name="Items">
+  <object id="114" name="SchwebebahnItem2" type="schwebebahnPart" x="637.697" y="336.848" width="48" height="47"/>
+  <object id="115" name="SchwebebahnItem1" type="schwebebahnPart" x="1960" y="1420" width="64" height="64"/>
+  <object id="158" name="SchwebebahnItem3.1" x="520.667" y="749.833" width="47.5" height="47"/>
+  <object id="159" template="../../../../object-templates/page.tx" x="1999" y="670.5" width="34" height="40"/>
+  <object id="182" template="../../../../object-templates/ritalin.tx" x="1376.67" y="1214" width="44" height="37.3333"/>
+  <object id="183" template="../../../../object-templates/ritalin.tx" x="1101.5" y="1214.33" width="41" height="40.1667"/>
+  <object id="269" template="../../../../object-templates/ritalin.tx" x="1508" y="1031.33" width="44" height="37.3333"/>
+  <object id="271" template="../../../../object-templates/ritalin.tx" x="1022.33" y="813.333" width="44" height="37.3333"/>
+  <object id="272" template="../../../../object-templates/gleiter.tx" x="694.583" y="767.417" width="50.8333" height="42.5"/>
+  <object id="273" template="../../../../object-templates/gleiter.tx" x="1755.58" y="822.75" width="50.8333" height="42.5"/>
+  <object id="274" template="../../../../object-templates/ritalin.tx" x="1865" y="488.333" width="44" height="37.3333"/>
+  <object id="276" template="../../../../object-templates/gleiter.tx" x="1380.58" y="156.75" width="50.8333" height="42.5"/>
+  <object id="277" template="../../../../object-templates/page.tx" x="529" y="498" width="34" height="40"/>
+  <object id="278" template="../../../../object-templates/page.tx" x="1879" y="344" width="34" height="40"/>
  </objectgroup>
- <objectgroup id="14" name="End" visible="0"/>
+ <objectgroup id="14" name="End"/>
 </map>
