@@ -2,6 +2,7 @@ package braid.main.screens.huds;
 
 import braid.main.Braid;
 import braid.main.Items.PowerUp;
+import braid.main.tools.Savemanager;
 import braid.main.tools.TextFontManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,6 +30,7 @@ public class LevelHUD implements Disposable {
 
     private static Integer collectedPages;
     private static Integer maxPages;
+    private static Integer previouslyCollectedPages;
     private final Label timerLabel;
     private static Label pageLabel;
     private Image pageImage;
@@ -56,13 +58,14 @@ public class LevelHUD implements Disposable {
 
 
 
-    public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages){
+    public LevelHUD(SpriteBatch batch, TextureAtlas atlas, int maxPages, int previouslyCollectedPages){
         startTime = System.currentTimeMillis();
         pauseTime = 0;
         tempTimeStamp = System.currentTimeMillis();
         elapsedTime = 0;
         collectedPages = 0;
         LevelHUD.maxPages = maxPages;
+        LevelHUD.previouslyCollectedPages = previouslyCollectedPages;
         viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(viewport,batch);
 
@@ -102,7 +105,7 @@ public class LevelHUD implements Disposable {
         table.setFillParent(true);
 
         timerLabel = new Label("00.00", TextFont);
-        pageLabel = new Label(String.format("%d/%d", collectedPages, LevelHUD.maxPages), TextFont);
+        pageLabel = new Label(String.format("%d/%d", collectedPages+previouslyCollectedPages, LevelHUD.maxPages+previouslyCollectedPages), TextFont);
 
         Table scoreTable = new Table();
         scoreTable.add(pageLabel);
@@ -194,7 +197,7 @@ public class LevelHUD implements Disposable {
 
     public static void addScore (int value){
         collectedPages += value;
-        pageLabel.setText(String.format("%d/%d", collectedPages, maxPages));
+        pageLabel.setText(String.format("%d/%d", collectedPages+previouslyCollectedPages, maxPages+previouslyCollectedPages));
     }
 
     public static boolean isTimerVisible() { return timerVisible; }

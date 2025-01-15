@@ -1,21 +1,21 @@
 {
 SaveGameKEY: 1
-SaveGameName: hjhsd
+SaveGameName: hfghv
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: false
-	ARKADEN: false
-	WEGZURUNI: false
-	BAYER: false
-	OBERBARMEN: false
-	ZOO: false
+	SCHLOSSBURG: true
+	ARKADEN: true
+	WEGZURUNI: true
+	BAYER: true
+	OBERBARMEN: true
+	ZOO: true
 	FREUDENBERG: true
-	HBF: false
-	LUISENVIERTEL: false
+	HBF: true
+	LUISENVIERTEL: true
 }
-lastLevel: FREUDENBERG
-Playtime: 77941
+lastLevel: UNI
+Playtime: 119107
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -175,7 +175,7 @@ Collectables: {
 	FREUDENBERG: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean

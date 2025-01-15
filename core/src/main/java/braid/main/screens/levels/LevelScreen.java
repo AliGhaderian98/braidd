@@ -85,10 +85,12 @@ public abstract class LevelScreen implements Screen {
     private final SubtitleManager subtitleManager;
 
     // Shader variables
+    private ShaderProgram defaultShader;
     private ShaderProgram rewindShader;
     private ShaderProgram hitShader;
     private ShaderProgram pauseShader;
     private ShaderProgram activeShader;
+    private ShaderProgram nonRewindableShader;
     private FrameBuffer fbo;
     private Texture fboTex;
     private SpriteBatch fboBatch;
@@ -180,34 +182,33 @@ public abstract class LevelScreen implements Screen {
                 maxPages++;
         }
 
-        levelHUD = new LevelHUD(game.batch, atlas, maxPages);
+        int previouslyCollectedPages = 0;
+        for (boolean collected : Savemanager.currentsavegame.Collectables.get(levelName)) {
+            if (collected)
+                previouslyCollectedPages++;
+        }
+
+        levelHUD = new LevelHUD(game.batch, atlas, maxPages, previouslyCollectedPages);
     }
 
 
     private void setupShaders() {
-        // define shader program
+        // get defaultshader
+        defaultShader = SpriteBatch.createDefaultShader();
+
         String vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
-        String fragmentShader = Gdx.files.internal("shaders/crt-rewind.frag").readString();
-        rewindShader = new ShaderProgram(vertexShader, fragmentShader);
-        ShaderProgram.pedantic = false;
-        if (!rewindShader.isCompiled()) {
-            throw new GdxRuntimeException("Shader compilation failed: " + rewindShader.getLog());
-        }
 
-        fragmentShader = Gdx.files.internal("shaders/red.frag").readString();
-        hitShader = new ShaderProgram(vertexShader, fragmentShader);
-        ShaderProgram.pedantic = false;
-        if (!hitShader.isCompiled()) {
-            throw new GdxRuntimeException("Shader compilation failed: " + hitShader.getLog());
-        }
+        // define rewind shader
+        rewindShader = compileShader(vertexShader, "shaders/crt-rewind.frag");
 
-        vertexShader = Gdx.files.internal("shaders/standard.vert").readString();
-        fragmentShader = Gdx.files.internal("shaders/grey.frag").readString();
-        pauseShader = new ShaderProgram(vertexShader, fragmentShader);
-        ShaderProgram.pedantic = false;
-        if (!pauseShader.isCompiled()) {
-            throw new GdxRuntimeException("Shader compilation failed: " + pauseShader.getLog());
-        }
+        // define hit shader
+        hitShader = compileShader(vertexShader, "shaders/red.frag");
+
+        // define pause shader
+        pauseShader = compileShader(vertexShader, "shaders/grey.frag");
+
+        // define non rewindable entity shader
+        nonRewindableShader = compileShader(vertexShader, "shaders/outline.frag");
 
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
         fboBatch = new SpriteBatch();
@@ -217,6 +218,18 @@ public abstract class LevelScreen implements Screen {
         Sprite ps = new Sprite(atlas.findRegion("pause-symbol"));
         ps.setBounds(0,0,18,15);
         rewindHUD = new RewindHUD(game.batch, rs, ps);
+
+        activeShader = defaultShader;
+    }
+
+    private ShaderProgram compileShader(String vertexShader, String fragmentShaderPath) {
+        String fragmentShader = Gdx.files.internal(fragmentShaderPath).readString();
+        ShaderProgram shader = new ShaderProgram(vertexShader, fragmentShader);
+        ShaderProgram.pedantic = false;
+        if (!shader.isCompiled()) {
+            throw new GdxRuntimeException("Shader compilation failed: " + shader.getLog());
+        }
+        return shader;
     }
 
     public void setRewindShader() {
@@ -231,7 +244,7 @@ public abstract class LevelScreen implements Screen {
 
     public void setHitShader() { activeShader = hitShader; }
 
-    public void resetShader() { activeShader = null; }
+    public void resetShader() { activeShader = defaultShader; }
 
     public World getWorld() {
         return world;
@@ -277,7 +290,7 @@ public abstract class LevelScreen implements Screen {
         fboBatch.begin();
         clearScreen();
 
-        if (activeShader != null) {
+        if (activeShader != defaultShader) {
             shader.setUniformf("u_time", time);
             shader.setUniformf("u_resolution", gameCamera.getViewport().getScreenWidth(), gameCamera.getViewport().getScreenHeight());
             shader.setUniformf("u_viewportOffset", gameCamera.getViewport().getScreenX(), gameCamera.getViewport().getScreenY());
@@ -350,11 +363,20 @@ public abstract class LevelScreen implements Screen {
         game.batch.begin();
 
         player.getSprite().draw(game.batch);
+
+        game.batch.enableBlending();
         for (Enemy e : enemies) {
-            if (!e.isDead()) { // Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
-                e.getSprite().draw(game.batch);
+            if (!e.isRewindable()) {
+                nonRewindableShader.setUniformf( "u_time", time);
+                nonRewindableShader.setUniformf( "u_imageSize", new Vector2(e.getSprite().getRegionWidth(), e.getSprite().getRegionHeight()));
+                nonRewindableShader.setUniformf( "u_glowRadius", 5);
+                game.batch.setShader(nonRewindableShader);
             }
+            else
+                game.batch.setShader(defaultShader);
+            e.draw(game.batch);
         }
+        game.batch.setShader(defaultShader);
 
         for(Item item :items)
             item.draw(game.batch);

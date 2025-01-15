@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 1
-SaveGameName: Heyo
+SaveGameName: hfghv
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -14,72 +14,33 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 108940
+lastLevel: UNI
+Playtime: 119107
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	SCHLOSSBURG: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -122,48 +83,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	WEGZURUNI: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -206,48 +127,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	OBERBARMEN: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -290,48 +171,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	FREUDENBERG: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -374,48 +215,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	LUISENVIERTEL: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
