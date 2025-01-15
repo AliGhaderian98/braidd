@@ -11,6 +11,19 @@
     ],
     "propertyTypes": [
         {
+            "color": "#ffff6060",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+            ],
+            "name": "enemy",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        },
+        {
             "color": "#ffd4c89d",
             "drawFill": true,
             "id": 1,
@@ -22,19 +35,6 @@
                 "property",
                 "object",
                 "project"
-            ]
-        },
-        {
-            "color": "#ffff6060",
-            "drawFill": true,
-            "id": 3,
-            "members": [
-            ],
-            "name": "enemy",
-            "type": "class",
-            "useAs": [
-                "property",
-                "object"
             ]
         },
         {
