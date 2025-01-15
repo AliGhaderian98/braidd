@@ -256,7 +256,8 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
-        if (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (userDataA.getObject() instanceof MovingPlatform || userDataB.getObject() instanceof MovingPlatform)) {
             MovingPlatform platform = (userDataA.getObject() instanceof MovingPlatform)
                 ? (MovingPlatform) userDataA.getObject()
                 : (MovingPlatform) userDataB.getObject();
