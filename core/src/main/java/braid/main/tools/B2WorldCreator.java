@@ -105,9 +105,8 @@ public class B2WorldCreator {
         TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
 
         for (MapObject object : brickLayer.getObjects()) {
-
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            screen.addBrick(new Brick(world,map, rect,true, brickRegion));
+            screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
         }
     }
 
@@ -248,7 +247,7 @@ public class B2WorldCreator {
             if ("Ritalin".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, RITALIN)));
             }
-            if ("HAMMER".equals(type)) {
+            if ("Hammer".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, HAMMER)));
             }
 

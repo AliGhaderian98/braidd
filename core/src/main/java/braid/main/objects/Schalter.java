@@ -30,10 +30,6 @@ public class Schalter extends InteractiveGameObject {
         linkedPlatform.setActive();
     }
 
-    public void update(float dt) {
-        sprite.setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y - sprite.getHeight() / 2);
-    }
-
     public void draw(Batch batch) {
         sprite.draw(batch);
     }

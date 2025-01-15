@@ -11,11 +11,13 @@ audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/object-templates/Brick.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
 maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
 maps/object-templates/gleiter.tx
+maps/object-templates/hammer.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
 maps/object-templates/movingPlatformType2.tx
@@ -337,6 +339,8 @@ sprites/lion-run/lion-run_5.png
 sprites/lion-run/lion-run_6.png
 sprites/misc/balloon-small.png
 sprites/misc/balloon.png
+sprites/misc/brick.png
+sprites/misc/hammer.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
 sprites/misc/plattform.png

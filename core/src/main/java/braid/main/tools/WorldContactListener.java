@@ -206,27 +206,21 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void hammerHitBoxWithBrick(UserData userDataA, UserData userDataB) {
-
-            if (("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
-                || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) &&
-                (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
-                if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
-                    (userDataA.getObject() instanceof Brick || userDataB.getObject() instanceof Brick)) {
-
-                    if (player.isHammerActive()) {
-
-                        Brick brick = (userDataA.getObject() instanceof Brick) ? (Brick) userDataA.getObject() : (Brick) userDataB.getObject();
-                        player.setCollidingBrick(brick);
-                    }
+        if (("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
+            || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+            if (userDataA.getObject() instanceof Brick || userDataB.getObject() instanceof Brick) {
+                if (player.isHammerActive()) {
+                    Brick brick = (userDataA.getObject() instanceof Brick) ? (Brick) userDataA.getObject() : (Brick) userDataB.getObject();
+                    player.setCollidingBrick(brick);
                 }
-
             }
+        }
     }
 
     private void endHammerBoxWithBrick (UserData userDataA, UserData userDataB) {
         if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
-
             player.resetCollidingBrick();
         }
     }

@@ -158,8 +158,6 @@ public abstract class LevelScreen implements Screen {
         music.play();
 
 
-
-
         rewindObjects = new Array<>();
 
         rewindObjects.add(player.getRewindController());
@@ -174,9 +172,13 @@ public abstract class LevelScreen implements Screen {
         }
 
         for (SchalterMovingPlatform gm : schalterMovingPlatforms) {
-            if (gm.isRewindable()) {
+            if (gm.isRewindable())
                 rewindObjects.add(gm.getRewindController());
-            }
+        }
+
+        for (Brick b : bricks) {
+            if (b.isRewindable())
+                rewindObjects.add(b.getRewindController());
         }
 
         // Final setup steps
@@ -368,32 +370,47 @@ public abstract class LevelScreen implements Screen {
             }
         }
 
-        for(Item item : items)
-            item.draw(game.batch);
-
-        for(MovingPlatform movingPlatform : movingPlatforms)
-            movingPlatform.draw(game.batch);
-
-        for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
-            schalterMovingPlatform.draw(game.batch);
-
-        drawSchalters(game.batch);
-
-        for (Brick brick :bricks) // notwendig?
-            brick.draw(game.batch);
+        drwaMovingPlatforms();
+        drawSchalterMovingPlatforms();
+        drawSchalters();
+        drawBricks();
+        drawItems();
 
         game.batch.end();
 
         levelHUD.stage.draw();
     }
 
+    private void drwaMovingPlatforms() {
+        for(MovingPlatform movingPlatform : movingPlatforms)
+            movingPlatform.draw(game.batch);
+    }
+
+    private void drawSchalterMovingPlatforms() {
+        for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
+            schalterMovingPlatform.draw(game.batch);
+    }
+
+    public void drawSchalters() {
+        for (Schalter schalter : schalters)
+            schalter.draw(game.batch);
+    }
+
+    public void drawBricks() {
+        for (Brick brick : bricks)
+            brick.draw(game.batch);
+    }
+
+    public void drawItems() {
+        for(Item item : items)
+            item.draw(game.batch);
+    }
 
     public void update(float dt) {
         KeyBindings.loadKeyBindings();
 
         if( !(gameIsPaused && player.isAlive()) )
             levelHUD.update(dt);
-        updateSchalters(dt);
 
         //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
@@ -418,6 +435,7 @@ public abstract class LevelScreen implements Screen {
             for (Brick brick : bricks) {
                 brick.update(dt);
             }
+
             for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
                 schalterMovingPlatform.update(dt);
 
@@ -440,18 +458,6 @@ public abstract class LevelScreen implements Screen {
 
                 game.setScreen(new Overworld(game));
             }
-        }
-    }
-
-    public void updateSchalters(float dt) {
-        for (Schalter schalter : schalters) {
-            schalter.update(dt);
-        }
-    }
-
-    public void drawSchalters(SpriteBatch batch) {
-        for (Schalter schalter : schalters) {
-            schalter.draw(batch);
         }
     }
 

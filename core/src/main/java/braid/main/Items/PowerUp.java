@@ -7,9 +7,6 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Timer;
 
 public class PowerUp extends Item {
@@ -34,7 +31,7 @@ public class PowerUp extends Item {
         fixture.setUserData(new UserData("item", this));
         readTypePowerUp = givenTypeOfPowerUp;
 
-        String regionName = getRegionName(); //Später andere Sprites je nach TypeOfPowerUp
+        String regionName = getRegionName();
         sprite = new Sprite(screen.getAtlas().findRegion(regionName));
         sprite.setBounds(0,0,
             sprite.getRegionWidth()/ Braid.PPM,
@@ -63,15 +60,15 @@ public class PowerUp extends Item {
 
     @Override
     public void use(Player player) {
-        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.RITALIN) {
+        if (player.hasActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
             player.setNewestPowerUp(false);
         }
-        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.GLEITER) {
+        if (player.hasActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
             player.setNewestPowerUp(false);
         }
-        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.HAMMER) {
+        if (player.hasActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.HAMMER) {
             player.setHammerActive(false);
             player.setNewestPowerUp(false);
         }
@@ -89,7 +86,7 @@ public class PowerUp extends Item {
 
         LevelHUD.activatePowerUp(getType());
         player.setPreviousPowerUp(readTypePowerUp);
-        player.setActivePowerUp(true);
+        player.hasActivePowerUp(true);
         destroy();
 
         // deactivate power up after maxTime is over
@@ -105,7 +102,7 @@ public class PowerUp extends Item {
         toReset = true;
         if (player.isNewestPowerUp()) {
             LevelHUD.resetPowerUp();
-            player.setActivePowerUp(false);
+            player.hasActivePowerUp(false);
             if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
                 player.setJumpSpeed(player.getJumpSpeed() * (1 / ritalinJumpModifier));
             }

@@ -35,7 +35,6 @@ public class PlayerInputHandler {
             handleMovement();
             handleJumping();
             handleClimbing();
-            handleDestroyingBrick();
             handleInteract();
         }
 
@@ -45,13 +44,6 @@ public class PlayerInputHandler {
         // En-/Disable Box2D Debug renderer, delete later
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9))
             LevelScreen.debugRendererEnabled = !LevelScreen.debugRendererEnabled;
-    }
-
-    private void handleInteract() {
-        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))) {
-            if (player.isAtSchalter())
-                player.getCollidingSchalter().toggle();
-        }
     }
 
     private void handlePause() {
@@ -131,12 +123,22 @@ public class PlayerInputHandler {
         }
     }
 
-    private void handleDestroyingBrick() {
+    private void handleInteract() {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))) {
-            if (player.getCollidingBrick() != null) {
-                Brick brick = player.getCollidingBrick();
-                brick.use();
-            }
+            handleSchalterToggle();
+            handleDestroyingBrick();
         }
+    }
+
+    private void handleDestroyingBrick() {
+        if (player.getCollidingBrick() != null) {
+            Brick brick = player.getCollidingBrick();
+            brick.use();
+        }
+    }
+
+    private void handleSchalterToggle() {
+        if (player.isAtSchalter())
+            player.getCollidingSchalter().toggle();
     }
 }

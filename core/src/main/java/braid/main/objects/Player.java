@@ -4,15 +4,12 @@ import braid.main.Braid;
 import braid.main.Items.PowerUp;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 
 /***********
@@ -68,7 +65,7 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
-    private boolean activePowerUp = false;
+    private boolean hasActivePowerUp = false;
     private boolean hammerActive = false;
     private Brick collidingBrick;
     private PowerUp.TypeOfPowerUp previousPowerUp;
@@ -115,19 +112,6 @@ public class Player extends DynamicGameObject {
         };
     }
 
-    private Array<Fixture> nearbyFixtures = new Array<>();
-    public Array<Fixture> getNearbyFixtures() {
-        return nearbyFixtures;
-    }
-    public void addNearbyFixture(Fixture fixture) {
-        if (!nearbyFixtures.contains(fixture, true)) {
-            nearbyFixtures.add(fixture);
-        }
-    }
-    public void removeNearbyFixture(Fixture fixture) {
-        nearbyFixtures.removeValue(fixture, true);
-    }
-
     // Methods
     @Override
     public void defineBody() {
@@ -155,13 +139,10 @@ public class Player extends DynamicGameObject {
         Fixture feetFixture = b2body.createFixture(footFdef);
         feetFixture.setUserData(new UserData("PlayerFeet", this));
 
-//        shape.dispose(); //Kann das weg?
-        feet.dispose();
-
-        // Create Hammer collider
+        // Create Hammer colliders
         FixtureDef rechteHammerFdef = new FixtureDef();
         PolygonShape rechterHammer = new PolygonShape();
-        rechterHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
+        rechterHammer.setAsBox(15 / Braid.PPM, 20 / Braid.PPM, new Vector2(0.25F, 10 / Braid.PPM), 0);
         rechteHammerFdef.shape = rechterHammer;
         rechteHammerFdef.friction = 1f;
         rechteHammerFdef.isSensor = true;
@@ -170,16 +151,17 @@ public class Player extends DynamicGameObject {
 
         FixtureDef linkeHammerFdef = new FixtureDef();
         PolygonShape linkerHammer = new PolygonShape();
-        linkerHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(-0.25F, 35 / Braid.PPM), 0);
+        linkerHammer.setAsBox(15 / Braid.PPM, 20 / Braid.PPM, new Vector2(-0.25F, 10 / Braid.PPM), 0);
         linkeHammerFdef.shape = linkerHammer;
         linkeHammerFdef.friction = 1f;
         linkeHammerFdef.isSensor = true;
         Fixture linkeHammerFixture = b2body.createFixture(linkeHammerFdef);
         linkeHammerFixture.setUserData(new UserData("LinkeHammerHitBox", this));
 
-
+        feet.dispose();
         shape.dispose();
         rechterHammer.dispose();
+        linkerHammer.dispose();
     }
 
     public void update(float dt) {
@@ -354,8 +336,8 @@ public class Player extends DynamicGameObject {
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
 
-    public boolean isActivePowerUp() { return activePowerUp; }
-    public void setActivePowerUp(boolean activePowerUp) { this.activePowerUp = activePowerUp; }
+    public boolean hasActivePowerUp() { return hasActivePowerUp; }
+    public void hasActivePowerUp(boolean hasActivePowerUp) { this.hasActivePowerUp = hasActivePowerUp; }
 
     public boolean isHammerActive() {return hammerActive;}
     public void setHammerActive(boolean hammerActive) {this.hammerActive = hammerActive;}
