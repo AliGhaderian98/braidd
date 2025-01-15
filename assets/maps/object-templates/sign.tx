@@ -2,7 +2,7 @@
 <template>
  <object name="Sign" width="16" height="16">
   <properties>
-   <property name="Text" value="Achtung! Starker Gegner voraus"/>
+   <property name="Text" value="You need 3 Parts!"/>
   </properties>
  </object>
 </template>
