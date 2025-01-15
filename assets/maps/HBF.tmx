@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="83">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="84">
  <tileset firstgid="1" source="tilesets/HBF/TX Village Props.tsx"/>
  <tileset firstgid="3137" source="tilesets/HBF/sheet.tsx"/>
  <tileset firstgid="3242" source="tilesets/HBF/four-seasons-tileset.tsx"/>
@@ -48,7 +48,7 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="End">
-  <object id="8" name="End" x="929.667" y="87.5" width="28.8333" height="54.9167"/>
+  <object id="8" name="End" x="913.221" y="115.824" width="28.8333" height="28.4201"/>
  </objectgroup>
  <objectgroup id="5" name="Ladder">
   <object id="9" name="Ladder" x="756.801" y="32.0179" width="11.3542" height="64.0833"/>
@@ -70,9 +70,9 @@
   <object id="50" template="object-templates/patrollingEnemy.tx" x="208.199" y="99.0214"/>
   <object id="51" template="object-templates/patrollingEnemy.tx" x="542.965" y="49.5509"/>
   <object id="52" template="object-templates/patrollingEnemy.tx" x="803.637" y="17.3901"/>
-  <object id="53" template="object-templates/patrollingEnemy.tx" x="844.261" y="124.029"/>
+  <object id="53" template="object-templates/patrollingEnemy.tx" x="367.322" y="165.144"/>
   <object id="54" template="object-templates/knight.tx" x="613.594" y="164.189"/>
-  <object id="55" template="object-templates/unhingedEnemy.tx" x="418.09" y="130.336"/>
+  <object id="55" template="object-templates/unhingedEnemy.tx" x="849.345" y="125.768"/>
  </objectgroup>
  <objectgroup id="9" name="Items">
   <object id="57" template="object-templates/page.tx" x="50.7802" y="98.1751"/>
@@ -89,6 +89,7 @@
   <object id="77" template="object-templates/page.tx" x="729.337" y="85.195"/>
   <object id="78" template="object-templates/page.tx" x="891.971" y="124.483"/>
   <object id="81" template="object-templates/gleiter.tx" x="371.75" y="43.75"/>
+  <object id="83" template="object-templates/page.tx" x="425.996" y="129.965"/>
  </objectgroup>
  <objectgroup id="8" name="MovingPlatform">
   <object id="71" template="object-templates/movingPlatformType2.tx" x="46.6031" y="144.498" width="17.3487" height="18">
@@ -104,10 +105,11 @@
   <object id="73" template="object-templates/movingPlatformType2.tx" x="370.045" y="69.5762" width="47.5" height="6.1222">
    <properties>
     <property name="goalPosition" type="object" value="74"/>
+    <property name="speed" type="float" value="0.8"/>
    </properties>
   </object>
-  <object id="74" template="object-templates/GoalPosition.tx" x="291.463" y="72.1805"/>
-  <object id="75" template="object-templates/GoalPosition.tx" x="60.3027" y="74.0078"/>
+  <object id="74" template="object-templates/GoalPosition.tx" x="275.93" y="74.0079"/>
+  <object id="75" template="object-templates/GoalPosition.tx" x="57.5617" y="79.4899"/>
   <object id="82" template="object-templates/GoalPosition.tx" x="550.5" y="119.682"/>
  </objectgroup>
 </map>
