@@ -6,6 +6,8 @@ import braid.main.Items.Item;
 import braid.main.enemies.Knight;
 import braid.main.objects.*;
 import braid.main.enemies.*;
+import braid.main.Items.ItemDef;
+import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
@@ -76,6 +78,7 @@ public abstract class LevelScreen implements Screen {
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<SchalterMovingPlatform> schalterMovingPlatforms;
     protected Array<Item> items;
+    protected Array<Brick> bricks;
 
     private final Array<Schalter> schalters = new Array<>();
 
@@ -122,7 +125,6 @@ public abstract class LevelScreen implements Screen {
 
 
         // Setup level map
-        //mapLoader = new TmxMapLoader();
         mapLoader = new TemplateTmxMapLoader();
         map = mapLoader.load(mapPath);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Braid.PPM);
@@ -140,6 +142,8 @@ public abstract class LevelScreen implements Screen {
 
         movingPlatforms = new Array<>();
         schalterMovingPlatforms = new Array<>();
+
+        bricks = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -375,6 +379,9 @@ public abstract class LevelScreen implements Screen {
 
         drawSchalters(game.batch);
 
+        for (Brick brick :bricks) // notwendig?
+            brick.draw(game.batch);
+
         game.batch.end();
 
         levelHUD.stage.draw();
@@ -408,6 +415,9 @@ public abstract class LevelScreen implements Screen {
             for(MovingPlatform movingPlatform : movingPlatforms)
                 movingPlatform.update(dt);
 
+            for (Brick brick : bricks) {
+                brick.update(dt);
+            }
             for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
                 schalterMovingPlatform.update(dt);
 
@@ -493,6 +503,7 @@ public abstract class LevelScreen implements Screen {
         gameIsPaused = false;
         // reset Screen
         game.setScreen(getNewInstance());
+        player.setNewestPowerUp(false);
     }
 
     @Override
@@ -551,6 +562,11 @@ public abstract class LevelScreen implements Screen {
 
     public void addItem(Item item) {
         items.add(item);
+    }
+
+    public void addBrick (Brick brick) {
+        bricks.add(brick);
+        brick.setRewindController((new RewindController((new RewindableBody(brick.b2body,brick)))));
     }
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }

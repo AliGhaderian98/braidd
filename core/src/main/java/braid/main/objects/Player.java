@@ -1,6 +1,7 @@
 package braid.main.objects;
 
 import braid.main.Braid;
+import braid.main.Items.PowerUp;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
-//todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
+
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
@@ -50,6 +51,7 @@ public class Player extends DynamicGameObject {
     public boolean holdingJump;
     float jumpSpeed = 3.0f;
 
+
     private final float maxCoyoteTime = 0.15f;
     private boolean coyoteActive = false;
 
@@ -66,6 +68,11 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
+    private boolean activePowerUp = false;
+    private boolean hammerActive = false;
+    private Brick collidingBrick;
+    private PowerUp.TypeOfPowerUp previousPowerUp;
+    private boolean newestPowerUp = true;
     private boolean isAtSchalter = false;
     private Schalter collidingSchalter = null;
 
@@ -148,23 +155,34 @@ public class Player extends DynamicGameObject {
         Fixture feetFixture = b2body.createFixture(footFdef);
         feetFixture.setUserData(new UserData("PlayerFeet", this));
 
-        shape.dispose();
+//        shape.dispose(); //Kann das weg?
         feet.dispose();
+
+        // Create Hammer collider
+        FixtureDef rechteHammerFdef = new FixtureDef();
+        PolygonShape rechterHammer = new PolygonShape();
+        rechterHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(0.25F, 35 / Braid.PPM), 0);
+        rechteHammerFdef.shape = rechterHammer;
+        rechteHammerFdef.friction = 1f;
+        rechteHammerFdef.isSensor = true;
+        Fixture rechteHammerFixture = b2body.createFixture(rechteHammerFdef);
+        rechteHammerFixture.setUserData(new UserData("RechteHammerHitBox", this));
+
+        FixtureDef linkeHammerFdef = new FixtureDef();
+        PolygonShape linkerHammer = new PolygonShape();
+        linkerHammer.setAsBox(15 / Braid.PPM, 45 / Braid.PPM, new Vector2(-0.25F, 35 / Braid.PPM), 0);
+        linkeHammerFdef.shape = linkerHammer;
+        linkeHammerFdef.friction = 1f;
+        linkeHammerFdef.isSensor = true;
+        Fixture linkeHammerFixture = b2body.createFixture(linkeHammerFdef);
+        linkeHammerFixture.setUserData(new UserData("LinkeHammerHitBox", this));
+
+
+        shape.dispose();
+        rechterHammer.dispose();
     }
 
-    /*public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            for (Fixture fixture : getNearbyFixtures()) {
-                if (fixture.getUserData() instanceof UserData userData) {
-                    Schalter schalter = (Schalter) userData.getObject();
-                    schalter.toggle();
-                }
-            }
-        }
-    }*/
-
     public void update(float dt) {
-       // handleInput();
         sprite.setRegion(getFrame(dt));
         sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
@@ -335,6 +353,26 @@ public class Player extends DynamicGameObject {
 
     public boolean isAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive;}
+
+    public boolean isActivePowerUp() { return activePowerUp; }
+    public void setActivePowerUp(boolean activePowerUp) { this.activePowerUp = activePowerUp; }
+
+    public boolean isHammerActive() {return hammerActive;}
+    public void setHammerActive(boolean hammerActive) {this.hammerActive = hammerActive;}
+
+    public PowerUp.TypeOfPowerUp getPreviousPowerUp() { return previousPowerUp; }
+    public void setPreviousPowerUp(PowerUp.TypeOfPowerUp previousPowerUp) { this.previousPowerUp = previousPowerUp; }
+
+
+    public boolean isNewestPowerUp() { return newestPowerUp; }
+
+    public void setNewestPowerUp(boolean newestPowerUp) { this.newestPowerUp = newestPowerUp; }
+
+    public Brick getCollidingBrick() { return collidingBrick; }
+    public void setCollidingBrick(Brick collidingBrick) { this.collidingBrick = collidingBrick; }
+
+    public void resetCollidingBrick() {this.collidingBrick = null;}
+
 
     public void setMoveLimits(Vector2 max, Vector2 min) {
         maxMoveLimit = max;

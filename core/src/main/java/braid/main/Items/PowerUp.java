@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Timer;
 public class PowerUp extends Item {
 
     TypeOfPowerUp readTypePowerUp;
+    TypeOfPowerUp previousPowerUp;
     private final float ritalinJumpModifier = 1.43f;
     private final float gleiterDescendingModifier = 0.01f;
 
@@ -50,8 +51,8 @@ public class PowerUp extends Item {
     private String getRegionName() {
         return switch (readTypePowerUp) {
             case RITALIN -> "ritalin";
-            case GLEITER -> "balloon"; //Später Gleiter, wenn Sprite vorhanden ist
-            // case HAMMER -> "hammer";
+            case GLEITER -> "balloon";
+            case HAMMER -> "hammer";
             default -> "page";
         };
     }
@@ -62,14 +63,33 @@ public class PowerUp extends Item {
 
     @Override
     public void use(Player player) {
+        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.RITALIN) {
+            player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
+            player.setNewestPowerUp(false);
+        }
+        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.GLEITER) {
+            player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
+            player.setNewestPowerUp(false);
+        }
+        if (player.isActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.HAMMER) {
+            player.setHammerActive(false);
+            player.setNewestPowerUp(false);
+        }
+
+        toReset = false;
         if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
             player.setJumpSpeed(player.getJumpSpeed()*ritalinJumpModifier);
-
         }
         if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*gleiterDescendingModifier);
         }
+        if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
+            player.setHammerActive(true);
+        }
+
         LevelHUD.activatePowerUp(getType());
+        player.setPreviousPowerUp(readTypePowerUp);
+        player.setActivePowerUp(true);
         destroy();
 
         // deactivate power up after maxTime is over
@@ -83,13 +103,20 @@ public class PowerUp extends Item {
 
     public void reset(Player player) {
         toReset = true;
-        LevelHUD.resetPowerUp();
-        if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
-            player.setJumpSpeed(player.getJumpSpeed()*(1/ritalinJumpModifier));
+        if (player.isNewestPowerUp()) {
+            LevelHUD.resetPowerUp();
+            player.setActivePowerUp(false);
+            if (readTypePowerUp == TypeOfPowerUp.RITALIN) {
+                player.setJumpSpeed(player.getJumpSpeed() * (1 / ritalinJumpModifier));
+            }
+            if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
+                player.setDescendingGravity(player.getDescendingGravity() * (1 / gleiterDescendingModifier));
+            }
+            if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
+                player.setHammerActive(false);
+            }
         }
-        if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
-            player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
-        }
+        player.setNewestPowerUp(true);
     }
 
     public static int getMaxTime() { return maxTime; }

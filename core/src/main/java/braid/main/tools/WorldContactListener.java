@@ -10,10 +10,12 @@ import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
+import braid.main.tools.KeyBindings;
 import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
@@ -39,6 +41,8 @@ public class WorldContactListener implements ContactListener {
             playerWithLadder(userDataA, userDataB);
             playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
+            playerFeetWithBrick(userDataA, userDataB);
+            hammerHitBoxWithBrick (userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
             playerWithSchalter(userDataA, userDataB);
 
@@ -68,6 +72,8 @@ public class WorldContactListener implements ContactListener {
             contactEndedPlayerWithKnightAttack(userDataA, userDataB);
             playerWithSignEnds(userDataA, userDataB);
             contactEndedPlayerWithSchalter(userDataA,userDataB);
+            contactEndedPlayerWithBrick(userDataA, userDataB);
+            endHammerBoxWithBrick(userDataA,userDataB);
         }
 
         patrollingEnemyOnEdge(userDataA, userDataB);
@@ -190,6 +196,41 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerFeetWithBrick(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
+            if (!player.isGrounded()) {
+                player.land();
+            }
+        }
+    }
+
+    private void hammerHitBoxWithBrick(UserData userDataA, UserData userDataB) {
+
+            if (("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
+                || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) &&
+                (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+                if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+                    (userDataA.getObject() instanceof Brick || userDataB.getObject() instanceof Brick)) {
+
+                    if (player.isHammerActive()) {
+
+                        Brick brick = (userDataA.getObject() instanceof Brick) ? (Brick) userDataA.getObject() : (Brick) userDataB.getObject();
+                        player.setCollidingBrick(brick);
+                    }
+                }
+
+            }
+    }
+
+    private void endHammerBoxWithBrick (UserData userDataA, UserData userDataB) {
+        if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+
+            player.resetCollidingBrick();
+        }
+    }
+
     private void playerFeetWithEnemy(UserData userDataA, UserData userDataB) {
         if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
             UserData enemyData = (userDataA.getObject() instanceof Enemy) ? userDataA : userDataB;
@@ -283,6 +324,14 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
+            if (player.isGrounded())
+                player.fall();
+        }
+    }
+
+    private void contactEndedPlayerWithBrick(UserData userDataA, UserData userDataB) {
+        if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
+            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
             if (player.isGrounded())
                 player.fall();
         }

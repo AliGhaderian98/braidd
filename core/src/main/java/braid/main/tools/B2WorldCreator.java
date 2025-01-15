@@ -16,8 +16,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.Objects;
 
-import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
-import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
+import static braid.main.Items.PowerUp.TypeOfPowerUp.*;
 
 public class B2WorldCreator {
     private Array<Ladder> ladders;
@@ -45,7 +44,9 @@ public class B2WorldCreator {
 
         spawnGround();
         spawnWalls();
+        spawnBricks();
         spawnLadders();
+        spawnEnd();
         spawnEnemies();
         spawnMovingPlatform();
         spawnItems();
@@ -99,6 +100,17 @@ public class B2WorldCreator {
         }
     }
 
+    private void spawnBricks() {
+        MapLayer brickLayer = map.getLayers().get("Brick");
+        TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
+
+        for (MapObject object : brickLayer.getObjects()) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            screen.addBrick(new Brick(world,map, rect,true, brickRegion));
+        }
+    }
+
     private void spawnLadders() {
         MapLayer ladderLayer = map.getLayers().get("Ladder");
         if (ladderLayer != null) {
@@ -108,7 +120,8 @@ public class B2WorldCreator {
                 new Ladder(world, rect);
             }
         }
-        // Create End Object
+    }
+    private void spawnEnd() {
         ends = new Array<>();
         MapLayer endLayer = map.getLayers().get("End");
         if (endLayer != null) {
@@ -234,6 +247,9 @@ public class B2WorldCreator {
             }
             if ("Ritalin".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, RITALIN)));
+            }
+            if ("HAMMER".equals(type)) {
+                screen.addItem((new PowerUp(screen, x, y, HAMMER)));
             }
 
 

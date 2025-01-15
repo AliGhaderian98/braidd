@@ -30,7 +30,6 @@ public abstract class Enemy extends DynamicGameObject{
     private AnimationState currentState = AnimationState.ALIVE;
     protected Animation<TextureRegion> idle, walking, running, attacking;
 
-
     // Konstruktor für die Initialisierung des Gegners
     public Enemy(World world, LevelScreen screen, float x, float y, boolean rewindable, String type) {
         super(world);
