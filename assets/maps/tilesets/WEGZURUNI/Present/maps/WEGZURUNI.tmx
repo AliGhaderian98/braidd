@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="145" height="56" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="9">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="145" height="56" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="13">
  <tileset firstgid="1" source=":/automap-tiles.tsx"/>
  <tileset firstgid="6" source="../tilesets/WegzurUni.tsx"/>
  <layer id="1" name="Background" width="145" height="56">
@@ -246,10 +246,17 @@
 </data>
  </layer>
  <objectgroup id="6" name="Cars">
-  <object id="2" name="Cars" type="cars" x="16" y="704" width="2176" height="192"/>
+  <object id="2" name="Cars" type="cars" x="-17.3333" y="704" width="2306.67" height="192"/>
+ </objectgroup>
+ <objectgroup id="12" name="End"/>
+ <objectgroup id="13" name="Items"/>
+ <objectgroup id="11" name="Walls">
+  <object id="9" x="0" y="-158" width="12" height="1018"/>
+  <object id="11" x="2196" y="-12" width="36" height="928"/>
+  <object id="12" x="2000" y="-4016"/>
  </objectgroup>
  <objectgroup id="10" name="CarsTrigger">
-  <object id="8" name="CarsTrigger" x="480" y="-176" width="160" height="1200"/>
+  <object id="8" name="CarsTrigger" type="carsTrigger" x="480" y="-176" width="160" height="1200"/>
  </objectgroup>
  <objectgroup id="7" name="Sign">
   <object id="3" template="../../../../object-templates/sign.tx" x="1402" y="588" width="70" height="72"/>
