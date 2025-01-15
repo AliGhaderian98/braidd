@@ -90,7 +90,6 @@ public class B2WorldCreator {
             float rotation = 0;
             if (object.getProperties().containsKey("rotation")) {
                 rotation =  (float) object.getProperties().get("rotation");
-                System.out.println(rotation);
             }
 
             bdef.type = BodyDef.BodyType.StaticBody;
