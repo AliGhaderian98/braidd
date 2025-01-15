@@ -66,6 +66,8 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
+    private boolean isAtSchalter = false;
+    private Schalter collidingSchalter = null;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -343,6 +345,15 @@ public class Player extends DynamicGameObject {
         maxMoveLimit = null;
         minMoveLimit = null;
     }
+
+    public void isAtSchalter(boolean value, Schalter schalter) {
+        isAtSchalter = value;
+        collidingSchalter = schalter;
+    }
+
+    public boolean isAtSchalter() { return isAtSchalter; }
+
+    public Schalter getCollidingSchalter() { return collidingSchalter; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
 

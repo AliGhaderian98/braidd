@@ -54,7 +54,6 @@ public class B2WorldCreator {
         spawnMovingPlatform();
         spawnItems();
         spawnSigns();
-        spawnSchalter();
     }
 
     private void spawnSigns() {
@@ -63,7 +62,7 @@ public class B2WorldCreator {
             for (MapObject object : signLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                new Sign(world, map, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
+                new Sign(world, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
             }
         }
     }
@@ -110,7 +109,7 @@ public class B2WorldCreator {
             for (MapObject object : ladderLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                new Ladder(world, map, rect);
+                new Ladder(world, rect);
             }
         }
         // Create End Object
@@ -120,7 +119,7 @@ public class B2WorldCreator {
             for (MapObject object : endLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                End end = new End(world, map, rect);
+                End end = new End(world, rect);
                 ends.add(end);
             }
         }
@@ -141,15 +140,15 @@ public class B2WorldCreator {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
 
-                MapObject schalter = (MapObject) object.getProperties().get("schalter");
-                int schalterPosX = (int) schalter.getProperties().get("X");
-                int schalterPosY = (int) schalter.getProperties().get("Y");
+                RectangleMapObject schalter = (RectangleMapObject) object.getProperties().get("schalter");
+                float schalterPosX = schalter.getRectangle().x;
+                float schalterPosY = schalter.getRectangle().y;
 
-                MapObject goal = (MapObject) object.getProperties().get("goalPosition");
-                int goalPosX = (int) goal.getProperties().get("X");
-                int goalPosY = (int) goal.getProperties().get("Y");
+                RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
+                float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
+                float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
 
-                screen.addGoalMovingPlatform(new GoalMovingPlatform(world, movingPlatformRegion, rect, speed,
+                screen.addGoalMovingPlatform(new GoalMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
                      schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
@@ -222,28 +221,4 @@ public class B2WorldCreator {
 
         }
     }
-
-    private void spawnSchalter() {
-        MapLayer schalterLayer = map.getLayers().get("Schalter");
-        TextureRegion schalterRegion = screen.getAtlas().findRegion("schalter");
-
-        for (MapObject object : schalterLayer.getObjects()) {
-            if (object instanceof RectangleMapObject) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                MovingPlatform linkedPlatform = findLinkedPlatform((String) object.getProperties().get("linkedPlatform"));
-                screen.addSchalter(new Schalter(world, schalterRegion, rect, linkedPlatform));
-            }
-        }
-    }
-
-
-    private MovingPlatform findLinkedPlatform(String platformName) {
-        for (MovingPlatform platform : movingPlatforms) {
-            if (platform.getName().equals(platformName)) {
-                return platform;
-            }
-        }
-        return null;
-    }
-
 }

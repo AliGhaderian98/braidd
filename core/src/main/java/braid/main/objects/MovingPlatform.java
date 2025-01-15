@@ -21,13 +21,12 @@ public class MovingPlatform extends InteractiveGameObject {
 
     private MovingPlatform.AnimationState currentState = MovingPlatform.AnimationState.RIGHT;
 
-    private final boolean rewindable;
+    protected final boolean rewindable;
+    protected final float speed;
+    protected final Sprite sprite;
     private final float rangeX;
-    private final float speed;
     private final float startX;
-    private final Sprite sprite;
     private Player player;
-    private boolean isActive = true;
 
     public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
         super(world, boundary, region,false);
@@ -43,20 +42,11 @@ public class MovingPlatform extends InteractiveGameObject {
         fixture.setUserData(new UserData("MovingPlatform", this));
     }
 
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
 
     @Override
     public void defineBody() {}
 
     public void update(float dt) {
-
-        if (!isActive) {
-            b2body.setLinearVelocity(0, 0);
-            return;
-        }
-
         // determine movement direction
         float currentX = b2body.getPosition().x;
         if (movingRight() && currentX > startX + rangeX) {
@@ -70,7 +60,11 @@ public class MovingPlatform extends InteractiveGameObject {
         b2body.setLinearVelocity(velocityX*0.005f, 0);
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
-        // give this platform's velocity over to player to ensure player stays moving with platform
+        giveVelocityToPlayer();
+    }
+
+    // give this platform's velocity over to player to ensure player stays moving with platform
+    protected void giveVelocityToPlayer() {
         if (player != null) {
             if (player.getPlatformVelocity() != b2body.getLinearVelocity().x)
                 player.setPlatformVelocity(b2body.getLinearVelocity().x);

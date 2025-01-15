@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Ladder extends InteractiveGameObject{
-    public Ladder(World world, TiledMap map, Rectangle boundary) {
-        super(world,map,boundary, true);
+    public Ladder(World world, Rectangle boundary) {
+        super(world, boundary, true);
         fixture.setUserData(new UserData("Ladder", this));
     }
 

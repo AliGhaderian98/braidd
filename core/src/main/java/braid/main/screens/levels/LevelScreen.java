@@ -3,18 +3,14 @@ package braid.main.screens.levels;
 import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
-import braid.main.Items.ItemDef;
 import braid.main.enemies.Knight;
-import braid.main.objects.Schalter;
+import braid.main.objects.*;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
-import braid.main.objects.Enemy;
-import braid.main.objects.MovingPlatform;
-import braid.main.objects.Player;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
 import braid.main.screens.huds.RewindHUD;
@@ -32,7 +28,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.maps.tiled.BaseTmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -74,6 +69,7 @@ public abstract class LevelScreen implements Screen {
     protected final Player player;
     protected Array<Enemy> enemies;
     protected Array<MovingPlatform> movingPlatforms;
+    protected Array<GoalMovingPlatform> goalMovingPlatforms;
     protected Array<Item> items;
 
     private final Array<Schalter> schalters = new Array<>();
@@ -151,6 +147,7 @@ public abstract class LevelScreen implements Screen {
         enemies = new Array<>();
 
         movingPlatforms = new Array<>();
+        goalMovingPlatforms = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -180,6 +177,11 @@ public abstract class LevelScreen implements Screen {
                 rewindObjects.add(m.getRewindController());
         }
 
+        for (GoalMovingPlatform gm : goalMovingPlatforms) {
+            if (gm.isRewindable())
+                rewindObjects.add(gm.getRewindController());
+        }
+
         // Final setup steps
         gameCamera = new GameCamera(25*16, 25*9, player);
         gameCamera.setMap(map);
@@ -195,17 +197,6 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages);
-    }
-
-    public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            for (Fixture fixture : getNearbyFixtures()) {
-                if (fixture.getUserData() instanceof UserData userData) {
-                    Schalter schalter = (Schalter) userData.getObject();
-                    schalter.toggle();
-                }
-            }
-        }
     }
 
 
@@ -386,6 +377,9 @@ public abstract class LevelScreen implements Screen {
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
 
+        for(GoalMovingPlatform goalMovingPlatform :goalMovingPlatforms)
+            goalMovingPlatform.draw(game.batch);
+
         drawSchalters(game.batch);
 
         game.batch.end();
@@ -401,7 +395,6 @@ public abstract class LevelScreen implements Screen {
         if( !(gameIsPaused && player.isAlive()) )
             levelHUD.update(dt);
         updateSchalters(dt);
-        handleInput();
 
         //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
@@ -422,6 +415,9 @@ public abstract class LevelScreen implements Screen {
 
             for(MovingPlatform movingPlatform : movingPlatforms)
                 movingPlatform.update(dt);
+
+            for(GoalMovingPlatform goalMovingPlatform : goalMovingPlatforms)
+                goalMovingPlatform.update(dt);
 
             // Update Camera
             updateCamera();
@@ -543,9 +539,9 @@ public abstract class LevelScreen implements Screen {
         movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
     }
 
-    public void addGoalMovingPlatform(MovingPlatform movingPlatform) {
-        movingPlatforms.add(movingPlatform);
-        movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
+    public void addGoalMovingPlatform(GoalMovingPlatform goalMovingPlatform) {
+        goalMovingPlatforms.add(goalMovingPlatform);
+        goalMovingPlatform.setRewindController(new RewindController(new RewindableBody(goalMovingPlatform.b2body, goalMovingPlatform)));
     }
 
     public void addSchalter(Schalter schalter) {

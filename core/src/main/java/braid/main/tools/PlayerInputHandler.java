@@ -34,6 +34,7 @@ public class PlayerInputHandler {
             handleMovement();
             handleJumping();
             handleClimbing();
+            handleInteract();
         }
 
         handlePause();
@@ -44,6 +45,12 @@ public class PlayerInputHandler {
             LevelScreen.debugRendererEnabled = !LevelScreen.debugRendererEnabled;
     }
 
+    private void handleInteract() {
+        if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))) {
+            if (player.isAtSchalter())
+                player.getCollidingSchalter().toggle();
+        }
+    }
 
     private void handlePause() {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("ESC")) && !gameIsPaused) {

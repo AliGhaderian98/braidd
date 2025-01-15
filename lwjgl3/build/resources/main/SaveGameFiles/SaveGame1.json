@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 1
-SaveGameName: saman
+SaveGameName: skdjfsd
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -14,6 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
+Playtime: 79781
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
