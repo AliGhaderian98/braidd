@@ -3,12 +3,15 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 //todo: stateTimer fixen/übersichtlicher machen, siehe print Ausgaben
 /***********
@@ -63,6 +66,8 @@ public class Player extends DynamicGameObject {
     private boolean isOnMovingPlatform = false;
     private float platformVelocity = 0;
     private boolean moving = false;
+    private boolean isAtSchalter = false;
+    private Schalter collidingSchalter = null;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -103,6 +108,19 @@ public class Player extends DynamicGameObject {
         };
     }
 
+    private Array<Fixture> nearbyFixtures = new Array<>();
+    public Array<Fixture> getNearbyFixtures() {
+        return nearbyFixtures;
+    }
+    public void addNearbyFixture(Fixture fixture) {
+        if (!nearbyFixtures.contains(fixture, true)) {
+            nearbyFixtures.add(fixture);
+        }
+    }
+    public void removeNearbyFixture(Fixture fixture) {
+        nearbyFixtures.removeValue(fixture, true);
+    }
+
     // Methods
     @Override
     public void defineBody() {
@@ -134,7 +152,19 @@ public class Player extends DynamicGameObject {
         feet.dispose();
     }
 
+    /*public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            for (Fixture fixture : getNearbyFixtures()) {
+                if (fixture.getUserData() instanceof UserData userData) {
+                    Schalter schalter = (Schalter) userData.getObject();
+                    schalter.toggle();
+                }
+            }
+        }
+    }*/
+
     public void update(float dt) {
+       // handleInput();
         sprite.setRegion(getFrame(dt));
         sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
@@ -315,6 +345,15 @@ public class Player extends DynamicGameObject {
         maxMoveLimit = null;
         minMoveLimit = null;
     }
+
+    public void isAtSchalter(boolean value, Schalter schalter) {
+        isAtSchalter = value;
+        collidingSchalter = schalter;
+    }
+
+    public boolean isAtSchalter() { return isAtSchalter; }
+
+    public Schalter getCollidingSchalter() { return collidingSchalter; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
 

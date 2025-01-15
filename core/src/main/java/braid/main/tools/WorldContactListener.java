@@ -40,6 +40,7 @@ public class WorldContactListener implements ContactListener {
             playerFeetWithMovingPlatform(userDataA, userDataB);
             playerFeetWithGround(userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
+            playerWithSchalter(userDataA, userDataB);
 
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
@@ -66,7 +67,9 @@ public class WorldContactListener implements ContactListener {
             contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
             contactEndedPlayerWithKnightAttack(userDataA, userDataB);
             playerWithSignEnds(userDataA, userDataB);
+            contactEndedPlayerWithSchalter(userDataA,userDataB);
         }
+
         patrollingEnemyOnEdge(userDataA, userDataB);
     }
 
@@ -78,6 +81,24 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+
+    private void playerWithSchalter(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
+            Schalter schalter = userDataA.getObject() instanceof Schalter
+                ? (Schalter) userDataA.getObject()
+                : (Schalter) userDataB.getObject();
+            player.isAtSchalter(true, schalter);
+        }
+    }
+
+    private void contactEndedPlayerWithSchalter(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
+            Schalter schalter = userDataA.getObject() instanceof Schalter
+                ? (Schalter) userDataA.getObject()
+                : (Schalter) userDataB.getObject();
+            player.isAtSchalter(false, null);
+        }
     }
 
     private void contactEndedPlayerWithKnightAttack(UserData userDataA, UserData userDataB) {

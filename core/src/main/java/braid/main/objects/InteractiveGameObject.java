@@ -17,7 +17,7 @@ public abstract class InteractiveGameObject extends GameObject {
     protected boolean isSensor;
 
     // constructor for box shaped objects
-    public InteractiveGameObject(World world, TiledMap map, Rectangle boundary, boolean isSensor) {
+    public InteractiveGameObject(World world, Rectangle boundary, boolean isSensor) {
         super(world);
         this.isSensor = isSensor;
 
@@ -92,6 +92,7 @@ public abstract class InteractiveGameObject extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
+        fdef.isSensor = isSensor;
 
         fixture = b2body.createFixture(fdef);
         shape.dispose();

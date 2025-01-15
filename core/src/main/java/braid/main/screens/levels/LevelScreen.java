@@ -3,11 +3,16 @@ package braid.main.screens.levels;
 import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
+import braid.main.enemies.Knight;
+import braid.main.objects.*;
 import braid.main.Items.ItemDef;
 import braid.main.enemies.*;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
+import braid.main.enemies.MadScientist;
+import braid.main.enemies.PatrollingEnemy;
+import braid.main.enemies.UnhingedEnemy;
 import braid.main.objects.Enemy;
 import braid.main.objects.MovingPlatform;
 import braid.main.objects.Player;
@@ -28,12 +33,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.maps.tiled.BaseTmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -71,7 +76,10 @@ public abstract class LevelScreen implements Screen {
     protected final Player player;
     protected Array<Enemy> enemies;
     protected Array<MovingPlatform> movingPlatforms;
+    protected Array<GoalMovingPlatform> goalMovingPlatforms;
     protected Array<Item> items;
+
+    private final Array<Schalter> schalters = new Array<>();
 
     public Array<RewindController> rewindObjects;
 
@@ -134,6 +142,7 @@ public abstract class LevelScreen implements Screen {
         enemies = new Array<>();
 
         movingPlatforms = new Array<>();
+        goalMovingPlatforms = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -161,6 +170,11 @@ public abstract class LevelScreen implements Screen {
         for (MovingPlatform m : movingPlatforms) {
             if (m.isRewindable())
                 rewindObjects.add(m.getRewindController());
+        }
+
+        for (GoalMovingPlatform gm : goalMovingPlatforms) {
+            if (gm.isRewindable())
+                rewindObjects.add(gm.getRewindController());
         }
 
         // Final setup steps
@@ -241,7 +255,6 @@ public abstract class LevelScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         delta = Math.min(1 / 10f, Gdx.graphics.getDeltaTime());
         time += delta;
 
@@ -359,6 +372,11 @@ public abstract class LevelScreen implements Screen {
         for(MovingPlatform movingPlatform :movingPlatforms)
             movingPlatform.draw(game.batch);
 
+        for(GoalMovingPlatform goalMovingPlatform :goalMovingPlatforms)
+            goalMovingPlatform.draw(game.batch);
+
+        drawSchalters(game.batch);
+
         game.batch.end();
 
         levelHUD.stage.draw();
@@ -370,6 +388,7 @@ public abstract class LevelScreen implements Screen {
 
         if( !(gameIsPaused && player.isAlive()) )
             levelHUD.update(dt);
+        updateSchalters(dt);
 
         //stop updating the game logic if game is paused or the player got hit
         if(!gameIsPaused && player.isAlive()) {
@@ -391,6 +410,9 @@ public abstract class LevelScreen implements Screen {
             for(MovingPlatform movingPlatform : movingPlatforms)
                 movingPlatform.update(dt);
 
+            for(GoalMovingPlatform goalMovingPlatform : goalMovingPlatforms)
+                goalMovingPlatform.update(dt);
+
             // Update Camera
             updateCamera();
 
@@ -410,6 +432,18 @@ public abstract class LevelScreen implements Screen {
 
                 game.setScreen(new Overworld(game));
             }
+        }
+    }
+
+    public void updateSchalters(float dt) {
+        for (Schalter schalter : schalters) {
+            schalter.update(dt);
+        }
+    }
+
+    public void drawSchalters(SpriteBatch batch) {
+        for (Schalter schalter : schalters) {
+            schalter.draw(batch);
         }
     }
 
@@ -506,6 +540,15 @@ public abstract class LevelScreen implements Screen {
     public void addMovingPlatform(MovingPlatform movingPlatform) {
         movingPlatforms.add(movingPlatform);
         movingPlatform.setRewindController(new RewindController(new RewindableBody(movingPlatform.b2body, movingPlatform)));
+    }
+
+    public void addGoalMovingPlatform(GoalMovingPlatform goalMovingPlatform) {
+        goalMovingPlatforms.add(goalMovingPlatform);
+        goalMovingPlatform.setRewindController(new RewindController(new RewindableBody(goalMovingPlatform.b2body, goalMovingPlatform)));
+    }
+
+    public void addSchalter(Schalter schalter) {
+        schalters.add(schalter);
     }
 
     public void addItem(Item item) {

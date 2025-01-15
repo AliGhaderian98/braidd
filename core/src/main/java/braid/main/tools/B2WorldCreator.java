@@ -3,10 +3,7 @@ package braid.main.tools;
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.PowerUp;
-import braid.main.objects.Ladder;
-import braid.main.objects.End;
-import braid.main.objects.MovingPlatform;
-import braid.main.objects.Sign;
+import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -16,9 +13,11 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
@@ -27,6 +26,7 @@ import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
 public class B2WorldCreator {
     private Array<Ladder> ladders;
     private final Array<MovingPlatform> movingPlatforms = new Array<>();
+   // private final Array<Schalter> schalters = new Array<>();
     private Array<End> ends;
     private final World world;
     private final TiledMap map;
@@ -62,7 +62,7 @@ public class B2WorldCreator {
             for (MapObject object : signLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                new Sign(world, map, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
+                new Sign(world, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
             }
         }
     }
@@ -109,7 +109,7 @@ public class B2WorldCreator {
             for (MapObject object : ladderLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                new Ladder(world, map, rect);
+                new Ladder(world, rect);
             }
         }
         // Create End Object
@@ -119,7 +119,7 @@ public class B2WorldCreator {
             for (MapObject object : endLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                End end = new End(world, map, rect);
+                End end = new End(world, rect);
                 ends.add(end);
             }
         }
@@ -130,12 +130,26 @@ public class B2WorldCreator {
         TextureRegion movingPlatformRegion = screen.getAtlas().findRegion("plattform");
 
         for (MapObject object : movingPlatformLayer.getObjects()) {
-            if (object instanceof RectangleMapObject) {
+            if (Objects.equals(object.getName(), "MovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float rangeX = (float) object.getProperties().get("rangeX");
                 float speed = (float) object.getProperties().get("speed");
 
                 screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX, (boolean) object.getProperties().get("rewindable")));
+            } else if (Objects.equals(object.getName(), "GoalMovingPlatform")) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                float speed = (float) object.getProperties().get("speed");
+
+                RectangleMapObject schalter = (RectangleMapObject) object.getProperties().get("schalter");
+                float schalterPosX = schalter.getRectangle().x;
+                float schalterPosY = schalter.getRectangle().y;
+
+                RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
+                float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
+                float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
+
+                screen.addGoalMovingPlatform(new GoalMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
+                     schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
 
