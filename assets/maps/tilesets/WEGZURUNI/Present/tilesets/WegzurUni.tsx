@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="WegzurUni" tilewidth="2175" tileheight="1080" tilecount="6" columns="0">
+<tileset version="1.10" tiledversion="1.10.2" name="WegzurUni" tilewidth="2175" tileheight="1080" tilecount="7" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="1416" height="980" source="../Pictures/city1.jpg"/>
@@ -18,5 +18,8 @@
  </tile>
  <tile id="6">
   <image width="2175" height="980" source="../Pictures/Backgroundreal.png"/>
+ </tile>
+ <tile id="7">
+  <image width="174" height="49" source="../Pictures/schwebebahn.png"/>
  </tile>
 </tileset>
