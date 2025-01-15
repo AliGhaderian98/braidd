@@ -1,49 +1,89 @@
 {
 SaveGameKEY: 1
-SaveGameName: hjhsd
+SaveGameName: Heyo
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: false
-	ARKADEN: false
-	WEGZURUNI: false
-	BAYER: false
-	OBERBARMEN: false
-	ZOO: false
+	SCHLOSSBURG: true
+	ARKADEN: true
+	WEGZURUNI: true
+	BAYER: true
+	OBERBARMEN: true
+	ZOO: true
 	FREUDENBERG: true
-	HBF: false
-	LUISENVIERTEL: false
+	HBF: true
+	LUISENVIERTEL: true
 }
-lastLevel: FREUDENBERG
-Playtime: 77941
+lastLevel: SCHLOSSBURG
+Playtime: 216106
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
 		}
 	]
 	SCHLOSSBURG: [
 		{
 			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
 			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -63,6 +103,26 @@ Collectables: {
 		}
 	]
 	ARKADEN: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -105,8 +165,48 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 	]
 	BAYER: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -149,8 +249,48 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 	]
 	ZOO: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -175,7 +315,27 @@ Collectables: {
 	FREUDENBERG: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -215,8 +375,48 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 	]
 	LUISENVIERTEL: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
 		{
 			class: java.lang.Boolean
 			value: false

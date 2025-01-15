@@ -5,16 +5,15 @@ import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Schalter extends InteractiveGameObject {
     private final Sprite sprite;
-    private final GoalMovingPlatform linkedPlatform;
+    private final SchalterMovingPlatform linkedPlatform;
 
-    public Schalter(World world, TextureRegion region, Rectangle boundary, GoalMovingPlatform linkedPlatform) {
+    public Schalter(World world, TextureRegion region, Rectangle boundary, SchalterMovingPlatform linkedPlatform) {
         super(world, boundary, true);
         this.linkedPlatform = linkedPlatform;
 

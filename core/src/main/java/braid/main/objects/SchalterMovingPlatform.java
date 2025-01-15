@@ -4,29 +4,24 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-import java.awt.*;
-
-public class GoalMovingPlatform extends MovingPlatform {
+public class SchalterMovingPlatform extends MovingPlatform {
 
     public enum AnimationState {
         WAITING, TOGOAL, TOORIGIN
     }
 
-    private GoalMovingPlatform.AnimationState currentState = AnimationState.WAITING;
-    private final Vector2 originPos;
-    private final Vector2 goalPos;
+    private SchalterMovingPlatform.AnimationState currentState = AnimationState.WAITING;
 
-    public GoalMovingPlatform(LevelScreen screen, World world, TextureRegion region, Rectangle boundary, float speed,
-                              float schalterPosX, float schalterPosY, float goalPosX, float goalPosY, boolean rewindable) {
-        super(world, region, boundary, 0, speed, false);
-        originPos = new Vector2(b2body.getPosition().cpy());
+
+    public SchalterMovingPlatform(LevelScreen screen, World world, TextureRegion region, Rectangle boundary, float speed,
+                                  float schalterPosX, float schalterPosY, float goalPosX, float goalPosY, boolean rewindable) {
+        super(world, region, boundary, 0, speed, rewindable);
+
         goalPos = new Vector2(goalPosX/Braid.PPM, goalPosY/Braid.PPM);
 
         fixture.setUserData(new UserData("GoalMovingPlatform", this));
@@ -48,8 +43,6 @@ public class GoalMovingPlatform extends MovingPlatform {
 
     @Override
     public void update(float dt) {
-        System.out.println(currentState);
-
         if (!isActive()) {
             b2body.setLinearVelocity(0, 0);
             return;
@@ -65,7 +58,6 @@ public class GoalMovingPlatform extends MovingPlatform {
             currentState = AnimationState.WAITING;
             return;
         }
-
 
         // Adjust velocity based on the remaining distance to avoid overshooting
         Vector2 limitedVelocity = distance.nor().scl(Math.min(speed, distance.len() / dt));
@@ -87,8 +79,8 @@ public class GoalMovingPlatform extends MovingPlatform {
 
     @Override
     public void setCurrentState(Object animationStates) {
-        if (animationStates instanceof GoalMovingPlatform.AnimationState) {
-            this.currentState = (GoalMovingPlatform.AnimationState) animationStates;
+        if (animationStates instanceof SchalterMovingPlatform.AnimationState) {
+            this.currentState = (SchalterMovingPlatform.AnimationState) animationStates;
         }
     }
 

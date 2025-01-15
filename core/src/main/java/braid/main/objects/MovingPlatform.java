@@ -8,12 +8,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class MovingPlatform extends InteractiveGameObject {
+    private enum Type {
+        RANGE, GOAL
+    }
 
     public enum AnimationState {
         LEFT, RIGHT
@@ -24,8 +28,12 @@ public class MovingPlatform extends InteractiveGameObject {
     protected final boolean rewindable;
     protected final float speed;
     protected final Sprite sprite;
+    private final Type type;
+
     private final float rangeX;
-    private final float startX;
+    protected final Vector2 originPos;
+    protected Vector2 goalPos;
+
     private Player player;
 
     public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
@@ -33,7 +41,26 @@ public class MovingPlatform extends InteractiveGameObject {
         this.rewindable = rewindable;
         this.rangeX = rangeX / 2;
         this.speed = speed;
-        this.startX = b2body.getPosition().x;
+
+        type = Type.RANGE;
+        originPos = new Vector2(b2body.getPosition().cpy());
+
+        sprite = new Sprite(region);
+        sprite.setBounds(0,0,region.getRegionWidth()/2f/ Braid.PPM, region.getRegionHeight()/2f/Braid.PPM);
+        sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
+
+        fixture.setUserData(new UserData("MovingPlatform", this));
+    }
+
+    public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float goalPosX, float goalPosY, float speed, boolean rewindable) {
+        super(world, boundary, region,false);
+        this.rewindable = rewindable;
+        this.speed = speed;
+
+        type = Type.GOAL;
+        rangeX = 0;
+        originPos = new Vector2(b2body.getPosition().cpy());
+        goalPos = new Vector2(goalPosX/Braid.PPM, goalPosY/Braid.PPM);
 
         sprite = new Sprite(region);
         sprite.setBounds(0,0,region.getRegionWidth()/2f/ Braid.PPM, region.getRegionHeight()/2f/Braid.PPM);
@@ -47,20 +74,44 @@ public class MovingPlatform extends InteractiveGameObject {
     public void defineBody() {}
 
     public void update(float dt) {
-        // determine movement direction
-        float currentX = b2body.getPosition().x;
-        if (movingRight() && currentX > startX + rangeX) {
-            currentState = MovingPlatform.AnimationState.LEFT;
-        } else if (!movingRight() && currentX < startX - rangeX) {
-            currentState = MovingPlatform.AnimationState.RIGHT;
-        }
+        if (type == Type.RANGE)
+            setVelocityRangeType(dt);
+        else
+            setVelocityGoalType(dt);
 
-        // update speed and sprite position
-        float velocityX = movingRight() ? speed : -speed;
-        b2body.setLinearVelocity(velocityX*0.005f, 0);
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
         giveVelocityToPlayer();
+    }
+
+    private void setVelocityRangeType(float dt) {
+        // determine movement direction
+        float currentX = b2body.getPosition().x;
+        if (movingRight() && currentX > originPos.x + rangeX) {
+            currentState = MovingPlatform.AnimationState.LEFT;
+        } else if (!movingRight() && currentX < originPos.x - rangeX) {
+            currentState = MovingPlatform.AnimationState.RIGHT;
+        }
+
+        float velocityX = movingRight() ? speed : -speed;
+        b2body.setLinearVelocity(velocityX*0.005f, 0);
+    }
+
+    private void setVelocityGoalType(float dt) {
+        Vector2 goal = movingRight() ? goalPos : originPos;
+        Vector2 distance = new Vector2(goal).sub(b2body.getPosition());
+
+        // If the distance is very small, change movement direction
+        if (distance.len2() < 0.001f) {
+            if (currentState == AnimationState.LEFT)
+                currentState = AnimationState.RIGHT;
+            else
+                currentState = AnimationState.LEFT;
+        }
+
+        // Adjust velocity based on the remaining distance to avoid overshooting
+        Vector2 limitedVelocity = distance.nor().scl(Math.min(speed, distance.len() / dt));
+        b2body.setLinearVelocity(limitedVelocity);
     }
 
     // give this platform's velocity over to player to ensure player stays moving with platform

@@ -920,14 +920,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 264, 21
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 492, 464
@@ -1663,6 +1663,13 @@ ritalin
   orig: 24, 24
   offset: 0, 0
   index: -1
+schalter
+  rotate: false
+  xy: 1346, 598
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
 run-smoke
   rotate: false
   xy: 1382, 876
@@ -1819,42 +1826,42 @@ schwebimini_n
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 626, 12
+  xy: 1372, 606
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_nw
   rotate: false
-  xy: 292, 3
+  xy: 626, 12
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_s
   rotate: false
-  xy: 310, 3
+  xy: 292, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 1346, 606
+  xy: 310, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 1364, 606
+  xy: 1390, 606
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 1382, 606
+  xy: 1340, 580
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

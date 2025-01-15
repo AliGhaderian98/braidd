@@ -98,56 +98,59 @@ public class Overworld implements Screen {
     }
 
     private void setupInput() {
-        inputProcessor = new InputAdapter() {
-            @Override
-            public boolean keyDown (int keycode) {
+    inputProcessor =
+        new InputAdapter() {
+          @Override
+          public boolean keyDown(int keycode) {
 
-                // Pause game
-                if (keycode == KeyBindings.getKey("ESC") && !gameIsPaused) {
-                    Timer.schedule(new Timer.Task() {
-                        @Override
-                        public void run() {
-                            pause();
-                        }
-                    }, 0f);
-                    return true;
-                }
-
-                // Enter level
-                if (keycode == KeyBindings.getKey("INTERACT") || keycode == Input.Keys.ENTER) {
-                    OverworldNode node = player.getCurrentNode();
-                    if (node instanceof LevelNode && ((LevelNode) node).isUnlocked()) {
-                        enterLevel(node.getName());
-                        return true;
+            // Pause game
+            if (keycode == KeyBindings.getKey("ESC") && !gameIsPaused) {
+              Timer.schedule(
+                  new Timer.Task() {
+                    @Override
+                    public void run() {
+                      pause();
                     }
-                }
-
-                // Handle overworld movement only if the player is not currently moving
-                if (player.isMoving())
-                    return true;
-
-                handleMovement(keycode);
-                return true;
+                  },
+                  0f);
+              return true;
             }
+
+            // Enter level
+            if (keycode == KeyBindings.getKey("INTERACT") || keycode == Input.Keys.ENTER) {
+              OverworldNode node = player.getCurrentNode();
+              if (node instanceof LevelNode && ((LevelNode) node).isUnlocked()) {
+                enterLevel(node.getName());
+                return true;
+              }
+            }
+
+            // Handle overworld movement only if the player is not currently moving
+            if (player.isMoving()) return true;
+
+            handleMovement(keycode);
+            return true;
+          }
         };
         Gdx.input.setInputProcessor(inputProcessor);
 
     }
 
     public void enterLevel(String levelName) {
-        // get next level based on current node
-        Screen newScreen = switch (levelName) {
-            case "UNI" -> new UniLevel(game);
-            case "HBF" -> new HBFLevel(game);
-            case "FREUDENBERG" -> new FreudenbergLevel(game);
-            case "LUISENVIERTEL" -> new LuisenviertelLevel(game);
-            case "ARKADEN" -> new ArkadenLevel(game);
-            case "OBERBARMEN" -> new OberbarmenLevel(game);
-            case "WEGZURUNI" -> new WegZurUniLevel(game);
-            case "SCHLOSSBURG" -> new SchlossBurgLevel(game);
-            case "BAYER" -> new BayerLevel(game);
-            case "ZOO" -> new ZooLevel(game);
-            default -> throw new IllegalStateException("Unknown Levelname: " + levelName);
+    // get next level based on current node
+    Screen newScreen =
+        switch (levelName) {
+          case "UNI" -> new UniLevel(game);
+          case "HBF" -> new HBFLevel(game);
+          case "FREUDENBERG" -> new FreudenbergLevel(game);
+          case "LUISENVIERTEL" -> new LuisenviertelLevel(game);
+          case "ARKADEN" -> new ArkadenLevel(game);
+          case "OBERBARMEN" -> new OberbarmenLevel(game);
+          case "WEGZURUNI" -> new WegZurUniLevel(game);
+          case "SCHLOSSBURG" -> new SchlossBurgLevel(game);
+          case "BAYER" -> new BayerLevel(game);
+          case "ZOO" -> new ZooLevel(game);
+          default -> throw new IllegalStateException("Unknown Levelname: " + levelName);
         };
 
         // Zoom transition

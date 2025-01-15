@@ -14,7 +14,8 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 108940
+lastLevel: SCHLOSSBURG
+Playtime: 290627
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -62,39 +63,39 @@ Collectables: {
 	SCHLOSSBURG: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean

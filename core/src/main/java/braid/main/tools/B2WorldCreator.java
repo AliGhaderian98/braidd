@@ -7,18 +7,14 @@ import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Objects;
-import java.util.logging.Level;
 
 import static braid.main.Items.PowerUp.TypeOfPowerUp.GLEITER;
 import static braid.main.Items.PowerUp.TypeOfPowerUp.RITALIN;
@@ -132,11 +128,26 @@ public class B2WorldCreator {
         for (MapObject object : movingPlatformLayer.getObjects()) {
             if (Objects.equals(object.getName(), "MovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                float rangeX = (float) object.getProperties().get("rangeX");
                 float speed = (float) object.getProperties().get("speed");
 
-                screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX, (boolean) object.getProperties().get("rewindable")));
-            } else if (Objects.equals(object.getName(), "GoalMovingPlatform")) {
+                // create a new range type moving platform
+                if (object.getProperties().get("rangeX") != null) {
+                    float rangeX = (float) object.getProperties().get("rangeX");
+                    screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX,
+                        (boolean) object.getProperties().get("rewindable")));
+
+                // create a new goal type moving platform
+                } else {
+                    RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
+                    float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
+                    float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
+
+                    screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, goalPosX, goalPosY,
+                        speed, (boolean) object.getProperties().get("rewindable")));
+                }
+
+            // create moving platforms operated by a switch
+            } else if (Objects.equals(object.getName(), "SchalterMovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
 
@@ -148,7 +159,7 @@ public class B2WorldCreator {
                 float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
                 float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
 
-                screen.addGoalMovingPlatform(new GoalMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
+                screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
                      schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
