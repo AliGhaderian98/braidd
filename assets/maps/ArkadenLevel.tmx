@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="49">
+ <tileset firstgid="1" name="mall2" tilewidth="32" tileheight="32" tilecount="0" columns="0"/>
+ <tileset firstgid="1646" source="tilesets/sheet.tsx"/>
+ <tileset firstgid="1782" source="tilesets/1_Industrial_Tileset_1.tsx"/>
+ <tileset firstgid="1878" source="tilesets/1_Industrial_Tileset_1B.tsx"/>
+ <tileset firstgid="1974" source="tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx"/>
+ <tileset firstgid="1974" source="tilesets/shopping_Mall.tsx"/>
+ <layer id="10" name="Tile Layer 1" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="2" name="Ground">
+  <object id="2" x="80.1257" y="626.866" width="751.296" height="11.3119"/>
+  <object id="3" x="833.307" y="80.1257" width="0.942655" height="560.88"/>
+  <object id="4" x="79.183" y="80.1257" height="560.88"/>
+  <object id="29" x="80" y="158" width="47" height="18.5"/>
+  <object id="35" x="480" y="305" width="47.5" height="16"/>
+  <object id="36" x="399" y="335" width="49" height="17.5"/>
+  <object id="39" x="255.5" y="350" width="96.5" height="23"/>
+  <object id="40" x="638.5" y="159" width="49" height="19.5"/>
+  <object id="41" x="479.5" y="447.5" width="64.5" height="17.5"/>
+  <object id="44" x="191.5" y="417" width="223" height="20"/>
+ </objectgroup>
+ <objectgroup id="3" name="Enemies">
+  <object id="5" x="600" y="615.5"/>
+  <object id="13" x="384.5" y="405"/>
+ </objectgroup>
+ <objectgroup id="4" name="Schalter">
+  <object id="6" x="819" y="615"/>
+  <object id="14" x="661" y="149"/>
+ </objectgroup>
+ <objectgroup id="5" name="GoalMovingPlatform">
+  <object id="9" x="550" y="497" width="45.5" height="12.5"/>
+  <object id="27" x="128" y="373" width="48.5" height="17"/>
+ </objectgroup>
+ <objectgroup id="11" name="End">
+  <object id="48" x="79" y="123" width="24" height="34.5"/>
+ </objectgroup>
+ <layer id="8" name="LadderLayer" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1r0JgEAMhuFUl0701P3ncAVXcBF/EIxYaKMgInp37wNfnxASIgIAAIC3DU5ktEzu60pEShWpLLV+XQkAAAjNn34aPBPLLBurP7e/trB4jf/XbQOf111dYv2m4Lij/iK92xPrPuNcptttXzNzBwAAABCIBdUbEbc=
+  </data>
+ </layer>
+ <objectgroup id="6" name="Signs">
+  <object id="8" x="375.5" y="616.5"/>
+  <object id="31" x="232" y="407">
+   <properties>
+    <property name="Text" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Ladder">
+  <object id="45" x="242" y="351.5" width="12.5" height="47.5"/>
+  <object id="46" x="448" y="454" width="29.5" height="3"/>
+ </objectgroup>
+ <layer id="7" name="signLayer" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJAAAIBDErtxdXdoxHSCa49qoAAAAAAICU7XQBAADw2XiKuAMTfwEp
+  </data>
+ </layer>
+</map>
