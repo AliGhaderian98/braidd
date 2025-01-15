@@ -41,14 +41,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="MovingPlatform">
-  <object id="13" name="Start" x="416.667" y="67.3333">
-   <point/>
-  </object>
-  <object id="14" name="End" x="320" y="62.6667">
-   <point/>
-  </object>
- </objectgroup>
  <objectgroup id="8" name="MovingPlatform">
   <object id="17" name="StartV" x="60" y="153.333">
    <point/>
