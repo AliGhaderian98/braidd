@@ -14,8 +14,8 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: SCHLOSSBURG
-Playtime: 338325
+lastLevel: FREUDENBERG
+Playtime: 350794
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
