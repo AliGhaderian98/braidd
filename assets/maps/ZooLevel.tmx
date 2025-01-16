@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="19" nextobjectid="519">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="20" nextobjectid="519">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -1023,6 +1023,7 @@
   <object id="359" template="object-templates/page.tx" x="1980.42" y="566.917"/>
   <object id="458" template="object-templates/gleiter.tx" x="2377.25" y="721"/>
  </objectgroup>
+ <objectgroup id="19" name="Brick"/>
  <objectgroup id="15" name="MovingPlatform"/>
  <layer id="16" name="MovingPlatformLayer" width="400" height="90" visible="0">
   <data encoding="csv">

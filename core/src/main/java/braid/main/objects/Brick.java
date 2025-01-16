@@ -64,6 +64,8 @@ public class Brick extends InteractiveGameObject {
 
     public boolean isRewindable() { return rewindable; }
 
+    public Sprite getSprite() { return sprite; }
+
     @Override
     public Object getCurrentState() {
         if (isBroken()) {

@@ -37,21 +37,29 @@ public class WorldContactListener implements ContactListener {
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
-            playerWithItem(userDataA, userDataB);
-            playerWithLadder(userDataA, userDataB);
-            playerFeetWithMovingPlatform(userDataA, userDataB);
-            playerFeetWithGround(userDataA, userDataB);
-            playerFeetWithBrick(userDataA, userDataB);
-            hammerHitBoxWithBrick (userDataA, userDataB);
-            playerWithEnd(userDataA,userDataB);
-            playerWithSchalter(userDataA, userDataB);
+            if ("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
+                || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) {
+                hammerHitBoxWithBrick (userDataA, userDataB);
+            }
 
-            playerFeetWithEnemy(userDataA, userDataB);
-            playerBodyWithEnemy(userDataA, userDataB, contact);
-            playerWithUnhingedEnemyRadius(userDataA, userDataB);
-            playerWithKnightEnemyRadius(userDataA, userDataB);
-            playerWithKnightAttack(userDataA, userDataB);
-            playerWithSign(userDataA, userDataB);
+            if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+                playerWithItem(userDataA, userDataB);
+                playerWithLadder(userDataA, userDataB);
+                playerWithEnd(userDataA,userDataB);
+                playerWithSchalter(userDataA, userDataB);
+                playerBodyWithEnemy(userDataA, userDataB, contact);
+                playerWithUnhingedEnemyRadius(userDataA, userDataB);
+                playerWithKnightEnemyRadius(userDataA, userDataB);
+                playerWithKnightAttack(userDataA, userDataB);
+                playerWithSign(userDataA, userDataB);
+            }
+
+            if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
+                playerFeetWithMovingPlatform(userDataA, userDataB);
+                playerFeetWithGround(userDataA, userDataB);
+                playerFeetWithBrick(userDataA, userDataB);
+                playerFeetWithEnemy(userDataA, userDataB);
+            }
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
@@ -64,16 +72,25 @@ public class WorldContactListener implements ContactListener {
         UserData userDataB = (UserData) contact.getFixtureB().getUserData();
 
         if (userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) {
-            contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
-            contactEndedPlayerWithGround(userDataA, userDataB);
-            contactEndedPlayerWithLadder(userDataA, userDataB);
-            contactEndedPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
-            contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
-            contactEndedPlayerWithKnightAttack(userDataA, userDataB);
-            playerWithSignEnds(userDataA, userDataB);
-            contactEndedPlayerWithSchalter(userDataA,userDataB);
-            contactEndedPlayerWithBrick(userDataA, userDataB);
-            endHammerBoxWithBrick(userDataA,userDataB);
+            if ("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
+                || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) {
+                endHammerBoxWithBrick(userDataA,userDataB);
+            }
+
+            if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+                contactEndedPlayerWithLadder(userDataA, userDataB);
+                contactEndedPlayerWithUnhingedEnemyRadius(userDataA, userDataB);
+                contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
+                contactEndedPlayerWithKnightAttack(userDataA, userDataB);
+                playerWithSignEnds(userDataA, userDataB);
+                contactEndedPlayerWithSchalter(userDataA,userDataB);
+            }
+
+            if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
+                contactEndedPlayerWithMovingPlatform(userDataA,userDataB);
+                contactEndedPlayerWithGround(userDataA, userDataB);
+                contactEndedPlayerWithBrick(userDataA, userDataB);
+            }
         }
 
         patrollingEnemyOnEdge(userDataA, userDataB);
@@ -144,8 +161,7 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void playerWithSignEnds(UserData userDataA, UserData userDataB) {
-        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
-            (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
+        if ((userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
             Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
 
             sign.setShowing(false);
@@ -154,8 +170,7 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void playerWithSign(UserData userDataA, UserData userDataB) {
-        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
-            (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
+        if ((userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
             Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
             sign.setShowing(true);
         }
@@ -206,9 +221,7 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void hammerHitBoxWithBrick(UserData userDataA, UserData userDataB) {
-        if (("RechteHammerHitBox".equals(userDataA.getName()) || "RechteHammerHitBox".equals(userDataB.getName())
-            || "LinkeHammerHitBox".equals(userDataA.getName()) || "LinkeHammerHitBox".equals(userDataB.getName())) &&
-            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+        if ("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())) {
             if (userDataA.getObject() instanceof Brick || userDataB.getObject() instanceof Brick) {
                 if (player.isHammerActive()) {
                     Brick brick = (userDataA.getObject() instanceof Brick) ? (Brick) userDataA.getObject() : (Brick) userDataB.getObject();
@@ -219,8 +232,7 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void endHammerBoxWithBrick (UserData userDataA, UserData userDataB) {
-        if (("HammerHitBox".equals(userDataA.getName()) || "HammerHitBox".equals(userDataB.getName())) &&
-            (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())))) {
+        if ("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName())) {
             player.resetCollidingBrick();
         }
     }

@@ -105,6 +105,7 @@ packedimages/sprites.atlas
 packedimages/sprites.png
 shaders/crt-rewind.frag
 shaders/grey.frag
+shaders/outline.frag
 shaders/red.frag
 shaders/standard.vert
 sprites/animals/Birds/Background/Bird1/Bird1_1.png

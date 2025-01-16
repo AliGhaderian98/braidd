@@ -14,8 +14,8 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: UNI
-Playtime: 256053
+lastLevel: HBF
+Playtime: 407109
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -197,19 +197,19 @@ Collectables: {
 	HBF: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean

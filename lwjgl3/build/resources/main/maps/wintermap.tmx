@@ -194,7 +194,11 @@
   <object id="169" x="384" y="256" height="16"/>
  </objectgroup>
  <objectgroup id="19" name="Brick">
-  <object id="298" template="object-templates/Brick.tx" x="736" y="256"/>
+  <object id="298" template="object-templates/Brick.tx" x="736" y="256">
+   <properties>
+    <property name="rewindable" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="11" name="Enemies">
   <properties>
@@ -204,6 +208,7 @@
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
   <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192">
    <properties>
+    <property name="rewindable" type="bool" value="false"/>
     <property name="type" value="cat"/>
    </properties>
   </object>
@@ -320,7 +325,7 @@
   <object id="255" template="object-templates/movingPlatformType2.tx" x="153.5" y="275">
    <properties>
     <property name="goalPosition" type="object" value="256"/>
-    <property name="type" value="GLEITER"/>
+    <property name="rewindable" type="bool" value="false"/>
    </properties>
   </object>
   <object id="256" template="object-templates/GoalPosition.tx" x="176" y="144"/>

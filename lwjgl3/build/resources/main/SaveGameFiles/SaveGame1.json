@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 1
-SaveGameName: Heyo
+SaveGameName: hfghv
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -14,88 +14,48 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: SCHLOSSBURG
-Playtime: 322322
+lastLevel: HBF
+Playtime: 400013
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	SCHLOSSBURG: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -103,26 +63,6 @@ Collectables: {
 		}
 	]
 	ARKADEN: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -165,48 +105,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	BAYER: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -249,48 +149,8 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	ZOO: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false
@@ -333,51 +193,11 @@ Collectables: {
 			class: java.lang.Boolean
 			value: false
 		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 	]
 	HBF: [
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -397,26 +217,6 @@ Collectables: {
 		}
 	]
 	LUISENVIERTEL: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
 		{
 			class: java.lang.Boolean
 			value: false

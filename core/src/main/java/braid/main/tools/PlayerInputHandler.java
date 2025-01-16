@@ -93,9 +93,11 @@ public class PlayerInputHandler {
             // apply rewind shader
             if (player.getRewindController().hasRewindStorage()) {
                 screen.setRewindShader();
+                player.b2body.setActive(false);
             } else {
                 rewinding = false;
                 screen.removeRewindShader();
+                player.b2body.setActive(true);
             }
         } else {
             for (RewindController r : screen.rewindObjects) {
@@ -103,6 +105,7 @@ public class PlayerInputHandler {
             }
             rewinding = false;
             screen.removeRewindShader();
+            player.b2body.setActive(true);
         }
         if (!rewinding && rewindBuffer)
             player.setIsGrounded(player.b2body.getLinearVelocity().y == 0);

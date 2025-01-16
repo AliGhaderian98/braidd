@@ -378,6 +378,19 @@ public abstract class LevelScreen implements Screen {
 
         player.getSprite().draw(game.batch);
 
+        drawEnemies();
+        drawMovingPlatforms();
+        drawSchalterMovingPlatforms();
+        drawSchalters();
+        drawBricks();
+        drawItems();
+
+        game.batch.end();
+
+        levelHUD.stage.draw();
+    }
+
+    private void drawEnemies() {
         for (Enemy e : enemies) {
             if (!e.isRewindable()) {
                 game.batch.setShader(nonRewindableShader);
@@ -390,16 +403,6 @@ public abstract class LevelScreen implements Screen {
             e.draw(game.batch);
         }
         game.batch.setShader(defaultShader);
-
-        drawMovingPlatforms();
-        drawSchalterMovingPlatforms();
-        drawSchalters();
-        drawBricks();
-        drawItems();
-
-        game.batch.end();
-
-        levelHUD.stage.draw();
     }
 
     private void drawMovingPlatforms() {
@@ -418,8 +421,19 @@ public abstract class LevelScreen implements Screen {
     }
 
     private void drawSchalterMovingPlatforms() {
-        for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
+        for (SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms) {
+            if (!schalterMovingPlatform.isRewindable()) {
+                game.batch.setShader(nonRewindableShader);
+                nonRewindableShader.setUniformf( "u_time", time);
+                nonRewindableShader.setUniformf( "u_textureSize",
+                    new Vector2(schalterMovingPlatform.getSprite().getRegionWidth(),
+                        schalterMovingPlatform.getSprite().getRegionHeight()));
+            }
+            else
+                game.batch.setShader(defaultShader);
             schalterMovingPlatform.draw(game.batch);
+        }
+        game.batch.setShader(defaultShader);
     }
 
     public void drawSchalters() {
@@ -428,8 +442,19 @@ public abstract class LevelScreen implements Screen {
     }
 
     public void drawBricks() {
-        for (Brick brick : bricks)
+        for (Brick brick : bricks) {
+            if (!brick.isRewindable()) {
+                game.batch.setShader(nonRewindableShader);
+                nonRewindableShader.setUniformf( "u_time", time);
+                nonRewindableShader.setUniformf( "u_textureSize",
+                    new Vector2(brick.getSprite().getRegionWidth(),
+                        brick.getSprite().getRegionHeight()));
+            }
+            else
+                game.batch.setShader(defaultShader);
             brick.draw(game.batch);
+        }
+        game.batch.setShader(defaultShader);
     }
 
     public void drawItems() {
