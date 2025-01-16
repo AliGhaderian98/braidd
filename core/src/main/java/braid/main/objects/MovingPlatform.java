@@ -148,4 +148,6 @@ public class MovingPlatform extends InteractiveGameObject {
     }
 
     public boolean isRewindable() { return rewindable; }
+
+    public Sprite getSprite() { return sprite; }
 }

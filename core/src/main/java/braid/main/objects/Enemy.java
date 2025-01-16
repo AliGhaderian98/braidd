@@ -1,10 +1,16 @@
 package braid.main.objects;
 
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.logging.Level;
 
@@ -39,10 +45,15 @@ public abstract class Enemy extends DynamicGameObject{
         this.type = type;
     }
 
-    // Überschreiben der `act()`-Methode, um die Gegnerlogik zu aktualisieren
+    public void draw(SpriteBatch batch) {
+        if (!isDead()) {
+            sprite.draw(batch);
+        }
+    }
+
     @Override
     public void act(float delta) {
-        super.act(delta); // Aufruf der GameObject-Logik
+        super.act(delta);
     }
 
     public abstract void defineBody();

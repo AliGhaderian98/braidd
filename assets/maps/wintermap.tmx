@@ -204,6 +204,7 @@
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
   <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192">
    <properties>
+    <property name="rewindable" type="bool" value="false"/>
     <property name="type" value="cat"/>
    </properties>
   </object>
