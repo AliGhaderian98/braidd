@@ -93,18 +93,38 @@ public class B2WorldCreator {
             }
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(
-                (rect.getX() + rect.getWidth() / 2) / Braid.PPM,
-                (rect.getY() + rect.getHeight() / 2) / Braid.PPM
-            );
-            body = world.createBody(bdef);
+            if(rotation==0){
+                bdef.position.set(
+                    (rect.getX() + rect.getWidth() / 2) / Braid.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / Braid.PPM
 
-            shape.setAsBox(
-                (rect.getWidth() / 2) / Braid.PPM,
-                (rect.getHeight() / 2) / Braid.PPM,
-                new Vector2(0, 0),
-                (float) -Math.toRadians(rotation)
-            );
+                );
+            }else {
+                bdef.position.set(
+                    (rect.getX() + rect.getWidth() / 2) / Braid.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / Braid.PPM
+
+                );
+            }
+
+            System.out.println("R" +rotation+"  x,y:"+rect.getX() +"  "+ rect.getY());
+
+            body = world.createBody(bdef);
+            if(rotation==0){
+                shape.setAsBox(
+                    (rect.getWidth() / 2) / Braid.PPM,
+                    (rect.getHeight() / 2) / Braid.PPM,
+                    new Vector2(0,0),
+                    (float) -Math.toRadians(rotation)
+                );
+            }else {
+                shape.setAsBox(
+                    (rect.getWidth() / 2) / Braid.PPM,
+                    (rect.getHeight() / 2) / Braid.PPM,
+                    new Vector2(-(rect.getWidth() / 2)/ Braid.PPM,-(rect.getHeight() / 2)/ Braid.PPM),
+                    (float) -Math.toRadians(rotation)
+                );
+            }
             fdef.shape = shape;
             Fixture wallFixture = body.createFixture(fdef);
             wallFixture.setUserData(new UserData("Wall", this));
