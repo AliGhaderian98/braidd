@@ -364,13 +364,12 @@ public abstract class LevelScreen implements Screen {
 
         player.getSprite().draw(game.batch);
 
-        game.batch.enableBlending();
         for (Enemy e : enemies) {
             if (!e.isRewindable()) {
-                nonRewindableShader.setUniformf( "u_time", time);
-                nonRewindableShader.setUniformf( "u_imageSize", new Vector2(e.getSprite().getRegionWidth(), e.getSprite().getRegionHeight()));
-                nonRewindableShader.setUniformf( "u_glowRadius", 5);
                 game.batch.setShader(nonRewindableShader);
+                nonRewindableShader.setUniformf( "u_time", time);
+                nonRewindableShader.setUniformf( "u_textureSize",
+                    new Vector2(e.getSprite().getRegionWidth(), e.getSprite().getRegionHeight()));
             }
             else
                 game.batch.setShader(defaultShader);
@@ -381,8 +380,19 @@ public abstract class LevelScreen implements Screen {
         for(Item item :items)
             item.draw(game.batch);
 
-        for(MovingPlatform movingPlatform :movingPlatforms)
+        for (MovingPlatform movingPlatform : movingPlatforms) {
+            if (!movingPlatform.isRewindable()) {
+                game.batch.setShader(nonRewindableShader);
+                nonRewindableShader.setUniformf( "u_time", time);
+                nonRewindableShader.setUniformf( "u_textureSize",
+                    new Vector2(movingPlatform.getSprite().getRegionWidth(), movingPlatform.getSprite().getRegionHeight()));
+            }
+            else
+                game.batch.setShader(defaultShader);
             movingPlatform.draw(game.batch);
+        }
+        game.batch.setShader(defaultShader);
+
 
         game.batch.end();
 

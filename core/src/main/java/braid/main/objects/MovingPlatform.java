@@ -15,19 +15,20 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class MovingPlatform extends InteractiveGameObject {
 
-    public enum AnimationState {
-        LEFT, RIGHT
-    }
 
+
+    public enum AnimationState {
+        LEFT, RIGHT;
+    }
     private MovingPlatform.AnimationState currentState = MovingPlatform.AnimationState.RIGHT;
 
     private final boolean rewindable;
+
     private final float rangeX;
     private final float speed;
     private final float startX;
     private final Sprite sprite;
     private Player player;
-
     public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
         super(world, boundary, region,false);
         this.rewindable = rewindable;
@@ -92,4 +93,6 @@ public class MovingPlatform extends InteractiveGameObject {
     }
 
     public boolean isRewindable() { return rewindable; }
+
+    public Sprite getSprite() { return sprite; }
 }

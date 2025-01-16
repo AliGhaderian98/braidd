@@ -1,91 +1,63 @@
-#version 120
+#version 140
 
 #ifdef GL_ES
 precision mediump float;
 #endif
 
-varying vec4 v_color;
-varying vec2 v_texCoords;
 uniform sampler2D u_texture;
+uniform vec2 u_textureSize;
 uniform float u_time;
-uniform vec2 u_imageSize;
-uniform int u_glowRadius;
-
-void main()
-{
-    vec4 color = texture2D(u_texture, v_texCoords);
-    vec2 pixelToTextureCoords = 1 / u_imageSize;
-    vec4 averageColor = vec4(0.0, 0.0, 0.0, 0.0);
-    for (int dx = -u_glowRadius; dx <= u_glowRadius; dx++)
-    {
-        for (int dy = -u_glowRadius; dy <= u_glowRadius; dy++)
-        {
-            vec2 point = v_texCoords + vec2(dx,dy) * pixelToTextureCoords;
-            averageColor += texture2D(u_texture, point);
-        }
-    }
-    averageColor /= pow(2.0 * u_glowRadius + 1.0, 2.0);
-    float amount = (sin(6.0 * u_time) + 1.0) * 0.5;
-    // extra factor of 2.0 intensifies glow effect
-    vec4 glowFactor = vec4( 2.0 * averageColor.rgb, averageColor.a );
-    gl_FragColor = v_color * (color + amount * glowFactor);
-}
-
-
-
-/*
-uniform sampler2D u_texture;
-const vec4 u_outlineColor = vec4(1, 0.855, 0, 1);
+const vec3 u_tintColorStart = vec3(0,0,1);
+const vec3 u_tintColorEnd = vec3(0, 1, 0.367);
+const float u_blurAmount = 0.04;
+const float u_threshold = 0.5;
 
 varying vec4 v_color;
-varying vec2 v_texCoords;
 
-const float smoothing = 1.0/16.0;
-const float outlineWidth = 3.0/16.0;
-const float outerEdgeCenter = 0.5 - outlineWidth;
+in vec2 v_texCoords;
+out vec4 fragColor;
 
 void main() {
-    vec4 texColor = texture2D(u_texture, v_texCoords);
-    float distance = texColor.a;  // Assuming alpha channel contains distance
+    // Sample the texture at the given coordinates
+    vec4 pixel = texture(u_texture, v_texCoords);
 
-    // Calculate alpha for the inner and outer edges
-    float alpha = smoothstep(outerEdgeCenter - smoothing, outerEdgeCenter + smoothing, distance);
-    float border = smoothstep(0.5 - smoothing, 0.5 + smoothing, distance);
+    // Calculate the phase for each color transition
+    float phase = mod(u_time * 2, 3.0);  // Cycle through 0 to 3 for each color transition
 
-    // Blend outline and texture colors
-    vec3 blendedColor = mix(u_outlineColor.rgb, v_color.rgb, border);
-    gl_FragColor = vec4(blendedColor, alpha * v_color.a);  // Scale alpha by vertex color alpha
-}
-/*
-varying vec4 v_color;
-varying vec2 v_texCoords;
-uniform sampler2D u_texture;
-uniform vec2 u_imageSize;
-vec4 u_borderColor = vec4(1, 0.855, 0, 1);
-float u_borderSize = 3;
+    vec3 blendedColor;
 
-void main()
-{
-    vec4 color = texture2D(u_texture, v_texCoords);
-    vec2 pixelToTextureCoords = 1 / u_imageSize;
-
-    bool isInteriorPoint = true;
-    bool isExteriorPoint = true;
-    for (float dx = -u_borderSize; dx < u_borderSize; dx++)
-    {
-        for (float dy = -u_borderSize; dy < u_borderSize; dy++)
-        {
-            vec2 point = v_texCoords + vec2(dx,dy) * pixelToTextureCoords;
-            float alpha = texture2D(u_texture, point).a;
-            if ( alpha < 0.5 )
-                isInteriorPoint = false;
-            if ( alpha > 0.5 )
-                isExteriorPoint = false;
-        }
+    if (phase < 1.0) {
+        // Transition from color1 to color2
+        blendedColor = mix(v_color.rgb, u_tintColorStart, phase);
+    } else if (phase < 2.0) {
+        // Transition from color2 to color3
+        blendedColor = mix(u_tintColorStart, u_tintColorEnd, phase - 1.0);
+    } else {
+        // Transition from color3 to color1
+        blendedColor = mix(u_tintColorEnd, v_color.rgb, phase - 2.0);
     }
-    if (!isInteriorPoint && !isExteriorPoint && color.a < 0.5)
-        gl_FragColor = u_borderColor;
-    else
-        gl_FragColor = v_color * color;
+
+    // If the pixel is not fully transparent (inside the sprite), apply the tint color
+    if (pixel.a > u_threshold) {
+        // Tint the color by multiplying the original pixel color by the interpolated color
+        fragColor = vec4(pixel.rgb * blendedColor, pixel.a);
+    } else {
+        // If the pixel is transparent, sample surrounding pixels to blur the edge
+        float sum = 0.0;
+        vec4 blurredColor = vec4(0.0);
+
+        // Sample surrounding pixels in a 3x3 grid (can be expanded for more blur)
+        for (int x = -1; x <= 1; ++x) {
+            for (int y = -1; y <= 1; ++y) {
+                // Apply offset based on the texture size and blur amount
+                vec2 offset = vec2(float(x), float(y)) * u_blurAmount / u_textureSize;
+                blurredColor += texture(u_texture, v_texCoords + offset);
+            }
+        }
+
+        // Average the sampled pixels for blur effect
+        blurredColor /= 9.0;
+        // Combine the blurred color with the original sprite's color (fade the transparency)
+        fragColor = mix(vec4(pixel.rgb * blendedColor, pixel.a), blurredColor, 0.5);
+    }
 }
-*/
