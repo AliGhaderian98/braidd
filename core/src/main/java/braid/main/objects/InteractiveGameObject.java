@@ -16,7 +16,7 @@ public abstract class InteractiveGameObject extends GameObject {
     protected Fixture fixture;
     protected boolean isSensor;
 
-    // constructor for box shaped objects
+
     public InteractiveGameObject(World world, Rectangle boundary, boolean isSensor) {
         super(world);
         this.isSensor = isSensor;
@@ -24,7 +24,7 @@ public abstract class InteractiveGameObject extends GameObject {
         defineBody(boundary);
     }
 
-    // constructor for circular objects
+
     public InteractiveGameObject(World world, float radius, boolean isSensor, float posX, float posY) {
         super(world);
         this.isSensor = isSensor;
@@ -32,7 +32,7 @@ public abstract class InteractiveGameObject extends GameObject {
         defineBody(radius, posX, posY);
     }
 
-    // constructor for objects size based on sprite
+
     public InteractiveGameObject(World world, Rectangle boundary, TextureRegion region, boolean isSensor) {
         super(world);
         this.isSensor = isSensor;

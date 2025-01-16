@@ -1,5 +1,4 @@
 package braid.main.objects;
-
 import braid.main.Braid;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Sprite;

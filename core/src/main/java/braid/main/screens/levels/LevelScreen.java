@@ -3,6 +3,8 @@ package braid.main.screens.levels;
 import braid.main.*;
 import braid.main.Items.CollectableItem;
 import braid.main.Items.Item;
+import braid.main.Items.Key;
+import braid.main.objects.Door;
 import braid.main.enemies.Knight;
 import braid.main.objects.*;
 import braid.main.enemies.*;
@@ -29,6 +31,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -52,7 +55,6 @@ import braid.main.screens.menus.PauseMenu;
  ***********/
 public abstract class LevelScreen implements Screen {
     protected String levelName;
-
     // Basic Game variables
     protected final Braid game;
     private static final int GRAVITY = -10;
@@ -104,8 +106,6 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
-
-
 
     public LevelScreen(Braid game, String mapPath, String atlasPath, String musicPath) {
         // Setup Game Variables
@@ -600,5 +600,9 @@ public abstract class LevelScreen implements Screen {
             levelName = "WEGZURUNI";
         else if (this instanceof ZooLevel)
             levelName = "ZOO";
+    }
+
+    public Batch getBatch() {
+        return  null;
     }
 }

@@ -18,6 +18,9 @@ import com.badlogic.gdx.utils.Timer;
  ***********/
 
 public class Player extends DynamicGameObject {
+    public void addKey(int keyID) {
+    }
+
     // Enumeration to represent the possible animation states a player can be in
     public enum AnimationState {
         IDLE,
@@ -188,41 +191,8 @@ public class Player extends DynamicGameObject {
         }
     }
 
-    public TextureRegion getFrame(float dt){
-        testAnimationPause();
-
-        if (!animationPaused) {
-            stateTimer = currentState == previousState ? stateTimer + dt : 0;
-        }
-
-        previousState = currentState;
-
-        TextureRegion region;
-
-        if (landingAnimationPlaying)
-            region = LionLanding.getKeyFrame(0,false);
-        else {
-            region = switch (currentState) {
-                case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
-                case JUMPING -> LionJumping.getKeyFrame(0, false);
-                case FALLING -> LionFalling.getKeyFrame(0,false);
-                case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
-                default -> LionIdle.getKeyFrame(stateTimer, true);
-            };
-        }
-
-
-        //checking if the model has to be flipped
-        if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
-            region.flip(true,false);
-            runningRight = false;
-        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
-            region.flip(true,false);
-            runningRight = true;
-
-        }
-
-        return region;
+    public TextureRegion getFrame(float dt) {
+        return null;
     }
 
     private void testAnimationPause() {

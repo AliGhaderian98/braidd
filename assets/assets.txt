@@ -10,7 +10,6 @@ audio/music/background_music.mp3
 audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/object-templates/Brick.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
@@ -80,6 +79,7 @@ maps/tilesets/images/3_Far_Background_Tile.png
 maps/tilesets/images/Anim_Robot_Jump1_v1.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
+maps/tilesets/images/coin.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
 maps/tilesets/images/prop-sheet.png
