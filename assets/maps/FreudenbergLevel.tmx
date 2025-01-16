@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="34">
- <tileset firstgid="1" source="braid/assets/maps/1_Industrial_Tileset_1.tsx"/>
- <tileset firstgid="97" source="Blue Sky.tsx"/>
- <tileset firstgid="2122" source="Door.tsx"/>
- <tileset firstgid="2564" source="city_tiles_by_carchagui_ddrixpq.tsx"/>
- <tileset firstgid="3236" source="Snow.tsx"/>
- <tileset firstgid="3317" source="floor.tsx"/>
- <tileset firstgid="3733" source="Car.tsx"/>
- <tileset firstgid="3887" source="Cloud 2.tsx"/>
- <tileset firstgid="3915" source="car3.tsx"/>
+ <tileset firstgid="1" source="tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx"/>
+ <tileset firstgid="97" source="tilesets/FreudenBerg/Blue Sky.tsx"/>
+ <tileset firstgid="2122" source="tilesets/FreudenBerg/Door.tsx"/>
+ <tileset firstgid="2564" source="tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx"/>
+ <tileset firstgid="3236" source="tilesets/FreudenBerg/Snow.tsx"/>
+ <tileset firstgid="3317" source="tilesets/FreudenBerg/floor.tsx"/>
+ <tileset firstgid="3733" source="tilesets/FreudenBerg/Car.tsx"/>
+ <tileset firstgid="3887" source="tilesets/FreudenBerg/Cloud 2.tsx"/>
+ <tileset firstgid="3915" source="tilesets/FreudenBerg/car3.tsx"/>
  <layer id="1" name="Background" width="40" height="15">
   <data encoding="base64" compression="zlib">
    eJzN1NdzVHUYBuA1BZSmztjoRRGU7lhC6KigJBACoaSBOiMgKEVaElpAinphpYROkN5LADtFsNND6CXopdKkB4jPmXEmDOYP4OKZ2e898+5++zt7Nio8FGpMNE1oSjOa04KWtKI1L/ISL9OGtrzCq7Qjhlja04E4OhJPJzqTQBe60o3uJJJEMimkEvXfXm/Si9704S360o+3eYf+DGAgg3iXwQxhKMMYThrpZDCCkYxiNGPIZCzjeI/xTGAik3ifD/jwtr0+43MmM4WpTCOL6cxgJrOYzRzmMo9s5vMFC1jIIhazhKUsYzkrWMkqVrOGtaxjPTlsYCObbttrM1vYyjZ+YDs7+JGf+Jlf+JXf+J2d7GI3e9jLPvaTywHyOMghDnOEoxzjOCc4ySnyOc0f/HnbXn/xN2c4yznOc4F/uMglLnOFq1zjOgXc4Ca3KCQUEQrdQxjhRBBJCUpyL/dRitKUoSzluJ8HeDCiaK/yXlegIpWoTBWqUo3q1OBxnqAmT1KL2jzF09ShLvV4qFQo9DCP8CiPUZ4KVKQSlalCVapRnRo0028eUbRXfVkDGtKIdrIYYmlPB+LoSDyd6FxMr7sskSSeNT/H87xAFI2JpglNgz1oTgta0orW9NXvRxvaBp8vi6Mj8QyXpZFOBiMYyShGM4bMYnoTZBOZRIK5C13pFuxOIkkkk0IqPejJa7zOG0zTz2IwQ+gvG8BABrFAtpBFLGYJS1nGclawspjeOtl6coL3NQ9lWPB9SSOdDEYwklGMZgyZjGUc2/V3MI9sPpJ9zCd8yl7ZPvaTywHyOMghDnOkmN5J2SnymWyewtTgPMhiOjOYySxmM4e5zCOb+ZzXv8BOdrFKtpo1rOWWrJBQpOeQMMKJIJISlIz8f6+MrCzlyDFvYCOb+JKv+Jpv+Jbv+J7NbGEr24JnRr8q1+1QEOwo282e4Oyo41pd6lGfBjSkEc9EFv2H3Nlr7Fo0Tcg1HyCPgxziMEc4yjGOcyI4d06Rz2li9GOpRW3OyM5yLjjb4LcsSySJZFJIpQc9I4v+Q+7s9XKtN324aL7EZa5wlWtcp4Ab3AzuFYWESrtXhJGmn04CXSgfurvVvMv9C0NiGsM=
