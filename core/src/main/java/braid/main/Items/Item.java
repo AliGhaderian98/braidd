@@ -10,11 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Item extends InteractiveGameObject {
     protected LevelScreen screen;
-    //protected World world;
+
     protected Vector2 velocity;
     protected boolean toDestroy;
     protected boolean destroyed;
-    //protected Body body;
+
     protected float x,y;
     protected Sprite sprite;
 
@@ -27,7 +27,7 @@ public abstract class Item extends InteractiveGameObject {
         toDestroy = false;
         destroyed = false;
     }
-    //public abstract void defineItem();
+
     public abstract void use(Player player);
 
 
