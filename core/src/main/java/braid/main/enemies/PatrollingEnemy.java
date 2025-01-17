@@ -69,6 +69,15 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
                     sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
+            case ("bear") -> {
+                sprite = new Sprite(atlas.findRegion("bear-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("bear-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.1f, atlas.findRegions("bear-run"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
             default -> {
                 sprite = new Sprite(atlas.findRegion("lion-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);

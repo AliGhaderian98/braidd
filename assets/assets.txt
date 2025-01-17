@@ -76,6 +76,8 @@ maps/tilesets/Zoo/Rocks-Tiled/Tilemap/sand_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilesheet.txt
+maps/tilesets/Zoo/Taiga.tsx
+maps/tilesets/Zoo/TaigaPack.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
@@ -111,6 +113,11 @@ shaders/grey.frag
 shaders/outline.frag
 shaders/red.frag
 shaders/standard.vert
+sprites/animals/Bear/bear-idle.png
+sprites/animals/Bear/bear-run_01.png
+sprites/animals/Bear/bear-run_02.png
+sprites/animals/Bear/bear-run_03.png
+sprites/animals/Bear/bear-run_04.png
 sprites/animals/Birds/Background/Bird1/Bird1_1.png
 sprites/animals/Birds/Background/Bird1/Bird1_2.png
 sprites/animals/Birds/Background/Bird2/Bird2_1.png
