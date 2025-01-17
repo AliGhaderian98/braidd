@@ -251,13 +251,18 @@ maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/orig.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/origbig.png
 maps/tilesets/WEGZURUNI/Past/maps/Past.tmx
 maps/tilesets/WEGZURUNI/Past/tilesets/alteSchwebebahn.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/automap-tiles.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcitys.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityt.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityu.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/rails.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/steampunk1.tsx
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundhalf.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.aseprite
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundreal.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.aseprite
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Public Bus.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Zebra.png
 maps/tilesets/WEGZURUNI/Present/Pictures/city1.jpg
@@ -285,9 +290,15 @@ maps/tilesets/WEGZURUNI/Present/Pictures/road&border.png
 maps/tilesets/WEGZURUNI/Present/Pictures/schwebebahn.png
 maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx
 maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI2.tmx
+maps/tilesets/WEGZURUNI/Present/tilesets/Backgroundreal.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/GlitchedScreen.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/Street.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/WegzurUni.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/WegzurUniBack.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/Zebrastreifen.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/backgroundmiddle.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
 maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.tmx
 maps/tilesets/WEGZURUNI/SecretPassage/Images/X5kDIm.png

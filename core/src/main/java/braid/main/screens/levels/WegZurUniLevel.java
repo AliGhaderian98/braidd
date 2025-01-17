@@ -13,7 +13,7 @@ public class WegZurUniLevel extends LevelScreen {
         super(game, "maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "WEGZURUNI";
 
-        player.setPosition(64/Braid.PPM, 400/Braid.PPM);
+        player.setPosition(64/Braid.PPM, 160/Braid.PPM);
     }
 
     @Override
