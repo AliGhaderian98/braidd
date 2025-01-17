@@ -35,27 +35,18 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
     public void update(float dt) {
         super.update(dt);
-        attackTime += dt;
 
-        // Wenn genug Zeit vergangen ist, wird eine Bierflasche geworfen
-        if (attackTime >= attackCooldown) {
-            attackTime = 0f;
-            throwBierflasche();
-        }
 
-        // Aktualisiere alle Bierflaschen
         for (Beer bierflasche : bierflaschen) {
             bierflasche.update(dt);
-            if (bierflasche.isOutOfBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())) {
-                bierflaschen.remove(bierflasche);
-            }
+
         }
 
         sprite.setRegion(getFrame(dt, walking));
         sprite.setFlip(direction < 0, false);
 
         if (isInRange) {
-            attack();
+            attack(dt);
         } else {
             idle();
         }
@@ -85,14 +76,14 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
         enemyRadiusDef.friction = 1f;
         enemyRadiusDef.isSensor = true;
         Fixture radiusFixture = b2body.createFixture(enemyRadiusDef);
-        radiusFixture.setUserData(new UserData("EnemyRadius", this));
+        radiusFixture.setUserData(new UserData("drunkenEnemyRadius", this));
 
         shape.dispose();
     }
 
     @Override
     public void setSprite(TextureAtlas atlas) {
-        sprite = new Sprite(atlas.findRegion("lion-idle"));
+        sprite = new Sprite(atlas.findRegion("cat-idle"));
         idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
         walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
         sprite.setRegion(getFrame(0, idle));
@@ -101,19 +92,29 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
     @Override
     public void idle() {
-        // Idle-Logik hier (falls notwendig)
+
     }
 
     @Override
     public void attack() {
-        // Eventuell hier weitere Angriffsinformationen
+
+    }
+
+
+    public void attack(float dt) {
+        attackTime += dt;
+
+        if (attackTime >= attackCooldown) {
+            attackTime = 0f;
+            throwBierflasche();
+        }
     }
 
     public void throwBierflasche() {
-        float throwSpeedX = direction * 5f;  // Geschwindigkeit der Bierflasche in x-Richtung
-        float throwSpeedY = 0f;              // Keine Geschwindigkeit in y-Richtung
+        float throwSpeedX = direction * 5f;
+        float throwSpeedY = 0f;
 
-        Beer bierflasche = new Beer(getX(), getY(), throwSpeedX, throwSpeedY, screen.getAtlas(), world);
+        Beer bierflasche = new Beer(getX(), getY(), throwSpeedX, throwSpeedY, screen.getAtlas().findRegion("schalter"), world);
         bierflaschen.add(bierflasche);
     }
 

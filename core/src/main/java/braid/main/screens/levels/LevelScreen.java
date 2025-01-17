@@ -600,7 +600,7 @@ public abstract class LevelScreen implements Screen {
             addEnemy((new Knight(world, this,player, x, y, rewindable, type)));
         } else if ("IdleEnemy".equals(enemyType)) {
             addEnemy((new IdleEnemy(world, this, x, y, rewindable, type)));
-        } else if ("DrunkenOberbarmer".equals(type)) {
+        } else if ("DrunkenOberbarmer".equals(enemyType)) {
             addEnemy((new DrunkenOberbarmer(world, this, x, y, rewindable, type)));
         }
     }

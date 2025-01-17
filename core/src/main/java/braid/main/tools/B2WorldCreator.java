@@ -223,7 +223,7 @@ public class B2WorldCreator {
                         (boolean) object.getProperties().get("rewindable"),
                         (String) object.getProperties().get("type"));
                 } else if ("DrunkenOberbarmer".equals(type)) {
-                    screen.spawnEnemy("IdleEnemy", x, y,
+                    screen.spawnEnemy("DrunkenOberbarmer", x, y,
                         (boolean) object.getProperties().get("rewindable"),
                         (String) object.getProperties().get("type"));
                 }
