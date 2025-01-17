@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
+import braid.main.Items.Key;
 import braid.main.Items.PowerUp;
 import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
@@ -51,6 +52,7 @@ public class B2WorldCreator {
         spawnMovingPlatform();
         spawnItems();
         spawnSigns();
+        spawnDoors();
     }
 
     private void spawnSigns() {
@@ -142,13 +144,13 @@ public class B2WorldCreator {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
 
-                // create a new range type moving platform
+
                 if (object.getProperties().get("rangeX") != null) {
                     float rangeX = (float) object.getProperties().get("rangeX");
                     screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX,
                         (boolean) object.getProperties().get("rewindable")));
 
-                // create a new goal type moving platform
+
                 } else {
                     RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
                     float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
@@ -158,7 +160,7 @@ public class B2WorldCreator {
                         speed, (boolean) object.getProperties().get("rewindable")));
                 }
 
-            // create moving platforms operated by a switch
+
             } else if (Objects.equals(object.getName(), "SchalterMovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
@@ -186,14 +188,14 @@ public class B2WorldCreator {
         for (MapObject object : enemyLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            // Position of the enemy
+
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
-            // Type of the enemy
+
             String type = object.getName();
 
-            // Spawning enemy
+
             if ("MadScientist".equals(type)) {
                 screen.spawnEnemy("MadScientist", x, y,
                     (boolean) object.getProperties().get("rewindable"),
@@ -226,15 +228,14 @@ public class B2WorldCreator {
         for (MapObject object : itemsLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            // Position of the Item
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
 
-            // Type of the Item
+
             String type = (String) object.getName();
 
-            // Spawning Item
+
             if ("Page".equals(type)) {
                 Array<Boolean> savedCollectables = Savemanager.currentsavegame.Collectables.get(screen.getLevelName());
                 int pageID = (Integer) object.getProperties().get("ID");
@@ -250,8 +251,19 @@ public class B2WorldCreator {
             if ("Hammer".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, HAMMER)));
             }
+            if ("Key".equals(type)) {
+                screen.addItem(new Key(screen, x, y));
+            }
+        }
+    }
 
-
+    private void spawnDoors() {
+        MapLayer doorLayer = map.getLayers().get("Doors");
+        if (doorLayer != null) {
+            for (MapObject object : doorLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                screen.addDoor(new Door(screen, rect));
+            }
         }
     }
 }

@@ -16,8 +16,10 @@ maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
 maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
+maps/object-templates/door.tx
 maps/object-templates/gleiter.tx
 maps/object-templates/hammer.tx
+maps/object-templates/key.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
 maps/object-templates/movingPlatformType2.tx
@@ -80,6 +82,7 @@ maps/tilesets/images/3_Far_Background_Tile.png
 maps/tilesets/images/Anim_Robot_Jump1_v1.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
+maps/tilesets/images/coin.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
 maps/tilesets/images/prop-sheet.png
@@ -341,7 +344,10 @@ sprites/lion-run/lion-run_6.png
 sprites/misc/balloon-small.png
 sprites/misc/balloon.png
 sprites/misc/brick.png
+sprites/misc/door-closed.png
+sprites/misc/door-open.png
 sprites/misc/hammer.png
+sprites/misc/key.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
 sprites/misc/plattform.png

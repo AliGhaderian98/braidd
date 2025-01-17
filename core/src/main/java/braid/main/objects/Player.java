@@ -2,6 +2,7 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.Items.PowerUp;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -72,6 +73,7 @@ public class Player extends DynamicGameObject {
     private boolean newestPowerUp = true;
     private boolean isAtSchalter = false;
     private Schalter collidingSchalter = null;
+    private boolean hasKey;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -102,6 +104,7 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
+
 
         landingTask = new Timer.Task() {
             @Override
@@ -188,7 +191,7 @@ public class Player extends DynamicGameObject {
         }
     }
 
-    public TextureRegion getFrame(float dt){
+    public TextureRegion getFrame(float dt) {
         testAnimationPause();
 
         if (!animationPaused) {
@@ -376,6 +379,13 @@ public class Player extends DynamicGameObject {
     public Schalter getCollidingSchalter() { return collidingSchalter; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
+
+    public void hasKey(boolean value) {
+        hasKey = value;
+        LevelHUD.playerHasKey(value);
+    }
+
+    public boolean hasKey() { return hasKey; }
 
     public void die() {
         screen.setHitShader();

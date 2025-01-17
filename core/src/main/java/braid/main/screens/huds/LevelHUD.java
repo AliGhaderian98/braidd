@@ -50,6 +50,9 @@ public class LevelHUD implements Disposable {
 
     private static boolean powerUpActive;
 
+    private static boolean playerHasKey;
+    private Image keyImage;
+
     private final long startTime;
     private long pauseTime;
     private long tempTimeStamp;
@@ -100,6 +103,9 @@ public class LevelHUD implements Disposable {
         powerUp.add(powerUpTimer);
         powerUp.add(powerUpImage);
 
+        keyImage = new Image(atlas.findRegion("key"));
+        keyImage.setScale(4);
+
         Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.WHITE);
 
         Table table = new Table();
@@ -110,6 +116,7 @@ public class LevelHUD implements Disposable {
         pageLabel = new Label(String.format("%d/%d", collectedPages+previouslyCollectedPages, LevelHUD.maxPages+previouslyCollectedPages), TextFont);
 
         Table scoreTable = new Table();
+        //scoreTable.add(keyImage).padRight(250).padTop(80);
         scoreTable.add(pageLabel);
         scoreTable.add(pageImage).padLeft(40).padRight(160).padTop(160);
 
@@ -117,10 +124,14 @@ public class LevelHUD implements Disposable {
         table.add(scoreTable).expandX().align(Align.right).pad(100);
 
         table.row();
+        table.add(keyImage).colspan(2).padRight(200).padBottom(100).align(Align.right);
+
+        table.row();
         table.add(powerUp).colspan(2).expandX().align(Align.right).padRight(180).padTop(60);
 
         timerLabel.setVisible(timerVisible);
         powerUp.setVisible(false);
+        keyImage.setVisible(false);
 
         stage.addActor(table);
     }
@@ -173,6 +184,9 @@ public class LevelHUD implements Disposable {
             currentFrame = powerUpTimerAnimation.getKeyFrame(stateTime);
             powerUpTimer.setDrawable(new Image(currentFrame).getDrawable());
         }
+
+        if (playerHasKey != keyImage.isVisible())
+            keyImage.setVisible(playerHasKey);
     }
 
     public static void activatePowerUp(String type) {
@@ -221,5 +235,7 @@ public class LevelHUD implements Disposable {
     public static int getCollectedPages() { return collectedPages; }
     public static int getMaxPages() { return maxPages; }
     public static long getElapsedTime() { return elapsedTime; }
+
+    public static void playerHasKey(boolean value) { playerHasKey = value; }
 
 }
