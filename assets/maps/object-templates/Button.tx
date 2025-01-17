@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="Button" width="16" height="16">
+  <properties>
+   <property name="actionType" value="toggleLayer"/>
+   <property name="targetName" value="Background"/>
+  </properties>
+ </object>
+</template>

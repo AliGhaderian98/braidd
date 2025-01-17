@@ -77,6 +77,7 @@ public abstract class LevelScreen implements Screen {
     protected Array<Enemy> enemies;
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<SchalterMovingPlatform> schalterMovingPlatforms;
+    protected Array<Button> buttons;
     protected Array<Item> items;
     protected Array<Brick> bricks;
 
@@ -142,6 +143,8 @@ public abstract class LevelScreen implements Screen {
 
         movingPlatforms = new Array<>();
         schalterMovingPlatforms = new Array<>();
+
+        buttons = new Array<>();
 
         bricks = new Array<>();
 
@@ -564,6 +567,10 @@ public abstract class LevelScreen implements Screen {
 
     public void addSchalter(Schalter schalter) {
         schalters.add(schalter);
+    }
+
+    public void addButton(Button button){
+        buttons.add(button);
     }
 
     public void addItem(Item item) {

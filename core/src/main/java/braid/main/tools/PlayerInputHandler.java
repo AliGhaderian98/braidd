@@ -126,6 +126,7 @@ public class PlayerInputHandler {
     private void handleInteract() {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT"))) {
             handleSchalterToggle();
+            handleButtonToggle();
             handleDestroyingBrick();
         }
     }
@@ -140,5 +141,10 @@ public class PlayerInputHandler {
     private void handleSchalterToggle() {
         if (player.isAtSchalter())
             player.getCollidingSchalter().toggle();
+    }
+
+    private void handleButtonToggle() {
+        if (player.isAtButton())
+            player.getCollidingButton().toggle();
     }
 }

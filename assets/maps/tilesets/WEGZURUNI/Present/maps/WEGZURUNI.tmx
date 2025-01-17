@@ -159,8 +159,8 @@
  <objectgroup id="7" name="Sign">
   <object id="3" template="../../../../object-templates/sign.tx" x="526.239" y="337.03" width="36" height="33.3334"/>
  </objectgroup>
- <objectgroup id="8" name="Button">
-  <object id="6" name="Button" x="733.997" y="336.667" width="36" height="34.6667"/>
+ <objectgroup id="8" name="Buttons">
+  <object id="6" template="../../../../object-templates/Button.tx" x="733.997" y="336.667" width="28" height="31"/>
  </objectgroup>
  <objectgroup id="9" name="Mathematician">
   <object id="7" name="Mathematician" type="enemy" x="518.909" y="408.394" width="96" height="32"/>

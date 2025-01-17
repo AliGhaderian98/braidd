@@ -45,6 +45,7 @@ public class WorldContactListener implements ContactListener {
             hammerHitBoxWithBrick (userDataA, userDataB);
             playerWithEnd(userDataA,userDataB);
             playerWithSchalter(userDataA, userDataB);
+            playerWithButton(userDataA, userDataB);
 
             playerFeetWithEnemy(userDataA, userDataB);
             playerBodyWithEnemy(userDataA, userDataB, contact);
@@ -72,6 +73,7 @@ public class WorldContactListener implements ContactListener {
             contactEndedPlayerWithKnightAttack(userDataA, userDataB);
             playerWithSignEnds(userDataA, userDataB);
             contactEndedPlayerWithSchalter(userDataA,userDataB);
+            contactEndedPlayerWithButton(userDataA,userDataB);
             contactEndedPlayerWithBrick(userDataA, userDataB);
             endHammerBoxWithBrick(userDataA,userDataB);
         }
@@ -98,12 +100,30 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithButton(UserData userDataA, UserData userDataB) {
+        if(userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button)  userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(true, button);
+        }
+    }
+
     private void contactEndedPlayerWithSchalter(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
             Schalter schalter = userDataA.getObject() instanceof Schalter
                 ? (Schalter) userDataA.getObject()
                 : (Schalter) userDataB.getObject();
             player.isAtSchalter(false, null);
+        }
+    }
+
+    private void contactEndedPlayerWithButton(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button) userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(false, null);
         }
     }
 

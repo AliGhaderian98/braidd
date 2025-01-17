@@ -71,7 +71,9 @@ public class Player extends DynamicGameObject {
     private PowerUp.TypeOfPowerUp previousPowerUp;
     private boolean newestPowerUp = true;
     private boolean isAtSchalter = false;
+    private boolean isAtButton = false;
     private Schalter collidingSchalter = null;
+    private Button collidingButton = null;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -373,7 +375,16 @@ public class Player extends DynamicGameObject {
 
     public boolean isAtSchalter() { return isAtSchalter; }
 
+    public void isAtButton(boolean value, Button button){
+        isAtButton = value;
+        collidingButton = button;
+    }
+
+    public boolean isAtButton() { return isAtButton; }
+
     public Schalter getCollidingSchalter() { return collidingSchalter; }
+
+    public Button getCollidingButton() { return collidingButton; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
 

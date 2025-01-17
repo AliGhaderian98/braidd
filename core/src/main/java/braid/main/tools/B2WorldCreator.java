@@ -49,6 +49,7 @@ public class B2WorldCreator {
         spawnEnd();
         spawnEnemies();
         spawnMovingPlatform();
+        spawnButtons();
         spawnItems();
         spawnSigns();
     }
@@ -177,6 +178,25 @@ public class B2WorldCreator {
             }
         }
 
+    }
+
+    private void spawnButtons() {
+        MapLayer buttonLayer = map.getLayers().get("Buttons");
+        if (buttonLayer != null){
+            for(MapObject object : buttonLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+                String actionType = (String) object.getProperties().get("actionType");
+                String targetName = (String) object.getProperties().get("targetName");
+
+                Button button = new Button(world, rect, map);
+
+                button.setActionType(actionType);
+                button.setTargetName(targetName);
+
+                screen.addButton(button);
+            }
+        }
     }
 
     private void spawnEnemies() {
