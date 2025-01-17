@@ -3,7 +3,7 @@
  <object name="Button" width="16" height="16">
   <properties>
    <property name="actionType" value="toggleLayer"/>
-   <property name="targetName" value="Background"/>
+   <property name="targetName" value="Street"/>
   </properties>
  </object>
 </template>

@@ -53,6 +53,7 @@ public class WorldContactListener implements ContactListener {
             playerWithKnightEnemyRadius(userDataA, userDataB);
             playerWithKnightAttack(userDataA, userDataB);
             playerWithSign(userDataA, userDataB);
+            playerWithNPC(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
@@ -72,6 +73,7 @@ public class WorldContactListener implements ContactListener {
             contactEndedPlayerWithKnightEnemyRadius(userDataA, userDataB);
             contactEndedPlayerWithKnightAttack(userDataA, userDataB);
             playerWithSignEnds(userDataA, userDataB);
+            playerWithNPCEnds(userDataA, userDataB);
             contactEndedPlayerWithSchalter(userDataA,userDataB);
             contactEndedPlayerWithButton(userDataA,userDataB);
             contactEndedPlayerWithBrick(userDataA, userDataB);
@@ -173,11 +175,31 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithNPCEnds(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
+            npc.getSubtitle().setCurrentText("");
+            npc.trigger(false);
+        }
+
+    }
+
     private void playerWithSign(UserData userDataA, UserData userDataB) {
         if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
             (userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
             Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
             sign.setShowing(true);
+        }
+    }
+
+    private void playerWithNPC(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            System.out.println("playerWithNpc");
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(true);
         }
     }
 

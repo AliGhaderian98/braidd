@@ -37,6 +37,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -75,6 +76,7 @@ public abstract class LevelScreen implements Screen {
     // Game Objects
     protected final Player player;
     protected Array<Enemy> enemies;
+    protected Array<NPC> npcs;
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<SchalterMovingPlatform> schalterMovingPlatforms;
     protected Array<Button> buttons;
@@ -140,6 +142,8 @@ public abstract class LevelScreen implements Screen {
 
         // Enemies
         enemies = new Array<>();
+
+        npcs = new Array<>();
 
         movingPlatforms = new Array<>();
         schalterMovingPlatforms = new Array<>();
@@ -550,9 +554,17 @@ public abstract class LevelScreen implements Screen {
         }
     }
 
+    public void spawnNPC(String type, Rectangle npcBoundary, Rectangle npcTrigger, String text, String spriteName){
+        addNPC(new NPC(world, this, subtitleManager, type, npcBoundary, npcTrigger, text, spriteName));
+    }
+
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
         enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+    }
+
+    private void addNPC(NPC npc) {
+        npcs.add(npc);
     }
 
     public void addMovingPlatform(MovingPlatform movingPlatform) {

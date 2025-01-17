@@ -16,6 +16,7 @@ maps/object-templates/Brick.tx
 maps/object-templates/Button.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
+maps/object-templates/NPC.tx
 maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
 maps/object-templates/gleiter.tx
@@ -23,6 +24,7 @@ maps/object-templates/hammer.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
 maps/object-templates/movingPlatformType2.tx
+maps/object-templates/npcTrigger.tx
 maps/object-templates/page.tx
 maps/object-templates/patrollingEnemy.tx
 maps/object-templates/ritalin.tx
@@ -264,6 +266,7 @@ maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundreal.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.aseprite
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Bus.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Public Bus.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Zebra.png
 maps/tilesets/WEGZURUNI/Present/Pictures/city1.jpg

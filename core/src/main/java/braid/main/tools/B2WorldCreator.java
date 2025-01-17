@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static braid.main.Items.PowerUp.TypeOfPowerUp.*;
@@ -52,6 +53,7 @@ public class B2WorldCreator {
         spawnButtons();
         spawnItems();
         spawnSigns();
+        spawnNPCs();
     }
 
     private void spawnSigns() {
@@ -61,6 +63,32 @@ public class B2WorldCreator {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
                 new Sign(world, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
+            }
+        }
+    }
+
+    private void spawnNPCs() {
+        MapLayer npcLayer = map.getLayers().get("NPCs");
+        if (npcLayer != null) {
+            for (MapObject object : npcLayer.getObjects()) {
+                if (Objects.equals(object.getName(), "NPC")) {
+                    System.out.println(object.getProperties().get("npcTrigger"));
+
+                    Rectangle npcBoundary = ((RectangleMapObject) object).getRectangle();
+
+                    Rectangle npcTrigger = null;
+                    Object npcTriggerObject = object.getProperties().get("npcTrigger");
+                    if (npcTriggerObject instanceof RectangleMapObject) {
+                        npcTrigger = ((RectangleMapObject) npcTriggerObject).getRectangle();
+                    }
+
+                    String text = (String) object.getProperties().get("Text");
+                    String type = (String) object.getProperties().get("Type");
+                    String spriteName = (String) object.getProperties().get("Name");
+
+                    screen.spawnNPC(type, npcBoundary, npcTrigger, text, spriteName);
+                }
+
             }
         }
     }

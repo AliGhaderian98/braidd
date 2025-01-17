@@ -16,6 +16,7 @@ public class WegZurUniLevel extends LevelScreen {
         player.setPosition(64/Braid.PPM, 160/Braid.PPM);
     }
 
+
     @Override
     protected LevelScreen getNewInstance() {
         return new WegZurUniLevel(game);
