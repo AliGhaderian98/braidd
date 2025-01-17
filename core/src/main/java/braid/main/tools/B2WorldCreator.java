@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.CollectableItem;
+import braid.main.Items.Key;
 import braid.main.Items.PowerUp;
 import braid.main.objects.*;
 import braid.main.screens.levels.LevelScreen;
@@ -51,6 +52,7 @@ public class B2WorldCreator {
         spawnMovingPlatform();
         spawnItems();
         spawnSigns();
+        spawnDoors();
     }
 
     private void spawnSigns() {
@@ -249,8 +251,19 @@ public class B2WorldCreator {
             if ("Hammer".equals(type)) {
                 screen.addItem((new PowerUp(screen, x, y, HAMMER)));
             }
+            if ("Key".equals(type)) {
+                screen.addItem(new Key(screen, x, y));
+            }
+        }
+    }
 
-
+    private void spawnDoors() {
+        MapLayer doorLayer = map.getLayers().get("Doors");
+        if (doorLayer != null) {
+            for (MapObject object : doorLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                screen.addDoor(new Door(screen, rect));
+            }
         }
     }
 }

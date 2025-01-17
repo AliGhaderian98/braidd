@@ -2,6 +2,7 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.Items.PowerUp;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,9 +19,6 @@ import com.badlogic.gdx.utils.Timer;
  ***********/
 
 public class Player extends DynamicGameObject {
-    public void addKey(int keyID) {
-    }
-
     // Enumeration to represent the possible animation states a player can be in
     public enum AnimationState {
         IDLE,
@@ -75,6 +73,7 @@ public class Player extends DynamicGameObject {
     private boolean newestPowerUp = true;
     private boolean isAtSchalter = false;
     private Schalter collidingSchalter = null;
+    private boolean hasKey;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit;
@@ -105,6 +104,7 @@ public class Player extends DynamicGameObject {
         LionLanding = new Animation<>(0.25f, screen.getAtlas().findRegions("lion-land"), Animation.PlayMode.NORMAL);
         LionFalling = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-fall"), Animation.PlayMode.NORMAL);
         LionClimbing = new Animation<>(0.1f, screen.getAtlas().findRegions("lion-climb"), Animation.PlayMode.LOOP);
+
 
         landingTask = new Timer.Task() {
             @Override
@@ -192,7 +192,40 @@ public class Player extends DynamicGameObject {
     }
 
     public TextureRegion getFrame(float dt) {
-        return null;
+        testAnimationPause();
+
+        if (!animationPaused) {
+            stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        }
+
+        previousState = currentState;
+
+        TextureRegion region;
+
+        if (landingAnimationPlaying)
+            region = LionLanding.getKeyFrame(0,false);
+        else {
+            region = switch (currentState) {
+                case RUNNING -> LionRunning.getKeyFrame(stateTimer, true);
+                case JUMPING -> LionJumping.getKeyFrame(0, false);
+                case FALLING -> LionFalling.getKeyFrame(0,false);
+                case CLIMBING -> LionClimbing.getKeyFrame(stateTimer, true);
+                default -> LionIdle.getKeyFrame(stateTimer, true);
+            };
+        }
+
+
+        //checking if the model has to be flipped
+        if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
+            region.flip(true,false);
+            runningRight = false;
+        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+            region.flip(true,false);
+            runningRight = true;
+
+        }
+
+        return region;
     }
 
     private void testAnimationPause() {
@@ -346,6 +379,13 @@ public class Player extends DynamicGameObject {
     public Schalter getCollidingSchalter() { return collidingSchalter; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
+
+    public void hasKey(boolean value) {
+        hasKey = value;
+        LevelHUD.playerHasKey(value);
+    }
+
+    public boolean hasKey() { return hasKey; }
 
     public void die() {
         screen.setHitShader();

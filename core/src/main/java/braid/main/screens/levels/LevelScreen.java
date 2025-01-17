@@ -81,6 +81,7 @@ public abstract class LevelScreen implements Screen {
     protected Array<SchalterMovingPlatform> schalterMovingPlatforms;
     protected Array<Item> items;
     protected Array<Brick> bricks;
+    protected Array<Door> doors;
 
     private final Array<Schalter> schalters = new Array<>();
 
@@ -144,6 +145,7 @@ public abstract class LevelScreen implements Screen {
         schalterMovingPlatforms = new Array<>();
 
         bricks = new Array<>();
+        doors = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
@@ -363,6 +365,8 @@ public abstract class LevelScreen implements Screen {
         // draw game objects
         game.batch.begin();
 
+        drawDoors();
+
         player.getSprite().draw(game.batch);
         for (Enemy e : enemies) {
             if (!e.isDead()) { // Hört auf Sprite zu malen, wenn Enemy stirbt (lieber in Enemy Datei?)
@@ -379,6 +383,11 @@ public abstract class LevelScreen implements Screen {
         game.batch.end();
 
         levelHUD.stage.draw();
+    }
+
+    private void drawDoors() {
+        for (Door door : doors)
+            door.draw(game.batch);
     }
 
     private void drwaMovingPlatforms() {
@@ -434,6 +443,10 @@ public abstract class LevelScreen implements Screen {
 
             for (Brick brick : bricks) {
                 brick.update(dt);
+            }
+
+            for(Door door : doors) {
+                door.update();
             }
 
             for(SchalterMovingPlatform schalterMovingPlatform : schalterMovingPlatforms)
@@ -573,6 +586,10 @@ public abstract class LevelScreen implements Screen {
     public void addBrick (Brick brick) {
         bricks.add(brick);
         brick.setRewindController((new RewindController((new RewindableBody(brick.b2body,brick)))));
+    }
+
+    public void addDoor(Door door) {
+        doors.add(door);
     }
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }

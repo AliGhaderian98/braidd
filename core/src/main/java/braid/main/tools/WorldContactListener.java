@@ -52,6 +52,7 @@ public class WorldContactListener implements ContactListener {
             playerWithKnightEnemyRadius(userDataA, userDataB);
             playerWithKnightAttack(userDataA, userDataB);
             playerWithSign(userDataA, userDataB);
+            playerBodyWithDoor(userDataA, userDataB);
         }
 
         patrollingEnemyWithWall(userDataA,userDataB);
@@ -360,6 +361,16 @@ public class WorldContactListener implements ContactListener {
                     screen.finish();
                 }
             }, 0.2f);
+        }
+    }
+
+    private void playerBodyWithDoor(UserData userDataA, UserData userDataB) {
+        if ("PlayerBody".equals(userDataA.getName()) || "PlayerBody".equals(userDataB.getName())) {
+            UserData doorData = (userDataA.getObject() instanceof Door) ? userDataA : userDataB;
+            if (player.hasKey() && doorData.getObject() instanceof Door door) {
+                door.open();
+                player.hasKey(false);
+            }
         }
     }
 
