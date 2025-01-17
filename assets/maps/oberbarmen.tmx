@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="128" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="128" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="11">
  <tileset firstgid="1" source="tilesets/wasteland.tsx"/>
  <tileset firstgid="3137" source="tilesets/00Atlas.tsx"/>
  <layer id="1" name="Background" width="128" height="48">
@@ -55,7 +55,7 @@
 </data>
  </layer>
  <objectgroup id="4" name="Enemies">
-  <object id="4" template="object-templates/DrunkenOberbarmer.tx" type="enemy" x="128" y="736"/>
+  <object id="10" template="object-templates/DrunkenOberbarmer.tx" type="enemy" x="320" y="736"/>
  </objectgroup>
  <layer id="2" name="GroundLayer" width="128" height="48">
   <data encoding="csv">

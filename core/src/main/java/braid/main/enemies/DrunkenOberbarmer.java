@@ -3,6 +3,7 @@ package braid.main.enemies;
 import braid.main.Braid;
 import braid.main.objects.Beer;
 import braid.main.objects.Enemy;
+import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
@@ -19,23 +20,28 @@ import java.util.List;
 public class DrunkenOberbarmer extends Enemy implements EnemyAI {
     private int direction = 1;
     private List<Beer> bierflaschen;
-    private float attackCooldown = 2f;  // Zeitintervall zwischen den Würfen
+    private float attackCooldown = 2f;
     private float attackTime = 0f;
     private boolean isInRange = false;
     private final LevelScreen screen;
+    private final Player player;
 
-    public DrunkenOberbarmer(World world, LevelScreen screen, float x, float y, boolean rewindable, String type) {
+
+    public DrunkenOberbarmer(World world, LevelScreen screen, Player player, float x, float y, boolean rewindable, String type) {
         super(world, screen, x, y, rewindable, type);
-        defineBody();
+        this.player = player;
         this.screen = screen;
+
         bierflaschen = new ArrayList<>();
         speed = 0.15f;
+
+
+        defineBody();
         setSprite(screen.getAtlas());
     }
 
     public void update(float dt) {
         super.update(dt);
-
 
         for (Beer bierflasche : bierflaschen) {
             bierflasche.update(dt);
@@ -71,7 +77,7 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
         // Create EnemyRadius
         FixtureDef enemyRadiusDef = new FixtureDef();
-        shape.setRadius(70 / Braid.PPM);
+        shape.setRadius(130 / Braid.PPM);
         enemyRadiusDef.shape = shape;
         enemyRadiusDef.friction = 1f;
         enemyRadiusDef.isSensor = true;
@@ -111,15 +117,15 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
     }
 
     public void throwBierflasche() {
-        float throwSpeedX = direction * 5f;
-        float throwSpeedY = 0f;
+        Beer bierflasche = new Beer(
+            getX(),
+            getY(),
+            player,
+            screen.getAtlas().findRegion("schalter"),
+            world
+        );
 
-        Beer bierflasche = new Beer(getX(), getY(), throwSpeedX, throwSpeedY, screen.getAtlas().findRegion("schalter"), world);
         bierflaschen.add(bierflasche);
-    }
-
-    public void changeDirection() {
-        direction *= -1;
     }
 
     public void isInRange(boolean inRange) {
