@@ -103,10 +103,11 @@ public class B2WorldCreator {
     private void spawnBricks() {
         MapLayer brickLayer = map.getLayers().get("Brick");
         TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
-
-        for (MapObject object : brickLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+        if(brickLayer != null) {
+            for (MapObject object : brickLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+            }
         }
     }
 
