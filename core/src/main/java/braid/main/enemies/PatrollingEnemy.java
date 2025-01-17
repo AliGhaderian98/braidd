@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.Objects;
+
 public class PatrollingEnemy extends Enemy implements EnemyAI {
     private int direction = 1;
 
@@ -32,6 +34,14 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
     }
 
     public void defineBody() {
+
+        float radius = 8/ Braid.PPM; // defult
+        float position =-3 /Braid.PPM;
+        if(Objects.equals(type, "bear")){
+            radius = 20/ Braid.PPM;
+            position = -25 /Braid.PPM;
+        }
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -39,8 +49,8 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8 / Braid.PPM);
-        shape.setPosition(new Vector2(0, -3/Braid.PPM));
+        shape.setRadius(radius);
+        shape.setPosition(new Vector2(0, position));
 
         fdef.shape = shape;
         fdef.friction = 1f;
@@ -72,7 +82,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
             case ("bear") -> {
                 sprite = new Sprite(atlas.findRegion("bear-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("bear-idle"), Animation.PlayMode.LOOP);
-                walking = new Animation<>(0.1f, atlas.findRegions("bear-run"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.2f, atlas.findRegions("bear-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,

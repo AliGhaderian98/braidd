@@ -13,18 +13,32 @@ bear-idle
   index: -1
 bear-run
   rotate: false
-  xy: 2, 764
+  xy: 2, 894
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+bear-run
+  rotate: false
+  xy: 2, 894
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 bear-run
   rotate: false
-  xy: 132, 894
+  xy: 2, 764
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
+bear-run
+  rotate: false
+  xy: 132, 894
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
 Bird1
   rotate: false
   xy: 860, 190

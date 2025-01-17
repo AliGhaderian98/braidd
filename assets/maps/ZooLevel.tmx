@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="22" nextobjectid="3011">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="400" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="22" nextobjectid="3026">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -696,8 +696,7 @@
   <object id="1367" x="3762" y="1440" width="162" height="18"/>
   <object id="1369" x="4032" y="1494.5" width="1753.5" height="72.8333"/>
   <object id="1370" x="2484" y="1422" width="90" height="18"/>
-  <object id="1372" x="4194" y="1422" width="144" height="18"/>
-  <object id="1374" x="4572" y="1422" width="54" height="18"/>
+  <object id="1372" x="4194" y="1422" width="143.719" height="18"/>
   <object id="1375" x="4626" y="1404" width="144" height="36"/>
   <object id="1376" x="4770" y="1422" width="90" height="18"/>
   <object id="1377" x="5058" y="1422" width="216" height="18"/>
@@ -1764,6 +1763,7 @@
   <object id="3006" x="3384" y="1530" width="486" height="36"/>
   <object id="3008" x="3510" y="1458" width="360" height="72"/>
   <object id="3009" x="3384" y="1566" width="2394" height="54"/>
+  <object id="3019" x="4572.22" y="1422" width="53.7778" height="18"/>
  </objectgroup>
  <objectgroup id="10" name="Walls">
   <object id="250" x="0.889976" y="1079.14" height="491.85"/>
@@ -2313,6 +2313,14 @@
   <object id="2507" x="2108.06" y="756" width="15.9688" height="5.03125"/>
   <object id="2508" x="2107.06" y="756" width="16.9688" height="3"/>
   <object id="2509" x="2106" y="756" width="18.0313" height="2.0625"/>
+  <object id="3015" x="4338" y="1422" height="18"/>
+  <object id="3016" x="5022" y="1476" height="18"/>
+  <object id="3017" x="5130" y="1440" height="54"/>
+  <object id="3018" x="5706" y="1422" height="18"/>
+  <object id="3020" x="4572" y="1404.91" width="0.266667" height="35.0687"/>
+  <object id="3021" x="4337.59" y="1422" width="0.40625" height="17.9688"/>
+  <object id="3023" x="432.117" y="1415.22" width="0.266667" height="150.069"/>
+  <object id="3024" x="324.117" y="1386.47" width="0.266667" height="179.569"/>
  </objectgroup>
  <objectgroup id="20" name="Doors">
   <object id="1363" template="object-templates/door.tx" x="3295" y="1518"/>
@@ -2713,7 +2721,22 @@
     <property name="type" value="Bird1"/>
    </properties>
   </object>
-  <object id="3010" template="object-templates/patrollingEnemy.tx" x="306.75" y="1532.5">
+  <object id="3011" template="object-templates/patrollingEnemy.tx" x="4452.5" y="1417.5">
+   <properties>
+    <property name="type" value="bear"/>
+   </properties>
+  </object>
+  <object id="3012" template="object-templates/patrollingEnemy.tx" x="5076.5" y="1467.5">
+   <properties>
+    <property name="type" value="bear"/>
+   </properties>
+  </object>
+  <object id="3013" template="object-templates/patrollingEnemy.tx" x="5731.5" y="1413.25">
+   <properties>
+    <property name="type" value="bear"/>
+   </properties>
+  </object>
+  <object id="3025" template="object-templates/patrollingEnemy.tx" x="364.75" y="1544.75">
    <properties>
     <property name="type" value="bear"/>
    </properties>
