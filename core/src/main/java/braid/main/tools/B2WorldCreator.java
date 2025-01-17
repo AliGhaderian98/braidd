@@ -82,7 +82,8 @@ public class B2WorldCreator {
                         npcTrigger = ((RectangleMapObject) npcTriggerObject).getRectangle();
                     }
 
-                    String text = (String) object.getProperties().get("Text");
+                    String text = (String) object.getProperties().get("text");
+                    System.out.println(text);
                     String type = (String) object.getProperties().get("Type");
                     String spriteName = (String) object.getProperties().get("Name");
 

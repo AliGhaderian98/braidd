@@ -199,6 +199,7 @@ public class WorldContactListener implements ContactListener {
             (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
             System.out.println("playerWithNpc");
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
             npc.trigger(true);
         }
     }

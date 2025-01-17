@@ -14,21 +14,24 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static braid.main.Braid.PPM;
 
-public class NPC extends Sign{
+public class NPC extends InteractiveGameObject{
+    private Player player;
     private final Rectangle npcTrigger;
     private final Subtitle subtitle;
-    private final String type;
+    private String type;
     private final String name;
     private boolean trigger = false;
     protected Body body;
+    SubtitleManager subtitleManager;
 
     public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name) {
-        super(world, boundary, subtitleManager, text);
+        super(world, boundary, true);
+        this.subtitleManager = subtitleManager;
         this.subtitle = new Subtitle(text);
         subtitleManager.addSubtitle(subtitle);
-        System.out.println(text);
-
         this.type = type;
+        System.out.println(type);
+
         this.npcTrigger = (npcTrigger != null) ? npcTrigger : boundary;
         System.out.println(npcTrigger);
         this.name = name;
@@ -51,35 +54,35 @@ public class NPC extends Sign{
 
 
     public void trigger(boolean trigger) {
-        System.out.println("hallo3");
+        System.out.println(type);
 
         if(this.trigger != trigger) {
-            System.out.println("hallo4");
 
-            switch (this.type) {
+            switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
-                case "AttackingNPC" -> { //attackPlayer
+                case "AttackingNPC" -> {
+
                 }
-                case "MovingNPC" -> { //move();
+                case "MovingNPC" -> {
+                    float speed = 3f;
+                    body.setLinearVelocity(speed, body.getLinearVelocity().y);
                 }
             }
             this.trigger = trigger;
         }
     }
 
-//    public void move() {
-//
-//    }
-    @Override
+    public void move() {
+
+    }
     public void setShowing(boolean showing) {
         subtitle.setShowing(showing);
     }
-    @Override
+
     public Subtitle getSubtitle() { return subtitle; }
 
     @Override
     public void defineBody() {
-        super.defineBody();
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set((npcTrigger.x + npcTrigger.width / 2) / PPM,
