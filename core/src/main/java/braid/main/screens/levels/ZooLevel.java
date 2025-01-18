@@ -14,10 +14,10 @@ public class ZooLevel extends LevelScreen {
 
         // debugSettings
         //player.setPosition(4550/Braid.PPM, 1050/Braid.PPM); // in dem Flying Platforms
-        player.setPosition(2000/Braid.PPM, 1000 /Braid.PPM); // oben in der Kuppel
+        //player.setPosition(2000/Braid.PPM, 1000 /Braid.PPM); // oben in der Kuppel
 
         // real Settings
-       // player.setPosition(32/Braid.PPM, 54/Braid.PPM);
+       player.setPosition(32/Braid.PPM, 54/Braid.PPM);
 
     }
 
