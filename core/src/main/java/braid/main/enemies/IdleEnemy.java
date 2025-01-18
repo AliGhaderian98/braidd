@@ -107,8 +107,13 @@ public class IdleEnemy extends Enemy implements EnemyAI{
 
         // Enemy is a Bird
         if(Bridnumber != 0){
+            float frameDuration = 0.4f; // default
+            if(Bridnumber > 7){
+                 frameDuration = 0.2f;
+            }
+
             sprite = new Sprite(atlas.findRegion("Bird"+Bridnumber));
-            idle = new Animation<>(0.4f, atlas.findRegions("Bird"+Bridnumber), Animation.PlayMode.LOOP);
+            idle = new Animation<>(frameDuration, atlas.findRegions("Bird"+Bridnumber), Animation.PlayMode.LOOP);
             sprite.setRegion(getFrame(0,idle));
             sprite.setBounds(0,0,
                 sprite.getRegionWidth()*0.75f/ Braid.PPM,

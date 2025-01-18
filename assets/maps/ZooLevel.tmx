@@ -3920,7 +3920,7 @@
     <property name="type" value="Bird1"/>
    </properties>
   </object>
-  <object id="515" template="object-templates/IdleEnemy.tx" x="2978" y="1548.67">
+  <object id="515" template="object-templates/IdleEnemy.tx" x="1928.67" y="1458">
    <properties>
     <property name="type" value="Bird1"/>
    </properties>
