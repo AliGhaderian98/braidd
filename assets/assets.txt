@@ -458,6 +458,7 @@ sprites/misc/balloon-small.png
 sprites/misc/balloon.png
 sprites/misc/beerbottle.png
 sprites/misc/brick.png
+sprites/misc/drunkenguy.png
 sprites/misc/hammer.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
@@ -508,4 +509,3 @@ sprites/wissenschaftler/wissenschaftler_8.png
 sprites/wissenschaftler/wissenschaftler_9.png
 textFonts/MenuTextFont.ttf
 textFonts/pixelfont.ttf
-ui/uiskin.json

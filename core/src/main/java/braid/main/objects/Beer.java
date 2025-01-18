@@ -3,6 +3,7 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -17,15 +18,15 @@ public class Beer {
     private final World world;
 
     public Beer(float x, float y, Player player, TextureRegion region, World world) {
-        this.position = new Vector2(x, y);
         this.world = world;
+        position = new Vector2(x, y);
         sprite = new Sprite(region);
         destroyed = false;
         toBeDestroyed = false;
 
         Vector2 playerPosition = new Vector2(player.b2body.getPosition().x* Braid.PPM, player.b2body.getPosition().y * Braid.PPM);
         Vector2 startPosition = new Vector2(x, y);
-        this.velocity = playerPosition.sub(startPosition).nor().scl(10f);
+        velocity = playerPosition.sub(startPosition).nor().scl(10f);
 
         defineBody();
     }
@@ -58,6 +59,10 @@ public class Beer {
             position.set(b2body.getPosition().x * Braid.PPM, b2body.getPosition().y * Braid.PPM);
             sprite.setPosition(position.x - sprite.getWidth() / 2, position.y - sprite.getHeight() / 2);
         }
+    }
+
+    public void draw(SpriteBatch batch) {
+        sprite.draw(batch);
     }
 
     public void markForDestroy() {

@@ -7,6 +7,7 @@ import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -45,10 +46,9 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
         for (Beer bierflasche : bierflaschen) {
             bierflasche.update(dt);
-
         }
 
-        sprite.setRegion(getFrame(dt, walking));
+        //sprite.setRegion(getFrame(dt, walking));
         sprite.setFlip(direction < 0, false);
 
         if (isInRange) {
@@ -67,8 +67,8 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
         // Create EnemyBody
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8 / Braid.PPM);
-        shape.setPosition(new Vector2(0, -3/Braid.PPM));
+        shape.setRadius(14 / Braid.PPM);
+        shape.setPosition(new Vector2(0, -12/Braid.PPM));
 
         fdef.shape = shape;
         fdef.friction = 1f;
@@ -89,11 +89,20 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
     @Override
     public void setSprite(TextureAtlas atlas) {
-        sprite = new Sprite(atlas.findRegion("cat-idle"));
-        idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
-        walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
-        sprite.setRegion(getFrame(0, idle));
+        sprite = new Sprite(atlas.findRegion("drunkenguy"));
+        //idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
+        //walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
+        //sprite.setRegion(getFrame(0, idle));
         sprite.setBounds(0, 0, sprite.getRegionWidth() / Braid.PPM, sprite.getRegionHeight() / Braid.PPM);
+    }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        if (!isDead()) {
+            sprite.draw(batch);
+            for (Beer beer : bierflaschen)
+                beer.draw(batch);
+        }
     }
 
     @Override
@@ -121,7 +130,7 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
             getX(),
             getY(),
             player,
-            screen.getAtlas().findRegion("schalter"),
+            screen.getAtlas().findRegion("beerbottle"),
             world
         );
 

@@ -11,7 +11,9 @@ audio/sound/menuSound.mp3
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
+maps/object-templates/DrunkenOberbarmer.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
 maps/object-templates/Schalter.tx
@@ -29,6 +31,7 @@ maps/object-templates/unhingedEnemy.tx
 maps/overworld-map.tmx
 maps/patrollingEnemyMap.tmx
 maps/testmap2.tmx
+maps/tilesets/00Atlas.tsx
 maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
@@ -85,8 +88,119 @@ maps/tilesets/images/mid-layer-b.png
 maps/tilesets/images/prop-sheet.png
 maps/tilesets/images/sheet.png
 maps/tilesets/images/sky.png
+maps/tilesets/images/wasteland.png
+maps/tilesets/images/wasteland2.png
+maps/tilesets/images/wasteland3.png
 maps/tilesets/mid-layer-a.tsx
 maps/tilesets/mid-layer-b.tsx
+maps/tilesets/oberbarmen/Platformer - desert/Background/BG-mountains.png
+maps/tilesets/oberbarmen/Platformer - desert/Background/BG-ruins.png
+maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sky.png
+maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sun.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/00Atlas.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge2.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge3.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge4.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge5.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge6.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge7.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge8.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge9.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass10.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass11.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass12.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass2.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass3.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass4.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass5.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass6.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass7.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass8.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass9.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms10.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms11.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms12.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms2.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms3.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms4.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms5.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms6.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms7.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms8.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms9.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation10.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation11.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation12.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation13.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation14.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation15.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation16.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation17.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation18.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation2.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation3.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation4.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation5.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation6.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation7.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation8.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation9.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain10.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain11.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain12.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain13.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain14.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain15.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain16.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain17.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain18.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain19.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain2.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain20.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain21.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain22.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain23.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain24.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain25.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain26.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain27.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain28.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain29.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain3.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain30.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain31.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain32.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain4.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain5.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain6.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain7.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain8.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain9.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/water1.png
+maps/tilesets/oberbarmen/Platformer - desert/Tileset/water2.png
+maps/tilesets/oberbarmen/Platformer - desert/mockup.aseprite
+maps/tilesets/oberbarmen/Platformer - desert/plat_showcover.gif
+maps/tilesets/oberbarmen/Platformer - desert/platformer-desert.aseprite
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks1.png
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks2.png
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks3.png
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks4.png
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks5.png
+maps/tilesets/oberbarmen/Platformer - desert/props/rocks6.png
+maps/tilesets/oberbarmen/Platformer - desert/props/tree01.png
+maps/tilesets/oberbarmen/Platformer - desert/props/tree02.png
+maps/tilesets/oberbarmen/Platformer - desert/props/tree03.png
+maps/tilesets/oberbarmen/Platformer - desert/props/tree04.png
+maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show1.png
+maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show2.png
+maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show3.png
+maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show4.png
+maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show5.png
 maps/tilesets/overworld-tiles.tsx
 maps/tilesets/overworld/BaseSet.png
 maps/tilesets/overworld/overworld-dots.png
@@ -100,6 +214,8 @@ maps/tilesets/overworld/overworld-railsSB.png
 maps/tilesets/prop-sheet.tsx
 maps/tilesets/sheet.tsx
 maps/tilesets/sky.tsx
+maps/tilesets/wasteland.tsx
+maps/tilesets/wasteland_background.tsx
 maps/wintermap.tmx
 packedimages/sprites.atlas
 packedimages/sprites.png
@@ -340,7 +456,9 @@ sprites/lion-run/lion-run_5.png
 sprites/lion-run/lion-run_6.png
 sprites/misc/balloon-small.png
 sprites/misc/balloon.png
+sprites/misc/beerbottle.png
 sprites/misc/brick.png
+sprites/misc/drunkenguy.png
 sprites/misc/hammer.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
