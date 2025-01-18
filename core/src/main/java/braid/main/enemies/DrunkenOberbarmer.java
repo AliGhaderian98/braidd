@@ -75,6 +75,15 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
         Fixture bodyFixture = b2body.createFixture(fdef);
         bodyFixture.setUserData(new UserData("EnemyBody", this));
 
+        // Create head collider
+        FixtureDef headFdef = new FixtureDef();
+        PolygonShape head = new PolygonShape();
+        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 15 / Braid.PPM), 0);
+        headFdef.shape = head;
+        headFdef.friction = 1f;
+        Fixture headFixture = b2body.createFixture(headFdef);
+        headFixture.setUserData(new UserData("EnemyHead", this));
+
         // Create EnemyRadius
         FixtureDef enemyRadiusDef = new FixtureDef();
         shape.setRadius(150 / Braid.PPM);
