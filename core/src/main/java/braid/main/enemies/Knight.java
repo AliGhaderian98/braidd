@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.Objects;
+
 public class Knight extends Enemy implements EnemyAI {
     private boolean playerIsInRange = false;
     private boolean isAttacking = false;
@@ -32,6 +34,16 @@ public class Knight extends Enemy implements EnemyAI {
     @Override
     public void setSprite(TextureAtlas atlas) {
         switch (type) {
+            case ("Lion") -> {
+                sprite = new Sprite(atlas.findRegion("Lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("Lion-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.2f, atlas.findRegions("Lion-go"), Animation.PlayMode.LOOP);
+                running = new Animation<>(0.1f, atlas.findRegions("Lion-run"), Animation.PlayMode.LOOP);
+                attacking = new Animation<>(0.1f, atlas.findRegions("Lion-attack"), Animation.PlayMode.LOOP);
+
+                sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
+                sprite.setRegion(idle.getKeyFrame(0, false));
+            }
             default -> {
                 sprite = new Sprite(atlas.findRegion("knight-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("knight-idle"), Animation.PlayMode.LOOP);
@@ -64,7 +76,6 @@ public class Knight extends Enemy implements EnemyAI {
         elapsedTime += dt;
 
         sprite.setRegion(running.getKeyFrame(elapsedTime, true));
-
         if (getSprite().getX() < player.getSprite().getX()) {
             b2body.setLinearVelocity(new Vector2(speed*2, 0));
         } else if (getSprite().getX() > player.getSprite().getX()) {
@@ -91,7 +102,7 @@ public class Knight extends Enemy implements EnemyAI {
             sprite.setRegion(walking.getKeyFrame(elapsedTime - standingTime, true));
 
             if (direction == 0) {
-                direction = (Math.random() * 2 == 0 ? 1 : -1); // 1 = rechts, -1 = links
+                direction = (Math.random() < 0.5 ? 1 : -1); // 1 = rechts, -1 = links
             }
 
             b2body.setLinearVelocity(new Vector2(direction*speed, 0));
@@ -119,6 +130,19 @@ public class Knight extends Enemy implements EnemyAI {
 
     @Override
     public void defineBody() {
+
+        // defult
+        float position =-3 /Braid.PPM;
+        float bodyShapehx = 5 / Braid.PPM;
+        float bodyShapehy = 16 / Braid.PPM;
+        float yPoint = -3/Braid.PPM;
+
+        if(Objects.equals(type, "Lion")){
+            bodyShapehx = 20/ Braid.PPM;
+            bodyShapehy = 12/ Braid.PPM;
+            yPoint = -10 / Braid.PPM;
+        }
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -127,7 +151,7 @@ public class Knight extends Enemy implements EnemyAI {
         // Create EnemyBody
         FixtureDef fdef = new FixtureDef();
         PolygonShape bodyShape = new PolygonShape();
-        bodyShape.setAsBox(5 / Braid.PPM, 16 / Braid.PPM, new Vector2(0, -3/Braid.PPM), 0);
+        bodyShape.setAsBox(bodyShapehx, bodyShapehy, new Vector2(0, yPoint), 0);
 
         fdef.shape = bodyShape;
         fdef.friction = 1f;
@@ -150,6 +174,17 @@ public class Knight extends Enemy implements EnemyAI {
         enemyAttackingRadius.isSensor = true;
         Fixture attackingRadiusFixture = b2body.createFixture(enemyAttackingRadius);
         attackingRadiusFixture.setUserData(new UserData("KnightEnemyAttackingRadius", this));
+
+        // create Head for lion
+        if(Objects.equals(type, "Lion")) {
+            FixtureDef headFdef = new FixtureDef();
+            PolygonShape head = new PolygonShape();
+            head.setAsBox(0.2f, 1 / Braid.PPM, new Vector2(0, 0.03f), 0);
+            headFdef.shape = head;
+            headFdef.friction = 1f;
+            Fixture headFixture = b2body.createFixture(headFdef);
+            headFixture.setUserData(new UserData("EnemyHead", this));
+        }
 
         shape.dispose();
     }

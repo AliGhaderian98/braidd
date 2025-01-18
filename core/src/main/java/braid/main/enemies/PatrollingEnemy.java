@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.Objects;
+
 public class PatrollingEnemy extends Enemy implements EnemyAI {
     private int direction = 1;
 
@@ -32,6 +34,20 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
     }
 
     public void defineBody() {
+
+        // defult
+        float radius = 8/ Braid.PPM;
+        float position =-3 /Braid.PPM;
+        float hx = 4 / Braid.PPM;
+        float yPoint = 10 / Braid.PPM;
+
+        if(Objects.equals(type, "bear")){
+            radius = 23/ Braid.PPM;
+            position = -25 /Braid.PPM;
+            hx = 30/ Braid.PPM;
+            yPoint = -6 / Braid.PPM;
+        }
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() / Braid.PPM, getY() / Braid.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -39,18 +55,20 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8 / Braid.PPM);
-        shape.setPosition(new Vector2(0, -3/Braid.PPM));
+        shape.setRadius(radius);
+        shape.setPosition(new Vector2(0, position));
 
         fdef.shape = shape;
         fdef.friction = 1f;
         Fixture bodyFixture = b2body.createFixture(fdef);
         bodyFixture.setUserData(new UserData("EnemyBody", this));
 
+
+
         // Create head collider
         FixtureDef headFdef = new FixtureDef();
         PolygonShape head = new PolygonShape();
-        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 10 / Braid.PPM), 0);
+        head.setAsBox(hx, 1 / Braid.PPM, new Vector2(0, yPoint), 0);
         headFdef.shape = head;
         headFdef.friction = 1f;
         Fixture headFixture = b2body.createFixture(headFdef);
@@ -64,6 +82,15 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
                 sprite = new Sprite(atlas.findRegion("cat-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("cat-idle"), Animation.PlayMode.LOOP);
                 walking = new Animation<>(0.1f, atlas.findRegions("cat-run"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
+            case ("bear") -> {
+                sprite = new Sprite(atlas.findRegion("bear-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("bear-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.2f, atlas.findRegions("bear-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
@@ -93,9 +120,21 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
 
     public void createEdgeSensor() {
+
+        float hx = 1/ Braid.PPM; // defult
+        float yPoint = -12 / Braid.PPM; // defult
+        float rightxPoint = 6 / Braid.PPM; // defult
+        float leftxPoint = -6 / Braid.PPM;
+        if(Objects.equals(type, "bear")){
+            hx = 1/ Braid.PPM;
+            yPoint = -50 / Braid.PPM;
+            rightxPoint = 28 / Braid.PPM;
+            leftxPoint = -28 / Braid.PPM;
+        }
+
         // Sensor for the left side
         PolygonShape leftEdgeSensorShape = new PolygonShape();
-        leftEdgeSensorShape.setAsBox(1 / Braid.PPM, 1 / Braid.PPM, new Vector2(-6 / Braid.PPM, -12 / Braid.PPM), 0);
+        leftEdgeSensorShape.setAsBox(hx, 1 / Braid.PPM, new Vector2(leftxPoint, yPoint), 0);
 
         FixtureDef leftEdgeSensorDef = new FixtureDef();
         leftEdgeSensorDef.shape = leftEdgeSensorShape;
@@ -106,7 +145,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
         // Sensor for the right side
         PolygonShape rightEdgeSensorShape = new PolygonShape();
-        rightEdgeSensorShape.setAsBox(1 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM, -12 / Braid.PPM), 0);
+        rightEdgeSensorShape.setAsBox(hx, 1 / Braid.PPM, new Vector2(rightxPoint, yPoint), 0);
 
         FixtureDef rightEdgeSensorDef = new FixtureDef();
         rightEdgeSensorDef.shape = rightEdgeSensorShape;
@@ -119,9 +158,17 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
 
     public void createSideSensor() {
+
+        float hx = 9/ Braid.PPM; // defult
+        float yPoint = 0; // defult
+        if(Objects.equals(type, "bear")){
+            hx = 30/ Braid.PPM;
+            yPoint = -35 / Braid.PPM;
+        }
+
         // Create side sensors
         PolygonShape sideSensorShape = new PolygonShape();
-        sideSensorShape.setAsBox(9 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 0), 0);
+        sideSensorShape.setAsBox(hx, 1 / Braid.PPM, new Vector2(0, yPoint), 0);
 
         FixtureDef sideSensorDef = new FixtureDef();
         sideSensorDef.shape = sideSensorShape;
