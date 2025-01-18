@@ -32,6 +32,16 @@ public class Knight extends Enemy implements EnemyAI {
     @Override
     public void setSprite(TextureAtlas atlas) {
         switch (type) {
+            case ("Lion") -> {
+                sprite = new Sprite(atlas.findRegion("Lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("Lion-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.2f, atlas.findRegions("Lion-go"), Animation.PlayMode.LOOP);
+                running = new Animation<>(0.1f, atlas.findRegions("Lion-run"), Animation.PlayMode.LOOP);
+                attacking = new Animation<>(0.1f, atlas.findRegions("Lion-attack"), Animation.PlayMode.LOOP);
+
+                sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
+                sprite.setRegion(idle.getKeyFrame(0, false));
+            }
             default -> {
                 sprite = new Sprite(atlas.findRegion("knight-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("knight-idle"), Animation.PlayMode.LOOP);

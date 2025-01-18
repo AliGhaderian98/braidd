@@ -35,11 +35,17 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
     public void defineBody() {
 
-        float radius = 8/ Braid.PPM; // defult
+        // defult
+        float radius = 8/ Braid.PPM;
         float position =-3 /Braid.PPM;
+        float hx = 4 / Braid.PPM;
+        float yPoint = 10 / Braid.PPM;
+
         if(Objects.equals(type, "bear")){
             radius = 23/ Braid.PPM;
             position = -25 /Braid.PPM;
+            hx = 30/ Braid.PPM;
+            yPoint = -6 / Braid.PPM;
         }
 
         BodyDef bdef = new BodyDef();
@@ -57,10 +63,12 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
         Fixture bodyFixture = b2body.createFixture(fdef);
         bodyFixture.setUserData(new UserData("EnemyBody", this));
 
+
+
         // Create head collider
         FixtureDef headFdef = new FixtureDef();
         PolygonShape head = new PolygonShape();
-        head.setAsBox(4 / Braid.PPM, 1 / Braid.PPM, new Vector2(0, 10 / Braid.PPM), 0);
+        head.setAsBox(hx, 1 / Braid.PPM, new Vector2(0, yPoint), 0);
         headFdef.shape = head;
         headFdef.friction = 1f;
         Fixture headFixture = b2body.createFixture(headFdef);
@@ -112,9 +120,21 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
 
     public void createEdgeSensor() {
+
+        float hx = 1/ Braid.PPM; // defult
+        float yPoint = -12 / Braid.PPM; // defult
+        float rightxPoint = 6 / Braid.PPM; // defult
+        float leftxPoint = -6 / Braid.PPM;
+        if(Objects.equals(type, "bear")){
+            hx = 1/ Braid.PPM;
+            yPoint = -50 / Braid.PPM;
+            rightxPoint = 28 / Braid.PPM;
+            leftxPoint = -28 / Braid.PPM;
+        }
+
         // Sensor for the left side
         PolygonShape leftEdgeSensorShape = new PolygonShape();
-        leftEdgeSensorShape.setAsBox(1/ Braid.PPM, 1 / Braid.PPM, new Vector2(-6 / Braid.PPM, -12 / Braid.PPM), 0);
+        leftEdgeSensorShape.setAsBox(hx, 1 / Braid.PPM, new Vector2(leftxPoint, yPoint), 0);
 
         FixtureDef leftEdgeSensorDef = new FixtureDef();
         leftEdgeSensorDef.shape = leftEdgeSensorShape;
@@ -125,7 +145,7 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
         // Sensor for the right side
         PolygonShape rightEdgeSensorShape = new PolygonShape();
-        rightEdgeSensorShape.setAsBox(1 / Braid.PPM, 1 / Braid.PPM, new Vector2(6 / Braid.PPM, -12 / Braid.PPM), 0);
+        rightEdgeSensorShape.setAsBox(hx, 1 / Braid.PPM, new Vector2(rightxPoint, yPoint), 0);
 
         FixtureDef rightEdgeSensorDef = new FixtureDef();
         rightEdgeSensorDef.shape = rightEdgeSensorShape;
@@ -142,8 +162,8 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
         float hx = 9/ Braid.PPM; // defult
         float yPoint = 0; // defult
         if(Objects.equals(type, "bear")){
-            hx = 25/ Braid.PPM;
-            yPoint = -30 / Braid.PPM;
+            hx = 30/ Braid.PPM;
+            yPoint = -35 / Braid.PPM;
         }
 
         // Create side sensors
