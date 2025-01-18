@@ -96,7 +96,6 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithBrick(userDataA, userDataB);
             }
         }
-        beerBottleWithAnything(userDataA, userDataB);
         patrollingEnemyOnEdge(userDataA, userDataB);
     }
 
@@ -221,18 +220,7 @@ public class WorldContactListener implements ContactListener {
 
     }
 
-    private void beerBottleWithAnything(UserData userDataA, UserData userDataB) {
-        // Identifiziere die Bierflasche
-        UserData beerData = (userDataA.getObject() instanceof Beer) ? userDataA : userDataB;
-        UserData otherData = (beerData == userDataA) ? userDataB : userDataA;
 
-        if (beerData.getObject() instanceof Beer beer) {
-            // Wenn die andere Fixture NICHT der Spieler ist, zerstöre die Bierflasche
-            if (!(otherData.getObject() instanceof Player) && !(otherData.getObject() instanceof Enemy)) {
-                beer.markForDestroy();
-            }
-        }
-    }
 
     private void playerWithItem(UserData userDataA, UserData userDataB) {
         UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
