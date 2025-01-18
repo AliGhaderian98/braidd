@@ -37,6 +37,12 @@ maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
+maps/tilesets/Zoo/Background/Taiga background/bgrd_tree1.png
+maps/tilesets/Zoo/Background/Taiga background/bgrd_tree2.png
+maps/tilesets/Zoo/Background/Taiga background/bgrd_tree3.png
+maps/tilesets/Zoo/Background/Taiga background/bgrd_tree4.png
+maps/tilesets/Zoo/Background/Taiga background/bgrd_tree5.png
+maps/tilesets/Zoo/Background/TaigaAmbient.tsx
 maps/tilesets/Zoo/Basic-Tiled.tsx
 maps/tilesets/Zoo/Basic-Tiled/License.txt
 maps/tilesets/Zoo/Basic-Tiled/Tiled/Basic-Tiled.tsx
@@ -56,6 +62,7 @@ maps/tilesets/Zoo/Farm-Tiled/License.txt
 maps/tilesets/Zoo/Farm-Tiled/Preview.png
 maps/tilesets/Zoo/Farm-Tiled/Sample.png
 maps/tilesets/Zoo/Farm-Tiled/Tilemap/Farm2.png
+maps/tilesets/Zoo/Farm-Tiled/Tilemap/Sprite-0002.png
 maps/tilesets/Zoo/Farm-Tiled/Tilemap/tilemap.png
 maps/tilesets/Zoo/Farm-Tiled/Tilemap/tilemap_packed.png
 maps/tilesets/Zoo/Farm-Tiled/Tilesheet.txt
@@ -67,6 +74,7 @@ maps/tilesets/Zoo/Rocks-Tiled/Preview.png
 maps/tilesets/Zoo/Rocks-Tiled/Sample.png
 maps/tilesets/Zoo/Rocks-Tiled/Tiled/Marble-Tilset.tsx
 maps/tilesets/Zoo/Rocks-Tiled/Tiled/Rock-Tilset.tsx
+maps/tilesets/Zoo/Rocks-Tiled/Tilemap/marble - Kopie.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/marble.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/marble_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilemap/rock.png
@@ -78,6 +86,8 @@ maps/tilesets/Zoo/Rocks-Tiled/Tilemap/stone_packed.png
 maps/tilesets/Zoo/Rocks-Tiled/Tilesheet.txt
 maps/tilesets/Zoo/Taiga.tsx
 maps/tilesets/Zoo/TaigaPack.png
+maps/tilesets/Zoo/greenBackground1.tsx
+maps/tilesets/Zoo/zoopng.tsx
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png

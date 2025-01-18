@@ -17,14 +17,14 @@ bear-run
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: 3
 bear-run
   rotate: false
   xy: 2, 368
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
+  index: 1
 bear-run
   rotate: false
   xy: 132, 498
@@ -438,13 +438,6 @@ Lion-attack
   orig: 128, 128
   offset: 0, 0
   index: 1
-Lion-idle
-  rotate: false
-  xy: 2, 888
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
 Lion-attack
   rotate: false
   xy: 2, 758
@@ -459,41 +452,41 @@ Lion-attack
   orig: 128, 128
   offset: 0, 0
   index: 3
-Lion-attack
-  rotate: false
-  xy: 2, 628
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
 Lion-go
   rotate: false
-  xy: 132, 758
+  xy: 2, 628
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 Lion-go
   rotate: false
-  xy: 132, 758
+  xy: 2, 628
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
 Lion-go
   rotate: false
-  xy: 262, 888
+  xy: 132, 758
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 Lion-go
   rotate: false
-  xy: 2, 498
+  xy: 262, 888
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
+Lion-idle
+  rotate: false
+  xy: 2, 498
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 Lion-run
   rotate: false
   xy: 132, 628
@@ -1039,14 +1032,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 2, 8
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 1862, 658
