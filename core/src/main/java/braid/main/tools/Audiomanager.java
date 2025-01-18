@@ -28,6 +28,12 @@ public class Audiomanager {
          */
         audiomanager.load("audio/sound/menuSound.mp3", Sound.class);
         audiomanager.finishLoading();
+
+        /*
+        Author	NicoleMarieT
+            */
+        audiomanager.load("audio/music/ZooSoundtrack.mp3", Sound.class);
+        audiomanager.finishLoading();
     }
 
 }
