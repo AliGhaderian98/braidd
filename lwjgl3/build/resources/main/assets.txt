@@ -303,8 +303,14 @@ maps/tilesets/WEGZURUNI/Present/tilesets/Zebrastreifen.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/backgroundmiddle.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.aseprite
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch2.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.tmx
+maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain.tmx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain2.tsx
 maps/tilesets/WEGZURUNI/SecretPassage/Images/X5kDIm.png
 maps/tilesets/WEGZURUNI/SecretPassage/Images/mazehole.png
 maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_000_delay-0.04s.gif

@@ -920,14 +920,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 264, 21
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 492, 464

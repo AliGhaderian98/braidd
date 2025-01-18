@@ -2,6 +2,7 @@ package braid.main.objects;
 
 import braid.main.Braid;
 import braid.main.screens.levels.LevelScreen;
+import braid.main.tools.EventListener;
 import braid.main.tools.Subtitle;
 import braid.main.tools.SubtitleManager;
 import braid.main.tools.UserData;
@@ -9,32 +10,39 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Timer;
+
+import java.util.Objects;
 
 import static braid.main.Braid.PPM;
 
 public class NPC extends InteractiveGameObject{
-    private Player player;
     private final Rectangle npcTrigger;
     private final Subtitle subtitle;
     private String type;
     private final String name;
     private boolean trigger = false;
     protected Body body;
+    private boolean triggerActive;
+    private final EventListener event ;
     SubtitleManager subtitleManager;
 
-    public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name) {
+    public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name, EventListener event) {
         super(world, boundary, true);
         this.subtitleManager = subtitleManager;
         this.subtitle = new Subtitle(text);
         subtitleManager.addSubtitle(subtitle);
+
         this.type = type;
-        System.out.println(type);
+        triggerActive = !Objects.equals(this.type, "AttackingNPC");
 
         this.npcTrigger = (npcTrigger != null) ? npcTrigger : boundary;
-        System.out.println(npcTrigger);
         this.name = name;
+
+        this.event = event;
 
         defineBody();
         setSprite(screen.getAtlas());
@@ -60,19 +68,28 @@ public class NPC extends InteractiveGameObject{
 
             switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
-                case "AttackingNPC" -> {
-
+                case "FinalNPC" -> { event.hasTriggeredNPC(trigger);
                 }
-                case "MovingNPC" -> {
-                    float speed = 3f;
-                    body.setLinearVelocity(speed, body.getLinearVelocity().y);
-                }
+                case "MovingNPC" -> move();
             }
             this.trigger = trigger;
         }
     }
 
+
+
+    public void setLevelTrigger(boolean triggerActive) {
+        this.triggerActive = triggerActive;
+    }
+
+    public boolean getLevelTrigger() {
+        return triggerActive;
+    }
+
+
     public void move() {
+        float speed = 3f;
+        this.setPosition(getX() + speed, getY() + speed);
 
     }
     public void setShowing(boolean showing) {
@@ -99,5 +116,9 @@ public class NPC extends InteractiveGameObject{
 
         body.createFixture(fixtureDef).setUserData(new UserData("NPCTrigger", this));
         shape.dispose();
+    }
+
+    public String getType() {
+        return this.type;
     }
 }

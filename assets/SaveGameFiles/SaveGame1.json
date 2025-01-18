@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: WEGZURUNI
+lastLevel: Mountain
 Playtime: 591359
 Collectables: {
 	class: java.util.HashMap

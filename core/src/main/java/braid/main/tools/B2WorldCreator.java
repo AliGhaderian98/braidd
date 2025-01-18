@@ -27,16 +27,18 @@ public class B2WorldCreator {
     private final World world;
     private final TiledMap map;
     private final LevelScreen screen;
+    private final EventListener event;
     private BodyDef bdef;
     private PolygonShape shape;
     private FixtureDef fdef;
     private Body body;
 
 
-    public B2WorldCreator(World world, TiledMap map, LevelScreen screen) {
+    public B2WorldCreator(World world, TiledMap map, LevelScreen screen, EventListener event) {
         this.map = map;
         this.world = world;
         this.screen = screen;
+        this.event = event;
 
         bdef = new BodyDef();
         shape = new PolygonShape();
@@ -218,7 +220,7 @@ public class B2WorldCreator {
                 String actionType = (String) object.getProperties().get("actionType");
                 String targetName = (String) object.getProperties().get("targetName");
 
-                Button button = new Button(world, rect, map);
+                Button button = new Button(world, rect, map, event);
 
                 button.setActionType(actionType);
                 button.setTargetName(targetName);

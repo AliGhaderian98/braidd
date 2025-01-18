@@ -34,6 +34,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -60,6 +61,7 @@ public abstract class LevelScreen implements Screen {
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused = false;
     public static boolean debugRendererEnabled = true;
+    public static boolean shouldLoadMap = false;
 
     protected final PlayerInputHandler inputHandler;
 
@@ -92,6 +94,8 @@ public abstract class LevelScreen implements Screen {
 
     // Subtitles
     private final SubtitleManager subtitleManager;
+
+    private final EventListener event;
 
     // Shader variables
     private ShaderProgram rewindShader;
@@ -135,6 +139,8 @@ public abstract class LevelScreen implements Screen {
         // World setup
         world = new World(new Vector2(0, GRAVITY), true);
 
+        event = new EventListener();
+
 
         // Setup player
         player = new Player(world, this);
@@ -154,7 +160,7 @@ public abstract class LevelScreen implements Screen {
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map, this);
+        new B2WorldCreator(world, map, this, event);
 
 
         // Setup Music
@@ -452,6 +458,8 @@ public abstract class LevelScreen implements Screen {
             for (RewindController r : rewindObjects) {
                 r.update();
             }
+            loadMap();
+
         }
         else {
             if(!finished && Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
@@ -468,6 +476,16 @@ public abstract class LevelScreen implements Screen {
         }
     }
 
+    public void loadMap() {
+        if (this instanceof WegZurUniLevel && event.canCompleteMap()) {
+            //Cutscene?
+            MapLayer layer = map.getLayers().get("GlitchedScreen");
+            layer.setVisible(!layer.isVisible());
+
+            Screen newScreen = new MountainMap(game);
+            game.setScreen(newScreen);
+        }
+    }
     public void finish() {
         if (!finished) {
             Savemanager.unlockNextLevel(levelName);
@@ -555,7 +573,7 @@ public abstract class LevelScreen implements Screen {
     }
 
     public void spawnNPC(String type, Rectangle npcBoundary, Rectangle npcTrigger, String text, String spriteName){
-        addNPC(new NPC(world, this, subtitleManager, type, npcBoundary, npcTrigger, text, spriteName));
+        addNPC(new NPC(world, this, subtitleManager, type, npcBoundary, npcTrigger, text, spriteName, event));
     }
 
     private void addEnemy(Enemy enemy) {
@@ -619,5 +637,15 @@ public abstract class LevelScreen implements Screen {
             levelName = "WEGZURUNI";
         else if (this instanceof ZooLevel)
             levelName = "ZOO";
+        else if (this instanceof MountainMap)
+            levelName = "Mountain";
+//        else if (this instanceof PastMap)
+//            levelName = "Past";
+//        else if (this instanceof PresentMap)
+//            levelName = "Present";
+//        else if (this instanceof FutureMap)
+//            levelName = "Future";
+//        else if (this instanceof FinaleMap)
+//            levelName = "Finale"
     }
 }

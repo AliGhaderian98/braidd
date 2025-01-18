@@ -34,7 +34,7 @@ public class MovingPlatform extends InteractiveGameObject {
     protected final Vector2 originPos;
     protected Vector2 goalPos;
 
-    private Player player;
+    protected Player player;
 
     public MovingPlatform(World world, TextureRegion region, Rectangle boundary, float rangeX, float speed, boolean rewindable) {
         super(world, boundary, region,false);

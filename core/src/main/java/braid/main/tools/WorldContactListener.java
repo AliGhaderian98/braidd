@@ -20,6 +20,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 
+import java.util.Objects;
+
 public class WorldContactListener implements ContactListener {
     private final Player player;
     private Braid game;
@@ -181,7 +183,12 @@ public class WorldContactListener implements ContactListener {
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
 
             npc.getSubtitle().setCurrentText("");
-            npc.trigger(false);
+            if(npc.getType().equals("FinalNPC") && !player.getRewindController().isRewinding()) {
+                npc.trigger(false);
+            }
+            if (!Objects.equals(npc.getType(), "FinalNPC")) {
+                npc.trigger(false);
+            }
         }
 
     }
@@ -199,8 +206,13 @@ public class WorldContactListener implements ContactListener {
             (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
             System.out.println("playerWithNpc");
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            if (Objects.equals(npc.getType(), "FinalNPC") && player.getRewindController().isRewinding()) {
+                npc.trigger(true);
+            }
 
-            npc.trigger(true);
+            if (!Objects.equals(npc.getType(), "FinalNPC")) {
+                npc.trigger(true);
+            }
         }
     }
 
