@@ -389,9 +389,9 @@ public class WorldContactListener implements ContactListener {
 
     private void patrollingEnemyOnEdge(UserData userDataA, UserData userDataB) {
         if ("EdgeSensor".equals(userDataA.getName()) || "EdgeSensor".equals(userDataB.getName())) {
-            UserData sideSensor = "SideSensor".equals(userDataA.getName()) ? userDataA : userDataB;
+            UserData edgeSensor = "EdgeSensor".equals(userDataA.getName()) ? userDataA : userDataB;
             if ("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))  {
-                PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
+                PatrollingEnemy enemy = (PatrollingEnemy) edgeSensor.getObject();
                 enemy.changeDirection();
             }
         }

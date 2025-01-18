@@ -1,6 +1,7 @@
 package braid.main.objects;
 
 import braid.main.screens.levels.LevelScreen;
+import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -69,7 +70,7 @@ public abstract class Enemy extends DynamicGameObject{
         if (currentState == AnimationState.DEAD) {
             b2body.setActive(false);
         }
-        else{
+        else if (currentState == AnimationState.ALIVE && !b2body.isActive()) {
             b2body.setActive(true);
         }
     }
