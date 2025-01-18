@@ -509,3 +509,4 @@ sprites/wissenschaftler/wissenschaftler_8.png
 sprites/wissenschaftler/wissenschaftler_9.png
 textFonts/MenuTextFont.ttf
 textFonts/pixelfont.ttf
+ui/uiskin.json

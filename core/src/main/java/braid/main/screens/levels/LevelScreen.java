@@ -582,6 +582,10 @@ public abstract class LevelScreen implements Screen {
         fboBatch.dispose();
     }
 
+    public TiledMap getMap() {
+        return map;
+    }
+
     public TextureAtlas getAtlas() {
         return atlas;
     }

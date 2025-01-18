@@ -77,7 +77,7 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
 
         // Create EnemyRadius
         FixtureDef enemyRadiusDef = new FixtureDef();
-        shape.setRadius(130 / Braid.PPM);
+        shape.setRadius(150 / Braid.PPM);
         enemyRadiusDef.shape = shape;
         enemyRadiusDef.friction = 1f;
         enemyRadiusDef.isSensor = true;
@@ -131,7 +131,8 @@ public class DrunkenOberbarmer extends Enemy implements EnemyAI {
             getY(),
             player,
             screen.getAtlas().findRegion("beerbottle"),
-            world
+            world,
+            (int) screen.getMap().getProperties().get("tilewidth")
         );
 
         bierflaschen.add(bierflasche);

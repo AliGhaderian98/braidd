@@ -16,16 +16,19 @@ public class Beer {
     private boolean destroyed;
     private boolean toBeDestroyed;
     private final World world;
+    private final int xBounds;
 
-    public Beer(float x, float y, Player player, TextureRegion region, World world) {
+    public Beer(float x, float y, Player player, TextureRegion region, World world, int xbounds) {
         this.world = world;
+        this.xBounds = xbounds;
         position = new Vector2(x, y);
         destroyed = false;
         toBeDestroyed = false;
 
+
         Vector2 playerPosition = new Vector2(player.b2body.getPosition().x* Braid.PPM, player.b2body.getPosition().y * Braid.PPM);
         Vector2 startPosition = new Vector2(x, y);
-        velocity = playerPosition.sub(startPosition).nor().scl(10f);
+        velocity = playerPosition.sub(startPosition).nor().scl(9f);
 
         defineBody();
 
@@ -42,10 +45,10 @@ public class Beer {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(2 / Braid.PPM, 4 / Braid.PPM);
+        shape.setAsBox(3 / Braid.PPM, 5 / Braid.PPM);
         fdef.shape = shape;
         fdef.density = 1f;
-        fdef.isSensor = false;
+        fdef.isSensor = true;
         Fixture fixture = b2body.createFixture(fdef);
         fixture.setUserData(new UserData("beerbottle", this));
 
@@ -53,7 +56,7 @@ public class Beer {
     }
 
     public void update(float dt) {
-        if (toBeDestroyed && !destroyed) {
+        if (toBeDestroyed && !destroyed || isOutOfBounds()) {
             destroy();
             return;
         }
@@ -64,8 +67,16 @@ public class Beer {
         }
     }
 
+    private boolean isOutOfBounds() {
+        return b2body != null && (b2body.getPosition().x < 0 ||
+            b2body.getPosition().x > xBounds ||
+            b2body.getPosition().y < 0);
+    }
+
     public void draw(SpriteBatch batch) {
-        sprite.draw(batch);
+        if (b2body != null && !destroyed) {
+            sprite.draw(batch);
+        }
     }
 
     public void markForDestroy() {
@@ -73,10 +84,11 @@ public class Beer {
     }
 
     private void destroy() {
-        if (b2body != null && !destroyed) {
+        if ((b2body != null && !destroyed) || isOutOfBounds()) {
             b2body.getWorld().destroyBody(b2body);
             b2body = null;
             destroyed = true;
+            System.out.println("DESTROYED");
         }
     }
 }
