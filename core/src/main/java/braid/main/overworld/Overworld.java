@@ -150,10 +150,6 @@ public class Overworld implements Screen {
           case "SCHLOSSBURG" -> new SchlossBurgLevel(game);
           case "BAYER" -> new BayerLevel(game);
           case "ZOO" -> new ZooLevel(game);
-          case "MOUNTAIN" -> new MountainMap(game);
-//          case "PAST" -> new PastMap(game);
-//          case "PRESENT2" -> new PresentMap(game);
-//          case "FUTURE" -> new FutureMap(game);
           default -> throw new IllegalStateException("Unknown Levelname: " + levelName);
         };
 

@@ -14,8 +14,8 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: WEGZURUNI
-Playtime: 974836
+lastLevel: SCHLOSSBURG
+Playtime: 3415537
 Collectables: {
 	class: java.util.HashMap
 	UNI: [

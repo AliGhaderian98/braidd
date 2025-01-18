@@ -261,6 +261,7 @@ maps/tilesets/WEGZURUNI/Past/tilesets/oldcityt.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityu.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/rails.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/steampunk1.tsx
+maps/tilesets/WEGZURUNI/Present/Pictures/AnimationSheet_Character (1).png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundhalf.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.aseprite
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.png
@@ -303,6 +304,7 @@ maps/tilesets/WEGZURUNI/Present/tilesets/WegzurUniBack.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/Zebrastreifen.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/backgroundmiddle.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/hoodedone.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.aseprite
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.png
@@ -312,137 +314,6 @@ maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.tmx
 maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain.tmx
 maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain.tsx
 maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain2.tsx
-maps/tilesets/WEGZURUNI/SecretPassage/Images/X5kDIm.png
-maps/tilesets/WEGZURUNI/SecretPassage/Images/mazehole.png
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_000_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_001_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_002_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_003_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_004_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_005_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_006_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_007_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_008_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_009_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_010_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_011_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_012_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_013_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_014_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_015_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_016_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_017_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_018_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_019_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_020_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_021_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_022_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_023_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_024_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_025_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_026_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_027_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_028_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_029_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_030_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_031_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_032_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_033_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_034_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_035_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_036_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_037_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_038_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_039_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_040_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_041_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_042_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_043_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_044_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_045_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_046_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_047_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_048_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_049_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_050_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_051_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_052_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_053_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_054_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_055_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_056_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_057_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_058_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_059_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_060_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_061_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_062_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_063_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_064_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_065_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_066_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_067_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_068_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_069_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_070_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_071_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_072_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_073_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_074_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_075_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_076_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_077_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_078_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_079_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_080_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_081_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_082_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_083_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_084_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_085_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_086_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_087_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_088_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_089_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_090_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_091_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_092_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_093_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_094_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_095_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_096_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_097_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_098_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_099_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_100_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_101_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_102_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_103_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_104_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_105_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_106_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_107_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_108_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_109_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_110_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_111_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_112_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_113_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_114_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_115_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_116_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_117_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_118_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_119_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_120_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_121_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_122_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_123_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/epic door/frame_124_delay-0.04s.gif
-maps/tilesets/WEGZURUNI/SecretPassage/maps/SecretPassage.tmx
-maps/tilesets/WEGZURUNI/SecretPassage/tilesets/SecretBackground.tsx
-maps/tilesets/WEGZURUNI/SecretPassage/tilesets/cloudsky.tsx
-maps/tilesets/WEGZURUNI/SecretPassage/tilesets/gigadoor.tsx
 maps/tilesets/Zoo/Basic-Tiled.tsx
 maps/tilesets/Zoo/Basic-Tiled/License.txt
 maps/tilesets/Zoo/Basic-Tiled/Tiled/Basic-Tiled.tsx

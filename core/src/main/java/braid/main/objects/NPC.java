@@ -26,10 +26,10 @@ public class NPC extends InteractiveGameObject{
     private final String name;
     private boolean trigger = false;
     protected Body body;
-    private final EventListener event ;
+    private EventListener event ;
     SubtitleManager subtitleManager;
 
-    public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name, EventListener event) {
+    public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name) {
         super(world, boundary, true);
         this.subtitleManager = subtitleManager;
         this.subtitle = new Subtitle(text);
@@ -39,11 +39,13 @@ public class NPC extends InteractiveGameObject{
         this.npcTrigger = (npcTrigger != null) ? npcTrigger : boundary;
         this.name = name;
 
-        this.event = event;
-
         defineBody();
-        setSprite(screen.getAtlas());
         fixture.setUserData(new UserData("NPC", this));
+        setSprite(screen.getAtlas());
+    }
+
+    public void setEvent(EventListener event) {
+        this.event = event;
     }
 
     public void setSprite(TextureAtlas atlas) {
@@ -60,10 +62,9 @@ public class NPC extends InteractiveGameObject{
 
 
     public void trigger(boolean trigger) {
-        System.out.println(type);
 
         if(this.trigger != trigger) {
-
+            System.out.println(type);
             switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> { event.hasTriggeredNPC(trigger);

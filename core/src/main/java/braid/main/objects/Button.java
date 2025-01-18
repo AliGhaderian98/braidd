@@ -15,30 +15,27 @@ public class Button extends InteractiveGameObject {
     private ButtonState buttonState;
     private String actionType;
     private String targetName;
-    private final EventListener event;
+    private EventListener event;
 
-    public Button(World world, Rectangle boundary, TiledMap map, EventListener event) {
+    public Button(World world, Rectangle boundary, TiledMap map, String actionType, String targetName) {
         super(world, boundary, true);
         this.buttonState = ButtonState.OFF;
         this.map = map;
-        this.event = event;
+        this.actionType = actionType;
+        this.targetName = targetName;
 
         fixture.setUserData(new UserData("Button", this));
+    }
+
+
+    public void setEvent(EventListener event) {
+        this.event = event;
     }
 
     @Override
     public void defineBody() {
 
     }
-
-    public void setActionType(String actionType){
-        this.actionType = actionType;
-    }
-
-    public void setTargetName(String targetName){
-        this.targetName = targetName;
-    }
-
 
     public void toggle() {
         if(buttonState != ButtonState.ON){

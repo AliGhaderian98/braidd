@@ -189,6 +189,10 @@ public class WorldContactListener implements ContactListener {
             if (!Objects.equals(npc.getType(), "FinalNPC")) {
                 npc.trigger(false);
             }
+        } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
+            NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(false);
         }
 
     }
