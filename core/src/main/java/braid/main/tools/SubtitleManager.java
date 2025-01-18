@@ -14,7 +14,7 @@ public class SubtitleManager {
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer;
 
-    private final float timeBetweenLetters = 0.05f;
+    private final float timeBetweenLetters = 0.02f;
     private float timeElapsed = 0;
 
 

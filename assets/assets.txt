@@ -17,6 +17,7 @@ maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
 maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
+maps/object-templates/TutorialSign.tx
 maps/object-templates/door.tx
 maps/object-templates/gleiter.tx
 maps/object-templates/hammer.tx
