@@ -91,6 +91,9 @@ public class IdleEnemy extends Enemy implements EnemyAI{
             case ("Bird7") -> {
                 Bridnumber = 7;
             }
+            case ("Bird8") -> {
+                Bridnumber = 8;
+            }
 
             default -> {
                 sprite = new Sprite(atlas.findRegion("lion-idle"));
