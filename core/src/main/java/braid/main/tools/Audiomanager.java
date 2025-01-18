@@ -32,7 +32,7 @@ public class Audiomanager {
         /*
         Author	NicoleMarieT
             */
-        audiomanager.load("audio/music/ZooSoundtrack.mp3", Sound.class);
+        audiomanager.load("audio/music/ZooSoundtrack.mp3", Music.class);
         audiomanager.finishLoading();
     }
 
