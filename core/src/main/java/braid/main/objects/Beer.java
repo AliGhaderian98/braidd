@@ -20,7 +20,6 @@ public class Beer {
     public Beer(float x, float y, Player player, TextureRegion region, World world) {
         this.world = world;
         position = new Vector2(x, y);
-        sprite = new Sprite(region);
         destroyed = false;
         toBeDestroyed = false;
 
@@ -29,6 +28,10 @@ public class Beer {
         velocity = playerPosition.sub(startPosition).nor().scl(10f);
 
         defineBody();
+
+        sprite = new Sprite(region);
+        sprite.setBounds(0,0,20/Braid.PPM, 20/Braid.PPM);
+        sprite.setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y - sprite.getHeight() / 2);
     }
 
     private void defineBody() {
@@ -42,7 +45,7 @@ public class Beer {
         shape.setAsBox(2 / Braid.PPM, 4 / Braid.PPM);
         fdef.shape = shape;
         fdef.density = 1f;
-        fdef.isSensor = true;
+        fdef.isSensor = false;
         Fixture fixture = b2body.createFixture(fdef);
         fixture.setUserData(new UserData("beerbottle", this));
 
@@ -57,7 +60,7 @@ public class Beer {
 
         if (!destroyed) {
             position.set(b2body.getPosition().x * Braid.PPM, b2body.getPosition().y * Braid.PPM);
-            sprite.setPosition(position.x - sprite.getWidth() / 2, position.y - sprite.getHeight() / 2);
+            sprite.setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y - sprite.getHeight() / 2);
         }
     }
 
