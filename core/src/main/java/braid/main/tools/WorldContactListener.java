@@ -358,7 +358,6 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithLadder(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Ladder || userDataB.getObject() instanceof Ladder) {
             player.atLadder(false);
-            player.resetMoveLimits();
             player.stopClimbing();
         }
     }

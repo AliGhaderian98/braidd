@@ -107,8 +107,12 @@ public class PlayerInputHandler {
             screen.removeRewindShader();
             player.b2body.setActive(true);
         }
-        if (!rewinding && rewindBuffer)
-            player.setIsGrounded(player.b2body.getLinearVelocity().y == 0);
+        if (!rewinding && rewindBuffer) {
+            if (player.isClimbing())
+                player.setIsGrounded(false);
+            else
+                player.setIsGrounded(player.b2body.getLinearVelocity().y == 0);
+        }
     }
 
     private void handleMovement() {

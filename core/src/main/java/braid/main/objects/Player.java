@@ -75,9 +75,9 @@ public class Player extends DynamicGameObject {
     private Schalter collidingSchalter = null;
     private boolean hasKey;
 
-    // Movement limits e.g. when climbing
-    private Vector2 maxMoveLimit;
-    private Vector2 minMoveLimit;
+  // Movement limits e.g. when climbing
+    private Vector2 maxMoveLimit = new Vector2(0,0);
+    private Vector2 minMoveLimit = new Vector2(0,0);
 
     // Constructors
     public Player(World world, LevelScreen screen) {
@@ -178,6 +178,12 @@ public class Player extends DynamicGameObject {
             else
                 b2body.setGravityScale(defaultGravity);
 
+        }
+
+        // enables no gravity after rewinding to a state while climbing
+        if (currentState == AnimationState.CLIMBING && b2body.getGravityScale() > 0) {
+            b2body.setGravityScale(0);
+            isGrounded = false;
         }
 
         // apply higher descending velocity
@@ -362,11 +368,6 @@ public class Player extends DynamicGameObject {
     public void setMoveLimits(Vector2 max, Vector2 min) {
         maxMoveLimit = max;
         minMoveLimit = min;
-    }
-
-    public void resetMoveLimits() {
-        maxMoveLimit = null;
-        minMoveLimit = null;
     }
 
     public void isAtSchalter(boolean value, Schalter schalter) {
