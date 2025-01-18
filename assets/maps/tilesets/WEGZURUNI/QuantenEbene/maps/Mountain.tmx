@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="4">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="5">
  <tileset firstgid="1" source="../tilesets/Mountain.tsx"/>
  <tileset firstgid="3301" source="../tilesets/Mountain2.tsx"/>
  <layer id="1" name="Tile Layer 1" width="55" height="60">
@@ -130,9 +130,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="Ground">
-  <object id="1" x="0" y="800" width="880" height="160"/>
- </objectgroup>
  <objectgroup id="5" name="Walls">
   <object id="2" x="880" y="0" width="16" height="976"/>
   <object id="3" x="-13.3333" y="0" width="13.3333" height="960"/>
@@ -146,4 +143,8 @@
  <objectgroup id="12" name="Doors"/>
  <objectgroup id="13" name="MovingPlatform"/>
  <objectgroup id="14" name="Ladder"/>
+ <objectgroup id="3" name="Ground">
+  <object id="1" x="0" y="800" width="880" height="160"/>
+  <object id="4" x="-2.66667" y="886.667" width="882.667" height="73.3333"/>
+ </objectgroup>
 </map>

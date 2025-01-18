@@ -7,8 +7,10 @@ MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
 SaveGameFiles/SaveGame3.json
+SaveGameFiles/SaveGame4.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
+hs_err_pid20472.log
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/city.tsx
@@ -24,7 +26,6 @@ maps/object-templates/hammer.tx
 maps/object-templates/knight.tx
 maps/object-templates/movingPlatform.tx
 maps/object-templates/movingPlatformType2.tx
-maps/object-templates/npcTrigger.tx
 maps/object-templates/page.tx
 maps/object-templates/patrollingEnemy.tx
 maps/object-templates/ritalin.tx

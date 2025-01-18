@@ -26,7 +26,6 @@ public class NPC extends InteractiveGameObject{
     private final String name;
     private boolean trigger = false;
     protected Body body;
-    private boolean triggerActive;
     private final EventListener event ;
     SubtitleManager subtitleManager;
 
@@ -37,8 +36,6 @@ public class NPC extends InteractiveGameObject{
         subtitleManager.addSubtitle(subtitle);
 
         this.type = type;
-        triggerActive = !Objects.equals(this.type, "AttackingNPC");
-
         this.npcTrigger = (npcTrigger != null) ? npcTrigger : boundary;
         this.name = name;
 
@@ -46,6 +43,7 @@ public class NPC extends InteractiveGameObject{
 
         defineBody();
         setSprite(screen.getAtlas());
+        fixture.setUserData(new UserData("NPC", this));
     }
 
     public void setSprite(TextureAtlas atlas) {
@@ -76,17 +74,6 @@ public class NPC extends InteractiveGameObject{
         }
     }
 
-
-
-    public void setLevelTrigger(boolean triggerActive) {
-        this.triggerActive = triggerActive;
-    }
-
-    public boolean getLevelTrigger() {
-        return triggerActive;
-    }
-
-
     public void move() {
         float speed = 3f;
         this.setPosition(getX() + speed, getY() + speed);
@@ -113,7 +100,6 @@ public class NPC extends InteractiveGameObject{
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
-
         body.createFixture(fixtureDef).setUserData(new UserData("NPCTrigger", this));
         shape.dispose();
     }

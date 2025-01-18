@@ -8,7 +8,7 @@ public class MountainMap extends LevelScreen{
         super(game, "maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "Mountain";
 
-        player.setPosition(64/Braid.PPM, 160/Braid.PPM);
+        player.setPosition(64/Braid.PPM, 300/Braid.PPM);
     }
     @Override
     protected LevelScreen getNewInstance() {

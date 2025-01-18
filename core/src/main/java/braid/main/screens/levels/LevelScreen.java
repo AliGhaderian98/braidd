@@ -61,7 +61,7 @@ public abstract class LevelScreen implements Screen {
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused = false;
     public static boolean debugRendererEnabled = true;
-    public static boolean shouldLoadMap = false;
+    public static boolean loadedMap = false;
 
     protected final PlayerInputHandler inputHandler;
 
@@ -483,7 +483,7 @@ public abstract class LevelScreen implements Screen {
             layer.setVisible(!layer.isVisible());
 
             Screen newScreen = new MountainMap(game);
-            game.setScreen(newScreen);
+            Gdx.app.postRunnable(() -> game.setScreen(newScreen));
         }
     }
     public void finish() {
