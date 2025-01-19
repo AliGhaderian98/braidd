@@ -9,7 +9,7 @@ import braid.main.objects.Enemy;
 public class ArkadenLevel extends LevelScreen {
 
     public ArkadenLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/Arkadenmap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
         levelName = "ARKADEN";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
