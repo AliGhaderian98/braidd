@@ -6,7 +6,9 @@ MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
+audio/music/UniLevelMusic.ogg
 audio/music/background_music.mp3
+audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
@@ -39,8 +41,8 @@ maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
-maps/tilesets/Uni/backgrounds.tsx
-maps/tilesets/Uni/backgrounds2.tsx
+maps/tilesets/Uni/bgs-shadow.tsx
+maps/tilesets/Uni/bgs.tsx
 maps/tilesets/Uni/buildings-uni.tsx
 maps/tilesets/Uni/city-tiles.tsx
 maps/tilesets/Uni/debug-tiles.tsx
@@ -49,62 +51,17 @@ maps/tilesets/Uni/images/Assets_City.png
 maps/tilesets/Uni/images/Fountain.png
 maps/tilesets/Uni/images/Green-Tree.png
 maps/tilesets/Uni/images/Tiles.png
-maps/tilesets/Uni/images/backgrounds/2.png
-maps/tilesets/Uni/images/backgrounds/3.png
-maps/tilesets/Uni/images/backgrounds/5.png
-maps/tilesets/Uni/images/backgrounds/Background.png
-maps/tilesets/Uni/images/backgrounds/background-tileset.png
-maps/tilesets/Uni/images/backgrounds/big-background-tileset.png
+maps/tilesets/Uni/images/backgrounds/background-reduced-shadow.png
+maps/tilesets/Uni/images/backgrounds/background-reduced.png
 maps/tilesets/Uni/images/backgrounds/buildings-uni.png
-maps/tilesets/Uni/images/backgrounds/c1.png
-maps/tilesets/Uni/images/backgrounds/c2.png
-maps/tilesets/Uni/images/backgrounds/c3.png
-maps/tilesets/Uni/images/backgrounds/c4.png
-maps/tilesets/Uni/images/backgrounds/c5.png
-maps/tilesets/Uni/images/backgrounds/city 2 (1).png
-maps/tilesets/Uni/images/backgrounds/city 2 (2).png
-maps/tilesets/Uni/images/backgrounds/city 2 (3).png
-maps/tilesets/Uni/images/backgrounds/city 2 (4).png
-maps/tilesets/Uni/images/backgrounds/city 2 (5).png
-maps/tilesets/Uni/images/backgrounds/city3 (1).png
-maps/tilesets/Uni/images/backgrounds/city3 (2).png
-maps/tilesets/Uni/images/backgrounds/city3 (3).png
-maps/tilesets/Uni/images/backgrounds/city3 (4).png
-maps/tilesets/Uni/images/backgrounds/city3 (5).png
-maps/tilesets/Uni/images/backgrounds/grass (1).png
-maps/tilesets/Uni/images/backgrounds/grass (2).png
-maps/tilesets/Uni/images/backgrounds/grass2 (1).png
-maps/tilesets/Uni/images/backgrounds/grass2 (2).png
-maps/tilesets/Uni/images/backgrounds/grass3.png
-maps/tilesets/Uni/images/backgrounds/grass4 (1).png
-maps/tilesets/Uni/images/backgrounds/grass4 (2).png
-maps/tilesets/Uni/images/backgrounds/grass4 (3).png
-maps/tilesets/Uni/images/backgrounds/grass4 (4).png
-maps/tilesets/Uni/images/backgrounds/hill.png
-maps/tilesets/Uni/images/backgrounds/parallaxcitybackgroundmountain.png
-maps/tilesets/Uni/images/backgrounds/parallaxcitybackgroundmountain2.png
-maps/tilesets/Uni/images/backgrounds/parallaxcitybuildings.png
-maps/tilesets/Uni/images/backgrounds/sky (1).png
-maps/tilesets/Uni/images/backgrounds/sky (2).png
-maps/tilesets/Uni/images/backgrounds/sky (3).png
-maps/tilesets/Uni/images/backgrounds/sky2 (1).png
-maps/tilesets/Uni/images/backgrounds/sky2 (2).png
-maps/tilesets/Uni/images/backgrounds/sky2 (3).png
-maps/tilesets/Uni/images/backgrounds/sky2 (4).png
-maps/tilesets/Uni/images/backgrounds/sky3 (1).png
-maps/tilesets/Uni/images/backgrounds/sky3 (2).png
-maps/tilesets/Uni/images/backgrounds/sky3 (3).png
-maps/tilesets/Uni/images/backgrounds/sky4 (1).png
-maps/tilesets/Uni/images/backgrounds/sky4 (2).png
-maps/tilesets/Uni/images/backgrounds/sky4 (3).png
-maps/tilesets/Uni/images/backgrounds/sky5.png
-maps/tilesets/Uni/images/backgrounds/sky6.png
 maps/tilesets/Uni/images/parkset.png
+maps/tilesets/Uni/images/tile-white-shadow.png
 maps/tilesets/Uni/images/tile-white.png
 maps/tilesets/Uni/images/tiles2.png
 maps/tilesets/Uni/images/tilesheet.png
 maps/tilesets/Uni/park-objects.tsx
 maps/tilesets/Uni/park-tileset.tsx
+maps/tilesets/Uni/tile-white-shadow.tsx
 maps/tilesets/Uni/tile-white.tsx
 maps/tilesets/Uni/trees.tsx
 maps/tilesets/Zoo/Basic-Tiled.tsx

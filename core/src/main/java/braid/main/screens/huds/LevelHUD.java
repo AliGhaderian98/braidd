@@ -77,6 +77,7 @@ public class LevelHUD implements Disposable {
         pageImage.setScale(8);
 
         powerUpActive = false;
+        playerHasKey = false;
 
         powerUpBackgroundAnimation = new Animation<>(0.1f, atlas.findRegions("ball"), Animation.PlayMode.LOOP);
         powerUpBackground = new Image(powerUpBackgroundAnimation.getKeyFrame(0));
@@ -235,6 +236,7 @@ public class LevelHUD implements Disposable {
     public static int getCollectedPages() { return collectedPages; }
     public static int getMaxPages() { return maxPages; }
     public static long getElapsedTime() { return elapsedTime; }
+    public static int getPreviouslyCollectedPages() { return previouslyCollectedPages; }
 
     public static void playerHasKey(boolean value) { playerHasKey = value; }
 

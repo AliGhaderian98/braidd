@@ -9,7 +9,7 @@ import braid.main.objects.Enemy;
 public class UniLevel extends LevelScreen {
 
     public UniLevel(Braid game) {
-        super(game, "maps/UniLevel.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/UniLevel.tmx", "packedimages/sprites.atlas", "audio/music/UniLevelMusic.ogg");
         levelName = "UNI";
 
         player.setPosition(32/Braid.PPM, 898/Braid.PPM);
