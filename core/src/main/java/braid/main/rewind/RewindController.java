@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private float maxRewindTime = 5f;
+    private float maxRewindTime = 610f;
     private float recordedTime = 0f;
     private float elapsedTime = 0f;
     private Rewindable rewindable;
