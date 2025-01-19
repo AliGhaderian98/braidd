@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="128">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="70">
  <tileset firstgid="1" source="tilesets/Arkaden/City.tsx"/>
  <tileset firstgid="2171" source="tilesets/Arkaden/Shopping_Mall.tsx"/>
  <tileset firstgid="3816" source="tilesets/sheet.tsx"/>
@@ -14,37 +14,29 @@
  </layer>
  <layer id="17" name="Tile Layer 2" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt0sENQFAQQME9uPvl0AM90AM90AO92iIkKzFTwTu8CAAAAAAAAAAAAAAAAAAAAAAAAAAAeM/QIsZWXcFfTfne7D+KLPne6j+KbPne7j+KHPne6T+KXPne7T8o1fXVBd/wAK7aBdI=
+   eJzt0kENgEAMAMFKODng4fAAHsDD4QG8UhEkJWFGwT42AgAAAAAAAAAAAAAAAAAAAAAAAAAA3jO1iLlVV/BXPd9b/EeRNd/b/EeRPd87/EeRke+d/qPIle/d/gM+4AGbUQW/
   </data>
  </layer>
  <layer id="3" name="GroundLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2E1OwlAYBdA3YKIOHlFn6nLYj6iLUNCZwoaUHTHnM9FIoUKAlgI9J7npT9K+pn1pepsSAAAAAACwi7NuSueRi27TV0IbXca8u4pcH9H8G+SUhpHXXFzn+NzEvLuN3P3Mv0EuBjYxzdsHAGiP//qEbtGc57jnL3PPAAAAoCrzXe+twb5RZ99c1XMBAIDqHUrPAADgTy8vpy1+v00Xl9scs27p+7dcJy8HAACgLR6iAz1GnnQhoEb38Y7p5+I7Zx/7mr52DsN7PIuPyCgyrjGL41ThM87zFZmUnH/d9reyf5/7yq7jn4oZsZhwag==
+   eJzt2DkOgkAYgFEKG7WAqJ16HO/jdgiX1uVC6o3s/S0VEhMXUHwv+QooBhImkxmSBAAAAAAAeEUzS5JW1M6qfhP+USfmXTfqmX9UoB/zbhANzT/e4Jw+HwAA1VnEfmwZraK1vRkAQO3Y7wEA1JN9HgAAAN9ilOaDsjTSfAAAAP9iGmegWTR3FgI+aBxrzCS9XXPKuFf1u/MdNvEtttEu2n+w++e8wyHGOUangvEfXV8V/fv8leriAkfaUus=
   </data>
  </layer>
  <objectgroup id="4" name="Ground">
-  <object id="9" x="528" y="256.034" width="64" height="15.9728"/>
-  <object id="10" x="464" y="336.167" width="64" height="15.625"/>
-  <object id="11" x="368.026" y="415.983" width="63.875" height="16.0431"/>
-  <object id="13" x="991.917" y="80" width="16.0625" height="479.833"/>
-  <object id="14" x="752.083" y="192.052" width="239.75" height="15.9063"/>
-  <object id="22" x="944" y="144.073" width="47.9394" height="47.9867"/>
-  <object id="29" x="0.212122" y="608.014" width="479.782" height="31.9639"/>
+  <object id="9" x="528" y="256.208" width="64" height="15.625"/>
+  <object id="10" x="464" y="320.042" width="64" height="15.625"/>
+  <object id="11" x="367.958" y="384.208" width="63.625" height="16.375"/>
+  <object id="13" x="991.917" y="80" width="16" height="481.333"/>
+  <object id="14" x="752.083" y="192.208" width="239.625" height="15.75"/>
+  <object id="22" x="944" y="143.636" width="47.9394" height="48.4242"/>
+  <object id="29" x="0.212122" y="608.125" width="479.788" height="31.875"/>
   <object id="30" x="0.333333" y="480" width="79.75" height="31.6667"/>
   <object id="32" x="0.333333" y="79" height="528.969"/>
   <object id="34" x="0.545455" y="80" width="1759.62"/>
-  <object id="47" x="752.042" y="607.992" width="255.886" height="31.981"/>
+  <object id="47" x="751.678" y="608.265" width="256.25" height="31.7083"/>
   <object id="51" x="1760" y="80" height="559.455"/>
-  <object id="63" x="592.322" y="575.992" width="47.6555" height="16.0111"/>
+  <object id="63" x="591.833" y="576.125" width="47.8333" height="16.1667"/>
   <object id="64" x="1008" y="623.818" width="752" height="16.3636"/>
-  <object id="95" x="991.88" y="479.909" width="111.727" height="15.9394"/>
-  <object id="96" x="1216.15" y="480.03" width="239.697" height="16.0909"/>
-  <object id="97" x="1376" y="336.091" width="112" height="15.5455"/>
-  <object id="98" x="1007.99" y="336.037" width="32.017" height="16.0086"/>
-  <object id="99" x="1007.99" y="175.994" width="64.0028" height="16.006"/>
-  <object id="100" x="1471.82" y="239.818" width="144.182" height="16.3636"/>
-  <object id="101" x="1664" y="159.943" width="96.0057" height="16.0398"/>
-  <object id="105" x="466.333" y="741" width="303" height="33"/>
  </objectgroup>
  <objectgroup id="7" name="MovingPlatform">
   <object id="19" template="object-templates/SchalterMovingPlatform.tx" x="624" y="256.667">
@@ -66,39 +58,17 @@
     <property name="goalPosition" type="object" value="52"/>
    </properties>
   </object>
-  <object id="52" template="object-templates/GoalPosition.tx" x="328.875" y="426.208"/>
+  <object id="52" template="object-templates/GoalPosition.tx" x="330" y="383.333"/>
   <object id="53" template="object-templates/movingPlatformType2.tx" x="720.167" y="144.083" width="47.5" height="16.125">
    <properties>
     <property name="goalPosition" type="object" value="54"/>
    </properties>
   </object>
   <object id="54" template="object-templates/GoalPosition.tx" x="476" y="152"/>
-  <object id="72" template="object-templates/SchalterMovingPlatform.tx" x="1612" y="579.666">
-   <properties>
-    <property name="goalPosition" type="object" value="74"/>
-    <property name="schalter" type="object" value="73"/>
-   </properties>
-  </object>
-  <object id="74" template="object-templates/GoalPosition.tx" x="1500.33" y="472.334"/>
-  <object id="87" template="object-templates/movingPlatformType2.tx" x="1090" y="177">
-   <properties>
-    <property name="goalPosition" type="object" value="88"/>
-   </properties>
-  </object>
-  <object id="88" template="object-templates/GoalPosition.tx" x="1072" y="321.666"/>
-  <object id="89" template="object-templates/SchalterMovingPlatform.tx" x="1153.33" y="178.667">
-   <properties>
-    <property name="goalPosition" type="object" value="91"/>
-    <property name="schalter" type="object" value="90"/>
-   </properties>
-  </object>
-  <object id="91" template="object-templates/GoalPosition.tx" x="1331.33" y="348.333"/>
  </objectgroup>
  <objectgroup id="10" name="Schalter">
   <object id="20" template="object-templates/Schalter.tx" x="682" y="254.667"/>
   <object id="42" template="object-templates/Schalter.tx" x="411" y="155"/>
-  <object id="73" template="object-templates/Schalter.tx" x="1633" y="569.667"/>
-  <object id="90" template="object-templates/Schalter.tx" x="1164.67" y="177.333"/>
  </objectgroup>
  <objectgroup id="11" name="Signs">
   <object id="39" template="object-templates/sign.tx" x="783.75" y="176.125">
@@ -107,67 +77,36 @@
 </property>
    </properties>
   </object>
-  <object id="40" template="object-templates/sign.tx" x="431.875" y="592.167">
+  <object id="40" template="object-templates/sign.tx" x="432" y="593.667">
    <properties>
     <property name="Text" value="Achtung! you need Retalin"/>
    </properties>
   </object>
-  <object id="94" template="object-templates/sign.tx" x="1056.67" y="607.667"/>
  </objectgroup>
  <layer id="12" name="signLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt3KERADAIBEFccPTfLTIGz2SyW8GZtx8BAAAAAAAAcJ3aLgAAAAAAAAAAAAAAAAAAAABekX4KYGQb8J8GjHgARQ==
+   eJzt3DENADAIAEE22OrfbRMWJBCSOwWv4CMAAAAAAAAARr7tAgAAAAAAAAAAAAAAAAAAAOCK8ikAgPYBMT8ALg==
   </data>
  </layer>
  <objectgroup id="8" name="Enemies">
   <object id="16" template="object-templates/patrollingEnemy.tx" x="553" y="239.958"/>
-  <object id="17" template="object-templates/patrollingEnemy.tx" x="390.292" y="399.958"/>
-  <object id="75" template="object-templates/patrollingEnemy.tx" x="1344.67" y="463.667"/>
-  <object id="81" template="object-templates/patrollingEnemy.tx" x="1414.09" y="320.031"/>
-  <object id="82" template="object-templates/patrollingEnemy.tx" x="1533" y="224"/>
-  <object id="93" template="object-templates/knight.tx" x="1519.66" y="607.666"/>
-  <object id="106" template="object-templates/unhingedEnemy.tx" x="467.333" y="723.333"/>
-  <object id="107" template="object-templates/unhingedEnemy.tx" x="501.667" y="723.667"/>
-  <object id="108" template="object-templates/unhingedEnemy.tx" x="537" y="724.333"/>
-  <object id="109" template="object-templates/unhingedEnemy.tx" x="602.333" y="724.667"/>
-  <object id="110" template="object-templates/unhingedEnemy.tx" x="631.667" y="724"/>
-  <object id="111" template="object-templates/unhingedEnemy.tx" x="668.667" y="723.667"/>
-  <object id="112" template="object-templates/unhingedEnemy.tx" x="711.333" y="723.333"/>
-  <object id="113" template="object-templates/unhingedEnemy.tx" x="749" y="723"/>
-  <object id="114" template="object-templates/unhingedEnemy.tx" x="573" y="723.667"/>
-  <object id="121" template="object-templates/ritalin.tx" x="1247.67" y="463"/>
-  <object id="122" template="object-templates/page.tx" x="1008.67" y="160"/>
+  <object id="17" template="object-templates/patrollingEnemy.tx" x="399.792" y="367.958"/>
  </objectgroup>
- <objectgroup id="19" name="Items">
-  <object id="115" template="object-templates/page.tx" x="848.333" y="175.333"/>
-  <object id="116" template="object-templates/key.tx" x="975" y="125.333"/>
-  <object id="117" template="object-templates/page.tx" x="0.909091" y="463.273"/>
-  <object id="118" template="object-templates/ritalin.tx" x="32.3636" y="463.818"/>
-  <object id="119" template="object-templates/page.tx" x="1008.5" y="463.625"/>
-  <object id="120" template="object-templates/patrollingEnemy.tx" x="1039.88" y="463.75"/>
-  <object id="124" template="object-templates/page.tx" x="1600" y="223.455"/>
-  <object id="126" template="object-templates/key.tx" x="1008.33" y="320.333"/>
-  <object id="127" template="object-templates/door.tx" x="1744" y="111.333"/>
+ <objectgroup id="9" name="Items" locked="1">
+  <object id="35" template="object-templates/ritalin.tx" x="21" y="463.5"/>
+  <object id="67" template="object-templates/page.tx" x="871.636" y="178"/>
  </objectgroup>
- <objectgroup id="14" name="End">
-  <object id="125" x="1759.93" y="112.045" width="0.0454545" height="47.9545"/>
- </objectgroup>
+ <objectgroup id="14" name="End"/>
  <objectgroup id="15" name="Walls"/>
  <objectgroup id="13" name="Brick"/>
  <objectgroup id="6" name="Ladder">
-  <object id="55" x="927.938" y="127.938" width="16.0625" height="64.0625"/>
-  <object id="59" x="512.049" y="256" width="15.913" height="47.9022"/>
-  <object id="62" x="448.25" y="335.875" width="15.75" height="64"/>
-  <object id="102" x="1040" y="336" width="16" height="111.963"/>
-  <object id="103" x="1456.05" y="239.955" width="15.9545" height="95.9545"/>
-  <object id="123" x="1648.33" y="160.061" width="15.5152" height="64.0606"/>
+  <object id="55" x="928.25" y="127.25" width="15.75" height="65"/>
+  <object id="59" x="511.875" y="256" width="16" height="49.25"/>
+  <object id="62" x="448.125" y="319.75" width="15.75" height="64"/>
  </objectgroup>
  <layer id="5" name="LadderLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt11ERw0AIBNA4iJhaqIX6txID/b3ZJbyngBv2GLguAAAAAIDZPne6Ajb7yh9BE/NnZr/Hb2AvJ/4Z3kP+SJo4swH+cU/02dQT+1yfTT3Z9NYpNu3Y8keS/JEkf3mN90ZjTZzROAMaa+KMxl431sQZjfeu/JEkfyTJH0mNOwEAAAAAAAAATPIAZAQJBA==
+   eJzt2DERADEMA8EwCJinEArhT+Vh3GS8i8CFCllrAQAAAAC87dv1BUx25I+Q/FG68gcAAOPZ5SjZRSjZRYAp9D1K+h4l+aPk3wAAAAAAAAAAAAB42w+smAOS
   </data>
  </layer>
- <objectgroup id="18" name="Door">
-  <object id="70" template="object-templates/door.tx" x="992" y="560" width="16" height="48"/>
- </objectgroup>
 </map>
