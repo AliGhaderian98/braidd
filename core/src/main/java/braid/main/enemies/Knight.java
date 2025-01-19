@@ -136,11 +136,16 @@ public class Knight extends Enemy implements EnemyAI {
         float bodyShapehx = 5 / Braid.PPM;
         float bodyShapehy = 16 / Braid.PPM;
         float yPoint = -3/Braid.PPM;
+        float Headhx = 7 / Braid.PPM;
+        float Headhy = 1 / Braid.PPM;
+        float HeadPosy = 15 / Braid.PPM;
 
         if(Objects.equals(type, "Lion")){
             bodyShapehx = 20/ Braid.PPM;
             bodyShapehy = 12/ Braid.PPM;
             yPoint = -10 / Braid.PPM;
+            Headhx =0.2f;
+            HeadPosy = 0.03f;
         }
 
         BodyDef bdef = new BodyDef();
@@ -175,16 +180,15 @@ public class Knight extends Enemy implements EnemyAI {
         Fixture attackingRadiusFixture = b2body.createFixture(enemyAttackingRadius);
         attackingRadiusFixture.setUserData(new UserData("KnightEnemyAttackingRadius", this));
 
-        // create Head for lion
-        if(Objects.equals(type, "Lion")) {
+        // create Head
             FixtureDef headFdef = new FixtureDef();
             PolygonShape head = new PolygonShape();
-            head.setAsBox(0.2f, 1 / Braid.PPM, new Vector2(0, 0.03f), 0);
+            head.setAsBox(Headhx, Headhy , new Vector2(0, HeadPosy), 0);
             headFdef.shape = head;
             headFdef.friction = 1f;
             Fixture headFixture = b2body.createFixture(headFdef);
             headFixture.setUserData(new UserData("EnemyHead", this));
-        }
+
 
         shape.dispose();
     }

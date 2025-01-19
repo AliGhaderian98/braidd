@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="600" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="37" nextobjectid="3228">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="600" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="37" nextobjectid="3229">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -4067,7 +4067,7 @@
     <property name="schalter" type="object" value="3046"/>
    </properties>
   </object>
-  <object id="3046" template="object-templates/Schalter.tx" x="3878.58" y="1563.92"/>
+  <object id="3046" template="object-templates/Schalter.tx" x="4061.16" y="1432.59"/>
   <object id="3051" template="object-templates/movingPlatformType2.tx" x="4552" y="1062.25">
    <properties>
     <property name="goalPosition" type="object" value="3052"/>
