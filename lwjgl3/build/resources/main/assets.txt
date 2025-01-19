@@ -8,9 +8,10 @@ SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3
+maps/ArkadenLevel.tmx
+maps/Arkadenmap.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/object-templates/Brick.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
@@ -33,6 +34,10 @@ maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/tilesets/Arkaden/City.tsx
+maps/tilesets/Arkaden/Shopping_Mall.tsx
+maps/tilesets/Arkaden/images/City.png
+maps/tilesets/Arkaden/images/shopping mall.jpg
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
 maps/tilesets/Zoo/Basic-Tiled.tsx

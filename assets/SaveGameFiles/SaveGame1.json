@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: SCHLOSSBURG
+lastLevel: ARKADEN
 Playtime: 338325
 Collectables: {
 	class: java.util.HashMap
@@ -105,7 +105,7 @@ Collectables: {
 	ARKADEN: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
