@@ -7,8 +7,7 @@ precision mediump float;
 uniform sampler2D u_texture;
 uniform vec2 u_textureSize;
 uniform float u_time;
-const vec3 u_tintColorStart = vec3(0,0,1);
-const vec3 u_tintColorEnd = vec3(0, 1, 0.367);
+const vec3 u_tintColor = vec3(0.381, 0.969, 0.375);
 const float u_blurAmount = 0.04;
 const float u_threshold = 0.5;
 
@@ -21,21 +20,8 @@ void main() {
     // Sample the texture at the given coordinates
     vec4 pixel = texture(u_texture, v_texCoords);
 
-    // Calculate the phase for each color transition
-    float phase = mod(u_time * 2, 3.0);  // Cycle through 0 to 3 for each color transition
-
-    vec3 blendedColor;
-
-    if (phase < 1.0) {
-        // Transition from color1 to color2
-        blendedColor = mix(v_color.rgb, u_tintColorStart, phase);
-    } else if (phase < 2.0) {
-        // Transition from color2 to color3
-        blendedColor = mix(u_tintColorStart, u_tintColorEnd, phase - 1.0);
-    } else {
-        // Transition from color3 to color1
-        blendedColor = mix(u_tintColorEnd, v_color.rgb, phase - 2.0);
-    }
+    float factor = 0.5 + 0.5 * sin(u_time*5);  // Oscillates between 0 and 1
+    vec3 blendedColor = mix(v_color.rgb, u_tintColor, factor);
 
     // If the pixel is not fully transparent (inside the sprite), apply the tint color
     if (pixel.a > u_threshold) {

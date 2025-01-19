@@ -88,7 +88,7 @@ public abstract class InteractiveGameObject extends GameObject {
         b2body = world.createBody(bdef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(region.getRegionWidth() / 4f / Braid.PPM, region.getRegionHeight() / 4f / Braid.PPM);
+        shape.setAsBox(region.getRegionWidth() / 2f / Braid.PPM, region.getRegionHeight() / 2f / Braid.PPM);
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;

@@ -62,7 +62,12 @@ public class B2WorldCreator {
             for (MapObject object : signLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                new Sign(world, rect, screen.getSubtitleManager() ,(String) object.getProperties().get("Text"));
+                if (Objects.equals(object.getName(), "TutorialSign"))
+                    new Sign(world, rect, screen.getSubtitleManager(),
+                        (String) object.getProperties().get("Text"),
+                        (String) object.getProperties().get("key"));
+                else
+                    new Sign(world, rect, screen.getSubtitleManager(), (String) object.getProperties().get("Text"));
             }
         }
     }

@@ -19,6 +19,11 @@ public class Audiomanager {
          */
         audiomanager.load("audio/music/background_music.mp3", Music.class);
 
+        /*
+        licence: UniLevelMusic.ogg
+                Eigene Musik (Alister)
+        */
+        audiomanager.load("audio/music/UniLevelMusic.ogg", Music.class);
 
         /*
         licence: menuSound.mp3
@@ -27,6 +32,16 @@ public class Audiomanager {
                 License: Creative Commons 0
          */
         audiomanager.load("audio/sound/menuSound.mp3", Sound.class);
+
+        /*
+        licence: buttonClick.ogg
+                Button Clicking 2 (Single)
+                https://freesound.org/s/494490/
+                License: CC0
+        */
+        audiomanager.load("audio/sound/buttonClick.ogg", Sound.class);
+
+
         audiomanager.finishLoading();
 
         /*

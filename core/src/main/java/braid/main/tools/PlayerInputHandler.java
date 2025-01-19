@@ -20,6 +20,7 @@ public class PlayerInputHandler {
 
     private boolean rewindBuffer = false;
     private boolean rewinding = false;
+    private boolean moveBuffer = false;
 
 
     public PlayerInputHandler(Player player, World world, Game game, LevelScreen screen) {
@@ -124,9 +125,12 @@ public class PlayerInputHandler {
             if (Gdx.input.isKeyPressed(KeyBindings.getKey("LEFT_KEY")) && !Gdx.input.isKeyPressed(KeyBindings.getKey("RIGHT_KEY")) && Math.abs(player.b2body.getLinearVelocity().x) <= player.getSpeed()) {
                 player.moveLeft();
             }
+            moveBuffer = true;
         } else {
-            if (player.b2body.getLinearVelocity().x != 0)
+            if (moveBuffer) {
                 player.stopMovement();
+                moveBuffer = false;
+            }
         }
     }
 

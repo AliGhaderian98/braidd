@@ -39,7 +39,10 @@ public class FinishHUD implements Disposable {
         finishLabel.setFontScale(2);
 
         timeLabel = new Label("", TextFont);
-        pageLabel = new Label(String.format("collected pages: %d/%d", LevelHUD.getCollectedPages(), LevelHUD.getMaxPages()), TextFont);
+        pageLabel = new Label(String.format("collected pages: %d/%d",
+            (LevelHUD.getCollectedPages() + LevelHUD.getPreviouslyCollectedPages()),
+            (LevelHUD.getMaxPages() + LevelHUD.getPreviouslyCollectedPages())),
+            TextFont);
         timeLabel.setText("time: "+formatTime(LevelHUD.getElapsedTime()));
 
         Table scoreTable = new Table();

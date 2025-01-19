@@ -46,7 +46,7 @@ public class MovingPlatform extends InteractiveGameObject {
         originPos = new Vector2(b2body.getPosition().cpy());
 
         sprite = new Sprite(region);
-        sprite.setBounds(0,0,region.getRegionWidth()/2f/ Braid.PPM, region.getRegionHeight()/2f/Braid.PPM);
+        sprite.setBounds(0,0,region.getRegionWidth()/ Braid.PPM, region.getRegionHeight()/Braid.PPM);
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
         fixture.setUserData(new UserData("MovingPlatform", this));
@@ -63,7 +63,7 @@ public class MovingPlatform extends InteractiveGameObject {
         goalPos = new Vector2(goalPosX/Braid.PPM, goalPosY/Braid.PPM);
 
         sprite = new Sprite(region);
-        sprite.setBounds(0,0,region.getRegionWidth()/2f/ Braid.PPM, region.getRegionHeight()/2f/Braid.PPM);
+        sprite.setBounds(0,0,region.getRegionWidth()/ Braid.PPM, region.getRegionHeight()/Braid.PPM);
         sprite.setPosition(b2body.getPosition().x-sprite.getWidth()/2, b2body.getPosition().y-sprite.getHeight()/2);
 
         fixture.setUserData(new UserData("MovingPlatform", this));

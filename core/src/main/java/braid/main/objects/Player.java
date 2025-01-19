@@ -13,6 +13,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 
+import java.util.TimerTask;
+
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
@@ -263,11 +265,17 @@ public class Player extends DynamicGameObject {
     }
 
     public void fall() {
-        if (currentState != AnimationState.JUMPING) {
-            currentState = AnimationState.FALLING;
-            isGrounded = false;
-            setCoyoteTime();
-        }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                if (currentState != AnimationState.JUMPING && !isGrounded) {
+                    isGrounded = false;
+                    setCoyoteTime();
+                    currentState = AnimationState.FALLING;
+                }
+            }
+        }, 0.01f);
+
     }
 
 
@@ -450,6 +458,7 @@ public class Player extends DynamicGameObject {
             landingTask.cancel();
             landingAnimationPlaying = false;
         }
+
         currentState = AnimationState.JUMPING;
         b2body.setGravityScale(1);
         b2body.setLinearVelocity(new Vector2(0, getJumpSpeed()*multiplier));

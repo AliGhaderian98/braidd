@@ -70,6 +70,30 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
                     sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
+            case ("mushroom") -> {
+                sprite = new Sprite(atlas.findRegion("mushroom-idle"));
+                idle = new Animation<>(0.07f, atlas.findRegions("mushroom-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/ Braid.PPM);
+            }
+            case ("henry") -> {
+                sprite = new Sprite(atlas.findRegion("henry-idle"));
+                idle = new Animation<>(0.2f, atlas.findRegions("henry-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/ Braid.PPM);
+            }
+            case ("alessa") -> {
+                sprite = new Sprite(atlas.findRegion("alessa-idle"));
+                idle = new Animation<>(0.2f, atlas.findRegions("alessa-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/ Braid.PPM);
+            }
             case ("Bird1") -> {
                 Bridnumber = 1;
             }
