@@ -1744,7 +1744,7 @@
   </object>
   <object id="495" x="702.375" y="1548.25" width="18" height="18">
    <properties>
-    <property name="Text" value="pass auf die Vögel auf...                      Sie habe scharfe Schnäbel"/>
+    <property name="Text" value="pass auf die Vögel auf... Sie habe scharfe Schnäbel"/>
    </properties>
   </object>
   <object id="3075" template="object-templates/sign.tx" x="3871.27" y="1424.73">
@@ -3929,12 +3929,12 @@
     <property name="type" value="Bird1"/>
    </properties>
   </object>
-  <object id="516" template="object-templates/IdleEnemy.tx" x="2910.33" y="1385.33">
+  <object id="516" template="object-templates/IdleEnemy.tx" x="2866.33" y="1334">
    <properties>
     <property name="type" value="Bird1"/>
    </properties>
   </object>
-  <object id="517" template="object-templates/IdleEnemy.tx" x="2843.67" y="1385.67">
+  <object id="517" template="object-templates/IdleEnemy.tx" x="2730" y="1457">
    <properties>
     <property name="type" value="Bird1"/>
    </properties>
