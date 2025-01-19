@@ -1,6 +1,8 @@
 package braid.main.rewind;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /***********
@@ -10,7 +12,9 @@ import com.badlogic.gdx.math.Vector2;
 public class RewindController {
     private boolean isRewinding = false;
     private List<State> states = new ArrayList<>();
-    private int maxRewindLength = 36000; //Anzahl der Frames/Minuten die wir saven wollen
+    private float maxRewindTime = 5f;
+    private float recordedTime = 0f;
+    private float elapsedTime = 0f;
     private Rewindable rewindable;
 
     public RewindController(Rewindable rewindable){
@@ -19,10 +23,24 @@ public class RewindController {
         }
     }
 
-    public void update(){
-        if(isRewinding){
-            applyRewind();
-        } else{
+    public void update(float dt) {
+        if (isRewinding) {
+            if (dt > 0 && !states.isEmpty()) {
+                elapsedTime -= dt;
+                recordedTime = Math.max(recordedTime - dt, 0);
+                applyRewind();
+                if(elapsedTime < 0) {
+                    elapsedTime = 1f;
+                }
+            }
+
+        } else {
+            elapsedTime += dt;
+            if (elapsedTime >= 1f) {
+                recordedTime += elapsedTime;
+                elapsedTime = 0f;
+
+            }
             recordState();
         }
     }
@@ -40,7 +58,7 @@ public class RewindController {
     }
 
     public void recordState(){
-        if (states.size() >= maxRewindLength){
+        if (recordedTime >= maxRewindTime){
             states.remove(0);
         }
             states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));

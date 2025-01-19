@@ -108,6 +108,7 @@ public abstract class LevelScreen implements Screen {
     private Texture fboTex;
     private SpriteBatch fboBatch;
     private float time = 0f;
+    private float elapsedTime = 0f;
     private RewindHUD rewindHUD;
 
     private LevelHUD levelHUD;
@@ -433,6 +434,8 @@ public abstract class LevelScreen implements Screen {
             // Update world physics
             world.step(dt, 6, 2);
 
+            elapsedTime += dt;
+
             // Update Entities
             player.update(dt);
 
@@ -457,7 +460,7 @@ public abstract class LevelScreen implements Screen {
             updateCamera();
 
             for (RewindController r : rewindObjects) {
-                r.update();
+                r.update(dt);
             }
 
         }

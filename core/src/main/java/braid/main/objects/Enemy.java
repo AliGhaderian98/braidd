@@ -53,7 +53,7 @@ public abstract class Enemy extends DynamicGameObject{
         sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
         if (rewindable)
-            rewindController.update();
+            rewindController.update(dt);
 
         if (currentState == AnimationState.DEAD) {
             b2body.setActive(false);
