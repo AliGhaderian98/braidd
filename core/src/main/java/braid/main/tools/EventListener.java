@@ -66,10 +66,17 @@ public class EventListener {
 
             Screen newScreen = new MountainMap(game, 1);
             game.setScreen(newScreen);
-        } else if (screen instanceof MountainMap && canCompleteMap()) {
-
-           Screen newScreen = new PastMap(game);
-           game.setScreen(newScreen);
+        } else if (screen instanceof MountainMap && canCompleteMap() ) {
+            if(map.getLayers().get("PresentDoor" ) == null) {
+                Screen newScreen = new PastMap(game);
+                game.setScreen(newScreen);
+            } else if (map.getLayers().get("FutureDoor" ) == null) {
+                Screen newScreen = new PresentMap(game);
+                game.setScreen(newScreen);
+            } else if (map.getLayers().get("FutureDoor") != null) {
+                Screen newScreen = new UniLevel(game);
+                game.setScreen(newScreen);
+            }
 
         } else if (screen instanceof PastMap && canCompleteMap()) {
 
