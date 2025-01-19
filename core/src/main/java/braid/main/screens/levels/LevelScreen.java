@@ -47,6 +47,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import braid.main.screens.menus.PauseMenu;
 
+import java.util.Objects;
+
 
 /***********
  Basisklasse für Level, die grundlegende Funktionen bereitstellt, die von allen
@@ -74,6 +76,8 @@ public abstract class LevelScreen implements Screen {
     // Box2D variables
     protected final World world;
     protected final Box2DDebugRenderer b2dr;
+    private final EventListener event;
+
 
     // Game Objects
     protected final Player player;
@@ -136,6 +140,7 @@ public abstract class LevelScreen implements Screen {
 
         // World setup
         world = new World(new Vector2(0, GRAVITY), true);
+        event = new EventListener(game, this, map);
 
 
         // Setup player
@@ -558,11 +563,17 @@ public abstract class LevelScreen implements Screen {
     }
 
     public void spawnNPC(String type, Rectangle npcBoundary, Rectangle npcTrigger, String text, String spriteName){
-        addNPC(new NPC(world, this, subtitleManager, type, npcBoundary, npcTrigger, text, spriteName));
+        NPC npc = new NPC(world, this, getSubtitleManager(), type, npcBoundary, npcTrigger, text, spriteName);
+        npc.setEvent(this.event);
+        addNPC(npc);
     }
 
     public void spawnButton(Rectangle boundary, String actionType, String targetName) {
-        addButton(new Button(world, boundary, map, actionType, targetName));
+        Button button = new Button(world, boundary, map, actionType, targetName, event);
+        if(Objects.equals(actionType, "repairButton")) {
+            event.addButtonCount();
+        }
+        addButton(button);
     }
 
     private void addEnemy(Enemy enemy) {
@@ -628,10 +639,10 @@ public abstract class LevelScreen implements Screen {
             levelName = "ZOO";
         else if (this instanceof MountainMap)
             levelName = "WEGZURUNI";
-//        else if (this instanceof PastMap)
-//            levelName = "Past";
-//        else if (this instanceof PresentMap)
-//            levelName = "Present";
+        else if (this instanceof PastMap)
+            levelName = "WEGZURUNI";
+        else if (this instanceof PresentMap)
+            levelName = "WEGZURUNI";
 //        else if (this instanceof FutureMap)
 //            levelName = "Future";
 //        else if (this instanceof FinaleMap)

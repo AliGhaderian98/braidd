@@ -49,12 +49,6 @@ public class Subtitle {
     public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, BitmapFont font) {
         if (!isShowing) return;
 
-        if (fullText == null) {
-            System.err.println("Subtitle text is null during draw.");
-        } else {
-            System.out.println("Drawing subtitle: " + fullText);
-        }
-
 
         // Use GlyphLayout to calculate text dimensions
         GlyphLayout layout = new GlyphLayout();

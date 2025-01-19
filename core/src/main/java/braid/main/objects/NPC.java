@@ -22,11 +22,11 @@ import static braid.main.Braid.PPM;
 public class NPC extends InteractiveGameObject{
     private final Rectangle npcTrigger;
     private final Subtitle subtitle;
-    private String type;
+    private final String type;
     private final String name;
     private boolean trigger = false;
     protected Body body;
-    private EventListener event ;
+    private EventListener event;
     SubtitleManager subtitleManager;
 
     public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name) {
@@ -63,13 +63,14 @@ public class NPC extends InteractiveGameObject{
 
     public void trigger(boolean trigger) {
 
-        if(this.trigger != trigger) {
+        if (this.trigger != trigger) {
             System.out.println(type);
             switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
-                case "FinalNPC" -> { event.hasTriggeredNPC(trigger);
-                }
+                case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "MovingNPC" -> move();
+                case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
+
             }
             this.trigger = trigger;
         }

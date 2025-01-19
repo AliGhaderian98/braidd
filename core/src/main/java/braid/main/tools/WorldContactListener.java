@@ -208,7 +208,6 @@ public class WorldContactListener implements ContactListener {
     private void playerWithNPC(UserData userDataA, UserData userDataB) {
         if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
             (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
-            System.out.println("playerWithNpc");
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
             if (Objects.equals(npc.getType(), "FinalNPC") && player.getRewindController().isRewinding()) {
                 npc.trigger(true);

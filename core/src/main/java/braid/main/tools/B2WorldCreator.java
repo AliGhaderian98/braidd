@@ -73,8 +73,6 @@ public class B2WorldCreator {
         if (npcLayer != null) {
             for (MapObject object : npcLayer.getObjects()) {
                 if (Objects.equals(object.getName(), "NPC")) {
-                    System.out.println(object.getProperties().get("npcTrigger"));
-
                     Rectangle npcBoundary = ((RectangleMapObject) object).getRectangle();
 
                     Rectangle npcTrigger = null;
@@ -87,7 +85,6 @@ public class B2WorldCreator {
                     }
 
                     String text = (String) object.getProperties().get("text");
-                    System.out.println(text);
                     String type = (String) object.getProperties().get("Type");
                     String spriteName = (String) object.getProperties().get("Name");
 

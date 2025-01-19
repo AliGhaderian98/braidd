@@ -1,18 +1,23 @@
 package braid.main.screens.levels;
 
 import braid.main.Braid;
+import braid.main.objects.Button;
+import braid.main.objects.NPC;
+import com.badlogic.gdx.maps.MapLayer;
+
+import java.util.Objects;
 
 public class MountainMap extends LevelScreen{
+    private final int instance;
 
-    public MountainMap(Braid game) {
-        super(game, "maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
-        levelName = "Mountain";
-
-        player.setPosition(64/Braid.PPM, 300/Braid.PPM);
+    public MountainMap(Braid game, int instance) {
+        super(game, "maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain" + instance + ".tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        this.instance = instance;
+        player.setPosition(272/Braid.PPM, 32/Braid.PPM);
     }
     @Override
     protected LevelScreen getNewInstance() {
-        return new MountainMap(game);
+        return new MountainMap(game, this.instance);
     }
 
     @Override
