@@ -48,8 +48,12 @@ public class Player extends DynamicGameObject {
     private final float defaultGravity = 1.2f;
     private float descendingGravity = defaultGravity*1.3f; //Soll glaube ich nicht mehr Final sein, wegen Gleiter
     private final float variableJumpHeightFactor = 0.5f;
-    public boolean holdingJump;
+    private boolean holdingJump;
+    private float downGravityFactor = 1f;
     float jumpSpeed = 3.0f;
+
+    private final float maxVelocityX = 2.5f;
+    private final float maxVelocityY = 4f;
 
 
     private final float maxCoyoteTime = 0.15f;
@@ -73,11 +77,12 @@ public class Player extends DynamicGameObject {
     private Brick collidingBrick;
     private PowerUp.TypeOfPowerUp previousPowerUp;
     private boolean newestPowerUp = true;
+    private boolean gleiterActive = false;
     private boolean isAtSchalter = false;
     private Schalter collidingSchalter = null;
     private boolean hasKey;
 
-  // Movement limits e.g. when climbing
+    // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit = new Vector2(0,0);
     private Vector2 minMoveLimit = new Vector2(0,0);
 
@@ -190,13 +195,17 @@ public class Player extends DynamicGameObject {
 
         // apply higher descending velocity
         if (!isClimbing() && b2body.getLinearVelocity().y < 0) {
-            b2body.setGravityScale(descendingGravity);
+            b2body.setGravityScale(descendingGravity*downGravityFactor);
         }
 
         // update velocity on moving platform
         if (isOnMovingPlatform && !moving) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
+
+        // don't let player get faster than certain velocities
+        b2body.getLinearVelocity().x = Math.clamp(b2body.getLinearVelocity().x, -maxVelocityX, maxVelocityX);
+        b2body.getLinearVelocity().y = Math.clamp(b2body.getLinearVelocity().y, -maxVelocityY, maxVelocityY);
     }
 
     public TextureRegion getFrame(float dt) {
@@ -236,6 +245,7 @@ public class Player extends DynamicGameObject {
         return region;
     }
 
+    // tests whether the climbing animation should be paused since the player stopped moving while climbing
     private void testAnimationPause() {
         if (isClimbing() && b2body.getLinearVelocity().y == 0)
             animationPaused = true;
@@ -253,6 +263,7 @@ public class Player extends DynamicGameObject {
             isGrounded = true;
             holdingJump = false;
             coyoteActive = false;
+            downGravityFactor = 1f;
 
             if (b2body.getLinearVelocity().y < -4.75) {
                 currentState = AnimationState.LANDING;
@@ -362,10 +373,11 @@ public class Player extends DynamicGameObject {
     public PowerUp.TypeOfPowerUp getPreviousPowerUp() { return previousPowerUp; }
     public void setPreviousPowerUp(PowerUp.TypeOfPowerUp previousPowerUp) { this.previousPowerUp = previousPowerUp; }
 
-
     public boolean isNewestPowerUp() { return newestPowerUp; }
-
     public void setNewestPowerUp(boolean newestPowerUp) { this.newestPowerUp = newestPowerUp; }
+
+    public boolean isGleiterActive() { return gleiterActive; }
+    public void setGleiterActive(boolean value) { gleiterActive = value; }
 
     public Brick getCollidingBrick() { return collidingBrick; }
     public void setCollidingBrick(Brick collidingBrick) { this.collidingBrick = collidingBrick; }
@@ -395,6 +407,12 @@ public class Player extends DynamicGameObject {
     }
 
     public boolean hasKey() { return hasKey; }
+
+    public void isHoldingJump(boolean value) { holdingJump = value; }
+
+    public void setDownGravityFactor(float value) { downGravityFactor = value; }
+
+    public float getDownGravityFactor() { return downGravityFactor; }
 
     public void die() {
         screen.setHitShader();

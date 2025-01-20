@@ -37,6 +37,7 @@ public class PlayerInputHandler {
             handleJumping();
             handleClimbing();
             handleInteract();
+            handleDownInput();
         }
 
         handlePause();
@@ -77,9 +78,23 @@ public class PlayerInputHandler {
         if (Gdx.input.isKeyJustPressed(KeyBindings.getKey("SPACEBAR")) && !player.isGrounded())
             player.setJumpBuffer();
         if (Gdx.input.isKeyPressed(KeyBindings.getKey("SPACEBAR"))) {
-            player.holdingJump = true;
+            player.isHoldingJump(true);
         } else {
-            player.holdingJump = false;
+            player.isHoldingJump(false);
+        }
+    }
+
+    // if the player presses down while having the gleiter, they are able to fall a little faster
+    private void handleDownInput() {
+        if (Gdx.input.isKeyPressed(KeyBindings.getKey("DOWN_KEY"))) {
+            if (player.getDownGravityFactor() == 1f && player.isGleiterActive())
+                player.setDownGravityFactor(30.0f);
+
+        } else {
+            if (player.getDownGravityFactor() > 1f) {
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0f);
+                player.setDownGravityFactor(1f);
+            }
         }
     }
 

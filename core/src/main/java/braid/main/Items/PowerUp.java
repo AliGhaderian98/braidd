@@ -66,6 +66,7 @@ public class PowerUp extends Item {
         }
         if (player.hasActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*(1/gleiterDescendingModifier));
+            player.setGleiterActive(false);
             player.setNewestPowerUp(false);
         }
         if (player.hasActivePowerUp() && player.getPreviousPowerUp() == TypeOfPowerUp.HAMMER) {
@@ -79,6 +80,7 @@ public class PowerUp extends Item {
         }
         if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
             player.setDescendingGravity(player.getDescendingGravity()*gleiterDescendingModifier);
+            player.setGleiterActive(true);
         }
         if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
             player.setHammerActive(true);
@@ -108,6 +110,7 @@ public class PowerUp extends Item {
             }
             if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
                 player.setDescendingGravity(player.getDescendingGravity() * (1 / gleiterDescendingModifier));
+                player.setGleiterActive(false);
             }
             if (readTypePowerUp == TypeOfPowerUp.HAMMER) {
                 player.setHammerActive(false);

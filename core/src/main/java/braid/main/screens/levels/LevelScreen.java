@@ -539,6 +539,7 @@ public abstract class LevelScreen implements Screen {
             Savemanager.currentsavegame.lastLevel = levelName;
             Savemanager.saveGame(false);
         }
+        music.stop();
         finished = true;
         gameIsPaused = true;
         activeShader = pauseShader;
