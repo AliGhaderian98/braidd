@@ -34,7 +34,6 @@ public class B2WorldCreator {
 
 
     public B2WorldCreator(World world, TiledMap map, LevelScreen screen) {
-        System.out.println("Hallo B2WorldCreator");
         this.map = map;
         this.world = world;
         this.screen = screen;
@@ -96,7 +95,6 @@ public class B2WorldCreator {
     }
 
     private void spawnGround() {
-        System.out.println("Hallo B2WorldCreator Ground");
 
         MapLayer groundLayer = map.getLayers().get("Ground");
         for (MapObject object : groundLayer.getObjects()) {
@@ -116,7 +114,6 @@ public class B2WorldCreator {
     }
 
     private void spawnWalls() {
-        System.out.println("Hallo B2WorldCreator Walls");
 
         MapLayer wallLayer = map.getLayers().get("Walls");
         for (MapObject object : wallLayer.getObjects()) {

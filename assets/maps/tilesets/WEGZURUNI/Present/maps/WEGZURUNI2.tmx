@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="79" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="565">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="79" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="589">
  <tileset firstgid="1" source="../tilesets/WegzurUni.tsx"/>
  <tileset firstgid="9" source="../../../Zoo/Basic-Tiled.tsx"/>
  <tileset firstgid="189" source="../tilesets/wegzurunibad.tsx"/>
@@ -229,18 +229,18 @@
   <object id="214" template="../../../../object-templates/GoalPosition.tx" x="1113" y="48"/>
  </objectgroup>
  <objectgroup id="17" name="Ladder">
-  <object id="173" x="1184" y="432" width="16" height="208"/>
-  <object id="175" x="528" y="400" width="16" height="240"/>
+  <object id="173" x="1184" y="432" width="16" height="213"/>
+  <object id="175" x="528" y="400" width="16" height="257"/>
  </objectgroup>
  <objectgroup id="6" name="End"/>
  <objectgroup id="5" name="Walls">
-  <object id="162" x="104.25" y="438.25" height="34"/>
-  <object id="163" x="206.75" y="438.25" width="0.5" height="30.25"/>
-  <object id="164" x="347" y="436.5" width="0.25" height="33"/>
-  <object id="165" x="447.25" y="437.25" width="0.25" height="34.75"/>
-  <object id="166" x="701" y="437.5" width="1.5" height="31.75"/>
+  <object id="162" x="105.25" y="439.625" height="32.625"/>
+  <object id="163" x="205.75" y="439.5" width="0.5" height="29"/>
+  <object id="164" x="348" y="438" width="0.25" height="31.5"/>
+  <object id="165" x="446.25" y="438.375" width="0.25" height="33.625"/>
+  <object id="166" x="701" y="438.227" width="0.681818" height="31.0227"/>
   <object id="167" x="841.25" y="438.5" width="0.25" height="30.25"/>
-  <object id="168" x="938.5" y="438" width="0.25" height="33.25"/>
+  <object id="168" x="937.5" y="438.875" width="0.25" height="32.375"/>
   <object id="169" x="1051" y="442" width="0.25" height="30.25"/>
   <object id="170" x="1261.25" y="0" width="8.25" height="776.5"/>
   <object id="171" x="-8.66667" y="0" width="8.66667" height="768"/>
@@ -288,6 +288,28 @@
   <object id="246" template="../../../../object-templates/patrollingEnemy.tx" x="199.333" y="192"/>
   <object id="247" template="../../../../object-templates/patrollingEnemy.tx" x="287.333" y="208"/>
   <object id="328" template="../../../../object-templates/patrollingEnemy.tx" x="188.5" y="298.5"/>
+  <object id="565" template="../../../../object-templates/patrollingEnemy.tx" x="940" y="623"/>
+  <object id="566" template="../../../../object-templates/patrollingEnemy.tx" x="217" y="300"/>
+  <object id="567" template="../../../../object-templates/patrollingEnemy.tx" x="326" y="303"/>
+  <object id="568" template="../../../../object-templates/patrollingEnemy.tx" x="333" y="303"/>
+  <object id="569" template="../../../../object-templates/patrollingEnemy.tx" x="342" y="303"/>
+  <object id="570" template="../../../../object-templates/patrollingEnemy.tx" x="354" y="303"/>
+  <object id="571" template="../../../../object-templates/patrollingEnemy.tx" x="355" y="303"/>
+  <object id="572" template="../../../../object-templates/patrollingEnemy.tx" x="355" y="303"/>
+  <object id="573" template="../../../../object-templates/patrollingEnemy.tx" x="355" y="303"/>
+  <object id="574" template="../../../../object-templates/patrollingEnemy.tx" x="403" y="303"/>
+  <object id="575" template="../../../../object-templates/patrollingEnemy.tx" x="430" y="303"/>
+  <object id="578" template="../../../../object-templates/patrollingEnemy.tx" x="289" y="289"/>
+  <object id="579" template="../../../../object-templates/patrollingEnemy.tx" x="353" y="301"/>
+  <object id="580" template="../../../../object-templates/patrollingEnemy.tx" x="384" y="298"/>
+  <object id="581" template="../../../../object-templates/patrollingEnemy.tx" x="419" y="292"/>
+  <object id="582" template="../../../../object-templates/patrollingEnemy.tx" x="436" y="293"/>
+  <object id="583" template="../../../../object-templates/patrollingEnemy.tx" x="439" y="293"/>
+  <object id="584" template="../../../../object-templates/patrollingEnemy.tx" x="461" y="298"/>
+  <object id="585" template="../../../../object-templates/patrollingEnemy.tx" x="471" y="274"/>
+  <object id="586" template="../../../../object-templates/patrollingEnemy.tx" x="471" y="270"/>
+  <object id="587" template="../../../../object-templates/patrollingEnemy.tx" x="415" y="276"/>
+  <object id="588" template="../../../../object-templates/patrollingEnemy.tx" x="412" y="276"/>
  </objectgroup>
  <objectgroup id="8" name="Items">
   <object id="210" template="../../../../object-templates/gleiter.tx" x="513" y="20"/>
@@ -310,7 +332,7 @@
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="There are still Enemies alive!"/>
+    <property name="text" value="There are still Enemies alive! (You should probably restart)"/>
    </properties>
   </object>
  </objectgroup>

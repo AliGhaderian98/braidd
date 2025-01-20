@@ -165,6 +165,7 @@ maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_63.png
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_64.png
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tileset.png
+maps/tilesets/WEGZURUNI/Past/Images/Trap.png
 maps/tilesets/WEGZURUNI/Past/Images/darkerorange.png
 maps/tilesets/WEGZURUNI/Past/Images/scaffoldingtileset.png
 maps/tilesets/WEGZURUNI/Past/Images/schwebebahn.aseprite
@@ -184,6 +185,7 @@ maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/6.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/orig.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/origbig.png
 maps/tilesets/WEGZURUNI/Past/maps/Past.tmx
+maps/tilesets/WEGZURUNI/Past/tilesets/TeslaCoil.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/alteSchwebebahn.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/automap-tiles.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/darkerorange.tsx

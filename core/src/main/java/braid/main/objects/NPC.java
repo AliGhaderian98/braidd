@@ -52,10 +52,8 @@ public class NPC extends InteractiveGameObject{
         if(this.name == null) return;
         switch (this.name) {
             case "PublicBus" -> {
-                System.out.println("hallo");
             }
             case "HoodedOne" -> {
-                System.out.println("hallo2");
             }
         }
     }
@@ -64,7 +62,6 @@ public class NPC extends InteractiveGameObject{
     public void trigger(boolean trigger) {
 
         if (this.trigger != trigger) {
-            System.out.println(type);
             switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
