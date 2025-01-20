@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="89">
  <tileset firstgid="1" source="tilesets/HBF/TX Village Props.tsx"/>
  <tileset firstgid="3137" source="tilesets/HBF/sheet.tsx"/>
  <tileset firstgid="3242" source="tilesets/HBF/four-seasons-tileset.tsx"/>
@@ -54,6 +54,7 @@
  <objectgroup id="5" name="Ladder">
   <object id="9" name="Ladder" x="756.801" y="32.0179" width="11.3542" height="64.0833"/>
  </objectgroup>
+ <objectgroup id="15" name="Doors"/>
  <objectgroup id="3" name="Ground">
   <object id="1" x="110.667" y="147.333" width="49.3333" height="9.33333"/>
   <object id="2" x="175.333" y="116" width="46.6667" height="7.33333"/>
@@ -68,52 +69,8 @@
  <objectgroup id="12" name="Walls"/>
  <objectgroup id="14" name="Brick"/>
  <objectgroup id="9" name="Items">
-  <object id="57" template="object-templates/page.tx" x="50.7802" y="98.1751"/>
-  <object id="58" template="object-templates/page.tx" x="111.334" y="128.26"/>
-  <object id="60" template="object-templates/page.tx" x="140.955" y="129.953"/>
-  <object id="61" template="object-templates/page.tx" x="308.53" y="166.345"/>
-  <object id="63" template="object-templates/page.tx" x="707.155" y="85.0971"/>
-  <object id="64" template="object-templates/page.tx" x="779.94" y="15.6974"/>
   <object id="65" template="object-templates/page.tx" x="513.344" y="49.5509"/>
   <object id="76" template="object-templates/page.tx" x="114.433" y="62.3531"/>
-  <object id="77" template="object-templates/page.tx" x="729.337" y="85.195"/>
-  <object id="78" template="object-templates/page.tx" x="891.971" y="124.483"/>
-  <object id="81" template="object-templates/gleiter.tx" x="371.75" y="43.75"/>
-  <object id="83" template="object-templates/page.tx" x="425.996" y="129.965"/>
-  <object id="84" template="object-templates/patrollingEnemy.tx" x="509.832" y="165.375"/>
  </objectgroup>
- <objectgroup id="8" name="MovingPlatform">
-  <object id="71" template="object-templates/movingPlatformType2.tx" x="46.6031" y="144.498" width="17.3487" height="18">
-   <properties>
-    <property name="goalPosition" type="object" value="75"/>
-   </properties>
-  </object>
-  <object id="72" template="object-templates/movingPlatformType2.tx" x="640.493" y="110.692" width="16.435" height="18">
-   <properties>
-    <property name="goalPosition" type="object" value="82"/>
-   </properties>
-  </object>
-  <object id="73" template="object-templates/movingPlatformType2.tx" x="370.045" y="69.5762" width="47.5" height="6.1222">
-   <properties>
-    <property name="goalPosition" type="object" value="74"/>
-    <property name="speed" type="float" value="0.8"/>
-   </properties>
-  </object>
-  <object id="74" template="object-templates/GoalPosition.tx" x="275.93" y="74.0079"/>
-  <object id="75" template="object-templates/GoalPosition.tx" x="57.5617" y="79.4899"/>
-  <object id="82" template="object-templates/GoalPosition.tx" x="550.5" y="119.682"/>
-  <object id="86" template="object-templates/movingPlatformType2.tx" x="720.891" y="157.152" width="22.8307" height="18">
-   <properties>
-    <property name="goalPosition" type="object" value="87"/>
-    <property name="speed" type="float" value="0.5"/>
-   </properties>
-  </object>
-  <object id="87" template="object-templates/GoalPosition.tx" x="786.676" y="131.569"/>
-  <object id="88" template="object-templates/SchalterMovingPlatform.tx" x="733.682" y="150.757" width="24.7119" height="16">
-   <properties>
-    <property name="goalPosition" type="object" value="87"/>
-    <property name="schalter" type="object" value="86"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup id="8" name="MovingPlatform"/>
 </map>
