@@ -11,7 +11,6 @@ audio/sound/menuSound.mp3
 maps/FreudenbergLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/object-templates/Brick.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
@@ -61,6 +60,7 @@ maps/tilesets/FreudenBerg/Cloud 2.tsx
 maps/tilesets/FreudenBerg/Door.tsx
 maps/tilesets/FreudenBerg/Mobile - Angry Birds - Post-Chrome Characters.tsx
 maps/tilesets/FreudenBerg/Snow.tsx
+maps/tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq Kopie.tsx
 maps/tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx
 maps/tilesets/FreudenBerg/floor.tsx
 maps/tilesets/FreudenBerg/test.tsx
