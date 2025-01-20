@@ -126,7 +126,8 @@ public class OverworldPlayer extends Actor {
                     moveToCurrentNode();
                 } else {
                     isMoving = false;
-                    hud.activate(currentNode.getName());
+                    if (!currentNode.getName().equals("ANCHORSOUTH"))
+                        hud.activate(currentNode.getName());
                 }
 
                 // force enter the wegZurUni level if it was just unlocked
