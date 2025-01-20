@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="oldcitys" tilewidth="576" tileheight="324" tilecount="70" columns="0">
+<tileset version="1.10" tiledversion="1.10.2" name="oldcitys" tilewidth="256" tileheight="256" tilecount="65" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="32" height="32" source="../Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_59.png"/>
@@ -195,20 +195,5 @@
  </tile>
  <tile id="64">
   <image width="256" height="256" source="../Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tileset.png"/>
- </tile>
- <tile id="65">
-  <image width="576" height="324" source="../Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/1.png"/>
- </tile>
- <tile id="66">
-  <image width="576" height="324" source="../Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/2.png"/>
- </tile>
- <tile id="67">
-  <image width="576" height="324" source="../Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/3.png"/>
- </tile>
- <tile id="68">
-  <image width="576" height="324" source="../Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/4.png"/>
- </tile>
- <tile id="69">
-  <image width="576" height="324" source="../Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/5.png"/>
  </tile>
 </tileset>

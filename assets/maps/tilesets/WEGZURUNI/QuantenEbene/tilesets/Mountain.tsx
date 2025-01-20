@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="Mountain" tilewidth="16" tileheight="16" tilecount="3300" columns="55">
- <image source="../Images/Mountainhoch.png" width="892" height="971"/>
+<tileset version="1.10" tiledversion="1.10.2" name="Mountain" tilewidth="16" tileheight="16" tilecount="8040" columns="1">
+ <image source="../../Future/Images/BlackScreen/Blackpixel.png" width="16" height="16"/>
 </tileset>

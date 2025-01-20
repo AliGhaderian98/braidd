@@ -91,6 +91,7 @@ maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-8.png
 maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-9.png
 maps/tilesets/WEGZURUNI/Future/Images/futureschwebebahn.png
 maps/tilesets/WEGZURUNI/Future/maps/Future.tmx
+maps/tilesets/WEGZURUNI/Future/tilesets/Cyberpunkol.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/FutureSchwebebahn.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/IntelliJ.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/blackScreen.tsx
@@ -164,86 +165,10 @@ maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_63.png
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_64.png
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tileset.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/1.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/2.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/3.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/4.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Day/5.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Night/1.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Night/2.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Night/3.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Night/4.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Night/5.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/2 Background/Overlay.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/1.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/10.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/11.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/2.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/3.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/4.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/5.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/6.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/7.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/8.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/1 Tube/9.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/1.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/10.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/11.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/12.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/13.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/14.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/15.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/16.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/17.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/18.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/19.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/2.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/20.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/21.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/22.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/23.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/24.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/25.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/26.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/27.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/3.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/4.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/5.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/6.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/7.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/8.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/2 Decoration/9.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/1.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/2.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/3.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/4.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/5.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/6.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/7.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/8.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/3 Objects/3 Power lines/9.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/4 Animated objects/Card.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/4 Animated objects/Chest.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/4 Animated objects/Money.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/4 Animated objects/Trap.png
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/Font.txt
-maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/License.txt
 maps/tilesets/WEGZURUNI/Past/Images/darkerorange.png
 maps/tilesets/WEGZURUNI/Past/Images/scaffoldingtileset.png
 maps/tilesets/WEGZURUNI/Past/Images/schwebebahn.aseprite
 maps/tilesets/WEGZURUNI/Past/Images/schwebebahn.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/1.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/2.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/3.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/4.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/orig.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 1/origbig.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/1.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/2.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/3.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/4.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/orig.png
-maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 2/origbig.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/1.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/2.png
 maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/3.png
@@ -315,10 +240,6 @@ maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/hoodedone.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/wegzurunibad.tsx
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/License.txt
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.aseprite
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch2.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_01-512x512.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_02-512x512.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_03-512x512.png
@@ -351,54 +272,11 @@ maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_0
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_06-512x512.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_07-512x512.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_08-512x512.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/10.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/3.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/5.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/6.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/7.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/8.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_1/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/3.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/4.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_2/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/3.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/4.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_3/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/3.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/4.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_4/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/3.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/4.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/5.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_5/origbig.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/1.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/2.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/3.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/orig.png
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_7/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_7/2.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_7/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_7/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_8/1.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_8/orig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_8/origbig.png
-maps/tilesets/WEGZURUNI/QuantenEbene/Images/schwebebahn (2).aseprite
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/schwebebahn (2).gif
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/schwebebahn (3).gif
 maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.png
