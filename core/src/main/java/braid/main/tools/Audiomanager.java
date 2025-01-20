@@ -34,6 +34,14 @@ public class Audiomanager {
         audiomanager.load("audio/music/victory-fanfare.ogg", Music.class);
 
         /*
+        licence: lofi-loop.ogg
+                Aesthetic Lofi Loop
+                https://freesound.org/s/679187/
+                License: CC0
+        */
+        audiomanager.load("audio/music/lofi-loop.ogg", Music.class);
+
+        /*
         licence: menuSound.mp3
                 Scissors one hit by ibaffette --
                 https://freesound.org/s/737698/ --

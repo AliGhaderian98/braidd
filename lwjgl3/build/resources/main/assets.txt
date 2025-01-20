@@ -5,13 +5,11 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
-SaveGameFiles/SaveGame2.json
-SaveGameFiles/SaveGame3.json
-SaveGameFiles/SaveGame4.json
 audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.ogg
 audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
+audio/music/lofi-loop.ogg
 audio/music/victory-fanfare.ogg
 audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
@@ -474,6 +472,9 @@ sprites/misc/plattform.png
 sprites/misc/rewind-symbol.png
 sprites/misc/ritalin.png
 sprites/misc/schalter.png
+sprites/misc/star.png
+sprites/misc/textbox.9.png
+sprites/misc/textbox2.9.png
 sprites/pack.json
 sprites/run-smoke/run-smoke_01.png
 sprites/run-smoke/run-smoke_02.png
@@ -555,4 +556,5 @@ sprites/wissenschaftler/wissenschaftler_7.png
 sprites/wissenschaftler/wissenschaftler_8.png
 sprites/wissenschaftler/wissenschaftler_9.png
 textFonts/MenuTextFont.ttf
+textFonts/bigPixel.otf
 textFonts/pixelfont.ttf

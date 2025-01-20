@@ -22,9 +22,7 @@ public class Savemanager {
         public Map<String, Boolean> UnlockedLevels;
         public String lastLevel;
         public boolean wegZurUniJustUnlocked;
-        public boolean oberbarmenFinished;
-        public boolean zooFinished;
-        public boolean bayerFinished;
+        public Map<String, Boolean> FinishedLevels;
         public long Playtime;
         public Map<String, Array<Boolean>> Collectables;
 
@@ -78,9 +76,11 @@ public class Savemanager {
         currentsavegame.lastLevel = "UNI";
 
         currentsavegame.wegZurUniJustUnlocked = false;
-        currentsavegame.oberbarmenFinished = false;
-        currentsavegame.zooFinished = false;
-        currentsavegame.bayerFinished = false;
+
+        currentsavegame.FinishedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
+        }
     }
 
 
@@ -102,10 +102,8 @@ public class Savemanager {
         saveData.Collectables = currentsavegame.Collectables;
         saveData.Playtime = currentsavegame.Playtime;
         saveData.lastLevel = currentsavegame.lastLevel;
-        saveData.oberbarmenFinished = currentsavegame.oberbarmenFinished;
-        saveData.zooFinished = currentsavegame.zooFinished;
-        saveData.bayerFinished = currentsavegame.bayerFinished;
         saveData.wegZurUniJustUnlocked = currentsavegame.wegZurUniJustUnlocked;
+        saveData.FinishedLevels = currentsavegame.FinishedLevels;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
         file.writeString(SaveGamesDoc.prettyPrint(saveData),false);
@@ -173,6 +171,7 @@ public class Savemanager {
     }
 
     public static void unlockNextLevel(String currentLevel) {
+        currentsavegame.FinishedLevels.put(currentLevel, true);
         switch (currentLevel) {
             case "UNI" -> currentsavegame.UnlockedLevels.put("FREUDENBERG", true);
             case "FREUDENBERG" -> currentsavegame.UnlockedLevels.put("ARKADEN", true);
@@ -183,18 +182,7 @@ public class Savemanager {
                 currentsavegame.UnlockedLevels.put("ZOO", true);
                 currentsavegame.UnlockedLevels.put("BAYER", true);
             }
-            case "OBERBARMEN" -> {
-                currentsavegame.oberbarmenFinished = true;
-                unlockWegZurUni();
-            }
-            case "BAYER" -> {
-                currentsavegame.bayerFinished = true;
-                unlockWegZurUni();
-            }
-            case "ZOO" -> {
-                currentsavegame.zooFinished = true;
-                unlockWegZurUni();
-            }
+            case "OBERBARMEN", "BAYER", "ZOO" -> unlockWegZurUni();
             case "SCHLOSSBURG", "WEGZURUNI" -> {}
             default -> throw new IllegalStateException("Unknown Level Name: " + currentLevel);
         }
@@ -205,7 +193,9 @@ public class Savemanager {
     }
 
     private static void unlockWegZurUni() {
-        if (currentsavegame.oberbarmenFinished && currentsavegame.zooFinished && currentsavegame.bayerFinished) {
+        if (currentsavegame.FinishedLevels.get("OBERBARMEN") &&
+            currentsavegame.FinishedLevels.get("ZOO") &&
+            currentsavegame.FinishedLevels.get("BAYER")) {
             if (!currentsavegame.UnlockedLevels.get("WEGZURUNI"))
                 currentsavegame.wegZurUniJustUnlocked = true;
             currentsavegame.UnlockedLevels.put("WEGZURUNI", true);

@@ -1,10 +1,10 @@
 {
 SaveGameKEY: 1
-SaveGameName: hfghv
+SaveGameName: test
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: true
+	SCHLOSSBURG: false
 	ARKADEN: true
 	WEGZURUNI: true
 	BAYER: true
@@ -14,8 +14,21 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: FREUDENBERG
-Playtime: 11858735
+lastLevel: UNI
+FinishedLevels: {
+	class: java.util.HashMap
+	UNI: true
+	SCHLOSSBURG: false
+	ARKADEN: true
+	WEGZURUNI: true
+	BAYER: true
+	OBERBARMEN: true
+	ZOO: true
+	FREUDENBERG: true
+	HBF: true
+	LUISENVIERTEL: true
+}
+Playtime: 917019
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -25,19 +38,19 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	SCHLOSSBURG: [
@@ -65,7 +78,7 @@ Collectables: {
 	ARKADEN: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -87,7 +100,7 @@ Collectables: {
 	WEGZURUNI: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -113,25 +126,25 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	OBERBARMEN: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -165,7 +178,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -179,15 +192,15 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -213,13 +226,13 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	LUISENVIERTEL: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean

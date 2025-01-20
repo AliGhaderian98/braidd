@@ -27,10 +27,12 @@ public class OverworldPlayer extends Actor {
     private OverworldNode currentNode;
 
     private boolean isMoving = false;
+    private OverworldHUD hud;
 
-    public OverworldPlayer(Overworld overworld, float x, float y) {
+    public OverworldPlayer(Overworld overworld, float x, float y, OverworldHUD hud) {
         TextureAtlas atlas = overworld.getAtlas();
         this.overworld = overworld;
+        this.hud = hud;
 
         north = new TextureRegion(atlas.findRegion("schwebimini_n"));
         northEast = new TextureRegion(atlas.findRegion("schwebimini_ne"));
@@ -87,6 +89,7 @@ public class OverworldPlayer extends Actor {
 
     public void moveToCurrentNode() {
         isMoving = true;
+        hud.hide();
 
         Vector2 position = new Vector2(getX(), getY());
         float distance = position.dst(currentNode.getPosition());
@@ -123,6 +126,7 @@ public class OverworldPlayer extends Actor {
                     moveToCurrentNode();
                 } else {
                     isMoving = false;
+                    hud.activate(currentNode.getName());
                 }
 
                 // force enter the wegZurUni level if it was just unlocked
