@@ -26,6 +26,14 @@ public class Audiomanager {
         audiomanager.load("audio/music/UniLevelMusic.ogg", Music.class);
 
         /*
+        licence: victory-fanfare.ogg
+                Music: Orchestral Victory Fanfare
+                https://freesound.org/s/470083/
+                License: Attribution 4.0
+        */
+        audiomanager.load("audio/music/victory-fanfare.ogg", Music.class);
+
+        /*
         licence: menuSound.mp3
                 Scissors one hit by ibaffette --
                 https://freesound.org/s/737698/ --

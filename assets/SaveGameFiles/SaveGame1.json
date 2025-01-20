@@ -14,8 +14,8 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: BAYER
-Playtime: 11422035
+lastLevel: FREUDENBERG
+Playtime: 11867144
 Collectables: {
 	class: java.util.HashMap
 	UNI: [

@@ -12,6 +12,7 @@ audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.ogg
 audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
+audio/music/victory-fanfare.ogg
 audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
 maps/Schlossburg.tmx
@@ -71,6 +72,7 @@ maps/tilesets/Uni/images/Tiles.png
 maps/tilesets/Uni/images/backgrounds/background-reduced-shadow.png
 maps/tilesets/Uni/images/backgrounds/background-reduced.png
 maps/tilesets/Uni/images/backgrounds/buildings-uni.png
+maps/tilesets/Uni/images/backgrounds/uni-flag.png
 maps/tilesets/Uni/images/parkset.png
 maps/tilesets/Uni/images/tile-white-shadow.png
 maps/tilesets/Uni/images/tile-white.png
@@ -81,6 +83,7 @@ maps/tilesets/Uni/park-tileset.tsx
 maps/tilesets/Uni/tile-white-shadow.tsx
 maps/tilesets/Uni/tile-white.tsx
 maps/tilesets/Uni/trees.tsx
+maps/tilesets/Uni/uni-flag.tsx
 maps/tilesets/Zoo/4.png
 maps/tilesets/Zoo/Background/Green Background/Green 1.tsx
 maps/tilesets/Zoo/Background/Green Background/Green 2.tsx

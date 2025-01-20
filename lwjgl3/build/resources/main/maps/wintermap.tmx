@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="307">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="64" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="302">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -194,11 +194,7 @@
   <object id="169" x="384" y="256" height="16"/>
  </objectgroup>
  <objectgroup id="19" name="Brick">
-  <object id="298" template="object-templates/Brick.tx" x="736" y="256">
-   <properties>
-    <property name="rewindable" type="bool" value="false"/>
-   </properties>
-  </object>
+  <object id="298" template="object-templates/Brick.tx" x="736" y="256"/>
  </objectgroup>
  <objectgroup id="11" name="Enemies">
   <properties>
@@ -208,14 +204,18 @@
   <object id="243" template="object-templates/patrollingEnemy.tx" x="400" y="256"/>
   <object id="244" template="object-templates/patrollingEnemy.tx" x="256" y="192">
    <properties>
-    <property name="rewindable" type="bool" value="false"/>
     <property name="type" value="cat"/>
    </properties>
   </object>
+  <object id="243" template="object-templates/knight.tx" type="enemy" x="320" y="336">
+   <properties>
+    <property name="rewindable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="247" template="object-templates/IdleEnemy.tx" x="160" y="336"/>
  </objectgroup>
  <objectgroup id="13" name="Items">
   <object id="151" template="object-templates/page.tx" type="page" x="80" y="336"/>
-  <object id="302" template="object-templates/key.tx" type="powerup" x="35" y="253.5"/>
   <object id="199" template="object-templates/page.tx" x="944" y="336">
    <properties>
     <property name="ID" type="int" value="9"/>
@@ -314,17 +314,13 @@
   <object id="232" template="object-templates/ritalin.tx" type="powerup" x="112" y="336"/>
   <object id="237" template="object-templates/gleiter.tx" type="powerup" x="912" y="80"/>
   <object id="301" template="object-templates/hammer.tx" type="powerup" x="672" y="336"/>
-  <object id="305" template="object-templates/key.tx" type="powerup" x="273.75" y="285"/>
- </objectgroup>
- <objectgroup id="21" name="Doors">
-  <object id="306" template="object-templates/door.tx" x="320" y="304"/>
  </objectgroup>
  <objectgroup id="15" name="MovingPlatform">
   <object id="254" template="object-templates/GoalPosition.tx" x="717" y="70"/>
   <object id="255" template="object-templates/movingPlatformType2.tx" x="153.5" y="275">
    <properties>
     <property name="goalPosition" type="object" value="256"/>
-    <property name="rewindable" type="bool" value="false"/>
+    <property name="type" value="GLEITER"/>
    </properties>
   </object>
   <object id="256" template="object-templates/GoalPosition.tx" x="176" y="144"/>

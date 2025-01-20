@@ -113,12 +113,12 @@
  </tile>
  <tile id="61">
   <animation>
-   <frame tileid="61" duration="100"/>
-   <frame tileid="63" duration="100"/>
-   <frame tileid="65" duration="100"/>
-   <frame tileid="67" duration="100"/>
-   <frame tileid="69" duration="100"/>
-   <frame tileid="71" duration="100"/>
+   <frame tileid="61" duration="125"/>
+   <frame tileid="63" duration="125"/>
+   <frame tileid="65" duration="125"/>
+   <frame tileid="67" duration="125"/>
+   <frame tileid="69" duration="125"/>
+   <frame tileid="71" duration="125"/>
   </animation>
  </tile>
 </tileset>

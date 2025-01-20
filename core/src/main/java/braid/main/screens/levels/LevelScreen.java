@@ -90,6 +90,7 @@ public abstract class LevelScreen implements Screen {
 
     // Music
     private final Music music;
+    private final Music victoryMusic;
 
     // Subtitles
     private final SubtitleManager subtitleManager;
@@ -163,6 +164,10 @@ public abstract class LevelScreen implements Screen {
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.setPosition(0);
         music.play();
+
+        victoryMusic = Audiomanager.audiomanager.get("audio/music/victory-fanfare.ogg", Music.class);
+        victoryMusic.setLooping(false);
+        victoryMusic.setPosition(1);
 
 
         rewindObjects = new Array<>();
@@ -528,6 +533,8 @@ public abstract class LevelScreen implements Screen {
                 (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT")) ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ENTER))) {
 
+                music.stop();
+                victoryMusic.stop();
                 game.setScreen(new Overworld(game));
             }
         }
@@ -540,6 +547,7 @@ public abstract class LevelScreen implements Screen {
             Savemanager.saveGame(false);
         }
         music.stop();
+        victoryMusic.play();
         finished = true;
         gameIsPaused = true;
         activeShader = pauseShader;
