@@ -9,10 +9,10 @@ import braid.main.objects.Enemy;
 public class SchlossBurgLevel extends LevelScreen {
 
     public SchlossBurgLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/Schlossburg.tmx", "packedimages/sprites.atlas", "audio/music/SchlossBurgSoundtrack.mp3");
         levelName = "SCHLOSSBURG";
 
-        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(1350/Braid.PPM, 450/Braid.PPM);
     }
 
     @Override

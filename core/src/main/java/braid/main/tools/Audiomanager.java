@@ -49,6 +49,14 @@ public class Audiomanager {
             */
         audiomanager.load("audio/music/ZooSoundtrack.mp3", Music.class);
         audiomanager.finishLoading();
+
+        /*
+        licence: menuSound.mp3
+               Author: OSFX
+                https://freesound.org
+         */
+        audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
+        audiomanager.finishLoading();
     }
 
 }

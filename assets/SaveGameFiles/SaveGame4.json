@@ -1,0 +1,242 @@
+{
+SaveGameKEY: 4
+SaveGameName: neu
+UnlockedLevels: {
+	class: java.util.HashMap
+	UNI: true
+	SCHLOSSBURG: false
+	ARKADEN: true
+	WEGZURUNI: false
+	BAYER: false
+	OBERBARMEN: false
+	ZOO: false
+	FREUDENBERG: true
+	HBF: true
+	LUISENVIERTEL: true
+}
+lastLevel: LUISENVIERTEL
+Playtime: 85045
+Collectables: {
+	class: java.util.HashMap
+	UNI: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	SCHLOSSBURG: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	ARKADEN: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	WEGZURUNI: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	BAYER: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	OBERBARMEN: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	ZOO: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	FREUDENBERG: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	HBF: [
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+	LUISENVIERTEL: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
+		}
+	]
+}
+}

@@ -13,6 +13,7 @@ audio/music/background_music.mp3
 audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
 maps/UniLevel.tmx
+maps/Schlossburg.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
@@ -43,6 +44,18 @@ maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
+maps/tilesets/Schlossburg/Castle 1.tsx
+maps/tilesets/Schlossburg/Castle 2.tsx
+maps/tilesets/Schlossburg/Castle 3.tsx
+maps/tilesets/Schlossburg/Castle 4.tsx
+maps/tilesets/Schlossburg/Castle 5.png
+maps/tilesets/Schlossburg/Castle 5.tsx
+maps/tilesets/Schlossburg/Castle4.aseprite
+maps/tilesets/Schlossburg/Castle4.png
+maps/tilesets/Schlossburg/Medieval_Castle_TileSet_16x16.png
+maps/tilesets/Schlossburg/Resources/Whimsy_Hallow_Dungeon_Asset_Pack_V1.62.png
+maps/tilesets/Schlossburg/Tilesetv3.png
+maps/tilesets/Schlossburg/castle-tileset.png
 maps/tilesets/Uni/bgs-shadow.tsx
 maps/tilesets/Uni/bgs.tsx
 maps/tilesets/Uni/buildings-uni.tsx
