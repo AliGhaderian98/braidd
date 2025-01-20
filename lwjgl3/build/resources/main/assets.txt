@@ -93,7 +93,11 @@ maps/tilesets/WEGZURUNI/Future/Images/futureschwebebahn.png
 maps/tilesets/WEGZURUNI/Future/maps/Future.tmx
 maps/tilesets/WEGZURUNI/Future/tilesets/FutureSchwebebahn.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/IntelliJ.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/blackScreen.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/cyberpunk.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/renderWorldCode.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/spawnItemsCode.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/spawnMPCode.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/vaporwave.tsx
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_01.png
 maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_02.png
@@ -268,6 +272,7 @@ maps/tilesets/WEGZURUNI/Present/Pictures/AnimationSheet_Character (1).png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundhalf.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.aseprite
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddlebad.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundreal.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.aseprite
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.png
@@ -309,6 +314,7 @@ maps/tilesets/WEGZURUNI/Present/tilesets/backgroundmiddle.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/hoodedone.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/wegzurunibad.tsx
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/License.txt
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.aseprite
 maps/tilesets/WEGZURUNI/QuantenEbene/Images/Mountainhoch.png

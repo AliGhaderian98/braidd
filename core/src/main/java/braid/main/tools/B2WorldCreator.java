@@ -169,9 +169,11 @@ public class B2WorldCreator {
         }
     }
 
-    private void spawnMovingPlatform() {
+    public void spawnMovingPlatform() {
         MapLayer movingPlatformLayer = map.getLayers().get("MovingPlatform");
         TextureRegion movingPlatformRegion = screen.getAtlas().findRegion("plattform");
+
+        if (movingPlatformLayer == null || !movingPlatformLayer.isVisible()) return;
 
         for (MapObject object : movingPlatformLayer.getObjects()) {
             if (Objects.equals(object.getName(), "MovingPlatform")) {
@@ -268,10 +270,9 @@ public class B2WorldCreator {
         }
     }
 
-    private void spawnItems() {
-        if (map.getLayers().get("Items") == null) return;
-
+    public void spawnItems() {
         MapLayer itemsLayer = map.getLayers().get("Items");
+        if (itemsLayer == null || !itemsLayer.isVisible()) return;
 
         for (MapObject object : itemsLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();

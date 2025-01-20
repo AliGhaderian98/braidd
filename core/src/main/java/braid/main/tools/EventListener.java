@@ -1,19 +1,18 @@
 package braid.main.tools;
 
 import braid.main.Braid;
+import braid.main.objects.Enemy;
 import braid.main.screens.levels.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-
-import java.util.Objects;
+import com.badlogic.gdx.utils.Array;
 
 public class EventListener {
-    private Braid game;
-    private LevelScreen screen;
-    private TiledMap map;
+    private final Braid game;
+    private final LevelScreen screen;
+    private final TiledMap map;
+
+    private Array<Enemy> enemies;
 
     //Checks
     private boolean check1, check2;
@@ -23,6 +22,7 @@ public class EventListener {
         this.game = game;
         this.screen = screen;
         this.map = map;
+
     }
 
     public void hasPressedButton(boolean pressed) {
@@ -33,10 +33,8 @@ public class EventListener {
     }
 
     public void hasPressedAllButtons() {
-        System.out.println("gotSignal");
         repairButtonCount--;
-        System.out.println("Count: "+ repairButtonCount);
-        if(repairButtonCount == 0) {
+        if (repairButtonCount == 0) {
             this.check1 = true;
             if (canCompleteMap()) {
                 loadMap();
@@ -49,7 +47,28 @@ public class EventListener {
 
         if (canCompleteMap()) {
             loadMap();
+        } else if (allEnemiesDead()) {
+            this.check1 = true;
+            System.out.println(check1 + ":1 2:" + check2);
+
+            loadMap();
         }
+    }
+
+    public boolean allEnemiesDead() {
+        System.out.println("allEnemiesDead");
+
+        this.enemies = screen.getEnemies();
+
+        if (enemies.isEmpty()) return false;
+        for (Enemy enemy : enemies) {
+            if (!enemy.isDead()) {
+                System.out.println("false");
+                return false;
+            }
+        }
+        System.out.println("true");
+        return true;
     }
 
     private boolean canCompleteMap() {
@@ -60,21 +79,34 @@ public class EventListener {
         repairButtonCount++;
     }
 
+    public void spawnStuff(String objectName) {
+        switch (objectName) {
+            case "spawnItems" -> {
+                map.getLayers().get("Items").setVisible(true);
+                screen.getB2WC().spawnItems();
+            }
+            case "spawnMovingplatform" -> {
+                map.getLayers().get("MovingPlatform").setVisible(true);
+                map.getLayers().get("MovingPlatformLayer").setVisible(true);
+                screen.getB2WC().spawnMovingPlatform();
+            }
+        }
+    }
+
     public void loadMap() {
-        System.out.println("loadMap");
         if (screen instanceof WegZurUniLevel && canCompleteMap()) {
 
             Screen newScreen = new MountainMap(game, 1);
             game.setScreen(newScreen);
-        } else if (screen instanceof MountainMap && canCompleteMap() ) {
-            if(map.getLayers().get("PresentDoor" ) == null) {
+        } else if (screen instanceof MountainMap && canCompleteMap()) {
+            if (map.getLayers().get("PresentDoor") == null) {
                 Screen newScreen = new PastMap(game);
                 game.setScreen(newScreen);
-            } else if (map.getLayers().get("FutureDoor" ) == null) {
+            } else if (map.getLayers().get("FutureDoor") == null) {
                 Screen newScreen = new PresentMap(game);
                 game.setScreen(newScreen);
             } else if (map.getLayers().get("FutureDoor") != null) {
-                Screen newScreen = new UniLevel(game);
+                Screen newScreen = new FutureMap(game);
                 game.setScreen(newScreen);
             }
 
@@ -82,10 +114,10 @@ public class EventListener {
 
             Screen newScreen = new MountainMap(game, 2);
             game.setScreen(newScreen);
-        } // else if (screen instanceof FutureMap && canCompleteMap()) {
-//            Screen newScreen = new Finale(game);
-//            game.setScreen(newScreen);
-//        }
+        } else if (screen instanceof PresentMap && canCompleteMap()) {
+            Screen newScreen = new MountainMap(game, 3);
+            game.setScreen(newScreen);
+        }
     }
 }
 

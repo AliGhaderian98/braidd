@@ -6,7 +6,6 @@ import braid.main.Items.Item;
 import braid.main.enemies.Knight;
 import braid.main.objects.*;
 import braid.main.enemies.*;
-import braid.main.Items.ItemDef;
 import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.FinishHUD;
@@ -34,7 +33,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -76,6 +74,7 @@ public abstract class LevelScreen implements Screen {
     // Box2D variables
     protected final World world;
     protected final Box2DDebugRenderer b2dr;
+    protected final B2WorldCreator b2WC;
     private final EventListener event;
 
 
@@ -162,7 +161,7 @@ public abstract class LevelScreen implements Screen {
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map, this);
+        b2WC = new B2WorldCreator(world, map, this);
 
 
         // Setup Music
@@ -617,7 +616,11 @@ public abstract class LevelScreen implements Screen {
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }
 
+    public B2WorldCreator getB2WC () { return b2WC; }
+
     public String getLevelName() { return levelName; }
+
+    public Array<Enemy> getEnemies() { return enemies; }
 
     private void setLevelName() {
         if (this instanceof ArkadenLevel)
@@ -646,8 +649,8 @@ public abstract class LevelScreen implements Screen {
             levelName = "WEGZURUNI";
         else if (this instanceof PresentMap)
             levelName = "WEGZURUNI";
-//        else if (this instanceof FutureMap)
-//            levelName = "Future";
+        else if (this instanceof FutureMap)
+            levelName = "Future";
 //        else if (this instanceof FinaleMap)
 //            levelName = "Finale"
     }

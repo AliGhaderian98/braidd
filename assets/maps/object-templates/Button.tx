@@ -2,8 +2,8 @@
 <template>
  <object name="Button" width="16" height="16">
   <properties>
-   <property name="actionType" value="repairButton"/>
-   <property name="targetName" value=""/>
+   <property name="actionType" value="toggleLayer"/>
+   <property name="targetName" value="spawnItems"/>
   </properties>
  </object>
 </template>

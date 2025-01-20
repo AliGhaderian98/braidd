@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="30">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="36">
  <tileset firstgid="1" source="../tilesets/WegzurUni.tsx"/>
  <tileset firstgid="9" source="../tilesets/GlitchedScreen.tsx"/>
  <tileset firstgid="28" source="../tilesets/WegzurUniBack.tsx"/>
@@ -179,9 +179,9 @@
    </properties>
   </object>
   <object id="17" name="npcTrigger" x="536" y="-18" width="58" height="538"/>
-  <object id="27" name="npcTrigger" x="323" y="216" width="19" height="197"/>
   <object id="28" template="../../../../object-templates/NPC.tx" x="729" y="339">
    <properties>
+    <property name="Type" value="TalkingNPC"/>
     <property name="text" value="Change traffic light? (Interact)"/>
    </properties>
   </object>
@@ -189,6 +189,48 @@
    <properties>
     <property name="Name" value="People"/>
     <property name="text" value="WHY DID HE CROSS ON RED?!?!?!"/>
+   </properties>
+  </object>
+  <object id="30" template="../../../../object-templates/NPC.tx" x="503.5" y="336.5">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="NOOOOO"/>
+   </properties>
+  </object>
+  <object id="31" template="../../../../object-templates/NPC.tx" x="523" y="337.5">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="*speechless*"/>
+   </properties>
+  </object>
+  <object id="32" template="../../../../object-templates/NPC.tx" x="480.5" y="337">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="WHAT"/>
+   </properties>
+  </object>
+  <object id="33" template="../../../../object-templates/NPC.tx" x="543.5" y="336">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="THE BUS DIDNT STOP?!?!"/>
+   </properties>
+  </object>
+  <object id="34" template="../../../../object-templates/NPC.tx" x="561.5" y="338.5">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="CALL 911!!"/>
+   </properties>
+  </object>
+  <object id="35" template="../../../../object-templates/NPC.tx" x="578.5" y="338">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="HE SHOULD LOSE HIS LICENSE!!!!"/>
    </properties>
   </object>
  </objectgroup>

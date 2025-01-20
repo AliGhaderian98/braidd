@@ -43,9 +43,12 @@ public class Button extends InteractiveGameObject {
     private void performAction(){
         if ("toggleLayer".equals(actionType)) {
             MapLayer layer = map.getLayers().get(targetName);
+            System.out.println(targetName + " " + actionType);
             if(layer != null){
                 layer.setVisible(!layer.isVisible());
             }
+            this.event.spawnStuff(targetName);
+            this.event.hasPressedButton(this.buttonState == ButtonState.ON);
         } else if ("toggleNPCTrigger".equals(actionType)) {
             this.event.hasPressedButton(this.buttonState == ButtonState.ON);
         } else if ("repairButton".equals(actionType)) {
