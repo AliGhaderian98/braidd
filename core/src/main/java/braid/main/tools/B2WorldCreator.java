@@ -124,6 +124,8 @@ public class B2WorldCreator {
 
     private void spawnWalls() {
         MapLayer wallLayer = map.getLayers().get("Walls");
+        if (wallLayer == null) return;
+
         for (MapObject object : wallLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             float rotation = 0;
