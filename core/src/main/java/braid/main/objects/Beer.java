@@ -28,7 +28,7 @@ public class Beer {
 
         Vector2 playerPosition = new Vector2(player.b2body.getPosition().x* Braid.PPM, player.b2body.getPosition().y * Braid.PPM);
         Vector2 startPosition = new Vector2(x, y);
-        velocity = playerPosition.sub(startPosition).nor().scl(9f);
+        velocity = playerPosition.sub(startPosition).nor().scl(10f);
 
         defineBody();
 
@@ -88,7 +88,6 @@ public class Beer {
             b2body.getWorld().destroyBody(b2body);
             b2body = null;
             destroyed = true;
-            System.out.println("DESTROYED");
         }
     }
 }

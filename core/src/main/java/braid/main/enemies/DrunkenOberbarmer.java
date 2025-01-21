@@ -21,7 +21,7 @@ import java.util.List;
 public class DrunkenOberbarmer extends Enemy implements EnemyAI {
     private int direction = 1;
     private List<Beer> bierflaschen;
-    private float attackCooldown = 2f;
+    private float attackCooldown = 1f;
     private float attackTime = 0f;
     private boolean isInRange = false;
     private final LevelScreen screen;
