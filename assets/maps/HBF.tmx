@@ -113,33 +113,32 @@
  <objectgroup id="21" name="Items">
   <object id="117" template="object-templates/page.tx" x="599" y="105" visible="1">
    <properties>
-    <property name="ID" type="int" value="1"/>
+    <property name="ID" type="int" value="0"/>
    </properties>
   </object>
   <object id="118" template="object-templates/page.tx" x="395" y="58">
    <properties>
-    <property name="ID" type="int" value="2"/>
+    <property name="ID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="119" template="object-templates/page.tx" x="1129" y="340">
+  <object id="119" template="object-templates/page.tx" x="1129" y="340" visible="1">
    <properties>
-    <property name="ID" type="int" value="3"/>
+    <property name="ID" type="int" value="2"/>
    </properties>
   </object>
   <object id="120" template="object-templates/page.tx" x="1239" y="101">
    <properties>
-    <property name="ID" type="int" value="4"/>
+    <property name="ID" type="int" value="3"/>
    </properties>
   </object>
   <object id="150" template="object-templates/page.tx" x="518" y="229">
    <properties>
-    <property name="ID" type="int" value="0"/>
+    <property name="ID" type="int" value="4"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup id="14" name="Brick">
   <object id="137" template="object-templates/gleiter.tx" type="powerup" x="334" y="52"/>
  </objectgroup>
+ <objectgroup id="14" name="Brick"/>
  <objectgroup id="20" name="Enemies">
   <object id="99" template="object-templates/patrollingEnemy.tx" x="418" y="306"/>
   <object id="100" template="object-templates/patrollingEnemy.tx" x="704" y="258"/>
