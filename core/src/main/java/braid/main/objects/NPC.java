@@ -66,7 +66,7 @@ public class NPC extends InteractiveGameObject{
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
-                case "MusicNPC" -> this.event.hasChangedMusic(trigger, name);
+                case "MusicNPC" -> this.event.hasChangedMusic(name);
 
             }
             this.trigger = trigger;
