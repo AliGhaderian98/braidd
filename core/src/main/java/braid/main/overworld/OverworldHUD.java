@@ -29,6 +29,7 @@ public class OverworldHUD implements Disposable {
     private Label pageLabel;
     private Image pageImage;
     private Image finishStar;
+    private Label bestTimeLabel;
 
     private NinePatchDrawable textbox;
     private Table table;
@@ -43,13 +44,14 @@ public class OverworldHUD implements Disposable {
 
         levelNameLabel = new Label(formatLevelName(Savemanager.currentsavegame.lastLevel), LevelFont);
         pageLabel = new Label(String.format("%d/5", countCollectables(Savemanager.currentsavegame.lastLevel)), TextFont);
+        bestTimeLabel = new Label(formatBestTime(Savemanager.currentsavegame.lastLevel), TextFont);
 
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(4);
 
         Table pageTable = new Table();
-        pageTable.add(pageImage).expandX().padRight(90).padTop(70);
         pageTable.add(pageLabel).expandX();
+        pageTable.add(pageImage).expandX().padLeft(30).padTop(70);
 
         finishStar = new Image(atlas.findRegion("star"));
         finishStar.setScale(3);
@@ -71,10 +73,11 @@ public class OverworldHUD implements Disposable {
         subTable.setFillParent(true);
         subTable.padLeft(30).padTop(45).padRight(120);
 
-        subTable.add(levelNameLabel).expandX().align(Align.left);
+        subTable.add(levelNameLabel).expandX().align(Align.left).colspan(2);
         subTable.add(finishStar).align(Align.right).padTop(45);
         subTable.row();
-        subTable.add(pageTable).align(Align.left).padTop(20).padLeft(20).colspan(2);
+        subTable.add(bestTimeLabel).align(Align.left).padTop(20).padLeft(20);
+        subTable.add(pageTable).align(Align.right).padTop(20).padLeft(50);
 
         table.add(subTable);
 
@@ -107,10 +110,31 @@ public class OverworldHUD implements Disposable {
         return counter;
     }
 
+    private String formatBestTime(String levelName) {
+        long savedTime = Savemanager.currentsavegame.BestTimes.get(levelName);
+        String out;
+        if (savedTime > 0L)
+            out = formatTime(savedTime);
+        else
+            out = "--:--:--.--";
+
+        return out;
+    }
+
+    private String formatTime(long time) {
+        long hours = (time / (1000 * 60 * 60)) % 24;
+        long minutes = (time / (1000 * 60)) % 60;
+        long seconds = (time / 1000) % 60;
+        long milliseconds = (time % 1000)/10;
+
+        return String.format("%d:%02d:%02d.%02d", hours, minutes, seconds, milliseconds);
+    }
+
     public void activate(String currentLevel) {
         levelNameLabel.setText(formatLevelName(currentLevel));
         pageLabel.setText(String.format("%d/5", countCollectables(currentLevel)));
         finishStar.setVisible(Savemanager.currentsavegame.FinishedLevels.get(currentLevel));
+        bestTimeLabel.setText(formatBestTime(currentLevel));
 
         table.setVisible(true);
     }

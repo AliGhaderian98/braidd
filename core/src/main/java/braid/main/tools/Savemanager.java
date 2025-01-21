@@ -1,6 +1,7 @@
 package braid.main.tools;
 
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +26,7 @@ public class Savemanager {
         public Map<String, Boolean> FinishedLevels;
         public long Playtime;
         public Map<String, Array<Boolean>> Collectables;
+        public Map<String, Long> BestTimes;
 
         public Savegame() {}
     }
@@ -68,6 +70,11 @@ public class Savemanager {
             }
         }
 
+        currentsavegame.BestTimes = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.BestTimes.put(LevelNodes.get(i), 0L);
+        }
+
         currentsavegame.UnlockedLevels = new HashMap<>();
         for(int i=0; i<10;i++){
             currentsavegame.UnlockedLevels.put(LevelNodes.get(i),false);
@@ -104,6 +111,7 @@ public class Savemanager {
         saveData.lastLevel = currentsavegame.lastLevel;
         saveData.wegZurUniJustUnlocked = currentsavegame.wegZurUniJustUnlocked;
         saveData.FinishedLevels = currentsavegame.FinishedLevels;
+        saveData.BestTimes = currentsavegame.BestTimes;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
         file.writeString(SaveGamesDoc.prettyPrint(saveData),false);
@@ -172,6 +180,8 @@ public class Savemanager {
 
     public static void unlockNextLevel(String currentLevel) {
         currentsavegame.FinishedLevels.put(currentLevel, true);
+        checkForBestTime(currentLevel, LevelHUD.getElapsedTime());
+
         switch (currentLevel) {
             case "UNI" -> currentsavegame.UnlockedLevels.put("FREUDENBERG", true);
             case "FREUDENBERG" -> currentsavegame.UnlockedLevels.put("ARKADEN", true);
@@ -200,6 +210,13 @@ public class Savemanager {
                 currentsavegame.wegZurUniJustUnlocked = true;
             currentsavegame.UnlockedLevels.put("WEGZURUNI", true);
         }
+    }
+
+    private static void checkForBestTime(String levelName, long time) {
+        // only update stored time as best if no best has been recorded or if it is smaller than recorded best
+        long currentBest = currentsavegame.BestTimes.get(levelName);
+        if (currentBest == 0L || currentBest > time)
+            currentsavegame.BestTimes.put(levelName, time);
     }
 
     public static void unlockCollectable(int ID, String level) {
