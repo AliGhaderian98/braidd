@@ -5,7 +5,7 @@ import braid.main.Braid;
 public class FutureMap extends LevelScreen{
 
     public FutureMap(Braid game) {
-        super(game, "maps/tilesets/WEGZURUNI/Future/maps/Future.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/tilesets/WEGZURUNI/Future/maps/Future.tmx", "packedimages/sprites.atlas", "audio/music/WEGZURUNI/FutureMap.mp3");
         levelName = "WEGZURUNI";
 
         player.setPosition(864/Braid.PPM, 576/Braid.PPM);
