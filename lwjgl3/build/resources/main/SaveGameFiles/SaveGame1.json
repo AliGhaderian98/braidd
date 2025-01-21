@@ -4,7 +4,7 @@ SaveGameName: test
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: false
+	SCHLOSSBURG: true
 	ARKADEN: true
 	WEGZURUNI: true
 	BAYER: true
@@ -14,11 +14,11 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: UNI
+lastLevel: FREUDENBERG
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: false
+	SCHLOSSBURG: true
 	ARKADEN: true
 	WEGZURUNI: true
 	BAYER: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 917019
+Playtime: 38550347
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -38,7 +38,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -56,23 +56,23 @@ Collectables: {
 	SCHLOSSBURG: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	ARKADEN: [
@@ -166,23 +166,23 @@ Collectables: {
 	ZOO: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	FREUDENBERG: [
@@ -192,19 +192,19 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	HBF: [

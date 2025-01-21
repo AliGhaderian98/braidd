@@ -10,12 +10,7 @@ import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
-import braid.main.tools.KeyBindings;
-import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
-import braid.main.screens.menus.SavegameMenu;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
@@ -206,9 +201,9 @@ public class WorldContactListener implements ContactListener {
     private void playerFeetWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
-            if (!player.isGrounded()) {
-                player.land();
-            }
+
+            player.onGround(true);
+            player.land();
         }
     }
 
@@ -262,7 +257,7 @@ public class WorldContactListener implements ContactListener {
                 : (MovingPlatform) userDataB.getObject();
 
             player.onMovingPlatform(true);
-            player.setIsGrounded(true);
+            player.land();
             platform.setPlayer(player);
         }
 
@@ -276,9 +271,12 @@ public class WorldContactListener implements ContactListener {
                 : (MovingPlatform) userDataB.getObject();
 
             player.onMovingPlatform(false);
-            player.fall();
             platform.setPlayer(null);
             player.setPlatformVelocity(0);
+
+            if (player.isGrounded() && !player.onGround()) {
+                player.fall();
+            }
         }
     }
 
@@ -332,8 +330,12 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+
+            player.onGround(false);
+
+            if (player.isGrounded() && !player.onMovingPlatform()) {
                 player.fall();
+            }
         }
     }
 

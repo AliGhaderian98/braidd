@@ -13,8 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 
-import java.util.TimerTask;
-
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
  Elemente davon kümmern.
@@ -40,6 +38,7 @@ public class Player extends DynamicGameObject {
     public float stateTimer;
 
     private boolean isGrounded = true;
+    private boolean onGround = true;
     private boolean landingAnimationPlaying = false;
 
     private Timer.Task landingTask;
@@ -258,7 +257,7 @@ public class Player extends DynamicGameObject {
         if (jumpBuffered || b2body.getLinearVelocity().y > 0) {
             jump(1f);
             jumpBuffered = false;
-        } else if(!isGrounded && b2body.getLinearVelocity().y < 0) {
+        } else { //if(!isGrounded && b2body.getLinearVelocity().y < 0) {
             currentState = AnimationState.IDLE;
             isGrounded = true;
             holdingJump = false;
@@ -276,16 +275,19 @@ public class Player extends DynamicGameObject {
     }
 
     public void fall() {
+        isGrounded = false;
+        setCoyoteTime();
+
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 if (currentState != AnimationState.JUMPING && !isGrounded) {
-                    isGrounded = false;
-                    setCoyoteTime();
+                    b2body.setLinearVelocity(b2body.getLinearVelocity().x, 0f);
+                    //setCoyoteTime();
                     currentState = AnimationState.FALLING;
                 }
             }
-        }, 0.01f);
+        }, 0.05f);
 
     }
 
@@ -413,6 +415,9 @@ public class Player extends DynamicGameObject {
     public void setDownGravityFactor(float value) { downGravityFactor = value; }
 
     public float getDownGravityFactor() { return downGravityFactor; }
+
+    public void onGround(boolean value) { onGround = value; }
+    public boolean onGround() { return onGround; }
 
     public void die() {
         screen.setHitShader();
