@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="NPC" type="NPC" width="32" height="32">
+  <properties>
+   <property name="Name" value="TrafficLight"/>
+   <property name="Type" value="DoorNPC"/>
+   <property name="npcTrigger" type="object" value="0"/>
+   <property name="text" value="Seems there are no busses around this time."/>
+  </properties>
+ </object>
+</template>

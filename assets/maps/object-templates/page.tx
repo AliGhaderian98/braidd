@@ -2,7 +2,7 @@
 <template>
  <object name="Page" type="page" width="16" height="16">
   <properties>
-   <property name="ID" type="int" value="0"/>
+   <property name="ID" type="int" value="3"/>
   </properties>
  </object>
 </template>

@@ -78,8 +78,10 @@ public class Player extends DynamicGameObject {
     private boolean newestPowerUp = true;
     private boolean gleiterActive = false;
     private boolean isAtSchalter = false;
+    private boolean isAtButton = false;
     private Schalter collidingSchalter = null;
     private boolean hasKey;
+    private Button collidingButton = null;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit = new Vector2(0,0);
@@ -198,7 +200,7 @@ public class Player extends DynamicGameObject {
         }
 
         // update velocity on moving platform
-        if (isOnMovingPlatform && !moving) {
+        if (isOnMovingPlatform && !moving && !this.getRewindController().isRewinding()) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
 
@@ -399,7 +401,16 @@ public class Player extends DynamicGameObject {
 
     public boolean isAtSchalter() { return isAtSchalter; }
 
+    public void isAtButton(boolean value, Button button){
+        isAtButton = value;
+        collidingButton = button;
+    }
+
+    public boolean isAtButton() { return isAtButton; }
+
     public Schalter getCollidingSchalter() { return collidingSchalter; }
+
+    public Button getCollidingButton() { return collidingButton; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
 

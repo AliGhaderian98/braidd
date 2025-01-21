@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 150185
+Playtime: 1224366
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -100,7 +100,7 @@ Collectables: {
 	WEGZURUNI: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean

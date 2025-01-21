@@ -28,7 +28,7 @@ public abstract class GameObject extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        rewindController.update();
+        rewindController.update(delta);
     }
 
     public abstract void defineBody();
