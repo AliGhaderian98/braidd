@@ -132,6 +132,8 @@ public class OverworldPlayer extends Actor {
 
                 // force enter the wegZurUni level if it was just unlocked
                 if (Objects.equals(currentNode.getName(), "WEGZURUNI") && Savemanager.currentsavegame.wegZurUniJustUnlocked) {
+                    hud.hide();
+                    hud.changeWegZurUniLabel();
                     overworld.enterLevel(currentNode.getName());
                     // reset flag that this level was just unlocked to false after starting level for the first time
                     if (Savemanager.currentsavegame.wegZurUniJustUnlocked)

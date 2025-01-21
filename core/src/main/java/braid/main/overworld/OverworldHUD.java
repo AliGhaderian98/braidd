@@ -34,17 +34,21 @@ public class OverworldHUD implements Disposable {
     private NinePatchDrawable textbox;
     private Table table;
 
+    private Label wegZurUniHintLabel;
+    private Table wegZurUniHintTable;
+
 
     public OverworldHUD(TextureAtlas atlas) {
         viewport = new FitViewport(Braid.V_WIDTH/2f, Braid.V_HEIGHT/2f, new OrthographicCamera());
         stage = new Stage(viewport);
 
-        Label.LabelStyle LevelFont = new Label.LabelStyle(TextFontManager.getBoldPixelFont(35), Color.BLACK);
-        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.getBoldPixelFont(30), Color.BLACK);
+        Label.LabelStyle LevelNameFont = new Label.LabelStyle(TextFontManager.getBoldPixelFont(35), Color.BLACK);
+        Label.LabelStyle BoldPixelFont = new Label.LabelStyle(TextFontManager.getBoldPixelFont(30), Color.BLACK);
+        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.getPixelFont(70), Color.BLACK);
 
-        levelNameLabel = new Label(formatLevelName(Savemanager.currentsavegame.lastLevel), LevelFont);
-        pageLabel = new Label(String.format("%d/5", countCollectables(Savemanager.currentsavegame.lastLevel)), TextFont);
-        bestTimeLabel = new Label(formatBestTime(Savemanager.currentsavegame.lastLevel), TextFont);
+        levelNameLabel = new Label(formatLevelName(Savemanager.currentsavegame.lastLevel), LevelNameFont);
+        pageLabel = new Label(String.format("%d/5", countCollectables(Savemanager.currentsavegame.lastLevel)), BoldPixelFont);
+        bestTimeLabel = new Label(formatBestTime(Savemanager.currentsavegame.lastLevel), BoldPixelFont);
 
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(4);
@@ -81,7 +85,22 @@ public class OverworldHUD implements Disposable {
 
         table.add(subTable);
 
+        wegZurUniHintLabel = new Label("Ich glaube jetzt\nwar ich überall...\nVielleicht sollte\nich zurück zur Uni.", TextFont);
+
+        wegZurUniHintTable = new Table();
+        wegZurUniHintTable.setBackground(textbox);
+
+        wegZurUniHintTable.top().right();
+        wegZurUniHintTable.setSize((Braid.V_WIDTH / 4f)*0.8f - padding * 2,
+            (Braid.V_HEIGHT / 4f)*1.05f - padding*2);
+        wegZurUniHintTable.setPosition(Braid.V_WIDTH/2f - wegZurUniHintTable.getWidth()-padding/2,
+            Braid.V_HEIGHT/2f - wegZurUniHintTable.getHeight()-padding/2);
+
+        wegZurUniHintTable.add(wegZurUniHintLabel).pad(20);
+        wegZurUniHintTable.setVisible(Savemanager.currentsavegame.wegZurUniJustUnlocked);
+
         stage.addActor(table);
+        stage.addActor(wegZurUniHintTable);
     }
 
     private String formatLevelName(String levelName) {
@@ -137,6 +156,10 @@ public class OverworldHUD implements Disposable {
         bestTimeLabel.setText(formatBestTime(currentLevel));
 
         table.setVisible(true);
+    }
+
+    public void changeWegZurUniLabel() {
+        wegZurUniHintLabel.setText("Was passiert?!");
     }
 
     public void draw() {
