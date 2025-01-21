@@ -334,6 +334,7 @@ public class WorldContactListener implements ContactListener {
 
             if (player.isGrounded() && !player.onMovingPlatform()) {
                 player.fall();
+            }
         }
     }
 

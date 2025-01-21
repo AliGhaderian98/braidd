@@ -13,6 +13,7 @@ audio/music/lofi-loop.ogg
 audio/music/victory-fanfare.ogg
 audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
+maps/HBF.tmx
 maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
@@ -25,6 +26,7 @@ maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
 maps/object-templates/TutorialSign.tx
 maps/object-templates/door.tx
+maps/object-templates/elevatorq.tsx
 maps/object-templates/gleiter.tx
 maps/object-templates/hammer.tx
 maps/object-templates/key.tx
@@ -43,6 +45,31 @@ maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/tilesets/HBF.tmx
+maps/tilesets/HBF/Dungeon Tile Set.png
+maps/tilesets/HBF/Dungeon Tile Set.tsx
+maps/tilesets/HBF/Male Demon skin.png
+maps/tilesets/HBF/Male Demon skin.tsx
+maps/tilesets/HBF/TX Village Props.png
+maps/tilesets/HBF/TX Village Props.tsx
+maps/tilesets/HBF/Tiles.png
+maps/tilesets/HBF/[removal.ai]_d6bd6fb4-ce3f-4d40-a801-a9a0d7280230-elevatorq.png
+maps/tilesets/HBF/a7b13e8061a7d06c0a2e914ebffd01da66ad2604.jpg
+maps/tilesets/HBF/four-seasons-tileset.png
+maps/tilesets/HBF/four-seasons-tileset.tsx
+maps/tilesets/HBF/hbbf.png
+maps/tilesets/HBF/hbbf.tsx
+maps/tilesets/HBF/hbf12.png
+maps/tilesets/HBF/hbf12.tsx
+maps/tilesets/HBF/op.jpeg
+maps/tilesets/HBF/op.tsx
+maps/tilesets/HBF/qw.png
+maps/tilesets/HBF/qw.tsx
+maps/tilesets/HBF/sheet.png
+maps/tilesets/HBF/sheet.tsx
+maps/tilesets/HBF/sky.tsx
+maps/tilesets/HBF/sprites.png
+maps/tilesets/HBF/sprites.tsx
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
 maps/tilesets/Schlossburg/Castle 1.tsx
@@ -195,6 +222,14 @@ maps/tilesets/prop-sheet.tsx
 maps/tilesets/sheet.tsx
 maps/tilesets/sky.tsx
 maps/wintermap.tmx
+packedimages/Dungeon Tile Set.png
+packedimages/Male Demon skin.png
+packedimages/TX Village Props.png
+packedimages/Tiles.png
+packedimages/[removal.ai]_d6bd6fb4-ce3f-4d40-a801-a9a0d7280230-elevatorq.png
+packedimages/four-seasons-tileset.png
+packedimages/hbf12.png
+packedimages/sheet.png
 packedimages/sprites.atlas
 packedimages/sprites.png
 shaders/crt-rewind.frag
