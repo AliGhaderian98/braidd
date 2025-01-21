@@ -65,19 +65,14 @@ public class NPC extends InteractiveGameObject{
             switch (type) {
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
-                case "MovingNPC" -> move();
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
+                case "MusicNPC" -> this.event.hasChangedMusic(trigger, name);
 
             }
             this.trigger = trigger;
         }
     }
 
-    public void move() {
-        float speed = 3f;
-        this.setPosition(getX() + speed, getY() + speed);
-
-    }
     public void setShowing(boolean showing) {
         subtitle.setShowing(showing);
     }

@@ -154,35 +154,35 @@ Collectables: {
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 		{
-			class: java.lang.Boolean,
+			class: java.lang.Boolean
 			value: false
 		}
 	]

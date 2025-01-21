@@ -4,6 +4,7 @@ import braid.main.Braid;
 import braid.main.objects.Enemy;
 import braid.main.screens.levels.*;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.Array;
 
@@ -53,6 +54,10 @@ public class EventListener {
 
             loadMap();
         }
+    }
+
+    public void hasChangedMusic(String musicName) {
+        Audiomanager.audiomanager.load("audio/music/" + musicName + ".mp3", Music.class);
     }
 
     public boolean allEnemiesDead() {
