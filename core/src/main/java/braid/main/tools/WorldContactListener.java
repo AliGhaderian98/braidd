@@ -260,7 +260,6 @@ public class WorldContactListener implements ContactListener {
             player.land();
             platform.setPlayer(player);
         }
-
     }
 
     private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
@@ -335,15 +334,15 @@ public class WorldContactListener implements ContactListener {
 
             if (player.isGrounded() && !player.onMovingPlatform()) {
                 player.fall();
-            }
         }
     }
 
     private void contactEndedPlayerWithBrick(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+            if (player.isGrounded()) {
                 player.fall();
+            }
         }
     }
 
