@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static braid.main.Items.PowerUp.TypeOfPowerUp.*;
@@ -51,8 +52,10 @@ public class B2WorldCreator {
         spawnEnd();
         spawnEnemies();
         spawnMovingPlatform();
+        spawnButtons();
         spawnItems();
         spawnSigns();
+        spawnNPCs();
         spawnDoors();
     }
 
@@ -68,6 +71,33 @@ public class B2WorldCreator {
                         (String) object.getProperties().get("key"));
                 else
                     new Sign(world, rect, screen.getSubtitleManager(), (String) object.getProperties().get("Text"));
+            }
+        }
+    }
+
+    private void spawnNPCs() {
+        MapLayer npcLayer = map.getLayers().get("NPCs");
+        if (npcLayer != null) {
+            for (MapObject object : npcLayer.getObjects()) {
+                if (Objects.equals(object.getName(), "NPC")) {
+                    Rectangle npcBoundary = ((RectangleMapObject) object).getRectangle();
+
+                    Rectangle npcTrigger = null;
+                    Object npcTriggerObject = object.getProperties().get("npcTrigger");
+                    if (npcTriggerObject instanceof RectangleMapObject) {
+                        npcTrigger = ((RectangleMapObject) npcTriggerObject).getRectangle();
+                    }
+                    if(npcTrigger == null) {
+                        npcTrigger = ((RectangleMapObject) object).getRectangle();
+                    }
+
+                    String text = (String) object.getProperties().get("text");
+                    String type = (String) object.getProperties().get("Type");
+                    String spriteName = (String) object.getProperties().get("Name");
+
+                    screen.spawnNPC(type, npcBoundary, npcTrigger, text, spriteName);
+                }
+
             }
         }
     }
@@ -124,10 +154,11 @@ public class B2WorldCreator {
     private void spawnBricks() {
         MapLayer brickLayer = map.getLayers().get("Brick");
         TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
-
-        for (MapObject object : brickLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+        if(brickLayer != null) {
+            for (MapObject object : brickLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+            }
         }
     }
 
@@ -154,22 +185,24 @@ public class B2WorldCreator {
         }
     }
 
-    private void spawnMovingPlatform() {
+    public void spawnMovingPlatform() {
         MapLayer movingPlatformLayer = map.getLayers().get("MovingPlatform");
         TextureRegion movingPlatformRegion = screen.getAtlas().findRegion("plattform");
+
+        if (movingPlatformLayer == null || !movingPlatformLayer.isVisible()) return;
 
         for (MapObject object : movingPlatformLayer.getObjects()) {
             if (Objects.equals(object.getName(), "MovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
 
-
+                // create a new range type moving platform
                 if (object.getProperties().get("rangeX") != null) {
                     float rangeX = (float) object.getProperties().get("rangeX");
                     screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX,
                         (boolean) object.getProperties().get("rewindable")));
 
-
+                // create a new goal type moving platform
                 } else {
                     RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
                     float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
@@ -179,7 +212,7 @@ public class B2WorldCreator {
                         speed, (boolean) object.getProperties().get("rewindable")));
                 }
 
-
+            // create moving platforms operated by a switch
             } else if (Objects.equals(object.getName(), "SchalterMovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
@@ -199,6 +232,20 @@ public class B2WorldCreator {
 
     }
 
+    private void spawnButtons() {
+        MapLayer buttonLayer = map.getLayers().get("Buttons");
+        if (buttonLayer != null){
+            for(MapObject object : buttonLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+                Rectangle boundary = ((RectangleMapObject) object).getRectangle() ;
+                String actionType = (String) object.getProperties().get("actionType");
+                String targetName = (String) object.getProperties().get("targetName");
+                screen.spawnButton(boundary, actionType, targetName);
+            }
+        }
+    }
+
     private void spawnEnemies() {
         if (map.getLayers().get("Enemies") == null) return;
 
@@ -207,14 +254,14 @@ public class B2WorldCreator {
         for (MapObject object : enemyLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-
+            // Position of the enemy
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
-
+            // Type of the enemy
             String type = object.getName();
 
-
+            // Spawning enemy
             if ("MadScientist".equals(type)) {
                 screen.spawnEnemy("MadScientist", x, y,
                     (boolean) object.getProperties().get("rewindable"),
@@ -239,22 +286,22 @@ public class B2WorldCreator {
         }
     }
 
-    private void spawnItems() {
-        if (map.getLayers().get("Items") == null) return;
-
+    public void spawnItems() {
         MapLayer itemsLayer = map.getLayers().get("Items");
+        if (itemsLayer == null || !itemsLayer.isVisible()) return;
 
         for (MapObject object : itemsLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            // Position of the Item
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
 
-
+            // Type of the Item
             String type = (String) object.getName();
 
-
+            // Spawning Item
             if ("Page".equals(type)) {
                 Array<Boolean> savedCollectables = Savemanager.currentsavegame.Collectables.get(screen.getLevelName());
                 int pageID = (Integer) object.getProperties().get("ID");

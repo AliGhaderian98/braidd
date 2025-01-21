@@ -18,6 +18,9 @@ public class Audiomanager {
                 Music promoted by https://onsound.eu/
          */
         audiomanager.load("audio/music/background_music.mp3", Music.class);
+        audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI2.mp3", Music.class);
+        audiomanager.load("audio/music/WEGZURUNI/FutureMap2.mp3", Music.class);
+
 
         /*
         licence: UniLevelMusic.ogg

@@ -49,6 +49,7 @@ public class Subtitle {
     public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, BitmapFont font) {
         if (!isShowing) return;
 
+
         // Use GlyphLayout to calculate text dimensions
         GlyphLayout layout = new GlyphLayout();
         layout.setText(font, fullText, Color.BLACK, wrapWidth, Align.left, true);

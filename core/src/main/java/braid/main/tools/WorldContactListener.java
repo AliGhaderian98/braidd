@@ -15,6 +15,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 
+import java.util.Objects;
+
 public class WorldContactListener implements ContactListener {
     private final Player player;
     private Braid game;
@@ -48,6 +50,8 @@ public class WorldContactListener implements ContactListener {
                 playerWithKnightAttack(userDataA, userDataB);
                 playerWithSign(userDataA, userDataB);
                 playerBodyWithDoor(userDataA, userDataB);
+                playerWithButton(userDataA, userDataB);
+                playerWithNPC(userDataA, userDataB);
             }
 
             if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
@@ -80,6 +84,8 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithKnightAttack(userDataA, userDataB);
                 playerWithSignEnds(userDataA, userDataB);
                 contactEndedPlayerWithSchalter(userDataA,userDataB);
+                playerWithNPCEnds(userDataA, userDataB);
+                contactEndedPlayerWithButton(userDataA,userDataB);
             }
 
             if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
@@ -111,12 +117,30 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithButton(UserData userDataA, UserData userDataB) {
+        if(userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button)  userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(true, button);
+        }
+    }
+
     private void contactEndedPlayerWithSchalter(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
             Schalter schalter = userDataA.getObject() instanceof Schalter
                 ? (Schalter) userDataA.getObject()
                 : (Schalter) userDataB.getObject();
             player.isAtSchalter(false, null);
+        }
+    }
+
+    private void contactEndedPlayerWithButton(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button) userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(false, null);
         }
     }
 
@@ -165,10 +189,48 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithNPCEnds(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
+            npc.getSubtitle().setCurrentText("");
+            if(npc.getType().equals("FinalNPC") && !player.getRewindController().isRewinding()) {
+                npc.trigger(false);
+            }
+            if (!Objects.equals(npc.getType(), "FinalNPC")) {
+                npc.trigger(false);
+            }
+        } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
+            NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(false);
+        }
+
+    }
+
     private void playerWithSign(UserData userDataA, UserData userDataB) {
         if ((userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
             Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
             sign.setShowing(true);
+        }
+    }
+
+    private void playerWithNPC(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            if (Objects.equals(npc.getType(), "FinalNPC") && player.getRewindController().isRewinding()) {
+                npc.trigger(true);
+            }
+
+            if (!Objects.equals(npc.getType(), "FinalNPC")) {
+                npc.trigger(true);
+            }
+        } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
+            NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(true);
         }
     }
 

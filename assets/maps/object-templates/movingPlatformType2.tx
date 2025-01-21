@@ -4,7 +4,7 @@
   <properties>
    <property name="goalPosition" type="object" value="0"/>
    <property name="rewindable" type="bool" value="true"/>
-   <property name="speed" type="float" value="1"/>
+   <property name="speed" type="float" value="0.1"/>
   </properties>
  </object>
 </template>
