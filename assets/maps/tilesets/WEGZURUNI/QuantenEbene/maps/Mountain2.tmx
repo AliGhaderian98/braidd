@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="36" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="19">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="36" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="20">
  <tileset firstgid="1" source="../tilesets/Mountain.tsx"/>
  <tileset firstgid="2" source="../tilesets/Mountain2.tsx"/>
  <tileset firstgid="3" source="../tilesets/Mounta.tsx"/>
@@ -120,16 +120,24 @@
  <objectgroup id="7" name="End"/>
  <objectgroup id="8" name="Enemies"/>
  <objectgroup id="9" name="NPCs">
-  <object id="5" template="../../../../object-templates/NPC.tx" x="303.963" y="257.595">
+  <object id="5" template="../../../../object-templates/NPC.tx" x="305.748" y="256.405">
    <properties>
-    <property name="text" value="Present"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="You have your chance now!"/>
    </properties>
   </object>
-  <object id="8" template="../../../../object-templates/NPC.tx" x="304.487" y="256.929">
+  <object id="8" template="../../../../object-templates/NPC.tx" x="305.082" y="256.334">
    <properties>
     <property name="Name" value="PresentMap"/>
     <property name="Type" value="DoorNPC"/>
     <property name="text" value="PresentDoor"/>
+   </properties>
+  </object>
+  <object id="19" template="../../../../object-templates/NPC.tx" x="18.5106" y="258.3">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="You had your chance then!"/>
    </properties>
   </object>
  </objectgroup>

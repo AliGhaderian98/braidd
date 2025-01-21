@@ -187,6 +187,8 @@ public class Player extends DynamicGameObject {
         // update velocity on moving platform
         if (isOnMovingPlatform && !moving && !this.getRewindController().isRewinding()) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
+            setIsGrounded(true);
+
         }
 
         if (jumpSpeed < 3f) {

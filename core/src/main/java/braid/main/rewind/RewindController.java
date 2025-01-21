@@ -11,14 +11,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class RewindController {
     private boolean isRewinding = false;
-    private List<State> states = new ArrayList<>();
+    private final List<State> states = new ArrayList<>();
     private float maxRewindTime = 610f;
     private float recordedTime = 0f;
     private float elapsedTime = 0f;
     private Rewindable rewindable;
 
-    public RewindController(Rewindable rewindable){
-        if(rewindable != null) {
+    public RewindController(Rewindable rewindable) {
+        if (rewindable != null) {
             this.rewindable = rewindable;
         }
     }
@@ -29,7 +29,7 @@ public class RewindController {
                 elapsedTime -= dt;
                 recordedTime = Math.max(recordedTime - dt, 0);
                 applyRewind();
-                if(elapsedTime < 0) {
+                if (elapsedTime < 0) {
                     elapsedTime = 1f;
                 }
             }
@@ -45,11 +45,11 @@ public class RewindController {
         }
     }
 
-    public void startRewinding(){
+    public void startRewinding() {
         isRewinding = true;
     }
 
-    public void stopRewinding(){
+    public void stopRewinding() {
         isRewinding = false;
     }
 
@@ -57,33 +57,32 @@ public class RewindController {
         return isRewinding;
     }
 
-    public void recordState(){
-        if (recordedTime >= maxRewindTime){
+    public void recordState() {
+        if (states.isEmpty()) {
+            recordedTime = 0f;
+        }
+
+        if (recordedTime >= maxRewindTime) {
             states.remove(0);
         }
-            states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));
+        states.add(new State(rewindable.getPosition(), rewindable.getVelocity(), rewindable.getStateTimer(), rewindable.getCurrentState()));
     }
 
-    public void applyRewind(){
-        int rewindSpeed = 0;
+    public void applyRewind() {
 
-        if(!states.isEmpty() && rewindable != null) {// NullPointer
-            for(int i = 0; i < rewindSpeed && !states.isEmpty(); i++) {
-                states.remove(states.size() - 1);
-            }
-            if(!states.isEmpty() && rewindable != null) {
-                State rewindState = states.remove(states.size() - 1);
+        if (!states.isEmpty() && rewindable != null) {
+            State rewindState = states.remove(states.size() - 1);
 
-                rewindable.setPosition(rewindState.position());
-                rewindable.setVelocity(rewindState.velocity());
-                rewindable.setStateTimer(rewindState.stateTimer());
-                rewindable.setCurrentState(rewindState.animationState());
-            }
-        } else{
+            rewindable.setPosition(rewindState.position());
+            rewindable.setVelocity(rewindState.velocity());
+            rewindable.setStateTimer(rewindState.stateTimer());
+            rewindable.setCurrentState(rewindState.animationState());
+
+        } else {
             stopRewinding();
         }
-
     }
+
 
     public boolean hasRewindStorage() {
         return !states.isEmpty();

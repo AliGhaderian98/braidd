@@ -34,6 +34,7 @@ public class EventListener {
 
     public void hasPressedAllButtons() {
         repairButtonCount--;
+        System.out.println("ButtonCountAll: " + repairButtonCount );
         if (repairButtonCount == 0) {
             this.check1 = true;
             if (canCompleteMap()) {
@@ -49,15 +50,12 @@ public class EventListener {
             loadMap();
         } else if (allEnemiesDead()) {
             this.check1 = true;
-            System.out.println(check1 + ":1 2:" + check2);
 
             loadMap();
         }
     }
 
     public boolean allEnemiesDead() {
-        System.out.println("allEnemiesDead");
-
         this.enemies = screen.getEnemies();
 
         if (enemies.isEmpty()) return false;
@@ -77,6 +75,8 @@ public class EventListener {
 
     public void addButtonCount() {
         repairButtonCount++;
+        System.out.println("ButtonCountAdd: " + repairButtonCount );
+
     }
 
     public void spawnStuff(String objectName) {
