@@ -8,6 +8,8 @@ SaveGameFiles/SaveGame1.json
 SaveGameFiles/SaveGame2.json
 SaveGameFiles/SaveGame3.json
 SaveGameFiles/SaveGame4.json
+audio/music/WEGZURUNI/FutureMap.m4a
+audio/music/WEGZURUNI/FutureMap2.mp3
 audio/music/WEGZURUNI/WEGZURUNI2.mp3
 audio/music/background_music.mp3
 audio/sound/menuSound.mp3

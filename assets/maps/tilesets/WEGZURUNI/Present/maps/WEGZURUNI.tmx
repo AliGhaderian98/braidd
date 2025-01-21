@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="36">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="37">
  <tileset firstgid="1" source="../tilesets/WegzurUni.tsx"/>
  <tileset firstgid="9" source="../tilesets/GlitchedScreen.tsx"/>
  <tileset firstgid="28" source="../tilesets/WegzurUniBack.tsx"/>
@@ -231,6 +231,12 @@
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
     <property name="text" value="HE SHOULD LOSE HIS LICENSE!!!!"/>
+   </properties>
+  </object>
+  <object id="36" template="../../../../object-templates/NPC.tx" x="186.5" y="331.5" width="117.667" height="38.3333">
+   <properties>
+    <property name="Name" value="WEGZURUNI/FutureMap2.mp3"/>
+    <property name="Type" value="MusicNPC"/>
    </properties>
   </object>
  </objectgroup>

@@ -625,6 +625,7 @@ public abstract class LevelScreen implements Screen {
     public void changeMusic(String musicName) {
         music.stop();
         music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
+        System.out.println(music);
         music.play();
     }
 
