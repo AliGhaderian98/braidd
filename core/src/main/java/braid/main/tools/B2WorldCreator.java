@@ -74,19 +74,21 @@ public class B2WorldCreator {
 
     private void spawnGround() {
         MapLayer groundLayer = map.getLayers().get("Ground");
-        for (MapObject object : groundLayer.getObjects()) {
+        if (groundLayer != null) {
+            for (MapObject object : groundLayer.getObjects()) {
 
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
+                bdef.type = BodyDef.BodyType.StaticBody;
+                bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
 
-            body = world.createBody(bdef);
+                body = world.createBody(bdef);
 
-            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
-            fdef.shape = shape;
-            Fixture groundFixture = body.createFixture(fdef);
-            groundFixture.setUserData(new UserData("Ground", this));
+                shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+                fdef.shape = shape;
+                Fixture groundFixture = body.createFixture(fdef);
+                groundFixture.setUserData(new UserData("Ground", this));
+            }
         }
     }
 
@@ -115,6 +117,7 @@ public class B2WorldCreator {
                     (float) -Math.toRadians(rotation)
                 );
 
+            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
             fdef.shape = shape;
             Fixture wallFixture = body.createFixture(fdef);
             wallFixture.setUserData(new UserData("Wall", this));
@@ -124,10 +127,11 @@ public class B2WorldCreator {
     private void spawnBricks() {
         MapLayer brickLayer = map.getLayers().get("Brick");
         TextureRegion brickRegion = screen.getAtlas().findRegion("brick");
-
-        for (MapObject object : brickLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+        if (brickLayer != null) {
+            for (MapObject object : brickLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                screen.addBrick(new Brick(world, rect, brickRegion, (boolean) object.getProperties().get("rewindable")));
+            }
         }
     }
 
@@ -163,13 +167,13 @@ public class B2WorldCreator {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
 
-
+                // create a new range type moving platform
                 if (object.getProperties().get("rangeX") != null) {
                     float rangeX = (float) object.getProperties().get("rangeX");
                     screen.addMovingPlatform(new MovingPlatform(world, movingPlatformRegion, rect, speed, rangeX,
                         (boolean) object.getProperties().get("rewindable")));
 
-
+                // create a new goal type moving platform
                 } else {
                     RectangleMapObject goal = (RectangleMapObject) object.getProperties().get("goalPosition");
                     float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
@@ -179,7 +183,7 @@ public class B2WorldCreator {
                         speed, (boolean) object.getProperties().get("rewindable")));
                 }
 
-
+            // create moving platforms operated by a switch
             } else if (Objects.equals(object.getName(), "SchalterMovingPlatform")) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 float speed = (float) object.getProperties().get("speed");
@@ -204,37 +208,44 @@ public class B2WorldCreator {
 
         MapLayer enemyLayer = map.getLayers().get("Enemies");
 
-        for (MapObject object : enemyLayer.getObjects()) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        if (enemyLayer != null) {
 
+            for (MapObject object : enemyLayer.getObjects()) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            float x = (rect.getX() + rect.getWidth() / 2);
-            float y = (rect.getY() + rect.getHeight() / 2);
+                // Position of the enemy
+                float x = (rect.getX() + rect.getWidth() / 2);
+                float y = (rect.getY() + rect.getHeight() / 2);
 
+                // Type of the enemy
+                String type = object.getName();
 
-            String type = object.getName();
-
-
-            if ("MadScientist".equals(type)) {
-                screen.spawnEnemy("MadScientist", x, y,
-                    (boolean) object.getProperties().get("rewindable"),
-                    (String) object.getProperties().get("type"));
-            } else if ("PatrollingEnemy".equals(type)) {
-                screen.spawnEnemy("PatrollingEnemy", x, y,
-                    (boolean) object.getProperties().get("rewindable"),
-                    (String) object.getProperties().get("type"));
-            } else if ("UnhingedEnemy".equals(type)) {
-                screen.spawnEnemy("UnhingedEnemy", x, y,
-                    (boolean) object.getProperties().get("rewindable"),
-                    (String) object.getProperties().get("type"));
-            } else if ("Knight".equals(type)) {
-                screen.spawnEnemy("Knight", x, y,
-                    (boolean) object.getProperties().get("rewindable"),
-                    (String) object.getProperties().get("type"));
-            } else if ("IdleEnemy".equals(type)) {
-                screen.spawnEnemy("IdleEnemy", x, y,
-                    (boolean) object.getProperties().get("rewindable"),
-                    (String) object.getProperties().get("type"));
+                // Spawning enemy
+                if ("MadScientist".equals(type)) {
+                    screen.spawnEnemy("MadScientist", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                } else if ("PatrollingEnemy".equals(type)) {
+                    screen.spawnEnemy("PatrollingEnemy", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                } else if ("UnhingedEnemy".equals(type)) {
+                    screen.spawnEnemy("UnhingedEnemy", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                } else if ("Knight".equals(type)) {
+                    screen.spawnEnemy("Knight", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                } else if ("IdleEnemy".equals(type)) {
+                    screen.spawnEnemy("IdleEnemy", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                } else if ("DrunkenOberbarmer".equals(type)) {
+                    screen.spawnEnemy("DrunkenOberbarmer", x, y,
+                        (boolean) object.getProperties().get("rewindable"),
+                        (String) object.getProperties().get("type"));
+                }
             }
         }
     }
@@ -247,14 +258,15 @@ public class B2WorldCreator {
         for (MapObject object : itemsLayer.getObjects()) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            // Position of the Item
             float x = (rect.getX() + rect.getWidth() / 2);
             float y = (rect.getY() + rect.getHeight() / 2);
 
 
-
+            // Type of the Item
             String type = (String) object.getName();
 
-
+            // Spawning Item
             if ("Page".equals(type)) {
                 Array<Boolean> savedCollectables = Savemanager.currentsavegame.Collectables.get(screen.getLevelName());
                 int pageID = (Integer) object.getProperties().get("ID");
