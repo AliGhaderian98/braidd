@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.Item;
+import braid.main.enemies.DrunkenOberbarmer;
 import braid.main.enemies.Knight;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -52,6 +53,8 @@ public class WorldContactListener implements ContactListener {
                 playerBodyWithDoor(userDataA, userDataB);
                 playerWithButton(userDataA, userDataB);
                 playerWithNPC(userDataA, userDataB);
+                playerWithDrunkenGuyRadius(userDataA, userDataB);
+                playerWithBeerBottle(userDataA, userDataB);
             }
 
             if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
@@ -84,6 +87,7 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithKnightAttack(userDataA, userDataB);
                 playerWithSignEnds(userDataA, userDataB);
                 contactEndedPlayerWithSchalter(userDataA,userDataB);
+                contactEndedPlayerWithDrunkenGuyRadius(userDataA, userDataB);
                 playerWithNPCEnds(userDataA, userDataB);
                 contactEndedPlayerWithButton(userDataA,userDataB);
             }
@@ -94,7 +98,6 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithBrick(userDataA, userDataB);
             }
         }
-
         patrollingEnemyOnEdge(userDataA, userDataB);
     }
 
@@ -106,6 +109,19 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
+    }
+    private void contactEndedPlayerWithDrunkenGuyRadius(UserData userDataA, UserData userDataB) {
+        if ("drunkenEnemyRadius".equals(userDataA.getName()) || "drunkenEnemyRadius".equals(userDataB.getName())) {
+            DrunkenOberbarmer oberbarmer = userDataA.getName().equals("drunkenEnemyRadius") ? (DrunkenOberbarmer) userDataA.getObject() : (DrunkenOberbarmer) userDataB.getObject();
+            oberbarmer.isInRange(false);
+        }
+    }
+
+    private void playerWithDrunkenGuyRadius(UserData userDataA, UserData userDataB) {
+        if ("drunkenEnemyRadius".equals(userDataA.getName()) || "drunkenEnemyRadius".equals(userDataB.getName())) {
+            DrunkenOberbarmer oberbarmer = userDataA.getName().equals("drunkenEnemyRadius") ? (DrunkenOberbarmer) userDataA.getObject() : (DrunkenOberbarmer) userDataB.getObject();
+            oberbarmer.isInRange(true);
+        }
     }
 
     private void playerWithSchalter(UserData userDataA, UserData userDataB) {
@@ -251,6 +267,18 @@ public class WorldContactListener implements ContactListener {
 
         }
     }
+
+    private void playerWithBeerBottle(UserData userDataA, UserData userDataB) {
+        Player player = (userDataA.getObject() instanceof Player) ? (Player) userDataA.getObject() : (Player) userDataB.getObject();
+        UserData beerData = (userDataA.getObject() instanceof Beer) ? userDataA : userDataB;
+
+        if (beerData.getObject() instanceof Beer beer) {
+            player.die();
+        }
+
+    }
+
+
 
     private void playerWithItem(UserData userDataA, UserData userDataB) {
         UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;

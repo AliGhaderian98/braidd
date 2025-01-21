@@ -104,19 +104,21 @@ public class B2WorldCreator {
 
     private void spawnGround() {
         MapLayer groundLayer = map.getLayers().get("Ground");
-        for (MapObject object : groundLayer.getObjects()) {
+        if (groundLayer != null) {
+            for (MapObject object : groundLayer.getObjects()) {
 
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
+                bdef.type = BodyDef.BodyType.StaticBody;
+                bdef.position.set((rect.getX() + rect.getWidth() / 2) / Braid.PPM, (rect.getY() + rect.getHeight() / 2) / Braid.PPM);
 
-            body = world.createBody(bdef);
+                body = world.createBody(bdef);
 
-            shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
-            fdef.shape = shape;
-            Fixture groundFixture = body.createFixture(fdef);
-            groundFixture.setUserData(new UserData("Ground", this));
+                shape.setAsBox((rect.getWidth() / 2) / Braid.PPM, (rect.getHeight() / 2) / Braid.PPM);
+                fdef.shape = shape;
+                Fixture groundFixture = body.createFixture(fdef);
+                groundFixture.setUserData(new UserData("Ground", this));
+            }
         }
     }
 
@@ -229,7 +231,6 @@ public class B2WorldCreator {
                      schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
             }
         }
-
     }
 
     private void spawnButtons() {
@@ -280,6 +281,10 @@ public class B2WorldCreator {
                     (String) object.getProperties().get("type"));
             } else if ("IdleEnemy".equals(type)) {
                 screen.spawnEnemy("IdleEnemy", x, y,
+                    (boolean) object.getProperties().get("rewindable"),
+                    (String) object.getProperties().get("type"));
+            } else if ("DrunkenOberbarmer".equals(type)) {
+                screen.spawnEnemy("DrunkenOberbarmer", x, y,
                     (boolean) object.getProperties().get("rewindable"),
                     (String) object.getProperties().get("type"));
             }
