@@ -93,7 +93,7 @@ public abstract class LevelScreen implements Screen {
     public Array<RewindController> rewindObjects;
 
     // Music
-    private final Music music;
+    private Music music;
 
     // Subtitles
     private final SubtitleManager subtitleManager;
@@ -621,6 +621,12 @@ public abstract class LevelScreen implements Screen {
     public String getLevelName() { return levelName; }
 
     public Array<Enemy> getEnemies() { return enemies; }
+
+    public void changeMusic(String musicName) {
+        music.stop();
+        music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
+        music.play();
+    }
 
     private void setLevelName() {
         if (this instanceof ArkadenLevel)

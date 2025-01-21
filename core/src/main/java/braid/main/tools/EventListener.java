@@ -57,7 +57,7 @@ public class EventListener {
     }
 
     public void hasChangedMusic(String musicName) {
-        Audiomanager.audiomanager.load("audio/music/" + musicName + ".mp3", Music.class);
+        screen.changeMusic(musicName);
     }
 
     public boolean allEnemiesDead() {
