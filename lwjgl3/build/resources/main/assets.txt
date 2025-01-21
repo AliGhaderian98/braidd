@@ -7,21 +7,28 @@ MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
 audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.ogg
+audio/music/WEGZURUNI/FutureMap.m4a
+audio/music/WEGZURUNI/FutureMap2.mp3
+audio/music/WEGZURUNI/WEGZURUNI2.mp3
 audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
 audio/music/lofi-loop.ogg
 audio/music/victory-fanfare.ogg
 audio/sound/buttonClick.ogg
 audio/sound/menuSound.mp3
+hs_err_pid20472.log
 maps/HBF.tmx
 maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
 maps/braid-maps.tiled-session
+maps/city.tsx
 maps/object-templates/Brick.tx
+maps/object-templates/Button.tx
 maps/object-templates/GoalPosition.tx
 maps/object-templates/IdleEnemy.tx
+maps/object-templates/NPC.tx
 maps/object-templates/Schalter.tx
 maps/object-templates/SchalterMovingPlatform.tx
 maps/object-templates/TutorialSign.tx
@@ -109,6 +116,282 @@ maps/tilesets/Uni/tile-white-shadow.tsx
 maps/tilesets/Uni/tile-white.tsx
 maps/tilesets/Uni/trees.tsx
 maps/tilesets/Uni/uni-flag.tsx
+maps/tilesets/WEGZURUNI/Future/Future.tmx
+maps/tilesets/WEGZURUNI/Future/Images/BlackScreen/Blackpixel.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Buildings.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Buildings.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Props-01.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Props-01.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Tiles.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Tiles.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Background Props.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Background Props.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Base Color.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Base Color.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Frontal Fog.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Frontal Fog.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Mid Fog.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Background/Mid Fog.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/Background Props.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/Buildings.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/MockUp-01.aseprite
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/MockUp-01.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/Props-01.png
+maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Social/Tiles.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/handleRewind.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/renderWorld.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/spawnGround.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/spawnItems.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/spawnMovingPlatform.png
+maps/tilesets/WEGZURUNI/Future/Images/IntelliJ/spawnWalls.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-1.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-10.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-101.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-11.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-12.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-13.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-14.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-15.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-16.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-17.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-18.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-19.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-2.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-20.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-21.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-3.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-4.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-5.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-6.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-7.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-8.png
+maps/tilesets/WEGZURUNI/Future/Images/Vaporwave/vaporwave-background-9.png
+maps/tilesets/WEGZURUNI/Future/Images/futureschwebebahn.png
+maps/tilesets/WEGZURUNI/Future/maps/Future.tmx
+maps/tilesets/WEGZURUNI/Future/tilesets/Cyberpunkol.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/FloorPov.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/FutureSchwebebahn.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/IntelliJ.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/WallPov.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/blackScreen.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/cyberpunk.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/floorpovgreen.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/renderWorldCode.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/spawnItemsCode.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/spawnMPCode.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/vaporwave.tsx
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_01.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_02.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_03.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_04.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_05.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_06.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_07.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_08.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_09.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_10.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_11.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_12.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_13.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_14.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_15.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_16.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_17.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_18.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_19.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_20.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_21.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_22.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_23.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_24.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_25.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_26.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_27.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_28.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_29.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_30.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_31.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_32.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_33.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_34.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_35.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_36.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_37.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_38.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_39.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_40.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_41.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_42.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_43.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_44.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_45.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_46.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_47.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_48.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_49.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_50.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_51.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_52.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_53.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_54.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_55.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_56.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_57.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_58.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_59.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_60.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_61.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_62.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_63.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tile_64.png
+maps/tilesets/WEGZURUNI/Past/Images/Power-Station-Free-Tileset-Pixel-Art/1 Tiles/Tileset.png
+maps/tilesets/WEGZURUNI/Past/Images/Trap.png
+maps/tilesets/WEGZURUNI/Past/Images/darkerorange.png
+maps/tilesets/WEGZURUNI/Past/Images/scaffoldingtileset.png
+maps/tilesets/WEGZURUNI/Past/Images/schwebebahn.aseprite
+maps/tilesets/WEGZURUNI/Past/Images/schwebebahn.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/1.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/2.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/3.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/4.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/orig.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 3/origbig.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/1.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/2.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/3.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/4.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/5.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/6.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/orig.png
+maps/tilesets/WEGZURUNI/Past/Images/steampunk/background 4/origbig.png
+maps/tilesets/WEGZURUNI/Past/maps/Past.tmx
+maps/tilesets/WEGZURUNI/Past/tilesets/TeslaCoil.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/alteSchwebebahn.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/automap-tiles.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/darkerorange.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldcitty.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldcitys.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldcityt.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldcityu.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/rails.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/steampunk1.tsx
+maps/tilesets/WEGZURUNI/Present/Pictures/AnimationSheet_Character (1).png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundhalf.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.aseprite
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddle.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundmiddlebad.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundreal.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.aseprite
+maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Bus.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Public Bus.png
+maps/tilesets/WEGZURUNI/Present/Pictures/X5kDIm.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Zebra.png
+maps/tilesets/WEGZURUNI/Present/Pictures/city1.jpg
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_00_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_01_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_02_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_03_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_04_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_05_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_06_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_07_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_08_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_09_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_10_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_11_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_12_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_13_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_14_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_15_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_16_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_17_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/glitchedScreen/frame_18_delay-0.1s.gif
+maps/tilesets/WEGZURUNI/Present/Pictures/npc1.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc2.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc3.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc4.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc5.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc6.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc7.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc8.png
+maps/tilesets/WEGZURUNI/Present/Pictures/npc9.png
+maps/tilesets/WEGZURUNI/Present/Pictures/road&border.png
+maps/tilesets/WEGZURUNI/Present/Pictures/schwebebahn.png
+maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx
+maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI2.tmx
+maps/tilesets/WEGZURUNI/Present/tilesets/Backgroundreal.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/GlitchedScreen.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/Street.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/WegzurUni.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/WegzurUniBack.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/Zebrastreifen.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/backgroundmiddle.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/backgroundsmall.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys1.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys2.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys3.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys4.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys5.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys6.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys7.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys8.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/guys9.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/hoodedone.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/skyyyy.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/wegzurunibad.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_01-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_02-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_03-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_04-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_05-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_06-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_07-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Blue Nebula/Blue_Nebula_08-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_01-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_02-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_03-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_04-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_05-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_06-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_07-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Green Nebula/Green_Nebula_08-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_01-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_02-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_03-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_04-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_05-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_06-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_07-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Purple Nebula/Purple_Nebula_08-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_01-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_02-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_03-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_04-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_05-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_06-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_07-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/Small 512x512/Starfields/Starfield_08-512x512.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/1.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/2.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/3.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/orig.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/nature_6/origbig.png
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/schwebebahn (2).gif
+maps/tilesets/WEGZURUNI/QuantenEbene/Images/schwebebahn (3).gif
+maps/tilesets/WEGZURUNI/QuantenEbene/Mountain.png
+maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain1.tmx
+maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain2.tmx
+maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain3.tmx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mounta.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/Mountain2.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/glowingbrand.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/schwebebahnold.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/schwebebahnoldgif.tsx
+maps/tilesets/WEGZURUNI/QuantenEbene/tilesets/schwebebahnpregif.tsx
 maps/tilesets/Zoo/4.png
 maps/tilesets/Zoo/Background/Green Background/Green 1.tsx
 maps/tilesets/Zoo/Background/Green Background/Green 2.tsx
