@@ -1684,6 +1684,15 @@ schalter
   orig: 24, 24
   offset: 0, 0
   index: -1
+textbox
+  rotate: false
+  xy: 660, 510
+  size: 16, 16
+  split: 4, 4, 4, 4
+  pad: 2, 4, 4, 4
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 run-smoke
   rotate: false
   xy: 1382, 876
