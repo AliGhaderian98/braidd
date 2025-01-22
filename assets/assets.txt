@@ -15,7 +15,11 @@ audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
 audio/music/lofi-loop.ogg
 audio/music/victory-fanfare.ogg
+audio/sound/Steps.mp3
 audio/sound/buttonClick.ogg
+audio/sound/jump.mp3
+audio/sound/kill.mp3
+audio/sound/land.mp3
 audio/sound/menuSound.mp3
 maps/HBF.tmx
 maps/Schlossburg.tmx
