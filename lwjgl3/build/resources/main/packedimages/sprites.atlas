@@ -1894,6 +1894,62 @@ schalter
   orig: 24, 24
   offset: 0, 0
   index: -1
+rotatingCoffeeBean
+  rotate: false
+  xy: 1812, 508
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+rotatingCoffeeBean
+  rotate: false
+  xy: 1830, 508
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+rotatingCoffeeBean
+  rotate: false
+  xy: 1848, 508
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+rotatingCoffeeBean
+  rotate: false
+  xy: 1866, 508
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+rotatingCoffeeBean
+  rotate: false
+  xy: 168, 10
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+rotatingCoffeeBean
+  rotate: false
+  xy: 568, 322
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+rotatingCoffeeBean
+  rotate: false
+  xy: 568, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+rotatingCoffeeBean
+  rotate: false
+  xy: 586, 322
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
 run-smoke
   rotate: false
   xy: 1430, 594
@@ -2036,56 +2092,56 @@ schwebebahn
   index: 9
 schwebimini_e
   rotate: false
-  xy: 1812, 508
+  xy: 568, 286
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_n
   rotate: false
-  xy: 1830, 508
+  xy: 586, 304
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 1848, 508
+  xy: 604, 322
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_nw
   rotate: false
-  xy: 1866, 508
+  xy: 568, 268
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_s
   rotate: false
-  xy: 168, 10
+  xy: 586, 286
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 568, 322
+  xy: 604, 304
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 568, 304
+  xy: 622, 322
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 586, 322
+  xy: 568, 250
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2250,20 +2306,6 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
-mushroom-idle
-  rotate: false
-  xy: 764, 358
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 5
-mushroom-idle
-  rotate: false
-  xy: 764, 358
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
   index: 2
 mushroom-idle
   rotate: false
@@ -2278,7 +2320,21 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
+  index: 4
+mushroom-idle
+  rotate: false
+  xy: 764, 358
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
   index: 6
+mushroom-idle
+  rotate: false
+  xy: 764, 358
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
 mushroom-idle
   rotate: false
   xy: 798, 358

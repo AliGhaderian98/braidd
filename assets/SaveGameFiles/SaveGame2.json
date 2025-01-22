@@ -1,21 +1,21 @@
 {
 SaveGameKEY: 2
-SaveGameName: d
+SaveGameName: jwakdn
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
 	SCHLOSSBURG: false
-	ARKADEN: false
+	ARKADEN: true
 	WEGZURUNI: false
 	BAYER: false
 	OBERBARMEN: false
 	ZOO: false
 	FREUDENBERG: true
 	HBF: false
-	LUISENVIERTEL: false
+	LUISENVIERTEL: true
 }
-lastLevel: UNI
-Playtime: 19054
+lastLevel: LUISENVIERTEL
+Playtime: 146343
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -33,7 +33,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -65,7 +65,7 @@ Collectables: {
 	ARKADEN: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -175,7 +175,7 @@ Collectables: {
 	FREUDENBERG: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -223,7 +223,11 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -231,11 +235,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 }
