@@ -69,7 +69,7 @@ public abstract class Enemy extends DynamicGameObject{
 
     @Override
     public float getStateTimer() {
-        return 0;
+        return stateTimer;
     }
 
     @Override
