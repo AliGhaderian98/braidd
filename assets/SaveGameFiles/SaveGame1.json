@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: UNI
+lastLevel: FREUDENBERG
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 1837848
+Playtime: 1845023
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
