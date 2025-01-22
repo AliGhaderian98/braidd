@@ -1021,3 +1021,4 @@ sprites/wissenschaftler/wissenschaftler_9.png
 textFonts/MenuTextFont.ttf
 textFonts/bigPixel.otf
 textFonts/pixelfont.ttf
+ui/uiskin.json
