@@ -140,16 +140,56 @@
  </objectgroup>
  <objectgroup id="14" name="Brick"/>
  <objectgroup id="20" name="Enemies">
-  <object id="99" template="object-templates/patrollingEnemy.tx" x="418" y="306"/>
-  <object id="100" template="object-templates/patrollingEnemy.tx" x="704" y="258"/>
-  <object id="101" template="object-templates/patrollingEnemy.tx" x="207" y="272"/>
-  <object id="102" template="object-templates/patrollingEnemy.tx" x="113" y="236"/>
-  <object id="113" template="object-templates/patrollingEnemy.tx" x="541" y="228"/>
-  <object id="114" template="object-templates/knight.tx" x="620" y="340"/>
-  <object id="146" template="object-templates/IdleEnemy.tx" x="278" y="338"/>
-  <object id="147" template="object-templates/IdleEnemy.tx" x="899" y="300"/>
-  <object id="148" template="object-templates/IdleEnemy.tx" x="1048" y="339"/>
-  <object id="151" template="object-templates/patrollingEnemy.tx" x="795" y="194"/>
+  <object id="99" template="object-templates/patrollingEnemy.tx" x="428.25" y="300.25">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="100" template="object-templates/patrollingEnemy.tx" x="704" y="254">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="101" template="object-templates/patrollingEnemy.tx" x="207" y="272">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="102" template="object-templates/patrollingEnemy.tx" x="113" y="236">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="113" template="object-templates/patrollingEnemy.tx" x="532" y="222.25">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="114" template="object-templates/knight.tx" x="620" y="340">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
+  <object id="146" template="object-templates/IdleEnemy.tx" x="278" y="338">
+   <properties>
+    <property name="type" value="drunkenguy"/>
+   </properties>
+  </object>
+  <object id="147" template="object-templates/IdleEnemy.tx" x="899" y="300">
+   <properties>
+    <property name="type" value="drunkenguy"/>
+   </properties>
+  </object>
+  <object id="148" template="object-templates/IdleEnemy.tx" x="1048" y="339">
+   <properties>
+    <property name="type" value="drunkenguy"/>
+   </properties>
+  </object>
+  <object id="151" template="object-templates/patrollingEnemy.tx" x="795" y="191">
+   <properties>
+    <property name="type" value="nakedguy"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="MovingPlatform">
   <object id="103" template="object-templates/SchalterMovingPlatform.tx" x="964" y="282">

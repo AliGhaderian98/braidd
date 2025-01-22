@@ -6,10 +6,7 @@ import braid.main.tools.EventListener;
 import braid.main.tools.Subtitle;
 import braid.main.tools.SubtitleManager;
 import braid.main.tools.UserData;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
@@ -24,6 +21,11 @@ public class NPC extends InteractiveGameObject{
     private final Subtitle subtitle;
     private final String type;
     private final String name;
+
+    private Sprite sprite;
+    private Animation<TextureRegion> idle;
+    private float stateTimer = 0f;
+
     private boolean trigger = false;
     protected Body body;
     private EventListener event;
@@ -51,6 +53,33 @@ public class NPC extends InteractiveGameObject{
     public void setSprite(TextureAtlas atlas) {
         if(this.name == null) return;
         switch (this.name) {
+            case "Marcel" -> {
+                sprite = new Sprite(atlas.findRegion("marcel"));
+                idle = new Animation<>(0.1f, atlas.findRegions("marcel"), Animation.PlayMode.LOOP);
+                sprite.setRegion(idle.getKeyFrame(0));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.6f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.6f/Braid.PPM);
+                sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/3.4f);
+            }
+            case ("henry") -> {
+                sprite = new Sprite(atlas.findRegion("henry-idle"));
+                idle = new Animation<>(0.2f, atlas.findRegions("henry-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(idle.getKeyFrame(0));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/ Braid.PPM);
+                sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+            }
+            case ("alessa") -> {
+                sprite = new Sprite(atlas.findRegion("alessa-idle"));
+                idle = new Animation<>(0.2f, atlas.findRegions("alessa-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(idle.getKeyFrame(0));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/ Braid.PPM);
+                sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
+            }
             case "PublicBus" -> {
             }
             case "HoodedOne" -> {
@@ -98,7 +127,21 @@ public class NPC extends InteractiveGameObject{
         shape.dispose();
     }
 
+    public void draw(SpriteBatch batch, float dt) {
+        if (sprite != null) {
+            stateTimer += dt;
+            sprite.setRegion(idle.getKeyFrame(stateTimer));
+            sprite.draw(batch);
+        }
+    }
+
     public String getType() {
         return this.type;
     }
+
+    @Override
+    public float getStateTimer() { return stateTimer; }
+
+    @Override
+    public void setStateTimer(float value) { stateTimer = value; }
 }

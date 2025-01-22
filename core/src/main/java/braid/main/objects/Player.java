@@ -464,6 +464,8 @@ public class Player extends DynamicGameObject {
                 currentState = AnimationState.IDLE;
             if (!isOnMovingPlatform)
                 b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+        } else {
+            b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
         }
     }
 

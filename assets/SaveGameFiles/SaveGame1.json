@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: OBERBARMEN
+lastLevel: UNI
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 1239613
+Playtime: 1815940
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -38,15 +38,15 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -90,7 +90,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -218,7 +218,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -226,7 +226,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	LUISENVIERTEL: [

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="170" height="75" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="448">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="170" height="75" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="452">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -738,11 +738,6 @@
     <property name="Text" value="Du hast auf deinem Weg viele Feinde. Spring auf ihren Kopf, um sie aus der Welt zu schaffen."/>
    </properties>
   </object>
-  <object id="264" template="object-templates/sign.tx" x="112" y="288">
-   <properties>
-    <property name="Text" value="Hehe jetzt wirst du niemals deine Masterarbeit beenden! Ich habe alle deine Seiten in ganz Wuppertal versteckt!"/>
-   </properties>
-  </object>
   <object id="270" template="object-templates/sign.tx" x="992" y="288">
    <properties>
     <property name="Text" value="Vorsicht: unten ist das Chemie-Labor, lieber alleine lassen..."/>
@@ -773,6 +768,32 @@
   <object id="446" name="Sign" x="2528" y="672" width="112" height="80">
    <properties>
     <property name="Text" value="Ich muss also alle meine Seiten finden... Am besten fange ich am Freudenberg an."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="32" name="NPCs">
+  <object id="449" name="NPC" type="NPC" x="80" y="272" width="64" height="32">
+   <properties>
+    <property name="Name" value="Marcel"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="npcTrigger" type="object" value="0"/>
+    <property name="text" value="Hehe jetzt wirst du niemals deine Masterarbeit beenden! Ich habe alle deine Seiten in ganz Wuppertal versteckt!"/>
+   </properties>
+  </object>
+  <object id="450" name="NPC" type="NPC" x="1965" y="845" width="16" height="16">
+   <properties>
+    <property name="Name" value="henry"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="npcTrigger" type="object" value="0"/>
+    <property name="text" value="MIAU!"/>
+   </properties>
+  </object>
+  <object id="451" name="NPC" type="NPC" x="1904" y="1085" width="16" height="16">
+   <properties>
+    <property name="Name" value="alessa"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="npcTrigger" type="object" value="0"/>
+    <property name="text" value="Miep!"/>
    </properties>
   </object>
  </objectgroup>
@@ -918,11 +939,6 @@
     <property name="type" value="chicken"/>
    </properties>
   </object>
-  <object id="261" template="object-templates/IdleEnemy.tx" x="1968" y="848">
-   <properties>
-    <property name="type" value="henry"/>
-   </properties>
-  </object>
   <object id="262" template="object-templates/patrollingEnemy.tx" x="1856" y="688">
    <properties>
     <property name="type" value="snake"/>
@@ -940,11 +956,6 @@
   <object id="334" template="object-templates/unhingedEnemy.tx" x="2336" y="816"/>
   <object id="335" template="object-templates/unhingedEnemy.tx" x="2160" y="912"/>
   <object id="336" template="object-templates/unhingedEnemy.tx" x="2336" y="1008"/>
-  <object id="443" template="object-templates/IdleEnemy.tx" x="1904" y="1088">
-   <properties>
-    <property name="type" value="alessa"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="13" name="Items">
   <object id="254" template="object-templates/page.tx" x="224" y="272"/>

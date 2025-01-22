@@ -44,6 +44,16 @@ public class Knight extends Enemy implements EnemyAI {
                 sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
                 sprite.setRegion(idle.getKeyFrame(0, false));
             }
+            case ("nakedguy") -> {
+                sprite = new Sprite(atlas.findRegion("nakedguy-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("nakedguy-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.2f, atlas.findRegions("nakedguy-run"), Animation.PlayMode.LOOP);
+                running = new Animation<>(0.1f, atlas.findRegions("nakedguy-sprint"), Animation.PlayMode.LOOP);
+                attacking = new Animation<>(0.1f, atlas.findRegions("nakedguy-attack"), Animation.PlayMode.LOOP);
+
+                sprite.setBounds(0,0,48 / Braid.PPM, 48 / Braid.PPM);
+                sprite.setRegion(idle.getKeyFrame(0, false));
+            }
             default -> {
                 sprite = new Sprite(atlas.findRegion("knight-idle"));
                 idle = new Animation<>(0.1f, atlas.findRegions("knight-idle"), Animation.PlayMode.LOOP);

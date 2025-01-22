@@ -303,7 +303,7 @@ public abstract class LevelScreen implements Screen {
 
         fbo.begin();
         clearScreen();
-        renderWorld();
+        renderWorld(delta);
         subtitleManager.render(delta);      // Update Subtitles
         fbo.end();
 
@@ -389,7 +389,7 @@ public abstract class LevelScreen implements Screen {
     }
 
 
-    private void renderWorld() {
+    private void renderWorld(float dt) {
         renderer.setView(gameCamera.getCamera());
         renderer.render();
         if (debugRendererEnabled)
@@ -400,6 +400,7 @@ public abstract class LevelScreen implements Screen {
         game.batch.begin();
 
         drawDoors();
+        drawNPCs(dt);
 
         player.getSprite().draw(game.batch);
 
@@ -428,6 +429,12 @@ public abstract class LevelScreen implements Screen {
             e.draw(game.batch);
         }
         game.batch.setShader(defaultShader);
+    }
+
+    private void drawNPCs(float dt) {
+        for (NPC npc : npcs) {
+            npc.draw(game.batch, dt);
+        }
     }
 
     private void drawMovingPlatforms() {
@@ -713,6 +720,9 @@ public abstract class LevelScreen implements Screen {
     public void changeMusic(String musicName) {
         music.stop();
         music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
+        music.setLooping(true);
+        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        music.setPosition(0);
         System.out.println(music);
         music.play();
     }
