@@ -59,6 +59,11 @@ public class Audiomanager {
                 License: CC0
         */
         audiomanager.load("audio/sound/buttonClick.ogg", Sound.class);
+        audiomanager.load("audio/sound/jump.mp3", Sound.class);
+        audiomanager.load("audio/sound/kill.mp3", Sound.class);
+        audiomanager.load("audio/sound/land.mp3", Sound.class);
+        audiomanager.load("audio/sound/Steps.mp3", Sound.class);
+
 
 
         audiomanager.finishLoading();

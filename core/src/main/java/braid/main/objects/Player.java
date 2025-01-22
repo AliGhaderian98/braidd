@@ -3,8 +3,12 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.Items.PowerUp;
 import braid.main.screens.huds.LevelHUD;
+import braid.main.tools.Audiomanager;
+import braid.main.tools.PreferencesManager;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -87,6 +91,9 @@ public class Player extends DynamicGameObject {
     private Vector2 maxMoveLimit = new Vector2(0,0);
     private Vector2 minMoveLimit = new Vector2(0,0);
 
+    // Sound
+    private Sound landSound, jumpSound, StepsSound;
+
     // Constructors
     public Player(World world, LevelScreen screen) {
         super(world);
@@ -100,6 +107,12 @@ public class Player extends DynamicGameObject {
 
         // Setup box2d body
         defineBody();
+
+        // Setup Sound
+        jumpSound = Audiomanager.audiomanager.get("audio/sound/jump.mp3", Sound.class);
+        landSound = Audiomanager.audiomanager.get("audio/sound/land.mp3", Sound.class);
+        StepsSound = Audiomanager.audiomanager.get("audio/sound/Steps.mp3", Sound.class);
+
 
         // Setup sprite
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
@@ -207,6 +220,18 @@ public class Player extends DynamicGameObject {
         // don't let player get faster than certain velocities
         b2body.getLinearVelocity().x = Math.clamp(b2body.getLinearVelocity().x, -maxVelocityX, maxVelocityX);
         b2body.getLinearVelocity().y = Math.clamp(b2body.getLinearVelocity().y, -maxVelocityY, maxVelocityY);
+
+        updateSound();
+
+    }
+
+    private void updateSound() {
+        if(currentState.equals(AnimationState.RUNNING)){
+            StepsSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            StepsSound.loop();
+        }else {
+            StepsSound.stop();
+        }
     }
 
     public TextureRegion getFrame(float dt) {
@@ -265,6 +290,7 @@ public class Player extends DynamicGameObject {
             holdingJump = false;
             coyoteActive = false;
             downGravityFactor = 1f;
+            landSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
 
             if (b2body.getLinearVelocity().y < -4.75) {
                 currentState = AnimationState.LANDING;
@@ -490,6 +516,7 @@ public class Player extends DynamicGameObject {
     }
 
     public void jump(float multiplier) {
+        jumpSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
         if (landingTask.isScheduled()) {
             landingTask.cancel();
             landingAnimationPlaying = false;
