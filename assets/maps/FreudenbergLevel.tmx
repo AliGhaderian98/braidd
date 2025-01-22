@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="53">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="61">
  <tileset firstgid="1" source="tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx"/>
  <tileset firstgid="97" source="tilesets/FreudenBerg/Blue Sky.tsx"/>
  <tileset firstgid="2122" source="tilesets/FreudenBerg/Door.tsx"/>
@@ -26,7 +26,7 @@
  <objectgroup id="12" name="Signs"/>
  <objectgroup id="4" name="End">
   <object id="49" x="456.084" y="199.421"/>
-  <object id="52" x="605.035" y="178.494" width="32.6214" height="27.6974"/>
+  <object id="53" x="603.804" y="179.11" width="35.0834" height="27.6974"/>
  </objectgroup>
  <objectgroup id="11" name="Ladder"/>
  <objectgroup id="3" name="Ground" opacity="0.49">
@@ -49,6 +49,14 @@
   <object id="46" template="object-templates/IdleEnemy.tx" x="156.952" y="137.256"/>
   <object id="45" template="object-templates/patrollingEnemy.tx" x="240.044" y="79.3993"/>
  </objectgroup>
- <objectgroup id="8" name="Items"/>
+ <objectgroup id="8" name="Items">
+  <object id="54" x="-25.2354" y="-31.3904"/>
+  <object id="55" template="object-templates/key.tx" x="17.234" y="79.3993"/>
+  <object id="56" template="object-templates/page.tx" x="-0.615498" y="78.7838"/>
+  <object id="57" template="object-templates/page.tx" x="35.0834" y="79.3993"/>
+  <object id="58" template="object-templates/page.tx" x="257.278" y="79.3993"/>
+  <object id="59" template="object-templates/page.tx" x="558.257" y="63.3963"/>
+  <object id="60" template="object-templates/page.tx" x="406.844" y="150.797"/>
+ </objectgroup>
  <objectgroup id="7" name="MovingPlatform"/>
 </map>
