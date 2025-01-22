@@ -66,7 +66,7 @@ public class Overworld implements Screen {
         gameIsPaused = false;
 
         // Setup Music
-        music = Audiomanager.audiomanager.get("audio/music/lofi-loop.ogg" ,Music.class);
+        music = Audiomanager.audiomanager.get("audio/music/lofi-loop.mp3" ,Music.class);
         music.setLooping(true);
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.setPosition(0);

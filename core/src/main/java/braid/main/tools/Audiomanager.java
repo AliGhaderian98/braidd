@@ -26,7 +26,7 @@ public class Audiomanager {
         licence: UniLevelMusic.ogg
                 Eigene Musik (Alister)
         */
-        audiomanager.load("audio/music/UniLevelMusic.ogg", Music.class);
+        audiomanager.load("audio/music/UniLevelMusic.mp3", Music.class);
 
         /*
         licence: victory-fanfare.ogg
@@ -34,7 +34,7 @@ public class Audiomanager {
                 https://freesound.org/s/470083/
                 License: Attribution 4.0
         */
-        audiomanager.load("audio/music/victory-fanfare.ogg", Music.class);
+        audiomanager.load("audio/music/victory-fanfare.mp3", Music.class);
 
         /*
         licence: lofi-loop.ogg
@@ -42,7 +42,7 @@ public class Audiomanager {
                 https://freesound.org/s/679187/
                 License: CC0
         */
-        audiomanager.load("audio/music/lofi-loop.ogg", Music.class);
+        audiomanager.load("audio/music/lofi-loop.mp3", Music.class);
 
         /*
         licence: menuSound.mp3

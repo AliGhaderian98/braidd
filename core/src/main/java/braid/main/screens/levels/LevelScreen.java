@@ -178,7 +178,7 @@ public abstract class LevelScreen implements Screen {
         music.setPosition(0);
         music.play();
 
-        victoryMusic = Audiomanager.audiomanager.get("audio/music/victory-fanfare.ogg", Music.class);
+        victoryMusic = Audiomanager.audiomanager.get("audio/music/victory-fanfare.mp3", Music.class);
         victoryMusic.setLooping(false);
         victoryMusic.setPosition(1);
 
