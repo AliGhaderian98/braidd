@@ -19,7 +19,8 @@ public class Audiomanager {
          */
         audiomanager.load("audio/music/background_music.mp3", Music.class);
         audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI2.mp3", Music.class);
-        audiomanager.load("audio/music/WEGZURUNI/FutureMap2.mp3", Music.class);
+        audiomanager.load("audio/music/WEGZURUNI/FutureMap1.mp3", Music.class);
+        audiomanager.load("audio/music/WEGZURUNI/Finale.mp3", Music.class);
 
 
         /*

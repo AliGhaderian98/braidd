@@ -620,11 +620,6 @@
     <property name="ID" type="int" value="500"/>
    </properties>
   </object>
-  <object id="296" template="../../../../object-templates/page.tx" x="1392" y="366.667">
-   <properties>
-    <property name="ID" type="int" value="0"/>
-   </properties>
-  </object>
   <object id="297" template="../../../../object-templates/page.tx" x="1529.33" y="694.667">
    <properties>
     <property name="ID" type="int" value="1"/>

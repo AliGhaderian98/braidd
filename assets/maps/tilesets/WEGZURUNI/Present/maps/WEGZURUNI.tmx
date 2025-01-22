@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="37">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="54" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="41">
  <tileset firstgid="1" source="../tilesets/WegzurUni.tsx"/>
  <tileset firstgid="9" source="../tilesets/GlitchedScreen.tsx"/>
  <tileset firstgid="28" source="../tilesets/WegzurUniBack.tsx"/>
@@ -159,12 +159,24 @@
   <object id="11" x="864" y="0" width="16" height="367"/>
   <object id="12" x="2000" y="-4448"/>
  </objectgroup>
- <objectgroup id="7" name="Sign"/>
+ <objectgroup id="7" name="Signs"/>
  <objectgroup id="8" name="Buttons">
-  <object id="6" template="../../../../object-templates/Button.tx" x="735.497" y="343.667" width="36.25" height="35.5">
+  <object id="6" template="../../../../object-templates/Button.tx" x="726.58" y="336.584" width="36.25" height="35.5">
    <properties>
     <property name="actionType" value="toggleNPCTrigger"/>
     <property name="targetName" value=""/>
+   </properties>
+  </object>
+  <object id="37" template="../../../../object-templates/TutorialSign.tx" x="727.5" y="336.5" width="33.5" height="35.5">
+   <properties>
+    <property name="Text" value="Tutorial: Auf Rot schalten? (Bitte %s drücken!)"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="23" name="Enemies">
+  <object id="38" template="../../../../object-templates/patrollingEnemy.tx" x="49" y="398" width="31.5" height="32.5">
+   <properties>
+    <property name="type" value="Bus"/>
    </properties>
   </object>
  </objectgroup>
@@ -178,65 +190,60 @@
    </properties>
   </object>
   <object id="17" name="npcTrigger" x="536" y="-18" width="58" height="538"/>
-  <object id="28" template="../../../../object-templates/NPC.tx" x="729" y="339">
-   <properties>
-    <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Change traffic light? (Interact)"/>
-   </properties>
-  </object>
   <object id="29" template="../../../../object-templates/NPC.tx" x="464" y="336">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="WHY DID HE CROSS ON RED?!?!?!"/>
+    <property name="text" value="WARUM IST ER ÜBER ROT GELAUFEN?!?!"/>
    </properties>
   </object>
   <object id="30" template="../../../../object-templates/NPC.tx" x="503.5" y="336.5">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="NOOOOO"/>
+    <property name="text" value="*sprachlos*"/>
    </properties>
   </object>
   <object id="31" template="../../../../object-templates/NPC.tx" x="523" y="337.5">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="*speechless*"/>
+    <property name="text" value="..."/>
    </properties>
   </object>
   <object id="32" template="../../../../object-templates/NPC.tx" x="480.5" y="337">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="WHAT"/>
+    <property name="text" value="WTF?!?!"/>
    </properties>
   </object>
   <object id="33" template="../../../../object-templates/NPC.tx" x="543.5" y="336">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="THE BUS DIDNT STOP?!?!"/>
+    <property name="text" value="WARUM HAT DER BUS NICHT GESTOPPT?!?!?!"/>
    </properties>
   </object>
   <object id="34" template="../../../../object-templates/NPC.tx" x="561.5" y="338.5">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="CALL 911!!"/>
+    <property name="text" value="RUFT DIE POLIZEI!!!"/>
    </properties>
   </object>
   <object id="35" template="../../../../object-templates/NPC.tx" x="578.5" y="338">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="HE SHOULD LOSE HIS LICENSE!!!!"/>
+    <property name="text" value="DEM SOLLTE SEIN FÜHRERSCHEIN ENTZOGEN WERDEN!!!!"/>
    </properties>
   </object>
-  <object id="36" template="../../../../object-templates/NPC.tx" x="186.5" y="331.5" width="117.667" height="38.3333">
+  <object id="40" template="../../../../object-templates/NPC.tx" x="619.333" y="337.333">
    <properties>
-    <property name="Name" value="WEGZURUNI/FutureMap2.mp3"/>
-    <property name="Type" value="MusicNPC"/>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="Wenn nur jemand das rückgängig machen könnte...."/>
    </properties>
   </object>
  </objectgroup>

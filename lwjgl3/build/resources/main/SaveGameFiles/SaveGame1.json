@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 1037910
+Playtime: 15316224
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -108,7 +108,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean

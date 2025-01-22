@@ -147,7 +147,7 @@
   <object id="5" template="../../../../object-templates/NPC.tx" x="502.102" y="255.81">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Back to the Future?"/>
+    <property name="text" value="Gestalte dir deine eigene Zukunft!"/>
    </properties>
   </object>
   <object id="8" template="../../../../object-templates/NPC.tx" x="501.435" y="255.144">

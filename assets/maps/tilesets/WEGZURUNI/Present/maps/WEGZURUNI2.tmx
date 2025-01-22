@@ -252,12 +252,12 @@
   <object id="248" x="80" y="64" height="16"/>
   <object id="249" x="32" y="64" height="16"/>
   <object id="250" x="112" y="115.273" height="12.7273"/>
-  <object id="251" x="160" y="112" height="16"/>
-  <object id="252" x="192" y="112" height="16"/>
-  <object id="253" x="240" y="112" height="16"/>
-  <object id="258" x="320" y="224" height="16"/>
-  <object id="259" x="272" y="224" width="0.666667" height="12.6667"/>
-  <object id="261" x="225.667" y="209.667" width="2.66667" height="15.3333"/>
+  <object id="251" x="160" y="112.909" height="15.0909"/>
+  <object id="252" x="192" y="112.364" height="15.6364"/>
+  <object id="253" x="240" y="113.091" height="14.9091"/>
+  <object id="258" x="320" y="224.636" height="15.3636"/>
+  <object id="259" x="272" y="224.538" width="0.666667" height="12.1292"/>
+  <object id="261" x="224.758" y="209.667" width="2.66667" height="13.6969"/>
   <object id="262" x="179.333" y="209.333" width="0.333333" height="14.6667"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
@@ -315,23 +315,18 @@
  <objectgroup id="8" name="Items">
   <object id="210" template="../../../../object-templates/gleiter.tx" x="513" y="20"/>
   <object id="229" template="../../../../object-templates/hammer.tx" x="146.167" y="304.5"/>
-  <object id="589" template="../../../../object-templates/page.tx" x="1079.33" y="616.667">
-   <properties>
-    <property name="ID" type="int" value="2"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="9" name="NPCs">
-  <object id="176" template="../../../../object-templates/NPC.tx" x="1070.83" y="610.545">
+  <object id="176" template="../../../../object-templates/NPC.tx" x="1055.95" y="609.295" width="62.5" height="32">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="it's broken :/"/>
+    <property name="text" value="Defekt!...............................................................................................................................................................................................................................................................................................................................................................oder doch nicht?"/>
    </properties>
   </object>
   <object id="177" template="../../../../object-templates/NPC.tx" x="160" y="608">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Defeat all Enemies!"/>
+    <property name="text" value="Die Schwebebahn wird überrannt! Besiege alle die dir im Weg stehen!"/>
    </properties>
   </object>
   <object id="326" template="../../../../object-templates/NPC.tx" x="75.5" y="245.5" width="32" height="72">
@@ -339,11 +334,11 @@
     <property name="text" value="Past"/>
    </properties>
   </object>
-  <object id="327" template="../../../../object-templates/NPC.tx" x="10.5" y="240.5" width="32" height="78">
+  <object id="327" template="../../../../object-templates/NPC.tx" x="10.5" y="240.5" width="42" height="93">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="There are still Enemies alive! (You probably failed...)"/>
+    <property name="text" value="Durchgefallen! Es sind noch Gegner am Leben!"/>
    </properties>
   </object>
  </objectgroup>

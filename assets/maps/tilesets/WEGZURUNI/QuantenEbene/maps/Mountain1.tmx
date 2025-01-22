@@ -96,13 +96,13 @@
  <objectgroup id="7" name="End"/>
  <objectgroup id="8" name="Enemies"/>
  <objectgroup id="9" name="NPCs">
-  <object id="5" template="../../../../object-templates/NPC.tx" x="21.0833" y="256.25">
+  <object id="5" template="../../../../object-templates/NPC.tx" x="22.1742" y="258.523">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Past"/>
+    <property name="text" value="Zur Vergangenheit reisen?"/>
    </properties>
   </object>
-  <object id="8" template="../../../../object-templates/NPC.tx" x="20.6667" y="256.334">
+  <object id="8" template="../../../../object-templates/NPC.tx" x="22.0303" y="258.879">
    <properties>
     <property name="Name" value="PastMap"/>
     <property name="Type" value="DoorNPC"/>

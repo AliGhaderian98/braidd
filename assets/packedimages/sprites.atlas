@@ -17,14 +17,14 @@ bear-run
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
+  index: 1
 bear-run
   rotate: false
   xy: 2, 82
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: 3
 bear-run
   rotate: false
   xy: 814, 894
@@ -1060,14 +1060,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 2, 16
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 720, 240
@@ -2275,7 +2275,7 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 2
 mushroom-idle
   rotate: false
   xy: 1774, 603
@@ -2283,13 +2283,6 @@ mushroom-idle
   orig: 32, 32
   offset: 0, 0
   index: 5
-mushroom-idle
-  rotate: false
-  xy: 1774, 603
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 2
 mushroom-idle
   rotate: false
   xy: 1774, 603
@@ -2304,6 +2297,13 @@ mushroom-idle
   orig: 32, 32
   offset: 0, 0
   index: 6
+mushroom-idle
+  rotate: false
+  xy: 1774, 603
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
 mushroom-idle
   rotate: false
   xy: 1808, 637
