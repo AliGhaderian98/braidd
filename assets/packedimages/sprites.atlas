@@ -2485,6 +2485,13 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
+  index: 4
+mushroom-idle
+  rotate: false
+  xy: 1131, 408
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
   index: 5
 mushroom-idle
   rotate: false
@@ -2493,13 +2500,6 @@ mushroom-idle
   orig: 32, 32
   offset: 0, 0
   index: 6
-mushroom-idle
-  rotate: false
-  xy: 1131, 408
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 4
 mushroom-idle
   rotate: false
   xy: 1131, 408

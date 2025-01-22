@@ -92,8 +92,8 @@ public class Player extends DynamicGameObject {
     private Vector2 minMoveLimit = new Vector2(0,0);
 
     // Sound
-    private Sound landSound, jumpSound, StepsSound;
-
+    private Sound landSound, jumpSound;
+    private Music StepsSound;
     // Constructors
     public Player(World world, LevelScreen screen) {
         super(world);
@@ -111,7 +111,7 @@ public class Player extends DynamicGameObject {
         // Setup Sound
         jumpSound = Audiomanager.audiomanager.get("audio/sound/jump.mp3", Sound.class);
         landSound = Audiomanager.audiomanager.get("audio/sound/land.mp3", Sound.class);
-        StepsSound = Audiomanager.audiomanager.get("audio/sound/Steps.mp3", Sound.class);
+        StepsSound = Audiomanager.audiomanager.get("audio/sound/Steps.mp3", Music.class);
 
 
         // Setup sprite
@@ -227,8 +227,9 @@ public class Player extends DynamicGameObject {
 
     private void updateSound() {
         if(currentState.equals(AnimationState.RUNNING)){
-            StepsSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
-            StepsSound.loop();
+            StepsSound.setVolume((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            StepsSound.setLooping(true);
+            StepsSound.play();
         }else {
             StepsSound.stop();
         }
@@ -290,9 +291,9 @@ public class Player extends DynamicGameObject {
             holdingJump = false;
             coyoteActive = false;
             downGravityFactor = 1f;
-            landSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
 
             if (b2body.getLinearVelocity().y < -4.75) {
+                landSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
                 currentState = AnimationState.LANDING;
                 landingAnimationPlaying = true;
 

@@ -62,7 +62,7 @@ public class Audiomanager {
         audiomanager.load("audio/sound/jump.mp3", Sound.class);
         audiomanager.load("audio/sound/kill.mp3", Sound.class);
         audiomanager.load("audio/sound/land.mp3", Sound.class);
-        audiomanager.load("audio/sound/Steps.mp3", Sound.class);
+        audiomanager.load("audio/sound/Steps.mp3", Music.class);
 
 
 
