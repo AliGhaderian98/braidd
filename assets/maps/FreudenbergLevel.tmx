@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="62">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="64">
  <tileset firstgid="1" source="tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx"/>
  <tileset firstgid="97" source="tilesets/FreudenBerg/Blue Sky.tsx"/>
  <tileset firstgid="2122" source="tilesets/FreudenBerg/Door.tsx"/>
@@ -20,13 +20,13 @@
  </layer>
  <layer id="2" name="Graphics" width="40" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt0jluwkAYQOFhKSxbwsBFwAlIEI6QKkSsOQKkZK+BE5AQOAeE5SbASQIFz4pTBGwXFPaA+KVPo9HI1rM8Qtzn1iahC5GEoftdYj+PdKWQlrTvb7KS910y5p14uNLv8qI9o/Hf8YSc9v/sdO/HlGmooIo3q6fAWkRJgr42DR100bN6GqxNtDzqe1GEyONVOT8b0/CFCaZWz4j1A58ufQHuXRAhhB3u4EYVYoud6vwe89kaXXW82/QtaFhihbX2u59hjm+XPp33RhFD3KHvh649Di595vTpGmAIIyK3Z8kdASxUN2k=
+   eJztkrkNwjAYRs1RoEQiwCIQDoljBCoK7jm45+Ceg3sTYBKg4EUkBQGnoEgC4pOeftmW7Wf5F+KfX0tSEyIFuua1yftk8MpCzqd+Vgo+9/skRk+kv/RdbrjnVf4dilBSn9fsYy/SwKEJLWibPlVqDeou++nR17k+DgMYwsj06VC70HPJrxKRr81wmMMClqbPmDqBqYNfgL4LQgjCkh48KkKc4KzIz5HttbLFYQd7OKiP8QrWsHHw0zg3BnFISO644HWFm4OfPcYf+5myz7kDcCwz7Q==
   </data>
  </layer>
  <objectgroup id="12" name="Signs"/>
  <objectgroup id="4" name="End">
   <object id="49" x="456.084" y="199.421"/>
-  <object id="53" x="603.804" y="179.11" width="35.0834" height="27.6974"/>
+  <object id="53" x="629.054" y="161.61" width="8.5834" height="46.1974"/>
  </objectgroup>
  <objectgroup id="11" name="Ladder"/>
  <objectgroup id="3" name="Ground" opacity="0.49">
@@ -40,6 +40,7 @@
   <object id="39" x="293.593" y="182.187" width="43.0849" height="14.1565"/>
   <object id="40" x="155.721" y="153.875" width="14.772" height="1.231"/>
   <object id="47" x="84.3233" y="136.025" width="16.6185"/>
+  <object id="63" x="624" y="144" width="15.5" height="15.75"/>
  </objectgroup>
  <objectgroup id="10" name="Walls">
   <object id="61" x="-0.666667" y="16" width="0.666667" height="207.667"/>
@@ -65,11 +66,30 @@
  <objectgroup id="8" name="Items">
   <object id="54" x="-25.2354" y="-31.3904"/>
   <object id="55" template="object-templates/key.tx" x="17.234" y="79.3993"/>
-  <object id="56" template="object-templates/page.tx" x="-0.615498" y="78.7838"/>
-  <object id="57" template="object-templates/page.tx" x="35.0834" y="79.3993"/>
-  <object id="58" template="object-templates/page.tx" x="257.278" y="79.3993"/>
-  <object id="59" template="object-templates/page.tx" x="558.257" y="63.3963"/>
-  <object id="60" template="object-templates/page.tx" x="406.844" y="150.797"/>
+  <object id="56" template="object-templates/page.tx" x="-0.615498" y="78.7838">
+   <properties>
+    <property name="ID" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="57" template="object-templates/page.tx" x="35.0834" y="79.3993">
+   <properties>
+    <property name="ID" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="58" template="object-templates/page.tx" x="257.278" y="79.3993">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="59" template="object-templates/page.tx" x="558.257" y="63.3963">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="60" template="object-templates/page.tx" x="403.344" y="147.797"/>
  </objectgroup>
  <objectgroup id="7" name="MovingPlatform"/>
+ <objectgroup id="13" name="Doors">
+  <object id="62" template="object-templates/door.tx" x="623.5" y="161"/>
+ </objectgroup>
 </map>

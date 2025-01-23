@@ -17,14 +17,14 @@ bear-run
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: 3
 bear-run
   rotate: false
   xy: 132, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
+  index: 1
 bear-run
   rotate: false
   xy: 132, 382
@@ -2723,14 +2723,14 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 3
 mushroom-idle
   rotate: false
   xy: 926, 292
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 5
 mushroom-idle
   rotate: false
   xy: 926, 292

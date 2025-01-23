@@ -43,7 +43,6 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -80,6 +79,7 @@ maps/tilesets/Arkaden/City.tsx
 maps/tilesets/Arkaden/Shopping_Mall.tsx
 maps/tilesets/Arkaden/images/City.png
 maps/tilesets/Arkaden/images/shopping mall.jpg
+maps/tilesets/Dungeon Tile Set.tsx
 maps/tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx
 maps/tilesets/FreudenBerg/2d_car.tsx
 maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.png
@@ -590,15 +590,18 @@ maps/tilesets/Zoo/TaigaAmbient.tsx
 maps/tilesets/Zoo/TaigaPack.png
 maps/tilesets/Zoo/greenBackground1.tsx
 maps/tilesets/Zoo/zoopng.tsx
+maps/tilesets/images/00Atlas.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
 maps/tilesets/images/Anim_Robot_Jump1_v1.png
+maps/tilesets/images/Dungeon Tile Set.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
 maps/tilesets/images/coin.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
+maps/tilesets/images/oberbarmen.png
 maps/tilesets/images/prop-sheet.png
 maps/tilesets/images/sheet.png
 maps/tilesets/images/sky.png
@@ -607,6 +610,7 @@ maps/tilesets/images/wasteland2.png
 maps/tilesets/images/wasteland3.png
 maps/tilesets/mid-layer-a.tsx
 maps/tilesets/mid-layer-b.tsx
+maps/tilesets/oberbarmen.tsx
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-mountains.png
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-ruins.png
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sky.png
