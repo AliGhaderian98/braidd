@@ -13,6 +13,8 @@ public class OberbarmenLevel extends LevelScreen {
         levelName = "OBERBARMEN";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(3400/Braid.PPM, 900 /Braid.PPM);
+
     }
 
     @Override
