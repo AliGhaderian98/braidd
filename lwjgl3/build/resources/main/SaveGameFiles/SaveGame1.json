@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: ARKADEN
+lastLevel: UNI
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 4050982
+Playtime: 4116457
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -46,7 +46,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -254,7 +254,7 @@ Collectables: {
 }
 BestTimes: {
 	class: java.util.HashMap
-	UNI: 0
+	UNI: 41109
 	SCHLOSSBURG: 0
 	ARKADEN: 0
 	WEGZURUNI: 3811

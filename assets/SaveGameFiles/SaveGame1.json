@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: ARKADEN
+lastLevel: LUISENVIERTEL
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 4056415
+Playtime: 4239624
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -46,7 +46,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -254,15 +254,15 @@ Collectables: {
 }
 BestTimes: {
 	class: java.util.HashMap
-	UNI: 0
+	UNI: 41109
 	SCHLOSSBURG: 0
 	ARKADEN: 0
 	WEGZURUNI: 3811
 	BAYER: 3750
 	OBERBARMEN: 0
 	ZOO: 0
-	FREUDENBERG: 0
-	HBF: 61863
-	LUISENVIERTEL: 0
+	FREUDENBERG: 5383
+	HBF: 11759
+	LUISENVIERTEL: 35713
 }
 }

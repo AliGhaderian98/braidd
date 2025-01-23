@@ -37,6 +37,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -121,7 +122,7 @@ public abstract class LevelScreen implements Screen {
     private FinishHUD finishHUD;
     private boolean finished = false;
     private FinishLevelCutscene finishLevelCutscene;
-    private int lastBackgroundIndex;
+    private int lastBackgroundIndex = 0;
 
 
 
@@ -234,9 +235,16 @@ public abstract class LevelScreen implements Screen {
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages, previouslyCollectedPages);
 
-        finishHUD = new FinishHUD(game.batch, atlas);
+        if (this instanceof FinaleMap)
+            finishHUD = new FinishGameHUD(game.batch, atlas);
+        else
+            finishHUD = new FinishHUD(game.batch, atlas);
+
         finishLevelCutscene = new FinishLevelCutscene(this, game.batch, gameCamera.getViewport(), player);
-        lastBackgroundIndex = map.getLayers().getIndex("Background 1");
+
+        MapLayer schwebeBahnLayer = map.getLayers().get("Schwebebahn");
+        if (schwebeBahnLayer != null)
+            lastBackgroundIndex = map.getLayers().getIndex("Schwebebahn");
     }
 
 
@@ -402,12 +410,20 @@ public abstract class LevelScreen implements Screen {
     private void renderWorld(float dt) {
         renderer.setView(gameCamera.getCamera());
 
-        for (int i = 0; i < lastBackgroundIndex; i++)
-            renderer.render(new int[] {i});
-        if (finishLevelCutscene.isPlaying())
-            finishLevelCutscene.render(delta);
-        for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
-            renderer.render(new int[] { i });
+        if (lastBackgroundIndex != 0) {
+            for (int i = 0; i < lastBackgroundIndex; i++)
+                renderer.render(new int[] {i});
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+            for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
+                renderer.render(new int[] { i });
+        } else {
+            renderer.render();
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+        }
+
+
 
         if (debugRendererEnabled)
             b2dr.render(world, gameCamera.getCamera().combined);
@@ -590,8 +606,6 @@ public abstract class LevelScreen implements Screen {
         finished = true;
         gameIsPaused = true;
         finishLevelCutscene.play();
-
-        activeShader = pauseShader;
     }
 
     public void setFinishHUD() {
