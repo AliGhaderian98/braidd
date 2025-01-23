@@ -35,6 +35,7 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx

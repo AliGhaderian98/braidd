@@ -440,10 +440,9 @@ public class WorldContactListener implements ContactListener {
     private void patrollingEnemyWithWall(UserData userDataA, UserData userDataB) {
         if ("SideSensor".equals(userDataA.getName()) || "SideSensor".equals(userDataB.getName())) {
             UserData sideSensor = "SideSensor".equals(userDataA.getName()) ? userDataA : userDataB;
-            if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()))  {
-                PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
-                enemy.changeDirection();
-            } else if ("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))  {
+            if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()) ||
+                "Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()) ||
+                "EnemyBody".equals(userDataA.getName()) || "EnemyBody".equals(userDataB.getName()))  {
                 PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
                 enemy.changeDirection();
             }

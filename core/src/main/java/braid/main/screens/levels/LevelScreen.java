@@ -64,7 +64,7 @@ public abstract class LevelScreen implements Screen {
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused = false;
-    public static boolean debugRendererEnabled = true;
+    public static boolean debugRendererEnabled = false;
     //public static boolean loadedMap = false;
 
     protected final PlayerInputHandler inputHandler;
