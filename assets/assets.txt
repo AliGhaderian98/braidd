@@ -6,6 +6,8 @@ MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
 StartScreen.png
+audio/music/ArkadenSoundtrack.mp3
+audio/music/HBF.mp3
 audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.mp3
 audio/music/WEGZURUNI/FutureMap.m4a
@@ -22,6 +24,7 @@ audio/sound/jump.mp3
 audio/sound/kill.mp3
 audio/sound/land.mp3
 audio/sound/menuSound.mp3
+maps/Arkadenmap.tmx
 maps/HBF.tmx
 maps/Schlossburg.tmx
 maps/UniLevel.tmx
@@ -60,6 +63,10 @@ maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/tilesets/Arkaden/City.tsx
+maps/tilesets/Arkaden/Shopping_Mall.tsx
+maps/tilesets/Arkaden/images/City.png
+maps/tilesets/Arkaden/images/shopping mall.jpg
 maps/tilesets/HBF.tmx
 maps/tilesets/HBF/Dungeon Tile Set.png
 maps/tilesets/HBF/Dungeon Tile Set.tsx
@@ -729,6 +736,15 @@ sprites/animals/rat-run_01.png
 sprites/animals/rat-run_02.png
 sprites/animals/rat-run_03.png
 sprites/animals/rat-run_04.png
+sprites/arkaden/Security-Guy_01.png
+sprites/arkaden/Security-Guy_02.png
+sprites/arkaden/Security-Guy_03.png
+sprites/arkaden/Security-Guy_04.png
+sprites/arkaden/wolf-walk_01.png
+sprites/arkaden/wolf-walk_02.png
+sprites/arkaden/wolf-walk_03.png
+sprites/arkaden/wolf-walk_04.png
+sprites/arkaden/wolf-walk_05.png
 sprites/ball/ball_01.png
 sprites/ball/ball_02.png
 sprites/ball/ball_03.png
