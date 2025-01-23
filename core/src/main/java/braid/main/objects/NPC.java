@@ -44,6 +44,7 @@ public class NPC extends InteractiveGameObject{
         defineBody();
         fixture.setUserData(new UserData("NPC", this));
         setSprite(screen.getAtlas());
+        System.out.println("spawnNPC" );
     }
 
     public void setEvent(EventListener event) {
@@ -91,7 +92,10 @@ public class NPC extends InteractiveGameObject{
     public void trigger(boolean trigger) {
 
         if (this.trigger != trigger) {
+            System.out.println("preswitch trigger" + type);
+
             switch (type) {
+
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);

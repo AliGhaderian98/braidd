@@ -5,7 +5,9 @@ import braid.main.tools.UserData;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
+
+import static braid.main.Braid.PPM;
 
 public class Button extends InteractiveGameObject {
     private enum ButtonState {
@@ -14,8 +16,10 @@ public class Button extends InteractiveGameObject {
     private final TiledMap map;
     private ButtonState buttonState;
     private final String actionType;
-    private String targetName;
-    private EventListener event;
+    private final String targetName;
+    private final EventListener event;
+    private final Rectangle boundary;
+    protected Body body;
 
     public Button(World world, Rectangle boundary, TiledMap map, String actionType, String targetName, EventListener event) {
         super(world, boundary, true);
@@ -24,6 +28,9 @@ public class Button extends InteractiveGameObject {
         this.actionType = actionType;
         this.event = event;
         this.targetName = targetName;
+        this.boundary = boundary;
+
+        System.out.println("spawnButton" + actionType);
 
         fixture.setUserData(new UserData("Button", this));
     }

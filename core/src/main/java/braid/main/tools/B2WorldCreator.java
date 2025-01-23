@@ -238,9 +238,8 @@ public class B2WorldCreator {
     private void spawnButtons() {
         MapLayer buttonLayer = map.getLayers().get("Buttons");
         if (buttonLayer != null){
-            for(MapObject object : buttonLayer.getObjects()) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            for(MapObject object : buttonLayer.getObjects()) {
                 Rectangle boundary = ((RectangleMapObject) object).getRectangle() ;
                 String actionType = (String) object.getProperties().get("actionType");
                 String targetName = (String) object.getProperties().get("targetName");

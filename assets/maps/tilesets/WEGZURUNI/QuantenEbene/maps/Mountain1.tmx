@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="36" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="19">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="36" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="20">
  <tileset firstgid="1" source="../tilesets/Mountain.tsx"/>
  <tileset firstgid="2" source="../tilesets/Mountain2.tsx"/>
  <tileset firstgid="3" source="../tilesets/Mounta.tsx"/>
@@ -96,17 +96,24 @@
  <objectgroup id="7" name="End"/>
  <objectgroup id="8" name="Enemies"/>
  <objectgroup id="9" name="NPCs">
-  <object id="5" template="../../../../object-templates/NPC.tx" x="21.0833" y="256.25">
+  <object id="5" template="../../../../object-templates/NPC.tx" x="22.1742" y="258.523">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Past"/>
+    <property name="text" value="Zur Vergangenheit reisen?"/>
    </properties>
   </object>
-  <object id="8" template="../../../../object-templates/NPC.tx" x="20.6667" y="256.334">
+  <object id="8" template="../../../../object-templates/NPC.tx" x="22.0303" y="258.879">
    <properties>
     <property name="Name" value="PastMap"/>
     <property name="Type" value="DoorNPC"/>
     <property name="text" value="PastDoor"/>
+   </properties>
+  </object>
+  <object id="19" template="../../../../object-templates/NPC.tx" x="260.667" y="258" width="313.333" height="32">
+   <properties>
+    <property name="Name" value="People"/>
+    <property name="Type" value="TalkingNPC"/>
+    <property name="text" value="WTF?!?!? Wo bin ich hier gelandet????"/>
    </properties>
   </object>
  </objectgroup>
