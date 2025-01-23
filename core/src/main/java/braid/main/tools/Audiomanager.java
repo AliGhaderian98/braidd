@@ -81,6 +81,13 @@ public class Audiomanager {
          */
         audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
 
+        /*
+            main theme GTA San Andreas
+            License: copyrighted
+         */
+        audiomanager.load("audio/music/Freudenberg.mp3", Music.class);
+
+
        /*
        licence: ArkadenSoundtrack.mp3
        Gentle Soft Lo-Fi Hip Hop | Vlog 2.0 by Alex-Productions

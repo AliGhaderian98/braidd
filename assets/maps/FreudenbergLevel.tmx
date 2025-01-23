@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="62">
+ <tileset firstgid="1" source="tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx"/>
+ <tileset firstgid="97" source="tilesets/FreudenBerg/Blue Sky.tsx"/>
+ <tileset firstgid="2122" source="tilesets/FreudenBerg/Door.tsx"/>
+ <tileset firstgid="2564" source="tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx"/>
+ <tileset firstgid="3236" source="tilesets/FreudenBerg/Snow.tsx"/>
+ <tileset firstgid="3317" source="tilesets/FreudenBerg/floor.tsx"/>
+ <tileset firstgid="3733" source="tilesets/FreudenBerg/Car.tsx"/>
+ <tileset firstgid="3887" source="tilesets/FreudenBerg/Cloud 2.tsx"/>
+ <layer id="6" name="Sky" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyV01N0HwYYxuGsTWrO9VxbKVLbtm3bttuktpmmtjHVNud6LvdcbCf/233nPOe8l7+bLzRmUFA+8lOAgoRRiMIUoSjFKE4JSlKK0pShLOUoTwUqUonKVKEq1ahODWpSi9rUoS71qE8DGhL6b1dLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rRmz70pR/9GcBABjGYIQxlGMMZwUhGMZoxjGVcQNc0pjODcCKYySxmM4e5zGM+C1jIIhazhKUsYzkrWMkqVrOGtaxjPRuIZCNRbGIzW9jKNrYHdO3nAAc5xGGOcJRjHOdLvuJrvuFbTnCSU5zmDGc5x3kucJFLXOYKV7nGdW5wk1vc5g53ucf9gK4HPOQRj3nCU57xK7/xO3/wJ3/xN895wUte8Zo3BAUHBb1FDGISTAixiE0c4hKP+CQgIYlITBKSBkd3JbOTk4KUpCI1afiIj/mET/mMz/mCtKQjPRnISCYyk4WsZCM7OchJLnKTh7yEko/8FKAgYRQKju4qRWnKUJZylKcCFalEZapQlWpUpwY1qUVt6lCXetSnAQ1pRGOa0JRmNKcFLWlFa9rQlna0D+jqTg960ove9KEv/ejPAAYyiMEMYSjDGM4IRjKK0YxhLOMYzwQmMonJTGEq05jODMKJYCazAroWsZglLGUZy1nBSlaxmjWsZR3r2UAkG4liE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcLRgK4TnOQUpznDWc5xngtc5BKXucJVrnGdG9zkFre5w13ucZ/v+J4f+JGf+JlfeMBDHvGYJzzlWUDXc17wkle85g1BIf6QGMQkmBBiEZs4xCUe8UlAQhKRmCQk5W3e4V3e430+4EOSkZwUpCQVqUkTEt2V1k5HejKQkUxkJgtZyUZ2cpCTXOQmD3kJJR/5KUBBwihEYYpQlGIUpwQlKUVpylCWcpSnQkh0Vw1qUova1KEu9ahPAxrSiMY0oSnNaE4LWtKK1rShLe1oTwc60onOdKEr3ehOD3rSi970oW9A11CGMZwRjGQUoxnDWMYxnglMZBKTmcJUpjGdGYQTwUxmMZs5zGUe81nAQhaxmCUsZRnLWRHQtYFINhLFJjazha1sYzs72MkudrOHvexjPwc4yCEOc4SjHOM4//f+6/oHiWksZA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztzltPz3EcB/Afl3VLihS2bslWOaQcHoC0iZQSD8BhSwcRegBhQypyeAAOm4goeQBhUyFFPQBqo5JTL9f9+m2/G+vi/9leF5/Pd+/v5xMEiUpUov5nLUsKguWksIJU0ljJKtJZTQaZrGEt65Lm/7XebAPZbAx5X6iicjn6XPLYxGa2sJV8tlFAIdvZwU52hezfbVbEHopj3BeV26svYR/7KeUAZZRzkAoqOUQVhzkSsv+o2TGOcyLGfVG5av1JaqiljnpO0cBpztDIWc5xnqaQ/c1mF7jIpRj3ReUu669wlRau0Uob7VznBh3c5Ba3uROy/67ZPe7zIMZ9UbmH+k4e8ZgunvCUbp7xnB56eUEfL0P295u94jVvYtwXlXurH2CQId7xng8M85ERRvnEZ8YYD9n/xewrE0zGuC8q903/nSmmmeEHs/zkF7/5w99/2eQgWMLS5Pl70ha5rEVuDmRAbiA=
+  </data>
+ </layer>
+ <layer id="2" name="Graphics" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt0jluwkAYQOFhKSxbwsBFwAlIEI6QKkSsOQKkZK+BE5AQOAeE5SbASQIFz4pTBGwXFPaA+KVPo9HI1rM8Qtzn1iahC5GEoftdYj+PdKWQlrTvb7KS910y5p14uNLv8qI9o/Hf8YSc9v/sdO/HlGmooIo3q6fAWkRJgr42DR100bN6GqxNtDzqe1GEyONVOT8b0/CFCaZWz4j1A58ufQHuXRAhhB3u4EYVYoud6vwe89kaXXW82/QtaFhihbX2u59hjm+XPp33RhFD3KHvh649Di595vTpGmAIIyK3Z8kdASxUN2k=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Signs"/>
+ <objectgroup id="4" name="End">
+  <object id="49" x="456.084" y="199.421"/>
+  <object id="53" x="603.804" y="179.11" width="35.0834" height="27.6974"/>
+ </objectgroup>
+ <objectgroup id="11" name="Ladder"/>
+ <objectgroup id="3" name="Ground" opacity="0.49">
+  <object id="13" x="0" y="212" width="639.333" height="28.6667"/>
+  <object id="23" x="336" y="82" width="240" height="16"/>
+  <object id="25" x="223.33" y="96.6667" width="64.6667" height="15.3333"/>
+  <object id="29" x="-2.67" y="96.33" width="67.3333" height="16"/>
+  <object id="31" x="364.667" y="164" width="56.6667" height="8.66667"/>
+  <object id="32" x="494.667" y="166.667" width="57.3333" height="8.66667"/>
+  <object id="38" x="638.887" y="14.6522" height="225.392"/>
+  <object id="39" x="293.593" y="182.187" width="43.0849" height="14.1565"/>
+  <object id="40" x="155.721" y="153.875" width="14.772" height="1.231"/>
+  <object id="47" x="84.3233" y="136.025" width="16.6185"/>
+ </objectgroup>
+ <objectgroup id="10" name="Walls">
+  <object id="61" x="-0.666667" y="16" width="0.666667" height="207.667"/>
+ </objectgroup>
+ <objectgroup id="9" name="Brick"/>
+ <objectgroup id="5" name="Enemies">
+  <object id="44" template="object-templates/IdleEnemy.tx" x="305.287" y="165.569">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
+  <object id="46" template="object-templates/IdleEnemy.tx" x="156.952" y="137.256">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
+  <object id="45" template="object-templates/patrollingEnemy.tx" x="240.044" y="79.3993">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Items">
+  <object id="54" x="-25.2354" y="-31.3904"/>
+  <object id="55" template="object-templates/key.tx" x="17.234" y="79.3993"/>
+  <object id="56" template="object-templates/page.tx" x="-0.615498" y="78.7838"/>
+  <object id="57" template="object-templates/page.tx" x="35.0834" y="79.3993"/>
+  <object id="58" template="object-templates/page.tx" x="257.278" y="79.3993"/>
+  <object id="59" template="object-templates/page.tx" x="558.257" y="63.3963"/>
+  <object id="60" template="object-templates/page.tx" x="406.844" y="150.797"/>
+ </objectgroup>
+ <objectgroup id="7" name="MovingPlatform"/>
+</map>
