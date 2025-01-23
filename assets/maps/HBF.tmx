@@ -82,7 +82,7 @@
   </object>
   <object id="141" template="object-templates/sign.tx" x="580" y="95">
    <properties>
-    <property name="Text" value="Versuche, Gleriter zu fangen, um das Level abzuschließen."/>
+    <property name="Text" value="Versuche, den Gleiter zu fangen, um das Level abzuschließen."/>
    </properties>
   </object>
  </objectgroup>
@@ -160,7 +160,7 @@
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="113" template="object-templates/patrollingEnemy.tx" x="532" y="222.25">
+  <object id="113" template="object-templates/patrollingEnemy.tx" x="532" y="219.25">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
@@ -200,7 +200,7 @@
    </properties>
   </object>
   <object id="104" template="object-templates/GoalPosition.tx" x="1131" y="218" visible="1"/>
-  <object id="105" template="object-templates/Schalter.tx" x="980" y="293"/>
+  <object id="105" template="object-templates/Schalter.tx" x="980.25" y="281.5"/>
   <object id="122" template="object-templates/GoalPosition.tx" x="1235" y="139"/>
   <object id="124" template="object-templates/GoalPosition.tx" x="1070" y="138"/>
   <object id="121" template="object-templates/movingPlatformType2.tx" x="1203" y="205" width="61.5" height="18">
