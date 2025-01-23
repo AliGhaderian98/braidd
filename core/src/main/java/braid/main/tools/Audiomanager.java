@@ -75,7 +75,6 @@ public class Audiomanager {
                 https://freesound.org
          */
         audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
-        audiomanager.finishLoading();
 
        /*
        licence: ArkadenSoundtrack.mp3
@@ -84,6 +83,8 @@ public class Audiomanager {
         Music promoted by https://onsound.eu/
         */
         audiomanager.load("audio/music/ArkadenSoundtrack.mp3", Music.class);
+
+        audiomanager.finishLoading();
     }
 
 }

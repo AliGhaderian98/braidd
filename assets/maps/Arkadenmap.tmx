@@ -186,11 +186,31 @@ You need a Key to open the Door!</property>
   </data>
  </layer>
  <objectgroup id="8" name="Enemies">
-  <object id="16" template="object-templates/patrollingEnemy.tx" x="572.333" y="240.625"/>
-  <object id="17" template="object-templates/patrollingEnemy.tx" x="383.459" y="367.958"/>
-  <object id="90" template="object-templates/patrollingEnemy.tx" x="1300.18" y="463.818"/>
-  <object id="91" template="object-templates/patrollingEnemy.tx" x="1407.76" y="319.485"/>
-  <object id="92" template="object-templates/patrollingEnemy.tx" x="1520.18" y="224.364"/>
+  <object id="16" template="object-templates/patrollingEnemy.tx" x="572.333" y="240.625">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="17" template="object-templates/patrollingEnemy.tx" x="383.459" y="367.958">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="90" template="object-templates/patrollingEnemy.tx" x="1300.18" y="463.818">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="91" template="object-templates/patrollingEnemy.tx" x="1407.76" y="319.485">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="92" template="object-templates/patrollingEnemy.tx" x="1520.18" y="224.364">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
   <object id="108" template="object-templates/unhingedEnemy.tx" x="740.667" y="757"/>
   <object id="109" template="object-templates/unhingedEnemy.tx" x="703" y="759"/>
   <object id="110" template="object-templates/unhingedEnemy.tx" x="659.667" y="757.667"/>
