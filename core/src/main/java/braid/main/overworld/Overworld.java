@@ -375,6 +375,7 @@ public class Overworld implements Screen {
 
     @Override
     public void resume() {
+        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
         KeyBindings.loadKeyBindings();
         setupInput();
