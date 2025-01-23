@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="164">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="168">
  <tileset firstgid="1" source="tilesets/Arkaden/City.tsx"/>
  <tileset firstgid="2171" source="tilesets/Arkaden/Shopping_Mall.tsx"/>
  <tileset firstgid="3816" source="tilesets/sheet.tsx"/>
@@ -19,7 +19,7 @@
  </layer>
  <layer id="3" name="GroundLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt201OwkAYBuAu3KiLqT879Tjex79DqOjOnwuJx2DnDXTvR2JjwaoUwRbmeZI3BZKWSecLmZkORQEAAADNNlLXLSBn6g9oa7Msiq3Idtl1S8jRbtTdXmRf/a296xijDCI3PRqrrGL91e9jH+8pszuIujuMHH3UX70/b/UpLb2l+QMA5OO7+YS5RfeqPjiLnOsHAIDOVeOyiz+OzS7j/KvamBtytKznHoMf5raeswBdSGVRlJGdFdp/wPzq4zwAAIDcvNp/2ivH6WtyUa0Lt1kfbjpnltfWnZuN/8s8HQAAgFw07TN8SZNHWIRR+jyO1FZ2TqLPT9Pkb85/fNZ12+mHu+iL+8hD5HGJmf6eRXiK6wwjzw3X/+39WNPa56pkXbwDXat7Ow==
+   eJzt201uwjAQhuEsUMtu0iv0Lr0C56Athyh/O1ouVDgGu94A9kwWURwwJbQktjPvI30KIOXXo8h2QpYBAAAAAOA3kNBHAMuov7Q85Fn2qBnmoY8EFonWXa55ov4QAPVnz0z7KHPNIoK+Ssr1517HmK4pmrtUf257LmlT3OggzZLy/Q/xalp/boB7+Uv9UYew7NJ4grFFeGUbvGneaQcAAIDgyn7Z5J99sw9df+r0uQGL2nruMf9lbMtzFgAh8BzOFrefBwAAAADW7Hn/Kiovch4rynnhW+aHfes0+cy8s1/xX+bTAAAQg2epAnRtJFWArlF/3fK9Z/gj9aUl1F97dlItd1xfrz7X31jP6VXq95wufgt97Cnpc/2t9Jw+NV+adYs53c89fOt2NpqtZ/vXvhd8c5+ppC+ON5iZlg==
   </data>
  </layer>
  <objectgroup id="4" name="Ground">
@@ -27,8 +27,8 @@
   <object id="10" x="464" y="320.042" width="64" height="15.625"/>
   <object id="11" x="367.958" y="384.208" width="47.625" height="16.375"/>
   <object id="13" x="991.917" y="80" width="16" height="479.333"/>
-  <object id="14" x="752.083" y="192.208" width="239.625" height="15.75"/>
-  <object id="22" x="944" y="127.969" width="47.9394" height="64.0909"/>
+  <object id="14" x="751.583" y="192.208" width="160.625" height="47.25"/>
+  <object id="22" x="912" y="111.969" width="47.9394" height="127.591"/>
   <object id="30" x="0.333333" y="480" width="79.75" height="31.6667"/>
   <object id="32" x="0.333333" y="79" height="528.969"/>
   <object id="34" x="0.545455" y="80" width="1759.62"/>
@@ -54,6 +54,8 @@
   <object id="143" x="672.148" y="575.977" width="15.8167" height="15.7955"/>
   <object id="159" x="351.75" y="160.75" width="48.25" height="15.25"/>
   <object id="161" x="176" y="319.333" width="47.6667" height="16"/>
+  <object id="164" x="1680.5" y="528.5" width="48" height="95.5"/>
+  <object id="167" x="752" y="224.5" width="239.5" height="15.5"/>
  </objectgroup>
  <objectgroup id="7" name="MovingPlatform">
   <object id="19" template="object-templates/SchalterMovingPlatform.tx" x="666" y="288.667">
@@ -84,13 +86,13 @@
    </properties>
   </object>
   <object id="54" template="object-templates/GoalPosition.tx" x="446" y="152"/>
-  <object id="96" template="object-templates/SchalterMovingPlatform.tx" x="1608.91" y="582.545">
+  <object id="96" template="object-templates/SchalterMovingPlatform.tx" x="1574.91" y="580.545">
    <properties>
     <property name="goalPosition" type="object" value="98"/>
     <property name="schalter" type="object" value="97"/>
    </properties>
   </object>
-  <object id="97" template="object-templates/Schalter.tx" x="1633.18" y="577.788"/>
+  <object id="97" template="object-templates/Schalter.tx" x="1630.18" y="578.288"/>
   <object id="98" template="object-templates/GoalPosition.tx" x="1497.45" y="488.182"/>
   <object id="99" template="object-templates/movingPlatformType2.tx" x="1094.67" y="172.333">
    <properties>
@@ -154,13 +156,12 @@
  <objectgroup id="11" name="Signs">
   <object id="39" template="object-templates/sign.tx" x="783.75" y="176.125">
    <properties>
-    <property name="Text">Take the Key and go to City Arkaden but first collect the available pages 
-</property>
+    <property name="Text" value="nehmen Sie den Schlüssel und gehen Sie zu den City Arkaden, aber versuchen Sie vorher, die verfügbaren Pages zu sammeln!"/>
    </properties>
   </object>
   <object id="40" template="object-templates/sign.tx" x="432" y="593.667">
    <properties>
-    <property name="Text" value="Ritalin is a Power-up Item that allows you to jump higher! "/>
+    <property name="Text" value="Ritalin ist ein Power-up-Item, das es Ihnen ermöglicht, höher zu springen!"/>
    </properties>
   </object>
   <object id="116" template="object-templates/sign.tx" x="1039.67" y="608.333">
@@ -170,13 +171,14 @@
   </object>
   <object id="122" template="object-templates/sign.tx" x="943.932" y="592.068">
    <properties>
-    <property name="Text">City Arkaden this Way!
-You need a Key to open the Door!</property>
+    <property name="Text">City Arkaden – diese Richtung!
+Sie benötigen einen Schlüssel, um die Tür zu öffnen!</property>
    </properties>
   </object>
   <object id="144" template="object-templates/sign.tx" x="784.182" y="592">
    <properties>
-    <property name="Text" value="Attention! Find the Switches and turn them on with &quot;E&quot;"/>
+    <property name="Text">Achtung!
+Finden Sie die Schalter und aktivieren Sie sie mit “E”.</property>
    </properties>
   </object>
  </objectgroup>
@@ -243,8 +245,8 @@ You need a Key to open the Door!</property>
    </properties>
   </object>
   <object id="152" template="object-templates/ritalin.tx" x="608" y="558"/>
-  <object id="153" template="object-templates/key.tx" x="975.667" y="110"/>
-  <object id="154" template="object-templates/key.tx" x="1019.67" y="319.333"/>
+  <object id="153" template="object-templates/key.tx" x="975.167" y="204"/>
+  <object id="154" template="object-templates/key.tx" x="1742.17" y="605.333"/>
   <object id="158" template="object-templates/ritalin.tx" x="1238" y="462.667"/>
  </objectgroup>
  <objectgroup id="14" name="End">
@@ -257,16 +259,17 @@ You need a Key to open the Door!</property>
   <object id="120" template="object-templates/door.tx" x="1743.67" y="112.333"/>
  </objectgroup>
  <objectgroup id="6" name="Ladder">
-  <object id="55" x="928.25" y="127.25" width="15.75" height="65"/>
+  <object id="55" x="895.75" y="109.75" width="15.75" height="82"/>
   <object id="59" x="544.208" y="254.667" width="16" height="49.25"/>
   <object id="62" x="448.125" y="319.75" width="15.75" height="64"/>
   <object id="75" x="1040.18" y="336" width="15.8182" height="128"/>
   <object id="78" x="1648" y="160" width="15.8182" height="63.8182"/>
   <object id="79" x="1456.18" y="239.818" width="15.6364" height="96.1818"/>
+  <object id="166" x="1664" y="528.5" width="16.5" height="95"/>
  </objectgroup>
  <layer id="5" name="LadderLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt10ERwzAQBEEzCJhQCAXzpxIC8SMP1955uxHIpdFZOg4AAAAAgN3er/QKaPbRH0Eb+zOzn+NcuJcbzwzPoT+SNs5sgF+8J+Zq2Bv3ubka9qbhG7dquGvrjyT95TXc8640zPjpJs6A5jPRZmJ/E9fEPSb+g/RHkv5I0h9J+iNJfyRNfBMBAAAAAAAA/OsLECUJaA==
+   eJzt2cENgzAQRFE6SDFpIS3Qfyu55sIlEsyu5r0KjPwxNj4OAAAAAPjf+5UeAc0++iNIfyRt7s/eYb9z8RxufnfYT38kbV67AX45T8zVMDf2c3M1zE3DM27VsNfWH0n6y2vY511pWOOnm7gGNL8TbSb2N3FM3GPiN0h/JOmPJP2RpD+S9EfSxDMRAADA09xNk+TfEEn6I0l/JOmPJHczcJ8vTdALrQ==
   </data>
  </layer>
 </map>
