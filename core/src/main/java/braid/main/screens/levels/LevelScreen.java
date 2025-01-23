@@ -573,7 +573,7 @@ public abstract class LevelScreen implements Screen {
         finished = true;
         gameIsPaused = true;
         activeShader = pauseShader;
-        finishHUD = new FinishGameHUD(game.batch, atlas);
+        finishHUD = new FinishHUD(game.batch, atlas);
     }
 
     @Override
