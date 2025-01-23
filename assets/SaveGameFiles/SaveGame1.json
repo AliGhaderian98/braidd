@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: LUISENVIERTEL
+lastLevel: HBF
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -46,7 +46,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean

@@ -144,8 +144,8 @@ public class IdleEnemy extends Enemy implements EnemyAI{
             }
 
             default -> {
-                sprite = new Sprite(atlas.findRegion("lion-idle"));
-                idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
+                sprite = new Sprite(atlas.findRegion("evil-lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("evil-lion-idle"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0, idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,

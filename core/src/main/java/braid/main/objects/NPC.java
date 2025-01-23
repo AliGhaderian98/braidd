@@ -45,7 +45,6 @@ public class NPC extends InteractiveGameObject{
         defineBody();
         fixture.setUserData(new UserData("NPC", this));
         setSprite(screen.getAtlas());
-        System.out.println("spawnNPC" );
     }
 
     public void setEvent(EventListener event) {

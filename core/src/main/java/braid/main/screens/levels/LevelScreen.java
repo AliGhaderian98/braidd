@@ -768,7 +768,6 @@ public abstract class LevelScreen implements Screen {
         music.setLooping(true);
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.setPosition(0);
-        System.out.println(music);
         music.play();
     }
 

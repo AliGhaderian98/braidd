@@ -43,6 +43,7 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -932,6 +933,16 @@ sprites/circle-timer/circle-timer_10.png
 sprites/circle-timer/circle-timer_11.png
 sprites/circle-timer/circle-timer_12.png
 sprites/circle-timer/circle-timer_13.png
+sprites/evil-lion/evil-lion-idle_1.png
+sprites/evil-lion/evil-lion-idle_2.png
+sprites/evil-lion/evil-lion-idle_3.png
+sprites/evil-lion/evil-lion-idle_4.png
+sprites/evil-lion/evil-lion-run_1.png
+sprites/evil-lion/evil-lion-run_2.png
+sprites/evil-lion/evil-lion-run_3.png
+sprites/evil-lion/evil-lion-run_4.png
+sprites/evil-lion/evil-lion-run_5.png
+sprites/evil-lion/evil-lion-run_6.png
 sprites/freudenberg/freudenberg-guy_01.png
 sprites/freudenberg/freudenberg-guy_02.png
 sprites/freudenberg/freudenberg-guy_03.png
@@ -1053,6 +1064,7 @@ sprites/misc/door-open.png
 sprites/misc/drunkenguy.png
 sprites/misc/hammer.png
 sprites/misc/key.png
+sprites/misc/longplattform.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
 sprites/misc/plattform.png

@@ -35,7 +35,6 @@ public class EventListener {
 
     public void hasPressedAllButtons() {
         repairButtonCount--;
-        System.out.println("ButtonCountAll: " + repairButtonCount );
         if (repairButtonCount == 0) {
             this.check1 = true;
             if (canCompleteMap()) {
@@ -46,7 +45,6 @@ public class EventListener {
 
     public void hasTriggeredNPC(boolean trigger) {
         this.check2 = trigger;
-        System.out.println("hastriggerNPC" );
 
         if (canCompleteMap()) {
             loadMap();
@@ -67,11 +65,9 @@ public class EventListener {
         if (enemies.isEmpty()) return false;
         for (Enemy enemy : enemies) {
             if (!enemy.isDead()) {
-                System.out.println("false");
                 return false;
             }
         }
-        System.out.println("true");
         return true;
     }
 
@@ -81,7 +77,6 @@ public class EventListener {
 
     public void addButtonCount() {
         repairButtonCount++;
-        System.out.println("ButtonCountAdd: " + repairButtonCount );
 
     }
 

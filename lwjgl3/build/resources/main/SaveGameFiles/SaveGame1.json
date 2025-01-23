@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: UNI
+lastLevel: LUISENVIERTEL
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 4116457
+Playtime: 4239624
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -261,8 +261,8 @@ BestTimes: {
 	BAYER: 3750
 	OBERBARMEN: 0
 	ZOO: 0
-	FREUDENBERG: 0
-	HBF: 61863
-	LUISENVIERTEL: 0
+	FREUDENBERG: 5383
+	HBF: 11759
+	LUISENVIERTEL: 35713
 }
 }
