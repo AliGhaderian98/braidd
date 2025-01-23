@@ -80,6 +80,15 @@ public class Audiomanager {
                 https://freesound.org
          */
         audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
+
+       /*
+       licence: ArkadenSoundtrack.mp3
+       Gentle Soft Lo-Fi Hip Hop | Vlog 2.0 by Alex-Productions
+        https://youtu.be/Lt044EWPklg
+        Music promoted by https://onsound.eu/
+        */
+        audiomanager.load("audio/music/ArkadenSoundtrack.mp3", Music.class);
+
         audiomanager.finishLoading();
     }
 
