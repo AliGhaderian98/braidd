@@ -120,6 +120,8 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
+    private FinishLevelCutscene finishLevelCutscene;
+    private int lastBackgroundIndex;
 
 
 
@@ -231,6 +233,10 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages, previouslyCollectedPages);
+
+        finishHUD = new FinishHUD(game.batch, atlas);
+        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, gameCamera.getViewport(), player);
+        lastBackgroundIndex = map.getLayers().getIndex("Background 1");
     }
 
 
@@ -313,7 +319,7 @@ public abstract class LevelScreen implements Screen {
 
         applyPostProcessing(activeShader);
 
-        if (finished)
+        if (finishLevelCutscene.isFinished())
             renderFinishHUD();
 
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
@@ -395,7 +401,14 @@ public abstract class LevelScreen implements Screen {
 
     private void renderWorld(float dt) {
         renderer.setView(gameCamera.getCamera());
-        renderer.render();
+
+        for (int i = 0; i < lastBackgroundIndex; i++)
+            renderer.render(new int[] {i});
+        if (finishLevelCutscene.isPlaying())
+            finishLevelCutscene.render(delta);
+        for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
+            renderer.render(new int[] { i });
+
         if (debugRendererEnabled)
             b2dr.render(world, gameCamera.getCamera().combined);
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
@@ -576,7 +589,14 @@ public abstract class LevelScreen implements Screen {
         victoryMusic.play();
         finished = true;
         gameIsPaused = true;
+        finishLevelCutscene.play();
+
         activeShader = pauseShader;
+    }
+
+    public void setFinishHUD() {
+        activeShader = pauseShader;
+        finishHUD.updateHUD();
 
         if (this instanceof FinaleMap)
             finishHUD = new FinishGameHUD(game.batch, atlas);
@@ -610,8 +630,8 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
-        if (finished)
-            finishHUD.resize(width, height);
+        finishHUD.resize(width, height);
+        finishLevelCutscene.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 

@@ -2,6 +2,7 @@ package braid.main.screens.huds;
 
 import braid.main.Braid;
 import braid.main.tools.TextFontManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -63,37 +64,29 @@ public class FinishHUD implements Disposable {
         table.add(timeLabel).padTop(100);
 
         stage.addActor(table);
+
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    protected StringBuilder formatTime(long time) {
+
+    protected String formatTime(long time) {
         long hours = (time / (1000 * 60 * 60)) % 24;
         long minutes = (time / (1000 * 60)) % 60;
         long seconds = (time / 1000) % 60;
         long milliseconds = (time % 1000)/10;
 
-        StringBuilder formattedTime = new StringBuilder();
+        return String.format("%d:%02d:%02d.%02d", hours, minutes, seconds, milliseconds);
+    }
 
-        if (hours > 0) {
-            formattedTime.append(String.format("%d:", hours));
-        }
-        if (minutes > 0 || hours > 0) {
-            formattedTime.append(String.format("%02d:", minutes));
-        }
-        if (seconds > 0 || minutes > 0 || hours > 0) {
-            formattedTime.append(String.format("%02d", seconds));
-        }
-        if (milliseconds > 0) {
-            if (!formattedTime.isEmpty()) {
-                formattedTime.append(".");
-            }
-            formattedTime.append(String.format("%02d", milliseconds));
-        }
-        return formattedTime;
+    public void updateHUD() {
+        timeLabel.setText("time: "+formatTime(LevelHUD.getElapsedTime()));
+        pageLabel.setText(String.format("collected pages: %d/%d", LevelHUD.getCollectedPages(), LevelHUD.getMaxPages()));
     }
 
 
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        stage.getCamera().update();
     }
 
     @Override
