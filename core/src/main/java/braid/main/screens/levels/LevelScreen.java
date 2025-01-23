@@ -130,6 +130,9 @@ public abstract class LevelScreen implements Screen {
         gameIsPaused = false;
         setLevelName();
 
+        if (Overworld.music.isPlaying())
+            Overworld.music.stop();
+
         items = new Array<>();
 
         subtitleManager = new SubtitleManager(this);
@@ -569,6 +572,7 @@ public abstract class LevelScreen implements Screen {
             Savemanager.saveGame(false);
         }
         music.stop();
+        player.stopSFX();
         victoryMusic.play();
         finished = true;
         gameIsPaused = true;

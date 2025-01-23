@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 1
-SaveGameName: test
+SaveGameName: testAllLevelsUnlocked
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 3921013
+Playtime: 3985365
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -38,15 +38,15 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -90,7 +90,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -122,10 +122,6 @@ Collectables: {
 	BAYER: [
 		{
 			class: java.lang.Boolean
-			value: true
-		}
-		{
-			class: java.lang.Boolean
 			value: false
 		}
 		{
@@ -134,7 +130,11 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
+		}
+		{
+			class: java.lang.Boolean
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -210,23 +210,23 @@ Collectables: {
 	HBF: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	LUISENVIERTEL: [
@@ -258,7 +258,7 @@ BestTimes: {
 	SCHLOSSBURG: 0
 	ARKADEN: 0
 	WEGZURUNI: 3811
-	BAYER: 3764
+	BAYER: 3750
 	OBERBARMEN: 0
 	ZOO: 0
 	FREUDENBERG: 0

@@ -5,14 +5,12 @@ import braid.main.Braid;
 import braid.main.overworld.Overworld;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.levels.TestLevel;
-import braid.main.tools.KeyBindings;
-import braid.main.tools.PreferencesManager;
-import braid.main.tools.Savemanager;
-import braid.main.tools.TextFontManager;
+import braid.main.tools.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -68,6 +66,11 @@ public class StartMenu extends ScreenAdapter {
 
         table.add(Startmessage).expand().bottom().left().padBottom(550).padLeft(750);
 
+        Overworld.music = Audiomanager.audiomanager.get("audio/music/lofi-loop.mp3" , Music.class);
+        Overworld.music.setLooping(true);
+        Overworld.music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        Overworld.music.setPosition(0);
+        Overworld.music.play();
     }
 
     private void loadDisplayseedings(){

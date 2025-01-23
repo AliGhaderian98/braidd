@@ -5,6 +5,7 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
+SaveScreen.png
 StartScreen.png
 audio/music/ArkadenSoundtrack.mp3
 audio/music/Freudenberg.mp3
