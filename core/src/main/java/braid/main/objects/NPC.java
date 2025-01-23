@@ -27,6 +27,7 @@ public class NPC extends InteractiveGameObject{
     private float stateTimer = 0f;
 
     private boolean trigger = false;
+    private boolean hasBeenPlayed = false;
     protected Body body;
     private EventListener event;
     SubtitleManager subtitleManager;
@@ -92,18 +93,25 @@ public class NPC extends InteractiveGameObject{
     public void trigger(boolean trigger) {
 
         if (this.trigger != trigger) {
-            System.out.println("preswitch trigger" + type);
-
             switch (type) {
 
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
-                case "MusicNPC" -> this.event.hasChangedMusic(name);
+                case "MusicNPC" -> {
+                    if (!hasBeenPlayed) {
+                        this.event.hasChangedMusic(name);
+                        setHasBeenPlayed(true);
+                    }
+                }
 
             }
             this.trigger = trigger;
         }
+    }
+
+    public void setHasBeenPlayed(boolean hasBeenPlayed) {
+        this.hasBeenPlayed = hasBeenPlayed;
     }
 
     public void setShowing(boolean showing) {
