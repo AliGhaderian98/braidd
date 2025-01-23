@@ -98,6 +98,8 @@ public class Audiomanager {
 
         audiomanager.load("audio/music/HBF.mp3", Music.class);
 
+        audiomanager.load("audio/music/Luisenviertel.mp3", Music.class);
+
         audiomanager.finishLoading();
     }
 

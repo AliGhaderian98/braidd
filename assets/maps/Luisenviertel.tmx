@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="134" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="234">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="134" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="236">
  <tileset firstgid="1" source="tilesets/Luisenviertel/Luisenviertel-Sky.tsx"/>
  <tileset firstgid="417" source="tilesets/Luisenviertel/Luisenviertel-Boden.tsx"/>
  <tileset firstgid="833" source="tilesets/Luisenviertel/Luisenviertel-1-house.tsx"/>
@@ -16,7 +16,11 @@
  </objectgroup>
  <objectgroup id="7" name="Items">
   <object id="53" template="object-templates/hammer.tx" x="432" y="192"/>
-  <object id="120" template="object-templates/page.tx" x="0" y="192"/>
+  <object id="120" template="object-templates/page.tx" x="0" y="192">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+   </properties>
+  </object>
   <object id="127" template="object-templates/page.tx" x="528" y="80">
    <properties>
     <property name="ID" type="int" value="1"/>
@@ -133,11 +137,6 @@
   <object id="204" x="2008.67" y="128.333" width="119" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="Signs">
-  <object id="190" template="object-templates/sign.tx" x="368" y="192">
-   <properties>
-    <property name="Text" value="Drücke die Interaktionstaste, um mit dem Hammer die Mauer zu zerstören"/>
-   </properties>
-  </object>
   <object id="192" template="object-templates/sign.tx" x="96" y="192">
    <properties>
     <property name="Text" value="Die Kaffeebohnen aus dem Café sind entflohen und wollen Rache!!!"/>
@@ -153,12 +152,22 @@
     <property name="Text" value="Bitte Klingeln"/>
    </properties>
   </object>
+  <object id="235" template="object-templates/TutorialSign.tx" x="368" y="192">
+   <properties>
+    <property name="Text" value="Drücke &quot;%s&quot;, um mit dem Hammer die Mauer zu zerstören."/>
+    <property name="key" value="INTERACT"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="14" name="Doors">
   <object id="129" template="object-templates/door.tx" x="1167.82" y="3.93939"/>
  </objectgroup>
  <objectgroup id="15" name="Brick">
-  <object id="74" template="object-templates/Brick.tx" x="512" y="128"/>
+  <object id="74" template="object-templates/Brick.tx" x="512" y="128">
+   <properties>
+    <property name="rewindable" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="76" template="object-templates/Brick.tx" x="784" y="144"/>
   <object id="92" template="object-templates/Brick.tx" x="784" y="48">
    <properties>
