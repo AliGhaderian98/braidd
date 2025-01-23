@@ -159,17 +159,18 @@
   <object id="11" x="864" y="0" width="16" height="367"/>
   <object id="12" x="2000" y="-4448"/>
  </objectgroup>
- <objectgroup id="7" name="Signs"/>
+ <objectgroup id="7" name="Signs">
+  <object id="37" template="../../../../object-templates/TutorialSign.tx" x="732.167" y="336.833" width="33.5" height="35.5">
+   <properties>
+    <property name="Text" value="Tutorial: Auf Rot schalten? (Bitte %s drücken!)"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="8" name="Buttons">
-  <object id="6" template="../../../../object-templates/Button.tx" x="729.913" y="332.584" width="36.25" height="35.5">
+  <object id="6" template="../../../../object-templates/Button.tx" x="730.58" y="339.251" width="36.25" height="35.5">
    <properties>
     <property name="actionType" value="toggleNPCTrigger"/>
     <property name="targetName" value=""/>
-   </properties>
-  </object>
-  <object id="37" template="../../../../object-templates/TutorialSign.tx" x="727.5" y="345.833" width="33.5" height="35.5">
-   <properties>
-    <property name="Text" value="Tutorial: Auf Rot schalten? (Bitte %s drücken!)"/>
    </properties>
   </object>
  </objectgroup>
