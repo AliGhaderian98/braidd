@@ -9,7 +9,7 @@ import braid.main.objects.Enemy;
 public class HBFLevel extends LevelScreen {
 
     public HBFLevel(Braid game) {
-        super(game, "maps/HBF.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/HBF.tmx", "packedimages/sprites.atlas", "audio/music/HBF.mp3");
         levelName = "HBF";
 
         player.setPosition(32/Braid.PPM, 48/Braid.PPM);
