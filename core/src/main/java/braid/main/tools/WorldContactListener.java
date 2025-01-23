@@ -443,6 +443,9 @@ public class WorldContactListener implements ContactListener {
             if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()))  {
                 PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
                 enemy.changeDirection();
+            } else if ("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))  {
+                PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
+                enemy.changeDirection();
             }
         }
     }
