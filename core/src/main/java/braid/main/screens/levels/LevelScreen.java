@@ -10,6 +10,7 @@ import braid.main.objects.*;
 import braid.main.enemies.*;
 import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.FinishGameHUD;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
@@ -572,7 +573,7 @@ public abstract class LevelScreen implements Screen {
         finished = true;
         gameIsPaused = true;
         activeShader = pauseShader;
-        finishHUD = new FinishHUD(game.batch, atlas);
+        finishHUD = new FinishGameHUD(game.batch, atlas);
     }
 
     @Override

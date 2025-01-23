@@ -239,6 +239,14 @@ public class Savemanager {
     return unlockedlevels;
     }
 
+    public static long SumBestTimes(Savegame savegame){
+        long sumBestTimes = 0L;
+        for(long time : savegame.BestTimes.values()){
+            sumBestTimes += time;
+        }
+        return sumBestTimes;
+    }
+
     public static int AmountFoundCollectables(Savegame savegame){
         int FoundCollectables = 0;
         for(Array<Boolean> entry : savegame.Collectables.values()){

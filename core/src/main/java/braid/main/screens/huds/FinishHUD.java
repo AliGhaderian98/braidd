@@ -20,10 +20,13 @@ public class FinishHUD implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private Image pageImage;
-    private Label finishLabel;
-    private Label pageLabel;
-    private Label timeLabel;
+    protected Label.LabelStyle TextFont;
+
+    protected Image pageImage;
+    protected Label finishLabel;
+    protected Label pageLabel;
+    protected Label timeLabel;
+    protected Table table;
 
 
     public FinishHUD(SpriteBatch batch, TextureAtlas atlas) {
@@ -33,7 +36,7 @@ public class FinishHUD implements Disposable {
         pageImage = new Image(atlas.findRegion("page"));
         pageImage.setScale(10,10);
 
-        Label.LabelStyle TextFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.WHITE);
+        TextFont = new Label.LabelStyle(TextFontManager.gettextFont(150), Color.WHITE);
 
         finishLabel = new Label("LEVEL FINISHED!", TextFont);
         finishLabel.setFontScale(2);
@@ -49,7 +52,7 @@ public class FinishHUD implements Disposable {
         scoreTable.add(pageLabel);
         scoreTable.add(pageImage).padLeft(40).padRight(160).padTop(160);
 
-        Table table = new Table();
+        table = new Table();
         table.center();
         table.setFillParent(true);
 
@@ -62,7 +65,7 @@ public class FinishHUD implements Disposable {
         stage.addActor(table);
     }
 
-    private StringBuilder formatTime(long time) {
+    protected StringBuilder formatTime(long time) {
         long hours = (time / (1000 * 60 * 60)) % 24;
         long minutes = (time / (1000 * 60)) % 60;
         long seconds = (time / 1000) % 60;
