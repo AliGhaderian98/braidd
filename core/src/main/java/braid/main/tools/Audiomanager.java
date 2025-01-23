@@ -75,6 +75,13 @@ public class Audiomanager {
                 https://freesound.org
          */
         audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
+
+        /*
+            main theme GTA San Andreas
+            License: copyrighted
+         */
+        audiomanager.load("audio/music/Freudenberg.mp3", Music.class);
+
         audiomanager.finishLoading();
     }
 

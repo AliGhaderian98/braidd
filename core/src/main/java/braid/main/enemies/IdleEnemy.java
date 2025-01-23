@@ -86,6 +86,14 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()/ Braid.PPM,
                     sprite.getRegionHeight()/Braid.PPM);
             }
+            case ("freudenberg-guy") -> {
+                sprite = new Sprite(atlas.findRegion("freudenberg-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("freudenberg-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.5f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.5f/Braid.PPM);
+            }
             case ("mushroom") -> {
                 sprite = new Sprite(atlas.findRegion("mushroom-idle"));
                 idle = new Animation<>(0.07f, atlas.findRegions("mushroom-idle"), Animation.PlayMode.LOOP);

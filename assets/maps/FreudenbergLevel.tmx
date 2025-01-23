@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="61">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="62">
  <tileset firstgid="1" source="tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx"/>
  <tileset firstgid="97" source="tilesets/FreudenBerg/Blue Sky.tsx"/>
  <tileset firstgid="2122" source="tilesets/FreudenBerg/Door.tsx"/>
@@ -36,18 +36,31 @@
   <object id="29" x="-2.67" y="96.33" width="67.3333" height="16"/>
   <object id="31" x="364.667" y="164" width="56.6667" height="8.66667"/>
   <object id="32" x="494.667" y="166.667" width="57.3333" height="8.66667"/>
-  <object id="36" x="-0.615498" y="84.9388" width="1.84649" height="157.568"/>
-  <object id="38" x="638.887" y="95.4022" height="144.642"/>
+  <object id="38" x="638.887" y="14.6522" height="225.392"/>
   <object id="39" x="293.593" y="182.187" width="43.0849" height="14.1565"/>
   <object id="40" x="155.721" y="153.875" width="14.772" height="1.231"/>
   <object id="47" x="84.3233" y="136.025" width="16.6185"/>
  </objectgroup>
- <objectgroup id="10" name="Walls"/>
+ <objectgroup id="10" name="Walls">
+  <object id="61" x="-0.666667" y="16" width="0.666667" height="207.667"/>
+ </objectgroup>
  <objectgroup id="9" name="Brick"/>
  <objectgroup id="5" name="Enemies">
-  <object id="44" template="object-templates/IdleEnemy.tx" x="305.287" y="165.569"/>
-  <object id="46" template="object-templates/IdleEnemy.tx" x="156.952" y="137.256"/>
-  <object id="45" template="object-templates/patrollingEnemy.tx" x="240.044" y="79.3993"/>
+  <object id="44" template="object-templates/IdleEnemy.tx" x="305.287" y="165.569">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
+  <object id="46" template="object-templates/IdleEnemy.tx" x="156.952" y="137.256">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
+  <object id="45" template="object-templates/patrollingEnemy.tx" x="240.044" y="79.3993">
+   <properties>
+    <property name="type" value="freudenberg-guy"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Items">
   <object id="54" x="-25.2354" y="-31.3904"/>
