@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="123">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="164">
  <tileset firstgid="1" source="tilesets/Arkaden/City.tsx"/>
  <tileset firstgid="2171" source="tilesets/Arkaden/Shopping_Mall.tsx"/>
  <tileset firstgid="3816" source="tilesets/sheet.tsx"/>
@@ -19,50 +19,58 @@
  </layer>
  <layer id="3" name="GroundLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt28tOwkAUBuAu3ICLIcBOfRzfh9tDiOjOywupb+SeQwIJ4HjBWEuZ70v+pCWhTDonzZxpqCoAAADIO0tNj4CSqT8A2qTTq6pu5LzX9EgoUT/qbhAZtqj+bmOtt4jcpd1j2uci6u4ycrWuv+35vDenHOg9/T4AQDk+6yf0Fs25iXs+35oDAABOi/Ue1PfeY/FFb+s9CwB1s84DAADgWFynjynFpi8/ZH84952fHNt3zlv9l3k/AAAApZhEDzSNzPRCQI1G8YwZp91nzn981vTYOQ4PMRePkafIc43Z/52/8BLXeY28Za7/3flKbu+zLTkVSxOecS4=
+   eJzt201OwkAYBuAu3KiLqT879Tjex79DqOjOnwuJx2DnDXTvR2JjwaoUwRbmeZI3BZKWSecLmZkORQEAAADNNlLXLSBn6g9oa7Msiq3Idtl1S8jRbtTdXmRf/a296xijDCI3PRqrrGL91e9jH+8pszuIujuMHH3UX70/b/UpLb2l+QMA5OO7+YS5RfeqPjiLnOsHAIDOVeOyiz+OzS7j/KvamBtytKznHoMf5raeswBdSGVRlJGdFdp/wPzq4zwAAIDcvNp/2ivH6WtyUa0Lt1kfbjpnltfWnZuN/8s8HQAAgFw07TN8SZNHWIRR+jyO1FZ2TqLPT9Pkb85/fNZ12+mHu+iL+8hD5HGJmf6eRXiK6wwjzw3X/+39WNPa56pkXbwDXat7Ow==
   </data>
  </layer>
  <objectgroup id="4" name="Ground">
-  <object id="9" x="528" y="256.208" width="64" height="15.625"/>
+  <object id="9" x="559.667" y="256.541" width="64" height="15.625"/>
   <object id="10" x="464" y="320.042" width="64" height="15.625"/>
-  <object id="11" x="367.958" y="384.208" width="63.625" height="16.375"/>
+  <object id="11" x="367.958" y="384.208" width="47.625" height="16.375"/>
   <object id="13" x="991.917" y="80" width="16" height="479.333"/>
   <object id="14" x="752.083" y="192.208" width="239.625" height="15.75"/>
-  <object id="22" x="944" y="143.636" width="47.9394" height="48.4242"/>
-  <object id="29" x="0.212122" y="608.125" width="479.788" height="31.875"/>
+  <object id="22" x="944" y="127.969" width="47.9394" height="64.0909"/>
   <object id="30" x="0.333333" y="480" width="79.75" height="31.6667"/>
   <object id="32" x="0.333333" y="79" height="528.969"/>
   <object id="34" x="0.545455" y="80" width="1759.62"/>
   <object id="47" x="751.678" y="608.265" width="256.25" height="31.7083"/>
   <object id="51" x="1760" y="80" height="559.455"/>
-  <object id="63" x="591.833" y="576.125" width="47.8333" height="16.1667"/>
+  <object id="63" x="592.166" y="576.125" width="47.8333" height="16.1667"/>
   <object id="64" x="1008" y="623.818" width="752" height="16.3636"/>
   <object id="70" x="1216" y="480" width="239.909" height="15.8182"/>
   <object id="71" x="992" y="480.182" width="111.818" height="15.6364"/>
   <object id="73" x="1008" y="336" width="32" height="15.8182"/>
-  <object id="77" x="1007.82" y="176" width="64.1818" height="15.8182"/>
+  <object id="77" x="992.82" y="176" width="79.1818" height="15.8182"/>
   <object id="80" x="1471.82" y="240" width="144.182" height="15.8182"/>
-  <object id="81" x="1663.82" y="159.818" width="96.1818" height="16.1818"/>
+  <object id="81" x="1663.82" y="159.943" width="96.1818" height="16.0568"/>
   <object id="82" x="1359.99" y="336" width="128.023" height="15.6364"/>
   <object id="107" x="457" y="774.333" width="301.333" height="15.6667"/>
   <object id="117" x="1744" y="80.3333" width="16" height="31.6667"/>
+  <object id="126" x="544.188" y="592" width="31.875" height="15.875"/>
+  <object id="127" x="512.063" y="591.938" width="15.9375" height="16"/>
+  <object id="130" x="-13.8333" y="608.25" width="493.833" height="32"/>
+  <object id="135" x="961" y="461.5" width="29" height="18"/>
+  <object id="136" x="945" y="367" width="45.5" height="16.5"/>
+  <object id="142" x="704.038" y="575.967" width="15.962" height="16.0326"/>
+  <object id="143" x="672.148" y="575.977" width="15.8167" height="15.7955"/>
+  <object id="159" x="351.75" y="160.75" width="48.25" height="15.25"/>
+  <object id="161" x="176" y="319.333" width="47.6667" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="MovingPlatform">
-  <object id="19" template="object-templates/SchalterMovingPlatform.tx" x="624" y="256.667">
+  <object id="19" template="object-templates/SchalterMovingPlatform.tx" x="666" y="288.667">
    <properties>
     <property name="goalPosition" type="object" value="21"/>
     <property name="schalter" type="object" value="20"/>
    </properties>
   </object>
-  <object id="21" template="object-templates/GoalPosition.tx" x="714" y="203.333"/>
-  <object id="41" template="object-templates/SchalterMovingPlatform.tx" x="367.875" y="160">
+  <object id="21" template="object-templates/GoalPosition.tx" x="698.333" y="228.666"/>
+  <object id="41" template="object-templates/SchalterMovingPlatform.tx" x="80.7083" y="150.5">
    <properties>
     <property name="goalPosition" type="object" value="43"/>
     <property name="schalter" type="object" value="42"/>
    </properties>
   </object>
-  <object id="43" template="object-templates/GoalPosition.tx" x="137" y="439"/>
-  <object id="44" template="object-templates/movingPlatformType2.tx" x="304.167" y="575.833" width="48" height="15.75">
+  <object id="43" template="object-templates/GoalPosition.tx" x="112.333" y="411"/>
+  <object id="44" template="object-templates/movingPlatformType2.tx" x="305.667" y="465.333" width="48" height="15.75">
    <properties>
     <property name="goalPosition" type="object" value="52"/>
     <property name="speed" type="float" value="0.7"/>
@@ -75,45 +83,84 @@
     <property name="speed" type="float" value="0.7"/>
    </properties>
   </object>
-  <object id="54" template="object-templates/GoalPosition.tx" x="476" y="152"/>
+  <object id="54" template="object-templates/GoalPosition.tx" x="446" y="152"/>
   <object id="96" template="object-templates/SchalterMovingPlatform.tx" x="1608.91" y="582.545">
    <properties>
     <property name="goalPosition" type="object" value="98"/>
     <property name="schalter" type="object" value="97"/>
    </properties>
   </object>
-  <object id="97" template="object-templates/Schalter.tx" x="1638.18" y="579.455"/>
+  <object id="97" template="object-templates/Schalter.tx" x="1633.18" y="577.788"/>
   <object id="98" template="object-templates/GoalPosition.tx" x="1497.45" y="488.182"/>
-  <object id="99" template="object-templates/movingPlatformType2.tx" x="1088.67" y="176.333">
+  <object id="99" template="object-templates/movingPlatformType2.tx" x="1094.67" y="172.333">
    <properties>
     <property name="goalPosition" type="object" value="100"/>
     <property name="speed" type="float" value="0.7"/>
    </properties>
   </object>
-  <object id="100" template="object-templates/GoalPosition.tx" x="1067.67" y="321"/>
-  <object id="101" template="object-templates/SchalterMovingPlatform.tx" x="1167.33" y="174.333">
+  <object id="100" template="object-templates/GoalPosition.tx" x="1067.34" y="307"/>
+  <object id="101" template="object-templates/SchalterMovingPlatform.tx" x="1403.33" y="117">
    <properties>
     <property name="goalPosition" type="object" value="103"/>
     <property name="schalter" type="object" value="102"/>
    </properties>
   </object>
-  <object id="102" template="object-templates/Schalter.tx" x="1183.33" y="174"/>
-  <object id="103" template="object-templates/GoalPosition.tx" x="1317.33" y="346.333"/>
+  <object id="102" template="object-templates/Schalter.tx" x="1012.33" y="174.333"/>
+  <object id="103" template="object-templates/GoalPosition.tx" x="1301.33" y="304.333"/>
+  <object id="123" template="object-templates/SchalterMovingPlatform.tx" x="184.667" y="450.667">
+   <properties>
+    <property name="goalPosition" type="object" value="124"/>
+    <property name="rewindable" type="bool" value="true"/>
+    <property name="schalter" type="object" value="137"/>
+   </properties>
+  </object>
+  <object id="124" template="object-templates/GoalPosition.tx" x="217" y="573.417"/>
+  <object id="133" template="object-templates/SchalterMovingPlatform.tx" x="233.5" y="413.5">
+   <properties>
+    <property name="goalPosition" type="object" value="134"/>
+    <property name="schalter" type="object" value="139"/>
+   </properties>
+  </object>
+  <object id="134" template="object-templates/GoalPosition.tx" x="266.5" y="521.5"/>
+  <object id="137" template="object-templates/Schalter.tx" x="986.5" y="460"/>
+  <object id="139" template="object-templates/Schalter.tx" x="986" y="366"/>
+  <object id="140" template="object-templates/movingPlatformType2.tx" x="872.591" y="535.636" width="47.5" height="16.1818">
+   <properties>
+    <property name="goalPosition" type="object" value="141"/>
+    <property name="speed" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="141" template="object-templates/GoalPosition.tx" x="895" y="367.5"/>
+  <object id="155" template="object-templates/SchalterMovingPlatform.tx" x="1277.33" y="120">
+   <properties>
+    <property name="goalPosition" type="object" value="156"/>
+    <property name="schalter" type="object" value="157"/>
+   </properties>
+  </object>
+  <object id="156" template="object-templates/GoalPosition.tx" x="1212" y="239.333"/>
+  <object id="162" template="object-templates/movingPlatformType2.tx" x="266" y="161">
+   <properties>
+    <property name="goalPosition" type="object" value="163"/>
+    <property name="speed" type="float" value="0.7"/>
+   </properties>
+  </object>
+  <object id="163" template="object-templates/GoalPosition.tx" x="289.667" y="317"/>
  </objectgroup>
  <objectgroup id="10" name="Schalter">
-  <object id="20" template="object-templates/Schalter.tx" x="682" y="254.667"/>
-  <object id="42" template="object-templates/Schalter.tx" x="411" y="155"/>
+  <object id="20" template="object-templates/Schalter.tx" x="614.333" y="255"/>
+  <object id="42" template="object-templates/Schalter.tx" x="371.667" y="159"/>
+  <object id="157" template="object-templates/Schalter.tx" x="1012.67" y="334.333"/>
  </objectgroup>
  <objectgroup id="11" name="Signs">
   <object id="39" template="object-templates/sign.tx" x="783.75" y="176.125">
    <properties>
-    <property name="Text">Take the Key and go to City Arkaden
+    <property name="Text">Take the Key and go to City Arkaden but first collect the available pages 
 </property>
    </properties>
   </object>
   <object id="40" template="object-templates/sign.tx" x="432" y="593.667">
    <properties>
-    <property name="Text" value="Attention! You need Retalin to jump higher."/>
+    <property name="Text" value="Ritalin is a Power-up Item that allows you to jump higher! "/>
    </properties>
   </object>
   <object id="116" template="object-templates/sign.tx" x="1039.67" y="608.333">
@@ -121,20 +168,26 @@
     <property name="Text" value="Welcome to City Arkaden!"/>
    </properties>
   </object>
-  <object id="122" template="object-templates/sign.tx" x="783.75" y="592.25">
+  <object id="122" template="object-templates/sign.tx" x="943.932" y="592.068">
    <properties>
-    <property name="Text" value="City Arkaden this Way!"/>
+    <property name="Text">City Arkaden this Way!
+You need a Key to open the Door!</property>
+   </properties>
+  </object>
+  <object id="144" template="object-templates/sign.tx" x="784.182" y="592">
+   <properties>
+    <property name="Text" value="Attention! Find the Switches and turn them on with &quot;E&quot;"/>
    </properties>
   </object>
  </objectgroup>
  <layer id="12" name="signLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt3LENACAMA8F0UMH+m1JSZoIQId0NYP0EjgAAAAAAAABIY3cXAAAAAAAAAAAAAAAAAAAAAL+YRT8FVbvwwlndBUCHC+AqAUs=
+   eJzt3DEOABAUA1AbE/c/KaPRKhH5Ie9doB06NyUAAAAAAACAJbfoBgAAAAAAAAAAAAAAAAAAAMAryqWfgl5j8+HE2Nwv8JcJupkCUA==
   </data>
  </layer>
  <objectgroup id="8" name="Enemies">
-  <object id="16" template="object-templates/patrollingEnemy.tx" x="553" y="239.958"/>
-  <object id="17" template="object-templates/patrollingEnemy.tx" x="399.792" y="367.958"/>
+  <object id="16" template="object-templates/patrollingEnemy.tx" x="572.333" y="240.625"/>
+  <object id="17" template="object-templates/patrollingEnemy.tx" x="383.459" y="367.958"/>
   <object id="90" template="object-templates/patrollingEnemy.tx" x="1300.18" y="463.818"/>
   <object id="91" template="object-templates/patrollingEnemy.tx" x="1407.76" y="319.485"/>
   <object id="92" template="object-templates/patrollingEnemy.tx" x="1520.18" y="224.364"/>
@@ -147,16 +200,32 @@
   <object id="114" template="object-templates/unhingedEnemy.tx" x="507.333" y="757.667"/>
   <object id="115" template="object-templates/unhingedEnemy.tx" x="467.333" y="756.333"/>
  </objectgroup>
- <objectgroup id="9" name="Items" locked="1">
-  <object id="35" template="object-templates/ritalin.tx" x="21" y="463.5"/>
-  <object id="67" template="object-templates/page.tx" x="871.636" y="178"/>
-  <object id="86" template="object-templates/page.tx" x="1015.27" y="159.818" width="16" height="15.4545"/>
-  <object id="87" template="object-templates/key.tx" x="1009.09" y="321.091" width="15.6364" height="14"/>
-  <object id="88" template="object-templates/page.tx" x="1008.36" y="464.182" width="15.4545" height="15.8182"/>
-  <object id="89" template="object-templates/ritalin.tx" x="1237.27" y="464.182" width="16" height="15.6364"/>
-  <object id="105" template="object-templates/key.tx" x="974.333" y="128.333" width="16" height="15.3333"/>
-  <object id="106" template="object-templates/page.tx" x="1" y="463.333" width="16.6667" height="16"/>
-  <object id="121" template="object-templates/page.tx" x="1671.33" y="140.667" width="17.6667" height="18"/>
+ <objectgroup id="19" name="Items">
+  <object id="147" template="object-templates/page.tx" x="864.667" y="172">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="148" template="object-templates/page.tx" x="0.666667" y="461.333">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="149" template="object-templates/page.tx" x="1010" y="463.333">
+   <properties>
+    <property name="ID" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="150" template="object-templates/page.tx" x="1020.33" y="158.667"/>
+  <object id="151" template="object-templates/page.tx" x="1694" y="142">
+   <properties>
+    <property name="ID" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="152" template="object-templates/ritalin.tx" x="608" y="558"/>
+  <object id="153" template="object-templates/key.tx" x="975.667" y="110"/>
+  <object id="154" template="object-templates/key.tx" x="1019.67" y="319.333"/>
+  <object id="158" template="object-templates/ritalin.tx" x="1238" y="462.667"/>
  </objectgroup>
  <objectgroup id="14" name="End">
   <object id="118" x="1749.67" y="111.333" width="9" height="48.6667"/>
@@ -169,7 +238,7 @@
  </objectgroup>
  <objectgroup id="6" name="Ladder">
   <object id="55" x="928.25" y="127.25" width="15.75" height="65"/>
-  <object id="59" x="511.875" y="256" width="16" height="49.25"/>
+  <object id="59" x="544.208" y="254.667" width="16" height="49.25"/>
   <object id="62" x="448.125" y="319.75" width="15.75" height="64"/>
   <object id="75" x="1040.18" y="336" width="15.8182" height="128"/>
   <object id="78" x="1648" y="160" width="15.8182" height="63.8182"/>
@@ -177,7 +246,7 @@
  </objectgroup>
  <layer id="5" name="LadderLayer" width="160" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt10ERwzAQBEEzCJhQCAXzp5J/yp88XHvn7UYgl0Zn6TgAAAAAAHZ7v9IroNlHfwRt7M/Mfo5z4V5uPDM8h/5I2jizAa54T8zTtCfuc/M07UnTt27RdMfWH0n6y2u67/1qmvVTTZwBzWeizcT+Jq6Je0z8B+mPJP2RpD+S9EeS/kia+CYCAAAAAAAA+NcXF+0JaA==
+   eJzt10ERwzAQBEEzCJhQCAXzpxIC8SMP1955uxHIpdFZOg4AAAAAgN3er/QKaPbRH0Eb+zOzn+NcuJcbzwzPoT+SNs5sgF+8J+Zq2Bv3ubka9qbhG7dquGvrjyT95TXc8640zPjpJs6A5jPRZmJ/E9fEPSb+g/RHkv5I0h9J+iNJfyRNfBMBAAAAAAAA/OsLECUJaA==
   </data>
  </layer>
 </map>
