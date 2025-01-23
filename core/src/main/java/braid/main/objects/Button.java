@@ -33,30 +33,10 @@ public class Button extends InteractiveGameObject {
         System.out.println("spawnButton" + actionType);
 
         fixture.setUserData(new UserData("Button", this));
-        defineBody();
-
     }
 
     @Override
     public void defineBody() {
-
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set((this.boundary.x + this.boundary.width / 2) / PPM,
-            (this.boundary.y + this.boundary.height / 2) / PPM);
-
-        body = world.createBody(bodyDef);
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(this.boundary.width / 2 / PPM, this.boundary.height / 2 / PPM);
-
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = shape;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef).setUserData(this);
-
-        shape.dispose();
 
     }
 

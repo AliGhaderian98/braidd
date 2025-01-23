@@ -704,11 +704,17 @@ public abstract class LevelScreen implements Screen {
 
     public Array<Enemy> getEnemies() { return enemies; }
 
+    public Player getPlayer() { return player; }
+
     public void changeMusic(String musicName) {
         music.stop();
         music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
         System.out.println(music);
         music.play();
+    }
+
+    public void stopMusic() {
+        music.stop();
     }
 
     private void setLevelName() {
@@ -739,8 +745,8 @@ public abstract class LevelScreen implements Screen {
         else if (this instanceof PresentMap)
             levelName = "WEGZURUNI";
         else if (this instanceof FutureMap)
-            levelName = "Future";
-//        else if (this instanceof FinaleMap)
-//            levelName = "Finale"
+            levelName = "WEGZURUNI";
+        else if (this instanceof FinaleMap)
+            levelName = "WEGZURUNI";
     }
 }

@@ -11,7 +11,7 @@ public class MountainMap extends LevelScreen{
     private final int instance;
 
     public MountainMap(Braid game, int instance) {
-        super(game, "maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain" + instance + ".tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/tilesets/WEGZURUNI/QuantenEbene/maps/Mountain" + instance + ".tmx", "packedimages/sprites.atlas", "audio/music/WEGZURUNI/MountainMap" + instance + ".mp3");
         this.instance = instance;
         player.setPosition(272/Braid.PPM, 32/Braid.PPM);
     }

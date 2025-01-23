@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="79" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="590">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="79" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="593">
  <tileset firstgid="1" source="../tilesets/WegzurUni.tsx"/>
  <tileset firstgid="9" source="../../../Zoo/Basic-Tiled.tsx"/>
  <tileset firstgid="189" source="../tilesets/wegzurunibad.tsx"/>
  <tileset firstgid="3981" source="../tilesets/Street.tsx"/>
  <tileset firstgid="12021" source="../tilesets/steetsmall.tsx"/>
  <tileset firstgid="20061" source="../tilesets/skyyyy.tsx"/>
+ <tileset firstgid="20650" source="../tilesets/hoodedone.tsx"/>
  <layer id="1" name="Background" width="79" height="48">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -150,8 +151,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073741884,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073741884,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,20684,20685,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,20700,20701,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073741884,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073741884,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -329,17 +330,21 @@
     <property name="text" value="Die Schwebebahn wird überrannt! Besiege alle die dir im Weg stehen!"/>
    </properties>
   </object>
-  <object id="326" template="../../../../object-templates/NPC.tx" x="75.5" y="245.5" width="32" height="72">
+  <object id="326" template="../../../../object-templates/NPC.tx" x="-99.8333" y="230.833" width="32" height="85.3333">
    <properties>
+    <property name="npcTrigger" type="object" value="591"/>
     <property name="text" value="Past"/>
    </properties>
   </object>
-  <object id="327" template="../../../../object-templates/NPC.tx" x="10.5" y="240.5" width="42" height="93">
+  <object id="327" template="../../../../object-templates/NPC.tx" x="-184.833" y="251.833" width="42" height="93">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
+    <property name="npcTrigger" type="object" value="592"/>
     <property name="text" value="Durchgefallen! Es sind noch Gegner am Leben!"/>
    </properties>
   </object>
+  <object id="591" name="npcTrigger" x="66.0002" y="233.333" width="45.9997" height="97.3333"/>
+  <object id="592" name="npcTrigger" x="5.66682" y="230.667" width="45.9997" height="97.3333"/>
  </objectgroup>
 </map>

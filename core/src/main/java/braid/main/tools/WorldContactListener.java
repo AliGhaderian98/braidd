@@ -195,12 +195,8 @@ public class WorldContactListener implements ContactListener {
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
 
             npc.getSubtitle().setCurrentText("");
-            if(npc.getType().equals("FinalNPC") && !player.getRewindController().isRewinding()) {
-                npc.trigger(false);
-            }
-            if (!Objects.equals(npc.getType(), "FinalNPC")) {
-                npc.trigger(false);
-            }
+            npc.trigger(false);
+
         } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
             (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
             NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
@@ -220,20 +216,14 @@ public class WorldContactListener implements ContactListener {
         if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
             (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
             NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
-            if (Objects.equals(npc.getType(), "FinalNPC") && player.getRewindController().isRewinding()) {
-                npc.trigger(true);
-            }
+            npc.trigger(true);
 
-            if (!Objects.equals(npc.getType(), "FinalNPC")) {
-                npc.trigger(true);
-                System.out.println("ifplayerwithnpc != Final");
-
-            }
         } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
             (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
             NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
             npc.trigger(true);
-            System.out.println("elseplayerwithnpc");
+
         }
     }
 

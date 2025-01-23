@@ -117,8 +117,8 @@
 </data>
  </layer>
  <objectgroup id="5" name="Ground" offsetx="16" offsety="0">
-  <object id="1" name="Ground" x="-108.571" y="369.471" width="1049.14" height="95.0587"/>
-  <object id="19" x="-14" y="432" width="861" height="98"/>
+  <object id="1" name="Ground" x="-108.571" y="369.471" width="1049.14" height="16.392"/>
+  <object id="19" x="-14" y="432" width="2351.67" height="98"/>
  </objectgroup>
  <layer id="22" name="NPC" width="54" height="29">
   <data encoding="csv">
@@ -161,13 +161,13 @@
  </objectgroup>
  <objectgroup id="7" name="Signs"/>
  <objectgroup id="8" name="Buttons">
-  <object id="6" template="../../../../object-templates/Button.tx" x="726.58" y="336.584" width="36.25" height="35.5">
+  <object id="6" template="../../../../object-templates/Button.tx" x="729.913" y="332.584" width="36.25" height="35.5">
    <properties>
     <property name="actionType" value="toggleNPCTrigger"/>
     <property name="targetName" value=""/>
    </properties>
   </object>
-  <object id="37" template="../../../../object-templates/TutorialSign.tx" x="727.5" y="336.5" width="33.5" height="35.5">
+  <object id="37" template="../../../../object-templates/TutorialSign.tx" x="727.5" y="345.833" width="33.5" height="35.5">
    <properties>
     <property name="Text" value="Tutorial: Auf Rot schalten? (Bitte %s drücken!)"/>
    </properties>
@@ -176,7 +176,7 @@
  <objectgroup id="23" name="Enemies">
   <object id="38" template="../../../../object-templates/patrollingEnemy.tx" x="49" y="398" width="31.5" height="32.5">
    <properties>
-    <property name="type" value="Bus"/>
+    <property name="type" value="PublicBus"/>
    </properties>
   </object>
  </objectgroup>
@@ -184,7 +184,7 @@
   <object id="7" template="../../../../object-templates/NPC.tx" x="551.909" y="402.394">
    <properties>
     <property name="Name" value="HoodedOne"/>
-    <property name="Type" value="FinalNPC"/>
+    <property name="Type" value="DoorNPC"/>
     <property name="npcTrigger" type="object" value="17"/>
     <property name="text" value="YOU ARE TO LATE!!!"/>
    </properties>

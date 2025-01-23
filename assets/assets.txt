@@ -7,8 +7,15 @@ MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
 audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.ogg
-audio/music/WEGZURUNI/Finale.mp3
+audio/music/WEGZURUNI/FinaleMap1.mp3
+audio/music/WEGZURUNI/FinaleMap2.mp3
+audio/music/WEGZURUNI/FinaleMap3.mp3
 audio/music/WEGZURUNI/FutureMap1.mp3
+audio/music/WEGZURUNI/FutureMap2.mp3
+audio/music/WEGZURUNI/MountainMap1.mp3
+audio/music/WEGZURUNI/MountainMap2.mp3
+audio/music/WEGZURUNI/MountainMap3.mp3
+audio/music/WEGZURUNI/PastMap.mp3
 audio/music/WEGZURUNI/WEGZURUNI1.mp3
 audio/music/WEGZURUNI/WEGZURUNI2.mp3
 audio/music/ZooSoundtrack.mp3
@@ -117,19 +124,38 @@ maps/tilesets/Uni/tile-white.tsx
 maps/tilesets/Uni/trees.tsx
 maps/tilesets/Uni/uni-flag.tsx
 maps/tilesets/WEGZURUNI/Finale/Images/BusTafel.png
+maps/tilesets/WEGZURUNI/Finale/Images/Credits.aseprite
+maps/tilesets/WEGZURUNI/Finale/Images/Credits.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x480.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x4802.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack3-720x480.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack3-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack4-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack5-720x480.webp
 maps/tilesets/WEGZURUNI/Finale/Images/HIGHmountain.png
+maps/tilesets/WEGZURUNI/Finale/Images/Nature_environment_01.png
+maps/tilesets/WEGZURUNI/Finale/Images/Nature_props_01.png
 maps/tilesets/WEGZURUNI/Finale/Images/Sprite-0001.png
+maps/tilesets/WEGZURUNI/Finale/Images/Tileset.png
 maps/tilesets/WEGZURUNI/Finale/Images/hintsign.png
 maps/tilesets/WEGZURUNI/Finale/Images/killscreen.aseprite
 maps/tilesets/WEGZURUNI/Finale/Images/killscreen.png
 maps/tilesets/WEGZURUNI/Finale/Images/pacmanschrift.png
+maps/tilesets/WEGZURUNI/Finale/Images/pixel art wood.jpg
 maps/tilesets/WEGZURUNI/Finale/maps/Finale.tmx
 maps/tilesets/WEGZURUNI/Finale/tilesets/BusTafel.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/Credits.tsx
 maps/tilesets/WEGZURUNI/Finale/tilesets/HIGHMountain.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/finalfloor.tsx
 maps/tilesets/WEGZURUNI/Finale/tilesets/gltiches.tsx
 maps/tilesets/WEGZURUNI/Finale/tilesets/hintsign.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/jungle.tsx
 maps/tilesets/WEGZURUNI/Finale/tilesets/killscreen.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/nature1.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/nature2.tsx
 maps/tilesets/WEGZURUNI/Finale/tilesets/pacmanschrift.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/winter1.tsx
 maps/tilesets/WEGZURUNI/Future/Future.tmx
 maps/tilesets/WEGZURUNI/Future/Images/BlackScreen/Blackpixel.png
 maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Buildings.aseprite
@@ -190,6 +216,7 @@ maps/tilesets/WEGZURUNI/Future/tilesets/WallPov.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/blackScreen.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/cyberpunk.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/floorpovgreen.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/futureSchwebe.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/renderWorldCode.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/spawnItemsCode.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/spawnMPCode.tsx
@@ -287,6 +314,7 @@ maps/tilesets/WEGZURUNI/Past/tilesets/oldcitty.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcitys.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityt.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityu.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldschwebe.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/rails.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/steampunk1.tsx
 maps/tilesets/WEGZURUNI/Present/Pictures/AnimationSheet_Character (1).png

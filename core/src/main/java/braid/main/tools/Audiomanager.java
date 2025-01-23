@@ -18,9 +18,56 @@ public class Audiomanager {
                 Music promoted by https://onsound.eu/
          */
         audiomanager.load("audio/music/background_music.mp3", Music.class);
+
+        /*
+        Track: Apotos (Night) - Sonic Unleashed [OST]
+        */
+        audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI1.mp3", Music.class);
+        /*
+        Track: Terraria Calamity Mod Music - "Reign of Lords"
+        */
         audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI2.mp3", Music.class);
+
+        /*
+        Track: Fear Factory - Donkey Kong Country Returns [OST]
+        */
+        audiomanager.load("audio/music/WEGZURUNI/PastMap.mp3", Music.class);
+
+        /*
+        Track: Step: Subspace Ver. 3 - Super Smash Bros. Brawl [OST]
+        */
         audiomanager.load("audio/music/WEGZURUNI/FutureMap1.mp3", Music.class);
-        audiomanager.load("audio/music/WEGZURUNI/Finale.mp3", Music.class);
+        /*
+        Track: A CYBER'S WORLD? - Toby Fox
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FutureMap2.mp3", Music.class);
+
+        /*
+        Track: Donkey Kong Country Returns - Aquatic Ambience (iSWM Remix)
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap1.mp3", Music.class);
+        /*
+        Track: In A Snow-Bound Land cove "Hibernation" - DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap2.mp3", Music.class);
+        /*
+        Track: Undertale OST: 071- Undertale
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap3.mp3", Music.class);
+
+        /*
+        Track: SAVE - DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap1.mp3", Music.class);
+        /*
+        Track: g a r d e n- DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap2.mp3", Music.class);
+        /*
+        Track: Undertale OST: 071- Undertale
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap3.mp3", Music.class);
+
 
 
         /*

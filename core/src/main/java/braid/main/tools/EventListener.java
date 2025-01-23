@@ -46,6 +46,7 @@ public class EventListener {
 
     public void hasTriggeredNPC(boolean trigger) {
         this.check2 = trigger;
+        System.out.println("hastriggerNPC" );
 
         if (canCompleteMap()) {
             loadMap();
@@ -98,30 +99,43 @@ public class EventListener {
         }
     }
 
+
     public void loadMap() {
         if (screen instanceof WegZurUniLevel && canCompleteMap()) {
-
+            screen.stopMusic();
             Screen newScreen = new MountainMap(game, 1);
             game.setScreen(newScreen);
+
         } else if (screen instanceof MountainMap && canCompleteMap()) {
             if (map.getLayers().get("PresentDoor") == null) {
+                screen.stopMusic();
                 Screen newScreen = new PastMap(game);
                 game.setScreen(newScreen);
             } else if (map.getLayers().get("FutureDoor") == null) {
+                screen.stopMusic();
                 Screen newScreen = new PresentMap(game);
                 game.setScreen(newScreen);
             } else if (map.getLayers().get("FutureDoor") != null) {
+                screen.stopMusic();
                 Screen newScreen = new FutureMap(game);
                 game.setScreen(newScreen);
             }
 
         } else if (screen instanceof PastMap && canCompleteMap()) {
-
+            screen.stopMusic();
             Screen newScreen = new MountainMap(game, 2);
             game.setScreen(newScreen);
+
         } else if (screen instanceof PresentMap && canCompleteMap()) {
+            screen.stopMusic();
             Screen newScreen = new MountainMap(game, 3);
             game.setScreen(newScreen);
+
+        } else if (screen instanceof FutureMap && !map.getLayers().get("BlackScreen").isVisible() && check2) {
+            screen.stopMusic();
+            Screen newScreen = new FinaleMap(game);
+            game.setScreen(newScreen);
+
         }
     }
 }
