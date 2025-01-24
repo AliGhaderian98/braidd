@@ -9,12 +9,10 @@ import braid.main.objects.Enemy;
 public class OberbarmenLevel extends LevelScreen {
 
     public OberbarmenLevel(Braid game) {
-        super(game, "maps/oberbarmen.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/oberbarmen.tmx", "packedimages/sprites.atlas", "audio/music/oberbarmen.mp3");
         levelName = "OBERBARMEN";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
-        player.setPosition(3400/Braid.PPM, 900 /Braid.PPM);
-
     }
 
     @Override

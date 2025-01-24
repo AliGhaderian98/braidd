@@ -148,6 +148,8 @@ public class Audiomanager {
 
         audiomanager.load("audio/music/Luisenviertel.mp3", Music.class);
 
+        audiomanager.load("audio/music/oberbarmen.mp3", Music.class);
+
         audiomanager.finishLoading();
     }
 
