@@ -163,7 +163,7 @@
   <object id="37" template="../../../../object-templates/TutorialSign.tx" x="732.167" y="336.833" width="33.5" height="35.5">
    <properties>
     <property name="Text" value="Tutorial: Auf Rot schalten? (Bitte %s drücken!)"/>
-    <property name="key" value="Interact"/>
+    <property name="key" value="INTERACT"/>
    </properties>
   </object>
  </objectgroup>
