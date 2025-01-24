@@ -17,14 +17,14 @@ bear-run
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
+  index: 1
 bear-run
   rotate: false
   xy: 132, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: 3
 bear-run
   rotate: false
   xy: 132, 382
@@ -2279,6 +2279,20 @@ schalter
   orig: 24, 24
   offset: 0, 0
   index: -1
+schalter-off
+  rotate: false
+  xy: 952, 186
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+schalter-on
+  rotate: false
+  xy: 952, 160
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
 star
   rotate: false
   xy: 730, 136
@@ -2288,7 +2302,7 @@ star
   index: -1
 textbox
   rotate: false
-  xy: 1042, 176
+  xy: 996, 158
   size: 16, 16
   split: 4, 4, 4, 4
   pad: 2, 4, 4, 4
@@ -2313,7 +2327,7 @@ rotatingCoffeeBean
   index: 1
 rotatingCoffeeBean
   rotate: false
-  xy: 952, 194
+  xy: 978, 194
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2327,14 +2341,14 @@ rotatingCoffeeBean
   index: 3
 rotatingCoffeeBean
   rotate: false
-  xy: 952, 176
+  xy: 978, 176
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 rotatingCoffeeBean
   rotate: false
-  xy: 970, 194
+  xy: 996, 194
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2348,14 +2362,14 @@ rotatingCoffeeBean
   index: 6
 rotatingCoffeeBean
   rotate: false
-  xy: 970, 176
+  xy: 996, 176
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 7
 rotatingCoffeeBean
   rotate: false
-  xy: 988, 194
+  xy: 1014, 194
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2516,14 +2530,14 @@ schwebimini_e
   index: -1
 schwebimini_n
   rotate: false
-  xy: 988, 176
+  xy: 1014, 176
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_ne
   rotate: false
-  xy: 1006, 194
+  xy: 1032, 194
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2537,28 +2551,28 @@ schwebimini_nw
   index: -1
 schwebimini_s
   rotate: false
-  xy: 1006, 176
+  xy: 1032, 176
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_se
   rotate: false
-  xy: 1024, 194
+  xy: 938, 142
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_sw
   rotate: false
-  xy: 1024, 176
+  xy: 956, 142
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 schwebimini_w
   rotate: false
-  xy: 1042, 194
+  xy: 978, 158
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2723,14 +2737,14 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 5
 mushroom-idle
   rotate: false
   xy: 926, 292
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 3
 mushroom-idle
   rotate: false
   xy: 926, 292

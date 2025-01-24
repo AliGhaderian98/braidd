@@ -43,6 +43,7 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -1074,6 +1075,8 @@ sprites/misc/pause-symbol.png
 sprites/misc/plattform.png
 sprites/misc/rewind-symbol.png
 sprites/misc/ritalin.png
+sprites/misc/schalter-off.png
+sprites/misc/schalter-on.png
 sprites/misc/schalter.png
 sprites/misc/star.png
 sprites/misc/textbox.9.png

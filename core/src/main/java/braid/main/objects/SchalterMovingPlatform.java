@@ -4,12 +4,15 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class SchalterMovingPlatform extends MovingPlatform {
+    Schalter schalter;
 
     public enum AnimationState {
         WAITING, TOGOAL, TOORIGIN
@@ -27,7 +30,14 @@ public class SchalterMovingPlatform extends MovingPlatform {
         fixture.setUserData(new UserData("GoalMovingPlatform", this));
 
         Rectangle rect = new Rectangle(schalterPosX, schalterPosY, 10,10);
-        screen.addSchalter(new Schalter(world, screen.getAtlas().findRegion("schalter"), rect, this));
+        schalter = new Schalter(world, screen.getAtlas(), rect, this);
+        screen.addSchalter(schalter);
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        sprite.draw(batch);
+        schalter.draw(batch);
     }
 
     public void setActive() {
@@ -39,7 +49,7 @@ public class SchalterMovingPlatform extends MovingPlatform {
         }
     }
 
-    private boolean isActive() { return currentState != AnimationState.WAITING; }
+    public boolean isActive() { return currentState != AnimationState.WAITING; }
 
     @Override
     public void update(float dt) {

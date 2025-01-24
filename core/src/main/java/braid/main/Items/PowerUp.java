@@ -7,6 +7,7 @@ import braid.main.screens.levels.LevelScreen;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
 public class PowerUp extends Item {
@@ -23,22 +24,35 @@ public class PowerUp extends Item {
     private boolean toReset = false;
     private static final int maxTime = 10; // 10 second timer measured in ms
 
+    private final Vector2 defaultPosition;
+
 
 
     public PowerUp(LevelScreen screen, float x, float y,TypeOfPowerUp givenTypeOfPowerUp) {
-        super(screen, x, y, 7);
+        super(screen, x, y, 9);
 
         fixture.setUserData(new UserData("item", this));
         readTypePowerUp = givenTypeOfPowerUp;
+
+
 
         String regionName = getRegionName();
         sprite = new Sprite(screen.getAtlas().findRegion(regionName));
         sprite.setBounds(0,0,
             sprite.getRegionWidth()/ Braid.PPM,
             sprite.getRegionHeight()/Braid.PPM);
-        sprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y-getHeight()/2);
 
+        if (readTypePowerUp == TypeOfPowerUp.GLEITER) {
+            fixture.getShape().setRadius(12/Braid.PPM);
+            defaultPosition = b2body.getPosition();
+            defaultPosition.y -= sprite.getHeight()/4f;
+        } else {
+            defaultPosition = b2body.getPosition();
+        }
+
+        sprite.setPosition(defaultPosition.x - getWidth() / 2, defaultPosition.y-getHeight()/2);
     }
+
     public enum TypeOfPowerUp {
         RITALIN,
         GLEITER,
@@ -134,11 +148,11 @@ public class PowerUp extends Item {
             toDestroy = false;
         }
 
-        sprite.setPosition(b2body.getPosition().x - sprite.getWidth() / 2, b2body.getPosition().y-sprite.getHeight()/2);
+        sprite.setPosition(defaultPosition.x - sprite.getWidth() / 2, defaultPosition.y-sprite.getHeight()/2);
 
         // animate sprite up and down
         time += dt;
-        sprite.setY(b2body.getPosition().y-sprite.getHeight()/4 + floatRange * (float) Math.sin(floatSpeed*time));
+        sprite.setY(defaultPosition.y-sprite.getHeight()/4 + floatRange * (float) Math.sin(floatSpeed*time));
     }
 
     @Override

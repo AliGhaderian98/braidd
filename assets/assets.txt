@@ -1076,6 +1076,8 @@ sprites/misc/pause-symbol.png
 sprites/misc/plattform.png
 sprites/misc/rewind-symbol.png
 sprites/misc/ritalin.png
+sprites/misc/schalter-off.png
+sprites/misc/schalter-on.png
 sprites/misc/schalter.png
 sprites/misc/star.png
 sprites/misc/textbox.9.png

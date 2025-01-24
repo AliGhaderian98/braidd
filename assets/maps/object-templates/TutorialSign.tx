@@ -3,7 +3,7 @@
  <object name="TutorialSign" width="16" height="16">
   <properties>
    <property name="Text" value="&quot;Auf Rot schalten? (Bitte %s drücken!)"/>
-   <property name="key" value="INTERACT"/>
+   <property name="key" value="SPACEBAR"/>
   </properties>
  </object>
 </template>

@@ -208,6 +208,11 @@ public abstract class LevelScreen implements Screen {
                 rewindObjects.add(gm.getRewindController());
         }
 
+        for (Schalter s : schalters) {
+            if (s.isRewindable())
+                rewindObjects.add(s.getRewindController());
+        }
+
         for (Brick b : bricks) {
             if (b.isRewindable())
                 rewindObjects.add(b.getRewindController());
@@ -440,7 +445,7 @@ public abstract class LevelScreen implements Screen {
         drawEnemies();
         drawMovingPlatforms();
         drawSchalterMovingPlatforms();
-        drawSchalters();
+        //drawSchalters();
         drawBricks();
         drawItems();
 
@@ -733,6 +738,7 @@ public abstract class LevelScreen implements Screen {
 
     public void addSchalter(Schalter schalter) {
         schalters.add(schalter);
+        schalter.setRewindController(new RewindController(new RewindableBody(schalter.b2body, schalter)));
     }
 
     public void addButton(Button button){

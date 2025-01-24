@@ -25,7 +25,6 @@
  </layer>
  <objectgroup id="12" name="Signs"/>
  <objectgroup id="4" name="End">
-  <object id="49" x="456.084" y="199.421"/>
   <object id="53" x="629.054" y="161.61" width="8.5834" height="46.1974"/>
  </objectgroup>
  <objectgroup id="11" name="Ladder"/>
@@ -64,7 +63,6 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="Items">
-  <object id="54" x="-25.2354" y="-31.3904"/>
   <object id="55" template="object-templates/key.tx" x="17.234" y="79.3993"/>
   <object id="56" template="object-templates/page.tx" x="-0.615498" y="78.7838">
    <properties>
@@ -83,7 +81,7 @@
   </object>
   <object id="59" template="object-templates/page.tx" x="558.257" y="63.3963">
    <properties>
-    <property name="ID" type="int" value="0"/>
+    <property name="ID" type="int" value="3"/>
    </properties>
   </object>
   <object id="60" template="object-templates/page.tx" x="403.344" y="147.797"/>

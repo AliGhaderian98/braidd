@@ -880,7 +880,7 @@
   <object id="326" x="2656" y="672" width="64" height="80"/>
  </objectgroup>
  <objectgroup id="8" name="Ladder">
-  <object id="437" x="2048" y="592" width="16" height="240"/>
+  <object id="437" x="2050.18" y="592" width="11.8182" height="240"/>
  </objectgroup>
  <objectgroup id="9" name="Ground">
   <object id="275" x="0" y="304" width="320" height="160"/>
