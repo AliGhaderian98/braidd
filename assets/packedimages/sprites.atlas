@@ -1123,14 +1123,14 @@ capybara-idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 8
+  index: 7
 capybara-idle
   rotate: false
   xy: 830, 651
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 7
+  index: 8
 capybara-idle
   rotate: false
   xy: 732, 553
@@ -2828,14 +2828,14 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 5
 mushroom-idle
   rotate: false
   xy: 1820, 433
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 2
 mushroom-idle
   rotate: false
   xy: 1820, 433
@@ -2849,7 +2849,7 @@ mushroom-idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 4
 mushroom-idle
   rotate: false
   xy: 1820, 433

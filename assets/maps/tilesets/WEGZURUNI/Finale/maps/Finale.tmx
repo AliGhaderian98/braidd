@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="95" height="260" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="400">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="95" height="260" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="400">
  <tileset firstgid="1" source="../tilesets/HIGHMountain.tsx"/>
  <tileset firstgid="16321" source="../tilesets/BusTafel.tsx"/>
  <tileset firstgid="16333" source="../tilesets/hintsign.tsx"/>
@@ -2173,7 +2173,9 @@
   <object id="398" template="../../../../object-templates/SchalterMovingPlatform.tx" x="496" y="2064" width="432" height="16">
    <properties>
     <property name="goalPosition" type="object" value="374"/>
+    <property name="rewindable" type="bool" value="false"/>
     <property name="schalter" type="object" value="399"/>
+    <property name="speed" type="float" value="0.1"/>
     <property name="type" value="long"/>
    </properties>
   </object>
@@ -2255,13 +2257,6 @@
     <property name="text" value="Das Schild unten war noch von der alten Prüfungsordnung!"/>
    </properties>
   </object>
-  <object id="384" template="../../../../object-templates/NPC.tx" x="-300.333" y="2211.33" width="137.333" height="158">
-   <properties>
-    <property name="Type" value="TalkingNPC"/>
-    <property name="npcTrigger" type="object" value="395"/>
-    <property name="text" value="Warte auf den Aufzug!"/>
-   </properties>
-  </object>
   <object id="385" template="../../../../object-templates/NPC.tx" x="493" y="1890.5" width="433.333" height="32">
    <properties>
     <property name="Name" value="CreditScreen"/>
@@ -2272,7 +2267,6 @@
   <object id="388" name="npcTrigger" x="0.333333" y="168.152" width="1524.67" height="1916.85"/>
   <object id="387" name="npcTrigger" x="-2" y="2192.67" width="1523.33" height="654.667"/>
   <object id="389" name="npcTrigger" x="3.66833" y="3983.67" width="49.9967" height="86"/>
-  <object id="395" name="npcTrigger" x="961.665" y="1897.33" width="54.0033" height="190.67"/>
   <object id="396" name="npcTrigger" x="231.241" y="718.544" width="1018.61" height="133.215"/>
  </objectgroup>
  <objectgroup id="7" name="Buttons">
