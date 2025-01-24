@@ -63,6 +63,15 @@ public class NPC extends InteractiveGameObject{
                     sprite.getRegionHeight()*0.6f/Braid.PPM);
                 sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/3.4f);
             }
+            case "Guru" -> {
+                sprite = new Sprite(atlas.findRegion("guru"));
+                idle = new Animation<>(0.1f, atlas.findRegions("guru"), Animation.PlayMode.LOOP);
+                sprite.setRegion(idle.getKeyFrame(0));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.6f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.6f/Braid.PPM);
+                sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/3f);
+            }
             case ("henry") -> {
                 sprite = new Sprite(atlas.findRegion("henry-idle"));
                 idle = new Animation<>(0.2f, atlas.findRegions("henry-idle"), Animation.PlayMode.LOOP);

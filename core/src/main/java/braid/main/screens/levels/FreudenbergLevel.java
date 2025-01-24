@@ -16,11 +16,6 @@ public class FreudenbergLevel extends LevelScreen {
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
     }
 
-    public void unlockSchlossBurg() {
-        Savemanager.unlockSchlossBurg();
-        Savemanager.saveGame(false);
-    }
-
     @Override
     protected LevelScreen getNewInstance() {
         return new FreudenbergLevel(game);

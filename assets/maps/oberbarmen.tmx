@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="256" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="309">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="256" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="313">
  <tileset firstgid="1" source="tilesets/wasteland.tsx"/>
  <tileset firstgid="3137" source="tilesets/00Atlas.tsx"/>
  <tileset firstgid="3237" source="tilesets/oberbarmen.tsx"/>
@@ -171,13 +171,18 @@
 Halt die Augen offen! </property>
    </properties>
   </object>
+  <object id="311" name="Sign" x="2624" y="688" width="48" height="32">
+   <properties>
+    <property name="Text" value="Junger Löwe... Nimm den geheimen Weg am Freudenberg zum Schloss und finde dein Schicksal..."/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Doors">
   <object id="93" template="object-templates/door.tx" x="1488" y="320"/>
   <object id="135" template="object-templates/door.tx" x="1472" y="96"/>
-  <object id="228" template="object-templates/door.tx" x="2512" y="672"/>
-  <object id="229" template="object-templates/door.tx" x="2560" y="672"/>
-  <object id="230" template="object-templates/door.tx" x="2607" y="671.667"/>
+  <object id="228" template="object-templates/door.tx" x="2512" y="672.333"/>
+  <object id="229" template="object-templates/door.tx" x="2560" y="672.333"/>
+  <object id="230" template="object-templates/door.tx" x="2607" y="672"/>
   <object id="274" template="object-templates/door.tx" x="3968" y="192"/>
  </objectgroup>
  <objectgroup id="9" name="End">
@@ -216,6 +221,7 @@ Halt die Augen offen! </property>
     <property name="ID" type="int" value="4"/>
    </properties>
   </object>
+  <object id="310" template="object-templates/key.tx" x="2635.09" y="698.455"/>
  </objectgroup>
  <objectgroup id="12" name="MovingPlatform">
   <object id="35" x="368" y="368">
@@ -301,6 +307,13 @@ Halt die Augen offen! </property>
   </object>
   <object id="270" template="object-templates/GoalPosition.tx" x="3408" y="139.333" rotation="0">
    <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="14" name="NPCs">
+  <object id="309" template="object-templates/NPC.tx" x="2640" y="688" width="32" height="32">
+   <properties>
+    <property name="Name" value="Guru"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

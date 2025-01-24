@@ -28,6 +28,7 @@ audio/music/WEGZURUNI/WEGZURUNI2.mp3
 audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
 audio/music/lofi-loop.mp3
+audio/music/oberbarmen.mp3
 audio/music/victory-fanfare.mp3
 audio/sound/Steps.mp3
 audio/sound/buttonClick.ogg
@@ -953,6 +954,19 @@ sprites/freudenberg/freudenberg-guy_02.png
 sprites/freudenberg/freudenberg-guy_03.png
 sprites/freudenberg/freudenberg-guy_04.png
 sprites/freudenberg/freudenberg-idle.png
+sprites/guru/guru_01.png
+sprites/guru/guru_02.png
+sprites/guru/guru_03.png
+sprites/guru/guru_04.png
+sprites/guru/guru_05.png
+sprites/guru/guru_06.png
+sprites/guru/guru_07.png
+sprites/guru/guru_08.png
+sprites/guru/guru_09.png
+sprites/guru/guru_10.png
+sprites/guru/guru_11.png
+sprites/guru/guru_12.png
+sprites/guru/guru_13.png
 sprites/hbf/nakedguy-attack_01.png
 sprites/hbf/nakedguy-attack_02.png
 sprites/hbf/nakedguy-attack_03.png

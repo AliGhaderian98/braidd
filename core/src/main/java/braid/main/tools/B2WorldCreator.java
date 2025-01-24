@@ -229,8 +229,14 @@ public class B2WorldCreator {
                 float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
                 float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
 
-                screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
-                     schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                if (object.getProperties().get("type").equals("long")) {
+                    screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, screen.getAtlas().findRegion("longplatform"), rect, speed,
+                        schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                } else {
+                    screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
+                        schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                }
+
             }
         }
     }

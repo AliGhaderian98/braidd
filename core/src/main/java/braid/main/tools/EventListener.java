@@ -46,6 +46,11 @@ public class EventListener {
     public void hasTriggeredNPC(boolean trigger) {
         this.check2 = trigger;
 
+        // check for edge case to unlock schloss burg level from oberbarmen
+        if (screen instanceof OberbarmenLevel && !Savemanager.currentsavegame.UnlockedLevels.get("SCHLOSSBURG")) {
+            ((OberbarmenLevel) screen).unlockSchlossBurg();
+        }
+
         if (canCompleteMap()) {
             loadMap();
         } else if (allEnemiesDead()) {
@@ -130,7 +135,6 @@ public class EventListener {
             screen.stopMusic();
             Screen newScreen = new FinaleMap(game);
             game.setScreen(newScreen);
-
         }
     }
 }

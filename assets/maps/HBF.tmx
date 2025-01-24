@@ -169,27 +169,27 @@
  </objectgroup>
  <objectgroup id="14" name="Brick"/>
  <objectgroup id="20" name="Enemies">
-  <object id="99" template="object-templates/patrollingEnemy.tx" x="428.25" y="300.25">
+  <object id="99" template="object-templates/patrollingEnemy.tx" x="422.583" y="304.917">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="100" template="object-templates/patrollingEnemy.tx" x="704" y="254">
+  <object id="100" template="object-templates/patrollingEnemy.tx" x="715.333" y="260">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="101" template="object-templates/patrollingEnemy.tx" x="207" y="272">
+  <object id="101" template="object-templates/patrollingEnemy.tx" x="182.333" y="273.333">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="102" template="object-templates/patrollingEnemy.tx" x="113" y="236">
+  <object id="102" template="object-templates/patrollingEnemy.tx" x="113.333" y="236.667">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="113" template="object-templates/patrollingEnemy.tx" x="532" y="219.25">
+  <object id="113" template="object-templates/patrollingEnemy.tx" x="519.333" y="226.917">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
@@ -214,7 +214,7 @@
     <property name="type" value="drunkenguy"/>
    </properties>
   </object>
-  <object id="151" template="object-templates/patrollingEnemy.tx" x="795" y="191">
+  <object id="151" template="object-templates/patrollingEnemy.tx" x="783" y="194">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>

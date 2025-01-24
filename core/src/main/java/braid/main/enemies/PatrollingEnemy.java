@@ -46,11 +46,6 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
             position = -25 /Braid.PPM;
             hx = 30/ Braid.PPM;
             yPoint = -6 / Braid.PPM;
-        } else if (type.equals("nakedguy")) {
-            radius = 8/ Braid.PPM;
-            position = -15 /Braid.PPM;
-            hx = 4/ Braid.PPM;
-            yPoint = 20 / Braid.PPM;
         }
 
         BodyDef bdef = new BodyDef();
@@ -123,8 +118,8 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
                 walking = new Animation<>(0.1f, atlas.findRegions("nakedguy-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,walking));
                 sprite.setBounds(0,0,
-                    sprite.getRegionWidth()/ Braid.PPM,
-                    sprite.getRegionHeight()/Braid.PPM);
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
             case ("freudenberg-guy") -> {
                 sprite = new Sprite(atlas.findRegion("freudenberg-guy"));
@@ -203,11 +198,6 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
             yPoint = -50 / Braid.PPM;
             rightxPoint = 28 / Braid.PPM;
             leftxPoint = -28 / Braid.PPM;
-        } else if (type.equals("nakedguy")) {
-            hx = 1/ Braid.PPM;
-            yPoint = -23 / Braid.PPM;
-            rightxPoint = 6 / Braid.PPM;
-            leftxPoint = -6 / Braid.PPM;
         }
 
         // Sensor for the left side

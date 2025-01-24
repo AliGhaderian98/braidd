@@ -14,7 +14,7 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: BAYER
+lastLevel: OBERBARMEN
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 4477893
+Playtime: 5217758
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -160,7 +160,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	ZOO: [

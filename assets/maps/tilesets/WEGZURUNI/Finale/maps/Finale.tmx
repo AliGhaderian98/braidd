@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="95" height="260" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="397">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="95" height="260" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="400">
  <tileset firstgid="1" source="../tilesets/HIGHMountain.tsx"/>
  <tileset firstgid="16321" source="../tilesets/BusTafel.tsx"/>
  <tileset firstgid="16333" source="../tilesets/hintsign.tsx"/>
@@ -2169,78 +2169,15 @@
     <property name="speed" type="float" value="0.2"/>
    </properties>
   </object>
-  <object id="362" template="../../../../object-templates/movingPlatformType2.tx" x="496" y="2048" width="47.5" height="15.6364">
-   <properties>
-    <property name="goalPosition" type="object" value="372"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="363" template="../../../../object-templates/movingPlatformType2.tx" x="592.174" y="2048" width="47.5" height="16.7273">
-   <properties>
-    <property name="goalPosition" type="object" value="373"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="364" template="../../../../object-templates/movingPlatformType2.tx" x="687.538" y="2048">
+  <object id="374" template="../../../../object-templates/GoalPosition.tx" x="720.25" y="626.75"/>
+  <object id="398" template="../../../../object-templates/SchalterMovingPlatform.tx" x="496" y="2064" width="432" height="16">
    <properties>
     <property name="goalPosition" type="object" value="374"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
+    <property name="schalter" type="object" value="399"/>
+    <property name="type" value="long"/>
    </properties>
   </object>
-  <object id="365" template="../../../../object-templates/movingPlatformType2.tx" x="783.174" y="2048">
-   <properties>
-    <property name="goalPosition" type="object" value="375"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="366" template="../../../../object-templates/movingPlatformType2.tx" x="877.583" y="2048">
-   <properties>
-    <property name="goalPosition" type="object" value="376"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="367" template="../../../../object-templates/movingPlatformType2.tx" x="544" y="2064" width="47.5" height="15.6364">
-   <properties>
-    <property name="goalPosition" type="object" value="377"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="368" template="../../../../object-templates/movingPlatformType2.tx" x="640.174" y="2064" width="47.5" height="16.7273">
-   <properties>
-    <property name="goalPosition" type="object" value="378"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="369" template="../../../../object-templates/movingPlatformType2.tx" x="735.538" y="2064">
-   <properties>
-    <property name="goalPosition" type="object" value="379"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="370" template="../../../../object-templates/movingPlatformType2.tx" x="831.174" y="2064">
-   <properties>
-    <property name="goalPosition" type="object" value="380"/>
-    <property name="rewindable" type="bool" value="false"/>
-    <property name="speed" type="float" value="0.2"/>
-   </properties>
-  </object>
-  <object id="372" template="../../../../object-templates/GoalPosition.tx" x="528" y="626.5"/>
-  <object id="373" template="../../../../object-templates/GoalPosition.tx" x="624.25" y="626.75"/>
-  <object id="374" template="../../../../object-templates/GoalPosition.tx" x="720.25" y="626.75"/>
-  <object id="375" template="../../../../object-templates/GoalPosition.tx" x="806.75" y="627.75"/>
-  <object id="376" template="../../../../object-templates/GoalPosition.tx" x="904" y="625"/>
-  <object id="377" template="../../../../object-templates/GoalPosition.tx" x="576" y="642"/>
-  <object id="378" template="../../../../object-templates/GoalPosition.tx" x="667" y="642"/>
-  <object id="379" template="../../../../object-templates/GoalPosition.tx" x="765.25" y="642.75"/>
-  <object id="380" template="../../../../object-templates/GoalPosition.tx" x="851.75" y="642.75"/>
+  <object id="399" template="../../../../object-templates/Schalter.tx" x="960" y="2080"/>
  </objectgroup>
  <objectgroup id="4" name="Walls">
   <object id="1" x="462.131" y="3908" width="32.0707" height="327.636"/>
@@ -2270,7 +2207,7 @@
   <object id="360" x="928" y="565.333" width="28.6667" height="1352.67"/>
   <object id="383" x="478.333" y="2082" width="17.3333" height="116"/>
  </objectgroup>
- <objectgroup id="6" name="NPCs">
+ <objectgroup id="6" name="NPCs" visible="0">
   <object id="143" template="../../../../object-templates/NPC.tx" x="-64" y="4016" width="56" height="32">
    <properties>
     <property name="Type" value="TalkingNPC"/>
