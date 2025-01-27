@@ -6,6 +6,7 @@
    <property name="rewindable" type="bool" value="true"/>
    <property name="schalter" type="object" value="0"/>
    <property name="speed" type="float" value="1"/>
+   <property name="type" value=""/>
   </properties>
  </object>
 </template>

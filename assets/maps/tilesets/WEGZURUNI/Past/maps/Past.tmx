@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="99" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="298">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="99" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="301">
  <tileset firstgid="1" source="../tilesets/oldcitys.tsx"/>
  <tileset firstgid="66" source="../tilesets/alteSchwebebahn.tsx"/>
  <tileset firstgid="67" source="../tilesets/oldcityu.tsx"/>
@@ -8,6 +8,8 @@
  <tileset firstgid="529" source="../tilesets/oldcitty.tsx"/>
  <tileset firstgid="12193" source="../tilesets/darkerorange.tsx"/>
  <tileset firstgid="12194" source="../tilesets/TeslaCoil.tsx"/>
+ <tileset firstgid="12218" source="../tilesets/oldschwebe.tsx"/>
+ <tileset firstgid="12248" source="../../Present/tilesets/hoodedone.tsx"/>
  <layer id="29" name="Background" width="99" height="96">
   <data encoding="csv">
 12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,12193,
@@ -291,11 +293,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,66,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,12218,12219,12220,12221,12222,12223,12224,12225,12226,12227,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,12228,12229,12230,12231,12232,12233,12234,12235,12236,12237,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,12238,12239,12240,12241,12242,12243,12244,12245,12246,12247,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -303,6 +303,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12510,12511,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12526,12527,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -426,7 +428,7 @@
   <object id="167" x="1328" y="1328" width="258.24" height="15.5647"/>
   <object id="164" x="1246.78" y="1358.29" width="65.0272" height="18.898"/>
   <object id="166" x="1134.39" y="1405.76" width="63.3606" height="18.898"/>
-  <object id="188" x="1008" y="1440" width="96" height="23"/>
+  <object id="188" x="1008" y="1440" width="96" height="34.6364"/>
   <object id="193" name="Ground" x="0" y="1472" width="1598.67" height="64"/>
   <object id="194" x="813.35" y="1264.22" width="770.639" height="15.5646"/>
   <object id="195" x="144" y="383.867" width="47.6939" height="15.898"/>
@@ -441,60 +443,62 @@
   <object id="90" x="320" y="1392" width="64" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="NPCs">
-  <object id="1" template="../../../../object-templates/NPC.tx" x="208" y="1424" width="49" height="47">
+  <object id="1" template="../../../../object-templates/NPC.tx" x="225.333" y="1427.33" width="49" height="47">
    <properties>
     <property name="Name" value="Emperor"/>
     <property name="Type" value="TalkingNPC"/>
     <property name="npcTrigger" type="object" value="284"/>
-    <property name="text" value="You need 3 Items to repair it!"/>
+    <property name="text" value="Der Kaiser will die Schwebebahn hier gebaut haben, finde 3 Tesla-Transformatoren, um den Kaiserwagen zu vervollständigen!"/>
    </properties>
   </object>
   <object id="284" x="23" y="1274" width="43" height="64.3333"/>
-  <object id="288" template="../../../../object-templates/NPC.tx" x="139.333" y="1273.67" width="32" height="62.3333">
+  <object id="288" template="../../../../object-templates/NPC.tx" x="-132.667" y="1265.67" width="32" height="33">
    <properties>
     <property name="Name" value="PastMap"/>
     <property name="Type" value="DoorNPC"/>
+    <property name="npcTrigger" type="object" value="300"/>
     <property name="text" value="PastDoor"/>
    </properties>
   </object>
   <object id="289" template="../../../../object-templates/NPC.tx" x="1535.38" y="1436.38" width="32" height="36.125">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interact with tesla coil?"/>
+    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
    </properties>
   </object>
   <object id="290" template="../../../../object-templates/NPC.tx" x="34" y="765.438" width="32" height="36.125">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interact with tesla coil?"/>
+    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
    </properties>
   </object>
-  <object id="295" template="../../../../object-templates/NPC.tx" x="18.6667" y="518.667">
+  <object id="295" template="../../../../object-templates/NPC.tx" x="29.3334" y="516.667">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="it was a fake..."/>
+    <property name="text" value="es war ein Plagiat....."/>
    </properties>
   </object>
   <object id="291" template="../../../../object-templates/NPC.tx" x="144.5" y="348.938" width="32" height="36.125">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interact with tesla coil?"/>
+    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
    </properties>
   </object>
+  <object id="300" name="npcTrigger" x="131.167" y="1275.83" width="43" height="64.3333"/>
  </objectgroup>
  <objectgroup id="31" name="Buttons">
-  <object id="280" template="../../../../object-templates/Button.tx" x="396.333" y="1207.33" width="46" height="44">
+  <object id="280" template="../../../../object-templates/Button.tx" x="156.333" y="361.997">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="279" template="../../../../object-templates/Button.tx" x="407.67" y="1204.45" width="46" height="44">
+  <object id="298" template="../../../../object-templates/Button.tx" x="38.6667" y="784">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="281" template="../../../../object-templates/Button.tx" x="397.167" y="1202.17" width="46" height="44">
+  <object id="299" template="../../../../object-templates/Button.tx" x="1546.67" y="1452">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
@@ -608,8 +612,6 @@
  <objectgroup id="10" name="Walls">
   <object id="110" x="1584" y="-16" width="28" height="1550.67"/>
   <object id="111" x="-14" y="10" width="32" height="1512"/>
-  <object id="189" x="1104" y="1440" height="64"/>
-  <object id="190" x="1008" y="1440" height="64"/>
  </objectgroup>
  <objectgroup id="9" name="Items">
   <object id="182" template="../../../../object-templates/ritalin.tx" x="762.503" y="1104" width="44" height="37.3333"/>
@@ -618,11 +620,6 @@
   <object id="292" template="../../../../object-templates/page.tx" x="39" y="521">
    <properties>
     <property name="ID" type="int" value="500"/>
-   </properties>
-  </object>
-  <object id="296" template="../../../../object-templates/page.tx" x="1392" y="366.667">
-   <properties>
-    <property name="ID" type="int" value="0"/>
    </properties>
   </object>
   <object id="297" template="../../../../object-templates/page.tx" x="1529.33" y="694.667">

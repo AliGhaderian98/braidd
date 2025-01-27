@@ -123,7 +123,7 @@
   <object id="5" template="../../../../object-templates/NPC.tx" x="305.748" y="256.405">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="You have your chance now!"/>
+    <property name="text" value="Du hast jetzt deine Chance!"/>
    </properties>
   </object>
   <object id="8" template="../../../../object-templates/NPC.tx" x="305.082" y="256.334">
@@ -137,7 +137,7 @@
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="You had your chance then!"/>
+    <property name="text" value="Du hattest damals deine Chance!"/>
    </properties>
   </object>
  </objectgroup>

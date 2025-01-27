@@ -5,14 +5,20 @@ import braid.main.objects.MovingPlatform;
 import braid.main.rewind.RewindController;
 import braid.main.rewind.RewindableBody;
 import braid.main.objects.Enemy;
+import braid.main.tools.Savemanager;
 
 public class OberbarmenLevel extends LevelScreen {
 
     public OberbarmenLevel(Braid game) {
-        super(game, "maps/oberbarmen.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/oberbarmen.tmx", "packedimages/sprites.atlas", "audio/music/oberbarmen.mp3");
         levelName = "OBERBARMEN";
 
         player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+    }
+
+    public void unlockSchlossBurg() {
+        Savemanager.unlockSchlossBurg();
+        Savemanager.saveGame(false);
     }
 
     @Override

@@ -27,6 +27,7 @@ public class NPC extends InteractiveGameObject{
     private float stateTimer = 0f;
 
     private boolean trigger = false;
+    private boolean hasBeenPlayed = false;
     protected Body body;
     private EventListener event;
     SubtitleManager subtitleManager;
@@ -62,6 +63,15 @@ public class NPC extends InteractiveGameObject{
                     sprite.getRegionHeight()*0.6f/Braid.PPM);
                 sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/3.4f);
             }
+            case "Guru" -> {
+                sprite = new Sprite(atlas.findRegion("guru"));
+                idle = new Animation<>(0.1f, atlas.findRegions("guru"), Animation.PlayMode.LOOP);
+                sprite.setRegion(idle.getKeyFrame(0));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.6f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.6f/Braid.PPM);
+                sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/3f);
+            }
             case ("henry") -> {
                 sprite = new Sprite(atlas.findRegion("henry-idle"));
                 idle = new Animation<>(0.2f, atlas.findRegions("henry-idle"), Animation.PlayMode.LOOP);
@@ -92,14 +102,24 @@ public class NPC extends InteractiveGameObject{
 
         if (this.trigger != trigger) {
             switch (type) {
+
                 case "TalkingNPC" -> setShowing(trigger);
                 case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
-                case "MusicNPC" -> this.event.hasChangedMusic(name);
+                case "MusicNPC" -> {
+                    if (!hasBeenPlayed) {
+                        this.event.hasChangedMusic(name);
+                        setHasBeenPlayed(true);
+                    }
+                }
 
             }
             this.trigger = trigger;
         }
+    }
+
+    public void setHasBeenPlayed(boolean hasBeenPlayed) {
+        this.hasBeenPlayed = hasBeenPlayed;
     }
 
     public void setShowing(boolean showing) {

@@ -10,6 +10,7 @@ import braid.main.objects.*;
 import braid.main.enemies.*;
 import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.FinishGameHUD;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
@@ -36,6 +37,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -63,7 +65,7 @@ public abstract class LevelScreen implements Screen {
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused = false;
-    public static boolean debugRendererEnabled = true;
+    public static boolean debugRendererEnabled = false;
     //public static boolean loadedMap = false;
 
     protected final PlayerInputHandler inputHandler;
@@ -119,6 +121,8 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
+    private FinishLevelCutscene finishLevelCutscene;
+    private int lastBackgroundIndex = 0;
 
 
 
@@ -128,6 +132,9 @@ public abstract class LevelScreen implements Screen {
         atlas = new TextureAtlas(atlasPath);
         gameIsPaused = false;
         setLevelName();
+
+        if (Overworld.music.isPlaying())
+            Overworld.music.stop();
 
         items = new Array<>();
 
@@ -201,6 +208,11 @@ public abstract class LevelScreen implements Screen {
                 rewindObjects.add(gm.getRewindController());
         }
 
+        for (Schalter s : schalters) {
+            if (s.isRewindable())
+                rewindObjects.add(s.getRewindController());
+        }
+
         for (Brick b : bricks) {
             if (b.isRewindable())
                 rewindObjects.add(b.getRewindController());
@@ -227,6 +239,17 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages, previouslyCollectedPages);
+
+        if (this instanceof FinaleMap)
+            finishHUD = new FinishGameHUD(game.batch, atlas);
+        else
+            finishHUD = new FinishHUD(game.batch, atlas);
+
+        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, gameCamera.getViewport(), player);
+
+        MapLayer schwebeBahnLayer = map.getLayers().get("Schwebebahn");
+        if (schwebeBahnLayer != null)
+            lastBackgroundIndex = map.getLayers().getIndex("Schwebebahn");
     }
 
 
@@ -309,7 +332,7 @@ public abstract class LevelScreen implements Screen {
 
         applyPostProcessing(activeShader);
 
-        if (finished)
+        if (finishLevelCutscene.isFinished())
             renderFinishHUD();
 
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
@@ -391,7 +414,22 @@ public abstract class LevelScreen implements Screen {
 
     private void renderWorld(float dt) {
         renderer.setView(gameCamera.getCamera());
-        renderer.render();
+
+        if (lastBackgroundIndex != 0) {
+            for (int i = 0; i < lastBackgroundIndex; i++)
+                renderer.render(new int[] {i});
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+            for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
+                renderer.render(new int[] { i });
+        } else {
+            renderer.render();
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+        }
+
+
+
         if (debugRendererEnabled)
             b2dr.render(world, gameCamera.getCamera().combined);
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
@@ -407,7 +445,7 @@ public abstract class LevelScreen implements Screen {
         drawEnemies();
         drawMovingPlatforms();
         drawSchalterMovingPlatforms();
-        drawSchalters();
+        //drawSchalters();
         drawBricks();
         drawItems();
 
@@ -568,11 +606,21 @@ public abstract class LevelScreen implements Screen {
             Savemanager.saveGame(false);
         }
         music.stop();
+        player.stopSFX();
         victoryMusic.play();
         finished = true;
         gameIsPaused = true;
+        finishLevelCutscene.play();
+    }
+
+    public void setFinishHUD() {
         activeShader = pauseShader;
-        finishHUD = new FinishHUD(game.batch, atlas);
+        finishHUD.updateHUD();
+
+        if (this instanceof FinaleMap)
+            finishHUD = new FinishGameHUD(game.batch, atlas);
+        else
+            finishHUD = new FinishHUD(game.batch, atlas);
     }
 
     @Override
@@ -601,8 +649,8 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
-        if (finished)
-            finishHUD.resize(width, height);
+        finishHUD.resize(width, height);
+        finishLevelCutscene.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
@@ -690,6 +738,7 @@ public abstract class LevelScreen implements Screen {
 
     public void addSchalter(Schalter schalter) {
         schalters.add(schalter);
+        schalter.setRewindController(new RewindController(new RewindableBody(schalter.b2body, schalter)));
     }
 
     public void addButton(Button button){
@@ -717,14 +766,19 @@ public abstract class LevelScreen implements Screen {
 
     public Array<Enemy> getEnemies() { return enemies; }
 
+    public Player getPlayer() { return player; }
+
     public void changeMusic(String musicName) {
         music.stop();
         music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
         music.setLooping(true);
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.setPosition(0);
-        System.out.println(music);
         music.play();
+    }
+
+    public void stopMusic() {
+        music.stop();
     }
 
     private void setLevelName() {
@@ -755,8 +809,8 @@ public abstract class LevelScreen implements Screen {
         else if (this instanceof PresentMap)
             levelName = "WEGZURUNI";
         else if (this instanceof FutureMap)
-            levelName = "Future";
-//        else if (this instanceof FinaleMap)
-//            levelName = "Finale"
+            levelName = "WEGZURUNI";
+        else if (this instanceof FinaleMap)
+            levelName = "WEGZURUNI";
     }
 }

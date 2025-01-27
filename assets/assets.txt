@@ -4,16 +4,31 @@ MenuDirectory/Slider/slider_background.png
 MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
+SaveGameFiles/SaveGame1.json
+SaveScreen.png
 StartScreen.png
+audio/music/ArkadenSoundtrack.mp3
+audio/music/Freudenberg.mp3
+audio/music/HBF.mp3
+audio/music/Luisenviertel.mp3
 audio/music/SchlossBurgSoundtrack.mp3
 audio/music/UniLevelMusic.mp3
-audio/music/WEGZURUNI/FutureMap.m4a
+audio/music/WEGZURUNI/FinaleMap1.mp3
+audio/music/WEGZURUNI/FinaleMap2.mp3
+audio/music/WEGZURUNI/FinaleMap3.mp3
 audio/music/WEGZURUNI/FutureMap.mp3
+audio/music/WEGZURUNI/FutureMap1.mp3
 audio/music/WEGZURUNI/FutureMap2.mp3
+audio/music/WEGZURUNI/MountainMap1.mp3
+audio/music/WEGZURUNI/MountainMap2.mp3
+audio/music/WEGZURUNI/MountainMap3.mp3
+audio/music/WEGZURUNI/PastMap.mp3
+audio/music/WEGZURUNI/WEGZURUNI1.mp3
 audio/music/WEGZURUNI/WEGZURUNI2.mp3
 audio/music/ZooSoundtrack.mp3
 audio/music/background_music.mp3
 audio/music/lofi-loop.mp3
+audio/music/oberbarmen.mp3
 audio/music/victory-fanfare.mp3
 audio/sound/Steps.mp3
 audio/sound/buttonClick.ogg
@@ -21,13 +36,14 @@ audio/sound/jump.mp3
 audio/sound/kill.mp3
 audio/sound/land.mp3
 audio/sound/menuSound.mp3
-maps/Bayer.tmx
+maps/Arkadenmap.tmx
+maps/FreudenbergLevel.tmx
 maps/HBF.tmx
+maps/Luisenviertel.tmx
 maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
-maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -60,6 +76,41 @@ maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
 maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
+maps/tilesets/Arkaden/City.tsx
+maps/tilesets/Arkaden/Shopping_Mall.tsx
+maps/tilesets/Arkaden/images/City.png
+maps/tilesets/Arkaden/images/shopping mall.jpg
+maps/tilesets/Dungeon Tile Set.tsx
+maps/tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx
+maps/tilesets/FreudenBerg/2d_car.tsx
+maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.png
+maps/tilesets/FreudenBerg/Bilder/2d_car.jpg
+maps/tilesets/FreudenBerg/Bilder/Cloud Tileset.png
+maps/tilesets/FreudenBerg/Bilder/Door.png
+maps/tilesets/FreudenBerg/Bilder/PC Computer - RPG Maker MV - Blue Sky.png
+maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.png
+maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.zip
+maps/tilesets/FreudenBerg/Bilder/car junkyard.png
+maps/tilesets/FreudenBerg/Bilder/city_tiles_by_carchagui_ddrixpq.png
+maps/tilesets/FreudenBerg/Bilder/exercises-X-material.zip
+maps/tilesets/FreudenBerg/Bilder/florest downt.png
+maps/tilesets/FreudenBerg/Bilder/free_to_use__rpg_tileset_by_virydyan_ddvahtl.png
+maps/tilesets/FreudenBerg/Bilder/layer 1 florest.png
+maps/tilesets/FreudenBerg/Bilder/layer 2 florest fog.png
+maps/tilesets/FreudenBerg/Bilder/layer 3 grass.png
+maps/tilesets/FreudenBerg/Bilder/layer 4 mountain.png
+maps/tilesets/FreudenBerg/Bilder/layer 5 mountain and sky.png
+maps/tilesets/FreudenBerg/Bilder/sky up.png
+maps/tilesets/FreudenBerg/Bilder/snow_tiles_by_droid779_dcc7m3a.png
+maps/tilesets/FreudenBerg/Blue Sky.tsx
+maps/tilesets/FreudenBerg/Car.tsx
+maps/tilesets/FreudenBerg/Cloud 2.tsx
+maps/tilesets/FreudenBerg/Door.tsx
+maps/tilesets/FreudenBerg/Mobile - Angry Birds - Post-Chrome Characters.tsx
+maps/tilesets/FreudenBerg/Snow.tsx
+maps/tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx
+maps/tilesets/FreudenBerg/floor.tsx
+maps/tilesets/FreudenBerg/test.tsx
 maps/tilesets/HBF.tmx
 maps/tilesets/HBF/Dungeon Tile Set.png
 maps/tilesets/HBF/Dungeon Tile Set.tsx
@@ -85,6 +136,24 @@ maps/tilesets/HBF/sheet.tsx
 maps/tilesets/HBF/sky.tsx
 maps/tilesets/HBF/sprites.png
 maps/tilesets/HBF/sprites.tsx
+maps/tilesets/Luisenviertel/City4.png
+maps/tilesets/Luisenviertel/Luisenviertel-1-house.tsx
+maps/tilesets/Luisenviertel/Luisenviertel-2-house.tsx
+maps/tilesets/Luisenviertel/Luisenviertel-Boden.tsx
+maps/tilesets/Luisenviertel/Luisenviertel-Sky.tsx
+maps/tilesets/Luisenviertel/Luisenviertel-allHouses.tsx
+maps/tilesets/Luisenviertel/Sky-Small.png
+maps/tilesets/Luisenviertel/Sky.png
+maps/tilesets/Luisenviertel/all-houses.png
+maps/tilesets/Luisenviertel/fountain&bush.png
+maps/tilesets/Luisenviertel/houses-small.png
+maps/tilesets/Luisenviertel/houses.png
+maps/tilesets/Luisenviertel/houses1-small.png
+maps/tilesets/Luisenviertel/houses1.png
+maps/tilesets/Luisenviertel/houses2.png
+maps/tilesets/Luisenviertel/road-small.png
+maps/tilesets/Luisenviertel/road.png
+maps/tilesets/Luisenviertel/umbrella&policebox.png
 maps/tilesets/Props.tsx
 maps/tilesets/Sample.tsx
 maps/tilesets/Schlossburg/Castle 1.tsx
@@ -124,6 +193,39 @@ maps/tilesets/Uni/tile-white-shadow.tsx
 maps/tilesets/Uni/tile-white.tsx
 maps/tilesets/Uni/trees.tsx
 maps/tilesets/Uni/uni-flag.tsx
+maps/tilesets/WEGZURUNI/Finale/Images/BusTafel.png
+maps/tilesets/WEGZURUNI/Finale/Images/Credits.aseprite
+maps/tilesets/WEGZURUNI/Finale/Images/Credits.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x480.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack2-720x4802.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack3-720x480.png
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack3-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack4-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/Frozen-Pixel-Art-Environment-Assets-Pack5-720x480.webp
+maps/tilesets/WEGZURUNI/Finale/Images/HIGHmountain.png
+maps/tilesets/WEGZURUNI/Finale/Images/Nature_environment_01.png
+maps/tilesets/WEGZURUNI/Finale/Images/Nature_props_01.png
+maps/tilesets/WEGZURUNI/Finale/Images/Sprite-0001.png
+maps/tilesets/WEGZURUNI/Finale/Images/Tileset.png
+maps/tilesets/WEGZURUNI/Finale/Images/hintsign.png
+maps/tilesets/WEGZURUNI/Finale/Images/killscreen.aseprite
+maps/tilesets/WEGZURUNI/Finale/Images/killscreen.png
+maps/tilesets/WEGZURUNI/Finale/Images/pacmanschrift.png
+maps/tilesets/WEGZURUNI/Finale/Images/pixel art wood.jpg
+maps/tilesets/WEGZURUNI/Finale/maps/Finale.tmx
+maps/tilesets/WEGZURUNI/Finale/tilesets/BusTafel.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/Credits.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/HIGHMountain.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/finalfloor.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/gltiches.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/hintsign.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/jungle.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/killscreen.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/nature1.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/nature2.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/pacmanschrift.tsx
+maps/tilesets/WEGZURUNI/Finale/tilesets/winter1.tsx
 maps/tilesets/WEGZURUNI/Future/Future.tmx
 maps/tilesets/WEGZURUNI/Future/Images/BlackScreen/Blackpixel.png
 maps/tilesets/WEGZURUNI/Future/Images/Cyberpunk/Sidescroller Shooter - Central City/Assets/Buildings.aseprite
@@ -184,6 +286,7 @@ maps/tilesets/WEGZURUNI/Future/tilesets/WallPov.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/blackScreen.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/cyberpunk.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/floorpovgreen.tsx
+maps/tilesets/WEGZURUNI/Future/tilesets/futureSchwebe.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/renderWorldCode.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/spawnItemsCode.tsx
 maps/tilesets/WEGZURUNI/Future/tilesets/spawnMPCode.tsx
@@ -281,6 +384,7 @@ maps/tilesets/WEGZURUNI/Past/tilesets/oldcitty.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcitys.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityt.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/oldcityu.tsx
+maps/tilesets/WEGZURUNI/Past/tilesets/oldschwebe.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/rails.tsx
 maps/tilesets/WEGZURUNI/Past/tilesets/steampunk1.tsx
 maps/tilesets/WEGZURUNI/Present/Pictures/AnimationSheet_Character (1).png
@@ -293,6 +397,7 @@ maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.aseprite
 maps/tilesets/WEGZURUNI/Present/Pictures/Backgroundsmall.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Bus.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Public Bus.png
+maps/tilesets/WEGZURUNI/Present/Pictures/Schwebebahntile.png
 maps/tilesets/WEGZURUNI/Present/Pictures/X5kDIm.png
 maps/tilesets/WEGZURUNI/Present/Pictures/Zebra.png
 maps/tilesets/WEGZURUNI/Present/Pictures/city1.jpg
@@ -347,6 +452,7 @@ maps/tilesets/WEGZURUNI/Present/tilesets/guys7.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/guys8.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/guys9.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/hoodedone.tsx
+maps/tilesets/WEGZURUNI/Present/tilesets/schwebebeahntile.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/skyyyy.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/steetsmall.tsx
 maps/tilesets/WEGZURUNI/Present/tilesets/wegzurunibad.tsx
@@ -485,19 +591,18 @@ maps/tilesets/Zoo/TaigaAmbient.tsx
 maps/tilesets/Zoo/TaigaPack.png
 maps/tilesets/Zoo/greenBackground1.tsx
 maps/tilesets/Zoo/zoopng.tsx
-maps/tilesets/bayer/Bayer.jpg
-maps/tilesets/bayer/Fabrik.jpg
-maps/tilesets/bayer/bayer.tsx
-maps/tilesets/bayer/fabrik.png
+maps/tilesets/images/00Atlas.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
 maps/tilesets/images/Anim_Robot_Jump1_v1.png
+maps/tilesets/images/Dungeon Tile Set.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
 maps/tilesets/images/coin.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
+maps/tilesets/images/oberbarmen.png
 maps/tilesets/images/prop-sheet.png
 maps/tilesets/images/sheet.png
 maps/tilesets/images/sky.png
@@ -506,6 +611,7 @@ maps/tilesets/images/wasteland2.png
 maps/tilesets/images/wasteland3.png
 maps/tilesets/mid-layer-a.tsx
 maps/tilesets/mid-layer-b.tsx
+maps/tilesets/oberbarmen.tsx
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-mountains.png
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-ruins.png
 maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sky.png
@@ -733,6 +839,15 @@ sprites/animals/rat-run_01.png
 sprites/animals/rat-run_02.png
 sprites/animals/rat-run_03.png
 sprites/animals/rat-run_04.png
+sprites/arkaden/Security-Guy_01.png
+sprites/arkaden/Security-Guy_02.png
+sprites/arkaden/Security-Guy_03.png
+sprites/arkaden/Security-Guy_04.png
+sprites/arkaden/wolf-walk_01.png
+sprites/arkaden/wolf-walk_02.png
+sprites/arkaden/wolf-walk_03.png
+sprites/arkaden/wolf-walk_04.png
+sprites/arkaden/wolf-walk_05.png
 sprites/ball/ball_01.png
 sprites/ball/ball_02.png
 sprites/ball/ball_03.png
@@ -823,6 +938,34 @@ sprites/circle-timer/circle-timer_10.png
 sprites/circle-timer/circle-timer_11.png
 sprites/circle-timer/circle-timer_12.png
 sprites/circle-timer/circle-timer_13.png
+sprites/evil-lion/evil-lion-idle_1.png
+sprites/evil-lion/evil-lion-idle_2.png
+sprites/evil-lion/evil-lion-idle_3.png
+sprites/evil-lion/evil-lion-idle_4.png
+sprites/evil-lion/evil-lion-run_1.png
+sprites/evil-lion/evil-lion-run_2.png
+sprites/evil-lion/evil-lion-run_3.png
+sprites/evil-lion/evil-lion-run_4.png
+sprites/evil-lion/evil-lion-run_5.png
+sprites/evil-lion/evil-lion-run_6.png
+sprites/freudenberg/freudenberg-guy_01.png
+sprites/freudenberg/freudenberg-guy_02.png
+sprites/freudenberg/freudenberg-guy_03.png
+sprites/freudenberg/freudenberg-guy_04.png
+sprites/freudenberg/freudenberg-idle.png
+sprites/guru/guru_01.png
+sprites/guru/guru_02.png
+sprites/guru/guru_03.png
+sprites/guru/guru_04.png
+sprites/guru/guru_05.png
+sprites/guru/guru_06.png
+sprites/guru/guru_07.png
+sprites/guru/guru_08.png
+sprites/guru/guru_09.png
+sprites/guru/guru_10.png
+sprites/guru/guru_11.png
+sprites/guru/guru_12.png
+sprites/guru/guru_13.png
 sprites/hbf/nakedguy-attack_01.png
 sprites/hbf/nakedguy-attack_02.png
 sprites/hbf/nakedguy-attack_03.png
@@ -929,6 +1072,7 @@ sprites/marcel/marcel_04.png
 sprites/marcel/marcel_05.png
 sprites/marcel/marcel_06.png
 sprites/marcel/marcel_07.png
+sprites/misc/Bus.png
 sprites/misc/balloon-small.png
 sprites/misc/balloon.png
 sprites/misc/beerbottle.png
@@ -938,16 +1082,27 @@ sprites/misc/door-open.png
 sprites/misc/drunkenguy.png
 sprites/misc/hammer.png
 sprites/misc/key.png
+sprites/misc/longplattform.png
 sprites/misc/page.png
 sprites/misc/pause-symbol.png
 sprites/misc/plattform.png
 sprites/misc/rewind-symbol.png
 sprites/misc/ritalin.png
+sprites/misc/schalter-off.png
+sprites/misc/schalter-on.png
 sprites/misc/schalter.png
 sprites/misc/star.png
 sprites/misc/textbox.9.png
 sprites/misc/textbox2.9.png
 sprites/pack.json
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_01.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_02.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_03.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_04.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_05.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_06.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_07.png
+sprites/rotatingCoffeeBean/rotatingCoffeeBean_08.png
 sprites/run-smoke/run-smoke_01.png
 sprites/run-smoke/run-smoke_02.png
 sprites/run-smoke/run-smoke_03.png
@@ -959,6 +1114,7 @@ sprites/run-smoke/run-smoke_08.png
 sprites/run-smoke/run-smoke_09.png
 sprites/run-smoke/run-smoke_10.png
 sprites/run-smoke/run-smoke_11.png
+sprites/schwebebahn-opendoor/schwebebahn-rails.png
 sprites/schwebebahn-opendoor/schwebebahn_1.png
 sprites/schwebebahn-opendoor/schwebebahn_2.png
 sprites/schwebebahn-opendoor/schwebebahn_3.png

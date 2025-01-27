@@ -2,7 +2,7 @@
 <template>
  <object name="Sign" width="16" height="16">
   <properties>
-   <property name="Text" value="I have to stop the Bus!"/>
+   <property name="Text" value="Abschlussprüfung: Töte alle Gegner und finde alle Knöpfe!"/>
   </properties>
  </object>
 </template>

@@ -55,7 +55,10 @@ public class Savemanager {
         currentsavegame.SaveGameKEY = freeSpot;
 
         fillLevelNodes();
-        createDummySavegame();
+        if (currentsavegame.SaveGameName.equals("testAllLevelsUnlocked"))
+            createUnlockedSavegame();
+        else
+            createDummySavegame();
         saveGame(false);
     }
 
@@ -78,6 +81,36 @@ public class Savemanager {
         currentsavegame.UnlockedLevels = new HashMap<>();
         for(int i=0; i<10;i++){
             currentsavegame.UnlockedLevels.put(LevelNodes.get(i),false);
+        }
+        currentsavegame.UnlockedLevels.put("UNI", true);
+        currentsavegame.lastLevel = "UNI";
+
+        currentsavegame.wegZurUniJustUnlocked = false;
+
+        currentsavegame.FinishedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
+        }
+    }
+
+    private static void createUnlockedSavegame() {
+        currentsavegame.Collectables = new HashMap<>();
+        for(int i=0; i<10;i++){
+            dummyCollectablesBool = new Array<>();
+            currentsavegame.Collectables.put(LevelNodes.get(i),dummyCollectablesBool);
+            for(int z = 0; z < 5; z++){
+                dummyCollectablesBool.add(false);
+            }
+        }
+
+        currentsavegame.BestTimes = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.BestTimes.put(LevelNodes.get(i), 0L);
+        }
+
+        currentsavegame.UnlockedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.UnlockedLevels.put(LevelNodes.get(i),true);
         }
         currentsavegame.UnlockedLevels.put("UNI", true);
         currentsavegame.lastLevel = "UNI";
@@ -176,6 +209,7 @@ public class Savemanager {
     public static void updatePlaytime(){
         totalSessionTime = System.currentTimeMillis() - playtimeStart;
         currentsavegame.Playtime += totalSessionTime;
+        playtimeStart = System.currentTimeMillis();
     }
 
     public static void unlockNextLevel(String currentLevel) {
@@ -237,6 +271,14 @@ public class Savemanager {
                 unlockedlevels++;
         }
     return unlockedlevels;
+    }
+
+    public static long SumBestTimes(Savegame savegame){
+        long sumBestTimes = 0L;
+        for(long time : savegame.BestTimes.values()){
+            sumBestTimes += time;
+        }
+        return sumBestTimes;
     }
 
     public static int AmountFoundCollectables(Savegame savegame){

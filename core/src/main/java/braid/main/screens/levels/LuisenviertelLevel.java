@@ -9,10 +9,10 @@ import braid.main.objects.Enemy;
 public class LuisenviertelLevel extends LevelScreen {
 
     public LuisenviertelLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/Luisenviertel.tmx", "packedimages/sprites.atlas", "audio/music/Luisenviertel.mp3");
         levelName = "LUISENVIERTEL";
 
-        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(48/Braid.PPM, 32/Braid.PPM);
     }
 
     @Override

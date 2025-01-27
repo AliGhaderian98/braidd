@@ -229,8 +229,14 @@ public class B2WorldCreator {
                 float goalPosX = goal.getRectangle().x+goal.getRectangle().getWidth()/2;
                 float goalPosY = goal.getRectangle().y+goal.getRectangle().getHeight()/2;
 
-                screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
-                     schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                if (object.getProperties().get("type").equals("long")) {
+                    screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, screen.getAtlas().findRegion("longplattform"), rect, speed,
+                        schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                } else {
+                    screen.addSchalterMovingPlatform(new SchalterMovingPlatform(screen, world, movingPlatformRegion, rect, speed,
+                        schalterPosX, schalterPosY, goalPosX, goalPosY, (boolean) object.getProperties().get("rewindable")));
+                }
+
             }
         }
     }
@@ -238,9 +244,8 @@ public class B2WorldCreator {
     private void spawnButtons() {
         MapLayer buttonLayer = map.getLayers().get("Buttons");
         if (buttonLayer != null){
-            for(MapObject object : buttonLayer.getObjects()) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            for(MapObject object : buttonLayer.getObjects()) {
                 Rectangle boundary = ((RectangleMapObject) object).getRectangle() ;
                 String actionType = (String) object.getProperties().get("actionType");
                 String targetName = (String) object.getProperties().get("targetName");

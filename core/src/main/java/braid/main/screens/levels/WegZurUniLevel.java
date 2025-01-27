@@ -5,10 +5,10 @@ import braid.main.Braid;
 public class WegZurUniLevel extends LevelScreen {
 
     public WegZurUniLevel(Braid game) {
-        super(game, "maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx", "packedimages/sprites.atlas", "audio/music/WEGZURUNI/WEGZURUNI1.mp3");
         levelName = "WEGZURUNI";
 
-        player.setPosition(64/Braid.PPM, 160/Braid.PPM);
+        player.setPosition(48/Braid.PPM, 128/Braid.PPM);
     }
 
     @Override

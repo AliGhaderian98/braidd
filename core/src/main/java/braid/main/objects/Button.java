@@ -1,11 +1,16 @@
 package braid.main.objects;
 
+import braid.main.tools.Audiomanager;
 import braid.main.tools.EventListener;
+import braid.main.tools.PreferencesManager;
 import braid.main.tools.UserData;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
+
+import static braid.main.Braid.PPM;
 
 public class Button extends InteractiveGameObject {
     private enum ButtonState {
@@ -14,8 +19,11 @@ public class Button extends InteractiveGameObject {
     private final TiledMap map;
     private ButtonState buttonState;
     private final String actionType;
-    private String targetName;
-    private EventListener event;
+    private final String targetName;
+    private final EventListener event;
+    private final Sound clickSFX;
+    private final Rectangle boundary;
+    protected Body body;
 
     public Button(World world, Rectangle boundary, TiledMap map, String actionType, String targetName, EventListener event) {
         super(world, boundary, true);
@@ -24,6 +32,9 @@ public class Button extends InteractiveGameObject {
         this.actionType = actionType;
         this.event = event;
         this.targetName = targetName;
+        this.boundary = boundary;
+
+        clickSFX = Audiomanager.audiomanager.get("audio/sound/buttonClick.ogg", Sound.class);
 
         fixture.setUserData(new UserData("Button", this));
     }
@@ -36,6 +47,7 @@ public class Button extends InteractiveGameObject {
     public void toggle() {
         if(buttonState != ButtonState.ON){
             this.buttonState = ButtonState.ON;
+            clickSFX.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
             performAction();
         }
     }
@@ -43,7 +55,6 @@ public class Button extends InteractiveGameObject {
     private void performAction(){
         if ("toggleLayer".equals(actionType)) {
             MapLayer layer = map.getLayers().get(targetName);
-            System.out.println(targetName + " " + actionType);
             if(layer != null){
                 layer.setVisible(!layer.isVisible());
             }

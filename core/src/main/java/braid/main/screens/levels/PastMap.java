@@ -5,7 +5,7 @@ import braid.main.Braid;
 public class PastMap extends LevelScreen{
 
     public PastMap(Braid game) {
-        super(game, "maps/tilesets/WEGZURUNI/Past/maps/Past.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/tilesets/WEGZURUNI/Past/maps/Past.tmx", "packedimages/sprites.atlas", "audio/music/WEGZURUNI/PastMap.mp3");
 
         player.setPosition(272/Braid.PPM, 320/Braid.PPM);
     }

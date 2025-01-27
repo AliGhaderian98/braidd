@@ -46,11 +46,6 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
             position = -25 /Braid.PPM;
             hx = 30/ Braid.PPM;
             yPoint = -6 / Braid.PPM;
-        } else if (type.equals("nakedguy")) {
-            radius = 8/ Braid.PPM;
-            position = -15 /Braid.PPM;
-            hx = 4/ Braid.PPM;
-            yPoint = 20 / Braid.PPM;
         }
 
         BodyDef bdef = new BodyDef();
@@ -123,13 +118,56 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
                 walking = new Animation<>(0.1f, atlas.findRegions("nakedguy-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,walking));
                 sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
+            case ("freudenberg-guy") -> {
+                sprite = new Sprite(atlas.findRegion("freudenberg-guy"));
+                walking = new Animation<>(0.2f, atlas.findRegions("freudenberg-guy"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,walking));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.5f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.5f/Braid.PPM);
+            }
+            case ("Security-Guy") -> {
+                sprite = new Sprite(atlas.findRegion("Security-Guy"));
+                walking = new Animation<>(0.2f, atlas.findRegions("Security-Guy"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,walking));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()/ Braid.PPM,
+                    sprite.getRegionHeight()/Braid.PPM);
+            }
+            case ("wolf") -> {
+                sprite = new Sprite(atlas.findRegion("wolf-walk"));
+                walking = new Animation<>(0.1f, atlas.findRegions("wolf-walk"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,walking));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*1.25f/ Braid.PPM,
+                    sprite.getRegionHeight()*1.25f/Braid.PPM);
+            }
+
+            case ("rotatingCoffeeBean") -> {
+                sprite = new Sprite(atlas.findRegion("rotatingCoffeeBean"));
+                walking = new Animation<>(0.2f, atlas.findRegions("rotatingCoffeeBean"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,walking));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()/ Braid.PPM,
+                    sprite.getRegionHeight()/Braid.PPM);
+            }
+
+            case ("PublicBus") -> {
+                this.changeSpeed(5f);
+                sprite = new Sprite(atlas.findRegion("Bus"));
+                walking = new Animation<>(0.1f, atlas.findRegions("Bus"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0, walking));
+                sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,
                     sprite.getRegionHeight()/Braid.PPM);
             }
             default -> {
-                sprite = new Sprite(atlas.findRegion("lion-idle"));
-                idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
-                walking = new Animation<>(0.1f, atlas.findRegions("lion-run"), Animation.PlayMode.LOOP);
+                sprite = new Sprite(atlas.findRegion("evil-lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("evil-lion-idle"), Animation.PlayMode.LOOP);
+                walking = new Animation<>(0.1f, atlas.findRegions("evil-lion-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0, idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,
@@ -160,11 +198,6 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
             yPoint = -50 / Braid.PPM;
             rightxPoint = 28 / Braid.PPM;
             leftxPoint = -28 / Braid.PPM;
-        } else if (type.equals("nakedguy")) {
-            hx = 1/ Braid.PPM;
-            yPoint = -23 / Braid.PPM;
-            rightxPoint = 6 / Braid.PPM;
-            leftxPoint = -6 / Braid.PPM;
         }
 
         // Sensor for the left side
@@ -215,5 +248,9 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
 
     public void changeDirection() {
         direction *= -1;
+    }
+
+    public void changeSpeed(float newSpeed) {
+        speed = newSpeed;
     }
 }

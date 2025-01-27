@@ -155,7 +155,8 @@ public class OverworldHUD implements Disposable {
         finishStar.setVisible(Savemanager.currentsavegame.FinishedLevels.get(currentLevel));
         bestTimeLabel.setText(formatBestTime(currentLevel));
 
-        table.setVisible(true);
+        if (Savemanager.currentsavegame.UnlockedLevels.get(currentLevel))
+            table.setVisible(true);
     }
 
     public void changeWegZurUniLabel() {

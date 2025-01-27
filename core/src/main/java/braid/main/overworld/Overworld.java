@@ -35,7 +35,7 @@ public class Overworld implements Screen {
     public static boolean gameIsPaused;
     private InputProcessor inputProcessor;
 
-    private Music music;
+    public static Music music;
 
     // Camera and Map variables
     private final OverworldCamera camera;
@@ -66,11 +66,15 @@ public class Overworld implements Screen {
         gameIsPaused = false;
 
         // Setup Music
-        music = Audiomanager.audiomanager.get("audio/music/lofi-loop.mp3" ,Music.class);
-        music.setLooping(true);
-        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
-        music.setPosition(0);
-        music.play();
+        if (music == null) {
+            music = Audiomanager.audiomanager.get("audio/music/lofi-loop.mp3" ,Music.class);
+            music.setLooping(true);
+            music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+            music.setPosition(0);
+            music.play();
+        }
+        if (!music.isPlaying())
+            music.play();
 
         // Load current GameData
         Savemanager.currentsavegame = Savemanager.loadGame(SavegameMenu.currentSavegamKey);
@@ -375,6 +379,7 @@ public class Overworld implements Screen {
 
     @Override
     public void resume() {
+        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
         KeyBindings.loadKeyBindings();
         setupInput();

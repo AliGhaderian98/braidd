@@ -457,6 +457,11 @@ public class Player extends DynamicGameObject {
     public void onGround(boolean value) { onGround = value; }
     public boolean onGround() { return onGround; }
 
+    public void stopSFX() {
+        if (StepsSound.isPlaying())
+            StepsSound.stop();
+    }
+
     public void die() {
         screen.setHitShader();
         LevelScreen.gameIsPaused = true;
