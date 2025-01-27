@@ -285,7 +285,11 @@ Finde  die Schalter und aktiviere  sie mit E.</property>
     <property name="ID" type="int" value="2"/>
    </properties>
   </object>
-  <object id="150" template="object-templates/page.tx" x="1020.33" y="158.667"/>
+  <object id="150" template="object-templates/page.tx" x="1020.33" y="158.667">
+   <properties>
+    <property name="ID" type="int" value="3"/>
+   </properties>
+  </object>
   <object id="151" template="object-templates/page.tx" x="1694" y="142">
    <properties>
     <property name="ID" type="int" value="4"/>
