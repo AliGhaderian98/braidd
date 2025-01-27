@@ -215,7 +215,11 @@ Halt die Augen offen! </property>
   <object id="271" template="object-templates/key.tx" x="3152" y="208"/>
   <object id="281" template="object-templates/key.tx" x="2128" y="608"/>
   <object id="296" template="object-templates/gleiter.tx" x="3504" y="112"/>
-  <object id="298" template="object-templates/page.tx" x="3840" y="80"/>
+  <object id="298" template="object-templates/page.tx" x="3840" y="80">
+   <properties>
+    <property name="ID" type="int" value="3"/>
+   </properties>
+  </object>
   <object id="299" template="object-templates/page.tx" x="2432" y="704">
    <properties>
     <property name="ID" type="int" value="4"/>

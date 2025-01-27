@@ -12,7 +12,7 @@ public class FinishGameHUD extends FinishHUD {
     public FinishGameHUD(SpriteBatch batch, TextureAtlas atlas) {
         super(batch, atlas);
 
-        Savemanager.saveGame(false);
+        Savemanager.saveGame(true);
 
         finishLabel.setText("GAME FINISHED!");
 
