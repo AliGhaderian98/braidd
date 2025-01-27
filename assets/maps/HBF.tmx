@@ -168,8 +168,6 @@
    </properties>
   </object>
   <object id="137" template="object-templates/gleiter.tx" type="powerup" x="334" y="52"/>
-  <object id="156" template="object-templates/key.tx" x="1123" y="196"/>
-  <object id="157" template="object-templates/key.tx" x="736" y="257"/>
   <object id="158" template="object-templates/key.tx" x="803" y="196"/>
  </objectgroup>
  <objectgroup id="14" name="Brick"/>
