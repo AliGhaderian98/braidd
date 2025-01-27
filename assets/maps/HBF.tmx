@@ -137,8 +137,8 @@
   <object id="125" x="575.667" y="119.333" width="48.6667" height="7.33333"/>
   <object id="138" x="191" y="115" width="46" height="8"/>
   <object id="142" x="131" y="35" width="46" height="8"/>
-  <object id="152" x="0" y="1" width="2" height="391"/>
-  <object id="153" x="1374" y="2" width="1" height="391"/>
+  <object id="152" x="0" y="-152" width="2" height="544"/>
+  <object id="153" x="1374" y="-131.455" width="1" height="524.455"/>
  </objectgroup>
  <objectgroup id="12" name="Walls"/>
  <objectgroup id="21" name="Items">

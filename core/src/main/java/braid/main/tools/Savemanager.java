@@ -209,6 +209,7 @@ public class Savemanager {
     public static void updatePlaytime(){
         totalSessionTime = System.currentTimeMillis() - playtimeStart;
         currentsavegame.Playtime += totalSessionTime;
+        playtimeStart = System.currentTimeMillis();
     }
 
     public static void unlockNextLevel(String currentLevel) {
