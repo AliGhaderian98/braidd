@@ -1,6 +1,6 @@
 {
 SaveGameKEY: 1
-SaveGameName: test
+SaveGameName: dsd
 UnlockedLevels: {
 	class: java.util.HashMap
 	UNI: true
@@ -14,11 +14,11 @@ UnlockedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-lastLevel: UNI
+lastLevel: BAYER
 FinishedLevels: {
 	class: java.util.HashMap
 	UNI: true
-	SCHLOSSBURG: false
+	SCHLOSSBURG: true
 	ARKADEN: true
 	WEGZURUNI: true
 	BAYER: true
@@ -28,16 +28,12 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 1837848
+Playtime: 52872
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
 			value: true
 		}
 		{
@@ -50,43 +46,17 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
 		}
 	]
 	SCHLOSSBURG: [
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-	]
-	ARKADEN: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -94,29 +64,59 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+	]
+	ARKADEN: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
 		}
 	]
 	WEGZURUNI: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 	BAYER: [
@@ -126,95 +126,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-	]
-	OBERBARMEN: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-	]
-	ZOO: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-	]
-	FREUDENBERG: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-	]
-	HBF: [
-		{
-			class: java.lang.Boolean
-			value: false
-		}
-		{
-			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -222,7 +134,95 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+	]
+	OBERBARMEN: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+	]
+	ZOO: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+	]
+	FREUDENBERG: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+	]
+	HBF: [
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
+		}
+		{
+			class: java.lang.Boolean
+			value: true
 		}
 		{
 			class: java.lang.Boolean
@@ -232,33 +232,33 @@ Collectables: {
 	LUISENVIERTEL: [
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 		{
 			class: java.lang.Boolean
-			value: false
+			value: true
 		}
 	]
 }
 BestTimes: {
 	class: java.util.HashMap
-	UNI: 0
+	UNI: 240284
 	SCHLOSSBURG: 0
 	ARKADEN: 0
-	WEGZURUNI: 3811
-	BAYER: 3764
+	WEGZURUNI: 0
+	BAYER: 0
 	OBERBARMEN: 0
 	ZOO: 0
 	FREUDENBERG: 0
