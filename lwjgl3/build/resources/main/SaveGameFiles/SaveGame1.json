@@ -28,7 +28,7 @@ FinishedLevels: {
 	HBF: true
 	LUISENVIERTEL: true
 }
-Playtime: 12582608
+Playtime: 4394337
 Collectables: {
 	class: java.util.HashMap
 	UNI: [
@@ -38,19 +38,19 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	SCHLOSSBURG: [
@@ -112,7 +112,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -122,7 +122,7 @@ Collectables: {
 	BAYER: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -160,7 +160,7 @@ Collectables: {
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	ZOO: [
@@ -188,7 +188,7 @@ Collectables: {
 	FREUDENBERG: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
@@ -210,23 +210,23 @@ Collectables: {
 	HBF: [
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 		{
 			class: java.lang.Boolean
-			value: true
+			value: false
 		}
 	]
 	LUISENVIERTEL: [

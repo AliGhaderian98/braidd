@@ -55,7 +55,7 @@ public class StartMenu extends ScreenAdapter {
         Label.LabelStyle TitelFont = new Label.LabelStyle(TextFontManager.gettextFont(100), Color.BLACK);
 
         // Setup lable
-        Label Startmessage = new Label("- press any key -", TitelFont);
+        Label Startmessage = new Label("- Drücke eine Taste -", TitelFont);
 
         // Setup Table
         Table table = new Table();
@@ -74,7 +74,7 @@ public class StartMenu extends ScreenAdapter {
     }
 
     private void loadDisplayseedings(){
-        Braid.Fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen");
+        Braid.Fullscreen = PreferencesManager.getFullscreenPreferences().getBoolean("Vollbild");
         if (Braid.Fullscreen){
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
         }

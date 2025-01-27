@@ -73,14 +73,14 @@ public class PauseMenu implements Screen {
         table.setFillParent(true);
 
         // create new Labels to display
-        Label PauseLabel = new Label("Game Paused", TitelFont);
+        Label PauseLabel = new Label("Pause", TitelFont);
         PauseLabel.setFontScale(2);
-        Resume = new Label("Resume", SelectionFont);
-        Overworld = new Label("Overworld", SelectionFont);
-        Startmenu = new Label("Startmenu", SelectionFont);
-        Retry = new Label("Retry", SelectionFont);
-        Option = new Label("Option", SelectionFont);
-        SaveAndExit = new Label("Save and Exit", SelectionFont);
+        Resume = new Label("Fortfahren", SelectionFont);
+        Overworld = new Label("Oberwelt", SelectionFont);
+        Startmenu = new Label("Startmenü", SelectionFont);
+        Retry = new Label("Neuer Versuch", SelectionFont);
+        Option = new Label("Optionen", SelectionFont);
+        SaveAndExit = new Label("Speichern und Beenden", SelectionFont);
 
         // fill Array with Labels to target a label
         menuLabels = new Array<>();
