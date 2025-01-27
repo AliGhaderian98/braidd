@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="53" height="39" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="136">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="53" height="39" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="144">
  <tileset firstgid="1" source="tilesets/bayer/bayer.tsx"/>
  <tileset firstgid="2029" source="tilesets/sheet.tsx"/>
  <tileset firstgid="2165" source="tilesets/Zoo/Rock-Tilset.tsx"/>
@@ -56,6 +56,10 @@
   <object id="116" template="object-templates/unhingedEnemy.tx" x="113.306" y="293.113"/>
   <object id="121" template="object-templates/patrollingEnemy.tx" x="573.996" y="44.371"/>
   <object id="134" template="object-templates/patrollingEnemy.tx" x="128" y="56"/>
+  <object id="138" template="object-templates/patrollingEnemy.tx" x="153.77" y="532.661"/>
+  <object id="139" template="object-templates/patrollingEnemy.tx" x="498.216" y="532.661"/>
+  <object id="141" template="object-templates/patrollingEnemy.tx" x="55.3574" y="56.5875"/>
+  <object id="142" template="object-templates/patrollingEnemy.tx" x="698.733" y="41.8256"/>
  </objectgroup>
  <objectgroup id="13" name="End">
   <object id="97" x="820" y="3.333" width="4.66667" height="38.6667"/>
@@ -72,7 +76,7 @@
     <property name="ID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="100" template="object-templates/key.tx" x="54.667" y="57.333"/>
+  <object id="100" template="object-templates/key.tx" x="90.3417" y="59.7933"/>
   <object id="117" template="object-templates/ritalin.tx" x="4.28" y="275.762" width="16" height="25"/>
   <object id="127" template="object-templates/page.tx" x="582" y="428">
    <properties>
@@ -84,9 +88,9 @@
     <property name="ID" type="int" value="3"/>
    </properties>
   </object>
-  <object id="135" template="object-templates/page.tx" x="309.493" y="46.3081">
+  <object id="135" template="object-templates/page.tx" x="674.852" y="161.943">
    <properties>
-    <property name="ID" type="int" value="3"/>
+    <property name="ID" type="int" value="4"/>
    </properties>
   </object>
  </objectgroup>

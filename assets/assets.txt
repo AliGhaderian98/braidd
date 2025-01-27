@@ -4,7 +4,6 @@ MenuDirectory/Slider/slider_background.png
 MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
-SaveGameFiles/SaveGame1.json
 SaveScreen.png
 StartScreen.png
 audio/music/ArkadenSoundtrack.mp3
@@ -37,6 +36,7 @@ audio/sound/kill.mp3
 audio/sound/land.mp3
 audio/sound/menuSound.mp3
 maps/Arkadenmap.tmx
+maps/Bayer.tmx
 maps/FreudenbergLevel.tmx
 maps/HBF.tmx
 maps/Luisenviertel.tmx
@@ -44,6 +44,7 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -591,6 +592,10 @@ maps/tilesets/Zoo/TaigaAmbient.tsx
 maps/tilesets/Zoo/TaigaPack.png
 maps/tilesets/Zoo/greenBackground1.tsx
 maps/tilesets/Zoo/zoopng.tsx
+maps/tilesets/bayer/Bayer.jpg
+maps/tilesets/bayer/Fabrik.jpg
+maps/tilesets/bayer/bayer.tsx
+maps/tilesets/bayer/fabrik.png
 maps/tilesets/images/00Atlas.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
