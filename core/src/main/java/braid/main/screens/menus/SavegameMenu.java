@@ -134,12 +134,12 @@ public class SavegameMenu implements Screen{
 
 
         // Setup Title and footnote and OverlayTitle
-        overlayTitle = new Label("Enter a Name for your Savegame", SelectionFont);
-        noNameWarning = new Label("You need to Enter a Name!",LittleSelectionFont);
+        overlayTitle = new Label("Gebe einen Spielstandnamen an", SelectionFont);
+        noNameWarning = new Label("Du musst einen Namen angeben!",LittleSelectionFont);
         noNameWarning.setColor(new Color(Color.RED));
-        title = new Label("Save games", TitelFont);
-        newSaveGame = new Label("new Savegame", SelectionFont);
-        nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
+        title = new Label("Spielstände", TitelFont);
+        newSaveGame = new Label("neuer Spielstand", SelectionFont);
+        nomoreSaveGames = new Label("Nur 10 Spielstände möglich", LittleSelectionFont);
         nomoreSaveGames.setColor(Color.RED);
 
         title.setFontScale(2);
@@ -166,9 +166,9 @@ public class SavegameMenu implements Screen{
 
                 // create Labels
                 savegames[i] = new Label(Savemanager.getSavegameName(Savemanager.currentsavegame), SelectionFont);
-                collectibles[i] = new Label("Collectibles: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
-                unlockedLevels [i] = new Label("Unlocked Levels: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
-                playtimes [i] = new Label("Time Played: " + Savemanager.getSavegamePlaytimeTOString(Savemanager.currentsavegame), TinySelectionFont);
+                collectibles[i] = new Label("Gesammelte Seiten: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
+                unlockedLevels [i] = new Label("Freigeschaltete Level: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
+                playtimes [i] = new Label("Spielzeit: " + Savemanager.getSavegamePlaytimeTOString(Savemanager.currentsavegame), TinySelectionFont);
                 trashcans[i] = new Image(new TextureRegionDrawable(new TextureRegion(trashcan.getTexture())));
 
                 // add Labels to Groups

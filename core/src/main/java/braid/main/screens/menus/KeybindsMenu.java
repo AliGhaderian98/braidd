@@ -81,21 +81,21 @@ public class KeybindsMenu implements Screen {
         // Setup Title and Options for Screen
         Label Keybindings = new Label("Keybindings", TitelFont);
         Keybindings.setFontScale(2);
-        RunLeft = new Label("Move Left: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")), SelectionFont);
+        RunLeft = new Label("Nach Links gehen: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")), SelectionFont);
         RunLeft.setFontScale(0.7f);
-        RunRight = new Label("Move Right: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")), SelectionFont);
+        RunRight = new Label("Nach Rechts gehen: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")), SelectionFont);
         RunRight.setFontScale(0.7f);
-        Jump = new Label("Jump: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")), SelectionFont);
+        Jump = new Label("Springen: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")), SelectionFont);
         Jump.setFontScale(0.7f);
-        Rewind = new Label("Rewind: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")), SelectionFont);
+        Rewind = new Label("Zeit zurückspulen: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")), SelectionFont);
         Rewind.setFontScale(0.7f);
-        INTERACT = new Label("Interact: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")), SelectionFont);
+        INTERACT = new Label("Interagieren: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")), SelectionFont);
         INTERACT.setFontScale(0.7f);
-        UP_KEY = new Label("Move Up: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")), SelectionFont);
+        UP_KEY = new Label("Nach Oben gehen: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")), SelectionFont);
         UP_KEY.setFontScale(0.7f);
-        DOWN_KEY = new Label("Move Down: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")), SelectionFont);
+        DOWN_KEY = new Label("Nach Unten gehen: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")), SelectionFont);
         DOWN_KEY.setFontScale(0.7f);
-        ResetKeybindings =  new Label("- Reset to Default -", SelectionFont);
+        ResetKeybindings =  new Label("- Auf Standardeinstellung zurücksetzen -", SelectionFont);
         ResetKeybindings.setFontScale(0.7f);
 
 
@@ -125,7 +125,7 @@ public class KeybindsMenu implements Screen {
         table.add(ResetKeybindings);
 
         // Setup Table for Overlay
-        Label OverlayText = new Label("Press a Key to switch Keybindings", SelectionFont);
+        Label OverlayText = new Label("Drücke eine Taste um die Tastenbelegung zu ändern", SelectionFont);
         Table OverlayTable = new Table();
         OverlayTable.center();
         OverlayTable.setFillParent(true);
@@ -133,8 +133,8 @@ public class KeybindsMenu implements Screen {
 
 
         // Setup Table for ErrorOverly
-        Label ErrorOverlayText = new Label("Key is already in use", SelectionFont);
-        Label ErrorOverlayText2 = new Label("Press Enter to proceed", SelectionFont);
+        Label ErrorOverlayText = new Label("Taste wird schon benutzt", SelectionFont);
+        Label ErrorOverlayText2 = new Label("Drücke die Eingabetaste zum fortfahren", SelectionFont);
         ErrorOverlayText2.setFontScale(0.5f);
         Table ErrorOverlayTable = new Table();
         ErrorOverlayTable.center();
@@ -256,13 +256,13 @@ public class KeybindsMenu implements Screen {
 
     private void updateKeybindingLabel(){
         // updates the current used Keybindings after a change
-        RunLeft.setText("Move Left: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")));
-        RunRight.setText("Move Right: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")));
-        UP_KEY.setText("Move Up: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")));
-        DOWN_KEY.setText("Move Down: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")));
-        Jump.setText("Jump: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")));
-        Rewind.setText("Rewind: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")));
-        INTERACT.setText("Interact: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")));
+        RunLeft.setText("Nach Links gehen: " +  Input.Keys.toString(KeyBindings.getKey("LEFT_KEY")));
+        RunRight.setText("Nach Rechts gehen: " + Input.Keys.toString(KeyBindings.getKey("RIGHT_KEY")));
+        UP_KEY.setText("Nach Oben gehen: " + Input.Keys.toString(KeyBindings.getKey("UP_KEY")));
+        DOWN_KEY.setText("Nach Unten gehen: " + Input.Keys.toString(KeyBindings.getKey("DOWN_KEY")));
+        Jump.setText("Springen: " + Input.Keys.toString(KeyBindings.getKey("SPACEBAR")));
+        Rewind.setText("Zeit zurückspulen: " + Input.Keys.toString(KeyBindings.getKey("SHIFT")));
+        INTERACT.setText("Interagieren: " + Input.Keys.toString(KeyBindings.getKey("INTERACT")));
     }
 
     private void executeSelectedAction() {

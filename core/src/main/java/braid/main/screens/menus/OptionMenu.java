@@ -55,7 +55,7 @@ public class OptionMenu implements Screen {
         // Setup Screen
         Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
-        Braid.Fullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Fullscreen", Braid.Fullscreen));
+        Braid.Fullscreen = (PreferencesManager.getFullscreenPreferences().getBoolean("Vollbild", Braid.Fullscreen));
 
         // Setup ScreenRatio
         width = Gdx.graphics.getWidth();
@@ -95,13 +95,13 @@ public class OptionMenu implements Screen {
 
 
         // Setup Title and Options
-        Label Options = new Label("Options", TitelFont);
+        Label Options = new Label("Optionen", TitelFont);
         Options.setFontScale(2);
-        Fullscreen = new Label("Fullscreen", SelectionFont);
-        Music = new Label("Music", SelectionFont);
-        Soundeffekt = new Label("Sound Effects", SelectionFont);
-        Keybindings = new Label("Keybindings", SelectionFont);
-        Timer = new Label("Timer:  " + booltoString(LevelHUD.isTimerVisible()), SelectionFont);
+        Fullscreen = new Label("Vollbild", SelectionFont);
+        Music = new Label("Musik", SelectionFont);
+        Soundeffekt = new Label("Soundeffekte", SelectionFont);
+        Keybindings = new Label("Tastenbelegung", SelectionFont);
+        Timer = new Label("Stoppuhr:  " + booltoString(LevelHUD.isTimerVisible()), SelectionFont);
 
 
 
@@ -276,7 +276,7 @@ public class OptionMenu implements Screen {
             Gdx.graphics.setWindowedMode(16*80,9*80);
             Braid.Fullscreen = false;
         }
-        PreferencesManager.getFullscreenPreferences().putBoolean("Fullscreen",Braid.Fullscreen);
+        PreferencesManager.getFullscreenPreferences().putBoolean("Vollbild",Braid.Fullscreen);
         PreferencesManager.getFullscreenPreferences().flush();
     }
 
@@ -298,7 +298,7 @@ public class OptionMenu implements Screen {
 
 
     private void updateLabel() {
-        Timer.setText("Timer:  " + booltoString(LevelHUD.isTimerVisible()));
+        Timer.setText("Stoppuhr:  " + booltoString(LevelHUD.isTimerVisible()));
     }
 
     private String booltoString(boolean value) {
