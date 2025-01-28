@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="53" height="39" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="144">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="53" height="39" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="144">
  <tileset firstgid="1" source="tilesets/bayer/bayer.tsx"/>
  <tileset firstgid="2029" source="tilesets/sheet.tsx"/>
  <tileset firstgid="2165" source="tilesets/Zoo/Rock-Tilset.tsx"/>
@@ -187,10 +187,10 @@
  <objectgroup id="12" name="Brick"/>
  <objectgroup id="8" name="Walls"/>
  <objectgroup id="9" name="Ground">
-  <object id="1" x="-2.667" y="-4" height="637.333"/>
-  <object id="2" x="831.667" y="2.333" height="618.667"/>
-  <object id="129" x="830.667" y="1.333" width="-6.75016e-14" height="618.667"/>
-  <object id="3" x="0" y="558.667" width="826.667" height="69.3333"/>
+  <object id="1" x="-2.667" y="-98.3333" height="731.666"/>
+  <object id="2" x="831.732" y="-77.6892" height="698.689"/>
+  <object id="129" x="830.602" y="-78.8185" width="-7.62327e-14" height="698.689"/>
+  <object id="3" x="-2" y="558.667" width="833.334" height="69.3333"/>
   <object id="7" x="810.67" y="320"/>
   <object id="21" x="561.5" y="448" width="45.5" height="16"/>
   <object id="22" x="641.25" y="447" width="45" height="18.75"/>

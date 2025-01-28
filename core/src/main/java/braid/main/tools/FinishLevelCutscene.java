@@ -98,7 +98,7 @@ public class FinishLevelCutscene {
         Vector2 spawnPosition = new Vector2(0,
             playerPosition.y/Braid.PPM + (schwebebahn.sprite.getHeight()/Braid.PPM));
         // schwebebahn gets spawned in on the right
-        if (playerPosition.x < screenRightEdge.x)
+        if (playerPosition.x < screenTopEdgeCenter.x)
             spawnPosition.x = screenRightEdge.x;
         // schwebebahn gets spawned in on the left
         else {
