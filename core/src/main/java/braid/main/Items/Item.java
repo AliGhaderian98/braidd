@@ -1,6 +1,5 @@
 package braid.main.Items;
 
-import braid.main.Braid;
 import braid.main.objects.InteractiveGameObject;
 import braid.main.objects.Player;
 import braid.main.screens.levels.LevelScreen;
@@ -15,10 +14,10 @@ public abstract class Item extends InteractiveGameObject {
     protected boolean toDestroy;
     protected boolean destroyed;
 
-    protected float x,y;
+    protected float x, y;
     protected Sprite sprite;
 
-    public Item(LevelScreen screen, float x, float y, float radius){
+    public Item(LevelScreen screen, float x, float y, float radius) {
         super(screen.getWorld(), radius, true, x, y);
         this.screen = screen;
         this.x = x;
@@ -31,19 +30,19 @@ public abstract class Item extends InteractiveGameObject {
     public abstract void use(Player player);
 
 
-    public void update(float dt){
-        if(toDestroy && !destroyed){
+    public void update(float dt) {
+        if (toDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
         }
     }
 
-    public void draw(Batch batch){
-        if(!destroyed)
+    public void draw(Batch batch) {
+        if (!destroyed)
             sprite.draw(batch);
     }
 
-    public void destroy(){
+    public void destroy() {
         toDestroy = true;
     }
 

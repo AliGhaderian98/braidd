@@ -11,8 +11,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class Key extends Item {
     private float time = 0f;
-    private float rotationAmplitude = 5f;
-    private float rotationSpeed = 4f;
+    private final float rotationAmplitude = 5f;
+    private final float rotationSpeed = 4f;
 
     public Key(LevelScreen screen, float x, float y) {
         super(screen, x, y, 8);
@@ -20,7 +20,7 @@ public class Key extends Item {
         // Sprite laden
         sprite = new Sprite(screen.getAtlas().findRegion("key"));
         sprite.setBounds(x / Braid.PPM, y / Braid.PPM,
-            20 / Braid.PPM, 20 / Braid.PPM);
+                20 / Braid.PPM, 20 / Braid.PPM);
         sprite.setOriginCenter();
 
         fixture.setUserData(new UserData("Key", this));

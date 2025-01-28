@@ -9,7 +9,7 @@ import braid.main.objects.Enemy;
 public class BayerLevel extends LevelScreen {
 
     public BayerLevel(Braid game) {
-        super(game, "maps/Bayer.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/Bayer.tmx", "packedimages/sprites.atlas", "audio/music/bayersoundtrack.mp3");
         levelName = "BAYER";
 
         player.setPosition(32/Braid.PPM, 100/Braid.PPM);

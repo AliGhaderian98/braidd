@@ -92,6 +92,8 @@ public class Audiomanager {
         */
         audiomanager.load("audio/music/lofi-loop.mp3", Music.class);
 
+
+
         /*
         licence: menuSound.mp3
                 Scissors one hit by ibaffette --
@@ -149,6 +151,13 @@ public class Audiomanager {
         audiomanager.load("audio/music/Luisenviertel.mp3", Music.class);
 
         audiomanager.load("audio/music/oberbarmen.mp3", Music.class);
+
+        //licence: bayersoundtrack.mp3
+        // Ambient Downtempo | Breaking News by Alex-Productions |
+        //https://youtu.be/OfYePizJhZk
+        //Music promoted by https://onsound.eu/
+
+        audiomanager.load("audio/music/bayersoundtrack.mp3", Music.class);
 
         audiomanager.finishLoading();
     }
