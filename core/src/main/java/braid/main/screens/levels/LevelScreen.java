@@ -186,6 +186,7 @@ public abstract class LevelScreen implements Screen {
         music.play();
 
         victoryMusic = Audiomanager.audiomanager.get("audio/music/victory-fanfare.mp3", Music.class);
+        victoryMusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         victoryMusic.setLooping(false);
         victoryMusic.setPosition(1);
 
@@ -640,6 +641,7 @@ public abstract class LevelScreen implements Screen {
         KeyBindings.loadKeyBindings();
         gameIsPaused = false;
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        victoryMusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
         levelHUD.resume();
     }

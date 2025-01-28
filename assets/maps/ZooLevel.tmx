@@ -16,7 +16,6 @@
  <tileset firstgid="2891" source="tilesets/Zoo/Marble-Tilset.tsx"/>
  <tileset firstgid="2972" source="tilesets/Zoo/Farm2.tsx"/>
  <tileset firstgid="2973" source="tilesets/Zoo/Taiga.tsx"/>
- <tileset firstgid="4062" source="tilesets/Zoo/Zoopng.tsx"/>
  <tileset firstgid="4192" source="tilesets/Zoo/zoopng.tsx"/>
  <tileset firstgid="4322" source="tilesets/Zoo/TaigaAmbient.tsx"/>
  <tileset firstgid="4898" source="tilesets/Zoo/Background/Taiga background/TB1.tsx"/>

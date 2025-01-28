@@ -91,6 +91,10 @@ public class Savemanager {
         for(int i=0; i<10;i++){
             currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
         }
+
+        PreferencesManager.getSliderPreferences().putFloat("sfxSlider", 1f);
+        PreferencesManager.getSliderPreferences().putFloat("musicSlider", 1f);
+        PreferencesManager.getSliderPreferences().flush();
     }
 
     private static void createUnlockedSavegame() {
@@ -121,6 +125,10 @@ public class Savemanager {
         for(int i=0; i<10;i++){
             currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
         }
+
+        PreferencesManager.getSliderPreferences().putFloat("sfxSlider", 1f);
+        PreferencesManager.getSliderPreferences().putFloat("musicSlider", 1f);
+        PreferencesManager.getSliderPreferences().flush();
     }
 
 
