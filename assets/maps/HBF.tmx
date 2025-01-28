@@ -172,32 +172,32 @@
  </objectgroup>
  <objectgroup id="14" name="Brick"/>
  <objectgroup id="20" name="Enemies">
-  <object id="99" template="object-templates/patrollingEnemy.tx" x="422.583" y="304.917">
+  <object id="99" template="object-templates/patrollingEnemy.tx" x="422.583" y="302.917">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="100" template="object-templates/patrollingEnemy.tx" x="715.333" y="260">
+  <object id="100" template="object-templates/patrollingEnemy.tx" x="715.333" y="256">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="101" template="object-templates/patrollingEnemy.tx" x="182.333" y="273.333">
+  <object id="101" template="object-templates/patrollingEnemy.tx" x="182.333" y="270.333">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="102" template="object-templates/patrollingEnemy.tx" x="113.333" y="236.667">
+  <object id="102" template="object-templates/patrollingEnemy.tx" x="113.333" y="233.667">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="113" template="object-templates/patrollingEnemy.tx" x="519.333" y="226.917">
+  <object id="113" template="object-templates/patrollingEnemy.tx" x="520.333" y="222.917">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="146" template="object-templates/IdleEnemy.tx" x="278" y="338">
+  <object id="146" template="object-templates/IdleEnemy.tx" x="278" y="334">
    <properties>
     <property name="type" value="drunkenguy"/>
    </properties>
@@ -212,7 +212,7 @@
     <property name="type" value="drunkenguy"/>
    </properties>
   </object>
-  <object id="151" template="object-templates/patrollingEnemy.tx" x="783" y="194">
+  <object id="151" template="object-templates/patrollingEnemy.tx" x="782" y="191">
    <properties>
     <property name="type" value="nakedguy"/>
    </properties>
