@@ -202,7 +202,7 @@
     <property name="type" value="drunkenguy"/>
    </properties>
   </object>
-  <object id="147" template="object-templates/IdleEnemy.tx" x="897" y="293">
+  <object id="147" template="object-templates/IdleEnemy.tx" x="873" y="294">
    <properties>
     <property name="type" value="drunkenguy"/>
    </properties>
