@@ -202,12 +202,12 @@
     <property name="type" value="drunkenguy"/>
    </properties>
   </object>
-  <object id="147" template="object-templates/IdleEnemy.tx" x="899" y="300">
+  <object id="147" template="object-templates/IdleEnemy.tx" x="897" y="293">
    <properties>
     <property name="type" value="drunkenguy"/>
    </properties>
   </object>
-  <object id="148" template="object-templates/IdleEnemy.tx" x="1048" y="339">
+  <object id="148" template="object-templates/IdleEnemy.tx" x="1048" y="336">
    <properties>
     <property name="type" value="drunkenguy"/>
    </properties>
@@ -217,7 +217,7 @@
     <property name="type" value="nakedguy"/>
    </properties>
   </object>
-  <object id="159" template="object-templates/IdleEnemy.tx" x="617" y="342">
+  <object id="159" template="object-templates/IdleEnemy.tx" x="619" y="336">
    <properties>
     <property name="type" value="drunkenguy"/>
    </properties>
