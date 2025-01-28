@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="184">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="185">
  <tileset firstgid="1" source="tilesets/Arkaden/City.tsx"/>
  <tileset firstgid="2171" source="tilesets/Arkaden/Shopping_Mall.tsx"/>
  <tileset firstgid="3816" source="tilesets/sheet.tsx"/>
@@ -174,14 +174,15 @@
   </object>
   <object id="122" template="object-templates/sign.tx" x="943.932" y="592.068">
    <properties>
-    <property name="Text">City Arkaden – diese Richtung!
+    <property name="Text">City Arkaden - diese Richtung!
 Ein Schlüssel wird benötigt, um die Tür zu öffnen!</property>
    </properties>
   </object>
-  <object id="144" template="object-templates/sign.tx" x="784.182" y="592">
+  <object id="184" template="object-templates/TutorialSign.tx" x="784" y="592">
    <properties>
     <property name="Text">Achtung!
-Finde  die Schalter und aktiviere  sie mit E.</property>
+Finde  die Schalter und aktiviere  sie mit %s.</property>
+    <property name="key" value="INTERACT"/>
    </properties>
   </object>
  </objectgroup>

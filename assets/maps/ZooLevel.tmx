@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="600" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="37" nextobjectid="3229">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="600" height="90" tilewidth="18" tileheight="18" infinite="0" nextlayerid="37" nextobjectid="3229">
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
@@ -4051,6 +4051,7 @@
   <object id="3049" template="object-templates/movingPlatformType2.tx" x="4500.5" y="1154.5">
    <properties>
     <property name="goalPosition" type="object" value="3050"/>
+    <property name="speed" type="float" value="0.4"/>
    </properties>
   </object>
   <object id="3050" template="object-templates/GoalPosition.tx" x="4140.14" y="1224.95"/>
@@ -4067,6 +4068,7 @@
    <properties>
     <property name="goalPosition" type="object" value="3052"/>
     <property name="rewindable" type="bool" value="false"/>
+    <property name="speed" type="float" value="0.4"/>
    </properties>
   </object>
   <object id="3052" template="object-templates/GoalPosition.tx" x="4573.42" y="1171"/>
@@ -4074,6 +4076,7 @@
    <properties>
     <property name="goalPosition" type="object" value="3054"/>
     <property name="rewindable" type="bool" value="true"/>
+    <property name="speed" type="float" value="0.4"/>
    </properties>
   </object>
   <object id="3054" template="object-templates/GoalPosition.tx" x="5010.58" y="1079.17"/>
@@ -4091,6 +4094,7 @@
    <properties>
     <property name="goalPosition" type="object" value="3068"/>
     <property name="rewindable" type="bool" value="false"/>
+    <property name="speed" type="float" value="0.4"/>
    </properties>
   </object>
   <object id="3068" template="object-templates/GoalPosition.tx" x="5113.41" y="869.837"/>

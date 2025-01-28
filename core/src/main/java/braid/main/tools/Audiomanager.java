@@ -160,6 +160,11 @@ public class Audiomanager {
         audiomanager.load("audio/music/bayersoundtrack.mp3", Music.class);
 
         audiomanager.finishLoading();
+
+        //licence: HBF.mp3
+       // Electronic Dreamwave | Aura by Alex-Productions
+       // https://youtu.be/nhYmH8h3tpk
+        //Music promoted by https://onsound.eu/
     }
 
 }

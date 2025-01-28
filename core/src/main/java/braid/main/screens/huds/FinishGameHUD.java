@@ -14,12 +14,12 @@ public class FinishGameHUD extends FinishHUD {
 
         Savemanager.saveGame(true);
 
-        finishLabel.setText("GAME FINISHED!");
+        finishLabel.setText("SPIEL BEENDET!");
 
-        pageLabel.setText(String.format("collected pages: %d/50", Savemanager.AmountFoundCollectables(Savemanager.currentsavegame)));
+        pageLabel.setText(String.format("Gesammelte Seiten: %d/50", Savemanager.AmountFoundCollectables(Savemanager.currentsavegame)));
 
-        timeLabel.setText("total time: "+formatTime(Savemanager.currentsavegame.Playtime)+
-            "\nbest times: "+formatTime(Savemanager.SumBestTimes(Savemanager.currentsavegame)));
+        timeLabel.setText("Gesamtzeit: "+formatTime(Savemanager.currentsavegame.Playtime)+
+            "\nBeste Zeiten: "+formatTime(Savemanager.SumBestTimes(Savemanager.currentsavegame)));
 
         notenLabel = new Label(String.format("Note der Masterarbeit: %.1f", calculateNote()), TextFont);
 
