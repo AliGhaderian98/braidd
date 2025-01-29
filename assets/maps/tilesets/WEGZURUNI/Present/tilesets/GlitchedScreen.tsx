@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="glitchedScreen" tilewidth="2500" tileheight="1669" tilecount="19" columns="0">
+<tileset version="1.10" tiledversion="1.10.2" name="glitchedScreen" tilewidth="2500" tileheight="1669" tilecount="19" columns="0" tilerendersize="grid">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="2500" height="1669" source="../Pictures/glitchedScreen/frame_00_delay-0.1s.gif"/>

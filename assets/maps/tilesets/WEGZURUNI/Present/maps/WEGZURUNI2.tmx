@@ -245,8 +245,8 @@
   <object id="167" x="841.25" y="438.5" width="0.25" height="30.25"/>
   <object id="168" x="937.5" y="438.875" width="0.25" height="32.375"/>
   <object id="169" x="1051" y="442" width="0.25" height="30.25"/>
-  <object id="170" x="1261.25" y="0" width="8.25" height="776.5"/>
-  <object id="171" x="-8.66667" y="0" width="8.66667" height="768"/>
+  <object id="170" x="1261.25" y="-151" width="8.25" height="927.5"/>
+  <object id="171" x="-8.66667" y="-123" width="8.66667" height="891"/>
   <object id="191" x="512" y="48" width="16" height="288"/>
   <object id="200" x="928" y="112" width="16" height="64"/>
   <object id="201" x="928" y="0" width="16" height="64"/>

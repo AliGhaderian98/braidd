@@ -20,6 +20,7 @@ public class NPC extends InteractiveGameObject{
     private final Rectangle npcTrigger;
     private final Subtitle subtitle;
     private final String type;
+    private final String text;
     private final String name;
 
     private Sprite sprite;
@@ -35,6 +36,7 @@ public class NPC extends InteractiveGameObject{
     public NPC(World world, LevelScreen screen, SubtitleManager subtitleManager, String type, Rectangle boundary, Rectangle npcTrigger, String text, String name) {
         super(world, boundary, true);
         this.subtitleManager = subtitleManager;
+        this.text = text;
         this.subtitle = new Subtitle(text);
         subtitleManager.addSubtitle(subtitle);
 
@@ -90,10 +92,6 @@ public class NPC extends InteractiveGameObject{
                     sprite.getRegionHeight()*.75f/ Braid.PPM);
                 sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
             }
-            case "PublicBus" -> {
-            }
-            case "HoodedOne" -> {
-            }
         }
     }
 
@@ -104,13 +102,21 @@ public class NPC extends InteractiveGameObject{
             switch (type) {
 
                 case "TalkingNPC" -> setShowing(trigger);
-                case "FinalNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "DoorNPC" -> this.event.hasTriggeredNPC(trigger);
                 case "MusicNPC" -> {
                     if (!hasBeenPlayed) {
                         this.event.hasChangedMusic(name);
                         setHasBeenPlayed(true);
                     }
+                }
+                case "CountingNPC" -> {
+                    int remaining = event.getRepairButton();
+                    String[] messages = text.split("\\|");
+
+                    String newText = remaining > 5 ? String.format(messages[0], remaining) : String.format(messages[1], remaining);
+                    subtitle.setFullText(newText);
+                    subtitle.setCurrentText("");
+                    setShowing(trigger);
                 }
 
             }

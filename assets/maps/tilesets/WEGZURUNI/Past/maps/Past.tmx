@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="99" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="301">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="99" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="308">
  <tileset firstgid="1" source="../tilesets/oldcitys.tsx"/>
  <tileset firstgid="66" source="../tilesets/alteSchwebebahn.tsx"/>
  <tileset firstgid="67" source="../tilesets/oldcityu.tsx"/>
@@ -460,18 +460,6 @@
     <property name="text" value="PastDoor"/>
    </properties>
   </object>
-  <object id="289" template="../../../../object-templates/NPC.tx" x="1535.38" y="1436.38" width="32" height="36.125">
-   <properties>
-    <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
-   </properties>
-  </object>
-  <object id="290" template="../../../../object-templates/NPC.tx" x="34" y="765.438" width="32" height="36.125">
-   <properties>
-    <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
-   </properties>
-  </object>
   <object id="295" template="../../../../object-templates/NPC.tx" x="29.3334" y="516.667">
    <properties>
     <property name="Name" value="People"/>
@@ -479,13 +467,34 @@
     <property name="text" value="es war ein Plagiat....."/>
    </properties>
   </object>
-  <object id="291" template="../../../../object-templates/NPC.tx" x="144.5" y="348.938" width="32" height="36.125">
+  <object id="300" name="npcTrigger" x="131.167" y="1275.83" width="43" height="64.3333"/>
+  <object id="302" template="../../../../object-templates/NPC.tx" x="-96.1667" y="319.5" width="48.6667" height="64.6667">
    <properties>
-    <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Interagiere mit dem Tesla-Transformator?"/>
+    <property name="Name" value="lol"/>
+    <property name="Type" value="CountingNPC"/>
+    <property name="npcTrigger" type="object" value="307"/>
+    <property name="text" value="Du brauchst noch %d Tesla-Transformatoren! |Du brauchst noch %d Tesla-Transformatoren! "/>
    </properties>
   </object>
-  <object id="300" name="npcTrigger" x="131.167" y="1275.83" width="43" height="64.3333"/>
+  <object id="303" template="../../../../object-templates/NPC.tx" x="-175" y="753" width="48.6667" height="64.6667">
+   <properties>
+    <property name="Name" value="lol"/>
+    <property name="Type" value="CountingNPC"/>
+    <property name="npcTrigger" type="object" value="306"/>
+    <property name="text" value="Du brauchst noch %d Tesla-Transformatoren! |Du brauchst noch %d Tesla-Transformatoren! "/>
+   </properties>
+  </object>
+  <object id="304" template="../../../../object-templates/NPC.tx" x="1720.33" y="1428.33" width="44.6667" height="44.6667">
+   <properties>
+    <property name="Name" value="lol"/>
+    <property name="Type" value="CountingNPC"/>
+    <property name="npcTrigger" type="object" value="305"/>
+    <property name="text" value="Du brauchst noch %d Tesla-Transformatoren! |Du brauchst noch %d Tesla-Transformatoren! "/>
+   </properties>
+  </object>
+  <object id="305" name="npcTrigger" x="1524.33" y="1407.67" width="49.9967" height="86"/>
+  <object id="306" name="npcTrigger" x="20.335" y="735.667" width="49.9967" height="86"/>
+  <object id="307" name="npcTrigger" x="145.002" y="318.333" width="49.9967" height="86"/>
  </objectgroup>
  <objectgroup id="31" name="Buttons">
   <object id="280" template="../../../../object-templates/Button.tx" x="156.333" y="361.997">
@@ -610,8 +619,8 @@
   <object id="267" template="../../../../object-templates/GoalPosition.tx" x="863.33" y="1310.67"/>
  </objectgroup>
  <objectgroup id="10" name="Walls">
-  <object id="110" x="1584" y="-16" width="28" height="1550.67"/>
-  <object id="111" x="-14" y="10" width="32" height="1512"/>
+  <object id="110" x="1584" y="-133.333" width="28" height="1668"/>
+  <object id="111" x="-14" y="-128.667" width="32" height="1650.67"/>
  </objectgroup>
  <objectgroup id="9" name="Items">
   <object id="182" template="../../../../object-templates/ritalin.tx" x="762.503" y="1104" width="44" height="37.3333"/>

@@ -13,8 +13,6 @@ public class EventListener {
     private final LevelScreen screen;
     private final TiledMap map;
 
-    private Array<Enemy> enemies;
-
     //Checks
     private boolean check1, check2;
     private int repairButtonCount;
@@ -24,6 +22,12 @@ public class EventListener {
         this.screen = screen;
         this.map = map;
 
+        this.repairButtonCount = 0;
+
+    }
+
+    public int getRepairButton() {
+        return repairButtonCount;
     }
 
     public void hasPressedButton(boolean pressed) {
@@ -34,12 +38,19 @@ public class EventListener {
     }
 
     public void hasPressedAllButtons() {
-        repairButtonCount--;
+        if (repairButtonCount > 0) {
+            repairButtonCount--;
+        } else {
+            repairButtonCount = 0;
+        }
+
         if (repairButtonCount == 0) {
             this.check1 = true;
             if (canCompleteMap()) {
                 loadMap();
             }
+        } else if (screen instanceof FinaleMap && repairButtonCount <= 5) { // Es gibt insgesamt 11 interaktive Tafeln im finalen Level (2 Fake), um die Schwierigkeit moderat zu halten werden nur 6 gefordert (Diese Zahl hat eine Bedeutung und kann man im Spiel herausfinden ;-), gerne auf 0 setzen wenn es zu leicht ist.
+            spawnStuff("spawnEnd");
         }
     }
 
@@ -65,7 +76,7 @@ public class EventListener {
     }
 
     public boolean allEnemiesDead() {
-        this.enemies = screen.getEnemies();
+        Array<Enemy> enemies = screen.getEnemies();
 
         if (enemies.isEmpty()) return false;
         for (Enemy enemy : enemies) {
@@ -82,7 +93,7 @@ public class EventListener {
 
     public void addButtonCount() {
         repairButtonCount++;
-    
+
     }
 
     public void spawnStuff(String objectName) {
@@ -95,6 +106,10 @@ public class EventListener {
                 map.getLayers().get("MovingPlatform").setVisible(true);
                 map.getLayers().get("MovingPlatformLayer").setVisible(true);
                 screen.getB2WC().spawnMovingPlatform();
+            }
+            case "spawnEnd" -> {
+                map.getLayers().get("End").setVisible(true);
+                screen.getB2WC().spawnEnd();
             }
         }
     }

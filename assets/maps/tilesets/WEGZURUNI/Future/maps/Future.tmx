@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="67" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="100">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="67" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="101">
  <tileset firstgid="1" source="../tilesets/cyberpunk.tsx"/>
  <tileset firstgid="5" source="../tilesets/vaporwave.tsx"/>
  <tileset firstgid="26" source="../tilesets/IntelliJ.tsx"/>
@@ -464,7 +464,7 @@
     <property name="targetName" value="spawnMovingplatform"/>
    </properties>
   </object>
-  <object id="84" template="../../../../object-templates/Button.tx" x="1574.5" y="585.333" width="25.5" height="27.5">
+  <object id="84" template="../../../../object-templates/Button.tx" x="1541.17" y="590.666" width="25.5" height="27.5">
    <properties>
     <property name="actionType" value="toggleLayer"/>
     <property name="targetName" value="BlackScreen"/>
@@ -504,7 +504,7 @@
     <property name="npcTrigger" type="object" value="99"/>
    </properties>
   </object>
-  <object id="95" template="../../../../object-templates/NPC.tx" x="1559" y="589.5">
+  <object id="95" template="../../../../object-templates/NPC.tx" x="1613.66" y="586.834">
    <properties>
     <property name="Name" value="People"/>
     <property name="Type" value="TalkingNPC"/>
@@ -521,10 +521,10 @@
   <object id="98" template="../../../../object-templates/NPC.tx" x="816" y="515.5">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Suche und Finde! Gestalte dir deine eigene Zukunft!"/>
+    <property name="text" value="Suche und Finde! Benutze Funktionen um deine Zukunft zu gestalten! Aber bedenke, wenn du zu lange brauchst (10 Minuten), kannst selbst du nicht mehr die Zukunft ändern, um die Vergangenheit zu beeinflussen!"/>
    </properties>
   </object>
-  <object id="99" name="npcTrigger" x="1446.33" y="580.333" width="217.333" height="57.3333"/>
+  <object id="99" name="npcTrigger" x="1548.66" y="580.667" width="122.333" height="57.3333"/>
  </objectgroup>
  <objectgroup id="6" name="Walls">
   <object id="11" x="751.333" y="414.667" width="48.3333" height="320.666"/>
@@ -541,7 +541,7 @@
   <object id="16" template="../../../../object-templates/movingPlatformType2.tx" x="1234.67" y="498.667">
    <properties>
     <property name="goalPosition" type="object" value="17"/>
-    <property name="rewindable" type="bool" value="false"/>
+    <property name="rewindable" type="bool" value="true"/>
    </properties>
   </object>
   <object id="17" x="1255" y="80.333">
@@ -581,7 +581,7 @@
  <objectgroup id="7" name="Items" visible="0">
   <object id="14" template="../../../../object-templates/hammer.tx" x="802.667" y="502" width="27.3333" height="26.6667"/>
   <object id="20" template="../../../../object-templates/ritalin.tx" x="1248" y="180"/>
-  <object id="21" template="../../../../object-templates/gleiter.tx" x="830" y="318"/>
+  <object id="21" template="../../../../object-templates/gleiter.tx" x="1128.67" y="342"/>
   <object id="35" template="../../../../object-templates/page.tx" x="1472" y="209.333">
    <properties>
     <property name="ID" type="int" value="3"/>

@@ -176,10 +176,10 @@ public class B2WorldCreator {
             }
         }
     }
-    private void spawnEnd() {
+    public void spawnEnd() {
         ends = new Array<>();
         MapLayer endLayer = map.getLayers().get("End");
-        if (endLayer != null) {
+        if (endLayer != null && endLayer.isVisible()) {
             for (MapObject object : endLayer.getObjects()) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
