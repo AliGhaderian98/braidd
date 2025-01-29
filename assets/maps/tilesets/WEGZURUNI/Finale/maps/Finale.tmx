@@ -2343,11 +2343,6 @@
   <object id="121" x="109.333" y="3552" width="66.6667" height="16.6667"/>
   <object id="122" x="0" y="3552" width="80" height="16"/>
   <object id="123" x="80" y="3600" width="32" height="16"/>
-  <object id="162" template="../../../../object-templates/Button.tx" x="142" y="3193.58" width="20.6667" height="14.8333">
-   <properties>
-    <property name="actionType" value="repairButton"/>
-   </properties>
-  </object>
   <object id="124" x="80" y="3696" width="32" height="16"/>
   <object id="219" x="800" y="3584" width="48" height="16"/>
   <object id="220" x="864" y="3520" width="48" height="16"/>
@@ -2548,7 +2543,7 @@
   <object id="242" x="480" y="3232" width="16" height="240"/>
   <object id="275" x="480" y="2576" width="16" height="448.667"/>
   <object id="279" x="928" y="2576.67" width="32" height="675.333"/>
-  <object id="285" x="475" y="-528" width="17.3333" height="2611"/>
+  <object id="285" x="483" y="-528" width="17.3333" height="2611"/>
   <object id="293" x="928" y="2240" width="28.6667" height="238"/>
   <object id="360" x="928" y="-600.667" width="28.6667" height="2678.67"/>
   <object id="383" x="478.333" y="2242" width="17.3333" height="116"/>
@@ -2620,7 +2615,7 @@
     <property name="text" value="Es sind nur noch %d Tafeln übrig! | Du kannst das Level abschließen, es sind aber noch %d Tafeln da!"/>
    </properties>
   </object>
-  <object id="402" name="npcTrigger" x="129.002" y="3157" width="49.9967" height="86"/>
+  <object id="402" name="npcTrigger" x="123.669" y="3161" width="49.9967" height="86"/>
   <object id="403" template="../../../../object-templates/NPC.tx" x="513.667" y="4547.67" width="48.6667" height="64.6667">
    <properties>
     <property name="Name" value="lol"/>
@@ -2634,7 +2629,7 @@
   <object id="406" name="npcTrigger" x="994.002" y="4093" width="49.9967" height="86"/>
   <object id="407" name="npcTrigger" x="1440" y="3432" width="49.9967" height="86"/>
   <object id="408" name="npcTrigger" x="967.002" y="2945" width="49.9967" height="86"/>
-  <object id="409" name="npcTrigger" x="515.002" y="2253" width="49.9967" height="86"/>
+  <object id="409" name="npcTrigger" x="507.002" y="2246.33" width="49.9967" height="86"/>
   <object id="410" name="npcTrigger" x="191.002" y="3463" width="49.9967" height="86"/>
   <object id="411" name="npcTrigger" x="77.0016" y="2531" width="65.9967" height="86"/>
   <object id="412" name="npcTrigger" x="3.00165" y="2911" width="49.9967" height="86"/>
@@ -2667,7 +2662,7 @@
     <property name="Name" value="lol"/>
     <property name="Type" value="CountingNPC"/>
     <property name="npcTrigger" type="object" value="409"/>
-    <property name="text" value="Es sind nur noch %d Tafeln übrig!"/>
+    <property name="text" value="Es sind nur noch %d Tafeln übrig! | Du kannst das Level abschließen, es sind aber noch %d Tafeln da!"/>
    </properties>
   </object>
   <object id="418" template="../../../../object-templates/NPC.tx" x="1655.67" y="2951.67" width="48.6667" height="64.6667">
@@ -2720,12 +2715,36 @@
     <property name="text" value="Es sind nur noch %d Tafeln übrig! | Du kannst das Level abschließen, es sind aber noch %d Tafeln da!"/>
    </properties>
   </object>
-  <object id="427" name="npcTrigger" x="234.695" y="9.3925" width="1018.61" height="61.215"/>
+  <object id="427" name="npcTrigger" x="218.695" y="-136.608" width="1018.61" height="203.215"/>
   <object id="428" template="../../../../object-templates/NPC.tx" x="-614.667" y="504" width="433.333" height="32">
    <properties>
     <property name="Type" value="TalkingNPC"/>
     <property name="npcTrigger" type="object" value="427"/>
-    <property name="text" value="Hast du die Warnung und ALLE Schilder ignoriert? Warum muss man mit 6 Tafeln interagieren denkst du dir wahrscheinlich? Gute Frage ehm... *nachdenkliches Schweigen*................. na gut, da du der Einzige bist der mich wahrscheinlich finden wird.... ehm, ja, zähl mal wie viele Bushaltestellen man vom Hauptbahnhof zur Uni braucht, genau, 6 ;-) .................................................................................................................................................................................................................................................................................."/>
+    <property name="text">Oh wow. Echt jetzt? Du hast einfach alle Schilder ignoriert? Ich mein... WARUM MACH ICH MIR ÜBERHAUPT DIE MÜHE, DIE HIER HIN ZU STELLEN?! &gt;:(
+Aber nee, du bist natürlich einfach weitergelatscht, ohne die Mindestanzahl an Tafeln zu würdigen. Sechs Tafeln? Pff, wer braucht schon Regeln, nicht wahr?
+
+Moment mal... *überlegt angestrengt*... Vielleicht hätte ich das mit den Tafeln klarer machen sollen? Hm. Naja. Zu spät jetzt.
+
+Sagen wir es mal so: Wenn du an der Uni ankommst und die Bushaltestellen bis dahin gezählt hast, DANN hast du vielleicht einen Hinweis, warum du so viele Tafeln drücken musst. ;)
+
+Also, willst du's nochmal versuchen oder einfach weiter Chaos stiften? Deine Wahl. Ich urteile nicht. (Doch, tu ich.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+..................................................................
+
+
+.................................................................</property>
    </properties>
   </object>
   <object id="429" name="NPC" type="NPC" x="746" y="1713" width="29" height="46">
@@ -2736,6 +2755,7 @@
     <property name="text" value="|Du hast den Test bestanden, die Note bekommst du in der vorlesungsfreien Zeit!"/>
    </properties>
   </object>
+  <object id="390" name="npcTrigger" x="28.1683" y="2630" width="49.9967" height="75"/>
  </objectgroup>
  <objectgroup id="7" name="Buttons">
   <object id="160" template="../../../../object-templates/Button.tx" x="1005.33" y="4116" width="22.6667" height="22.1667">
@@ -2743,7 +2763,11 @@
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="186" template="../../../../object-templates/Button.tx" x="502.666" y="4330.92" width="48" height="65.5"/>
+  <object id="186" template="../../../../object-templates/Button.tx" x="502.666" y="4330.92" width="48" height="65.5">
+   <properties>
+    <property name="actionType" value="repairButton"/>
+   </properties>
+  </object>
   <object id="228" template="../../../../object-templates/Button.tx" x="1096.67" y="3938.25" width="27.3333" height="18.8333">
    <properties>
     <property name="actionType" value="repairButton"/>
@@ -2764,27 +2788,31 @@
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="313" template="../../../../object-templates/Button.tx" x="962" y="2957.25" width="48" height="65.5">
+  <object id="313" template="../../../../object-templates/Button.tx" x="959.333" y="2951.92" width="48" height="65.5">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="316" template="../../../../object-templates/Button.tx" x="1442.67" y="3433.33" width="48" height="65.5">
+  <object id="316" template="../../../../object-templates/Button.tx" x="1437.34" y="3445.33" width="48" height="65.5">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="320" template="../../../../object-templates/Button.tx" x="512.667" y="2255.58" width="48" height="65.5">
+  <object id="320" template="../../../../object-templates/Button.tx" x="517.334" y="2260.91" width="48" height="65.5">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="322" template="../../../../object-templates/Button.tx" x="92.1666" y="2591" width="18.6667" height="18.8333">
+  <object id="322" template="../../../../object-templates/Button.tx" x="97.4999" y="2586.33" width="18.6667" height="18.8333">
    <properties>
     <property name="actionType" value="repairButton"/>
    </properties>
   </object>
-  <object id="390" name="npcTrigger" x="33.5016" y="2640" width="49.9967" height="75"/>
+  <object id="162" template="../../../../object-templates/Button.tx" x="142" y="3193.58" width="20.6667" height="14.8333">
+   <properties>
+    <property name="actionType" value="repairButton"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="25" name="End" visible="0">
   <object id="386" x="470" y="96" width="480" height="48"/>

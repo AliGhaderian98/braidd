@@ -521,7 +521,10 @@
   <object id="98" template="../../../../object-templates/NPC.tx" x="816" y="515.5">
    <properties>
     <property name="Type" value="TalkingNPC"/>
-    <property name="text" value="Suche und Finde! Benutze Funktionen um deine Zukunft zu gestalten! Aber bedenke, wenn du zu lange brauchst (10 Minuten), kannst selbst du nicht mehr die Zukunft ändern, um die Vergangenheit zu beeinflussen!"/>
+    <property name="text">Suche und Finde! Benutze Funktionen um deine Zukunft zu gestalten! Aber bedenke, wenn du zu lange brauchst (10 Minuten), kannst selbst du nicht mehr die Zukunft ändern, um die Vergangenheit zu beeinflussen!
+
+....................................................................
+............................................................................................................................................................................................................</property>
    </properties>
   </object>
   <object id="99" name="npcTrigger" x="1548.66" y="580.667" width="122.333" height="57.3333"/>
@@ -541,7 +544,8 @@
   <object id="16" template="../../../../object-templates/movingPlatformType2.tx" x="1234.67" y="498.667">
    <properties>
     <property name="goalPosition" type="object" value="17"/>
-    <property name="rewindable" type="bool" value="true"/>
+    <property name="rewindable" type="bool" value="false"/>
+    <property name="speed" type="float" value="0.5"/>
    </properties>
   </object>
   <object id="17" x="1255" y="80.333">
