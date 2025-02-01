@@ -5,7 +5,6 @@ MenuDirectory/Slider/slider_knob.png
 MenuDirectory/TrashCan/TrashCan.png
 MenuDirectory/TrashCan/TrashCanOpen.png
 SaveGameFiles/SaveGame1.json
-SaveGameFiles/SaveGame2.json
 SaveScreen.png
 StartScreen.png
 audio/music/ArkadenSoundtrack.mp3
@@ -47,6 +46,7 @@ maps/Schlossburg.tmx
 maps/UniLevel.tmx
 maps/ZooLevel.tmx
 maps/braid-maps.tiled-project
+maps/braid-maps.tiled-session
 maps/city.tsx
 maps/oberbarmen.tmx
 maps/object-templates/Brick.tx
@@ -174,27 +174,16 @@ maps/tilesets/Schlossburg/castle-tileset.png
 maps/tilesets/Uni/bgs-shadow.tsx
 maps/tilesets/Uni/bgs.tsx
 maps/tilesets/Uni/buildings-uni.tsx
-maps/tilesets/Uni/city-tiles.tsx
-maps/tilesets/Uni/debug-tiles.tsx
-maps/tilesets/Uni/forest-tiles.tsx
-maps/tilesets/Uni/images/Assets_City.png
-maps/tilesets/Uni/images/Fountain.png
-maps/tilesets/Uni/images/Green-Tree.png
-maps/tilesets/Uni/images/Tiles.png
 maps/tilesets/Uni/images/backgrounds/background-reduced-shadow.png
 maps/tilesets/Uni/images/backgrounds/background-reduced.png
 maps/tilesets/Uni/images/backgrounds/buildings-uni.png
 maps/tilesets/Uni/images/backgrounds/uni-flag.png
-maps/tilesets/Uni/images/parkset.png
 maps/tilesets/Uni/images/tile-white-shadow.png
 maps/tilesets/Uni/images/tile-white.png
-maps/tilesets/Uni/images/tiles2.png
 maps/tilesets/Uni/images/tilesheet.png
-maps/tilesets/Uni/park-objects.tsx
 maps/tilesets/Uni/park-tileset.tsx
 maps/tilesets/Uni/tile-white-shadow.tsx
 maps/tilesets/Uni/tile-white.tsx
-maps/tilesets/Uni/trees.tsx
 maps/tilesets/Uni/uni-flag.tsx
 maps/tilesets/WEGZURUNI/Finale/Images/BusTafel.png
 maps/tilesets/WEGZURUNI/Finale/Images/Credits.aseprite
@@ -746,14 +735,6 @@ maps/tilesets/sky.tsx
 maps/tilesets/wasteland.tsx
 maps/tilesets/wasteland_background.tsx
 maps/wintermap.tmx
-packedimages/Dungeon Tile Set.png
-packedimages/Male Demon skin.png
-packedimages/TX Village Props.png
-packedimages/Tiles.png
-packedimages/[removal.ai]_d6bd6fb4-ce3f-4d40-a801-a9a0d7280230-elevatorq.png
-packedimages/four-seasons-tileset.png
-packedimages/hbf12.png
-packedimages/sheet.png
 packedimages/sprites.atlas
 packedimages/sprites.png
 shaders/crt-rewind.frag

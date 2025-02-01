@@ -3,18 +3,13 @@
  <editorsettings>
   <export target="wintermap.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="tilesets/Sample.tsx"/>
- <tileset firstgid="1025" source="tilesets/Props.tsx"/>
- <tileset firstgid="1281" source="tilesets/prop-sheet.tsx"/>
  <tileset firstgid="1686" source="tilesets/sheet.tsx"/>
  <tileset firstgid="1822" source="tilesets/Uni/park-tileset.tsx"/>
  <tileset firstgid="2206" source="tilesets/Uni/tile-white.tsx"/>
- <tileset firstgid="2242" source="tilesets/Uni/debug-tiles.tsx"/>
  <tileset firstgid="2996" source="tilesets/Uni/buildings-uni.tsx"/>
  <tileset firstgid="25249" source="tilesets/Uni/tile-white-shadow.tsx"/>
  <tileset firstgid="25285" source="tilesets/Uni/bgs.tsx"/>
  <tileset firstgid="28255" source="tilesets/Uni/bgs-shadow.tsx"/>
- <tileset firstgid="31225" source="tilesets/Uni/forest-tiles.tsx"/>
  <tileset firstgid="31850" source="tilesets/Uni/uni-flag.tsx"/>
  <layer id="28" name="Sky" width="170" height="75">
   <data encoding="csv">
