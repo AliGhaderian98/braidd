@@ -130,20 +130,20 @@ public class PatrollingEnemy extends Enemy implements EnemyAI {
                     sprite.getRegionHeight()*0.5f/Braid.PPM);
             }
             case ("Security-Guy") -> {
-                sprite = new Sprite(atlas.findRegion("Security-Guy"));
-                walking = new Animation<>(0.2f, atlas.findRegions("Security-Guy"), Animation.PlayMode.LOOP);
+                sprite = new Sprite(atlas.findRegion("biker-run"));
+                walking = new Animation<>(0.12f, atlas.findRegions("biker-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,walking));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,
                     sprite.getRegionHeight()/Braid.PPM);
             }
             case ("wolf") -> {
-                sprite = new Sprite(atlas.findRegion("wolf-walk"));
-                walking = new Animation<>(0.1f, atlas.findRegions("wolf-walk"), Animation.PlayMode.LOOP);
+                sprite = new Sprite(atlas.findRegion("dog-run"));
+                walking = new Animation<>(0.1f, atlas.findRegions("dog-run"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0,walking));
                 sprite.setBounds(0,0,
-                    sprite.getRegionWidth()*1.25f/ Braid.PPM,
-                    sprite.getRegionHeight()*1.25f/Braid.PPM);
+                    sprite.getRegionWidth()*.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*.75f/Braid.PPM);
             }
 
             case ("rotatingCoffeeBean") -> {

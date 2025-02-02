@@ -78,67 +78,25 @@ maps/tilesets/00Atlas.tsx
 maps/tilesets/1_Industrial_Tileset_1.tsx
 maps/tilesets/1_Industrial_Tileset_1B.tsx
 maps/tilesets/3_Far_Background_Tile.tsx
-maps/tilesets/Anim_Robot_Jump1_v1.1_spritesheet.tsx
 maps/tilesets/Arkaden/City.tsx
 maps/tilesets/Arkaden/Shopping_Mall.tsx
 maps/tilesets/Arkaden/images/City.png
 maps/tilesets/Arkaden/images/shopping mall.jpg
 maps/tilesets/Dungeon Tile Set.tsx
-maps/tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx
-maps/tilesets/FreudenBerg/2d_car.tsx
-maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.png
-maps/tilesets/FreudenBerg/Bilder/2d_car.jpg
-maps/tilesets/FreudenBerg/Bilder/Cloud Tileset.png
-maps/tilesets/FreudenBerg/Bilder/Door.png
-maps/tilesets/FreudenBerg/Bilder/PC Computer - RPG Maker MV - Blue Sky.png
 maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.png
-maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.zip
 maps/tilesets/FreudenBerg/Bilder/car junkyard.png
 maps/tilesets/FreudenBerg/Bilder/city_tiles_by_carchagui_ddrixpq.png
-maps/tilesets/FreudenBerg/Bilder/exercises-X-material.zip
-maps/tilesets/FreudenBerg/Bilder/florest downt.png
-maps/tilesets/FreudenBerg/Bilder/free_to_use__rpg_tileset_by_virydyan_ddvahtl.png
-maps/tilesets/FreudenBerg/Bilder/layer 1 florest.png
-maps/tilesets/FreudenBerg/Bilder/layer 2 florest fog.png
-maps/tilesets/FreudenBerg/Bilder/layer 3 grass.png
-maps/tilesets/FreudenBerg/Bilder/layer 4 mountain.png
-maps/tilesets/FreudenBerg/Bilder/layer 5 mountain and sky.png
-maps/tilesets/FreudenBerg/Bilder/sky up.png
-maps/tilesets/FreudenBerg/Bilder/snow_tiles_by_droid779_dcc7m3a.png
-maps/tilesets/FreudenBerg/Blue Sky.tsx
 maps/tilesets/FreudenBerg/Car.tsx
-maps/tilesets/FreudenBerg/Cloud 2.tsx
-maps/tilesets/FreudenBerg/Door.tsx
-maps/tilesets/FreudenBerg/Mobile - Angry Birds - Post-Chrome Characters.tsx
 maps/tilesets/FreudenBerg/Snow.tsx
 maps/tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx
-maps/tilesets/FreudenBerg/floor.tsx
-maps/tilesets/FreudenBerg/test.tsx
 maps/tilesets/HBF.tmx
-maps/tilesets/HBF/Dungeon Tile Set.png
-maps/tilesets/HBF/Dungeon Tile Set.tsx
-maps/tilesets/HBF/Male Demon skin.png
-maps/tilesets/HBF/Male Demon skin.tsx
 maps/tilesets/HBF/TX Village Props.png
 maps/tilesets/HBF/TX Village Props.tsx
-maps/tilesets/HBF/Tiles.png
-maps/tilesets/HBF/[removal.ai]_d6bd6fb4-ce3f-4d40-a801-a9a0d7280230-elevatorq.png
-maps/tilesets/HBF/a7b13e8061a7d06c0a2e914ebffd01da66ad2604.jpg
-maps/tilesets/HBF/four-seasons-tileset.png
-maps/tilesets/HBF/four-seasons-tileset.tsx
 maps/tilesets/HBF/hbbf.png
 maps/tilesets/HBF/hbbf.tsx
-maps/tilesets/HBF/hbf12.png
-maps/tilesets/HBF/hbf12.tsx
-maps/tilesets/HBF/op.jpeg
-maps/tilesets/HBF/op.tsx
-maps/tilesets/HBF/qw.png
-maps/tilesets/HBF/qw.tsx
 maps/tilesets/HBF/sheet.png
 maps/tilesets/HBF/sheet.tsx
 maps/tilesets/HBF/sky.tsx
-maps/tilesets/HBF/sprites.png
-maps/tilesets/HBF/sprites.tsx
 maps/tilesets/Luisenviertel/City4.png
 maps/tilesets/Luisenviertel/Luisenviertel-1-house.tsx
 maps/tilesets/Luisenviertel/Luisenviertel-2-house.tsx
@@ -587,138 +545,23 @@ maps/tilesets/Zoo/TaigaPack.png
 maps/tilesets/Zoo/greenBackground1.tsx
 maps/tilesets/Zoo/zoopng.tsx
 maps/tilesets/bayer/Bayer.jpg
-maps/tilesets/bayer/Fabrik.jpg
 maps/tilesets/bayer/bayer.tsx
-maps/tilesets/bayer/fabrik.png
 maps/tilesets/images/00Atlas.png
 maps/tilesets/images/1_Industrial_Tileset_1.png
 maps/tilesets/images/1_Industrial_Tileset_1B.png
 maps/tilesets/images/3_Far_Background_Tile.png
-maps/tilesets/images/Anim_Robot_Jump1_v1.png
 maps/tilesets/images/Dungeon Tile Set.png
 maps/tilesets/images/Props.png
 maps/tilesets/images/Sample.png
-maps/tilesets/images/coin.png
 maps/tilesets/images/mid-layer-a.png
 maps/tilesets/images/mid-layer-b.png
 maps/tilesets/images/oberbarmen.png
 maps/tilesets/images/prop-sheet.png
 maps/tilesets/images/sheet.png
 maps/tilesets/images/sky.png
-maps/tilesets/images/wasteland.png
-maps/tilesets/images/wasteland2.png
-maps/tilesets/images/wasteland3.png
 maps/tilesets/mid-layer-a.tsx
 maps/tilesets/mid-layer-b.tsx
 maps/tilesets/oberbarmen.tsx
-maps/tilesets/oberbarmen/Platformer - desert/Background/BG-mountains.png
-maps/tilesets/oberbarmen/Platformer - desert/Background/BG-ruins.png
-maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sky.png
-maps/tilesets/oberbarmen/Platformer - desert/Background/BG-sun.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/00Atlas.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge2.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge3.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge4.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge5.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge6.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge7.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge8.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/bridge9.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass10.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass11.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass12.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass2.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass3.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass4.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass5.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass6.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass7.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass8.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/grass9.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms10.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms11.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms12.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms2.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms3.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms4.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms5.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms6.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms7.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms8.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platforms9.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation10.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation11.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation12.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation13.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation14.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation15.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation16.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation17.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation18.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation2.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation3.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation4.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation5.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation6.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation7.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation8.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/platvariation9.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain10.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain11.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain12.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain13.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain14.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain15.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain16.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain17.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain18.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain19.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain2.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain20.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain21.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain22.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain23.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain24.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain25.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain26.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain27.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain28.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain29.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain3.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain30.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain31.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain32.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain4.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain5.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain6.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain7.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain8.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/tileMain9.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/water1.png
-maps/tilesets/oberbarmen/Platformer - desert/Tileset/water2.png
-maps/tilesets/oberbarmen/Platformer - desert/mockup.aseprite
-maps/tilesets/oberbarmen/Platformer - desert/plat_showcover.gif
-maps/tilesets/oberbarmen/Platformer - desert/platformer-desert.aseprite
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks1.png
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks2.png
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks3.png
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks4.png
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks5.png
-maps/tilesets/oberbarmen/Platformer - desert/props/rocks6.png
-maps/tilesets/oberbarmen/Platformer - desert/props/tree01.png
-maps/tilesets/oberbarmen/Platformer - desert/props/tree02.png
-maps/tilesets/oberbarmen/Platformer - desert/props/tree03.png
-maps/tilesets/oberbarmen/Platformer - desert/props/tree04.png
-maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show1.png
-maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show2.png
-maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show3.png
-maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show4.png
-maps/tilesets/oberbarmen/Platformer - desert/showcase/plat_show5.png
 maps/tilesets/overworld-tiles.tsx
 maps/tilesets/overworld/BaseSet.png
 maps/tilesets/overworld/overworld-dots.png
@@ -732,8 +575,6 @@ maps/tilesets/overworld/overworld-railsSB.png
 maps/tilesets/prop-sheet.tsx
 maps/tilesets/sheet.tsx
 maps/tilesets/sky.tsx
-maps/tilesets/wasteland.tsx
-maps/tilesets/wasteland_background.tsx
 maps/wintermap.tmx
 packedimages/sprites.atlas
 packedimages/sprites.png
@@ -769,20 +610,10 @@ sprites/animals/bird-die_01.png
 sprites/animals/bird-die_02.png
 sprites/animals/bird-die_03.png
 sprites/animals/bird-die_04.png
-sprites/animals/bird-fly_01.png
-sprites/animals/bird-fly_02.png
-sprites/animals/bird-fly_03.png
-sprites/animals/bird-fly_04.png
-sprites/animals/bird-fly_05.png
-sprites/animals/bird-fly_06.png
 sprites/animals/bird-idle_01.png
 sprites/animals/bird-idle_02.png
 sprites/animals/bird-idle_03.png
 sprites/animals/bird-idle_04.png
-sprites/animals/cat-die_01.png
-sprites/animals/cat-die_02.png
-sprites/animals/cat-die_03.png
-sprites/animals/cat-die_04.png
 sprites/animals/cat-idle_01.png
 sprites/animals/cat-idle_02.png
 sprites/animals/cat-idle_03.png
@@ -818,27 +649,12 @@ sprites/animals/lion/Lion-idle.png
 sprites/animals/lion/Lion-run_01.png
 sprites/animals/lion/Lion-run_02.png
 sprites/animals/lion/Lion-run_03.png
-sprites/animals/rat-die_01.png
-sprites/animals/rat-die_02.png
-sprites/animals/rat-die_03.png
-sprites/animals/rat-die_04.png
-sprites/animals/rat-idle_01.png
-sprites/animals/rat-idle_02.png
-sprites/animals/rat-idle_03.png
-sprites/animals/rat-idle_04.png
-sprites/animals/rat-run_01.png
-sprites/animals/rat-run_02.png
-sprites/animals/rat-run_03.png
-sprites/animals/rat-run_04.png
-sprites/arkaden/Security-Guy_01.png
-sprites/arkaden/Security-Guy_02.png
-sprites/arkaden/Security-Guy_03.png
-sprites/arkaden/Security-Guy_04.png
-sprites/arkaden/wolf-walk_01.png
-sprites/arkaden/wolf-walk_02.png
-sprites/arkaden/wolf-walk_03.png
-sprites/arkaden/wolf-walk_04.png
-sprites/arkaden/wolf-walk_05.png
+sprites/arkaden/biker-run_01.png
+sprites/arkaden/biker-run_02.png
+sprites/arkaden/biker-run_03.png
+sprites/arkaden/biker-run_04.png
+sprites/arkaden/biker-run_05.png
+sprites/arkaden/biker-run_06.png
 sprites/ball/ball_01.png
 sprites/ball/ball_02.png
 sprites/ball/ball_03.png
@@ -900,22 +716,6 @@ sprites/ball/ball_58.png
 sprites/ball/ball_59.png
 sprites/ball/ball_60.png
 sprites/ball/ball_61.png
-sprites/capybara/capybara-idle_01.png
-sprites/capybara/capybara-idle_02.png
-sprites/capybara/capybara-idle_03.png
-sprites/capybara/capybara-idle_04.png
-sprites/capybara/capybara-idle_05.png
-sprites/capybara/capybara-idle_06.png
-sprites/capybara/capybara-idle_07.png
-sprites/capybara/capybara-idle_08.png
-sprites/capybara/capybara-run_01.png
-sprites/capybara/capybara-run_02.png
-sprites/capybara/capybara-run_03.png
-sprites/capybara/capybara-run_04.png
-sprites/capybara/capybara-run_05.png
-sprites/capybara/capybara-run_06.png
-sprites/capybara/capybara-run_07.png
-sprites/capybara/capybara-run_08.png
 sprites/circle-timer/circle-timer_01.png
 sprites/circle-timer/circle-timer_02.png
 sprites/circle-timer/circle-timer_03.png
@@ -1030,15 +830,6 @@ sprites/knight/knight-walk_05.png
 sprites/knight/knight-walk_06.png
 sprites/knight/knight-walk_07.png
 sprites/knight/knight-walk_08.png
-sprites/land-smoke/land-smoke_01.png
-sprites/land-smoke/land-smoke_02.png
-sprites/land-smoke/land-smoke_03.png
-sprites/land-smoke/land-smoke_04.png
-sprites/land-smoke/land-smoke_05.png
-sprites/land-smoke/land-smoke_06.png
-sprites/land-smoke/land-smoke_07.png
-sprites/land-smoke/land-smoke_08.png
-sprites/land-smoke/land-smoke_09.png
 sprites/lion-climb/lion-climb_1.png
 sprites/lion-climb/lion-climb_2.png
 sprites/lion-climb/lion-climb_3.png
@@ -1094,17 +885,6 @@ sprites/rotatingCoffeeBean/rotatingCoffeeBean_05.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_06.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_07.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_08.png
-sprites/run-smoke/run-smoke_01.png
-sprites/run-smoke/run-smoke_02.png
-sprites/run-smoke/run-smoke_03.png
-sprites/run-smoke/run-smoke_04.png
-sprites/run-smoke/run-smoke_05.png
-sprites/run-smoke/run-smoke_06.png
-sprites/run-smoke/run-smoke_07.png
-sprites/run-smoke/run-smoke_08.png
-sprites/run-smoke/run-smoke_09.png
-sprites/run-smoke/run-smoke_10.png
-sprites/run-smoke/run-smoke_11.png
 sprites/schwebebahn-opendoor/schwebebahn-rails.png
 sprites/schwebebahn-opendoor/schwebebahn_1.png
 sprites/schwebebahn-opendoor/schwebebahn_2.png
