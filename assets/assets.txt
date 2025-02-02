@@ -84,36 +84,12 @@ maps/tilesets/Arkaden/Shopping_Mall.tsx
 maps/tilesets/Arkaden/images/City.png
 maps/tilesets/Arkaden/images/shopping mall.jpg
 maps/tilesets/Dungeon Tile Set.tsx
-maps/tilesets/FreudenBerg/1_Industrial_Tileset_1 2.tsx
-maps/tilesets/FreudenBerg/2d_car.tsx
-maps/tilesets/FreudenBerg/Bilder/1_Industrial_Tileset_1 2.png
-maps/tilesets/FreudenBerg/Bilder/2d_car.jpg
-maps/tilesets/FreudenBerg/Bilder/Cloud Tileset.png
-maps/tilesets/FreudenBerg/Bilder/Door.png
-maps/tilesets/FreudenBerg/Bilder/PC Computer - RPG Maker MV - Blue Sky.png
 maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.png
-maps/tilesets/FreudenBerg/Bilder/Snow platform tileset.zip
 maps/tilesets/FreudenBerg/Bilder/car junkyard.png
 maps/tilesets/FreudenBerg/Bilder/city_tiles_by_carchagui_ddrixpq.png
-maps/tilesets/FreudenBerg/Bilder/exercises-X-material.zip
-maps/tilesets/FreudenBerg/Bilder/florest downt.png
-maps/tilesets/FreudenBerg/Bilder/free_to_use__rpg_tileset_by_virydyan_ddvahtl.png
-maps/tilesets/FreudenBerg/Bilder/layer 1 florest.png
-maps/tilesets/FreudenBerg/Bilder/layer 2 florest fog.png
-maps/tilesets/FreudenBerg/Bilder/layer 3 grass.png
-maps/tilesets/FreudenBerg/Bilder/layer 4 mountain.png
-maps/tilesets/FreudenBerg/Bilder/layer 5 mountain and sky.png
-maps/tilesets/FreudenBerg/Bilder/sky up.png
-maps/tilesets/FreudenBerg/Bilder/snow_tiles_by_droid779_dcc7m3a.png
-maps/tilesets/FreudenBerg/Blue Sky.tsx
 maps/tilesets/FreudenBerg/Car.tsx
-maps/tilesets/FreudenBerg/Cloud 2.tsx
-maps/tilesets/FreudenBerg/Door.tsx
-maps/tilesets/FreudenBerg/Mobile - Angry Birds - Post-Chrome Characters.tsx
 maps/tilesets/FreudenBerg/Snow.tsx
 maps/tilesets/FreudenBerg/city_tiles_by_carchagui_ddrixpq.tsx
-maps/tilesets/FreudenBerg/floor.tsx
-maps/tilesets/FreudenBerg/test.tsx
 maps/tilesets/HBF.tmx
 maps/tilesets/HBF/Dungeon Tile Set.png
 maps/tilesets/HBF/Dungeon Tile Set.tsx
@@ -779,10 +755,6 @@ sprites/animals/bird-idle_01.png
 sprites/animals/bird-idle_02.png
 sprites/animals/bird-idle_03.png
 sprites/animals/bird-idle_04.png
-sprites/animals/cat-die_01.png
-sprites/animals/cat-die_02.png
-sprites/animals/cat-die_03.png
-sprites/animals/cat-die_04.png
 sprites/animals/cat-idle_01.png
 sprites/animals/cat-idle_02.png
 sprites/animals/cat-idle_03.png
@@ -818,18 +790,6 @@ sprites/animals/lion/Lion-idle.png
 sprites/animals/lion/Lion-run_01.png
 sprites/animals/lion/Lion-run_02.png
 sprites/animals/lion/Lion-run_03.png
-sprites/animals/rat-die_01.png
-sprites/animals/rat-die_02.png
-sprites/animals/rat-die_03.png
-sprites/animals/rat-die_04.png
-sprites/animals/rat-idle_01.png
-sprites/animals/rat-idle_02.png
-sprites/animals/rat-idle_03.png
-sprites/animals/rat-idle_04.png
-sprites/animals/rat-run_01.png
-sprites/animals/rat-run_02.png
-sprites/animals/rat-run_03.png
-sprites/animals/rat-run_04.png
 sprites/arkaden/Security-Guy_01.png
 sprites/arkaden/Security-Guy_02.png
 sprites/arkaden/Security-Guy_03.png
@@ -900,22 +860,6 @@ sprites/ball/ball_58.png
 sprites/ball/ball_59.png
 sprites/ball/ball_60.png
 sprites/ball/ball_61.png
-sprites/capybara/capybara-idle_01.png
-sprites/capybara/capybara-idle_02.png
-sprites/capybara/capybara-idle_03.png
-sprites/capybara/capybara-idle_04.png
-sprites/capybara/capybara-idle_05.png
-sprites/capybara/capybara-idle_06.png
-sprites/capybara/capybara-idle_07.png
-sprites/capybara/capybara-idle_08.png
-sprites/capybara/capybara-run_01.png
-sprites/capybara/capybara-run_02.png
-sprites/capybara/capybara-run_03.png
-sprites/capybara/capybara-run_04.png
-sprites/capybara/capybara-run_05.png
-sprites/capybara/capybara-run_06.png
-sprites/capybara/capybara-run_07.png
-sprites/capybara/capybara-run_08.png
 sprites/circle-timer/circle-timer_01.png
 sprites/circle-timer/circle-timer_02.png
 sprites/circle-timer/circle-timer_03.png
@@ -1030,15 +974,6 @@ sprites/knight/knight-walk_05.png
 sprites/knight/knight-walk_06.png
 sprites/knight/knight-walk_07.png
 sprites/knight/knight-walk_08.png
-sprites/land-smoke/land-smoke_01.png
-sprites/land-smoke/land-smoke_02.png
-sprites/land-smoke/land-smoke_03.png
-sprites/land-smoke/land-smoke_04.png
-sprites/land-smoke/land-smoke_05.png
-sprites/land-smoke/land-smoke_06.png
-sprites/land-smoke/land-smoke_07.png
-sprites/land-smoke/land-smoke_08.png
-sprites/land-smoke/land-smoke_09.png
 sprites/lion-climb/lion-climb_1.png
 sprites/lion-climb/lion-climb_2.png
 sprites/lion-climb/lion-climb_3.png
@@ -1094,17 +1029,6 @@ sprites/rotatingCoffeeBean/rotatingCoffeeBean_05.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_06.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_07.png
 sprites/rotatingCoffeeBean/rotatingCoffeeBean_08.png
-sprites/run-smoke/run-smoke_01.png
-sprites/run-smoke/run-smoke_02.png
-sprites/run-smoke/run-smoke_03.png
-sprites/run-smoke/run-smoke_04.png
-sprites/run-smoke/run-smoke_05.png
-sprites/run-smoke/run-smoke_06.png
-sprites/run-smoke/run-smoke_07.png
-sprites/run-smoke/run-smoke_08.png
-sprites/run-smoke/run-smoke_09.png
-sprites/run-smoke/run-smoke_10.png
-sprites/run-smoke/run-smoke_11.png
 sprites/schwebebahn-opendoor/schwebebahn-rails.png
 sprites/schwebebahn-opendoor/schwebebahn_1.png
 sprites/schwebebahn-opendoor/schwebebahn_2.png
