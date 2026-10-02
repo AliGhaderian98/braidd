@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 
 public class Subtitle {
-    private final String fullText;
+    private String fullText;
     private String currentText;
     public float posX, posY;
     private float wrapWidth;
@@ -38,6 +38,7 @@ public class Subtitle {
 
     public void setShowing(boolean showing) { isShowing = showing; }
     public String getFullText() { return fullText; }
+    public void setFullText(String text) { this.fullText = text; }
     public String getCurrentText() { return currentText; }
     public void setCurrentText(String text) { currentText = text;}
 
@@ -48,6 +49,7 @@ public class Subtitle {
 
     public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, BitmapFont font) {
         if (!isShowing) return;
+
 
         // Use GlyphLayout to calculate text dimensions
         GlyphLayout layout = new GlyphLayout();

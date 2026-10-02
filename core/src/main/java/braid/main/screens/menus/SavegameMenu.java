@@ -17,9 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Objects;
@@ -36,6 +38,8 @@ public class SavegameMenu implements Screen{
 
     int width;
     int height;
+
+    private final Texture texture;
 
 
     // Labels show on Screen
@@ -73,7 +77,7 @@ public class SavegameMenu implements Screen{
         overlayActive = false;
 
         // Setup Screen
-        Viewport viewport = new ExtendViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(Braid.V_WIDTH,Braid.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,((Braid) game).batch);
         overlay = new Stage(viewport,((Braid) game).batch);
 
@@ -95,6 +99,16 @@ public class SavegameMenu implements Screen{
         table = new Table();
         rootTable = new Table();
         overlayTable = new Table();
+
+        // Setup Background Image
+        texture = new Texture(Gdx.files.internal("SaveScreen.png"));
+        Drawable backgroundImage = new TextureRegionDrawable(new TextureRegion(texture));
+
+        Table imageTable = new Table();
+        stage.addActor(imageTable);
+
+        imageTable.setFillParent(true);
+        imageTable.setBackground(backgroundImage);
 
         // Create TrashcanSkin
         texturetrashcan = new Texture(Gdx.files.internal("MenuDirectory/TrashCan/TrashCan.png"));
@@ -120,12 +134,12 @@ public class SavegameMenu implements Screen{
 
 
         // Setup Title and footnote and OverlayTitle
-        overlayTitle = new Label("Enter a Name for your Savegame", SelectionFont);
-        noNameWarning = new Label("You need to Enter a Name!",LittleSelectionFont);
+        overlayTitle = new Label("Gebe einen Spielstandnamen an", SelectionFont);
+        noNameWarning = new Label("Du musst einen Namen angeben!",LittleSelectionFont);
         noNameWarning.setColor(new Color(Color.RED));
-        title = new Label("Save games", TitelFont);
-        newSaveGame = new Label("new Savegame", SelectionFont);
-        nomoreSaveGames = new Label("only 10 Savegames possible", LittleSelectionFont);
+        title = new Label("Spielstände", TitelFont);
+        newSaveGame = new Label("neuer Spielstand", SelectionFont);
+        nomoreSaveGames = new Label("Nur 10 Spielstände möglich", LittleSelectionFont);
         nomoreSaveGames.setColor(Color.RED);
 
         title.setFontScale(2);
@@ -152,9 +166,9 @@ public class SavegameMenu implements Screen{
 
                 // create Labels
                 savegames[i] = new Label(Savemanager.getSavegameName(Savemanager.currentsavegame), SelectionFont);
-                collectibles[i] = new Label("Collectibles: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
-                unlockedLevels [i] = new Label("Unlocked Levels: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
-                playtimes [i] = new Label("Time Played: " + Savemanager.getSavegamePlaytimeTOString(Savemanager.currentsavegame), TinySelectionFont);
+                collectibles[i] = new Label("Gesammelte Seiten: " + Savemanager.AmountFoundCollectables(Savemanager.currentsavegame) + "/50", LittleSelectionFont);
+                unlockedLevels [i] = new Label("Freigeschaltete Level: " + Savemanager.AmountUnlockedLevels(Savemanager.currentsavegame) + "/10", LittleSelectionFont);
+                playtimes [i] = new Label("Spielzeit: " + Savemanager.getSavegamePlaytimeTOString(Savemanager.currentsavegame), TinySelectionFont);
                 trashcans[i] = new Image(new TextureRegionDrawable(new TextureRegion(trashcan.getTexture())));
 
                 // add Labels to Groups
@@ -220,6 +234,7 @@ public class SavegameMenu implements Screen{
         noNameWarning.setVisible(false);
         overlay.addActor(overlayTable);
 
+        table.left().padLeft(300);
 
         // mark first option
         updateLabelSelection();
@@ -459,5 +474,6 @@ public class SavegameMenu implements Screen{
     public void dispose() {
         stage.dispose();
         overlay.dispose();
+        texture.dispose();
     }
 }

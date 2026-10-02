@@ -2,7 +2,7 @@
 <template>
  <object name="TutorialSign" width="16" height="16">
   <properties>
-   <property name="Text" value="Springe mit %s."/>
+   <property name="Text" value="&quot;Auf Rot schalten? (Bitte %s drücken!)"/>
    <property name="key" value="SPACEBAR"/>
   </properties>
  </object>

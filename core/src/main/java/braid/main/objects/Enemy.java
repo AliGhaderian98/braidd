@@ -1,8 +1,11 @@
 package braid.main.objects;
 
 import braid.main.screens.levels.LevelScreen;
+import braid.main.tools.Audiomanager;
+import braid.main.tools.PreferencesManager;
 import braid.main.tools.UserData;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,6 +31,8 @@ public abstract class Enemy extends DynamicGameObject{
     protected final String type;
     private float stateTimer = 0;
 
+    private Sound killSound;
+
     public enum AnimationState {
         DEAD,
         ALIVE;
@@ -44,6 +49,7 @@ public abstract class Enemy extends DynamicGameObject{
         this.y = y;
         this.rewindable = rewindable;
         this.type = type;
+        killSound = Audiomanager.audiomanager.get("audio/sound/kill.mp3", Sound.class);
     }
 
     public void draw(SpriteBatch batch) {
@@ -64,20 +70,12 @@ public abstract class Enemy extends DynamicGameObject{
     public void update(float dt) {
         sprite.setPosition(b2body.getPosition().x - sprite.getWidth()/2, b2body.getPosition().y - sprite.getHeight()/2);
 
-        if (rewindable)
-            rewindController.update();
-
-        if (currentState == AnimationState.DEAD) {
-            b2body.setActive(false);
-        }
-        else if (currentState == AnimationState.ALIVE && !b2body.isActive()) {
-            b2body.setActive(true);
-        }
+        b2body.setActive(currentState != AnimationState.DEAD);
     }
 
     @Override
     public float getStateTimer() {
-        return 0;
+        return stateTimer;
     }
 
     @Override
@@ -104,6 +102,7 @@ public abstract class Enemy extends DynamicGameObject{
     }
 
     public void die () {
+        killSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
         currentState = AnimationState.DEAD;
     }
 

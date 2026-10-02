@@ -1,19 +1,14 @@
 package braid.main.screens.levels;
 
 import braid.main.Braid;
-import braid.main.objects.MovingPlatform;
-import braid.main.rewind.RewindController;
-import braid.main.rewind.RewindableBody;
-import braid.main.objects.Enemy;
-import braid.main.tools.Savemanager;
 
 public class WegZurUniLevel extends LevelScreen {
 
     public WegZurUniLevel(Braid game) {
-        super(game, "maps/wintermap.tmx", "packedimages/sprites.atlas", "audio/music/background_music.mp3");
+        super(game, "maps/tilesets/WEGZURUNI/Present/maps/WEGZURUNI.tmx", "packedimages/sprites.atlas", "audio/music/WEGZURUNI/WEGZURUNI1.mp3");
         levelName = "WEGZURUNI";
 
-        player.setPosition(32/Braid.PPM, 32/Braid.PPM);
+        player.setPosition(48/Braid.PPM, 128/Braid.PPM);
     }
 
     @Override

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Sign extends InteractiveGameObject {
-    private final SubtitleManager subtitleManager;
+    SubtitleManager subtitleManager;
     private final Subtitle subtitle;
 
     public Sign(World world, Rectangle boundary, SubtitleManager subtitleManager, String text) {

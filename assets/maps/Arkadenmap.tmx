@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="185">
+ <tileset firstgid="1" source="tilesets/Arkaden/City.tsx"/>
+ <tileset firstgid="2171" source="tilesets/Arkaden/Shopping_Mall.tsx"/>
+ <tileset firstgid="3816" source="tilesets/sheet.tsx"/>
+ <tileset firstgid="3952" source="tilesets/1_Industrial_Tileset_1.tsx"/>
+ <tileset firstgid="4048" source="tilesets/Zoo/Rock-Tilset.tsx"/>
+ <tileset firstgid="4129" source="tilesets/Zoo/Deko-Tiled.tsx"/>
+ <tileset firstgid="4409" source="tilesets/Props.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="160" height="40">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="17" name="Tile Layer 2" width="160" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0kENgEAMAMFKODng4fAAHsDD4QG8UhEkJWFGwT42AgAAAAAAAAAAAAAAAAAAAAAAAAAA3jO1iLlVV/BXPd9b/EeRNd/b/EeRPd87/EeRke+d/qPIle/d/gM+4AGbUQW/
+  </data>
+ </layer>
+ <layer id="3" name="GroundLayer" width="160" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt3E+OgjAUx3EWZnT38ArexSt4Dp3xECq6c8YLOXMMd3MD3fuIIRRSFP9RSr+f5BciBgT6QtpCjCIAAAAAAOx64voIEDLqzy8fcRT1NYPY9ZEgRKJ1F2uG1B8coP7Cs9I+SqJZt6Cv4nP9mdexTdcU9VXVn9meG9oUdzpJvfh8/0N71a0/M8CrPFJ/1CFCVjWeYGzhXtYGn5ov2gEAAMC5rF82f7JvttDtl0afGwjRu557JFfGtjxnAeACz+HCYvbzAJuxXAIAAAB00bH0/lVSmgu/9f5J1TyebT3zfgAA+CubI2OeDC6MJA/QtInkAZpG/TXL9p7hvxSXIaH+3ucg+fLA9bXqcv1N9ZxmUrznPLLOVGdb18fuky7X31bP6Vvzo9k9EZPt+/LvvMJe9/Or+bPs/9bnVPo/jr6mK85a0JIp
+  </data>
+ </layer>
+ <objectgroup id="4" name="Ground">
+  <object id="9" x="559.667" y="256.541" width="64" height="15.625"/>
+  <object id="10" x="464" y="320.042" width="64" height="15.625"/>
+  <object id="11" x="367.958" y="384.208" width="47.625" height="16.375"/>
+  <object id="13" x="991.917" y="80" width="16" height="479.333"/>
+  <object id="14" x="751.583" y="192.208" width="160.625" height="47.25"/>
+  <object id="22" x="912" y="111.969" width="47.9394" height="127.591"/>
+  <object id="30" x="0.083333" y="400.25" width="32.5" height="15.9167"/>
+  <object id="32" x="0.333333" y="79" height="528.969"/>
+  <object id="34" x="0.545455" y="80" width="1759.62"/>
+  <object id="47" x="751.678" y="608.265" width="256.25" height="31.7083"/>
+  <object id="51" x="1760" y="80" height="559.455"/>
+  <object id="63" x="592.166" y="576.125" width="47.8333" height="16.1667"/>
+  <object id="64" x="1008" y="623.818" width="752" height="16.3636"/>
+  <object id="70" x="1392.55" y="464" width="63.3635" height="15.8182"/>
+  <object id="71" x="1024.27" y="464.182" width="79.9089" height="15.6364"/>
+  <object id="73" x="1008" y="336" width="32" height="15.8182"/>
+  <object id="77" x="992.82" y="176" width="79.1818" height="15.8182"/>
+  <object id="80" x="1471.82" y="240" width="144.182" height="15.8182"/>
+  <object id="81" x="1663.82" y="159.943" width="96.1818" height="16.0568"/>
+  <object id="82" x="1359.99" y="336" width="128.023" height="15.6364"/>
+  <object id="107" x="250.5" y="774.333" width="507.833" height="15.6667"/>
+  <object id="117" x="1744" y="80.3333" width="16" height="31.6667"/>
+  <object id="126" x="544.188" y="592" width="31.875" height="15.875"/>
+  <object id="127" x="512.063" y="591.938" width="15.9375" height="16"/>
+  <object id="130" x="0.1667" y="608.25" width="288.083" height="32"/>
+  <object id="135" x="961" y="461.5" width="29" height="18"/>
+  <object id="136" x="945" y="367" width="45.5" height="16.5"/>
+  <object id="142" x="704.038" y="575.967" width="15.962" height="16.0326"/>
+  <object id="143" x="672.148" y="575.977" width="15.8167" height="15.7955"/>
+  <object id="159" x="351.75" y="160.75" width="48.25" height="15.25"/>
+  <object id="161" x="176" y="319.333" width="47.6667" height="16"/>
+  <object id="164" x="1680.5" y="513" width="48" height="111"/>
+  <object id="167" x="752" y="224.5" width="239.5" height="15.5"/>
+  <object id="173" x="335" y="607.5" width="144" height="34"/>
+  <object id="182" x="1216.18" y="464" width="47.8182" height="16"/>
+  <object id="183" x="1312.18" y="464" width="47.6364" height="16.1818"/>
+ </objectgroup>
+ <objectgroup id="7" name="MovingPlatform">
+  <object id="19" template="object-templates/SchalterMovingPlatform.tx" x="666" y="288.667">
+   <properties>
+    <property name="goalPosition" type="object" value="21"/>
+    <property name="schalter" type="object" value="20"/>
+   </properties>
+  </object>
+  <object id="21" template="object-templates/GoalPosition.tx" x="698.333" y="228.666"/>
+  <object id="41" template="object-templates/SchalterMovingPlatform.tx" x="80.7083" y="150.5">
+   <properties>
+    <property name="goalPosition" type="object" value="43"/>
+    <property name="schalter" type="object" value="42"/>
+   </properties>
+  </object>
+  <object id="43" template="object-templates/GoalPosition.tx" x="112.083" y="379.25"/>
+  <object id="44" template="object-templates/movingPlatformType2.tx" x="305.667" y="432.333" width="48" height="15.75">
+   <properties>
+    <property name="goalPosition" type="object" value="52"/>
+    <property name="speed" type="float" value="0.7"/>
+   </properties>
+  </object>
+  <object id="52" template="object-templates/GoalPosition.tx" x="330" y="383.333"/>
+  <object id="53" template="object-templates/movingPlatformType2.tx" x="720.167" y="144.083" width="47.5" height="16.125">
+   <properties>
+    <property name="goalPosition" type="object" value="54"/>
+    <property name="speed" type="float" value="0.7"/>
+   </properties>
+  </object>
+  <object id="54" template="object-templates/GoalPosition.tx" x="446" y="152"/>
+  <object id="96" template="object-templates/SchalterMovingPlatform.tx" x="1574.91" y="580.545">
+   <properties>
+    <property name="goalPosition" type="object" value="98"/>
+    <property name="schalter" type="object" value="97"/>
+   </properties>
+  </object>
+  <object id="97" template="object-templates/Schalter.tx" x="1630.18" y="578.288"/>
+  <object id="98" template="object-templates/GoalPosition.tx" x="1497.45" y="488.182"/>
+  <object id="99" template="object-templates/movingPlatformType2.tx" x="1094.67" y="172.333">
+   <properties>
+    <property name="goalPosition" type="object" value="100"/>
+    <property name="speed" type="float" value="0.7"/>
+   </properties>
+  </object>
+  <object id="100" template="object-templates/GoalPosition.tx" x="1067.34" y="307"/>
+  <object id="101" template="object-templates/SchalterMovingPlatform.tx" x="1403.33" y="117">
+   <properties>
+    <property name="goalPosition" type="object" value="103"/>
+    <property name="schalter" type="object" value="102"/>
+   </properties>
+  </object>
+  <object id="102" template="object-templates/Schalter.tx" x="1012.33" y="174.333"/>
+  <object id="103" template="object-templates/GoalPosition.tx" x="1301.33" y="304.333"/>
+  <object id="123" template="object-templates/SchalterMovingPlatform.tx" x="186.917" y="417.917">
+   <properties>
+    <property name="goalPosition" type="object" value="124"/>
+    <property name="rewindable" type="bool" value="true"/>
+    <property name="schalter" type="object" value="137"/>
+   </properties>
+  </object>
+  <object id="124" template="object-templates/GoalPosition.tx" x="217" y="552.417"/>
+  <object id="133" template="object-templates/SchalterMovingPlatform.tx" x="233.25" y="387.5">
+   <properties>
+    <property name="goalPosition" type="object" value="134"/>
+    <property name="schalter" type="object" value="139"/>
+   </properties>
+  </object>
+  <object id="134" template="object-templates/GoalPosition.tx" x="266" y="491.5"/>
+  <object id="137" template="object-templates/Schalter.tx" x="986.5" y="460"/>
+  <object id="139" template="object-templates/Schalter.tx" x="986" y="366"/>
+  <object id="140" template="object-templates/movingPlatformType2.tx" x="872.591" y="535.636" width="47.5" height="16.1818">
+   <properties>
+    <property name="goalPosition" type="object" value="141"/>
+    <property name="speed" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="141" template="object-templates/GoalPosition.tx" x="895" y="367.5"/>
+  <object id="155" template="object-templates/SchalterMovingPlatform.tx" x="1277.33" y="120">
+   <properties>
+    <property name="goalPosition" type="object" value="156"/>
+    <property name="schalter" type="object" value="157"/>
+   </properties>
+  </object>
+  <object id="156" template="object-templates/GoalPosition.tx" x="1212" y="239.333"/>
+  <object id="162" template="object-templates/movingPlatformType2.tx" x="266" y="161">
+   <properties>
+    <property name="goalPosition" type="object" value="163"/>
+    <property name="speed" type="float" value="0.7"/>
+   </properties>
+  </object>
+  <object id="163" template="object-templates/GoalPosition.tx" x="289.667" y="317"/>
+ </objectgroup>
+ <objectgroup id="10" name="Schalter">
+  <object id="20" template="object-templates/Schalter.tx" x="614.333" y="255"/>
+  <object id="42" template="object-templates/Schalter.tx" x="371.667" y="159"/>
+  <object id="157" template="object-templates/Schalter.tx" x="1012.67" y="334.333"/>
+ </objectgroup>
+ <objectgroup id="11" name="Signs">
+  <object id="39" template="object-templates/sign.tx" x="783.75" y="176.125">
+   <properties>
+    <property name="Text" value="Finde den Schlüssel und gehe zu den City Arkaden, aber versuche vorher, die verfügbaren Pages zu sammeln!"/>
+   </properties>
+  </object>
+  <object id="40" template="object-templates/sign.tx" x="432" y="593.667">
+   <properties>
+    <property name="Text" value="Ritalin ist ein Power-up-Item, mit dem du höher springen kannst!"/>
+   </properties>
+  </object>
+  <object id="116" template="object-templates/sign.tx" x="1039.67" y="608.333">
+   <properties>
+    <property name="Text" value="City Arkaden!"/>
+   </properties>
+  </object>
+  <object id="122" template="object-templates/sign.tx" x="943.932" y="592.068">
+   <properties>
+    <property name="Text">City Arkaden - diese Richtung!
+Ein Schlüssel wird benötigt, um die Tür zu öffnen!</property>
+   </properties>
+  </object>
+  <object id="184" template="object-templates/TutorialSign.tx" x="784" y="592">
+   <properties>
+    <property name="Text">Achtung!
+Finde  die Schalter und aktiviere  sie mit %s.</property>
+    <property name="key" value="INTERACT"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="12" name="signLayer" width="160" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt3DEOABAUA1AbE/c/KaPRKhH5Ie9doB06NyUAAAAAAACAJbfoBgAAAAAAAAAAAAAAAAAAAMAryqWfgl5j8+HE2Nwv8JcJupkCUA==
+  </data>
+ </layer>
+ <objectgroup id="8" name="Enemies">
+  <object id="16" template="object-templates/patrollingEnemy.tx" x="577.333" y="240.125">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="178" template="object-templates/patrollingEnemy.tx" x="369.333" y="144.125">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="17" template="object-templates/patrollingEnemy.tx" x="383.459" y="367.958">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="179" template="object-templates/patrollingEnemy.tx" x="481.459" y="301.458">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="174" template="object-templates/patrollingEnemy.tx" x="398.459" y="589.958">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="175" template="object-templates/patrollingEnemy.tx" x="607.959" y="557.958">
+   <properties>
+    <property name="type" value="wolf"/>
+   </properties>
+  </object>
+  <object id="90" template="object-templates/patrollingEnemy.tx" x="1327.45" y="447.454">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="181" template="object-templates/patrollingEnemy.tx" x="1220.91" y="447.091">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="180" template="object-templates/patrollingEnemy.tx" x="1413.45" y="447.454">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="177" template="object-templates/patrollingEnemy.tx" x="1694.68" y="495.318">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="176" template="object-templates/patrollingEnemy.tx" x="1066.18" y="447.318">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="91" template="object-templates/patrollingEnemy.tx" x="1407.76" y="319.485">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="92" template="object-templates/patrollingEnemy.tx" x="1520.18" y="224.364">
+   <properties>
+    <property name="type" value="Security-Guy"/>
+   </properties>
+  </object>
+  <object id="108" template="object-templates/unhingedEnemy.tx" x="740.667" y="757"/>
+  <object id="109" template="object-templates/unhingedEnemy.tx" x="703" y="759"/>
+  <object id="110" template="object-templates/unhingedEnemy.tx" x="659.667" y="757.667"/>
+  <object id="111" template="object-templates/unhingedEnemy.tx" x="621" y="758"/>
+  <object id="112" template="object-templates/unhingedEnemy.tx" x="583.333" y="756.667"/>
+  <object id="113" template="object-templates/unhingedEnemy.tx" x="551" y="756"/>
+  <object id="114" template="object-templates/unhingedEnemy.tx" x="507.333" y="757.667"/>
+  <object id="115" template="object-templates/unhingedEnemy.tx" x="467.333" y="756.333"/>
+  <object id="169" template="object-templates/unhingedEnemy.tx" x="412.333" y="755.833"/>
+  <object id="170" template="object-templates/unhingedEnemy.tx" x="360.333" y="756.333"/>
+  <object id="171" template="object-templates/unhingedEnemy.tx" x="311.333" y="757.833"/>
+  <object id="172" template="object-templates/unhingedEnemy.tx" x="257.833" y="756.333"/>
+ </objectgroup>
+ <objectgroup id="19" name="Items">
+  <object id="147" template="object-templates/page.tx" x="864.667" y="172">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="148" template="object-templates/page.tx" x="0.416667" y="383.833">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="149" template="object-templates/page.tx" x="1025.5" y="448.833">
+   <properties>
+    <property name="ID" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="150" template="object-templates/page.tx" x="1020.33" y="158.667">
+   <properties>
+    <property name="ID" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="151" template="object-templates/page.tx" x="1694" y="142">
+   <properties>
+    <property name="ID" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="152" template="object-templates/ritalin.tx" x="704.5" y="560"/>
+  <object id="153" template="object-templates/key.tx" x="975.167" y="204"/>
+  <object id="154" template="object-templates/key.tx" x="1742.17" y="605.333"/>
+  <object id="158" template="object-templates/ritalin.tx" x="1238" y="447.394"/>
+ </objectgroup>
+ <objectgroup id="14" name="End">
+  <object id="118" x="1749.67" y="111.333" width="9" height="48.6667"/>
+ </objectgroup>
+ <objectgroup id="15" name="Walls"/>
+ <objectgroup id="13" name="Brick"/>
+ <objectgroup id="18" name="Doors">
+  <object id="104" template="object-templates/door.tx" x="992" y="559.667"/>
+  <object id="120" template="object-templates/door.tx" x="1743.67" y="112.333"/>
+ </objectgroup>
+ <objectgroup id="6" name="Ladder">
+  <object id="55" x="895.75" y="109.75" width="15.75" height="82"/>
+  <object id="59" x="544.208" y="254.667" width="16" height="49.25"/>
+  <object id="62" x="448.125" y="319.75" width="15.75" height="64"/>
+  <object id="75" x="1043.18" y="336" width="9.8182" height="112.545"/>
+  <object id="78" x="1651" y="160" width="10.3182" height="63.8182"/>
+  <object id="79" x="1458.68" y="239.818" width="10.1364" height="96.1818"/>
+  <object id="166" x="1667" y="513" width="9.5" height="110.5"/>
+ </objectgroup>
+ <layer id="5" name="LadderLayer" width="160" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2cENg0AQBEEycDBOwSmQfyr++sPHEsyupiqCQ9ccCxwHAAAAAPzv/UqvgGYf/RGkP5I292d22O9cvIeb7x320x9Jm89ugF/eJ+Zq2Bvz3FwNe9NwjVs1zNr6I0l/eQ1z3pWGM366iWdA8z3RZmJ/E9fEPSY+g/RHkv5I0h9J+iNp4kwKAADwNP8GSfJtiCT9kaQ/kvRHkv5I8m8Q7vMF3QALrQ==
+  </data>
+ </layer>
+</map>

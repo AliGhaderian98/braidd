@@ -5,9 +5,12 @@ import braid.main.Braid;
 import braid.main.screens.levels.*;
 import braid.main.screens.menus.PauseMenu;
 import braid.main.screens.menus.SavegameMenu;
+import braid.main.tools.Audiomanager;
 import braid.main.tools.KeyBindings;
+import braid.main.tools.PreferencesManager;
 import braid.main.tools.Savemanager;
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,6 +35,8 @@ public class Overworld implements Screen {
     public static boolean gameIsPaused;
     private InputProcessor inputProcessor;
 
+    public static Music music;
+
     // Camera and Map variables
     private final OverworldCamera camera;
     private final TmxMapLoader mapLoader;
@@ -46,6 +51,8 @@ public class Overworld implements Screen {
     private final Stage stage;
     private final OverworldPlayer player;
 
+    private final OverworldHUD hud;
+
     private final FrameBuffer fbo;
     private final SpriteBatch fboBatch;
     private Texture fboTex;
@@ -54,8 +61,20 @@ public class Overworld implements Screen {
     public Overworld(Braid game) {
         this.game = game;
         atlas = new TextureAtlas("packedimages/sprites.atlas");
+        hud = new OverworldHUD(atlas);
 
         gameIsPaused = false;
+
+        // Setup Music
+        if (music == null) {
+            music = Audiomanager.audiomanager.get("audio/music/lofi-loop.mp3" ,Music.class);
+            music.setLooping(true);
+            music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+            music.setPosition(0);
+            music.play();
+        }
+        if (!music.isPlaying())
+            music.play();
 
         // Load current GameData
         Savemanager.currentsavegame = Savemanager.loadGame(SavegameMenu.currentSavegamKey);
@@ -82,7 +101,7 @@ public class Overworld implements Screen {
                 startNode = n;
         }
 
-        player = new OverworldPlayer(this, startNode.getPosition().x, startNode.getPosition().y);
+        player = new OverworldPlayer(this, startNode.getPosition().x, startNode.getPosition().y, hud);
         player.setPreviousNode(startNode);
         player.setCurrentNode(startNode);
         stage.addActor(player);
@@ -137,9 +156,10 @@ public class Overworld implements Screen {
     }
 
     public void enterLevel(String levelName) {
-    // get next level based on current node
-    Screen newScreen =
-        switch (levelName) {
+        music.stop();
+
+        // get next level based on current node
+        Screen newScreen = switch (levelName) {
           case "UNI" -> new UniLevel(game);
           case "HBF" -> new HBFLevel(game);
           case "FREUDENBERG" -> new FreudenbergLevel(game);
@@ -334,6 +354,7 @@ public class Overworld implements Screen {
             renderer.render(new int[] { i });
         }
 
+        hud.draw();
     }
 
     private void updateCamera() {
@@ -344,11 +365,13 @@ public class Overworld implements Screen {
     @Override
     public void resize(int width, int height) {
         camera.resize(width, height);
+        hud.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
     @Override
     public void pause() {
+        music.pause();
         gameIsPaused = true;
         Gdx.input.setInputProcessor(null);
         game.setScreen(new PauseMenu(game, this,true, fboTex));
@@ -356,6 +379,8 @@ public class Overworld implements Screen {
 
     @Override
     public void resume() {
+        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        music.play();
         KeyBindings.loadKeyBindings();
         setupInput();
         gameIsPaused = false;

@@ -2,6 +2,7 @@ package braid.main.tools;
 
 import braid.main.Braid;
 import braid.main.Items.Item;
+import braid.main.enemies.DrunkenOberbarmer;
 import braid.main.enemies.Knight;
 import braid.main.enemies.PatrollingEnemy;
 import braid.main.enemies.UnhingedEnemy;
@@ -10,15 +11,12 @@ import braid.main.objects.End;
 import braid.main.objects.Enemy;
 import braid.main.objects.Ladder;
 import braid.main.objects.Player;
-import braid.main.tools.KeyBindings;
-import braid.main.overworld.Overworld;
 import braid.main.screens.levels.LevelScreen;
-import braid.main.screens.menus.SavegameMenu;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
+
+import java.util.Objects;
 
 public class WorldContactListener implements ContactListener {
     private final Player player;
@@ -53,6 +51,10 @@ public class WorldContactListener implements ContactListener {
                 playerWithKnightAttack(userDataA, userDataB);
                 playerWithSign(userDataA, userDataB);
                 playerBodyWithDoor(userDataA, userDataB);
+                playerWithButton(userDataA, userDataB);
+                playerWithNPC(userDataA, userDataB);
+                playerWithDrunkenGuyRadius(userDataA, userDataB);
+                playerWithBeerBottle(userDataA, userDataB);
             }
 
             if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
@@ -85,6 +87,9 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithKnightAttack(userDataA, userDataB);
                 playerWithSignEnds(userDataA, userDataB);
                 contactEndedPlayerWithSchalter(userDataA,userDataB);
+                contactEndedPlayerWithDrunkenGuyRadius(userDataA, userDataB);
+                playerWithNPCEnds(userDataA, userDataB);
+                contactEndedPlayerWithButton(userDataA,userDataB);
             }
 
             if ("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) {
@@ -93,7 +98,6 @@ public class WorldContactListener implements ContactListener {
                 contactEndedPlayerWithBrick(userDataA, userDataB);
             }
         }
-
         patrollingEnemyOnEdge(userDataA, userDataB);
     }
 
@@ -106,6 +110,19 @@ public class WorldContactListener implements ContactListener {
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
     }
+    private void contactEndedPlayerWithDrunkenGuyRadius(UserData userDataA, UserData userDataB) {
+        if ("drunkenEnemyRadius".equals(userDataA.getName()) || "drunkenEnemyRadius".equals(userDataB.getName())) {
+            DrunkenOberbarmer oberbarmer = userDataA.getName().equals("drunkenEnemyRadius") ? (DrunkenOberbarmer) userDataA.getObject() : (DrunkenOberbarmer) userDataB.getObject();
+            oberbarmer.isInRange(false);
+        }
+    }
+
+    private void playerWithDrunkenGuyRadius(UserData userDataA, UserData userDataB) {
+        if ("drunkenEnemyRadius".equals(userDataA.getName()) || "drunkenEnemyRadius".equals(userDataB.getName())) {
+            DrunkenOberbarmer oberbarmer = userDataA.getName().equals("drunkenEnemyRadius") ? (DrunkenOberbarmer) userDataA.getObject() : (DrunkenOberbarmer) userDataB.getObject();
+            oberbarmer.isInRange(true);
+        }
+    }
 
     private void playerWithSchalter(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
@@ -116,12 +133,30 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithButton(UserData userDataA, UserData userDataB) {
+        if(userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button)  userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(true, button);
+        }
+    }
+
     private void contactEndedPlayerWithSchalter(UserData userDataA, UserData userDataB) {
         if (userDataA.getObject() instanceof Schalter || userDataB.getObject() instanceof Schalter) {
             Schalter schalter = userDataA.getObject() instanceof Schalter
                 ? (Schalter) userDataA.getObject()
                 : (Schalter) userDataB.getObject();
             player.isAtSchalter(false, null);
+        }
+    }
+
+    private void contactEndedPlayerWithButton(UserData userDataA, UserData userDataB) {
+        if (userDataA.getObject() instanceof Button || userDataB.getObject() instanceof Button) {
+            Button button = userDataA.getObject() instanceof Button
+                ? (Button) userDataA.getObject()
+                : (Button) userDataB.getObject();
+            player.isAtButton(false, null);
         }
     }
 
@@ -170,10 +205,41 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithNPCEnds(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
+            npc.getSubtitle().setCurrentText("");
+            npc.trigger(false);
+
+        } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
+            NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(false);
+        }
+
+    }
+
     private void playerWithSign(UserData userDataA, UserData userDataB) {
         if ((userDataA.getObject() instanceof Sign || userDataB.getObject() instanceof Sign)) {
             Sign sign = (userDataA.getObject() instanceof Sign) ? (Sign) userDataA.getObject() : (Sign) userDataB.getObject();
             sign.setShowing(true);
+        }
+    }
+
+    private void playerWithNPC(UserData userDataA, UserData userDataB) {
+        if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getName().equals("NPCTrigger") || userDataB.getName().equals("NPCTrigger"))) {
+            NPC npc = (userDataA.getName().equals("NPCTrigger")) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+            npc.trigger(true);
+
+        } else if ((userDataA.getObject() instanceof Player || userDataB.getObject() instanceof Player) &&
+            (userDataA.getObject() instanceof NPC || userDataB.getObject() instanceof NPC)) {
+            NPC npc = (userDataA.getObject() instanceof NPC) ? (NPC) userDataA.getObject() : (NPC) userDataB.getObject();
+
+            npc.trigger(true);
+
         }
     }
 
@@ -195,6 +261,18 @@ public class WorldContactListener implements ContactListener {
         }
     }
 
+    private void playerWithBeerBottle(UserData userDataA, UserData userDataB) {
+        Player player = (userDataA.getObject() instanceof Player) ? (Player) userDataA.getObject() : (Player) userDataB.getObject();
+        UserData beerData = (userDataA.getObject() instanceof Beer) ? userDataA : userDataB;
+
+        if (beerData.getObject() instanceof Beer beer) {
+            player.die();
+        }
+
+    }
+
+
+
     private void playerWithItem(UserData userDataA, UserData userDataB) {
         UserData itemData = (userDataA.getObject() instanceof Item) ? userDataA : userDataB;
 
@@ -206,9 +284,9 @@ public class WorldContactListener implements ContactListener {
     private void playerFeetWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
-            if (!player.isGrounded()) {
-                player.land();
-            }
+
+            player.onGround(true);
+            player.land();
         }
     }
 
@@ -262,10 +340,9 @@ public class WorldContactListener implements ContactListener {
                 : (MovingPlatform) userDataB.getObject();
 
             player.onMovingPlatform(true);
-            player.setIsGrounded(true);
+            player.land();
             platform.setPlayer(player);
         }
-
     }
 
     private void contactEndedPlayerWithMovingPlatform(UserData userDataA, UserData userDataB) {
@@ -276,9 +353,12 @@ public class WorldContactListener implements ContactListener {
                 : (MovingPlatform) userDataB.getObject();
 
             player.onMovingPlatform(false);
-            player.fall();
             platform.setPlayer(null);
             player.setPlatformVelocity(0);
+
+            if (player.isGrounded() && !player.onGround()) {
+                player.fall();
+            }
         }
     }
 
@@ -332,23 +412,30 @@ public class WorldContactListener implements ContactListener {
     private void contactEndedPlayerWithGround(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Ground".equals(userDataA.getName()) || "Ground".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+
+            player.onGround(false);
+
+            if (player.isGrounded() && !player.onMovingPlatform()) {
                 player.fall();
+            }
         }
     }
 
     private void contactEndedPlayerWithBrick(UserData userDataA, UserData userDataB) {
         if (("PlayerFeet".equals(userDataA.getName()) || "PlayerFeet".equals(userDataB.getName())) &&
             (("Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()))))  {
-            if (player.isGrounded())
+            if (player.isGrounded()) {
                 player.fall();
+            }
         }
     }
 
     private void patrollingEnemyWithWall(UserData userDataA, UserData userDataB) {
         if ("SideSensor".equals(userDataA.getName()) || "SideSensor".equals(userDataB.getName())) {
             UserData sideSensor = "SideSensor".equals(userDataA.getName()) ? userDataA : userDataB;
-            if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()))  {
+            if ("Wall".equals(userDataA.getName()) || "Wall".equals(userDataB.getName()) ||
+                "Brick".equals(userDataA.getName()) || "Brick".equals(userDataB.getName()) ||
+                "EnemyBody".equals(userDataA.getName()) || "EnemyBody".equals(userDataB.getName()))  {
                 PatrollingEnemy enemy = (PatrollingEnemy) sideSensor.getObject();
                 enemy.changeDirection();
             }

@@ -20,10 +20,79 @@ public class Audiomanager {
         audiomanager.load("audio/music/background_music.mp3", Music.class);
 
         /*
+        Track: Apotos (Night) - Sonic Unleashed [OST]
+        */
+        audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI1.mp3", Music.class);
+        /*
+        Track: Terraria Calamity Mod Music - "Reign of Lords"
+        */
+        audiomanager.load("audio/music/WEGZURUNI/WEGZURUNI2.mp3", Music.class);
+
+        /*
+        Track: Fear Factory - Donkey Kong Country Returns [OST]
+        */
+        audiomanager.load("audio/music/WEGZURUNI/PastMap.mp3", Music.class);
+
+        /*
+        Track: Step: Subspace Ver. 3 - Super Smash Bros. Brawl [OST]
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FutureMap1.mp3", Music.class);
+        /*
+        Track: A CYBER'S WORLD? - Toby Fox
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FutureMap2.mp3", Music.class);
+
+        /*
+        Track: Donkey Kong Country Returns - Aquatic Ambience (iSWM Remix)
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap1.mp3", Music.class);
+        /*
+        Track: In A Snow-Bound Land cove "Hibernation" - DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap2.mp3", Music.class);
+        /*
+        Track: Undertale OST: 071- Undertale
+        */
+        audiomanager.load("audio/music/WEGZURUNI/MountainMap3.mp3", Music.class);
+
+        /*
+        Track: SAVE - DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap1.mp3", Music.class);
+        /*
+        Track: g a r d e n- DM Dokuro
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap2.mp3", Music.class);
+        /*
+        Track: Undertale OST: 071- Undertale
+        */
+        audiomanager.load("audio/music/WEGZURUNI/FinaleMap3.mp3", Music.class);
+
+
+
+        /*
         licence: UniLevelMusic.ogg
                 Eigene Musik (Alister)
         */
-        audiomanager.load("audio/music/UniLevelMusic.ogg", Music.class);
+        audiomanager.load("audio/music/UniLevelMusic.mp3", Music.class);
+
+        /*
+        licence: victory-fanfare.ogg
+                Music: Orchestral Victory Fanfare
+                https://freesound.org/s/470083/
+                License: Attribution 4.0
+        */
+        audiomanager.load("audio/music/victory-fanfare.mp3", Music.class);
+
+        /*
+        licence: lofi-loop.ogg
+                Aesthetic Lofi Loop
+                https://freesound.org/s/679187/
+                License: CC0
+        */
+        audiomanager.load("audio/music/lofi-loop.mp3", Music.class);
+
+
 
         /*
         licence: menuSound.mp3
@@ -40,6 +109,11 @@ public class Audiomanager {
                 License: CC0
         */
         audiomanager.load("audio/sound/buttonClick.ogg", Sound.class);
+        audiomanager.load("audio/sound/jump.mp3", Sound.class);
+        audiomanager.load("audio/sound/kill.mp3", Sound.class);
+        audiomanager.load("audio/sound/land.mp3", Sound.class);
+        audiomanager.load("audio/sound/Steps.mp3", Music.class);
+
 
 
         audiomanager.finishLoading();
@@ -56,7 +130,41 @@ public class Audiomanager {
                 https://freesound.org
          */
         audiomanager.load("audio/music/SchlossBurgSoundtrack.mp3", Music.class);
+
+        /*
+            main theme GTA San Andreas
+            License: copyrighted
+         */
+        audiomanager.load("audio/music/Freudenberg.mp3", Music.class);
+
+
+       /*
+       licence: ArkadenSoundtrack.mp3
+       Gentle Soft Lo-Fi Hip Hop | Vlog 2.0 by Alex-Productions
+        https://youtu.be/Lt044EWPklg
+        Music promoted by https://onsound.eu/
+        */
+        audiomanager.load("audio/music/ArkadenSoundtrack.mp3", Music.class);
+
+        audiomanager.load("audio/music/HBF.mp3", Music.class);
+
+        audiomanager.load("audio/music/Luisenviertel.mp3", Music.class);
+
+        audiomanager.load("audio/music/oberbarmen.mp3", Music.class);
+
+        //licence: bayersoundtrack.mp3
+        // Ambient Downtempo | Breaking News by Alex-Productions |
+        //https://youtu.be/OfYePizJhZk
+        //Music promoted by https://onsound.eu/
+
+        audiomanager.load("audio/music/bayersoundtrack.mp3", Music.class);
+
         audiomanager.finishLoading();
+
+        //licence: HBF.mp3
+       // Electronic Dreamwave | Aura by Alex-Productions
+       // https://youtu.be/nhYmH8h3tpk
+        //Music promoted by https://onsound.eu/
     }
 
 }

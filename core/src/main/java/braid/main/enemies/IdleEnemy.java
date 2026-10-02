@@ -70,6 +70,30 @@ public class IdleEnemy extends Enemy implements EnemyAI{
                     sprite.getRegionWidth()*0.75f/ Braid.PPM,
                     sprite.getRegionHeight()*0.75f/Braid.PPM);
             }
+            case ("drunkenguy") -> {
+                sprite = new Sprite(atlas.findRegion("drunkenguy"));
+                idle = new Animation<>(0.1f, atlas.findRegions("drunkenguy"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.75f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.75f/Braid.PPM);
+            }
+            case ("nakedguy") -> {
+                sprite = new Sprite(atlas.findRegion("nakedguy-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("nakedguy-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()/ Braid.PPM,
+                    sprite.getRegionHeight()/Braid.PPM);
+            }
+            case ("freudenberg-guy") -> {
+                sprite = new Sprite(atlas.findRegion("freudenberg-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("freudenberg-idle"), Animation.PlayMode.LOOP);
+                sprite.setRegion(getFrame(0,idle));
+                sprite.setBounds(0,0,
+                    sprite.getRegionWidth()*0.5f/ Braid.PPM,
+                    sprite.getRegionHeight()*0.5f/Braid.PPM);
+            }
             case ("mushroom") -> {
                 sprite = new Sprite(atlas.findRegion("mushroom-idle"));
                 idle = new Animation<>(0.07f, atlas.findRegions("mushroom-idle"), Animation.PlayMode.LOOP);
@@ -120,8 +144,8 @@ public class IdleEnemy extends Enemy implements EnemyAI{
             }
 
             default -> {
-                sprite = new Sprite(atlas.findRegion("lion-idle"));
-                idle = new Animation<>(0.1f, atlas.findRegions("lion-idle"), Animation.PlayMode.LOOP);
+                sprite = new Sprite(atlas.findRegion("evil-lion-idle"));
+                idle = new Animation<>(0.1f, atlas.findRegions("evil-lion-idle"), Animation.PlayMode.LOOP);
                 sprite.setRegion(getFrame(0, idle));
                 sprite.setBounds(0,0,
                     sprite.getRegionWidth()/ Braid.PPM,

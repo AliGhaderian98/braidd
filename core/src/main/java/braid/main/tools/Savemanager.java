@@ -1,6 +1,7 @@
 package braid.main.tools;
 
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.LevelHUD;
 import braid.main.screens.menus.SavegameMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -22,11 +23,10 @@ public class Savemanager {
         public Map<String, Boolean> UnlockedLevels;
         public String lastLevel;
         public boolean wegZurUniJustUnlocked;
-        public boolean oberbarmenFinished;
-        public boolean zooFinished;
-        public boolean bayerFinished;
+        public Map<String, Boolean> FinishedLevels;
         public long Playtime;
         public Map<String, Array<Boolean>> Collectables;
+        public Map<String, Long> BestTimes;
 
         public Savegame() {}
     }
@@ -55,7 +55,10 @@ public class Savemanager {
         currentsavegame.SaveGameKEY = freeSpot;
 
         fillLevelNodes();
-        createDummySavegame();
+        if (currentsavegame.SaveGameName.equals("testAllLevelsUnlocked"))
+            createUnlockedSavegame();
+        else
+            createDummySavegame();
         saveGame(false);
     }
 
@@ -70,6 +73,11 @@ public class Savemanager {
             }
         }
 
+        currentsavegame.BestTimes = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.BestTimes.put(LevelNodes.get(i), 0L);
+        }
+
         currentsavegame.UnlockedLevels = new HashMap<>();
         for(int i=0; i<10;i++){
             currentsavegame.UnlockedLevels.put(LevelNodes.get(i),false);
@@ -78,9 +86,49 @@ public class Savemanager {
         currentsavegame.lastLevel = "UNI";
 
         currentsavegame.wegZurUniJustUnlocked = false;
-        currentsavegame.oberbarmenFinished = false;
-        currentsavegame.zooFinished = false;
-        currentsavegame.bayerFinished = false;
+
+        currentsavegame.FinishedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
+        }
+
+        PreferencesManager.getSliderPreferences().putFloat("sfxSlider", 1f);
+        PreferencesManager.getSliderPreferences().putFloat("musicSlider", 1f);
+        PreferencesManager.getSliderPreferences().flush();
+    }
+
+    private static void createUnlockedSavegame() {
+        currentsavegame.Collectables = new HashMap<>();
+        for(int i=0; i<10;i++){
+            dummyCollectablesBool = new Array<>();
+            currentsavegame.Collectables.put(LevelNodes.get(i),dummyCollectablesBool);
+            for(int z = 0; z < 5; z++){
+                dummyCollectablesBool.add(false);
+            }
+        }
+
+        currentsavegame.BestTimes = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.BestTimes.put(LevelNodes.get(i), 0L);
+        }
+
+        currentsavegame.UnlockedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.UnlockedLevels.put(LevelNodes.get(i),true);
+        }
+        currentsavegame.UnlockedLevels.put("UNI", true);
+        currentsavegame.lastLevel = "UNI";
+
+        currentsavegame.wegZurUniJustUnlocked = false;
+
+        currentsavegame.FinishedLevels = new HashMap<>();
+        for(int i=0; i<10;i++){
+            currentsavegame.FinishedLevels.put(LevelNodes.get(i),false);
+        }
+
+        PreferencesManager.getSliderPreferences().putFloat("sfxSlider", 1f);
+        PreferencesManager.getSliderPreferences().putFloat("musicSlider", 1f);
+        PreferencesManager.getSliderPreferences().flush();
     }
 
 
@@ -102,10 +150,9 @@ public class Savemanager {
         saveData.Collectables = currentsavegame.Collectables;
         saveData.Playtime = currentsavegame.Playtime;
         saveData.lastLevel = currentsavegame.lastLevel;
-        saveData.oberbarmenFinished = currentsavegame.oberbarmenFinished;
-        saveData.zooFinished = currentsavegame.zooFinished;
-        saveData.bayerFinished = currentsavegame.bayerFinished;
         saveData.wegZurUniJustUnlocked = currentsavegame.wegZurUniJustUnlocked;
+        saveData.FinishedLevels = currentsavegame.FinishedLevels;
+        saveData.BestTimes = currentsavegame.BestTimes;
 
         FileHandle file = Gdx.files.local("SaveGameFiles/SaveGame"+ currentsavegame.SaveGameKEY + ".json");
         file.writeString(SaveGamesDoc.prettyPrint(saveData),false);
@@ -170,9 +217,13 @@ public class Savemanager {
     public static void updatePlaytime(){
         totalSessionTime = System.currentTimeMillis() - playtimeStart;
         currentsavegame.Playtime += totalSessionTime;
+        playtimeStart = System.currentTimeMillis();
     }
 
     public static void unlockNextLevel(String currentLevel) {
+        currentsavegame.FinishedLevels.put(currentLevel, true);
+        checkForBestTime(currentLevel, LevelHUD.getElapsedTime());
+
         switch (currentLevel) {
             case "UNI" -> currentsavegame.UnlockedLevels.put("FREUDENBERG", true);
             case "FREUDENBERG" -> currentsavegame.UnlockedLevels.put("ARKADEN", true);
@@ -183,18 +234,7 @@ public class Savemanager {
                 currentsavegame.UnlockedLevels.put("ZOO", true);
                 currentsavegame.UnlockedLevels.put("BAYER", true);
             }
-            case "OBERBARMEN" -> {
-                currentsavegame.oberbarmenFinished = true;
-                unlockWegZurUni();
-            }
-            case "BAYER" -> {
-                currentsavegame.bayerFinished = true;
-                unlockWegZurUni();
-            }
-            case "ZOO" -> {
-                currentsavegame.zooFinished = true;
-                unlockWegZurUni();
-            }
+            case "OBERBARMEN", "BAYER", "ZOO" -> unlockWegZurUni();
             case "SCHLOSSBURG", "WEGZURUNI" -> {}
             default -> throw new IllegalStateException("Unknown Level Name: " + currentLevel);
         }
@@ -205,11 +245,20 @@ public class Savemanager {
     }
 
     private static void unlockWegZurUni() {
-        if (currentsavegame.oberbarmenFinished && currentsavegame.zooFinished && currentsavegame.bayerFinished) {
+        if (currentsavegame.FinishedLevels.get("OBERBARMEN") &&
+            currentsavegame.FinishedLevels.get("ZOO") &&
+            currentsavegame.FinishedLevels.get("BAYER")) {
             if (!currentsavegame.UnlockedLevels.get("WEGZURUNI"))
                 currentsavegame.wegZurUniJustUnlocked = true;
             currentsavegame.UnlockedLevels.put("WEGZURUNI", true);
         }
+    }
+
+    private static void checkForBestTime(String levelName, long time) {
+        // only update stored time as best if no best has been recorded or if it is smaller than recorded best
+        long currentBest = currentsavegame.BestTimes.get(levelName);
+        if (currentBest == 0L || currentBest > time)
+            currentsavegame.BestTimes.put(levelName, time);
     }
 
     public static void unlockCollectable(int ID, String level) {
@@ -230,6 +279,14 @@ public class Savemanager {
                 unlockedlevels++;
         }
     return unlockedlevels;
+    }
+
+    public static long SumBestTimes(Savegame savegame){
+        long sumBestTimes = 0L;
+        for(long time : savegame.BestTimes.values()){
+            sumBestTimes += time;
+        }
+        return sumBestTimes;
     }
 
     public static int AmountFoundCollectables(Savegame savegame){

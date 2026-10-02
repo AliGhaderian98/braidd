@@ -8,9 +8,9 @@ import braid.main.objects.Door;
 import braid.main.enemies.Knight;
 import braid.main.objects.*;
 import braid.main.enemies.*;
-import braid.main.Items.ItemDef;
 import braid.main.objects.Brick;
 import braid.main.overworld.Overworld;
+import braid.main.screens.huds.FinishGameHUD;
 import braid.main.screens.huds.FinishHUD;
 import braid.main.screens.huds.LevelHUD;
 import braid.main.enemies.MadScientist;
@@ -37,9 +37,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -47,6 +49,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import braid.main.screens.menus.PauseMenu;
+
+import java.util.Objects;
 
 
 /***********
@@ -61,7 +65,8 @@ public abstract class LevelScreen implements Screen {
     private static final int GRAVITY = -10;
     protected final TextureAtlas atlas;
     public static boolean gameIsPaused = false;
-    public static boolean debugRendererEnabled = true;
+    public static boolean debugRendererEnabled = false;
+    //public static boolean loadedMap = false;
 
     protected final PlayerInputHandler inputHandler;
 
@@ -74,12 +79,17 @@ public abstract class LevelScreen implements Screen {
     // Box2D variables
     protected final World world;
     protected final Box2DDebugRenderer b2dr;
+    protected final B2WorldCreator b2WC;
+    private final EventListener event;
+
 
     // Game Objects
     protected final Player player;
     protected Array<Enemy> enemies;
+    protected Array<NPC> npcs;
     protected Array<MovingPlatform> movingPlatforms;
     protected Array<SchalterMovingPlatform> schalterMovingPlatforms;
+    protected Array<Button> buttons;
     protected Array<Item> items;
     protected Array<Brick> bricks;
     protected Array<Door> doors;
@@ -89,7 +99,8 @@ public abstract class LevelScreen implements Screen {
     public Array<RewindController> rewindObjects;
 
     // Music
-    private final Music music;
+    private Music music;
+    private final Music victoryMusic;
 
     // Subtitles
     private final SubtitleManager subtitleManager;
@@ -110,6 +121,8 @@ public abstract class LevelScreen implements Screen {
     private LevelHUD levelHUD;
     private FinishHUD finishHUD;
     private boolean finished = false;
+    private FinishLevelCutscene finishLevelCutscene;
+    private int lastBackgroundIndex = 0;
 
 
 
@@ -119,6 +132,9 @@ public abstract class LevelScreen implements Screen {
         atlas = new TextureAtlas(atlasPath);
         gameIsPaused = false;
         setLevelName();
+
+        if (Overworld.music.isPlaying())
+            Overworld.music.stop();
 
         items = new Array<>();
 
@@ -137,6 +153,7 @@ public abstract class LevelScreen implements Screen {
 
         // World setup
         world = new World(new Vector2(0, GRAVITY), true);
+        event = new EventListener(game, this, map);
 
 
         // Setup player
@@ -146,15 +163,19 @@ public abstract class LevelScreen implements Screen {
         // Enemies
         enemies = new Array<>();
 
+        npcs = new Array<>();
+
         movingPlatforms = new Array<>();
         schalterMovingPlatforms = new Array<>();
+
+        buttons = new Array<>();
 
         bricks = new Array<>();
         doors = new Array<>();
 
         // B2WorldCreator
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map, this);
+        b2WC = new B2WorldCreator(world, map, this);
 
 
         // Setup Music
@@ -163,6 +184,11 @@ public abstract class LevelScreen implements Screen {
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.setPosition(0);
         music.play();
+
+        victoryMusic = Audiomanager.audiomanager.get("audio/music/victory-fanfare.mp3", Music.class);
+        victoryMusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        victoryMusic.setLooping(false);
+        victoryMusic.setPosition(1);
 
 
         rewindObjects = new Array<>();
@@ -181,6 +207,11 @@ public abstract class LevelScreen implements Screen {
         for (SchalterMovingPlatform gm : schalterMovingPlatforms) {
             if (gm.isRewindable())
                 rewindObjects.add(gm.getRewindController());
+        }
+
+        for (Schalter s : schalters) {
+            if (s.isRewindable())
+                rewindObjects.add(s.getRewindController());
         }
 
         for (Brick b : bricks) {
@@ -209,6 +240,17 @@ public abstract class LevelScreen implements Screen {
         }
 
         levelHUD = new LevelHUD(game.batch, atlas, maxPages, previouslyCollectedPages);
+
+        if (this instanceof FinaleMap)
+            finishHUD = new FinishGameHUD(game.batch, atlas);
+        else
+            finishHUD = new FinishHUD(game.batch, atlas);
+
+        finishLevelCutscene = new FinishLevelCutscene(this, game.batch, gameCamera.getViewport(), player);
+
+        MapLayer schwebeBahnLayer = map.getLayers().get("Schwebebahn");
+        if (schwebeBahnLayer != null)
+            lastBackgroundIndex = map.getLayers().getIndex("Schwebebahn");
     }
 
 
@@ -285,13 +327,13 @@ public abstract class LevelScreen implements Screen {
 
         fbo.begin();
         clearScreen();
-        renderWorld();
+        renderWorld(delta);
         subtitleManager.render(delta);      // Update Subtitles
         fbo.end();
 
         applyPostProcessing(activeShader);
 
-        if (finished)
+        if (finishLevelCutscene.isFinished())
             renderFinishHUD();
 
         game.batch.setProjectionMatrix(levelHUD.stage.getCamera().combined);
@@ -371,9 +413,24 @@ public abstract class LevelScreen implements Screen {
     }
 
 
-    private void renderWorld() {
+    private void renderWorld(float dt) {
         renderer.setView(gameCamera.getCamera());
-        renderer.render();
+
+        if (lastBackgroundIndex != 0) {
+            for (int i = 0; i < lastBackgroundIndex; i++)
+                renderer.render(new int[] {i});
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+            for (int i = lastBackgroundIndex; i < map.getLayers().getCount(); i++)
+                renderer.render(new int[] { i });
+        } else {
+            renderer.render();
+            if (finishLevelCutscene.isPlaying())
+                finishLevelCutscene.render(dt);
+        }
+
+
+
         if (debugRendererEnabled)
             b2dr.render(world, gameCamera.getCamera().combined);
         game.batch.setProjectionMatrix(gameCamera.getCamera().combined);
@@ -382,13 +439,14 @@ public abstract class LevelScreen implements Screen {
         game.batch.begin();
 
         drawDoors();
+        drawNPCs(dt);
 
         player.getSprite().draw(game.batch);
 
         drawEnemies();
         drawMovingPlatforms();
         drawSchalterMovingPlatforms();
-        drawSchalters();
+        //drawSchalters();
         drawBricks();
         drawItems();
 
@@ -410,6 +468,12 @@ public abstract class LevelScreen implements Screen {
             e.draw(game.batch);
         }
         game.batch.setShader(defaultShader);
+    }
+
+    private void drawNPCs(float dt) {
+        for (NPC npc : npcs) {
+            npc.draw(game.batch, dt);
+        }
     }
 
     private void drawMovingPlatforms() {
@@ -515,8 +579,9 @@ public abstract class LevelScreen implements Screen {
             updateCamera();
 
             for (RewindController r : rewindObjects) {
-                r.update();
+                r.update(dt);
             }
+
         }
         else {
             if(!finished && Gdx.input.isKeyPressed(KeyBindings.getKey("SHIFT"))) {
@@ -528,6 +593,8 @@ public abstract class LevelScreen implements Screen {
                 (Gdx.input.isKeyJustPressed(KeyBindings.getKey("INTERACT")) ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ENTER))) {
 
+                music.stop();
+                victoryMusic.stop();
                 game.setScreen(new Overworld(game));
             }
         }
@@ -540,10 +607,21 @@ public abstract class LevelScreen implements Screen {
             Savemanager.saveGame(false);
         }
         music.stop();
+        player.stopSFX();
+        victoryMusic.play();
         finished = true;
         gameIsPaused = true;
+        finishLevelCutscene.play();
+    }
+
+    public void setFinishHUD() {
         activeShader = pauseShader;
-        finishHUD = new FinishHUD(game.batch, atlas);
+        finishHUD.updateHUD();
+
+        if (this instanceof FinaleMap)
+            finishHUD = new FinishGameHUD(game.batch, atlas);
+        else
+            finishHUD = new FinishHUD(game.batch, atlas);
     }
 
     @Override
@@ -563,6 +641,7 @@ public abstract class LevelScreen implements Screen {
         KeyBindings.loadKeyBindings();
         gameIsPaused = false;
         music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        victoryMusic.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
         music.play();
         levelHUD.resume();
     }
@@ -572,8 +651,8 @@ public abstract class LevelScreen implements Screen {
         gameCamera.resize(width, height);
         rewindHUD.resize(width, height);
         levelHUD.resize(width, height);
-        if (finished)
-            finishHUD.resize(width, height);
+        finishHUD.resize(width, height);
+        finishLevelCutscene.resize(width, height);
         fboBatch.getProjectionMatrix().setToOrtho2D(0,0,width,height);
     }
 
@@ -599,6 +678,10 @@ public abstract class LevelScreen implements Screen {
         fboBatch.dispose();
     }
 
+    public TiledMap getMap() {
+        return map;
+    }
+
     public TextureAtlas getAtlas() {
         return atlas;
     }
@@ -617,12 +700,32 @@ public abstract class LevelScreen implements Screen {
             addEnemy((new Knight(world, this,player, x, y, rewindable, type)));
         } else if ("IdleEnemy".equals(enemyType)) {
             addEnemy((new IdleEnemy(world, this, x, y, rewindable, type)));
+        } else if ("DrunkenOberbarmer".equals(enemyType)) {
+            addEnemy((new DrunkenOberbarmer(world, this, player, x, y, rewindable, type)));
         }
+    }
+
+    public void spawnNPC(String type, Rectangle npcBoundary, Rectangle npcTrigger, String text, String spriteName){
+        NPC npc = new NPC(world, this, getSubtitleManager(), type, npcBoundary, npcTrigger, text, spriteName);
+        npc.setEvent(this.event);
+        addNPC(npc);
+    }
+
+    public void spawnButton(Rectangle boundary, String actionType, String targetName) {
+        Button button = new Button(world, boundary, map, actionType, targetName, event);
+        if(Objects.equals(actionType, "repairButton")) {
+            event.addButtonCount();
+        }
+        addButton(button);
     }
 
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
         enemy.setRewindController(new RewindController(new RewindableBody(enemy.b2body, enemy)));
+    }
+
+    protected void addNPC(NPC npc) {
+        npcs.add(npc);
     }
 
     public void addMovingPlatform(MovingPlatform movingPlatform) {
@@ -637,6 +740,11 @@ public abstract class LevelScreen implements Screen {
 
     public void addSchalter(Schalter schalter) {
         schalters.add(schalter);
+        schalter.setRewindController(new RewindController(new RewindableBody(schalter.b2body, schalter)));
+    }
+
+    public void addButton(Button button){
+        buttons.add(button);
     }
 
     public void addItem(Item item) {
@@ -654,7 +762,26 @@ public abstract class LevelScreen implements Screen {
 
     public SubtitleManager getSubtitleManager() { return subtitleManager; }
 
+    public B2WorldCreator getB2WC () { return b2WC; }
+
     public String getLevelName() { return levelName; }
+
+    public Array<Enemy> getEnemies() { return enemies; }
+
+    public Player getPlayer() { return player; }
+
+    public void changeMusic(String musicName) {
+        music.stop();
+        music = Audiomanager.audiomanager.get(String.format("audio/music/%s", musicName), Music.class);
+        music.setLooping(true);
+        music.setVolume(PreferencesManager.getSliderPreferences().getFloat("musicSlider"));
+        music.setPosition(0);
+        music.play();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
 
     private void setLevelName() {
         if (this instanceof ArkadenLevel)
@@ -677,5 +804,15 @@ public abstract class LevelScreen implements Screen {
             levelName = "WEGZURUNI";
         else if (this instanceof ZooLevel)
             levelName = "ZOO";
+        else if (this instanceof MountainMap)
+            levelName = "WEGZURUNI";
+        else if (this instanceof PastMap)
+            levelName = "WEGZURUNI";
+        else if (this instanceof PresentMap)
+            levelName = "WEGZURUNI";
+        else if (this instanceof FutureMap)
+            levelName = "WEGZURUNI";
+        else if (this instanceof FinaleMap)
+            levelName = "WEGZURUNI";
     }
 }

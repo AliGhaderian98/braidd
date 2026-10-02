@@ -3,8 +3,12 @@ package braid.main.objects;
 import braid.main.Braid;
 import braid.main.Items.PowerUp;
 import braid.main.screens.huds.LevelHUD;
+import braid.main.tools.Audiomanager;
+import braid.main.tools.PreferencesManager;
 import braid.main.tools.UserData;
 import braid.main.screens.levels.LevelScreen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,8 +16,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
-
-import java.util.TimerTask;
 
 /***********
  Diese Klasse implementiert den Spieler und soll sich, um alle Variablen und interaktiven
@@ -40,6 +42,7 @@ public class Player extends DynamicGameObject {
     public float stateTimer;
 
     private boolean isGrounded = true;
+    private boolean onGround = true;
     private boolean landingAnimationPlaying = false;
 
     private Timer.Task landingTask;
@@ -79,13 +82,18 @@ public class Player extends DynamicGameObject {
     private boolean newestPowerUp = true;
     private boolean gleiterActive = false;
     private boolean isAtSchalter = false;
+    private boolean isAtButton = false;
     private Schalter collidingSchalter = null;
     private boolean hasKey;
+    private Button collidingButton = null;
 
     // Movement limits e.g. when climbing
     private Vector2 maxMoveLimit = new Vector2(0,0);
     private Vector2 minMoveLimit = new Vector2(0,0);
 
+    // Sound
+    private Sound landSound, jumpSound;
+    private Music StepsSound;
     // Constructors
     public Player(World world, LevelScreen screen) {
         super(world);
@@ -99,6 +107,12 @@ public class Player extends DynamicGameObject {
 
         // Setup box2d body
         defineBody();
+
+        // Setup Sound
+        jumpSound = Audiomanager.audiomanager.get("audio/sound/jump.mp3", Sound.class);
+        landSound = Audiomanager.audiomanager.get("audio/sound/land.mp3", Sound.class);
+        StepsSound = Audiomanager.audiomanager.get("audio/sound/Steps.mp3", Music.class);
+
 
         // Setup sprite
         sprite = new Sprite(screen.getAtlas().findRegion("lion-idle"));
@@ -199,13 +213,26 @@ public class Player extends DynamicGameObject {
         }
 
         // update velocity on moving platform
-        if (isOnMovingPlatform && !moving) {
+        if (isOnMovingPlatform && !moving && !this.getRewindController().isRewinding()) {
             b2body.setLinearVelocity(new Vector2(platformVelocity, b2body.getLinearVelocity().y));
         }
 
         // don't let player get faster than certain velocities
         b2body.getLinearVelocity().x = Math.clamp(b2body.getLinearVelocity().x, -maxVelocityX, maxVelocityX);
         b2body.getLinearVelocity().y = Math.clamp(b2body.getLinearVelocity().y, -maxVelocityY, maxVelocityY);
+
+        updateSound();
+
+    }
+
+    private void updateSound() {
+        if(currentState.equals(AnimationState.RUNNING)){
+            StepsSound.setVolume((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
+            StepsSound.setLooping(true);
+            StepsSound.play();
+        }else {
+            StepsSound.stop();
+        }
     }
 
     public TextureRegion getFrame(float dt) {
@@ -258,7 +285,7 @@ public class Player extends DynamicGameObject {
         if (jumpBuffered || b2body.getLinearVelocity().y > 0) {
             jump(1f);
             jumpBuffered = false;
-        } else if(!isGrounded && b2body.getLinearVelocity().y < 0) {
+        } else { //if(!isGrounded && b2body.getLinearVelocity().y < 0) {
             currentState = AnimationState.IDLE;
             isGrounded = true;
             holdingJump = false;
@@ -266,6 +293,7 @@ public class Player extends DynamicGameObject {
             downGravityFactor = 1f;
 
             if (b2body.getLinearVelocity().y < -4.75) {
+                landSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
                 currentState = AnimationState.LANDING;
                 landingAnimationPlaying = true;
 
@@ -276,16 +304,19 @@ public class Player extends DynamicGameObject {
     }
 
     public void fall() {
+        isGrounded = false;
+        setCoyoteTime();
+
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 if (currentState != AnimationState.JUMPING && !isGrounded) {
-                    isGrounded = false;
-                    setCoyoteTime();
+                    b2body.setLinearVelocity(b2body.getLinearVelocity().x, 0f);
+                    //setCoyoteTime();
                     currentState = AnimationState.FALLING;
                 }
             }
-        }, 0.01f);
+        }, 0.05f);
 
     }
 
@@ -397,7 +428,16 @@ public class Player extends DynamicGameObject {
 
     public boolean isAtSchalter() { return isAtSchalter; }
 
+    public void isAtButton(boolean value, Button button){
+        isAtButton = value;
+        collidingButton = button;
+    }
+
+    public boolean isAtButton() { return isAtButton; }
+
     public Schalter getCollidingSchalter() { return collidingSchalter; }
+
+    public Button getCollidingButton() { return collidingButton; }
 
     public boolean hasCoyoteTime() { return coyoteActive; }
 
@@ -413,6 +453,14 @@ public class Player extends DynamicGameObject {
     public void setDownGravityFactor(float value) { downGravityFactor = value; }
 
     public float getDownGravityFactor() { return downGravityFactor; }
+
+    public void onGround(boolean value) { onGround = value; }
+    public boolean onGround() { return onGround; }
+
+    public void stopSFX() {
+        if (StepsSound.isPlaying())
+            StepsSound.stop();
+    }
 
     public void die() {
         screen.setHitShader();
@@ -448,6 +496,8 @@ public class Player extends DynamicGameObject {
                 currentState = AnimationState.IDLE;
             if (!isOnMovingPlatform)
                 b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
+        } else {
+            b2body.setLinearVelocity(0, b2body.getLinearVelocity().y);
         }
     }
 
@@ -472,6 +522,7 @@ public class Player extends DynamicGameObject {
     }
 
     public void jump(float multiplier) {
+        jumpSound.play((PreferencesManager.getSliderPreferences().getFloat("sfxSlider")));
         if (landingTask.isScheduled()) {
             landingTask.cancel();
             landingAnimationPlaying = false;
